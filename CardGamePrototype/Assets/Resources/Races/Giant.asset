@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d62f73445185b4baa2b3262a4d1ed5, type: 3}
+  m_Name: Giant
+  m_EditorClassIdentifier: 
+  name: Monster
+  Icon: {fileID: 21300000, guid: 096edfba89aabb64490c35a814b189e7, type: 3}
+  Description: 
+  PlayerRace: 1
+  GroupSize: 1
+  FavoriteActions: 03000000
+  FavoriteTriggers: 01000000

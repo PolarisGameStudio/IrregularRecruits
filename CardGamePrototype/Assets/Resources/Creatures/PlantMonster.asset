@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
+  m_Name: PlantMonster
+  m_EditorClassIdentifier: 
+  name: Plant Monster
+  Rarity: 0
+  Locked: 0
+  Image: {fileID: 21300000, guid: 0b1731c15f1c618448a29ae33edd3bea, type: 3}
+  Attack: 2
+  Health: 7
+  Traits: []
+  Races:
+  - {fileID: 11400000, guid: 13c15678981d7d6448215a1dab454c59, type: 2}
+  race: {fileID: 11400000, guid: 13c15678981d7d6448215a1dab454c59, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 69e88140ae263064d9358c68662cb07b, type: 2}
