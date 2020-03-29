@@ -84,8 +84,6 @@ public class CardGeneration
         {
             //// ___________________________________________________REMOVE AT SOME POINT
             ///
-            if (c.Races.Length > 0)
-                c.Race = c.Races[0];
             if (!c.Race)
                 Debug.LogError("No Race for: " + c);
 

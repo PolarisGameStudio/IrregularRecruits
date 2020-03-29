@@ -15,19 +15,9 @@ public class Creature : ScriptableObject
     public int Attack = 1;
     public int Health = 1;
     public Trait[] Traits;
-    public Race[] Races;
-    [SerializeProperty("Race")]
-    [SerializeField]
-    private Race race;
     public Ability SpecialAbility;
 
-    public Race Race { get {
-            if (!race && Races.Length > 0)
-                race = Races[0];
-
-            return race; 
-        } 
-        set => race = value; }
+    public Race Race;
 
     public enum RarityType { Common, Rare, Unique }
 }

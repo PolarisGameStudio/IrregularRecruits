@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: DemonBerzerker
+  m_Name: Demonic Miner
   m_EditorClassIdentifier: 
-  name: Demon Berzerker
-  Rarity: 1
+  name: Demonic Miner
+  Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 02616d9e851224c4ea306130f6184dd8, type: 3}
-  Attack: 6
-  Health: 6
-  Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 30f4edb60f90dd24a8bcd92bee8a802e, type: 2}
+  Image: {fileID: 21300000, guid: e5f1f27b9fb0c674bb873cb3afd60065, type: 3}
+  Attack: 3
+  Health: 3
+  Traits: []
+  SpecialAbility: {fileID: 11400000, guid: b070fecfcc4c24142b61906ea6bb8193, type: 2}
   Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}

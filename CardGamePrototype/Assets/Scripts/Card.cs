@@ -135,12 +135,11 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
         DescriptionText.text = "";
 
 
-
-        foreach (var r in creature.Races)
+        if (creature.Race)
         {
             var instance = Instantiate(RaceInstance, RaceInstance.transform.parent);
             instance.gameObject.SetActive(true);
-            instance.sprite = r.Icon;
+            instance.sprite = creature.Race.Icon;
 
             InstantiatedObjects.Add(instance.gameObject);
         }

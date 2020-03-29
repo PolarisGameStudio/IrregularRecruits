@@ -33,7 +33,7 @@ public abstract class AbilityAction
                 cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.InDeck != _owner.InDeck).ToList();
                 break;
             case Ability.Noun.OwnerRACE:
-                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.Creature.Races.Any(_owner.Creature.Races.Contains)).ToList();
+                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.Creature.Race ==_owner.Creature.Race).ToList();
                 break;
             case Ability.Noun.DAMAGED:
                 cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.CurrentHealth < c.MaxHealth).ToList();
@@ -54,7 +54,7 @@ public abstract class AbilityAction
                     cs.Add(triggerExecuter);
                 break;
             case Ability.Noun.NotOwnerRACE:
-                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && !c.Creature.Races.Any(_owner.Creature.Races.Contains)).ToList();
+                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.Creature.Race !=_owner.Creature.Race).ToList();
 
                 break;
             case Ability.Noun.CardInOpponentsHand:

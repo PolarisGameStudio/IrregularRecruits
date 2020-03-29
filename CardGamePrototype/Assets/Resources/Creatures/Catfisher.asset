@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: RabbitDog
+  m_Name: Catfisher
   m_EditorClassIdentifier: 
-  name: Rabbit Dog
-  Rarity: 1
+  name: Cat Fisher
+  Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: e3b1f4264028ed3438cc77e9aecb9c5f, type: 3}
-  Attack: 1
-  Health: 6
+  Image: {fileID: 21300000, guid: e80b2f46762c6064e98cee7515ac6238, type: 3}
+  Attack: 2
+  Health: 3
   Traits: []
-  Races:
-  - {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
-  race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 5074efb5094e8c042a4c564d61c935bd, type: 2}
+  SpecialAbility: {fileID: 0}
+  Race: {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}

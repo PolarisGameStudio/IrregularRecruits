@@ -52,7 +52,7 @@ public class CombatTest : MonoBehaviour
         Race[] possibleRaces = player ? AllRaces.Where(r => r.PlayerRace).ToArray() : AllRaces;
         var race = possibleRaces[Random.Range(0, possibleRaces.Length)];
 
-        var creatures = AllCreatures.Where(c => c.Races.Contains(race)).ToList();
+        var creatures = AllCreatures.Where(c => c.Race == race).ToList();
         //creatures.OrderBy(c => Random.value);
 
         for (int i = 0; i < (GameSettings.DeckSize(player)); i++)

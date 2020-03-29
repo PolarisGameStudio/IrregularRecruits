@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Kobold
+  m_Name: GoatRabbit
   m_EditorClassIdentifier: 
-  name: Kobold
-  Rarity: 0
+  name: Goat Rabbit
+  Rarity: 1
   Locked: 0
-  Image: {fileID: 21300000, guid: e5f1f27b9fb0c674bb873cb3afd60065, type: 3}
-  Attack: 3
-  Health: 3
+  Image: {fileID: 21300000, guid: e3b1f4264028ed3438cc77e9aecb9c5f, type: 3}
+  Attack: 1
+  Health: 6
   Traits: []
-  Races:
-  - {fileID: 11400000, guid: d83c7ff83493cb94185a0dc59eb05962, type: 2}
-  race: {fileID: 11400000, guid: d83c7ff83493cb94185a0dc59eb05962, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: b070fecfcc4c24142b61906ea6bb8193, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 5074efb5094e8c042a4c564d61c935bd, type: 2}
+  Race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}

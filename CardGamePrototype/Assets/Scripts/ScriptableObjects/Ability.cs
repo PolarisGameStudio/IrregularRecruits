@@ -150,9 +150,9 @@ public partial class Ability : ScriptableObject
             case Noun.ENEMY:
                 return instigator.InDeck != abilityOwner.InDeck;
             case Noun.OwnerRACE:
-                return instigator.Creature.Races.Any(abilityOwner.Creature.Races.Contains);
+                return instigator.Creature.Race ==abilityOwner.Creature.Race;
             case Noun.NotOwnerRACE:
-                return !instigator.Creature.Races.Any(abilityOwner.Creature.Races.Contains);
+                return instigator.Creature.Race != abilityOwner.Creature.Race;
             case Noun.DAMAGED:
                 return instigator.CurrentHealth < instigator.MaxHealth;
             case Noun.UNDAMAGED:
@@ -237,7 +237,7 @@ public partial class Ability : ScriptableObject
                 cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.InDeck != _owner.InDeck).ToList();
                 break;
             case Noun.OwnerRACE:
-                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.Creature.Races.Any(_owner.Creature.Races.Contains)).ToList();
+                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.Creature.Race ==_owner.Creature.Race).ToList();
                 break;
             case Noun.DAMAGED:
                 cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.CurrentHealth < c.MaxHealth).ToList();
@@ -258,7 +258,7 @@ public partial class Ability : ScriptableObject
                     cs.Add(triggerExecuter);
                 break;
             case Noun.NotOwnerRACE:
-                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && !c.Creature.Races.Any(_owner.Creature.Races.Contains)).ToList();
+                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.Creature.Race != _owner.Creature.Race).ToList();
 
                 break;
             case Noun.CardInOpponentsHand:

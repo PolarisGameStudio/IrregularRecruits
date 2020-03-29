@@ -54,7 +54,7 @@ public class CombatManager : Singleton<CombatManager>
     }
     private void EndCombat()
     {
-        Debug.Log("Combat finished, packing up");
+        Event.OnCombatFinished.Invoke();
         PlayerDeck.PackUp();
     }
 
