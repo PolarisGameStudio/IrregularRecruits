@@ -11,7 +11,7 @@ public class Deck
     public bool PlayerDeck;
     public AI AI;
 
-    public Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
+    private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 
     public Deck(List<Card> initialLibrary,bool playerDeck)
     {
@@ -49,6 +49,10 @@ public class Deck
     {
         //Debug.Log("Packing deck");
 
+        //removing dead creatures
+        while (Creatures[Zone.Graveyard].Any())
+            Remove(Creatures[Zone.Graveyard].First());        
+
         while(Creatures.Any(z => z.Key != Zone.Library && z.Value.Any()))
         {
             var c = Creatures.First(z => z.Key != Zone.Library && z.Value.Any()).Value[0];
@@ -71,6 +75,12 @@ public class Deck
         for (int i = 0; i < amount; i++)
             Draw();
     }
+
+    internal List<Card> AllCreatures()
+    {
+        return Creatures.SelectMany(x => x.Value).ToList();
+    }
+
     public void Draw()
     {
         if (Creatures[Zone.Library].Count() == 0) return;
@@ -107,6 +117,7 @@ public class Deck
     internal void Remove(Card card)
     {
         Creatures[card.Location].Remove(card);
+        card.InDeck = null;
     }
 
     internal void Add(Card card)

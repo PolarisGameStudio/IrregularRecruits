@@ -11,6 +11,9 @@ public class CombatManager : Singleton<CombatManager>
     public static Deck PlayerDeck;
     public static Deck EnemyDeck;
 
+    //to keep track of losses and kills
+    private List<Card> InitialPlayerDeck, InitialEnemyDeck;
+
     public float AttackAnimationDuration = 1f;
     public float AbilityTriggerDuration = 1f;
 
@@ -45,6 +48,9 @@ public class CombatManager : Singleton<CombatManager>
         PlayerDeck = playerDeck;
         EnemyDeck = opponentDeck;
 
+        InitialPlayerDeck = PlayerDeck.AllCreatures();
+        InitialEnemyDeck = EnemyDeck.AllCreatures();
+
         PlayerDeck.DrawInitialHand();
         EnemyDeck.DrawInitialHand(true);
 
@@ -56,6 +62,9 @@ public class CombatManager : Singleton<CombatManager>
     {
         Event.OnCombatFinished.Invoke();
         PlayerDeck.PackUp();
+        EnemyDeck.PackUp();
+
+        BattleUI.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
     }
 
     private IEnumerator NextTurn()
@@ -77,9 +86,12 @@ public class CombatManager : Singleton<CombatManager>
     {
         AbilityTriggering = true;
 
-        yield return new WaitForSeconds(AbilityTriggerDuration);
+        //Time.timeScale = 0;
+
+        yield return new WaitForSecondsRealtime(AbilityTriggerDuration);
 
         AbilityTriggering = false;
+        //Time.timeScale = 1f;
 
     }
 
@@ -115,6 +127,9 @@ public class CombatManager : Singleton<CombatManager>
         };
 
          AttackAnimationDuration = 1f;
+
+        //To prevent wrong attack positions, if card have not reaach battle field yet
+        yield return new WaitForSeconds(AttackAnimationDuration);
 
         while (attackOrder.Any(c => c.Alive()))
         {

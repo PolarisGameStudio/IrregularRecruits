@@ -10,7 +10,6 @@ public class BattleUI : MonoBehaviour
 {
     public static BattleUI Instance;
 
-
     public UIZone[] PlayerUIZones;
     public UIZone[] EnemyUIZones;
     [Serializable]
@@ -23,12 +22,23 @@ public class BattleUI : MonoBehaviour
 
     public TextMeshProUGUI PlayerDeckDescription, EnemyDeckDescription;
 
+    [Header("Battle summary")]
+    //TODO: move to battlesummary class
+    public GameObject BattleSummaryHolder;
+    public UnitIcon BattleSummaryLostIcon;
+    public UnitIcon BattleSummaryKilledIcon;
+    public UnitIcon BattleSummaryGainedIcon;
+    private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
+
     void Awake()
     {
         if (!Instance) Instance = this;
 
         Event.OnDraw.AddListener(c=> UpdateLibrary());
         Event.OnWithdraw.AddListener(c=> UpdateLibrary());
+
+        BattleSummaryHolder.SetActive(false);
+        
     }
 
     public static Transform GetZoneHolder(Deck.Zone zone, bool enm)
@@ -93,5 +103,39 @@ public class BattleUI : MonoBehaviour
         }
         rect.SetParent(zoneRect);
         rect.SetAsLastSibling();
+    }
+
+    public static void ShowSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck)
+    {
+        Instance.ShowBattleSummary(initialPlayerDeck, initialEnemyDeck, finalPlayerDeck, finalEnemyDeck);
+    }
+
+    private void ShowBattleSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck)
+    {
+        foreach (var i in InstantiatedObjects)
+            Destroy(i.gameObject);
+        InstantiatedObjects.Clear();
+
+        var killed = initialEnemyDeck.Where(c => !finalEnemyDeck.Contains(c));
+        var lost = initialPlayerDeck.Where(c => !finalPlayerDeck.Contains(c));
+        var gained = finalPlayerDeck.Where(c => !initialPlayerDeck.Contains(c));
+        SetupIcons(killed,BattleSummaryKilledIcon);
+        SetupIcons(lost, BattleSummaryLostIcon);
+        SetupIcons(gained, BattleSummaryGainedIcon);
+
+        BattleSummaryHolder.SetActive(true);
+    }
+
+    private void SetupIcons(IEnumerable<Card> killed, UnitIcon iconPrefab)
+    {
+        foreach (var c in killed)
+        {
+            var icon = Instantiate(iconPrefab,iconPrefab.transform.parent);
+
+            icon.Setup(c);
+            icon.gameObject.SetActive(true);
+
+            InstantiatedObjects.Add(icon);
+        }
     }
 }

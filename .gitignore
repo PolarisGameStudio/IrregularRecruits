@@ -3,3 +3,5 @@ CardGamePrototype/Library/
 CardGamePrototype/Temp/
 CardGamePrototype/.vs/
 
+
+*.csproj

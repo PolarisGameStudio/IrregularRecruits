@@ -78,4 +78,5 @@ public class CardAnimation : MonoBehaviour
     {
         Animator.Play(HighlightAbilityAnimationName);
     }
+
 }
