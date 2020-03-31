@@ -80,7 +80,7 @@ public class CardHighlight : Singleton<CardHighlight>
         foreach(var t in card.Creature.Traits)
         {
             var trait = Instantiate(TraitPrefab, TraitPrefab.transform.parent);
-            trait.Text.text = $" {t.name} <i>({t.Description})</i>";
+            trait.Text.text = $" <b>{t.name}</b> <i>({t.Description})</i>";
             trait.gameObject.SetActive(true);
             trait.Image.sprite = t.Icon;
 

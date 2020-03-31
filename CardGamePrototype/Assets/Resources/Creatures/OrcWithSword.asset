@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: OrcWithSword
   m_EditorClassIdentifier: 
-  name: Orc with big Sword
+  name: Orc with a big Sword
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: d016aa23038981f418799814459d02ef, type: 3}
+  IconImage: {fileID: 0}
   Attack: 4
   Health: 8
   Traits:

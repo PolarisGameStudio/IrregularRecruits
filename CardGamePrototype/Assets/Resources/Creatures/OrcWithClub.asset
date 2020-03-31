@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: OrcWithClub
   m_EditorClassIdentifier: 
-  name: OrcWithClub
+  name: Orc with Club
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: 5d68978841b59cc4c9eaddc5d4d6052b, type: 3}
+  IconImage: {fileID: 21300000, guid: a31dfaaf8e670224c8d9b3eedae7b14f, type: 3}
   Attack: 3
   Health: 9
   Traits:

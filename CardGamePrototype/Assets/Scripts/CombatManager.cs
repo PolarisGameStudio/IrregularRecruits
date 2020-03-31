@@ -64,7 +64,7 @@ public class CombatManager : Singleton<CombatManager>
         PlayerDeck.PackUp();
         EnemyDeck.PackUp();
 
-        BattleUI.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
+        BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
     }
 
     private IEnumerator NextTurn()

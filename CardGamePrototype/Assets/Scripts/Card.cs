@@ -144,11 +144,6 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
             InstantiatedObjects.Add(instance.gameObject);
         }
 
-        if (creature.SpecialAbility)
-        {
-            creature.SpecialAbility.SetupListeners(this);
-            DescriptionText.text += $"{creature.SpecialAbility.Description(this)}\n";
-        }
 
         foreach (var a in creature.Traits)
         {
@@ -157,6 +152,18 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
             instance.sprite = a.Icon;
 
             DescriptionText.text += $"<b>{a.name}</b>\n";
+
+            InstantiatedObjects.Add(instance.gameObject);
+        }
+
+        if (creature.SpecialAbility)
+        {
+            creature.SpecialAbility.SetupListeners(this);
+            DescriptionText.text += $"{creature.SpecialAbility.Description(this)}\n";
+
+            var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
+            instance.gameObject.SetActive(true);
+            instance.sprite = IconManager.GetAbilityIconSprite( creature.SpecialAbility.ResultingAction.ActionType);
 
             InstantiatedObjects.Add(instance.gameObject);
         }

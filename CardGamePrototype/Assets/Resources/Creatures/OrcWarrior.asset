@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: OrcWarrior
   m_EditorClassIdentifier: 
-  name: OrcWarrior
+  name: Orc Warrior
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: fe350a7a73793794db5ace60b3bce004, type: 3}
+  IconImage: {fileID: 0}
   Attack: 3
   Health: 8
   Traits: []
