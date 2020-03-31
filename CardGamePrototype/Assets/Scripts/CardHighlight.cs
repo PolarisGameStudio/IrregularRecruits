@@ -69,7 +69,12 @@ public class CardHighlight : Singleton<CardHighlight>
         //public ImageTextEntry AbilityIcon;
         AbilityIcon.gameObject.SetActive(card.Creature.SpecialAbility);
 
-        AbilityIcon.Text.text = card.Creature.SpecialAbility?.Description(card);
+        AbilityIcon.gameObject.SetActive(card.Creature.SpecialAbility);
+
+        if (card.Creature.SpecialAbility) {
+            AbilityIcon.Text.text = card.Creature.SpecialAbility?.Description(card);
+            AbilityIcon.Image.sprite = IconManager.GetAbilityIconSprite(card.Creature.SpecialAbility.ResultingAction.ActionType);
+        }
 
         //public ImageTextEntry TraitPrefab;
         foreach(var t in card.Creature.Traits)
@@ -82,9 +87,9 @@ public class CardHighlight : Singleton<CardHighlight>
             InstantiatedObjects.Add(trait);
         }
 
-        //var rect = GetComponent<RectTransform>();
-        //rect.position = card.GetComponent<RectTransform>().position;
-        
+        var rect = GetComponent<RectTransform>();
+        rect.position = card.GetComponent<RectTransform>().position;
+
         Instance.Holder.SetActive(true);
     }
 
