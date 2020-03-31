@@ -269,10 +269,14 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        CardHighlight.Hide();
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        CardHighlight.Show(this);
+
     }
 
     public void OnDrag(PointerEventData eventData)

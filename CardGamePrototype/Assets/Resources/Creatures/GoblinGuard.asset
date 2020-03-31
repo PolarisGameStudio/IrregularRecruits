@@ -16,6 +16,7 @@ MonoBehaviour:
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: 2d4b80157f42fd04fa2e9396eb0a697a, type: 3}
+  IconImage: {fileID: 21300000, guid: 05163ee552e716c4db1d5a3bc548dd7f, type: 3}
   Attack: 2
   Health: 6
   Traits:
