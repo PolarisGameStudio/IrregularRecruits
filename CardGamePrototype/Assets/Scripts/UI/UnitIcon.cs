@@ -12,7 +12,7 @@ public class UnitIcon : MonoBehaviour
  
     internal void Setup(Card c)
     {
-        Portrait.sprite = c.CardImage.sprite;
-        NameText.text = c.name;
+        Portrait.sprite = c.Creature.Image;
+        NameText.text = c.Name;
     }
 }

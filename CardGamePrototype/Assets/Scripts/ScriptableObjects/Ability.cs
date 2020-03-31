@@ -137,7 +137,7 @@ public partial class Ability : ScriptableObject
         if (abilityOwner.Location != Deck.Zone.Battlefield) return false;
 
         //Trigger Actions without instigators always has correct noun
-        if (!instigator) return true;
+        if (instigator == null) return true;
 
         switch (subject)
         {
@@ -177,7 +177,7 @@ public partial class Ability : ScriptableObject
         Debug.Log("Executing: " + ResultingAction.Description(_owner));
         Event.OnAbilityTrigger.Invoke(_owner);
 
-        _owner.CardAnimation.HighlightAbility();
+        _owner.OnAbilityTrigger.Invoke();
 
         var potentialTargets = new List<Card>();
 
@@ -254,7 +254,7 @@ public partial class Ability : ScriptableObject
 
                 break;
             case Noun.IT:
-                if (triggerExecuter && triggerExecuter.Location == location)
+                if (triggerExecuter != null && triggerExecuter.Location == location)
                     cs.Add(triggerExecuter);
                 break;
             case Noun.NotOwnerRACE:

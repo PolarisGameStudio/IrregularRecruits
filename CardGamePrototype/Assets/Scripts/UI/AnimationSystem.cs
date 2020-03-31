@@ -8,9 +8,9 @@ public class AnimationSystem : Singleton<AnimationSystem>
 
     public static IEnumerator AttackAnimation(Card owner, Card target, float duration)
     {
-        var rect = owner.GetComponent<RectTransform>();
+        var rect = owner.BattleRepresentation.GetComponent<RectTransform>();
         var startPos = rect.position;
-        var endPos = target.GetComponent<RectTransform>();
+        var endPos = target.BattleRepresentation.GetComponent<RectTransform>();
 
 
         var startTime = Time.time;

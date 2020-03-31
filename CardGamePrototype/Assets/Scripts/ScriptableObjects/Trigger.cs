@@ -49,7 +49,7 @@ public partial class Ability
                 case Verb.IsHealed:
                     return $"When {NounAsString(Subject, _owner) } is healed";
                 case Verb.Draw:
-                    return $"When {_owner.name}'s controller draws a card";
+                    return $"When {_owner.Name}'s controller draws a card";
                 case Verb.Withdraw:
                     return $"When {NounAsString(Subject, _owner) } is withdrawn";
                 case Verb.RoundEnd:

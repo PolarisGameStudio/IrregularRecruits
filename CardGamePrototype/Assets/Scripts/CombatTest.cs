@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public class CombatTest : MonoBehaviour
 {
     public Button NextCombatButton;
-    public Card CardPrefab;
+    public CardUI CardPrefab;
     private Deck PlayerDeck;
     private Deck EnemyDeck;
     public Race[] AllRaces;
@@ -57,7 +57,11 @@ public class CombatTest : MonoBehaviour
 
         for (int i = 0; i < (GameSettings.DeckSize(player)); i++)
         {
-            var card = Instantiate<Card>(CardPrefab);
+            var ui = Instantiate<CardUI>(CardPrefab);
+
+            var card = new Card(ui);
+
+            ui.Card = card;
 
             card.InDeck = deck;
 

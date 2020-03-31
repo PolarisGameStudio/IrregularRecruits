@@ -139,7 +139,7 @@ public class CombatManager : Singleton<CombatManager>
 
             var target = player ? EnemyDeck.GetAttackTarget() : PlayerDeck.GetAttackTarget();
 
-            if (!target)
+            if (target == null)
             {
                 attackOrder.Remove(attacker);
                 break; 

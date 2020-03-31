@@ -68,7 +68,7 @@ public class BattleUI : MonoBehaviour
     {
         var duration = 0.2f;
                        
-        var rect = card.GetComponent<RectTransform>();
+        var rect = card.BattleRepresentation.GetComponent<RectTransform>();
         var startPos = rect.position;
         var zoneRect = GetZoneHolder(zone,!player);
 

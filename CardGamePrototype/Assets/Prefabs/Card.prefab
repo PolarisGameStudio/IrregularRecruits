@@ -849,8 +849,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3647378737500881846}
-  - component: {fileID: 3647378737500881847}
   - component: {fileID: 6328246388895847416}
+  - component: {fileID: 6978953058678933244}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -882,32 +882,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3647378737500881847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3647378737500881845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09cf63b90c39a0d4bbf797f0e8260c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  creature: {fileID: 11400000, guid: 6cc698745ba90de4b8859cf65e05afdc, type: 2}
-  FrontHolder: {fileID: 292642175116116442}
-  CardBackHolder: {fileID: 3983243860329674903}
-  CardImage: {fileID: 3647378738829383159}
-  RaceInstance: {fileID: 7829417301979537092}
-  AttributeInstance: {fileID: 3640668363075213114}
-  CardAnimation: {fileID: 6328246388895847416}
-  AttackText: {fileID: 5173733348141758132}
-  HealthText: {fileID: 3999779988335304302}
-  NameText: {fileID: 3647378737615735766}
-  DescriptionText: {fileID: 8750236915218075657}
-  InstantiatedObjects: []
-  MaxHealth: 0
-  Location: 0
 --- !u!114 &6328246388895847416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,6 +901,30 @@ MonoBehaviour:
   StatPlusAnimation: {fileID: 4710035850358601697}
   StatMinusAnimation: {fileID: 5181561675151185336}
   HighlightAbilityAnimationName: HighlightAbility
+--- !u!114 &6978953058678933244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647378737500881845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce174aa9d08c90478426b29f36fb55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Card: {fileID: 0}
+  FrontHolder: {fileID: 292642175116116442}
+  CardBackHolder: {fileID: 3983243860329674903}
+  CardImage: {fileID: 3647378738829383159}
+  RaceInstance: {fileID: 7829417301979537092}
+  AttributeInstance: {fileID: 3640668363075213114}
+  CardAnimation: {fileID: 6328246388895847416}
+  AttackText: {fileID: 5173733348141758132}
+  HealthText: {fileID: 3999779988335304302}
+  NameText: {fileID: 3647378737615735766}
+  DescriptionText: {fileID: 8750236915218075657}
+  InstantiatedObjects: []
 --- !u!1 &3647378737615735764
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,19 +27,21 @@ public class CardHighlight : Singleton<CardHighlight>
 
     //DISABLE mask if creature has small image
     //remember color the same as health and attack of card
-    public static void Show(Card card)
+    public static void Show(CardUI card)
     {
         Instance.ShowCard(card);
     }
 
-    private void ShowCard(Card card)
+    private void ShowCard(CardUI cardUI)
     {
         InstantiatedObjects.ForEach(t => Destroy(t.gameObject));
 
         InstantiatedObjects.Clear();
 
+        var card = cardUI.Card;
+
         //public TextMeshProUGUI CardTitleText;
-        CardTitleText.text = card.name;
+        CardTitleText.text = card.Name;
 
 
         //public Image ImageMask, Image;
@@ -55,12 +57,12 @@ public class CardHighlight : Singleton<CardHighlight>
         }
 
         //public TextMeshProUGUI AttackText;
-        AttackText.text = card.AttackText.text;
-        AttackText.color = card.AttackText.color;
+        AttackText.text = cardUI.AttackText.text;
+        AttackText.color = cardUI.AttackText.color;
 
         //public TextMeshProUGUI HealthText;
-        HealthText.text = card.HealthText.text + "/" + card.MaxHealth.ToString("N0");
-        HealthText.color = card.HealthText.color;
+        HealthText.text = cardUI.HealthText.text + "/" + card.MaxHealth.ToString("N0");
+        HealthText.color = cardUI.HealthText.color;
 
         //public ImageTextEntry RaceIcon;
         RaceIcon.Text.text = card.Creature.Race.name;
@@ -88,7 +90,7 @@ public class CardHighlight : Singleton<CardHighlight>
         }
 
         var rect = GetComponent<RectTransform>();
-        rect.position = card.GetComponent<RectTransform>().position;
+        rect.position = cardUI.GetComponent<RectTransform>().position;
 
         Instance.Holder.SetActive(true);
     }

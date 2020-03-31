@@ -50,7 +50,7 @@ public abstract class AbilityAction
 
                 break;
             case Ability.Noun.IT:
-                if (triggerExecuter && triggerExecuter.Location == location)
+                if (triggerExecuter != null && triggerExecuter.Location == location)
                     cs.Add(triggerExecuter);
                 break;
             case Ability.Noun.NotOwnerRACE:

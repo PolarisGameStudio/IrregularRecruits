@@ -3892,7 +3892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextCombatButton: {fileID: 811981349}
-  CardPrefab: {fileID: 3647378737500881847, guid: 8ba74a1c13a7ed44fae40a93abce7f51,
+  CardPrefab: {fileID: 6978953058678933244, guid: 8ba74a1c13a7ed44fae40a93abce7f51,
     type: 3}
   AllRaces:
   - {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}

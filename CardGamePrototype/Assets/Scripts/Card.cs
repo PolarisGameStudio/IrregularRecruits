@@ -5,10 +5,11 @@ using System.Linq;
 using System.Reflection;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-[RequireComponent(typeof(RectTransform))]
-public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
+
+public class Card 
 {
     [SerializeProperty("Creature")]
     [SerializeField]
@@ -18,22 +19,22 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
         get => creature; set
         {
             creature = value;
-            UpdateCreature(value);            
+            SetCreature(value);            
         }
     }
 
-    [Header("UI Refs")]
-    public GameObject FrontHolder, CardBackHolder;
-    public Image CardImage;
-    public Image RaceInstance;
-    //TODO: replace with clickable
-    public Image AttributeInstance;
-    public CardAnimation CardAnimation;
-    public TextMeshProUGUI AttackText;
-    public TextMeshProUGUI HealthText;
-    public TextMeshProUGUI NameText;
-    public TextMeshProUGUI DescriptionText;
-    public List<GameObject> InstantiatedObjects = new List<GameObject>();
+    public CardUI BattleRepresentation;
+
+    public string Name;
+
+    public UnityEvent OnStatChange = new UnityEvent();
+    public UnityEvent OnDeath = new UnityEvent();
+    public class StatChangeEvent : UnityEvent<int> { }
+    public StatChangeEvent OnDamage = new StatChangeEvent();
+    public StatChangeEvent OnStatMod = new StatChangeEvent();
+    public class CreatureChangeEvent : UnityEvent<Creature> { }
+    public CreatureChangeEvent OnCreatureChange = new CreatureChangeEvent();
+    public UnityEvent OnAbilityTrigger = new UnityEvent();
 
     [Header("Battle specific")]
     public Deck InDeck;
@@ -46,22 +47,23 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
         {
             if (currentHealth > value)
             {
-                CardAnimation.DamageAnimation.Show(value- currentHealth);
+                OnDamage.Invoke(value- currentHealth);
                 Event.OnDamaged.Invoke(this);
             }
             else if (value > currentHealth)
                 Event.OnHealed.Invoke(this);
 
-
-
-            HealthText.color = value < MaxHealth ? Color.red : creature.Health < MaxHealth ? Color.green : Color.white;
-
             if (value > MaxHealth) value = MaxHealth;
 
             currentHealth = value;
             if (value <= 0) Die();
-            UpdateStats();
+            OnStatChange.Invoke();
         }
+    }
+
+    public Card(CardUI representation)
+    {
+        BattleRepresentation = representation;
     }
 
     public void Die()
@@ -70,7 +72,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
 
         Event.OnDeath.Invoke(this);
         ChangeLocation(Location, Deck.Zone.Graveyard);
-        CardAnimation.Dissolve();// () => ChangeLocation(Location, Deck.Zone.Graveyard));
+        OnDeath.Invoke();
     }
 
     private int attack;
@@ -79,16 +81,19 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
         get => attack; set
         {
             attack = value;
-            AttackText.color = creature.Attack < value ? Color.green : Color.white;
-            UpdateStats();
+            OnStatChange.Invoke();
         }
     }
+
+    public bool FaceUp = true; 
+
     public Deck.Zone Location;
 
     public void ChangeLocation(Deck.Zone to)
     {
         ChangeLocation(Location, to);
     }
+
     public void ChangeLocation(Deck.Zone from, Deck.Zone to)
     {
         //Debug.Log($"Moving {this} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
@@ -117,62 +122,23 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
         BattleUI.Move(this, to, InDeck.PlayerDeck);
     }
 
-    public void UpdateCreature(Creature creature)
+    public void SetCreature(Creature creature)
     {
         if (String.IsNullOrEmpty(creature.name)) creature.name = creature.ToString();
 
-        CardImage.sprite = creature.Image;
-        NameText.text = creature.name;
-        name = creature?.name;
+        Name = creature?.name;
 
         MaxHealth = creature.Health;
         CurrentHealth = creature.Health;
         Attack = creature.Attack;
 
-        InstantiatedObjects.ForEach(DestroyImmediate);
-        InstantiatedObjects.Clear();
+        OnCreatureChange.Invoke(creature);
 
-        DescriptionText.text = "";
-
-
-        if (creature.Race)
-        {
-            var instance = Instantiate(RaceInstance, RaceInstance.transform.parent);
-            instance.gameObject.SetActive(true);
-            instance.sprite = creature.Race.Icon;
-
-            InstantiatedObjects.Add(instance.gameObject);
-        }
-
-
-        foreach (var a in creature.Traits)
-        {
-            var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
-            instance.gameObject.SetActive(true);
-            instance.sprite = a.Icon;
-
-            DescriptionText.text += $"<b>{a.name}</b>\n";
-
-            InstantiatedObjects.Add(instance.gameObject);
-        }
-
+        //TODO: remove old listeners
         if (creature.SpecialAbility)
         {
             creature.SpecialAbility.SetupListeners(this);
-            DescriptionText.text += $"{creature.SpecialAbility.Description(this)}\n";
-
-            var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
-            instance.gameObject.SetActive(true);
-            instance.sprite = IconManager.GetAbilityIconSprite( creature.SpecialAbility.ResultingAction.ActionType);
-
-            InstantiatedObjects.Add(instance.gameObject);
         }
-    }
-
-    private void UpdateStats()
-    {
-        AttackText.text = Attack.ToString("N0");
-        HealthText.text = CurrentHealth.ToString("N0");
     }
 
     internal bool Defender() =>
@@ -184,12 +150,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
 
 
     internal void StatModifier(int amount)
-    {
-        if (amount > 0)
-            CardAnimation.StatPlusAnimation.Show(amount);
-        else if (amount < 0)
-            CardAnimation.StatMinusAnimation.Show(amount);
-
+    { 
         MaxHealth += amount;
         CurrentHealth += amount;
         Attack += amount;
@@ -197,8 +158,9 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
 
     private void Flip(bool upsideUp)
     {
-        CardBackHolder.SetActive(!upsideUp);
-        FrontHolder.SetActive(upsideUp);
+        FaceUp = upsideUp;
+
+        BattleRepresentation.Flip();
     }
     private void PlayCard()
     {
@@ -233,7 +195,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
     internal void Resurrect(int amount)
     {
         if (Location != Deck.Zone.Graveyard || Alive())
-            Debug.LogWarning("Resurrectting alive character; "+ name);
+            Debug.LogWarning("Resurrectting alive character; "+ Name);
 
         CurrentHealth = amount;
         ChangeLocation(Deck.Zone.Graveyard, Deck.Zone.Battlefield);
@@ -259,8 +221,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
         ChangeLocation(Deck.Zone.Battlefield);
     }
 
-    #region Input Handling
-    public void OnPointerClick(PointerEventData eventData)
+    public void Click()
     {
         //Debug.Log("Clicked card " + this);
 
@@ -274,20 +235,4 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IP
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        CardHighlight.Hide();
-
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        CardHighlight.Show(this);
-
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-    }
-    #endregion
 }
