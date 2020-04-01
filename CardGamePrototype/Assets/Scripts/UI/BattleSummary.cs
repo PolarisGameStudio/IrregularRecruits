@@ -13,6 +13,11 @@ public class BattleSummary : Singleton<BattleSummary>
     public UnitIcon BattleSummaryGainedIcon;
     private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
 
+    private void Start()
+    {
+        BattleSummaryHolder.SetActive(false);
+    }
+
     public static void ShowSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck)
     {
         Instance.ShowBattleSummary(initialPlayerDeck, initialEnemyDeck, finalPlayerDeck, finalEnemyDeck);
