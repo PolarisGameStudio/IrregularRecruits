@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class BattleUI : MonoBehaviour
@@ -12,6 +13,9 @@ public class BattleUI : MonoBehaviour
 
     public UIZone[] PlayerUIZones;
     public UIZone[] EnemyUIZones;
+
+    public Button ViewPlayerDeckButton;
+
     [Serializable]
     public struct UIZone { 
         public Deck.Zone Zone; 
@@ -27,7 +31,8 @@ public class BattleUI : MonoBehaviour
         if (!Instance) Instance = this;
 
         Event.OnDraw.AddListener(c=> UpdateLibrary());
-        Event.OnWithdraw.AddListener(c=> UpdateLibrary());        
+        Event.OnWithdraw.AddListener(c=> UpdateLibrary());
+        ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(CombatManager.PlayerDeck));
     }
 
     public static Transform GetZoneHolder(Deck.Zone zone, bool enm)

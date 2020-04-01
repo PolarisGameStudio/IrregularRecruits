@@ -36,7 +36,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI DescriptionText;
     public List<GameObject> InstantiatedObjects = new List<GameObject>();
-
+    //For deck view and the like
+    public bool AlwaysFaceUp;
 
     private void AddListeners(Card c)
     {
@@ -48,6 +49,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
         c.OnStatMod.AddListener(StatModifier);
         c.OnDamage.AddListener(CardAnimation.DamageAnimation.Show);
         c.OnDeath.AddListener(()=>CardAnimation.Dissolve());
+
+        UpdateCreature(c.Creature);
     }
 
     private void RemoveListeners(Card c)
@@ -64,6 +67,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
     public void UpdateCreature(Creature creature)
     {
+        if (!creature) return;
+
         if (String.IsNullOrEmpty(creature.name)) creature.name = creature.ToString();
 
         CardImage.sprite = creature.Image;
@@ -128,8 +133,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
     public void Flip()
     {
-
         //todo: deck view/unflippable bool 
+        if (AlwaysFaceUp) return;
         
         CardBackHolder.SetActive(!Card.FaceUp);
         FrontHolder.SetActive(Card.FaceUp);
@@ -151,7 +156,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Card.FaceUp)
+        if (AlwaysFaceUp || (Card != null && Card.FaceUp))
             CardHighlight.Show(this);
 
     }
