@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
+  m_Name: Dwarfs
+  m_EditorClassIdentifier: 
+  name: Dwarven Army
+  Description: Small and sturdy. Beards
+  Creatures:
+  - {fileID: 11400000, guid: cba74a2b26beef44293c048057b62e35, type: 2}
+  - {fileID: 11400000, guid: cba74a2b26beef44293c048057b62e35, type: 2}
+  - {fileID: 11400000, guid: cba74a2b26beef44293c048057b62e35, type: 2}
+  - {fileID: 11400000, guid: cba74a2b26beef44293c048057b62e35, type: 2}
+  - {fileID: 11400000, guid: cba74a2b26beef44293c048057b62e35, type: 2}
+  - {fileID: 11400000, guid: cba74a2b26beef44293c048057b62e35, type: 2}
+  - {fileID: 11400000, guid: d4487b468fbf9da449cc8cc2672a2075, type: 2}
+  - {fileID: 11400000, guid: d4487b468fbf9da449cc8cc2672a2075, type: 2}
+  - {fileID: 11400000, guid: d4487b468fbf9da449cc8cc2672a2075, type: 2}
+  - {fileID: 11400000, guid: d4487b468fbf9da449cc8cc2672a2075, type: 2}
+  - {fileID: 11400000, guid: d4487b468fbf9da449cc8cc2672a2075, type: 2}
+  - {fileID: 11400000, guid: d4487b468fbf9da449cc8cc2672a2075, type: 2}
+  - {fileID: 11400000, guid: 77e08626bca3fd34b922cb49084e03d7, type: 2}
+  - {fileID: 11400000, guid: 77e08626bca3fd34b922cb49084e03d7, type: 2}
+  - {fileID: 11400000, guid: 77e08626bca3fd34b922cb49084e03d7, type: 2}
+  - {fileID: 11400000, guid: 77e08626bca3fd34b922cb49084e03d7, type: 2}
+  - {fileID: 11400000, guid: 77e08626bca3fd34b922cb49084e03d7, type: 2}
+  - {fileID: 11400000, guid: 77e08626bca3fd34b922cb49084e03d7, type: 2}
+  - {fileID: 11400000, guid: 19d807260aeb4b34c9086ed02680505d, type: 2}
+  - {fileID: 11400000, guid: 19d807260aeb4b34c9086ed02680505d, type: 2}
+  DeckIcon: {fileID: 21300000, guid: 83ed9dd37548b784b8808023d2a33731, type: 3}
+  DeckImage: {fileID: 21300000, guid: e709fa692eed1d542801a0748e091546, type: 3}

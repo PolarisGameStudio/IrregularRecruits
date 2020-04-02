@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Angry Crab
   Rarity: 0
-  Locked: 0
+  Locked: 1
   Image: {fileID: 21300000, guid: 4695dc54b2e2fe84aaa980e25834e78c, type: 3}
+  IconImage: {fileID: 21300000, guid: 3a03f05646d4cca40aee1444ff7f3afa, type: 3}
   Attack: 1
   Health: 4
   Traits:

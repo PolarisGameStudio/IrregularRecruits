@@ -19,6 +19,13 @@ public class DeckViewerUI : Singleton<DeckViewerUI>
 
         Instance.ViewDeck(deck);
     }
+    
+    public static void View(DeckObject deck)
+    {
+        if (deck == null) return;
+
+        Instance.ViewDeck(deck);
+    }
 
     public void ViewDeck(Deck deck)
     {
@@ -30,6 +37,26 @@ public class DeckViewerUI : Singleton<DeckViewerUI>
             var inst = Instantiate(CardUIInstance,CardUIInstance.transform.parent);
 
             inst.Card = c;
+
+            inst.gameObject.SetActive(true);
+            inst.AlwaysFaceUp = true;
+
+            InstatiatedObjects.Add(inst.gameObject);
+        }
+
+        Holder.SetActive(true);
+    }
+    
+    public void ViewDeck(DeckObject deck)
+    {
+        InstatiatedObjects.ForEach(Destroy);
+        InstatiatedObjects.Clear();
+
+        foreach (var c in deck.Creatures)
+        {
+            var inst = Instantiate(CardUIInstance,CardUIInstance.transform.parent);
+
+            inst.UpdateCreature(c);
 
             inst.gameObject.SetActive(true);
             inst.AlwaysFaceUp = true;

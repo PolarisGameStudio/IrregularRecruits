@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
+  m_Name: Demons
+  m_EditorClassIdentifier: 
+  name: Demonic Horde
+  Description: Demon and their minions. Sacrifice is demanded. Deals are made
+  Creatures:
+  - {fileID: 11400000, guid: 38b9eb25c27f2774eb3b7db486d38f00, type: 2}
+  - {fileID: 11400000, guid: 38b9eb25c27f2774eb3b7db486d38f00, type: 2}
+  - {fileID: 11400000, guid: 38b9eb25c27f2774eb3b7db486d38f00, type: 2}
+  - {fileID: 11400000, guid: d1c986e9f687c2049b0470327febc935, type: 2}
+  - {fileID: 11400000, guid: 896636e326c93474fbbe268a481f3377, type: 2}
+  - {fileID: 11400000, guid: 7d1a90b45e6f13043856a3029af096c0, type: 2}
+  - {fileID: 11400000, guid: 447f973aa495a724c9434a3dc2a193d6, type: 2}
+  - {fileID: 11400000, guid: dbf60561985d70040a4a91fc8c099713, type: 2}
+  - {fileID: 11400000, guid: dbf60561985d70040a4a91fc8c099713, type: 2}
+  - {fileID: 11400000, guid: dbf60561985d70040a4a91fc8c099713, type: 2}
+  - {fileID: 11400000, guid: 04ab0a004cf51144082e9a7e144dd923, type: 2}
+  - {fileID: 11400000, guid: 58f7f319b92a0ed42b57069e47d5f543, type: 2}
+  - {fileID: 11400000, guid: 58f7f319b92a0ed42b57069e47d5f543, type: 2}
+  - {fileID: 11400000, guid: 26eda7ce4b960684db0a10236fef921b, type: 2}
+  - {fileID: 11400000, guid: 26eda7ce4b960684db0a10236fef921b, type: 2}
+  - {fileID: 11400000, guid: f83133d28a126da4a8eefc2971b58ba3, type: 2}
+  - {fileID: 11400000, guid: f83133d28a126da4a8eefc2971b58ba3, type: 2}
+  - {fileID: 11400000, guid: e660b887da1250a42ba7428059db2e86, type: 2}
+  - {fileID: 11400000, guid: e660b887da1250a42ba7428059db2e86, type: 2}
+  - {fileID: 11400000, guid: e660b887da1250a42ba7428059db2e86, type: 2}
+  DeckIcon: {fileID: 21300000, guid: b5bc0b4edc33f274e927e39931fac2ba, type: 3}
+  DeckImage: {fileID: 21300000, guid: c06e890595c68a34aad491ce28085011, type: 3}

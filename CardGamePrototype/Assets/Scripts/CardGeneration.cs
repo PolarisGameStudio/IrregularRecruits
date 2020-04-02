@@ -142,7 +142,7 @@ public class CardGeneration
 
     }
 
-    private static List<T> GetAssetsOfType<T>() where T : UnityEngine.Object
+    public static List<T> GetAssetsOfType<T>() where T : UnityEngine.Object
     {
         var guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);  //FindAssets uses tags check documentation for more info
         return guids.Select(guid => AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guid))).ToList();
