@@ -6,10 +6,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class CombatTest : MonoBehaviour
+public class CombatTest : Singleton<CombatTest>
 {
     public Button NextCombatButton;
-    public CardUI CardPrefab;
     private Deck PlayerDeck;
     private Deck EnemyDeck;
     public Race[] AllRaces;
@@ -23,7 +22,6 @@ public class CombatTest : MonoBehaviour
             AllRaces = Resources.FindObjectsOfTypeAll<Race>();
 
         PlayerDeck = GenerateDeck(true);
-
 
         NextCombatButton.onClick.AddListener( NextCombat);
         Event.OnCombatFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
@@ -39,15 +37,15 @@ public class CombatTest : MonoBehaviour
         NextCombatButton.gameObject.SetActive(false);
     }
 
+    public static void SetPlayerDeck(Deck deck)
+    {
+        Instance.PlayerDeck = deck;
+    }
+
+
     private Deck GenerateDeck(bool player = false)
     {
         var library = new List<Card>();
-
-        var deck = new Deck(library,player);
-
-        deck.PlayerDeck = player;
-
-
 
         Race[] possibleRaces = player ? AllRaces.Where(r => r.PlayerRace).ToArray() : AllRaces;
         var race = possibleRaces[Random.Range(0, possibleRaces.Length)];
@@ -57,21 +55,13 @@ public class CombatTest : MonoBehaviour
 
         for (int i = 0; i < (GameSettings.DeckSize(player)); i++)
         {
-            var ui = Instantiate<CardUI>(CardPrefab);
-
-            var card = new Card(ui);
-
-            ui.Card = card;
-
-            card.InDeck = deck;
-
-            card.Creature = creatures[Random.Range(0, creatures.Count())];
-
+            var card = new Card(creatures[Random.Range(0, creatures.Count())]);
+            
             library.Add(card);
-
-            card.ChangeLocation(Deck.Zone.Library);
-
         }
+
+        var deck = new Deck(library, player);
+
 
         return deck;
     }

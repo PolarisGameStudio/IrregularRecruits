@@ -24,8 +24,8 @@ public class EffectAnimation : MonoBehaviour
         Hide();
 
         Text.text = dmg.ToString("N0");
-
-        LeanTween.scale(gameObject, Vector3.one *  Random.Range(1-SizeRandomElement,1+ SizeRandomElement), Duration + Random.Range(-DurationRandomElement,DurationRandomElement)).setEase(TweenType).setOnComplete(Hide);
+        if(gameObject)
+            LeanTween.scale(gameObject, Vector3.one *  Random.Range(1-SizeRandomElement,1+ SizeRandomElement), Duration + Random.Range(-DurationRandomElement,DurationRandomElement)).setEase(TweenType).setOnComplete(Hide);
 
         //TODO: the higher the damage, the bigger, quicker and more child objects
 

@@ -66,6 +66,11 @@ public class Card
         BattleRepresentation = representation;
     }
 
+    public Card(Creature c)
+    {
+        Creature = c;
+    }
+
     public void Die()
     {
         //Debug.Log("Killing " + this);
@@ -160,7 +165,7 @@ public class Card
     {
         FaceUp = upsideUp;
 
-        BattleRepresentation.Flip();
+        BattleRepresentation?.Flip();
     }
     private void PlayCard()
     {

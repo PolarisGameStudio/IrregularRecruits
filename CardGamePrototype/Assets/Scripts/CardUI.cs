@@ -7,7 +7,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
-public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
+public class CardUI : MonoBehaviour
+#if UNITY_EDITOR
+    , IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
+#endif
 {
     private Card card;
     public Card Card
@@ -51,6 +54,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
         c.OnDeath.AddListener(()=>CardAnimation.Dissolve());
 
         UpdateCreature(c.Creature);
+        UpdateStats();
     }
 
     private void RemoveListeners(Card c)
@@ -123,6 +127,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
     private void UpdateStats()
     {
+        if (!Card.Creature) return;
+
         AttackText.text = Card.Attack.ToString("N0");
         HealthText.text = Card.CurrentHealth.ToString("N0");
         HealthText.color = Card.CurrentHealth < Card.MaxHealth ? Color.red : 
@@ -141,6 +147,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     }
 
     #region Input Handling
+#if true
     public void OnPointerClick(PointerEventData eventData)
     {
         //Debug.Log("Clicked card " + this);
@@ -164,5 +171,21 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     public void OnDrag(PointerEventData eventData)
     {
     }
+#endif
+#if false
+    public void Update()
+    {
+        var touch = Input.GetTouch(0);
+
+        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+        {
+            // ui touched
+            CardHighlight.Show(this);
+        }
+        else if (touch.phase == TouchPhase.Ended)
+            CardHighlight.Hide();
+
+    }
+#endif
     #endregion
 }

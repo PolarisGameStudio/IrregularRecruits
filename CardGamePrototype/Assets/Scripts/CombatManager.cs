@@ -48,6 +48,9 @@ public class CombatManager : Singleton<CombatManager>
         PlayerDeck = playerDeck;
         EnemyDeck = opponentDeck;
 
+        SetupUI(playerDeck);
+        SetupUI(EnemyDeck);
+
         InitialPlayerDeck = PlayerDeck.AllCreatures();
         InitialEnemyDeck = EnemyDeck.AllCreatures();
 
@@ -58,6 +61,25 @@ public class CombatManager : Singleton<CombatManager>
 
         StartCoroutine(NextTurn());
     }
+
+    private void SetupUI(Deck deck)
+    {
+        foreach (var card in deck.AllCreatures())
+        {
+            if (card.BattleRepresentation)
+                continue;
+
+            var ui = Instantiate<CardUI>(BattleUI.Instance.CardPrefab);
+
+            ui.Card = card;
+            card.BattleRepresentation = ui;
+
+            card.ChangeLocation(Deck.Zone.Library);
+
+            BattleUI.Move(card, card.Location, deck.PlayerDeck);
+        }
+    }
+
     private void EndCombat()
     {
         Event.OnCombatFinished.Invoke();

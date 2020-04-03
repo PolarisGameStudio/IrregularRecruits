@@ -13,6 +13,11 @@ public class Deck
 
     private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 
+    public Deck(DeckObject deckObject,bool playerDeck)
+        : this(deckObject.Creatures.Select(c => new Card(c)).ToList(), playerDeck)
+    {
+    }
+
     public Deck(List<Card> initialLibrary,bool playerDeck)
     {
         for (int i = (int)Zone.Library; i < (int)Zone.COUNT; i++)
@@ -20,7 +25,17 @@ public class Deck
             Creatures[(Zone)i] = new List<Card>();
         }
 
+        PlayerDeck = playerDeck;
+
+
         Creatures[Zone.Library] = initialLibrary;
+
+        foreach (var card in initialLibrary)
+        {
+            card.InDeck = this;
+            card.Location = Zone.Library;
+        }
+
         if (!playerDeck)
             AI = new AI(this);
 
