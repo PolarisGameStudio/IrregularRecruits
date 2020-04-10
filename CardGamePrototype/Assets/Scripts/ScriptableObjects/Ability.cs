@@ -10,8 +10,7 @@ public partial class Ability : ScriptableObject
 {
     [SerializeField]
     private float Value;
-
-
+    
     //could be composite (friendly undamaged OwnerRace) Negated (!OwnerRace)
     public enum Noun { 
         THIS,
@@ -175,40 +174,48 @@ public partial class Ability : ScriptableObject
     {
         Debug.Log("Trigger: " + TriggerCondition.Description(_owner) + " is true");
         Debug.Log("Executing: " + ResultingAction.Description(_owner));
-        Event.OnAbilityTrigger.Invoke(_owner);
-
         _owner.OnAbilityTrigger.Invoke();
 
-        var potentialTargets = new List<Card>();
 
+        List<Card> targets = GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Battlefield, _owner, triggerExecuter);
         switch (ResultingAction.ActionType)
         {
             case ActionType.Kill:
-                GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Battlefield, _owner,triggerExecuter).ForEach(c=>c.Die());
+                targets.ForEach(c=> c.Die());
+                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
                 break;
             case ActionType.DealDamage:
-                GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Battlefield, _owner, triggerExecuter).ForEach(c => c.CurrentHealth -= ResultingAction.Amount);
+                targets.ForEach(c => c.CurrentHealth -= ResultingAction.Amount);
+                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
                 break;
             case ActionType.StatPlus:
-                GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Battlefield, _owner, triggerExecuter).ForEach(c => c.StatModifier(ResultingAction.Amount));
+                targets.ForEach(c => c.StatModifier(ResultingAction.Amount));
+                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
                 break;
             case ActionType.StatMinus:
-                GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Battlefield, _owner, triggerExecuter).ForEach(c => c.StatModifier(-ResultingAction.Amount));
+                targets.ForEach(c => c.StatModifier(-ResultingAction.Amount));
+                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
                 break;
             case ActionType.Withdraw:
-                GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Battlefield, _owner, triggerExecuter).ForEach(c => c.Withdraw());
+                targets.ForEach(c => c.Withdraw());
+                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
                 break;
             case ActionType.Heal:
-                GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Battlefield, _owner, triggerExecuter).ForEach(c=> c.CurrentHealth += ResultingAction.Amount);
+                targets.ForEach(c=> c.CurrentHealth += ResultingAction.Amount);
+                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
                 break;
             case ActionType.Resurrect:
-                GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Graveyard, _owner, triggerExecuter).ForEach(c => c.Resurrect(ResultingAction.Amount));
+                List<Card> graveTargets = GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Graveyard, _owner, triggerExecuter);
+                graveTargets.ForEach(c => c.Resurrect(ResultingAction.Amount));
+                Event.OnAbilityTrigger.Invoke(this, _owner, graveTargets);
                 break;
             case ActionType.Draw:
                 _owner.InDeck.Draw(ResultingAction.Amount);
+                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
                 break;
             case ActionType.Charm:
-                GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Graveyard, _owner, triggerExecuter).ForEach(c => c.Charm(_owner.InDeck));
+                targets.ForEach(c => c.Charm(_owner.InDeck));
+                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
                 break;
             case ActionType.Summon:
                 Debug.Log("summoning not implemented");
@@ -216,6 +223,8 @@ public partial class Ability : ScriptableObject
             default:
                 break;
         }
+
+
     }
 
     private List<Card> GetTargets(Noun targetType, Count count,Deck.Zone location, Card _owner,Card triggerExecuter )

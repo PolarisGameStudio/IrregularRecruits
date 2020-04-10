@@ -48,5 +48,9 @@ public class GameSettings : Singleton<GameSettings>
 
 	public static int DeckSize(bool player) => player ? Instance.PlayerDeckSize : Instance.EnemyDeckSize;
 
-
+	private void Awake()
+	{
+		//Set up event hierachy
+		Event.OnPlay.AddListener(c => Event.OnPlayerAction.Invoke());
+	}
 }

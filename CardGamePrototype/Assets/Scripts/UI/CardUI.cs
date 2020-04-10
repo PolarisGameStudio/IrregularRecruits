@@ -7,10 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
-public class CardUI : MonoBehaviour
-#if UNITY_EDITOR
-    , IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
-#endif
+public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
 {
     private Card card;
     public Card Card
@@ -27,6 +24,7 @@ public class CardUI : MonoBehaviour
         }
     }
 
+
     [Header("UI Refs")]
     public GameObject FrontHolder, CardBackHolder;
     public Image CardImage;
@@ -38,6 +36,7 @@ public class CardUI : MonoBehaviour
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI DescriptionText;
+    public Image AbilityIcon;
     public List<GameObject> InstantiatedObjects = new List<GameObject>();
     //For deck view and the like
     public bool AlwaysFaceUp;
@@ -114,6 +113,10 @@ public class CardUI : MonoBehaviour
             instance.sprite = IconManager.GetAbilityIconSprite(creature.SpecialAbility.ResultingAction.ActionType);
 
             InstantiatedObjects.Add(instance.gameObject);
+
+            AbilityIcon = instance;
+
+            CardAnimation.SpecialAbilityIcon = instance;
         }
     }
 
@@ -163,7 +166,7 @@ public class CardUI : MonoBehaviour
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (AlwaysFaceUp || (Card != null && Card.FaceUp))
+        if ( AlwaysFaceUp || (Card != null && Card.FaceUp))
             CardHighlight.Show(this);
 
     }

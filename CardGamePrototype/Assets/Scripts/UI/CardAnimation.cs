@@ -9,8 +9,6 @@ public class CardAnimation : MonoBehaviour
 {
     public Material DissolveMaterial, HighlightMaterial;
 
-    public Animation Animator;
-
     public EffectAnimation DamageAnimation,StatPlusAnimation,StatMinusAnimation;
 
     private Material TargetMaterial, InstigatorMaterial;
@@ -18,11 +16,19 @@ public class CardAnimation : MonoBehaviour
     private Image[] ControlledImages;
     private TextMeshProUGUI[] ControlledTexts;
 
+    [Range(0.1f,3)]
+    public float DissolveSpeed = 1f;
+
     private float DissolveAmount;
     private bool IsDissolving;
     private UnityAction OnDissolved;
+    
+    public ParticleSystem PushoutParticles;
 
-    public string HighlightAbilityAnimationName;
+    public Image SpecialAbilityIcon;
+
+    public LayoutElement LayoutElement;
+    private float prefWidth;
 
     void Start()
     {
@@ -30,6 +36,8 @@ public class CardAnimation : MonoBehaviour
         ControlledTexts = GetComponentsInChildren<TextMeshProUGUI>(true);
         DissolveMaterial = Instantiate(DissolveMaterial);
         HighlightMaterial = Instantiate(HighlightMaterial);
+
+        prefWidth = LayoutElement.preferredWidth;
 
         foreach (var i in ControlledImages)
             i.material = DissolveMaterial;
@@ -39,7 +47,7 @@ public class CardAnimation : MonoBehaviour
     {
         if (IsDissolving)
         {
-            DissolveAmount = Mathf.Clamp01(DissolveAmount + Time.deltaTime);
+            DissolveAmount = Mathf.Clamp01(DissolveAmount + Time.deltaTime * DissolveSpeed);
             DissolveMaterial.SetFloat("DissolveAmount", DissolveAmount);
 
             foreach (var t in ControlledTexts)
@@ -76,7 +84,43 @@ public class CardAnimation : MonoBehaviour
 
     public void HighlightAbility()
     {
-        Animator.Play(HighlightAbilityAnimationName);
+        if (!SpecialAbilityIcon) return;
+
+        LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one * 2.5f, 0.4f).setOnComplete(() =>
+            LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one , 0.3f));
+
+        //PushoutParticles.Play();
+
+    }
+
+    public void ChangeLayoutSizeWhileMoving()
+    {
+        StartCoroutine(ChangeWidthToMove());
+    }
+
+    private IEnumerator ChangeWidthToMove()
+    {
+        var parent = transform.parent;
+        
+        var anitime = 0.2f;
+        var start = Time.time;
+
+        LayoutElement.preferredWidth = 0;
+        
+        yield return new WaitUntil(() => parent != transform.parent);
+
+        start = Time.time;
+        while (Time.time < start + anitime)
+        {
+            LayoutElement.preferredWidth = Mathf.Lerp(0f, prefWidth, (Time.time - start) / anitime);
+            yield return null;
+        }
+
+    }
+
+    public void EnterBattleField()
+    {
+        //PushoutParticles.Play();
     }
 
 }

@@ -61,10 +61,6 @@ public class Card
         }
     }
 
-    public Card(CardUI representation)
-    {
-        BattleRepresentation = representation;
-    }
 
     public Card(Creature c)
     {
@@ -76,7 +72,7 @@ public class Card
         //Debug.Log("Killing " + this);
 
         Event.OnDeath.Invoke(this);
-        ChangeLocation(Location, Deck.Zone.Graveyard);
+        ChangeLocation(Location, Deck.Zone.Graveyard,2f);
         OnDeath.Invoke();
     }
 
@@ -99,7 +95,7 @@ public class Card
         ChangeLocation(Location, to);
     }
 
-    public void ChangeLocation(Deck.Zone from, Deck.Zone to)
+    public void ChangeLocation(Deck.Zone from, Deck.Zone to, float delay = 0f)
     {
         //Debug.Log($"Moving {this} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
 
@@ -119,12 +115,7 @@ public class Card
 
         Location = to;
 
-        //TODO: handle from BattleUI class
-        //transform.SetParent( BattleUI.GetZoneHolder(to,!InDeck.PlayerDeck),false);
-
-        //if(from != Deck.Zone.Library && to == Deck.Zone.Library)
-        //    BattleUI.MoveCardToLibrary(this);
-        BattleUI.Move(this, to, InDeck.PlayerDeck);
+        BattleUI.Move(this, to, InDeck.PlayerDeck,delay);
     }
 
     public void SetCreature(Creature creature)
@@ -178,8 +169,6 @@ public class Card
         ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
 
         Event.OnPlay.Invoke(this);
-
-        CombatManager.PlayerActionsLeft--;
     }
 
     public void Withdraw()
@@ -193,7 +182,7 @@ public class Card
 
         ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library);
 
-        Event.OnDraw.Invoke(this);
+        Event.OnWithdraw.Invoke(this);
 
     }
 
@@ -229,6 +218,7 @@ public class Card
     public void Click()
     {
         //Debug.Log("Clicked card " + this);
+        if (!InDeck.PlayerDeck) return;
 
         if (Location == Deck.Zone.Hand)
         {

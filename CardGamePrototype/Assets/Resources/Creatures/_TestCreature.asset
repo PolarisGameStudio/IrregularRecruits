@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
+  m_Name: _TestCreature
+  m_EditorClassIdentifier: 
+  name: Testie
+  Rarity: 2
+  Locked: 0
+  Image: {fileID: 21300000, guid: c70ed4735ca80db4086ff675ccbd5030, type: 3}
+  IconImage: {fileID: 0}
+  Attack: 1
+  Health: 100
+  Traits: []
+  SpecialAbility: {fileID: 11400000, guid: d500180051fa1f441aed1867c87c33f7, type: 2}
+  Race: {fileID: 11400000, guid: 5635c48887d99084a9876306e16e608b, type: 2}

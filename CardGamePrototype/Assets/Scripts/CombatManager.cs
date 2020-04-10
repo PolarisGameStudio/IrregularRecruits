@@ -21,19 +21,22 @@ public class CombatManager : Singleton<CombatManager>
 
     private void Start()
     {
-        Event.OnAbilityTrigger.AddListener(c => StartCoroutine(WaitForTrigger()));
+        Event.OnAbilityTrigger.AddListener((x,y,z) => StartCoroutine(WaitForTrigger()));
 
-        Event.OnAttack.AddListener(c=> Debug.Log("Event: "+ c +  ": Attacking"));
-        Event.OnBeingAttacked.AddListener(c=> Debug.Log("Event: "+ c +  ": Is Attacked"));
-        Event.OnDamaged.AddListener(c=> Debug.Log("Event: "+ c +  ": Is Damaged"));
-        Event.OnDeath.AddListener(c=> Debug.Log("Event: "+ c +  ": Is dead"));
-        Event.OnHealed.AddListener(c=> Debug.Log("Event: "+ c +  ": Is healed"));
-        Event.OnKill.AddListener(c=> Debug.Log("Event: "+ c +  ": Killed a minion"));
-        Event.OnWithdraw.AddListener(c=> Debug.Log("Event: "+ c +  ": Withdrew"));
-        Event.OnCombatFinished.AddListener(()=> Debug.Log("Event: Combat Finished"));
-        Event.OnCombatRoundFinished.AddListener(()=> Debug.Log("Event: Combat Round Finished"));
-        Event.OnCombatStart.AddListener(()=> Debug.Log("Event: Combat started"));
-        Event.OnGameOver.AddListener(()=> Debug.Log("Event: Game Over"));
+        //Debugs texts
+        //Event.OnAttack.AddListener(c=> Debug.Log("Event: "+ c +  ": Attacking"));
+        //Event.OnBeingAttacked.AddListener(c=> Debug.Log("Event: "+ c +  ": Is Attacked"));
+        //Event.OnDamaged.AddListener(c=> Debug.Log("Event: "+ c +  ": Is Damaged"));
+        //Event.OnDeath.AddListener(c=> Debug.Log("Event: "+ c +  ": Is dead"));
+        //Event.OnHealed.AddListener(c=> Debug.Log("Event: "+ c +  ": Is healed"));
+        //Event.OnKill.AddListener(c=> Debug.Log("Event: "+ c +  ": Killed a minion"));
+        //Event.OnWithdraw.AddListener(c=> Debug.Log("Event: "+ c +  ": Withdrew"));
+        //Event.OnCombatFinished.AddListener(()=> Debug.Log("Event: Combat Finished"));
+        //Event.OnCombatRoundFinished.AddListener(()=> Debug.Log("Event: Combat Round Finished"));
+        //Event.OnCombatStart.AddListener(()=> Debug.Log("Event: Combat started"));
+        //Event.OnGameOver.AddListener(()=> Debug.Log("Event: Game Over"));
+
+        Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
     }
 
     public static void StartCombat(Deck playerDeck, Deck opponentDeck)
@@ -96,6 +99,8 @@ public class CombatManager : Singleton<CombatManager>
         EnemyDeck.AI?.MakeMoves();
 
         PlayerDeck.Draw(GameSettings.Instance.DrawPrTurn);
+
+        Event.OnTurnBegin.Invoke();
 
         PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
 

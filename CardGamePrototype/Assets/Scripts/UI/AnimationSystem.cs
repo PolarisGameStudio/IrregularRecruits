@@ -1,10 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AnimationSystem : Singleton<AnimationSystem>
 {
     public AnimationCurve AttackAnimationCurve;
+
+    public ParticleSystem[] WithdrawParticlesPrefab;
+    public ParticleSystem[] ETBParticlesPrefab;
+    public ParticleSystem[] DamageParticlesPrefab;
+    public ParticleSystem[] DeathParticlesPrefab;
+    public AbilityAnimationFX[] AbilityFx;
+
+    [Serializable]
+    public struct AbilityAnimationFX
+    {
+        public Ability.ActionType ActionType;
+        public ParticleSystem[] AbilityIconFX;
+        public ParticleSystem[] TargetFX;
+        public ParticleSystem[] OwnerFX;
+    }
+
+    private void Start()
+    {
+        Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab)));
+        Event.OnPlay.AddListener(c => StartCoroutine(PlayCardFX(c, ETBParticlesPrefab,BattleUI.Instance.MoveDuration+0.1f)));
+        Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab,0.1f)));
+        Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
+
+        Event.OnAbilityTrigger.AddListener((a,c,ts) => PlayAbilityFx(a,c,ts,0.25f));
+    }
 
     public static IEnumerator AttackAnimation(Card owner, Card target, float duration)
     {
@@ -23,4 +50,44 @@ public class AnimationSystem : Singleton<AnimationSystem>
         }
     }
 
+
+    private IEnumerator PlayCardFX(Card card, ParticleSystem[] fxs,float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (!card.BattleRepresentation) yield break;
+        //vector2 to ignore z position to prevent oddities
+        Vector2 position = card.BattleRepresentation.transform.position;
+        PlayFx(fxs, position, card.BattleRepresentation.transform);
+    }
+    private IEnumerator PlayAbilityIconFx(Card abilityOwner, ParticleSystem[] fxs,float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (!abilityOwner.BattleRepresentation || !abilityOwner.BattleRepresentation.AbilityIcon) yield break;
+        //vector2 to ignore z position to prevent oddities
+        Vector2 position = abilityOwner.BattleRepresentation.AbilityIcon.transform.position;
+        PlayFx(fxs, position, abilityOwner.BattleRepresentation.AbilityIcon.transform);
+    }
+
+    private static void PlayFx(ParticleSystem[] fxs, Vector2 position,Transform parent)
+    {
+        foreach (var fx in fxs)
+        {
+            Instantiate(fx, position, fx.transform.localRotation).transform.SetParent(parent);
+
+        }
+    }
+
+    private void PlayAbilityFx(Ability ability,Card owner, List<Card> targets, float delay = 0)
+    {
+        var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
+
+        int i = 0;
+
+        StartCoroutine(PlayCardFX(owner, abilityFx.OwnerFX, delay * i++));
+        StartCoroutine(PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, delay * i++));
+        foreach(var t in targets)
+            StartCoroutine(PlayCardFX(t, abilityFx.TargetFX,delay*i++));
+    }
 }

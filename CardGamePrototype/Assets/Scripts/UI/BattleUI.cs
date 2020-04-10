@@ -27,6 +27,8 @@ public class BattleUI : Singleton<BattleUI>
 
     public TextMeshProUGUI PlayerDeckDescription, EnemyDeckDescription;
 
+    public float MoveDuration = 0.2f;
+
     void Awake()
     {
         Event.OnDraw.AddListener(c=> UpdateLibrary());
@@ -61,18 +63,19 @@ public class BattleUI : Singleton<BattleUI>
 
     public static void MoveCardToLibrary(Card card)
     {
-        Instance.StartCoroutine(Instance.MoveCard(card,Deck.Zone.Library,true));
+        Instance.StartCoroutine(Instance.MoveCard(card,Deck.Zone.Library,true,0));
     }
-    public static void Move(Card card, Deck.Zone zone, bool player)
+    public static void Move(Card card, Deck.Zone zone, bool player,float delay = 0)
     {
-        Instance.StartCoroutine(Instance.MoveCard(card, zone, player));
+        Instance.StartCoroutine(Instance.MoveCard(card, zone, player,delay));
     }
 
-    private IEnumerator MoveCard(Card card, Deck.Zone zone,bool player)
+    private IEnumerator MoveCard(Card card, Deck.Zone zone,bool player, float delay)
     {
         if (!card.BattleRepresentation) yield break;
 
-        var duration = 0.2f;
+        yield return new WaitForSeconds(delay);
+
                        
         var rect = card.BattleRepresentation.GetComponent<RectTransform>();
         var startPos = rect.position;
@@ -80,22 +83,30 @@ public class BattleUI : Singleton<BattleUI>
 
         if (!zoneRect) yield break;
 
+
         var startTime = Time.time;
         var posAdjust = GetZoneAdjust(zone, !player);
         var rot = GetZoneRotation(zone, !player);
 
         Vector3 endPosition = zoneRect.position + new Vector3 (Random.Range(-posAdjust,posAdjust), Random.Range(-posAdjust, posAdjust)) ;
+        
+        rect.Rotate(new Vector3(0, 0, Random.Range(-rot, rot)));
 
-        rect.SetParent(zoneRect,true);
-        rect.SetAsFirstSibling();
+        //TODO: use lean tween instead
+        //LeanTween.move(card.BattleRepresentation.gameObject, endPosition, duration).setEaseInExpo();//.setOnComplete(c => rect.SetParent(zoneRect));
 
-        while (Time.time < startTime + duration)
+        card.BattleRepresentation?.CardAnimation.ChangeLayoutSizeWhileMoving();
+
+        while (Time.time < startTime + MoveDuration)
         {
             yield return null;
 
-            rect.position = Vector3.LerpUnclamped(startPos, endPosition, (Time.time - startTime) / duration);
-            rect.Rotate(new Vector3(0, 0, Random.Range(-rot, rot)));
+            //TODO: use animation curve
+            rect.position = Vector3.LerpUnclamped(startPos, endPosition, (Time.time - startTime) / MoveDuration);
         }
+
+        //TODO: hack that should not be needed
+        rect.localScale = Vector3.one;
         rect.SetParent(zoneRect);
         rect.SetAsLastSibling();
     }

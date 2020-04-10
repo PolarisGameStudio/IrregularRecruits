@@ -11,6 +11,7 @@ public class CombatTest : Singleton<CombatTest>
     public Button NextCombatButton;
     private Deck PlayerDeck;
     private Deck EnemyDeck;
+    public Creature TestCreature;
     public Race[] AllRaces;
     public Creature[] AllCreatures;
 
@@ -47,11 +48,21 @@ public class CombatTest : Singleton<CombatTest>
     {
         var library = new List<Card>();
 
-        Race[] possibleRaces = player ? AllRaces.Where(r => r.PlayerRace).ToArray() : AllRaces;
-        var race = possibleRaces[Random.Range(0, possibleRaces.Length)];
+        List<Creature> creatures;
 
-        var creatures = AllCreatures.Where(c => c.Race == race).ToList();
-        //creatures.OrderBy(c => Random.value);
+        //Generate a deck full of the test creature
+        if (TestCreature && player)
+        {
+            creatures = new List<Creature>() { TestCreature }; 
+        }
+        else
+        {
+            Race[] possibleRaces = player ? AllRaces.Where(r => r.PlayerRace).ToArray() : AllRaces;
+            var race = possibleRaces[Random.Range(0, possibleRaces.Length)];
+
+             creatures = AllCreatures.Where(c => c.Race == race).ToList();
+            //creatures.OrderBy(c => Random.value);
+        }
 
         for (int i = 0; i < (GameSettings.DeckSize(player)); i++)
         {

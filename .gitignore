@@ -5,3 +5,7 @@ CardGamePrototype/.vs/
 
 
 *.csproj
+
+CardGamePrototype/Build/
+
+*.apk

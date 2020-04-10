@@ -80,7 +80,8 @@ public class Deck
 
     public void ShuffleLibrary()
     {
-        Creatures[Zone.Library].OrderBy(x => UnityEngine.Random.value);
+        Debug.Log("shuffling deck");
+        Creatures[Zone.Library] = Creatures[Zone.Library].OrderBy(x => Random.value).ToList();
     }
 
 
