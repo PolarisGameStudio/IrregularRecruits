@@ -5698,6 +5698,7 @@ MonoBehaviour:
   HealthText: {fileID: 3999779988335304302}
   NameText: {fileID: 3647378737615735766}
   DescriptionText: {fileID: 8750236915218075657}
+  AbilityIcon: {fileID: 0}
   InstantiatedObjects: []
   AlwaysFaceUp: 0
 --- !u!114 &4991445251926434332
@@ -6128,10 +6129,10 @@ RectTransform:
   m_Father: {fileID: 3647378737500881846}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 150, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4453128676253294754
 GameObject:

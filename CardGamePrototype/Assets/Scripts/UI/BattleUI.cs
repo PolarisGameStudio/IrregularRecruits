@@ -75,21 +75,28 @@ public class BattleUI : Singleton<BattleUI>
         if (!card.BattleRepresentation) yield break;
 
         yield return new WaitForSeconds(delay);
-
-                       
+                               
         var rect = card.BattleRepresentation.GetComponent<RectTransform>();
         var startPos = rect.position;
         var zoneRect = GetZoneHolder(zone,!player);
 
         if (!zoneRect) yield break;
-
-
+        
         var startTime = Time.time;
         var posAdjust = GetZoneAdjust(zone, !player);
         var rot = GetZoneRotation(zone, !player);
+        Vector3 endPosition;
+        if (zoneRect.childCount > 0)
+        {
+            Debug.Log("moving to child pos "+ zoneRect.GetChild(zoneRect.childCount -1));
+            endPosition = zoneRect.GetChild(zoneRect.childCount - 1).position;
+        }
+        else
+           endPosition  = zoneRect.position;
 
-        Vector3 endPosition = zoneRect.position + new Vector3 (Random.Range(-posAdjust,posAdjust), Random.Range(-posAdjust, posAdjust)) ;
-        
+        endPosition += new Vector3(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
+
+
         rect.Rotate(new Vector3(0, 0, Random.Range(-rot, rot)));
 
         //TODO: use lean tween instead
