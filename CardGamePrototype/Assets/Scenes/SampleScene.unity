@@ -214,9 +214,7 @@ MonoBehaviour:
   - {fileID: 19800018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
   ETBParticlesPrefab:
   - {fileID: 19800000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
-  DamageParticlesPrefab:
-  - {fileID: 19800000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
-  - {fileID: 19800000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
+  DamageParticlesPrefab: []
   DeathParticlesPrefab:
   - {fileID: 198247871303120836, guid: e473029e4c70ad543a6879b82a732f4f, type: 3}
   AbilityFx:
@@ -19513,10 +19511,10 @@ RectTransform:
   m_Father: {fileID: 1066718295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 444.75003, y: -103.22}
+  m_SizeDelta: {x: 789.50006, y: 106.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910797087
 MonoBehaviour:
@@ -19978,7 +19976,7 @@ MonoBehaviour:
   MaxCreaturesOnBattlefield: 10
   AttackOrderParadigm: 0
   DeckDamageParadigm: 0
-  CombatSpeed: 0.5
+  CombatSpeed: 0.6
 --- !u!1001 &986603378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20697,7 +20695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1051119842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24874,10 +24872,10 @@ RectTransform:
   m_Father: {fileID: 537136784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 283.7}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 859.50006, y: -131.85}
+  m_SizeDelta: {x: 300, y: 283.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1665298993
 CanvasRenderer:
@@ -31909,10 +31907,10 @@ RectTransform:
   m_Father: {fileID: 1066718295}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 444.75003, y: -311.44}
+  m_SizeDelta: {x: 789.50006, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2119130800
 MonoBehaviour:
