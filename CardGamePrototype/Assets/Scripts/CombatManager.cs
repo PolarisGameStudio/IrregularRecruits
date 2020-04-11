@@ -62,7 +62,7 @@ public class CombatManager : Singleton<CombatManager>
         EnemyDeck.DrawInitialHand(true);
 
 
-        EventController.AddEvent(() =>    Event.OnCombatStart.Invoke());
+        FlowController.AddEvent(() =>    Event.OnCombatStart.Invoke());
 
         StartCoroutine(NextTurn());
     }
@@ -99,24 +99,24 @@ public class CombatManager : Singleton<CombatManager>
     {
         Debug.Log("Turn: " + Turn + " Started");
 
-        yield return new WaitUntil(() => EventController.ReadyForNextAction);
+        yield return new WaitUntil(() => FlowController.ReadyForNextAction);
 
         //Enemy actions
         EnemyDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-        yield return new WaitUntil(() => EventController.ReadyForNextAction);
+        yield return new WaitUntil(() => FlowController.ReadyForNextAction);
         EnemyDeck.AI?.MakeMoves();
 
-        yield return new WaitUntil(() => EventController.ReadyForNextAction);
+        yield return new WaitUntil(() => FlowController.ReadyForNextAction);
         PlayerDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-        EventController.AddEvent(() => 
+        FlowController.AddEvent(() => 
             Event.OnTurnBegin.Invoke());
 
         PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
 
 
-        yield return new WaitUntil(() => EventController.ReadyForNextAction && (PlayerActionsLeft <= 0 || PlayerDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0));
+        yield return new WaitUntil(() => FlowController.ReadyForNextAction && (PlayerActionsLeft <= 0 || PlayerDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0));
 
         StartCoroutine(ResolveCombat());
     }
@@ -138,28 +138,28 @@ public class CombatManager : Singleton<CombatManager>
     private IEnumerator ResolveCombat()
     {
         //Debug.Log("Resolving combat");
-
         var attackOrder = new List<Card>();
 
         attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.Attack > 0));
         attackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.Attack > 0));
 
+        //Differentiate between player and enemy creatures?
         switch (GameSettings.Instance.AttackOrderParadigm)
         {
             case GameSettings.AttackParadigm.Random:
-                attackOrder.OrderBy(x => Random.value);
+                attackOrder = attackOrder.OrderBy(x => Random.value).ToList();
                 break;
             case GameSettings.AttackParadigm.HighestHealthFirst:
-                attackOrder.OrderByDescending(x => x.Creature.Health);
+                attackOrder = attackOrder.OrderByDescending(x => x.Creature.Health).ToList();
                 break;
             case GameSettings.AttackParadigm.LowestHealthFirst:
-                attackOrder.OrderBy(x => x.Creature.Health);
+                attackOrder = attackOrder.OrderBy(x => x.Creature.Health).ToList();
                 break;
             case GameSettings.AttackParadigm.HighestAttackFirst:
-                attackOrder.OrderByDescending(x => x.Creature.Attack);
+                attackOrder = attackOrder.OrderByDescending(x => x.Creature.Attack).ToList();
                 break;
             case GameSettings.AttackParadigm.LowestAttackFirst:
-                attackOrder.OrderBy(x => x.Creature.Attack);
+                attackOrder = attackOrder.OrderBy(x => x.Creature.Attack).ToList();
                 break;
             default:
                 break;
@@ -172,7 +172,7 @@ public class CombatManager : Singleton<CombatManager>
 
         while (attackOrder.Any(c => c.Alive()))
         {
-            yield return new WaitUntil(()=>EventController.ReadyForNextAction);
+            yield return new WaitUntil(()=>FlowController.ReadyForNextAction);
 
             var attacker = attackOrder.First(c => c.Alive());
 
@@ -187,11 +187,11 @@ public class CombatManager : Singleton<CombatManager>
             }
 
             yield return new WaitUntil(() => !AbilityTriggering);
-            EventController.AddEvent(()=>
+            FlowController.AddEvent(()=>
                 Event.OnAttack.Invoke(attacker));
 
             yield return new WaitUntil(() => !AbilityTriggering);
-            EventController.AddEvent(() =>
+            FlowController.AddEvent(() =>
                 Event.OnBeingAttacked.Invoke(attacker));
 
             StartCoroutine(AnimationSystem.AttackAnimation(attacker,target, AttackAnimationDuration));
@@ -214,14 +214,14 @@ public class CombatManager : Singleton<CombatManager>
 
         //Debug.Log("Combat round finished. Enemies left: "+ EnemyDeck.Alive());
 
-        EventController.AddEvent(() =>
+        FlowController.AddEvent(() =>
             Event.OnCombatRoundFinished.Invoke());
 
         //TODO: just wait on eventcontroller
         yield return new WaitUntil(() => !AbilityTriggering);
 
         if (EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0)
-            EventController.AddEvent(() => Event.OnCombatFinished.Invoke());
+            FlowController.AddEvent(() => Event.OnCombatFinished.Invoke());
         else
             StartCoroutine(NextTurn());
     }

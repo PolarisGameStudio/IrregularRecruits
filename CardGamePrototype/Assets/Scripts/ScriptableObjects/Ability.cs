@@ -181,55 +181,55 @@ public partial class Ability : ScriptableObject
         switch (ResultingAction.ActionType)
         {
             case ActionType.Kill:
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                     targets.ForEach(c => c.Die()));
                 break;
             case ActionType.DealDamage:
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                     targets.ForEach(c => c.CurrentHealth -= ResultingAction.Amount));
                 break;
             case ActionType.StatPlus:
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                     targets.ForEach(c => c.StatModifier(ResultingAction.Amount)));
                 break;
             case ActionType.StatMinus:
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                     targets.ForEach(c => c.StatModifier(-ResultingAction.Amount)));
                 break;
             case ActionType.Withdraw:
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, targets));
                 targets.ForEach(c => c.Withdraw());
                 break;
             case ActionType.Heal:
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                     targets.ForEach(c => c.CurrentHealth += ResultingAction.Amount));
                 break;
             case ActionType.Resurrect:
                 List<Card> graveTargets = GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Graveyard, _owner, triggerExecuter);
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, graveTargets));
                 graveTargets.ForEach(c => c.Resurrect(ResultingAction.Amount));
                 break;
             case ActionType.Draw:
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, new List<Card>()));
                 _owner.InDeck.Draw(ResultingAction.Amount);
                 break;
             case ActionType.Charm:
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                EventController.AddEvent(()=> 
+                FlowController.AddEvent(()=> 
                     targets.ForEach(c => c.Charm(_owner.InDeck)));
                 break;
             case ActionType.Summon:
@@ -270,12 +270,10 @@ public partial class Ability : ScriptableObject
                 cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.CurrentHealth >= c.MaxHealth).ToList();
                 break;
             case Noun.CardInOwnersHand:
-                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == Deck.Zone.Hand && c.InDeck == _owner.InDeck).ToList();
-
+                cs = CombatManager.GetCardsInZone(Deck.Zone.Hand).Where(c=> c.InDeck == _owner.InDeck).ToList();
                 break;
             case Noun.CardInOwnersDeck:
-                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == Deck.Zone.Library && c.InDeck == _owner.InDeck).ToList();
-
+                cs = CombatManager.GetCardsInZone(Deck.Zone.Library).Where(c =>c.InDeck == _owner.InDeck).ToList();
                 break;
             case Noun.IT:
                 if (triggerExecuter != null && triggerExecuter.Location == location)
@@ -283,14 +281,12 @@ public partial class Ability : ScriptableObject
                 break;
             case Noun.NotOwnerRACE:
                 cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == location && c.Creature.Race != _owner.Creature.Race).ToList();
-
                 break;
             case Noun.CardInOpponentsHand:
-                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == Deck.Zone.Hand && c.InDeck != _owner.InDeck).ToList();
-
+                cs = CombatManager.GetCardsInZone(Deck.Zone.Hand).Where(c => c.InDeck != _owner.InDeck).ToList();
                 break;
             case Noun.CardInOpponentsDeck:
-                cs = CombatManager.GetCardsInZone(location).Where(c => c.Location == Deck.Zone.Library && c.InDeck != _owner.InDeck).ToList();
+                cs = CombatManager.GetCardsInZone(Deck.Zone.Library).Where(c => c.InDeck != _owner.InDeck).ToList();
                 break;
             case Noun.COUNT:
             default:

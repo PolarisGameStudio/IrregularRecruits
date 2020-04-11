@@ -5,10 +5,26 @@ using UnityEngine;
 
 //Responsible for controlling the timed invoke of events, by a readyforaction boolean and adding the event to an action queue.
 //TODO: replace event fields with an enum a create event in a dictionary, to better control 
-public class EventController : Singleton<EventController>
+public class FlowController : Singleton<FlowController>
 {
     private static Queue<Action> ActionQueue = new Queue<Action>();
     public static bool ReadyForNextAction;
+
+    public FlowSpeedFactor[] FlowSpeedFactors;
+
+    [Serializable]
+    public struct FlowSpeedFactor
+    {
+        public FlowEvent FlowEvent;
+        public float SpeedFactor;
+    }
+
+    //Replace these with more descriptive Events
+    public enum FlowEvent
+    {
+        Standard,
+        Fast,
+    }
 
     void Start()
     {

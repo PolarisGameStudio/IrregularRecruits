@@ -95,7 +95,7 @@ public class Deck
 
         foreach (var card in draws)
         {
-            EventController.AddEvent(() => Event.OnDraw.Invoke(card));
+            FlowController.AddEvent(() => Event.OnDraw.Invoke(card));
         }
     }
 

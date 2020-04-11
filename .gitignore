@@ -9,3 +9,5 @@ CardGamePrototype/.vs/
 CardGamePrototype/Build/
 
 *.apk
+
+*.cache

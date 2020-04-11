@@ -47,10 +47,10 @@ public class Card
             if (currentHealth > value)
             {
                 OnDamage.Invoke(value- currentHealth);
-                EventController.AddEvent(()=> Event.OnDamaged.Invoke(this));
+                FlowController.AddEvent(()=> Event.OnDamaged.Invoke(this));
             }
             else if (value > currentHealth && CombatManager.CombatRunning)
-                EventController.AddEvent(() =>
+                FlowController.AddEvent(() =>
                         Event.OnHealed.Invoke(this));
 
             if (value > MaxHealth) value = MaxHealth;
@@ -71,7 +71,7 @@ public class Card
     {
         //Debug.Log("Killing " + this);
 
-        EventController.AddEvent(()=>
+        FlowController.AddEvent(()=>
             Event.OnDeath.Invoke(this));
     }
 
@@ -168,7 +168,7 @@ public class Card
         if(BattleRepresentation)
             BattleRepresentation.Interactable = false;
 
-        EventController.AddEvent(() =>    Event.OnPlay.Invoke(this));
+        FlowController.AddEvent(() =>    Event.OnPlay.Invoke(this));
     }
 
     public void Withdraw()
@@ -180,7 +180,7 @@ public class Card
             return;
         }
 
-        EventController.AddEvent(() =>
+        FlowController.AddEvent(() =>
             Event.OnWithdraw.Invoke(this));
 
     }
