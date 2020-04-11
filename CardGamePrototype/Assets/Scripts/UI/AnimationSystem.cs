@@ -64,10 +64,11 @@ public class AnimationSystem : Singleton<AnimationSystem>
     {
         yield return new WaitForSeconds(delay);
 
-        if (!abilityOwner.BattleRepresentation || !abilityOwner.BattleRepresentation.AbilityIcon) yield break;
+        if (!abilityOwner.BattleRepresentation || !abilityOwner.BattleRepresentation.CardAnimation.SpecialAbilityIcon) yield break;
+        abilityOwner.BattleRepresentation.CardAnimation.HighlightAbility();
         //vector2 to ignore z position to prevent oddities
-        Vector2 position = abilityOwner.BattleRepresentation.AbilityIcon.transform.position;
-        PlayFx(fxs, position, abilityOwner.BattleRepresentation.AbilityIcon.transform);
+        Vector2 position = abilityOwner.BattleRepresentation.CardAnimation.SpecialAbilityIcon.transform.position;
+        PlayFx(fxs, position, abilityOwner.BattleRepresentation.CardAnimation.SpecialAbilityIcon.transform);
     }
 
     private static void PlayFx(ParticleSystem[] fxs, Vector2 position,Transform parent)

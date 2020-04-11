@@ -36,6 +36,10 @@ public class GameSettings : Singleton<GameSettings>
 	}
 	//DamageToDeckSystem
 	public DeckDamage DeckDamageParadigm;
+
+	[Range(0.1f,3f)]
+	public float CombatSpeed = 1f;
+
 	public enum DeckDamage 
 	{ 
 		DamageToTopCard,

@@ -86,7 +86,7 @@ public class CardAnimation : MonoBehaviour
     {
         if (!SpecialAbilityIcon) return;
 
-        LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one * 2.5f, 0.4f).setOnComplete(() =>
+        LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one * 3.5f, 0.4f).setOnComplete(() =>
             LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one , 0.3f));
 
         //PushoutParticles.Play();

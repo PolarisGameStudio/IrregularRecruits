@@ -88,8 +88,15 @@ public class Deck
 
     public void Draw(int amount)
     {
-        for (int i = 0; i < amount; i++)
-            Draw();
+        if (Creatures[Zone.Library].Count() == 0) return;
+        if (Creatures[Zone.Library].Count() < amount) amount = Creatures[Zone.Library].Count();
+
+        var draws = Creatures[Zone.Library].Take(amount);
+
+        foreach (var card in draws)
+        {
+            EventController.AddEvent(() => Event.OnDraw.Invoke(card));
+        }
     }
 
     internal List<Card> AllCreatures()
@@ -97,16 +104,6 @@ public class Deck
         return Creatures.SelectMany(x => x.Value).ToList();
     }
 
-    public void Draw()
-    {
-        if (Creatures[Zone.Library].Count() == 0) return;
-
-        Card card = Creatures[Zone.Library][0];
-
-        Event.OnDraw.Invoke(card);
-
-        card.ChangeLocation(Zone.Library, Zone.Hand);
-    }
     public void MoveTopCardToBattleField()
     {
         if (Creatures[Zone.Library].Count() == 0) return;

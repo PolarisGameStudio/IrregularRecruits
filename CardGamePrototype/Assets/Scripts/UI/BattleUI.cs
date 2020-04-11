@@ -61,10 +61,6 @@ public class BattleUI : Singleton<BattleUI>
         Instance.EnemyDeckDescription.text = "Deck size: "+ CombatManager.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
     }
 
-    public static void MoveCardToLibrary(Card card)
-    {
-        Instance.StartCoroutine(Instance.MoveCard(card,Deck.Zone.Library,true,0));
-    }
     public static void Move(Card card, Deck.Zone zone, bool player,float delay = 0)
     {
         Instance.StartCoroutine(Instance.MoveCard(card, zone, player,delay));
@@ -88,7 +84,6 @@ public class BattleUI : Singleton<BattleUI>
         Vector3 endPosition;
         if (zoneRect.childCount > 0)
         {
-            Debug.Log("moving to child pos "+ zoneRect.GetChild(zoneRect.childCount -1));
             endPosition = zoneRect.GetChild(zoneRect.childCount - 1).position;
         }
         else
@@ -116,6 +111,9 @@ public class BattleUI : Singleton<BattleUI>
         rect.localScale = Vector3.one;
         rect.SetParent(zoneRect);
         rect.SetAsLastSibling();
+        
+        if (card.BattleRepresentation)
+            card.BattleRepresentation.Interactable = true;
     }
 
 

@@ -36,10 +36,10 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI DescriptionText;
-    public Image AbilityIcon;
     public List<GameObject> InstantiatedObjects = new List<GameObject>();
     //For deck view and the like
     public bool AlwaysFaceUp;
+    public bool Interactable = true;
 
     private void AddListeners(Card c)
     {
@@ -47,10 +47,9 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
         c.OnCreatureChange.AddListener(UpdateCreature);
         c.OnStatChange.AddListener(UpdateStats);
-        c.OnAbilityTrigger.AddListener(CardAnimation.HighlightAbility);
+        //c.OnAbilityTrigger.AddListener(CardAnimation.HighlightAbility);
         c.OnStatMod.AddListener(StatModifier);
         c.OnDamage.AddListener(CardAnimation.DamageAnimation.Show);
-        c.OnDeath.AddListener(()=>CardAnimation.Dissolve());
 
         UpdateCreature(c.Creature);
         UpdateStats();
@@ -62,10 +61,9 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
         c.OnCreatureChange.RemoveListener(UpdateCreature);
         c.OnStatChange.RemoveListener(UpdateStats);
-        c.OnAbilityTrigger.RemoveListener(CardAnimation.HighlightAbility);
+        //c.OnAbilityTrigger.RemoveListener(CardAnimation.HighlightAbility);
         c.OnStatMod.RemoveListener(StatModifier);
         c.OnDamage.RemoveListener(CardAnimation.DamageAnimation.Show);
-        c.OnDeath.RemoveListener(() => CardAnimation.Dissolve());
     }
 
     public void UpdateCreature(Creature creature)
@@ -113,9 +111,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
             instance.sprite = IconManager.GetAbilityIconSprite(creature.SpecialAbility.ResultingAction.ActionType);
 
             InstantiatedObjects.Add(instance.gameObject);
-
-            AbilityIcon = instance;
-
+            
             CardAnimation.SpecialAbilityIcon = instance;
         }
     }

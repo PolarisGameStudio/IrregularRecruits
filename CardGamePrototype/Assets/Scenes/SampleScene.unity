@@ -18386,6 +18386,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656971621}
   m_CullTransparentMesh: 0
+--- !u!1 &723976506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 723976507}
+  - component: {fileID: 723976508}
+  m_Layer: 0
+  m_Name: EventController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &723976507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723976506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1638672459}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &723976508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723976506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b687705dbb7da646ad8fed758509fc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &729666922
 GameObject:
   m_ObjectHideFlags: 0
@@ -19927,14 +19970,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyBattlefieldSize: 0
   EnemyDeckSize: 5
-  EnemyPlaysPrTurn: 2
+  EnemyPlaysPrTurn: 1
   PlayerDeckSize: 20
-  PlayerStartingHandSize: 4
-  PlayerPlaysPrTurn: 4
-  DrawPrTurn: 1
+  PlayerStartingHandSize: 3
+  PlayerPlaysPrTurn: 2
+  DrawPrTurn: 2
   MaxCreaturesOnBattlefield: 10
   AttackOrderParadigm: 0
   DeckDamageParadigm: 0
+  CombatSpeed: 0.5
 --- !u!1001 &986603378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24791,6 +24835,7 @@ Transform:
   - {fileID: 947290327}
   - {fileID: 1221026022}
   - {fileID: 1907279812}
+  - {fileID: 723976507}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

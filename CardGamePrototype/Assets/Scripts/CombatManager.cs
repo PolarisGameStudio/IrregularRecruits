@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +10,7 @@ public class CombatManager : Singleton<CombatManager>
     public static int PlayerActionsLeft;
     public static Deck PlayerDeck;
     public static Deck EnemyDeck;
+    public static bool CombatRunning;
 
     //to keep track of losses and kills
     private List<Card> InitialPlayerDeck, InitialEnemyDeck;
@@ -23,20 +24,18 @@ public class CombatManager : Singleton<CombatManager>
     {
         Event.OnAbilityTrigger.AddListener((x,y,z) => StartCoroutine(WaitForTrigger()));
 
-        //Debugs texts
-        //Event.OnAttack.AddListener(c=> Debug.Log("Event: "+ c +  ": Attacking"));
-        //Event.OnBeingAttacked.AddListener(c=> Debug.Log("Event: "+ c +  ": Is Attacked"));
-        //Event.OnDamaged.AddListener(c=> Debug.Log("Event: "+ c +  ": Is Damaged"));
-        //Event.OnDeath.AddListener(c=> Debug.Log("Event: "+ c +  ": Is dead"));
-        //Event.OnHealed.AddListener(c=> Debug.Log("Event: "+ c +  ": Is healed"));
-        //Event.OnKill.AddListener(c=> Debug.Log("Event: "+ c +  ": Killed a minion"));
-        //Event.OnWithdraw.AddListener(c=> Debug.Log("Event: "+ c +  ": Withdrew"));
-        //Event.OnCombatFinished.AddListener(()=> Debug.Log("Event: Combat Finished"));
-        //Event.OnCombatRoundFinished.AddListener(()=> Debug.Log("Event: Combat Round Finished"));
-        //Event.OnCombatStart.AddListener(()=> Debug.Log("Event: Combat started"));
-        //Event.OnGameOver.AddListener(()=> Debug.Log("Event: Game Over"));
+        Event.OnCombatFinished.AddListener(EndCombat);
 
         Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
+
+        Event.OnDeath.AddListener(c => c.BattleRepresentation?.CardAnimation.Dissolve());
+        Event.OnDeath.AddListener(c=>c. ChangeLocation(Deck.Zone.Graveyard, 2f));
+
+        Event.OnPlay.AddListener( c=>c. ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield));
+
+        Event.OnWithdraw.AddListener(c=>c.ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library));
+
+        Event.OnDraw.AddListener(c => c.ChangeLocation(Deck.Zone.Library, Deck.Zone.Hand));
     }
 
     public static void StartCombat(Deck playerDeck, Deck opponentDeck)
@@ -46,6 +45,8 @@ public class CombatManager : Singleton<CombatManager>
 
     private void BeginCombat(Deck playerDeck, Deck opponentDeck)
     {
+        CombatRunning = true;
+
         Turn = 0;
 
         PlayerDeck = playerDeck;
@@ -60,7 +61,8 @@ public class CombatManager : Singleton<CombatManager>
         PlayerDeck.DrawInitialHand();
         EnemyDeck.DrawInitialHand(true);
 
-        Event.OnCombatStart.Invoke();
+
+        EventController.AddEvent(() =>    Event.OnCombatStart.Invoke());
 
         StartCoroutine(NextTurn());
     }
@@ -85,7 +87,8 @@ public class CombatManager : Singleton<CombatManager>
 
     private void EndCombat()
     {
-        Event.OnCombatFinished.Invoke();
+        CombatRunning = false;
+
         PlayerDeck.PackUp();
         EnemyDeck.PackUp();
 
@@ -94,17 +97,26 @@ public class CombatManager : Singleton<CombatManager>
 
     private IEnumerator NextTurn()
     {
+        Debug.Log("Turn: " + Turn + " Started");
+
+        yield return new WaitUntil(() => EventController.ReadyForNextAction);
+
         //Enemy actions
         EnemyDeck.Draw(GameSettings.Instance.DrawPrTurn);
+
+        yield return new WaitUntil(() => EventController.ReadyForNextAction);
         EnemyDeck.AI?.MakeMoves();
 
+        yield return new WaitUntil(() => EventController.ReadyForNextAction);
         PlayerDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-        Event.OnTurnBegin.Invoke();
+        EventController.AddEvent(() => 
+            Event.OnTurnBegin.Invoke());
 
         PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
 
-        yield return new WaitUntil(() => PlayerActionsLeft <= 0 || PlayerDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0);
+
+        yield return new WaitUntil(() => EventController.ReadyForNextAction && (PlayerActionsLeft <= 0 || PlayerDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0));
 
         StartCoroutine(ResolveCombat());
     }
@@ -160,6 +172,8 @@ public class CombatManager : Singleton<CombatManager>
 
         while (attackOrder.Any(c => c.Alive()))
         {
+            yield return new WaitUntil(()=>EventController.ReadyForNextAction);
+
             var attacker = attackOrder.First(c => c.Alive());
 
             var player = attacker.InDeck.PlayerDeck;
@@ -173,10 +187,12 @@ public class CombatManager : Singleton<CombatManager>
             }
 
             yield return new WaitUntil(() => !AbilityTriggering);
-            Event.OnAttack.Invoke(attacker);
+            EventController.AddEvent(()=>
+                Event.OnAttack.Invoke(attacker));
 
             yield return new WaitUntil(() => !AbilityTriggering);
-            Event.OnBeingAttacked.Invoke(attacker);
+            EventController.AddEvent(() =>
+                Event.OnBeingAttacked.Invoke(attacker));
 
             StartCoroutine(AnimationSystem.AttackAnimation(attacker,target, AttackAnimationDuration));
             yield return new WaitForSeconds(AttackAnimationDuration);
@@ -198,12 +214,14 @@ public class CombatManager : Singleton<CombatManager>
 
         //Debug.Log("Combat round finished. Enemies left: "+ EnemyDeck.Alive());
 
-        Event.OnCombatRoundFinished.Invoke();
+        EventController.AddEvent(() =>
+            Event.OnCombatRoundFinished.Invoke());
 
+        //TODO: just wait on eventcontroller
         yield return new WaitUntil(() => !AbilityTriggering);
 
         if (EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0)
-            EndCombat();
+            EventController.AddEvent(() => Event.OnCombatFinished.Invoke());
         else
             StartCoroutine(NextTurn());
     }

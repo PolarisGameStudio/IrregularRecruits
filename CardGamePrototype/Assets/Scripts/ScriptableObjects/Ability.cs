@@ -182,40 +182,49 @@ public partial class Ability : ScriptableObject
         {
             case ActionType.Kill:
                 targets.ForEach(c=> c.Die());
-                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
                 break;
             case ActionType.DealDamage:
                 targets.ForEach(c => c.CurrentHealth -= ResultingAction.Amount);
-                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
                 break;
             case ActionType.StatPlus:
                 targets.ForEach(c => c.StatModifier(ResultingAction.Amount));
-                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
                 break;
             case ActionType.StatMinus:
                 targets.ForEach(c => c.StatModifier(-ResultingAction.Amount));
-                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
                 break;
             case ActionType.Withdraw:
                 targets.ForEach(c => c.Withdraw());
-                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
                 break;
             case ActionType.Heal:
                 targets.ForEach(c=> c.CurrentHealth += ResultingAction.Amount);
-                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
                 break;
             case ActionType.Resurrect:
                 List<Card> graveTargets = GetTargets(ResultingAction.Targets, ResultingAction.TargetCount, Deck.Zone.Graveyard, _owner, triggerExecuter);
                 graveTargets.ForEach(c => c.Resurrect(ResultingAction.Amount));
-                Event.OnAbilityTrigger.Invoke(this, _owner, graveTargets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, graveTargets));
                 break;
             case ActionType.Draw:
                 _owner.InDeck.Draw(ResultingAction.Amount);
-                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, new List<Card>()));
                 break;
             case ActionType.Charm:
                 targets.ForEach(c => c.Charm(_owner.InDeck));
-                Event.OnAbilityTrigger.Invoke(this, _owner, targets);
+                EventController.AddEvent(() =>
+                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
                 break;
             case ActionType.Summon:
                 Debug.Log("summoning not implemented");

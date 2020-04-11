@@ -28,7 +28,6 @@ public class Card
     public string Name;
 
     public UnityEvent OnStatChange = new UnityEvent();
-    public UnityEvent OnDeath = new UnityEvent();
     public class StatChangeEvent : UnityEvent<int> { }
     public StatChangeEvent OnDamage = new StatChangeEvent();
     public StatChangeEvent OnStatMod = new StatChangeEvent();
@@ -48,10 +47,11 @@ public class Card
             if (currentHealth > value)
             {
                 OnDamage.Invoke(value- currentHealth);
-                Event.OnDamaged.Invoke(this);
+                EventController.AddEvent(()=> Event.OnDamaged.Invoke(this));
             }
-            else if (value > currentHealth)
-                Event.OnHealed.Invoke(this);
+            else if (value > currentHealth && CombatManager.CombatRunning)
+                EventController.AddEvent(() =>
+                        Event.OnHealed.Invoke(this));
 
             if (value > MaxHealth) value = MaxHealth;
 
@@ -71,9 +71,8 @@ public class Card
     {
         //Debug.Log("Killing " + this);
 
-        Event.OnDeath.Invoke(this);
-        ChangeLocation(Location, Deck.Zone.Graveyard,2f);
-        OnDeath.Invoke();
+        EventController.AddEvent(()=>
+            Event.OnDeath.Invoke(this));
     }
 
     private int attack;
@@ -90,14 +89,14 @@ public class Card
 
     public Deck.Zone Location;
 
-    public void ChangeLocation(Deck.Zone to)
+    public void ChangeLocation(Deck.Zone to,float delay = 0f)
     {
-        ChangeLocation(Location, to);
+        ChangeLocation(Location, to,delay);
     }
 
     public void ChangeLocation(Deck.Zone from, Deck.Zone to, float delay = 0f)
     {
-        //Debug.Log($"Moving {this} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
+        Debug.Log($"Moving {this.Name} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
 
         if (InDeck == null)
         {
@@ -122,7 +121,7 @@ public class Card
     {
         if (String.IsNullOrEmpty(creature.name)) creature.name = creature.ToString();
 
-        Name = creature?.name;
+        Name = creature?.name;// + " !" + Guid.NewGuid();
 
         MaxHealth = creature.Health;
         CurrentHealth = creature.Health;
@@ -166,9 +165,10 @@ public class Card
             return;
         }
 
-        ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
+        if(BattleRepresentation)
+            BattleRepresentation.Interactable = false;
 
-        Event.OnPlay.Invoke(this);
+        EventController.AddEvent(() =>    Event.OnPlay.Invoke(this));
     }
 
     public void Withdraw()
@@ -180,9 +180,8 @@ public class Card
             return;
         }
 
-        ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library);
-
-        Event.OnWithdraw.Invoke(this);
+        EventController.AddEvent(() =>
+            Event.OnWithdraw.Invoke(this));
 
     }
 
@@ -218,7 +217,7 @@ public class Card
     public void Click()
     {
         //Debug.Log("Clicked card " + this);
-        if (!InDeck.PlayerDeck) return;
+        if (!InDeck.PlayerDeck |! FaceUp |! BattleRepresentation.Interactable) return;
 
         if (Location == Deck.Zone.Hand)
         {
