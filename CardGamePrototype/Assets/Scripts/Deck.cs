@@ -117,14 +117,25 @@ public class Deck
     internal Card GetAttackTarget()
     {
         //empty list check?
-        if (CreaturesInZone(Zone.Battlefield).Count == 0) return null;
+        if (CreaturesInZone(Zone.Battlefield).Count > 0)
+        {
 
-        var defenders = CreaturesInZone(Zone.Battlefield).Where(c => c.Defender()).ToList();
+            var defenders = CreaturesInZone(Zone.Battlefield).Where(c => c.Defender()).ToList();
 
-        if (defenders.Any())
-            return defenders[Random.Range(0, defenders.Count())];
+            if (defenders.Any())
+                return defenders[Random.Range(0, defenders.Count())];
 
-        return CreaturesInZone(Zone.Battlefield)[Random.Range(0, CreaturesInZone(Zone.Battlefield).Count())];
+            return CreaturesInZone(Zone.Battlefield)[Random.Range(0, CreaturesInZone(Zone.Battlefield).Count())];
+        }
+        else if (CreaturesInZone(Zone.Hand).Count > 0)
+        {
+            return CreaturesInZone(Zone.Hand)[Random.Range(0, CreaturesInZone(Zone.Hand).Count())];
+        }
+        else if (CreaturesInZone(Zone.Library).Count > 0)
+        {
+            return CreaturesInZone(Zone.Library)[Random.Range(0, CreaturesInZone(Zone.Library).Count())];
+        }
+        else return null;
     }
 
     internal void Remove(Card card)

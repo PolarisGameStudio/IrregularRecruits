@@ -25,7 +25,7 @@ public class AnimationSystem : Singleton<AnimationSystem>
 
     private void Start()
     {
-        Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab)));
+        Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab,0,true)));
         Event.OnPlay.AddListener(c => StartCoroutine(PlayCardFX(c, ETBParticlesPrefab,BattleUI.Instance.MoveDuration+0.1f)));
         Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab,0.1f)));
         Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
@@ -51,14 +51,14 @@ public class AnimationSystem : Singleton<AnimationSystem>
     }
 
 
-    private IEnumerator PlayCardFX(Card card, ParticleSystem[] fxs,float delay = 0)
+    private IEnumerator PlayCardFX(Card card, ParticleSystem[] fxs,float delay = 0, bool instantiateInWorldSpace = false)
     {
         yield return new WaitForSeconds(delay);
 
         if (!card.BattleRepresentation) yield break;
         //vector2 to ignore z position to prevent oddities
         Vector2 position = card.BattleRepresentation.transform.position;
-        PlayFx(fxs, position, card.BattleRepresentation.transform);
+        PlayFx(fxs, position, instantiateInWorldSpace ? null: card.BattleRepresentation.transform);
     }
     private IEnumerator PlayAbilityIconFx(Card abilityOwner, ParticleSystem[] fxs,float delay = 0)
     {
@@ -75,7 +75,10 @@ public class AnimationSystem : Singleton<AnimationSystem>
     {
         foreach (var fx in fxs)
         {
-            Instantiate(fx, position, fx.transform.localRotation).transform.SetParent(parent);
+            if (parent)
+                Instantiate(fx, parent);//position, fx.transform.localRotation).transform.SetParent(parent);
+            else
+                Instantiate(fx, position, fx.transform.localRotation);//.transform.SetParent(parent);
 
         }
     }

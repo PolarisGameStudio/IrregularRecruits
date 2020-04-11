@@ -180,17 +180,17 @@ public class CombatManager : Singleton<CombatManager>
 
             var target = player ? EnemyDeck.GetAttackTarget() : PlayerDeck.GetAttackTarget();
 
-            if (target == null)
+            if (target == null ||attacker.Location != Deck.Zone.Battlefield)
             {
                 attackOrder.Remove(attacker);
                 break; 
             }
 
-            yield return new WaitUntil(() => !AbilityTriggering);
+            //yield return new WaitUntil(() => !AbilityTriggering);
             FlowController.AddEvent(()=>
                 Event.OnAttack.Invoke(attacker));
 
-            yield return new WaitUntil(() => !AbilityTriggering);
+            //yield return new WaitUntil(() => !AbilityTriggering);
             FlowController.AddEvent(() =>
                 Event.OnBeingAttacked.Invoke(attacker));
 
@@ -199,12 +199,13 @@ public class CombatManager : Singleton<CombatManager>
 
             target.CurrentHealth -= attacker.Attack;
 
-            yield return new WaitUntil(() => !AbilityTriggering);
+            //yield return new WaitUntil(() => !AbilityTriggering);
 
-            if (!attacker.Ranged())
+            //TODO: test that units that die still get to damage
+            if (!attacker.Ranged() && target.Location == Deck.Zone.Battlefield)
                 attacker.CurrentHealth -= target.Attack;
 
-            yield return new WaitUntil(() => !AbilityTriggering);
+            //yield return new WaitUntil(() => !AbilityTriggering);
 
             attackOrder.Remove(attacker);
         }

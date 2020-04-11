@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: DeckDamageTest
   m_EditorClassIdentifier: 
-  Value: 0
+  Value: 6
   TriggerCondition:
     Subject: 0
     TriggerAction: 5
   ResultingAction:
-    ActionType: 1
-    TargetCount: 0
-    Targets: 12
+    ActionType: 5
+    TargetCount: 1
+    Targets: 3
     Amount: 3

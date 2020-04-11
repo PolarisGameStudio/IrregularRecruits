@@ -74,7 +74,7 @@ public partial class Ability : ScriptableObject
     }
     public string Description(Card owner)
     {
-        return $"{TriggerCondition.Description(owner)}, {ResultingAction.Description(owner)}.({GetValue().ToString("N")})"; 
+        return $"{TriggerCondition.Description(owner)}, {ResultingAction.Description(owner)}."; 
     }
 
     public void SetupListeners(Card _owner)

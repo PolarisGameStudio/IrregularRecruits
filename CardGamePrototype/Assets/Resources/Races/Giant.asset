@@ -18,4 +18,4 @@ MonoBehaviour:
   PlayerRace: 1
   GroupSize: 1
   FavoriteActions: 03000000
-  FavoriteTriggers: 01000000
+  FavoriteTriggers: 0100000009000000

@@ -220,32 +220,28 @@ MonoBehaviour:
   AbilityFx:
   - ActionType: 0
     AbilityIconFX:
-    - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
-    TargetFX:
-    - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
     - {fileID: 19800000, guid: 7b56cd9b663f23f429e131a54ec87db0, type: 3}
+    TargetFX:
+    - {fileID: 19800004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+    OwnerFX: []
   - ActionType: 1
     AbilityIconFX:
-    - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
-    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
+    OwnerFX: []
   - ActionType: 2
     AbilityIconFX:
-    - {fileID: 198858562690846188, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+    - {fileID: 19800006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
     TargetFX:
     - {fileID: 19800004, guid: 757df604761b8ef42831192c70ee1099, type: 3}
-    OwnerFX:
-    - {fileID: 19800006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
+    OwnerFX: []
   - ActionType: 3
     AbilityIconFX:
-    - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+    - {fileID: 19800000, guid: 7b56cd9b663f23f429e131a54ec87db0, type: 3}
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
-    - {fileID: 19800000, guid: 7b56cd9b663f23f429e131a54ec87db0, type: 3}
+    OwnerFX: []
   - ActionType: 4
     AbilityIconFX:
     - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
@@ -255,18 +251,16 @@ MonoBehaviour:
     - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
   - ActionType: 5
     AbilityIconFX:
-    - {fileID: 198858562690846188, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+    - {fileID: 19800006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
     TargetFX:
     - {fileID: 19800004, guid: 757df604761b8ef42831192c70ee1099, type: 3}
-    OwnerFX:
-    - {fileID: 19800006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
+    OwnerFX: []
   - ActionType: 6
     AbilityIconFX:
-    - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+    - {fileID: 19800006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
-    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
+    OwnerFX: []
   - ActionType: 7
     AbilityIconFX:
     - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
@@ -18427,6 +18421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b687705dbb7da646ad8fed758509fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FlowSpeedFactors: []
 --- !u!1 &729666922
 GameObject:
   m_ObjectHideFlags: 0
@@ -19511,10 +19506,10 @@ RectTransform:
   m_Father: {fileID: 1066718295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 444.75003, y: -103.22}
-  m_SizeDelta: {x: 789.50006, y: 106.44}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910797087
 MonoBehaviour:
@@ -19968,7 +19963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyBattlefieldSize: 0
   EnemyDeckSize: 5
-  EnemyPlaysPrTurn: 1
+  EnemyPlaysPrTurn: 2
   PlayerDeckSize: 20
   PlayerStartingHandSize: 3
   PlayerPlaysPrTurn: 2
@@ -19976,6 +19971,7 @@ MonoBehaviour:
   MaxCreaturesOnBattlefield: 10
   AttackOrderParadigm: 0
   DeckDamageParadigm: 0
+  MaxRareEnemiesPrCombat: 1
   CombatSpeed: 0.6
 --- !u!1001 &986603378
 PrefabInstance:
@@ -20695,7 +20691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1051119842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24872,10 +24868,10 @@ RectTransform:
   m_Father: {fileID: 537136784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 859.50006, y: -131.85}
-  m_SizeDelta: {x: 300, y: 283.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 283.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1665298993
 CanvasRenderer:
@@ -31907,10 +31903,10 @@ RectTransform:
   m_Father: {fileID: 1066718295}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 444.75003, y: -311.44}
-  m_SizeDelta: {x: 789.50006, y: 250}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2119130800
 MonoBehaviour:

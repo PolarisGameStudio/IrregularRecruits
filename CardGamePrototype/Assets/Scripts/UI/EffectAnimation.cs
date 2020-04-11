@@ -28,7 +28,6 @@ public class EffectAnimation : MonoBehaviour
             LeanTween.scale(gameObject, Vector3.one *  Random.Range(1-SizeRandomElement,1+ SizeRandomElement), Duration + Random.Range(-DurationRandomElement,DurationRandomElement)).setEase(TweenType).setOnComplete(Hide);
 
         //TODO: the higher the damage, the bigger, quicker and more child objects
-
         var childDur = Duration;
 
         foreach(var c in ChildImages)

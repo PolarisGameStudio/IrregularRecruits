@@ -24,7 +24,6 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
         }
     }
 
-
     [Header("UI Refs")]
     public GameObject FrontHolder, CardBackHolder;
     public Image CardImage;

@@ -135,11 +135,11 @@ public class CardGeneration
 
         if (v < -8)
             return rarity == Creature.RarityType.Unique;
-        else if (v < -3)
+        else if (v < -2)
             return rarity == Creature.RarityType.Rare;
         else if (v <= 2)
-            return rarity == Creature.RarityType.Common;
-        else if (v <= 8)
+            return rarity == Creature.RarityType.Rare;
+        else if (v <= 6)
             return rarity == Creature.RarityType.Rare;
         else
             return rarity == Creature.RarityType.Unique;

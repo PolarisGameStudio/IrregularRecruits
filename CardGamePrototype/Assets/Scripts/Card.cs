@@ -159,12 +159,6 @@ public class Card
     }
     private void PlayCard()
     {
-        if (CombatManager.PlayerActionsLeft <= 0)
-        {
-            Debug.Log("No player actions left");
-            return;
-        }
-
         if(BattleRepresentation)
             BattleRepresentation.Interactable = false;
 
@@ -174,11 +168,6 @@ public class Card
     public void Withdraw()
     {
         //TODO: replace with Waiting ON player Input
-        if (CombatManager.PlayerActionsLeft <= 0)
-        {
-            Debug.Log("No player actions left");
-            return;
-        }
 
         FlowController.AddEvent(() =>
             Event.OnWithdraw.Invoke(this));
@@ -216,6 +205,12 @@ public class Card
 
     public void Click()
     {
+        if (CombatManager.PlayerActionsLeft <= 0)
+        {
+            Debug.Log("No player actions left");
+            return;
+        }
+
         //Debug.Log("Clicked card " + this);
         if (!InDeck.PlayerDeck |! FaceUp |! BattleRepresentation.Interactable) return;
 

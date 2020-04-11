@@ -37,6 +37,10 @@ public class GameSettings : Singleton<GameSettings>
 	//DamageToDeckSystem
 	public DeckDamage DeckDamageParadigm;
 
+	[Range(0, 10)]
+	//make all rare creatures have abilities
+	public int MaxRareEnemiesPrCombat = 1;
+
 	[Range(0.1f,3f)]
 	public float CombatSpeed = 1f;
 

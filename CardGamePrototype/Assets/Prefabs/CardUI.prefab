@@ -5698,9 +5698,9 @@ MonoBehaviour:
   HealthText: {fileID: 3999779988335304302}
   NameText: {fileID: 3647378737615735766}
   DescriptionText: {fileID: 8750236915218075657}
-  AbilityIcon: {fileID: 0}
   InstantiatedObjects: []
   AlwaysFaceUp: 0
+  Interactable: 1
 --- !u!114 &4991445251926434332
 MonoBehaviour:
   m_ObjectHideFlags: 0
