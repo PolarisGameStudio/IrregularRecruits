@@ -38,7 +38,7 @@ public class GameSettings : Singleton<GameSettings>
 	public DeckDamage DeckDamageParadigm;
 
 	[Range(0, 10)]
-	//make all rare creatures have abilities
+	//make all rare creatures have abilities and all normal 
 	public int MaxRareEnemiesPrCombat = 1;
 
 	[Range(0.1f,3f)]

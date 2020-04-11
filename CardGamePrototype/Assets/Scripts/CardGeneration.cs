@@ -34,7 +34,6 @@ public class CardGeneration
     [MenuItem("Content/Divide abilities")]
     public static void DivideAbilitiesToCreature()
     {
-
         List<Creature> creatureObjects = new List<Creature>();
 
         creatureObjects = GetAssetsOfType<Creature>().Where(c=>c.Race ).ToList();
@@ -71,8 +70,16 @@ public class CardGeneration
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
+
+
+        //foreach (var common in creatureObjects.Where(c => c.Rarity == Creature.RarityType.Common))
+        //    common.SpecialAbility = null;
+
+        Debug.Log("rare creatures without abilities: " + creatureObjects.Count(c => c.Rarity == Creature.RarityType.Rare & !c.SpecialAbility));
+        Debug.Log("common creatures with abilities: " + creatureObjects.Count(c => c.Rarity == Creature.RarityType.Common && c.SpecialAbility));
+
     }
-    
+
     [MenuItem("Content/Re-Generate unlocked creature abilities")]
     public static void GenerateAbilities()
     {
@@ -84,11 +91,11 @@ public class CardGeneration
         int amountMin = 1;
         int amountMax = 4;
 
-        foreach (var c in creatureObjects.Where(c => !c.Locked))
+        foreach (var c in creatureObjects.Where(c => !c.Locked && c.Rarity != Creature.RarityType.Common))
         {
             //// ___________________________________________________REMOVE AT SOME POINT
             ///
-            if (!c.Race)
+            if (!c.Race )
                 Debug.LogError("No Race for: " + c);
 
             //todo: rarity should be a factor

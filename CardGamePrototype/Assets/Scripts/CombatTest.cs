@@ -61,12 +61,24 @@ public class CombatTest : Singleton<CombatTest>
             var race = possibleRaces[Random.Range(0, possibleRaces.Length)];
 
              creatures = AllCreatures.Where(c => c.Race == race).ToList();
-            //creatures.OrderBy(c => Random.value);
         }
+
+        var rares = creatures.Where(c => c.Rarity == Creature.RarityType.Rare || c.Rarity == Creature.RarityType.Unique).ToList();
+        var notRares = creatures.Except(rares).ToList();
+        if (!notRares.Any())
+            notRares = rares;
 
         for (int i = 0; i < (GameSettings.DeckSize(player)); i++)
         {
-            var card = new Card(creatures[Random.Range(0, creatures.Count())]);
+            for (; i < GameSettings.Instance.MaxRareEnemiesPrCombat; i++)
+            {
+                var rare = new Card(rares[Random.Range(0, rares.Count())]);
+
+                library.Add(rare);
+            }
+
+
+            var card = new Card(notRares[Random.Range(0, notRares.Count())]);
             
             library.Add(card);
         }
