@@ -76,7 +76,7 @@ public class AnimationSystem : Singleton<AnimationSystem>
         foreach (var fx in fxs)
         {
             if (parent)
-                Instantiate(fx, parent);//position, fx.transform.localRotation).transform.SetParent(parent);
+                Instantiate(fx, position, parent.rotation).transform.SetParent(parent);
             else
                 Instantiate(fx, position, fx.transform.localRotation);//.transform.SetParent(parent);
 

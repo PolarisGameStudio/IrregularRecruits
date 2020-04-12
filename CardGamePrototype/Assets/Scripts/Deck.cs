@@ -66,12 +66,10 @@ public class Deck
 
         //removing dead creatures
         while (Creatures[Zone.Graveyard].Any())
-            Remove(Creatures[Zone.Graveyard].First());        
-
-        while(Creatures.Any(z => z.Key != Zone.Library && z.Value.Any()))
-        {
-            var c = Creatures.First(z => z.Key != Zone.Library && z.Value.Any()).Value[0];
-
+            Remove(Creatures[Zone.Graveyard].First());    
+        
+        foreach(var c in AllCreatures())
+        { 
             c.ChangeLocation(Zone.Library);
             c.CurrentHealth = c.MaxHealth;
         }
