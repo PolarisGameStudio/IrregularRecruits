@@ -7,9 +7,19 @@ public class ActionsLeftUI : MonoBehaviour
 {
     public ActionIcon ActionIconExample;
     private List<ActionIcon> ActionIcons = new List<ActionIcon>();
+    private bool Initialized;
 
-    void Awake()
+    private void Start()
     {
+        Event.OnCombatStart.AddListener(Initialize);
+    }
+
+    void Initialize()
+    {
+        if (Initialized) return;
+
+        Initialized = true;
+
         //TODO: does not take into account if amount of actions are changed. Move to on next turn and check there
         for(int i = 0; i < GameSettings.Instance.PlayerPlaysPrTurn;i++)
         {

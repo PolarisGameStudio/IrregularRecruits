@@ -70,11 +70,14 @@ public class CombatTest : Singleton<CombatTest>
 
         for (int i = 0; i < (GameSettings.DeckSize(player)); i++)
         {
-            for (; i < GameSettings.Instance.MaxRareEnemiesPrCombat; i++)
+            if (rares.Any())
             {
-                var rare = new Card(rares[Random.Range(0, rares.Count())]);
+                for (; i < GameSettings.Instance.MaxRareEnemiesPrCombat; i++)
+                {
+                    var rare = new Card(rares[Random.Range(0, rares.Count())]);
 
-                library.Add(rare);
+                    library.Add(rare);
+                }
             }
 
 

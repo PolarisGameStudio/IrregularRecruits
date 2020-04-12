@@ -15,6 +15,7 @@ public class CardHighlight : Singleton<CardHighlight>
     public ImageTextEntry AbilityIcon;
     public ImageTextEntry TraitPrefab;
     public Image ImageMask, Image;
+    public static Coroutine ShowAfterDelayRoutine;
 
     private List<ImageTextEntry> InstantiatedObjects = new List<ImageTextEntry>();
 
@@ -25,15 +26,30 @@ public class CardHighlight : Singleton<CardHighlight>
         Hide();
     }
 
+    public static bool IsActive()
+    {
+        return Instance.Holder.activeSelf;
+    }
+
     //DISABLE mask if creature has small image
     //remember color the same as health and attack of card
     public static void Show(CardUI card)
     {
-        Instance.ShowCard(card);
+        if(ShowAfterDelayRoutine == null)
+            ShowAfterDelayRoutine = Instance.StartCoroutine( Instance.ShowAfterDelay(card));
+    }
+
+    private IEnumerator ShowAfterDelay(CardUI card)
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        ShowCard(card);
     }
 
     private void ShowCard(CardUI cardUI)
     {
+        ShowAfterDelayRoutine = null;
+
         InstantiatedObjects.ForEach(t => Destroy(t.gameObject));
 
         InstantiatedObjects.Clear();
@@ -92,11 +108,21 @@ public class CardHighlight : Singleton<CardHighlight>
         var rect = GetComponent<RectTransform>();
         rect.position = cardUI.GetComponent<RectTransform>().position;
 
+        Instance.Holder.transform.localScale = Vector3.zero;
+
+        LeanTween.scale(Instance.Holder, Vector3.one, 0.15f);
+
         Instance.Holder.SetActive(true);
     }
 
     public static void Hide()
     {
         Instance.Holder.SetActive(false);
+
+        if (ShowAfterDelayRoutine != null)
+        {
+            Instance.StopCoroutine(ShowAfterDelayRoutine);
+            ShowAfterDelayRoutine = null;
+        }
     }
 }

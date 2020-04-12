@@ -51,6 +51,40 @@ public class GameSettings : Singleton<GameSettings>
 		AnyDamageKillsTopCard
 	}
 
+	public void SetCombatSpeed(float f)
+	{
+		CombatSpeed = f;
+	}
+
+	public void SetStartingHandSize(float val )
+	{
+		PlayerStartingHandSize =(int) val;
+	}
+	public void SetDrawsPrTurn(float val )
+	{
+		DrawPrTurn = (int)val;
+	}
+	public void SetPlayerActionsPrTurn(float val )
+	{
+		PlayerPlaysPrTurn = (int)val;
+	}
+	public void SetEnemyStartCreatures(float val )
+	{
+		EnemyBattlefieldSize = (int)val;
+	}
+	public void SetEnemyDeckSize(float val )
+	{
+		EnemyDeckSize = (int)val;
+	}
+	public void SetEnemyPlaysPrTurn(float val )
+	{
+		EnemyPlaysPrTurn = (int)val;
+	}
+	public void SetRareEnemiesPrBattle(float val )
+	{
+		MaxRareEnemiesPrCombat = (int)val;
+	}
+
 	//using same size for enemies and player right now
 	internal static int StartingHandSize(bool enemy) => enemy ? Instance.PlayerStartingHandSize : Instance.PlayerStartingHandSize;
 

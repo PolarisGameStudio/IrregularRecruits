@@ -149,6 +149,10 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     public void OnPointerClick(PointerEventData eventData)
     {
         //Debug.Log("Clicked card " + this);
+        //TODO: hack to prevent holding from trigggering clicks
+#if !UNITY_EDITOR
+        if (CardHighlight.IsActive()) return;
+#endif
 
         Card.Click();
     }
