@@ -35,6 +35,11 @@ public class DeckSelectionUI : MonoBehaviour
         InstantiatedIcons[0].Button.onClick.Invoke();
     }
 
+    private void Start()
+    {
+        Event.OnGameOpen.Invoke();
+    }
+
     private void SelectDeck(Icon i, DeckObject d)
     {
         SelectedDeck = d;
@@ -58,6 +63,8 @@ public class DeckSelectionUI : MonoBehaviour
     public void Submit()
     {
         Debug.Log("Deck Selected: " + SelectedDeck.name);
+
+        Event.OnGameBegin.Invoke();
 
         CombatTest.SetPlayerDeck( Decks[SelectedDeck]);
 

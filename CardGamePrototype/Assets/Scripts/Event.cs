@@ -30,6 +30,8 @@ public class Event
 
     //GAME EVENTS
     public static UnityEvent OnGameOver = new UnityEvent();
+    public static UnityEvent OnGameOpen = new UnityEvent();
+    public static UnityEvent OnGameBegin = new UnityEvent();
 
 
 }

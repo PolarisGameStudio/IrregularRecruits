@@ -79,6 +79,22 @@ public class CardGeneration
         Debug.Log("common creatures with abilities: " + creatureObjects.Count(c => c.Rarity == Creature.RarityType.Common && c.SpecialAbility));
 
     }
+    
+    [MenuItem("Content/Do stuff")]
+    public static void DoStuff()
+    {
+        List<Creature> creatureObjects = new List<Creature>();
+        creatureObjects = GetAssetsOfType<Creature>().Where(c=>c.Race ).ToList();
+
+        List<Ability> abilities = new List<Ability>();
+        abilities = GetAssetsOfType<Ability>();
+
+        creatureObjects.ForEach(c => c.Health *= 2);
+               
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+
+    }
 
     [MenuItem("Content/Re-Generate unlocked creature abilities")]
     public static void GenerateAbilities()
