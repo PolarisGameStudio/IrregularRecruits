@@ -51,6 +51,7 @@ public class SoundBank : Singleton<SoundBank>
         ETB,
         Death,
         Withdraw,
+        Draw,
         NoAbilityTarget,
     }
 
@@ -101,6 +102,7 @@ public class SoundBank : Singleton<SoundBank>
     public StingerSoundReference[] Stingers;
     public BackgroundSoundref[] Backgrounds;
     public MusicRef[] Musics;
+    public AbilitySound[] AbilitySounds;
 
     
     internal static AudioClip GetSound(CardSound type)
@@ -156,6 +158,27 @@ public class SoundBank : Singleton<SoundBank>
         }
 
         return Rnd(Instance.Musics.First(s => s.Type == sound).Audio);
+    }
+    
+    public static AudioClip GetAbilityTrigger(Ability.ActionType sound)
+    {
+        if (!Instance.AbilitySounds.Any(s => s.Type == sound))
+        {
+            Debug.LogWarning("No sound for " + sound);
+            return null;
+        }
+
+        return Rnd(Instance.AbilitySounds.First(s => s.Type == sound).TriggerAudio);
+    }
+    public static AudioClip GetAbilityHit(Ability.ActionType sound)
+    {
+        if (!Instance.AbilitySounds.Any(s => s.Type == sound))
+        {
+            Debug.LogWarning("No sound for " + sound);
+            return null;
+        }
+
+        return Rnd(Instance.AbilitySounds.First(s => s.Type == sound).TargetAudio);
     }
 
 

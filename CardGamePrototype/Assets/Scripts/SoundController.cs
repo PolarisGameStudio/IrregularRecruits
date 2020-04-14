@@ -26,6 +26,11 @@ public class SoundController : Singleton<SoundController>
         Event.OnCombatFinished.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
         Event.OnCombatFinished.AddListener(() => PlayStinger(SoundBank.Stinger.BattleWon));
 
+        Event.OnDraw.AddListener(c => PlayCardSound(SoundBank.CardSound.Draw));
+        Event.OnWithdraw.AddListener(c => PlayCardSound(SoundBank.CardSound.Withdraw));
+        Event.OnPlay.AddListener(c => PlayCardSound(SoundBank.CardSound.ETB));
+        Event.OnDamaged.AddListener(c => PlayCardSound(SoundBank.CardSound.Hit));
+        Event.OnDeath.AddListener(c => PlayCardSound(SoundBank.CardSound.Death));
     }
 
     public void PlayButtonClick()
@@ -34,9 +39,29 @@ public class SoundController : Singleton<SoundController>
 
     }
 
-    public static void PlayStinger(SoundBank.Stinger type)
+    public static void PlayAbilityTrigger(Ability.ActionType type)
+    {
+        Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityTrigger(type));
+    }
+    
+    public static void PlayAbilityHit(Ability.ActionType type)
+    {
+        Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityHit(type));
+    }
+
+        public static void PlayStinger(SoundBank.Stinger type)
     {
         Instance.StingerAudioSource.PlayOneShot(SoundBank.GetSound(type));
+
+    }
+    public static void PlayCardSound(SoundBank.CardSound type)
+    {
+        Instance.SfxAudioSource.PlayOneShot(SoundBank.GetSound(type));
+
+    }
+    public static void PlayUISound(SoundBank.UiSound type)
+    {
+        Instance.UiAudioSource.PlayOneShot(SoundBank.GetSound(type));
 
     }
 

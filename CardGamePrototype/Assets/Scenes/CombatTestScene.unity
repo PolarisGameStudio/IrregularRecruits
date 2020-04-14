@@ -6685,7 +6685,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaa30729696789438f739855d61bdbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FXReferences: []
+  FXReferences:
+  - Type: 0
+    Audio:
+    - {fileID: 8300000, guid: b840f125a9b4d364e933450116868da7, type: 3}
+    - {fileID: 8300000, guid: eced74d16f0b7214394a53f36366e207, type: 3}
+    - {fileID: 8300000, guid: 03d60a157130e894d98944f0d0221998, type: 3}
+    - {fileID: 8300000, guid: 580275da88dbbf9419ea8298a9d5fb5a, type: 3}
+    - {fileID: 8300000, guid: c9c2fb4af3be13a409a180971d93baaa, type: 3}
+  - Type: 1
+    Audio:
+    - {fileID: 8300000, guid: 7b2c9e5f81088b74bbe1f005932eec22, type: 3}
+  - Type: 2
+    Audio:
+    - {fileID: 8300000, guid: a603fbca99afc344c946bde37eb0b19b, type: 3}
+    - {fileID: 8300000, guid: c4da5b6a756276d46ae398ccd1762340, type: 3}
+  - Type: 3
+    Audio:
+    - {fileID: 8300000, guid: af1ca7094bf8b1f43b55475172135cc8, type: 3}
+    - {fileID: 8300000, guid: e8daf7c9eb47e7b4380a35257c8bd33f, type: 3}
+    - {fileID: 8300000, guid: 71fde498c0d758b40ab47ae75cb73132, type: 3}
+    - {fileID: 8300000, guid: 99c3f7ae215ff994092d5d4b2a75a969, type: 3}
+    - {fileID: 8300000, guid: ab35c2c3a2abf9b4aaa3ad5955fc1d16, type: 3}
+    - {fileID: 8300000, guid: 85f02aaff61ff3c409c34630ceeb95de, type: 3}
+    - {fileID: 8300000, guid: e94f1c66980c62441acb4a3dffb37350, type: 3}
+    - {fileID: 8300000, guid: c5248109af97f5c49912441bbba0ea93, type: 3}
+    - {fileID: 8300000, guid: 6e86fd9478a67704fa29fce9e8b5f07b, type: 3}
+    - {fileID: 8300000, guid: 0925bfdf18e641a4dbb4df87a5001a3b, type: 3}
+  - Type: 4
+    Audio:
+    - {fileID: 8300000, guid: 60582bc2a662f3647a87b1e949a05cbb, type: 3}
+    - {fileID: 8300000, guid: 0b479887d6b80694093a23638ab41ab9, type: 3}
+  - Type: 5
+    Audio:
+    - {fileID: 8300000, guid: e85918b022fa35a44875c88168c00d1d, type: 3}
+    - {fileID: 8300000, guid: 21b3fa0abfe97334f80df8fcfc00850d, type: 3}
+  - Type: 6
+    Audio: []
   UiSounds:
   - Type: 1
     Audio:
@@ -6725,6 +6761,7 @@ MonoBehaviour:
   - Type: 3
     Audio:
     - {fileID: 8300000, guid: 79c7ef39285c99f4fadc220bc67d12ec, type: 3}
+  AbilitySounds: []
 --- !u!4 &128590203
 Transform:
   m_ObjectHideFlags: 0
