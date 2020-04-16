@@ -247,9 +247,9 @@ private bool CorrectRace(Card instigator, Card abilityOwner, RaceType race)
             case RaceType.Any:
                 return true;
             case RaceType.Same:
-                return instigator.Creature.Race = abilityOwner.Creature.Race;
+                return instigator.Creature.Race == abilityOwner.Creature.Race;
             case RaceType.Different:
-                return instigator.Creature.Race = abilityOwner.Creature.Race;
+                return instigator.Creature.Race == abilityOwner.Creature.Race;
             default:
                 return true;
         }
