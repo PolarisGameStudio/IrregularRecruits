@@ -12,61 +12,6 @@ public partial class Ability : ScriptableObject
     [SerializeField]
     private float Value;
 
-    //TODO: old noun type. remove ocne data has been converted
-    public enum Noun
-    {
-        THIS,
-        ANY, // can also mean random
-        IT, //refers to the executer of trigger
-        FRIENDLY,
-        ENEMY,
-        OwnerRACE,
-        NotOwnerRACE,
-        DAMAGED,
-        UNDAMAGED,
-        CardInOpponentsHand,
-        CardInOpponentsDeck,
-        CardInOwnersHand,
-        CardInOwnersDeck,
-        COUNT
-    }
-    public NounType NounToNounType(Noun noun)
-    {
-        switch (noun)
-        {
-            case Noun.THIS:
-                return new NounType(Character.This);
-            case Noun.ANY:
-                return new NounType(Character.Any);
-            case Noun.IT:
-                return new NounType(Character.It);
-            case Noun.FRIENDLY:
-                return new NounType(Character.Any, Allegiance.Friend);
-            case Noun.ENEMY:
-                return new NounType(Character.Any, Allegiance.Enemy);
-            case Noun.OwnerRACE:
-                return new NounType(Character.Any, Allegiance.Any, DamageState.Any, RaceType.Same);
-            case Noun.NotOwnerRACE:
-                return new NounType(Character.Any, Allegiance.Any, DamageState.Any, RaceType.Different);
-            case Noun.DAMAGED:
-                return new NounType(Character.Any, Allegiance.Any, DamageState.Damaged);
-            case Noun.UNDAMAGED:
-                return new NounType(Character.Any, Allegiance.Any, DamageState.Undamaged);
-            case Noun.CardInOpponentsHand:
-                return new NounType(Character.Any, Allegiance.Enemy, DamageState.Any, RaceType.Any, Deck.Zone.Hand);
-            case Noun.CardInOpponentsDeck:
-                return new NounType(Character.Any, Allegiance.Enemy, DamageState.Any, RaceType.Any, Deck.Zone.Library);
-            case Noun.CardInOwnersHand:
-                return new NounType(Character.Any, Allegiance.Friend, DamageState.Any, RaceType.Any, Deck.Zone.Hand);
-            case Noun.CardInOwnersDeck:
-                return new NounType(Character.Any, Allegiance.Friend, DamageState.Any, RaceType.Any, Deck.Zone.Library);
-            case Noun.COUNT:
-                return new NounType();
-            default:
-                return new NounType();
-        }
-    }
-
     //TODO: move amount to noun as well
     [System.Serializable]
     public struct NounType
@@ -383,11 +328,9 @@ private bool CorrectRace(Card instigator, Card abilityOwner, RaceType race)
         switch (noun.Character)
         {
             case Character.This:
-                str += _owner.Creature.name;
-                break;
+                return _owner.Creature.name;
             case Character.It:
-                str += "it";
-                break;
+                return "it";
             case Character.Any:
                 if (count == Count.One)
                     str+= "a ";
@@ -444,9 +387,9 @@ private bool CorrectRace(Card instigator, Card abilityOwner, RaceType race)
                 switch (noun.Relationship)
                 {
                     case Allegiance.Friend:
-                        return $"{str} in {_owner.Creature.name}'s deck";
+                        return $"{str.Replace("friendly ","")} in {_owner.Creature.name}'s deck";
                     case Allegiance.Enemy:
-                        return $"{str} in the enemy deck";
+                        return $"{str.Replace("enemy ", "")} in the enemy deck";
                     case Allegiance.Any:
                     default:
                         return $"{str} in a deck";
@@ -459,9 +402,9 @@ private bool CorrectRace(Card instigator, Card abilityOwner, RaceType race)
                 switch (noun.Relationship)
                 {
                     case Allegiance.Friend:
-                        return $"{str} in {_owner.Creature.name}'s hand";
+                        return $"{str.Replace("friendly ", "")} in {_owner.Creature.name}'s hand";
                     case Allegiance.Enemy:
-                        return $"{str} in the enemy hand";
+                        return $"{str.Replace("enemy ", "")} in the enemy hand";
                     case Allegiance.Any:
                     default:
                         return $"{str} in a hand";

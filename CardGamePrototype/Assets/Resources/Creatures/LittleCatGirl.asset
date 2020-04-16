@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: LittleCatGirl
   m_EditorClassIdentifier: 
-  name: LittleCatGirl
+  name: Scared Cat
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: 06f28cdfa896d0f4f9c7613860a368da, type: 3}
@@ -20,5 +20,5 @@ MonoBehaviour:
   Attack: 1
   Health: 2
   Traits: []
-  SpecialAbility: {fileID: 0}
+  SpecialAbility: {fileID: 11400000, guid: 2dbfa521a0c770340973bd1da473b55c, type: 2}
   Race: {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}
