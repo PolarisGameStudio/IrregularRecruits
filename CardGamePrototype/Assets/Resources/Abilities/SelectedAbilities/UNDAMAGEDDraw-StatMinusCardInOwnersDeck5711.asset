@@ -15,9 +15,21 @@ MonoBehaviour:
   Value: -2.64
   TriggerCondition:
     Subject: 8
+    Subjekt:
+      Character: 0
+      Location: 1
+      Relationship: 0
+      DamageState: 2
+      Race: 0
     TriggerAction: 7
   ResultingAction:
     ActionType: 3
     TargetCount: 0
     Targets: 12
+    Target:
+      Character: 0
+      Location: 0
+      Relationship: 1
+      DamageState: 0
+      Race: 0
     Amount: 1

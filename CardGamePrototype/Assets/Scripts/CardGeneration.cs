@@ -89,12 +89,14 @@ public class CardGeneration
         List<Ability> abilities = new List<Ability>();
         abilities = GetAssetsOfType<Ability>();
 
-        creatureObjects.ForEach(c => c.Health *= 2);
+        //creatureObjects.ForEach(c => c.Health *= 2);
 
         abilities.ForEach(a => a.TriggerCondition.Subjekt = a.NounToNounType(a.TriggerCondition.Subject));
         abilities.ForEach(a =>  a.ResultingAction.Target = a.NounToNounType(a.ResultingAction.Targets));
-        AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+        abilities.ForEach(a => EditorUtility.SetDirty(a));
+        creatureObjects.ForEach(a => EditorUtility.SetDirty(a));
+        AssetDatabase.SaveAssets();
 
     }
 
