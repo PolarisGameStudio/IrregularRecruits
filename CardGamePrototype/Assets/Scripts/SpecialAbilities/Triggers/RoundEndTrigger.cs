@@ -18,7 +18,7 @@ public class RoundEndTrigger : AbilityTrigger
         return 1f;
     }
 
-    internal override void SetupListener(Card owner, Ability.NounType subjekt, UnityAction<Card, Card, Ability.NounType> executeIfTrue)
+    internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
     {
         Event.OnCombatRoundFinished.AddListener(() => executeIfTrue.Invoke(null, owner, subjekt));
     }

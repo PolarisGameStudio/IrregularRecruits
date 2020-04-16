@@ -26,10 +26,10 @@ public partial class Ability
     {
         public ActionType ActionType;
         public Count TargetCount;
-        public NounType Target;
+        public Noun Target;
         public int Amount;
 
-        public Action(ActionType actionType, Count targetCount, int amount, NounType target)
+        public Action(ActionType actionType, Count targetCount, int amount, Noun target)
         {
             ActionType = actionType;
             TargetCount = targetCount;
@@ -38,7 +38,7 @@ public partial class Ability
         }
 
         public string Description(Card owner) {
-            return AbilityProcessor.GetAction(ActionType).Description(NounAsString(Target, owner, TargetCount),Amount);
+            return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, TargetCount),Amount);
         }
 
 
@@ -55,7 +55,7 @@ public partial class Ability
 
             //OTHER factors could change value up or down
 
-            if (Target.Relationship == Allegiance.Enemy || (neutralAsNegative && Target.Relationship == Allegiance.Any)) value *= -1;
+            if (Target.Relationship == Noun.Allegiance.Enemy || (neutralAsNegative && Target.Relationship == Noun.Allegiance.Any)) value *= -1;
 
             return value;
         }

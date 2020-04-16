@@ -117,14 +117,14 @@ public class CardGeneration
         //    {
         //        ability = ScriptableObject.CreateInstance<Ability>();
         //        do
-        //            ability.TriggerCondition = new Ability.Trigger((Ability.Noun)Random.Range(0, (int)Ability.Noun.CardInOwnersHand), (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ? c.Race.FavoriteTriggers[Random.Range(0, c.Race.FavoriteTriggers.Length)] : (Ability.Verb)Random.Range(0, (int)Ability.Verb.COUNT));
+        //            ability.TriggerCondition = new Ability.Trigger((Noun)Random.Range(0, (int)Noun.CardInOwnersHand), (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ? c.Race.FavoriteTriggers[Random.Range(0, c.Race.FavoriteTriggers.Length)] : (Ability.Verb)Random.Range(0, (int)Ability.Verb.COUNT));
         //        while (ability.AnyTriggerInconsistencies());
 
         //        do
         //            ability.ResultingAction = new Ability.Action(
         //                (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (Ability.ActionType)Random.Range(0, (int)Ability.ActionType.Summon),
         //                (Ability.Count)Random.Range(0, (int)Ability.Count.COUNT),
-        //                (Ability.Noun)Random.Range(0, (int)Ability.Noun.COUNT),
+        //                (Noun)Random.Range(0, (int)Noun.COUNT),
         //                Random.Range(amountMin, amountMax)
         //                );
         //        while (ability.AnyActionInconsistencies());

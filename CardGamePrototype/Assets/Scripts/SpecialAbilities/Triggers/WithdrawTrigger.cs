@@ -17,7 +17,7 @@ public class WithdrawTrigger : AbilityTrigger
         return 1;
     }
 
-    internal override void SetupListener(Card owner, Ability.NounType subjekt, UnityAction<Card, Card, Ability.NounType> executeIfTrue)
+    internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
     {
         Event.OnWithdraw.AddListener(a => executeIfTrue.Invoke(a, owner, subjekt));
     }

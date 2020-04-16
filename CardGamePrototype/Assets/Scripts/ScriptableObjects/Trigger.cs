@@ -23,17 +23,17 @@ public partial class Ability
     public struct Trigger
     { 
     
-        public NounType Subjekt;
+        public Noun Subjekt;
         public Verb TriggerAction;
 
-        public Trigger(NounType subj, Verb triggerAction)
+        public Trigger(Noun subj, Verb triggerAction)
         {
             Subjekt = subj;
             TriggerAction = triggerAction;
         }
 
         public string Description(Card _owner) {
-            return AbilityProcessor.GetTrigger(TriggerAction).Description(NounAsString(Subjekt, _owner));
+            return AbilityProcessor.GetTrigger(TriggerAction).Description(Subjekt.NounAsString(_owner));
 
         }
 
@@ -50,13 +50,13 @@ public partial class Ability
             //The more common the higher the value. So each constraint subtracts the value
             var value = 1.4f;
                                    
-            if (Subjekt.Relationship != Allegiance.Any)
+            if (Subjekt.Relationship != Noun.Allegiance.Any)
                 value -= 0.1f;
-            if (Subjekt.Race != RaceType.Any)
+            if (Subjekt.Race != Noun.RaceType.Any)
                 value -= 0.1f;
-            if (Subjekt.DamageState != DamageState.Any)
+            if (Subjekt.DamageState != Noun.DamageType.Any)
                 value -= 0.1f;
-            if (Subjekt.Character != Character.Any)
+            if (Subjekt.Character != Noun.CharacterTyp.Any)
                 value -= 0.1f;
 
             return value;
