@@ -87,43 +87,8 @@ public partial class Ability : ScriptableObject
 
     public void SetupListeners(Card _owner)
     {
-
+        AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner,TriggerCondition.Subjekt,ExecuteIfTrue);
         //TODO: replace with CardEvent Reference
-        switch (TriggerCondition.TriggerAction)
-        {
-            case Verb.ATTACKS:
-                Event.OnAttack.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.IsATTACKED:
-                Event.OnBeingAttacked.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.KILLS:
-                Event.OnKill.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.DIES:
-                Event.OnDeath.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.ETB:
-                Event.OnPlay.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.IsDAMAGED:
-                Event.OnDamaged.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.Draw:
-                Event.OnDraw.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.Withdraw:
-                Event.OnWithdraw.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.IsHealed:
-                Event.OnHealed.AddListener(a => ExecuteIfTrue(a, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.RoundEnd:
-                Event.OnCombatRoundFinished.AddListener(() => ExecuteIfTrue(null, _owner, TriggerCondition.Subjekt));
-                break;
-            case Verb.COUNT:
-                break;
-        }
     }
 
     public float GetValue()

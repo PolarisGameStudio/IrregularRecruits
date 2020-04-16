@@ -33,57 +33,15 @@ public partial class Ability
         }
 
         public string Description(Card _owner) {
-            switch (TriggerAction)
-            {
-                case Verb.ATTACKS:
-                    return $"When {NounAsString(Subjekt, _owner) } attacks";
-                case Verb.IsATTACKED:
-                    return $"When {NounAsString(Subjekt, _owner) } is attacked";
-                case Verb.KILLS:
-                    return $"When {NounAsString(Subjekt, _owner) } kills a minion";
-                case Verb.DIES:
-                    return $"When {NounAsString(Subjekt, _owner) } dies";
-                case Verb.ETB:
-                    return $"When {NounAsString(Subjekt, _owner) } enters the battlefield";
-                case Verb.IsDAMAGED:
-                    return $"When {NounAsString(Subjekt, _owner) } is damaged";
-                case Verb.IsHealed:
-                    return $"When {NounAsString(Subjekt, _owner) } is healed";
-                case Verb.Draw:
-                    return $"When {_owner.Name}'s controller draws a card";
-                case Verb.Withdraw:
-                    return $"When {NounAsString(Subjekt, _owner) } is withdrawn";
-                case Verb.RoundEnd:
-                    return $"At the end of a combat round";
-                case Verb.COUNT:
-                default:
-                    return $"When {NounAsString(Subjekt, _owner) } {TriggerAction}";
-            }
+            return AbilityProcessor.GetTrigger(TriggerAction).Description(NounAsString(Subjekt, _owner));
+
         }
 
         //Higher the more often it happens
         internal float GetValue()
         {
-            switch (TriggerAction)
-            {
-                //HAPPENS MORE THAN ONCE EACH TURN:
-                case Verb.ATTACKS:
-                case Verb.IsATTACKED:
-                case Verb.IsDAMAGED:
-                    return 3f * GetSubjectValue();
-                    //Happens about once a turn, depending on subject
-                case Verb.KILLS:
-                case Verb.DIES:
-                case Verb.ETB:
-                case Verb.Draw:
-                case Verb.Withdraw:
-                case Verb.IsHealed:
-                    return 1f * GetSubjectValue();
-                case Verb.RoundEnd:
-                case Verb.COUNT:
-                default:
-                    return 1f ;
-            }
+            return AbilityProcessor.GetTrigger(TriggerAction).GetValue() * GetSubjectValue();
+
         }
 
         private float GetSubjectValue()
