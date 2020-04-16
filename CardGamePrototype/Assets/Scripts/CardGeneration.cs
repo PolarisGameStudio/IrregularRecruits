@@ -90,7 +90,9 @@ public class CardGeneration
         abilities = GetAssetsOfType<Ability>();
 
         creatureObjects.ForEach(c => c.Health *= 2);
-               
+
+        abilities.ForEach(a => a.TriggerCondition.Subjekt = a.NounToNounType(a.TriggerCondition.Subject));
+        abilities.ForEach(a =>  a.ResultingAction.Target = a.NounToNounType(a.ResultingAction.Targets));
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
@@ -100,54 +102,49 @@ public class CardGeneration
     public static void GenerateAbilities()
     {
 
-        List<Creature> creatureObjects = new List<Creature>();
+        //List<Creature> creatureObjects = new List<Creature>();
 
-        creatureObjects = GetAssetsOfType<Creature>();
+        //creatureObjects = GetAssetsOfType<Creature>();
 
-        int amountMin = 1;
-        int amountMax = 4;
+        //int amountMin = 1;
+        //int amountMax = 4;
 
-        foreach (var c in creatureObjects.Where(c => !c.Locked && c.Rarity != Creature.RarityType.Common))
-        {
-            //// ___________________________________________________REMOVE AT SOME POINT
-            ///
-            if (!c.Race )
-                Debug.LogError("No Race for: " + c);
+        //foreach (var c in creatureObjects.Where(c => !c.Locked && c.Rarity != Creature.RarityType.Common))
+        //{
+        //    //todo: rarity should be a factor
+        //    Ability ability;
+        //    do
+        //    {
+        //        ability = ScriptableObject.CreateInstance<Ability>();
+        //        do
+        //            ability.TriggerCondition = new Ability.Trigger((Ability.Noun)Random.Range(0, (int)Ability.Noun.CardInOwnersHand), (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ? c.Race.FavoriteTriggers[Random.Range(0, c.Race.FavoriteTriggers.Length)] : (Ability.Verb)Random.Range(0, (int)Ability.Verb.COUNT));
+        //        while (ability.AnyTriggerInconsistencies());
 
-            //todo: rarity should be a factor
-            Ability ability;
-            do
-            {
-                ability = ScriptableObject.CreateInstance<Ability>();
-                do
-                    ability.TriggerCondition = new Ability.Trigger((Ability.Noun)Random.Range(0, (int)Ability.Noun.CardInOwnersHand), (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ? c.Race.FavoriteTriggers[Random.Range(0, c.Race.FavoriteTriggers.Length)] : (Ability.Verb)Random.Range(0, (int)Ability.Verb.COUNT));
-                while (ability.AnyTriggerInconsistencies());
+        //        do
+        //            ability.ResultingAction = new Ability.Action(
+        //                (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (Ability.ActionType)Random.Range(0, (int)Ability.ActionType.Summon),
+        //                (Ability.Count)Random.Range(0, (int)Ability.Count.COUNT),
+        //                (Ability.Noun)Random.Range(0, (int)Ability.Noun.COUNT),
+        //                Random.Range(amountMin, amountMax)
+        //                );
+        //        while (ability.AnyActionInconsistencies());
+        //    }
+        //    while (!AbilityFitsRarity(ability, c.Rarity));
 
-                do
-                    ability.ResultingAction = new Ability.Action(
-                        (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (Ability.ActionType)Random.Range(0, (int)Ability.ActionType.Summon),
-                        (Ability.Count)Random.Range(0, (int)Ability.Count.COUNT),
-                        (Ability.Noun)Random.Range(0, (int)Ability.Noun.COUNT),
-                        Random.Range(amountMin, amountMax)
-                        );
-                while (ability.AnyActionInconsistencies());
-            }
-            while (!AbilityFitsRarity(ability, c.Rarity));
+        //    ability.GetValue();
 
-            ability.GetValue();
+        //    string path = "Assets/Resources/Abilities/";
 
-            string path = "Assets/Resources/Abilities/";
+        //    string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path +ability.TriggerCondition.Subject+ ability.TriggerCondition.TriggerAction + "-" + ability.ResultingAction.ActionType + ability.ResultingAction.Targets + Random.Range(0, 10000) + ".asset");
 
-            string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path +ability.TriggerCondition.Subject+ ability.TriggerCondition.TriggerAction + "-" + ability.ResultingAction.ActionType + ability.ResultingAction.Targets + Random.Range(0, 10000) + ".asset");
+        //    AssetDatabase.CreateAsset(ability, assetPathAndName);
 
-            AssetDatabase.CreateAsset(ability, assetPathAndName);
+        //    AssetDatabase.SaveAssets();
+        //    AssetDatabase.Refresh();
 
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+        //    c.SpecialAbility = ability;
 
-            c.SpecialAbility = ability;
-
-        }
+        //}
     }
 
     private static bool AbilityFitsRarity(Ability ability, Creature.RarityType rarity)

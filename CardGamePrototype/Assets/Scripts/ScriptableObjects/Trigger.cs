@@ -23,11 +23,13 @@ public partial class Ability
     public struct Trigger
     {
         public Noun Subject;
+        public NounType Subjekt;
         public Verb TriggerAction;
 
-        public Trigger(Noun subject, Verb triggerAction)
+        public Trigger(Noun subject,NounType subj, Verb triggerAction)
         {
             Subject = subject;
+            Subjekt = subj;
             TriggerAction = triggerAction;
         }
 
@@ -35,23 +37,23 @@ public partial class Ability
             switch (TriggerAction)
             {
                 case Verb.ATTACKS:
-                    return $"When {NounAsString(Subject, _owner) } attacks";
+                    return $"When {NounAsString(Subjekt, _owner) } attacks";
                 case Verb.IsATTACKED:
-                    return $"When {NounAsString(Subject, _owner) } is attacked";
+                    return $"When {NounAsString(Subjekt, _owner) } is attacked";
                 case Verb.KILLS:
-                    return $"When {NounAsString(Subject, _owner) } kills a minion";
+                    return $"When {NounAsString(Subjekt, _owner) } kills a minion";
                 case Verb.DIES:
-                    return $"When {NounAsString(Subject, _owner) } dies";
+                    return $"When {NounAsString(Subjekt, _owner) } dies";
                 case Verb.ETB:
-                    return $"When {NounAsString(Subject, _owner) } enters the battlefield";
+                    return $"When {NounAsString(Subjekt, _owner) } enters the battlefield";
                 case Verb.IsDAMAGED:
-                    return $"When {NounAsString(Subject, _owner) } is damaged";
+                    return $"When {NounAsString(Subjekt, _owner) } is damaged";
                 case Verb.IsHealed:
-                    return $"When {NounAsString(Subject, _owner) } is healed";
+                    return $"When {NounAsString(Subjekt, _owner) } is healed";
                 case Verb.Draw:
                     return $"When {_owner.Name}'s controller draws a card";
                 case Verb.Withdraw:
-                    return $"When {NounAsString(Subject, _owner) } is withdrawn";
+                    return $"When {NounAsString(Subjekt, _owner) } is withdrawn";
                 case Verb.RoundEnd:
                     return $"At the end of a combat round";
                 case Verb.COUNT:

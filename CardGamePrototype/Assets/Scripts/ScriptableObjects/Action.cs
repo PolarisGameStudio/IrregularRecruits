@@ -27,13 +27,15 @@ public partial class Ability
         public ActionType ActionType;
         public Count TargetCount;
         public Noun Targets;
+        public NounType Target;
         public int Amount;
 
-        public Action(ActionType actionType, Count targetCount, Noun targets, int amount)
+        public Action(ActionType actionType, Count targetCount, Noun targets, int amount, NounType target)
         {
             ActionType = actionType;
             TargetCount = targetCount;
             Targets = targets;
+            Target = target;
             Amount = amount;
         }
 
@@ -41,25 +43,25 @@ public partial class Ability
             switch (ActionType)
             {
                 case ActionType.Kill:
-                    return $"kill {NounAsString(Targets, owner, TargetCount)}";
+                    return $"kill {NounAsString(Target, owner, TargetCount)}";
                 case ActionType.DealDamage:
-                    return $"deal {Amount} damage to {NounAsString(Targets, owner, TargetCount)}";
+                    return $"deal {Amount} damage to {NounAsString(Target, owner, TargetCount)}";
                 case ActionType.StatPlus:
-                    return $"{NounAsString(Targets, owner, TargetCount)} get +{Amount} Attack and Health";
+                    return $"{NounAsString(Target, owner, TargetCount)} get +{Amount} Attack and Health";
                 case ActionType.StatMinus:
-                    return $"{NounAsString(Targets, owner, TargetCount)} get -{Amount} Attack and Health";
+                    return $"{NounAsString(Target, owner, TargetCount)} get -{Amount} Attack and Health";
                 case ActionType.Withdraw:
-                    return $"withdraw {NounAsString(Targets, owner, TargetCount)}";
+                    return $"withdraw {NounAsString(Target, owner, TargetCount)}";
                 case ActionType.Heal:
-                    return $"heal {NounAsString(Targets, owner, TargetCount)} for {Amount}";
+                    return $"heal {NounAsString(Target, owner, TargetCount)} for {Amount}";
                 case ActionType.Resurrect:
-                    return $"resurrect {NounAsString(Targets, owner, TargetCount)} with {Amount} health";
+                    return $"resurrect {NounAsString(Target, owner, TargetCount)} with {Amount} health";
                 case ActionType.Draw:
                     return $"draw {Amount} cards";
                 case ActionType.Charm:
-                    return $"take control of {NounAsString(Targets, owner, TargetCount)}";
+                    return $"take control of {NounAsString(Target, owner, TargetCount)}";
                 case ActionType.Summon:
-                    return $"summon {NounAsString(Targets, owner, TargetCount)}";
+                    return $"summon {NounAsString(Target, owner, TargetCount)}";
                 case ActionType.COUNT:
                 default:
                     return $"{ActionType} {TargetCount} {Targets}";
