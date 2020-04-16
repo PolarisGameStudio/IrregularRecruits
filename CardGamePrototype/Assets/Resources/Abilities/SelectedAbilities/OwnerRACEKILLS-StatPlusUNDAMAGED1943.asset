@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Value: 2.25
   TriggerCondition:
-    Subject: 5
     Subjekt:
       Character: 0
       Location: 1
@@ -24,12 +23,11 @@ MonoBehaviour:
     TriggerAction: 2
   ResultingAction:
     ActionType: 2
-    TargetCount: 2
-    Targets: 8
+    TargetCount: 1
     Target:
-      Character: 0
+      Character: 3
       Location: 1
       Relationship: 0
-      DamageState: 2
+      DamageState: 0
       Race: 0
     Amount: 2

@@ -217,6 +217,7 @@ MonoBehaviour:
   DamageParticlesPrefab: []
   DeathParticlesPrefab:
   - {fileID: 198247871303120836, guid: e473029e4c70ad543a6879b82a732f4f, type: 3}
+  - {fileID: 198330214428362902, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
   AbilityFx:
   - ActionType: 0
     AbilityIconFX:
