@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillAction : AbilityAction
+public class StatMinusAction : AbilityAction
 {
-    public override Ability.ActionType ActionType => Ability.ActionType.Kill;
+    public override Ability.ActionType ActionType => Ability.ActionType.StatMinus;
 
     public override string Description(string target, int amount)
     {
-        return "kill " + target;
+        return $"{target} get -{amount} Attack and Health";
     }
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
@@ -16,11 +16,11 @@ public class KillAction : AbilityAction
         FlowController.AddEvent(() =>
                 Event.OnAbilityTrigger.Invoke(ability, owner, targets));
         FlowController.AddEvent(() =>
-            targets.ForEach(c => c.Die()));
+            targets.ForEach(c => c.StatModifier(-ability.ResultingAction.Amount)));
     }
 
     public override float GetValue(float targetValue, int amount)
     {
-        return -3f * targetValue;
+        return -1f * targetValue * (1 + amount / 3f);
     }
 }

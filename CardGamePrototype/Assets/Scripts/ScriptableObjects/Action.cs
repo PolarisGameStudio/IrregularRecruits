@@ -38,65 +38,14 @@ public partial class Ability
         }
 
         public string Description(Card owner) {
-            switch (ActionType)
-            {
-                case ActionType.Kill:
-                    return $"kill {NounAsString(Target, owner, TargetCount)}";
-                case ActionType.DealDamage:
-                    return $"deal {Amount} damage to {NounAsString(Target, owner, TargetCount)}";
-                case ActionType.StatPlus:
-                    return $"{NounAsString(Target, owner, TargetCount)} get +{Amount} Attack and Health";
-                case ActionType.StatMinus:
-                    return $"{NounAsString(Target, owner, TargetCount)} get -{Amount} Attack and Health";
-                case ActionType.Withdraw:
-                    return $"withdraw {NounAsString(Target, owner, TargetCount)}";
-                case ActionType.Heal:
-                    return $"heal {NounAsString(Target, owner, TargetCount)} for {Amount}";
-                case ActionType.Resurrect:
-                    return $"resurrect {NounAsString(Target, owner, TargetCount)} with {Amount} health";
-                case ActionType.Draw:
-                    return $"draw {Amount} cards";
-                case ActionType.Charm:
-                    return $"take control of {NounAsString(Target, owner, TargetCount)}";
-                case ActionType.Summon:
-                    return $"summon {NounAsString(Target, owner, TargetCount)}";
-                case ActionType.COUNT:
-                default:
-                    return $"{ActionType} {TargetCount} {NounAsString(Target, owner, TargetCount)}";
-            }
+            return AbilityProcessor.GetAction(ActionType).Description(NounAsString(Target, owner, TargetCount),Amount);
         }
 
 
         //Negative for an enemy target. Positive for a friendly or neutral target. More impactfull raises value
         public float GetValue()
         {
-            switch (ActionType)
-            {
-                case ActionType.Kill:
-                    return -3f * GetTargetTypeValue(true) * GetAmountOfTargetsValue();
-                case ActionType.Charm:
-                    return -4f * GetTargetTypeValue(true) * GetAmountOfTargetsValue();
-                case ActionType.DealDamage:
-                    return -1f * GetTargetTypeValue(true) * GetAmountOfTargetsValue() * (1+Amount/20f);
-                case ActionType.StatMinus:
-                    return -1f * GetTargetTypeValue(true) * GetAmountOfTargetsValue() * (1 + Amount / 10f);
-                case ActionType.Withdraw:
-                    return 1f * GetAmountOfTargetsValue() ;
-                case ActionType.StatPlus:
-                    return 1.5f * GetTargetTypeValue() * GetAmountOfTargetsValue() * (1 + Amount / 2);
-                case ActionType.Heal:
-                    return 0.5f * GetTargetTypeValue() * GetAmountOfTargetsValue() * (1 + Amount / 20f);
-                case ActionType.Resurrect:
-                    return 3.3f * GetTargetTypeValue() * GetAmountOfTargetsValue() * (1 + Amount / 20f);
-                case ActionType.Draw:
-                    return 1f * Amount;
-                case ActionType.Summon:
-                case ActionType.Clone:
-                case ActionType.Copy:
-                case ActionType.COUNT:
-                default:
-                    return 1f * GetTargetTypeValue() * GetAmountOfTargetsValue() * (1 + Amount / 20f);
-            }
+            return AbilityProcessor.GetAction(ActionType).GetValue(GetTargetTypeValue() * GetAmountOfTargetsValue(),Amount);
         }
 
         //Negative if enemy target - so kill enemy becomes a net positive ability

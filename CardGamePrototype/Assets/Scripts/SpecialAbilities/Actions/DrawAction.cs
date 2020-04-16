@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillAction : AbilityAction
+public class DrawAction : AbilityAction
 {
-    public override Ability.ActionType ActionType => Ability.ActionType.Kill;
+    public override Ability.ActionType ActionType => Ability.ActionType.Draw;
 
     public override string Description(string target, int amount)
     {
-        return "kill " + target;
+        return $"draw {amount} cards";
     }
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
         FlowController.AddEvent(() =>
-                Event.OnAbilityTrigger.Invoke(ability, owner, targets));
-        FlowController.AddEvent(() =>
-            targets.ForEach(c => c.Die()));
+                Event.OnAbilityTrigger.Invoke(ability, owner, new List<Card>()));
+        owner.InDeck.Draw(ability.ResultingAction.Amount);
     }
 
     public override float GetValue(float targetValue, int amount)
     {
-        return -3f * targetValue;
+        return 1f * amount;
     }
 }

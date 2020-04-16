@@ -182,76 +182,15 @@ private bool CorrectRace(Card instigator, Card abilityOwner, RaceType race)
         }
     }
 
-    private void ExecuteAction(Card _owner, Card triggerExecuter)
+    private void ExecuteAction(Card owner, Card triggerExecuter)
     {
-        Debug.Log("Trigger: " + TriggerCondition.Description(_owner) + " is true");
-        Debug.Log("Executing: " + ResultingAction.Description(_owner));
-        _owner.OnAbilityTrigger.Invoke();
+        Debug.Log("Trigger: " + TriggerCondition.Description(owner) + " is true");
+        Debug.Log("Executing: " + ResultingAction.Description(owner));
+        owner.OnAbilityTrigger.Invoke();
 
+        List<Card> targets = GetTargets(ResultingAction.Target, ResultingAction.TargetCount, Deck.Zone.Battlefield, owner, triggerExecuter);
 
-        List<Card> targets = GetTargets(ResultingAction.Target, ResultingAction.TargetCount, Deck.Zone.Battlefield, _owner, triggerExecuter);
-        switch (ResultingAction.ActionType)
-        {
-            case ActionType.Kill:
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                FlowController.AddEvent(() =>
-                    targets.ForEach(c => c.Die()));
-                break;
-            case ActionType.DealDamage:
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                FlowController.AddEvent(() =>
-                    targets.ForEach(c => c.CurrentHealth -= ResultingAction.Amount));
-                break;
-            case ActionType.StatPlus:
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                FlowController.AddEvent(() =>
-                    targets.ForEach(c => c.StatModifier(ResultingAction.Amount)));
-                break;
-            case ActionType.StatMinus:
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                FlowController.AddEvent(() =>
-                    targets.ForEach(c => c.StatModifier(-ResultingAction.Amount)));
-                break;
-            case ActionType.Withdraw:
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                targets.ForEach(c => c.Withdraw());
-                break;
-            case ActionType.Heal:
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                FlowController.AddEvent(() =>
-                    targets.ForEach(c => c.CurrentHealth += ResultingAction.Amount));
-                break;
-            case ActionType.Resurrect:
-                List<Card> graveTargets = GetTargets(ResultingAction.Target, ResultingAction.TargetCount, Deck.Zone.Graveyard, _owner, triggerExecuter);
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, graveTargets));
-                graveTargets.ForEach(c => c.Resurrect(ResultingAction.Amount));
-                break;
-            case ActionType.Draw:
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, new List<Card>()));
-                _owner.InDeck.Draw(ResultingAction.Amount);
-                break;
-            case ActionType.Charm:
-                FlowController.AddEvent(() =>
-                        Event.OnAbilityTrigger.Invoke(this, _owner, targets));
-                FlowController.AddEvent(() =>
-                    targets.ForEach(c => c.Charm(_owner.InDeck)));
-                break;
-            case ActionType.Summon:
-                Debug.Log("summoning not implemented");
-                break;
-            default:
-                break;
-        }
-
-
+        AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteAction(this, owner,targets);        
     }
 
     private List<Card> GetTargets(NounType targetType, Count count, Deck.Zone location, Card _owner, Card triggerExecuter)
