@@ -41,9 +41,40 @@ public class CardEditor : Singleton<CardEditor>
 
         RaceDropdown.onValueChanged.AddListener(ChangeRace);
 
-        AbilityEditor.AddRandomTraitButton.onClick.AddListener(AddRandomTrait);
-        AbilityEditor.MoveTraitToOtherButton.onClick.AddListener(MoveTraitToOtherCreature);
-        AbilityEditor.DeleteTraitButton.onClick.AddListener(DeleteTrait);
+        AbilityEditor.AddRandomTraitButton.onClick.AddListener(AddRandomAbility);
+        AbilityEditor.MoveTraitToOtherButton.onClick.AddListener(MoveAbilityToOtherCreature);
+        AbilityEditor.DeleteTraitButton.onClick.AddListener(DeleteAbility);
+
+        TraitEditorInstance.AddTraitButton.onClick.AddListener(()=>AddTrait());
+    }
+
+    private void AddTrait(Trait t = null)
+    {
+        var entry = Instantiate(TraitEditorInstance, TraitEditorInstance.transform.parent);
+
+        entry.RemoveTraitButton.onClick.AddListener(() => RemoveTrait(entry));
+        entry.ChangeTraitButton.onClick.AddListener(() => ChangeTrait(entry));
+        entry.RemoveTraitButton.gameObject.SetActive(true);
+        entry.ChangeTraitButton.gameObject.SetActive(true);
+        entry.AddTraitButton.enabled = false;
+
+        if(t)
+        {
+            entry.UpdateTrait(t);
+        }
+        else
+            ChangeTrait(entry);
+
+        TraitEditorInstance.transform.SetAsLastSibling();
+    }
+
+    private void RemoveTrait(TraitEditorInstance entry)
+    {
+        Creature.Traits = Creature.Traits.Where(t => t != entry.Trait).ToArray();
+
+        Destroy(entry);
+
+        EditorUtility.SetDirty(Creature);
     }
 
     private void Update()
@@ -52,8 +83,10 @@ public class CardEditor : Singleton<CardEditor>
             Open(CardHighlight.GetCreature());
     }
 
-    private void MoveTraitToOtherCreature()
+    private void MoveAbilityToOtherCreature()
     {
+        if (!Creature.SpecialAbility) return;
+
         AssetManager.MoveAbilityToOtherCreature(Creature.SpecialAbility);
         Creature.SpecialAbility = null;
 
@@ -62,9 +95,9 @@ public class CardEditor : Singleton<CardEditor>
         EditorUtility.SetDirty(Creature);
     }
 
-    private void DeleteTrait()
+    private void DeleteAbility()
     {
-        Destroy(Creature.SpecialAbility);
+        DestroyImmediate(Creature.SpecialAbility,true);
 
         Creature.SpecialAbility = null;
 
@@ -73,7 +106,7 @@ public class CardEditor : Singleton<CardEditor>
         EditorUtility.SetDirty(Creature);
     }
 
-    private void AddRandomTrait()
+    private void AddRandomAbility()
     {
 
     }
@@ -90,6 +123,23 @@ public class CardEditor : Singleton<CardEditor>
         EditorUtility.SetDirty(Creature);
     }
 
+    public void ChangeTrait(TraitEditorInstance traitEditorInstance)
+    {
+        Trait oldTrait = traitEditorInstance.Trait;
+        Trait newTrait = oldTrait;
+
+        do
+        {
+            var index = Traits.IndexOf(newTrait);
+            newTrait = Traits[index >= Traits.Count ? 0 : index + 1];
+        }
+        while (Creature.Traits.Contains(newTrait));
+
+        traitEditorInstance.UpdateTrait(newTrait);
+        Creature.Traits[Traits.IndexOf(oldTrait)] = newTrait;
+
+        EditorUtility.SetDirty(Creature);
+    }
 
     private void Open(Creature creature)
     {
@@ -105,6 +155,9 @@ public class CardEditor : Singleton<CardEditor>
         CardPortrait.sprite = creature.Image;
         RaceDropdown.value = Races.IndexOf(creature.Race);
         Creature = creature;
+        foreach (var t in Creature.Traits)
+            AddTrait(t);
+        UpdateAbility();
     }
 
     private void UpdateAttack(string input)

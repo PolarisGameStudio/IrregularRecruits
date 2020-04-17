@@ -11,7 +11,7 @@ public class AssetManager
 
 #if UNITY_EDITOR
     private static float FavoredAbilityUseRate = 0.5f;
-    private static List<Creature> creatureObjects;
+    private static List<Creature> creatureObjects = new List<Creature>();
 
     [MenuItem("Content/Re-Generate unlocked creatures")]
     public static void GenerateCreatures()
@@ -82,6 +82,7 @@ public class AssetManager
         {
             selected.First().SpecialAbility = a;
             EditorUtility.SetDirty(selected.First());
+            Debug.Log("moved ability: " + a+ "; to: "+selected);
         }
         else
             Debug.Log("no suitable creature found for ability: " + a);

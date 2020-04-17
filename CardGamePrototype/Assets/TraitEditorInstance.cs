@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TraitEditorInstance : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Button AddTraitButton;
+    public TextMeshProUGUI Text;
+    public Button ChangeTraitButton;
+    public Button RemoveTraitButton;
+    public Trait Trait;
 
-    // Update is called once per frame
-    void Update()
+
+    public void UpdateTrait(Trait t)
     {
-        
+        AddTraitButton.image.sprite = t.Icon;
+        Text.text = t.name + " ("+t.Description+")";
+
+        Trait = t;
     }
 }
