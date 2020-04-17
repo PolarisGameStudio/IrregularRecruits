@@ -39795,7 +39795,7 @@ GameObject:
   - component: {fileID: 1999890074}
   - component: {fileID: 1999890076}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: ChangeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39990,7 +39990,7 @@ GameObject:
   - component: {fileID: 2015213787}
   - component: {fileID: 2015213789}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: RemoveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41734,8 +41734,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AddTraitButton: {fileID: 2198836194013323356}
   Text: {fileID: 6112044425865389997}
-  ChangeTraitButton: {fileID: 2015213789}
-  RemoveTraitButton: {fileID: 1999890076}
+  ChangeTraitButton: {fileID: 1999890076}
+  RemoveTraitButton: {fileID: 2015213789}
+  Trait: {fileID: 0}
 --- !u!1 &2175440689230232422
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class StatBoostAction : AbilityAction
 
     public override string Description(string target, int amount)
     {
-        return $"{target} get +{amount} Attack and Health";
+        return $"{target} gain {amount} Attack and Health";
     }
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)

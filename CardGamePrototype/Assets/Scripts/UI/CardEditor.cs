@@ -70,9 +70,9 @@ public class CardEditor : Singleton<CardEditor>
 
     private void RemoveTrait(TraitEditorInstance entry)
     {
-        Creature.Traits = Creature.Traits.Where(t => t != entry.Trait).ToArray();
+        Creature.Traits.Remove(entry.Trait);
 
-        Destroy(entry);
+        Destroy(entry.gameObject);
 
         EditorUtility.SetDirty(Creature);
     }
@@ -130,13 +130,16 @@ public class CardEditor : Singleton<CardEditor>
 
         do
         {
-            var index = Traits.IndexOf(newTrait);
-            newTrait = Traits[index >= Traits.Count ? 0 : index + 1];
+            var index = Traits.IndexOf(newTrait)+1;
+            if (index < 0) index = 0;
+            if (index >= Traits.Count) index = 0;
+            newTrait = Traits[index];
         }
         while (Creature.Traits.Contains(newTrait));
 
         traitEditorInstance.UpdateTrait(newTrait);
-        Creature.Traits[Traits.IndexOf(oldTrait)] = newTrait;
+        Creature.Traits.Remove(oldTrait);
+        Creature.Traits.Add(newTrait);
 
         EditorUtility.SetDirty(Creature);
     }

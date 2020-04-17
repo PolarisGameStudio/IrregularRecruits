@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -12,7 +13,7 @@ public class Creature : ScriptableObject
     public Sprite IconImage;
     public int Attack = 1;
     public int Health = 1;
-    public Trait[] Traits;
+    public List<Trait> Traits;
     public Ability SpecialAbility;
 
     public Race Race;

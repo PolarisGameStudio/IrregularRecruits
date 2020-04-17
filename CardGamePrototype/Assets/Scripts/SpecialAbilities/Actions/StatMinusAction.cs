@@ -8,7 +8,7 @@ public class StatMinusAction : AbilityAction
 
     public override string Description(string target, int amount)
     {
-        return $"{target} get -{amount} Attack and Health";
+        return $"{target} lose {amount} Attack and Health";
     }
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
