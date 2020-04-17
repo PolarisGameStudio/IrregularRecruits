@@ -123,6 +123,9 @@ public class Card
 
         Name = creature?.name;// + " !" + Guid.NewGuid();
 
+        //if (Creature && Creature.SpecialAbility)
+        //    Creature.SpecialAbility.RemoveListeners(this);
+
         MaxHealth = creature.Health;
         CurrentHealth = creature.Health;
         Attack = creature.Attack;

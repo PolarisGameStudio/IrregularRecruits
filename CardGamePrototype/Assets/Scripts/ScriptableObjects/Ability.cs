@@ -66,6 +66,7 @@ public partial class Ability : ScriptableObject
         //TODO: replace with CardEvent Reference
     }
 
+
     public float GetValue()
     {
         Value = TriggerCondition.GetValue() * ResultingAction.GetValue();

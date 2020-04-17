@@ -78,6 +78,7 @@ public partial class Ability
         }
     }
 
+
     //internal bool AnyActionInconsistencies()
     //{
     //    return InconsistentActionTargets.Any(a=> a.Key == ResultingAction.ActionType && a.Value.Contains(ResultingAction.Targets));

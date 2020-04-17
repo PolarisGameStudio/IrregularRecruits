@@ -6,7 +6,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-public class CardGeneration 
+public class AssetManager 
 {
 
 #if UNITY_EDITOR

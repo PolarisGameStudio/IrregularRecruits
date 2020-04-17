@@ -10,7 +10,7 @@ public class DeckManager : Singleton<DeckManager>
     {
 #if UNITY_EDITOR
         if (Instance.Decks == null ||Instance.Decks.Count == 0)
-            Instance.Decks = CardGeneration.GetAssetsOfType<DeckObject>();
+            Instance.Decks = AssetManager.GetAssetsOfType<DeckObject>();
 #endif
 
         return Instance.Decks;

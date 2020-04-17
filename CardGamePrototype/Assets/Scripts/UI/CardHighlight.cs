@@ -16,6 +16,7 @@ public class CardHighlight : Singleton<CardHighlight>
     public ImageTextEntry TraitPrefab;
     public Image ImageMask, Image;
     public static Coroutine ShowAfterDelayRoutine;
+    private Creature Creature;
 
     private List<ImageTextEntry> InstantiatedObjects = new List<ImageTextEntry>();
 
@@ -29,6 +30,13 @@ public class CardHighlight : Singleton<CardHighlight>
     public static bool IsActive()
     {
         return Instance.Holder.activeSelf;
+    }
+
+    internal static Creature GetCreature()
+    {
+        if (!IsActive()) return null;
+
+        return Instance.Creature;
     }
 
     //DISABLE mask if creature has small image
@@ -49,6 +57,8 @@ public class CardHighlight : Singleton<CardHighlight>
     private void ShowCard(CardUI cardUI)
     {
         ShowAfterDelayRoutine = null;
+
+        Creature = cardUI.Card.Creature;
 
         InstantiatedObjects.ForEach(t => Destroy(t.gameObject));
 
