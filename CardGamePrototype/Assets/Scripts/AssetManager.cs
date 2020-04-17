@@ -11,6 +11,7 @@ public class AssetManager
 
 #if UNITY_EDITOR
     private static float FavoredAbilityUseRate = 0.5f;
+    private static List<Creature> creatureObjects;
 
     [MenuItem("Content/Re-Generate unlocked creatures")]
     public static void GenerateCreatures()
@@ -34,9 +35,8 @@ public class AssetManager
     [MenuItem("Content/Divide abilities")]
     public static void DivideAbilitiesToCreature()
     {
-        List<Creature> creatureObjects = new List<Creature>();
-
-        creatureObjects = GetAssetsOfType<Creature>().Where(c=>c.Race ).ToList();
+        if(!creatureObjects.Any())
+            creatureObjects = GetAssetsOfType<Creature>().Where(c=>c.Race ).ToList();
 
 
         List<Ability> abilities = new List<Ability>();
@@ -49,26 +49,7 @@ public class AssetManager
             if (creatureObjects.Any(c => c.SpecialAbility == a))
                 continue;
 
-            List<Creature> selected = new List<Creature>();
-
-            if (creatureObjects.Any(c => c.Race.FavoriteActions.Contains(a.ResultingAction.ActionType)))
-                selected.AddRange(creatureObjects.Where(c => c.Race.FavoriteActions.Contains(a.ResultingAction.ActionType)));
-
-            if (creatureObjects.Any(c => c.Race.FavoriteTriggers.Contains(a.TriggerCondition.TriggerAction)))
-                selected.AddRange(creatureObjects.Where(c => c.Race.FavoriteTriggers.Contains(a.TriggerCondition.TriggerAction)));
-
-            selected.RemoveAll(c => !AbilityFitsRarity(a, c.Rarity) || c.SpecialAbility);
-
-            selected.OrderBy(c => Random.value);
-
-            if (selected.Any())
-            {
-                selected.First().SpecialAbility = a;
-                EditorUtility.SetDirty( selected.First());
-            }
-
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+            MoveAbilityToOtherCreature(a);
         }
 
 
@@ -78,6 +59,35 @@ public class AssetManager
         Debug.Log("rare creatures without abilities: " + creatureObjects.Count(c => c.Rarity == Creature.RarityType.Rare & !c.SpecialAbility));
         Debug.Log("common creatures with abilities: " + creatureObjects.Count(c => c.Rarity == Creature.RarityType.Common && c.SpecialAbility));
 
+    }
+
+    public static void MoveAbilityToOtherCreature(Ability a)
+    {
+        if (!creatureObjects.Any())
+            creatureObjects = GetAssetsOfType<Creature>().Where(c => c.Race).ToList();
+
+        List<Creature> selected = new List<Creature>();
+
+        if (creatureObjects.Any(c => c.Race.FavoriteActions.Contains(a.ResultingAction.ActionType)))
+            selected.AddRange(creatureObjects.Where(c => c.Race.FavoriteActions.Contains(a.ResultingAction.ActionType)));
+
+        if (creatureObjects.Any(c => c.Race.FavoriteTriggers.Contains(a.TriggerCondition.TriggerAction)))
+            selected.AddRange(creatureObjects.Where(c => c.Race.FavoriteTriggers.Contains(a.TriggerCondition.TriggerAction)));
+
+        selected.RemoveAll(c => !AbilityFitsRarity(a, c.Rarity) || c.SpecialAbility);
+
+        selected.OrderBy(c => Random.value);
+
+        if (selected.Any())
+        {
+            selected.First().SpecialAbility = a;
+            EditorUtility.SetDirty(selected.First());
+        }
+        else
+            Debug.Log("no suitable creature found for ability: " + a);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
     
     [MenuItem("Content/Do stuff")]

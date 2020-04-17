@@ -103,7 +103,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
         if (creature.SpecialAbility)
         {
-            DescriptionText.text += $"{creature.SpecialAbility.Description(Card)}\n";
+            DescriptionText.text += $"{creature.SpecialAbility.Description(Card.Creature)}\n";
 
             var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
             instance.gameObject.SetActive(true);

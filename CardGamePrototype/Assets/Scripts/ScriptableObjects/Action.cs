@@ -37,7 +37,7 @@ public partial class Ability
             Amount = amount;
         }
 
-        public string Description(Card owner) {
+        public string Description(Creature owner) {
             return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, TargetCount),Amount);
         }
 

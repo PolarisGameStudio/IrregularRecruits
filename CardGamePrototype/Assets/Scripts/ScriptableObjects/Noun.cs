@@ -100,14 +100,14 @@ public struct Noun
         }
     }
 
-    public string NounAsString(Card _owner, Ability.Count count = Ability.Count.One)
+    public string NounAsString(Creature _owner, Ability.Count count = Ability.Count.One)
     {
         var str = "";
 
         switch (Character)
         {
             case CharacterTyp.This:
-                return _owner.Creature.name;
+                return _owner.name;
             case CharacterTyp.It:
                 return "it";
             case CharacterTyp.Any:
@@ -153,10 +153,10 @@ public struct Noun
                 str += "minion" + (count == Ability.Count.One ? "" : "s");
                 break;
             case RaceType.Same:
-                str += _owner.Creature.Race?.name + (count == Ability.Count.One ? "" : "s");
+                str += _owner.Race?.name + (count == Ability.Count.One ? "" : "s");
                 break;
             case RaceType.Different:
-                str += "non-" + _owner.Creature.Race?.name + (count == Ability.Count.One ? "" : "s");
+                str += "non-" + _owner.Race?.name + (count == Ability.Count.One ? "" : "s");
                 break;
         }
 
@@ -166,7 +166,7 @@ public struct Noun
                 switch (Relationship)
                 {
                     case Allegiance.Friend:
-                        return $"{str.Replace("friendly ", "")} in {_owner.Creature.name}'s deck";
+                        return $"{str.Replace("friendly ", "")} in {_owner.name}'s deck";
                     case Allegiance.Enemy:
                         return $"{str.Replace("enemy ", "")} in the enemy deck";
                     case Allegiance.Any:
@@ -181,7 +181,7 @@ public struct Noun
                 switch (Relationship)
                 {
                     case Allegiance.Friend:
-                        return $"{str.Replace("friendly ", "")} in {_owner.Creature.name}'s hand";
+                        return $"{str.Replace("friendly ", "")} in {_owner.name}'s hand";
                     case Allegiance.Enemy:
                         return $"{str.Replace("enemy ", "")} in the enemy hand";
                     case Allegiance.Any:

@@ -100,7 +100,7 @@ public class CardHighlight : Singleton<CardHighlight>
         AbilityIcon.gameObject.SetActive(card.Creature.SpecialAbility);
 
         if (card.Creature.SpecialAbility) {
-            AbilityIcon.Text.text = card.Creature.SpecialAbility?.Description(card);
+            AbilityIcon.Text.text = card.Creature.SpecialAbility?.Description(card.Creature);
             AbilityIcon.Image.sprite = IconManager.GetAbilityIconSprite(card.Creature.SpecialAbility.ResultingAction.ActionType);
         }
 

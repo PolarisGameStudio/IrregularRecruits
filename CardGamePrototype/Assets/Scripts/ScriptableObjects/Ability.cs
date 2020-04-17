@@ -55,7 +55,7 @@ public partial class Ability : ScriptableObject
     {
         return base.ToString();
     }
-    public string Description(Card owner)
+    public string Description(Creature owner)
     {
         return $"{TriggerCondition.Description(owner)}, {ResultingAction.Description(owner)}.";
     }
@@ -82,8 +82,8 @@ public partial class Ability : ScriptableObject
 
     private void ExecuteAction(Card owner, Card triggerExecuter)
     {
-        Debug.Log("Trigger: " + TriggerCondition.Description(owner) + " is true");
-        Debug.Log("Executing: " + ResultingAction.Description(owner));
+        Debug.Log("Trigger: " + TriggerCondition.Description(owner.Creature) + " is true");
+        Debug.Log("Executing: " + ResultingAction.Description(owner.Creature));
         owner.OnAbilityTrigger.Invoke();
 
         List<Card> targets = GetTargets(ResultingAction.Target, ResultingAction.TargetCount, Deck.Zone.Battlefield, owner, triggerExecuter);

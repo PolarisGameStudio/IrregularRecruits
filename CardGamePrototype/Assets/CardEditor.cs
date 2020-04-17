@@ -15,18 +15,22 @@ public class CardEditor : Singleton<CardEditor>
     public GameObject Holder;
     public TMP_Dropdown RaceDropdown;
     public Image RaceImage;
-    public InputField AttackInput, HealthInput, NameInput;
+    public Image CardPortrait;
+    public TMP_InputField AttackInput, HealthInput, NameInput;
     public Button SaveButton;
     private List<Race> Races;
     private List<Trait> Traits;
     private List<Creature> Creatures;
     private Creature Creature;
+    public AbilityEditorEntry AbilityEditor;
+    public TraitEditorInstance TraitEditorInstance;
 
     private void Awake()
     {
+        Holder.SetActive(false);
+
         Races = AssetManager.GetAssetsOfType<Race>();
         Traits = AssetManager.GetAssetsOfType<Trait>();
-        Creatures = AssetManager.GetAssetsOfType<Creature>();
 
         SaveButton.onClick.AddListener(Save);
         AttackInput.onEndEdit.AddListener(UpdateAttack);
@@ -36,25 +40,54 @@ public class CardEditor : Singleton<CardEditor>
         RaceDropdown.options = Races.Select(r => new TMP_Dropdown.OptionData(r.name, r.Icon)).ToList();
 
         RaceDropdown.onValueChanged.AddListener(ChangeRace);
+
+        AbilityEditor.AddRandomTraitButton.onClick.AddListener(AddRandomTrait);
+        AbilityEditor.MoveTraitToOtherButton.onClick.AddListener(MoveTraitToOtherCreature);
+        AbilityEditor.DeleteTraitButton.onClick.AddListener(DeleteTrait);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && CardHighlight.IsActive())
+            Open(CardHighlight.GetCreature());
+    }
+
+    private void MoveTraitToOtherCreature()
+    {
+        AssetManager.MoveAbilityToOtherCreature(Creature.SpecialAbility);
+        Creature.SpecialAbility = null;
+
+        UpdateCreature(Creature);
+
+        EditorUtility.SetDirty(Creature);
+    }
+
+    private void DeleteTrait()
+    {
+        Destroy(Creature.SpecialAbility);
+
+        Creature.SpecialAbility = null;
+
+        UpdateCreature(Creature);
+
+        EditorUtility.SetDirty(Creature);
+    }
+
+    private void AddRandomTrait()
+    {
+
     }
 
     private void ChangeRace(int arg0)
     {
         var race = Races[arg0];
 
+        RaceImage.sprite = race.Icon;
+
         if (!Creature || race == Creature.Race) return;
-
         Debug.Log("updating Race for " + Creature + " to " + race);
-
         Creature.Race = race;
-
         EditorUtility.SetDirty(Creature);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && CardHighlight.IsActive() )
-            Open(CardHighlight.GetCreature());
     }
 
 
@@ -69,6 +102,9 @@ public class CardEditor : Singleton<CardEditor>
         AttackInput.text = creature.Attack.ToString("N0");
         HealthInput.text = creature.Health.ToString("N0");
         NameInput.text = creature.name;
+        CardPortrait.sprite = creature.Image;
+        RaceDropdown.value = Races.IndexOf(creature.Race);
+        Creature = creature;
     }
 
     private void UpdateAttack(string input)
@@ -96,7 +132,20 @@ public class CardEditor : Singleton<CardEditor>
         EditorUtility.SetDirty(Creature);
     }
 
-    
+    private void UpdateAbility()
+    {
+        AbilityEditor.Image.enabled = Creature.SpecialAbility;
+        if(Creature.SpecialAbility)
+        {
+            AbilityEditor.Image.sprite = IconManager.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
+            AbilityEditor.Text.text = Creature.SpecialAbility.Description(Creature); 
+        }
+        else
+        {
+            AbilityEditor.Text.text = "no special ability";
+        }
+
+    }
 
     private void Save()
     {

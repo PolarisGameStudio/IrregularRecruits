@@ -32,7 +32,7 @@ public partial class Ability
             TriggerAction = triggerAction;
         }
 
-        public string Description(Card _owner) {
+        public string Description(Creature _owner) {
             return AbilityProcessor.GetTrigger(TriggerAction).Description(Subjekt.NounAsString(_owner));
 
         }
