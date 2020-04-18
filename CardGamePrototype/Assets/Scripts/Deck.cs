@@ -48,8 +48,14 @@ public class Deck
     {
         ShuffleLibrary();
 
-        //Move AVANTGARDE cards to the front
-        var lib = Creatures[Zone.Library];
+        var amountToDraw = GameSettings.StartingHandSize(enemy);
+
+        //Move AVANTGARDE cards to the front and shuffle the rest
+        foreach(var c in CreaturesInZone(Zone.Library).Where(c=>c.Avantgarde()))
+        {
+            Draw(c);
+            amountToDraw--;
+        }
 
         if (enemy)
         {
@@ -57,7 +63,7 @@ public class Deck
                 MoveTopCardToBattleField();
         }
         
-        Draw(GameSettings.StartingHandSize(enemy));
+        Draw(amountToDraw);
     }
 
     internal void PackUp()
@@ -86,15 +92,20 @@ public class Deck
 
     public void Draw(int amount)
     {
-        if (Creatures[Zone.Library].Count() == 0) return;
+        if (Creatures[Zone.Library].Count() == 0 || amount < 0) return;
         if (Creatures[Zone.Library].Count() < amount) amount = Creatures[Zone.Library].Count();
 
         var draws = Creatures[Zone.Library].Take(amount);
 
         foreach (var card in draws)
         {
-            FlowController.AddEvent(() => Event.OnDraw.Invoke(card));
+            Draw(card);
         }
+    }
+
+    public void Draw(Card card)
+    {
+        FlowController.AddEvent(() => Event.OnDraw.Invoke(card));
     }
 
     internal List<Card> AllCreatures()
@@ -117,13 +128,16 @@ public class Deck
         //empty list check?
         if (CreaturesInZone(Zone.Battlefield).Count > 0)
         {
-
-            var defenders = CreaturesInZone(Zone.Battlefield).Where(c => c.Defender()).ToList();
+            List<Card> battlefield = CreaturesInZone(Zone.Battlefield).Where(c=> !c.Ethereal()).ToList();
+            var defenders = battlefield.Where(c => c.Defender()).ToList();
 
             if (defenders.Any())
                 return defenders[Random.Range(0, defenders.Count())];
 
-            return CreaturesInZone(Zone.Battlefield)[Random.Range(0, CreaturesInZone(Zone.Battlefield).Count())];
+            if (!battlefield.Any()) //meaning only ethereals
+                return CreaturesInZone(Zone.Battlefield)[Random.Range(0, CreaturesInZone(Zone.Battlefield).Count)];
+
+            return battlefield[Random.Range(0, battlefield.Count())];
         }
         else if (CreaturesInZone(Zone.Hand).Count > 0)
         {

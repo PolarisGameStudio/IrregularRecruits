@@ -12,6 +12,9 @@ public class CombatManager : Singleton<CombatManager>
     public static Deck EnemyDeck;
     public static bool CombatRunning;
 
+    public Trait AvantgardeTrait;
+    public Trait EtherealTrait;
+
     //to keep track of losses and kills
     private List<Card> InitialPlayerDeck, InitialEnemyDeck;
 
@@ -144,8 +147,8 @@ public class CombatManager : Singleton<CombatManager>
         //Debug.Log("Resolving combat");
         var attackOrder = new List<Card>();
 
-        attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.Attack > 0));
-        attackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.Attack > 0));
+        attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
+        attackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
 
         //Differentiate between player and enemy creatures?
         switch (GameSettings.Instance.AttackOrderParadigm)

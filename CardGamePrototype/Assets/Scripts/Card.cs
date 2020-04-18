@@ -61,6 +61,10 @@ public class Card
         }
     }
 
+    internal bool Avantgarde()
+    {
+        return Creature.Traits.Contains(CombatManager.Instance.AvantgardeTrait);
+    }
 
     public Card(Creature c)
     {
@@ -147,7 +151,6 @@ public class Card
 
     public bool Alive() => CurrentHealth > 0;
 
-
     internal void StatModifier(int amount)
     { 
         MaxHealth += amount;
@@ -167,6 +170,16 @@ public class Card
             BattleRepresentation.Interactable = false;
 
         FlowController.AddEvent(() =>    Event.OnPlay.Invoke(this));
+    }
+
+    internal bool Ethereal()
+    {
+        return Creature.Traits.Contains(CombatManager.Instance.EtherealTrait);
+    }
+
+    internal bool CanAttack()
+    {
+        return Attack > 0 & !Ethereal();
     }
 
     public void Withdraw()

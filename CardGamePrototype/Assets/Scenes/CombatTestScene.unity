@@ -38435,6 +38435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Turn: 0
+  AvantgardeTrait: {fileID: 11400000, guid: 7a817369293f625469ed09b70b07e03c, type: 2}
+  EtherealTrait: {fileID: 11400000, guid: 2075b1581c3413a4c8d1ac53c8aef4de, type: 2}
   AttackAnimationDuration: 0.5
   AbilityTriggerDuration: 1
 --- !u!1 &1908468736
