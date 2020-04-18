@@ -53,6 +53,7 @@ public class SoundBank : Singleton<SoundBank>
         Withdraw,
         Draw,
         NoAbilityTarget,
+        Resurrect,
     }
 
 

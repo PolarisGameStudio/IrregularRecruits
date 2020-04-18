@@ -31,6 +31,7 @@ public class SoundController : Singleton<SoundController>
         Event.OnPlay.AddListener(c => PlayCardSound(SoundBank.CardSound.ETB));
         Event.OnDamaged.AddListener(c => PlayCardSound(SoundBank.CardSound.Hit));
         Event.OnDeath.AddListener(c => PlayCardSound(SoundBank.CardSound.Death));
+        Event.OnRessurrect.AddListener(c => PlayCardSound(SoundBank.CardSound.Resurrect));
     }
 
     public void PlayButtonClick()

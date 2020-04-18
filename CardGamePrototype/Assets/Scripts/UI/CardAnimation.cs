@@ -79,7 +79,7 @@ public class CardAnimation : MonoBehaviour
     }
     public void UnDissolve()
     {
-        IsDissolving = true;
+        IsDissolving = false;
     }
 
     public void HighlightAbility()

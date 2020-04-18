@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: _TestCreature
+  m_Name: Succubus
   m_EditorClassIdentifier: 
-  name: Testie
-  Rarity: 2
+  name: Succubus
+  Rarity: 1
   Locked: 0
-  Image: {fileID: 21300000, guid: c70ed4735ca80db4086ff675ccbd5030, type: 3}
+  Image: {fileID: 21300000, guid: 895084eb1070a274086e953d953eb2f8, type: 3}
   IconImage: {fileID: 0}
-  Attack: 1
-  Health: 1
-  Traits: []
-  SpecialAbility: {fileID: 11400000, guid: 50a8852ae990d8f4a9f8a0e245429a0d, type: 2}
-  Race: {fileID: 11400000, guid: 5635c48887d99084a9876306e16e608b, type: 2}
+  Attack: 2
+  Health: 14
+  Traits:
+  - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: adf4f46b9e8784a44baa883d21f5c3f4, type: 2}
+  Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}

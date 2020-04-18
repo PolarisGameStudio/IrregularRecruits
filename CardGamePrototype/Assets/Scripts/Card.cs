@@ -74,6 +74,7 @@ public class Card
         FlowController.AddEvent(()=>
             Event.OnDeath.Invoke(this));
     }
+    
 
     private int attack;
     public int Attack
@@ -177,14 +178,18 @@ public class Card
 
     }
 
+    //should this method be called from OnRessurrect or the other way around?
     internal void Resurrect(int amount)
     {
         if (Location != Deck.Zone.Graveyard || Alive())
             Debug.LogWarning("Resurrectting alive character; "+ Name);
 
-        CurrentHealth = amount;
-        ChangeLocation(Deck.Zone.Graveyard, Deck.Zone.Battlefield);
+        FlowController.AddEvent(() =>
+            Event.OnRessurrect.Invoke(this));
 
+        CurrentHealth = amount;
+
+        
         //TODO: change race to UNDEAD?
     }
 

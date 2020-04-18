@@ -29,7 +29,11 @@ public class CombatManager : Singleton<CombatManager>
         Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
 
         Event.OnDeath.AddListener(c => c.BattleRepresentation?.CardAnimation.Dissolve());
+        Event.OnRessurrect.AddListener(c => c.BattleRepresentation?.CardAnimation.UnDissolve());
+
+        //TODO: this delay should be handled by the flow controller
         Event.OnDeath.AddListener(c=>c. ChangeLocation(Deck.Zone.Graveyard, 2f));
+        Event.OnRessurrect.AddListener(c=>c. ChangeLocation(Deck.Zone.Battlefield,2f));
 
         Event.OnPlay.AddListener( c=>c. ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield));
 

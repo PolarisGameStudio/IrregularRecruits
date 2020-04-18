@@ -29,14 +29,14 @@ public class FlowController : Singleton<FlowController>
     void Start()
     {
         //Debugs texts
-        Event.OnAttack.AddListener(c => Debug.Log("Event: " + c + ": Attacking"));
-        Event.OnBeingAttacked.AddListener(c => Debug.Log("Event: " + c + ": Is Attacked"));
-        Event.OnDamaged.AddListener(c => Debug.Log("Event: " + c + ": Is Damaged"));
-        Event.OnDeath.AddListener(c => Debug.Log("Event: " + c + ": Is dead"));
-        Event.OnHealed.AddListener(c => Debug.Log("Event: " + c + ": Is healed"));
-        Event.OnKill.AddListener(c => Debug.Log("Event: " + c + ": Killed a minion"));
-        Event.OnWithdraw.AddListener(c => Debug.Log("Event: " + c + ": Withdrew"));
-        Event.OnAbilityTrigger.AddListener((a,c,ts) => Debug.Log("Event: " + c + ": AbilityTriggered"));
+        Event.OnAttack.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Attacking"));
+        Event.OnBeingAttacked.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is Attacked"));
+        Event.OnDamaged.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is Damaged"));
+        Event.OnDeath.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is dead"));
+        Event.OnHealed.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is healed"));
+        Event.OnKill.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Killed a minion"));
+        Event.OnWithdraw.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Withdrew"));
+        Event.OnAbilityTrigger.AddListener((a,c,ts) => Debug.Log("Event: " + c.Creature.name + ": AbilityTriggered"));
         Event.OnCombatFinished.AddListener(() => Debug.Log("Event: Combat Finished"));
         Event.OnCombatRoundFinished.AddListener(() => Debug.Log("Event: Combat Round Finished"));
         Event.OnCombatStart.AddListener(() => Debug.Log("Event: Combat started"));

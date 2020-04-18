@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Werewolf
+  m_Name: WerewolfStalker
   m_EditorClassIdentifier: 
-  name: Werewolf
+  name: Werewolf Hunter
   Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 3c4e92ed8b032444085b23a358fdf00b, type: 3}
-  IconImage: {fileID: 21300000, guid: 21a913e39bf9a1c449e384c2dd73ff75, type: 3}
+  Image: {fileID: 21300000, guid: 45aa43718b3d8974788b60693217ecff, type: 3}
+  IconImage: {fileID: 0}
   Attack: 5
-  Health: 18
+  Health: 15
   Traits:
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
   SpecialAbility: {fileID: 11400000, guid: 8d3c03a3886ee9a4eafa992687dac68c, type: 2}

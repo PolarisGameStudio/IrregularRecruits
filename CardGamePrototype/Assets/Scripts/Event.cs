@@ -10,6 +10,7 @@ public class Event
     public static CardEvent OnDraw = new CardEvent();
     public static CardEvent OnPlay = new CardEvent();
     public static CardEvent OnDeath = new CardEvent();
+    public static CardEvent OnRessurrect = new CardEvent();
     public static CardEvent OnKill = new CardEvent();
     public static CardEvent OnAttack = new CardEvent();
     public static CardEvent OnBeingAttacked = new CardEvent();
