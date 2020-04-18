@@ -12,6 +12,7 @@ public class AttackTrigger : AbilityTrigger
         return $"When {instigatorString} attacks";
     }
 
+
     internal override float GetValue()
     {
         return 3f;

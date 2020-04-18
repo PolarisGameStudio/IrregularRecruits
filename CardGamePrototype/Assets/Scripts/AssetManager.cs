@@ -52,7 +52,6 @@ public class AssetManager
             MoveAbilityToOtherCreature(a);
         }
 
-
         //foreach (var common in creatureObjects.Where(c => c.Rarity == Creature.RarityType.Common))
         //    common.SpecialAbility = null;
 
@@ -112,54 +111,87 @@ public class AssetManager
     [MenuItem("Content/Re-Generate unlocked creature abilities")]
     public static void GenerateAbilities()
     {
+        List<Creature> creatureObjects = new List<Creature>();
 
-        //List<Creature> creatureObjects = new List<Creature>();
+        creatureObjects = GetAssetsOfType<Creature>();
 
-        //creatureObjects = GetAssetsOfType<Creature>();
-
-        //int amountMin = 1;
-        //int amountMax = 4;
-
-        //foreach (var c in creatureObjects.Where(c => !c.Locked && c.Rarity != Creature.RarityType.Common))
-        //{
-        //    //todo: rarity should be a factor
-        //    Ability ability;
-        //    do
-        //    {
-        //        ability = ScriptableObject.CreateInstance<Ability>();
-        //        do
-        //            ability.TriggerCondition = new Ability.Trigger((Noun)Random.Range(0, (int)Noun.CardInOwnersHand), (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ? c.Race.FavoriteTriggers[Random.Range(0, c.Race.FavoriteTriggers.Length)] : (Ability.Verb)Random.Range(0, (int)Ability.Verb.COUNT));
-        //        while (ability.AnyTriggerInconsistencies());
-
-        //        do
-        //            ability.ResultingAction = new Ability.Action(
-        //                (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (Ability.ActionType)Random.Range(0, (int)Ability.ActionType.Summon),
-        //                (Ability.Count)Random.Range(0, (int)Ability.Count.COUNT),
-        //                (Noun)Random.Range(0, (int)Noun.COUNT),
-        //                Random.Range(amountMin, amountMax)
-        //                );
-        //        while (ability.AnyActionInconsistencies());
-        //    }
-        //    while (!AbilityFitsRarity(ability, c.Rarity));
-
-        //    ability.GetValue();
-
-        //    string path = "Assets/Resources/Abilities/";
-
-        //    string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path +ability.TriggerCondition.Subject+ ability.TriggerCondition.TriggerAction + "-" + ability.ResultingAction.ActionType + ability.ResultingAction.Targets + Random.Range(0, 10000) + ".asset");
-
-        //    AssetDatabase.CreateAsset(ability, assetPathAndName);
-
-        //    AssetDatabase.SaveAssets();
-        //    AssetDatabase.Refresh();
-
-        //    c.SpecialAbility = ability;
-
-        //}
+        foreach (var c in creatureObjects.Where(c => !c.Locked && c.Rarity != Creature.RarityType.Common))
+        {
+            GenerateAbilityForCreature(c);
+        }
     }
+
+    public static void GenerateAbilityForCreature(Creature c)
+    {
+        int amountMin = 1;
+        int amountMax = 4;
+
+        //todo: rarity should be a factor
+        Ability ability;
+        do
+        {
+            ability = ScriptableObject.CreateInstance<Ability>();
+            
+            var triggerCondition = new Noun(
+                Random.value > 0.4f ? Noun.CharacterTyp.This : Noun.CharacterTyp.Any,
+                Random.value > 0.2f ? Noun.Allegiance.Any : (Random.value > 0.5f ? Noun.Allegiance.Friend : Noun.Allegiance.Enemy),
+                Random.value > 0.05f ? Noun.DamageType.Any : (Random.value > 0.5f ? Noun.DamageType.Damaged : Noun.DamageType.Undamaged),
+                Random.value > 0.15f ? Noun.RaceType.Any: (Random.value > 0.4f ? Noun.RaceType.Same: Noun.RaceType.Different)                    
+                );
+
+            Ability.Verb triggerAction = (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ?
+                c.Race.FavoriteTriggers[Random.Range(0, c.Race.FavoriteTriggers.Length)]
+                : (Ability.Verb)Random.Range(0, (int)Ability.Verb.COUNT);
+
+            ability.TriggerCondition = new Ability.Trigger(
+                triggerCondition,
+                triggerAction);
+
+            ability.FixTriggerInconsistencies();
+                
+            var abilityTarget = new Noun(
+                Random.value > 0.6f ? Noun.CharacterTyp.This : Random.value > 0.5f ? Noun.CharacterTyp.It : Noun.CharacterTyp.Any,
+                Random.value > 0.2f ? Noun.Allegiance.Any : (Random.value > 0.5f ? Noun.Allegiance.Friend : Noun.Allegiance.Enemy),
+                Random.value > 0.05f ? Noun.DamageType.Any : (Random.value > 0.5f ? Noun.DamageType.Damaged : Noun.DamageType.Undamaged),
+                Random.value > 0.15f ? Noun.RaceType.Any : (Random.value > 0.4f ? Noun.RaceType.Same : Noun.RaceType.Different)
+                );
+
+
+            ability.ResultingAction = new Ability.Action(
+                (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (Ability.ActionType)Random.Range(0, (int)Ability.ActionType.Summon),
+                (Ability.Count)Random.Range(0, (int)Ability.Count.COUNT),
+                Random.Range(amountMin, amountMax),
+                abilityTarget
+                );
+        }
+        while (!AbilityFitsRarity(ability, c.Rarity));
+
+        ability.GetValue();
+
+        string path = "Assets/Resources/Abilities/";
+
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + ability.TriggerCondition.TriggerAction + "-" + ability.ResultingAction.ActionType  + Random.Range(0, 10000) + ".asset");
+
+        AssetDatabase.CreateAsset(ability, assetPathAndName);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+
+        c.SpecialAbility = ability;
+
+    }
+    private static Noun FixTriggerInconsistencies(Noun triggerCondition)
+    {
+
+
+        return triggerCondition;
+    }
+
 
     private static bool AbilityFitsRarity(Ability ability, Creature.RarityType rarity)
     {
+        return true;
+
         var v = ability.GetValue();
 
         if (v < 0) return false;
@@ -169,7 +201,7 @@ public class AssetManager
         else if (v < -2)
             return rarity == Creature.RarityType.Rare;
         else if (v <= 2)
-            return rarity == Creature.RarityType.Rare;
+            return rarity == Creature.RarityType.Common;
         else if (v <= 6)
             return rarity == Creature.RarityType.Rare;
         else

@@ -62,9 +62,16 @@ public partial class Ability
             return value;
         }
     }
-    //internal bool AnyTriggerInconsistencies()
-    //{
-    //    return InconsistentNounVerbs.Any(a => a.Key == TriggerCondition.TriggerAction && a.Value.Contains(TriggerCondition.Subject));
-    //}
 
-}
+    internal void FixTriggerInconsistencies()
+    {
+        //TODO: fix inconsistencies
+
+    }
+
+        //internal bool AnyTriggerInconsistencies()
+        //{
+        //    return InconsistentNounVerbs.Any(a => a.Key == TriggerCondition.TriggerAction && a.Value.Contains(TriggerCondition.Subject));
+        //}
+
+    }

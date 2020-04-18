@@ -108,7 +108,11 @@ public class CardEditor : Singleton<CardEditor>
 
     private void AddRandomAbility()
     {
+        AssetManager.GenerateAbilityForCreature(Creature);
 
+        UpdateCreature(Creature);
+
+        EditorUtility.SetDirty(Creature);
     }
 
     private void ChangeRace(int arg0)
