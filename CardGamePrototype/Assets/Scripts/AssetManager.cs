@@ -81,7 +81,7 @@ public class AssetManager
         {
             selected.First().SpecialAbility = a;
             EditorUtility.SetDirty(selected.First());
-            Debug.Log("moved ability: " + a+ "; to: "+selected);
+            Debug.Log("moved ability: " + a+ "; to: "+selected.First());
         }
         else
             Debug.Log("no suitable creature found for ability: " + a);

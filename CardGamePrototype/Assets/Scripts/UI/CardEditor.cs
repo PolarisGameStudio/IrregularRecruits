@@ -24,6 +24,7 @@ public class CardEditor : Singleton<CardEditor>
     private Creature Creature;
     public AbilityEditorEntry AbilityEditor;
     public TraitEditorInstance TraitEditorInstance;
+    private List<TraitEditorInstance> TraitObjects = new List<TraitEditorInstance>();
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class CardEditor : Singleton<CardEditor>
     {
         var entry = Instantiate(TraitEditorInstance, TraitEditorInstance.transform.parent);
 
+
         entry.RemoveTraitButton.onClick.AddListener(() => RemoveTrait(entry));
         entry.ChangeTraitButton.onClick.AddListener(() => ChangeTrait(entry));
         entry.RemoveTraitButton.gameObject.SetActive(true);
@@ -65,16 +67,24 @@ public class CardEditor : Singleton<CardEditor>
         else
             ChangeTrait(entry);
 
+        TraitObjects.Add(entry);
+
         TraitEditorInstance.transform.SetAsLastSibling();
     }
 
     private void RemoveTrait(TraitEditorInstance entry)
     {
         Creature.Traits.Remove(entry.Trait);
-
-        Destroy(entry.gameObject);
-
+        
         EditorUtility.SetDirty(Creature);
+
+        DeleteTraitEntry(entry);
+    }
+
+    private void DeleteTraitEntry(TraitEditorInstance entry)
+    {
+        TraitObjects.Remove(entry);
+        Destroy(entry.gameObject);
     }
 
     private void Update()
@@ -153,7 +163,6 @@ public class CardEditor : Singleton<CardEditor>
         Instance.Holder.SetActive(true);
         UpdateCreature(creature);
     }
-
     private void UpdateCreature(Creature creature)
     {
         AttackInput.text = creature.Attack.ToString("N0");
@@ -162,8 +171,13 @@ public class CardEditor : Singleton<CardEditor>
         CardPortrait.sprite = creature.Image;
         RaceDropdown.value = Races.IndexOf(creature.Race);
         Creature = creature;
+
+        while (TraitObjects.Any())
+            DeleteTraitEntry(TraitObjects.First());
+
         foreach (var t in Creature.Traits)
             AddTrait(t);
+
         UpdateAbility();
     }
 
@@ -216,6 +230,8 @@ public class CardEditor : Singleton<CardEditor>
         foreach (var cardUI in FindObjectsOfType<CardUI>())
             if (cardUI.Card.Creature == Creature)
                 cardUI.Card.SetCreature(Creature);
+
+        Creature = null;
 
         Holder.SetActive(false);
     }
