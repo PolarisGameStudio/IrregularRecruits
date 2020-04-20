@@ -58,51 +58,52 @@ public class CardHighlight : Singleton<CardHighlight>
     {
         ShowAfterDelayRoutine = null;
 
-        Creature = cardUI.Card.Creature;
+        Creature = cardUI.Card != null ? cardUI.Card.Creature: cardUI.Creature;
 
         InstantiatedObjects.ForEach(t => Destroy(t.gameObject));
 
         InstantiatedObjects.Clear();
 
-        var card = cardUI.Card;
+        CardTitleText.text = Creature.name;
 
-        CardTitleText.text = card.Name;
-
-        if(card.Creature.IconImage)
+        if(Creature.IconImage)
         {
-            Image.sprite = card.Creature.IconImage;
+            Image.sprite = Creature.IconImage;
             ImageMask.enabled = false;
         }
         else
         {
-            Image.sprite = card.Creature.Image;
+            Image.sprite = Creature.Image;
             ImageMask.enabled = true;
         }
 
         //public TextMeshProUGUI AttackText;
-        AttackText.text = cardUI.AttackText.text;
-        AttackText.color = cardUI.AttackText.color;
+        AttackText.text = (cardUI.Card != null ? cardUI.Card.Attack.ToString("N0") :
+            Creature.Attack.ToString("N0"));
+        AttackText.color = (cardUI.Card != null ? cardUI.AttackText.color : Color.white);
 
         //public TextMeshProUGUI HealthText;
-        HealthText.text = cardUI.HealthText.text + "/" + card.MaxHealth.ToString("N0");
-        HealthText.color = cardUI.HealthText.color;
+        HealthText.text =
+            (cardUI.Card != null ? cardUI.Card.CurrentHealth.ToString("N0") +"/" + cardUI.Card.MaxHealth.ToString("N0"):
+            Creature.Health.ToString("N0"));
+        HealthText.color = (cardUI.Card != null ? cardUI.HealthText.color : Color.white);
 
         //public ImageTextEntry RaceIcon;
-        RaceIcon.Text.text = card.Creature.Race.name;
-        RaceIcon.Image.sprite = card.Creature.Race.Icon;
+        RaceIcon.Text.text = Creature.Race.name;
+        RaceIcon.Image.sprite = Creature.Race.Icon;
 
         //public ImageTextEntry AbilityIcon;
-        AbilityIcon.gameObject.SetActive(card.Creature.SpecialAbility);
+        AbilityIcon.gameObject.SetActive(Creature.SpecialAbility);
 
-        AbilityIcon.gameObject.SetActive(card.Creature.SpecialAbility);
+        AbilityIcon.gameObject.SetActive(Creature.SpecialAbility);
 
-        if (card.Creature.SpecialAbility) {
-            AbilityIcon.Text.text = card.Creature.SpecialAbility?.Description(card.Creature);
-            AbilityIcon.Image.sprite = IconManager.GetAbilityIconSprite(card.Creature.SpecialAbility.ResultingAction.ActionType);
+        if (Creature.SpecialAbility) {
+            AbilityIcon.Text.text = Creature.SpecialAbility?.Description(Creature);
+            AbilityIcon.Image.sprite = IconManager.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
         }
 
         //public ImageTextEntry TraitPrefab;
-        foreach(var t in card.Creature.Traits)
+        foreach(var t in Creature.Traits)
         {
             var trait = Instantiate(TraitPrefab, TraitPrefab.transform.parent);
             trait.Text.text = $" <b>{t.name}</b> <i>({t.Description})</i>";

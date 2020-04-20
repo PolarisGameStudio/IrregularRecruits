@@ -24,6 +24,9 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
         }
     }
 
+    //If not a card yet
+    public Creature Creature;
+
     [Header("UI Refs")]
     public GameObject FrontHolder, CardBackHolder;
     public Image CardImage;
@@ -69,6 +72,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     public void UpdateCreature(Creature creature)
     {
         if (!creature) return;
+
+        Creature = creature;
 
         if (String.IsNullOrEmpty(creature.name)) creature.name = creature.ToString();
 
