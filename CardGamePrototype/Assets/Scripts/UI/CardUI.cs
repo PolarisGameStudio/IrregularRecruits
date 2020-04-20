@@ -12,10 +12,10 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     private Card card;
     public Card Card
     {
-        get => card; 
+        get => card;
         set
         {
-            if(card != value)
+            if (card != value)
             {
                 RemoveListeners(card);
                 card = value;
@@ -27,6 +27,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     [Header("UI Refs")]
     public GameObject FrontHolder, CardBackHolder;
     public Image CardImage;
+    public Image IconImage;
     public Image RaceInstance;
     //TODO: replace with clickable
     public Image AttributeInstance;
@@ -56,7 +57,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
     private void RemoveListeners(Card c)
     {
-        if (c ==null) return;
+        if (c == null) return;
 
         c.OnCreatureChange.RemoveListener(UpdateCreature);
         c.OnStatChange.RemoveListener(UpdateStats);
@@ -71,48 +72,57 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
         if (String.IsNullOrEmpty(creature.name)) creature.name = creature.ToString();
 
-        CardImage.sprite = creature.Image;
-        NameText.text = creature.name;
+        if (IconImage)
+            IconImage.sprite = creature.IconImage ? creature.IconImage : creature.Image;
+        if (CardImage)
+            CardImage.sprite = creature.Image;
+        if (NameText)
+            NameText.text = creature.name;
+
         name = creature?.name;
 
         InstantiatedObjects.ForEach(DestroyImmediate);
         InstantiatedObjects.Clear();
 
-        DescriptionText.text = "";
+        if(DescriptionText)
+            DescriptionText.text = "";
 
-        if (creature.Race)
-        {
-            var instance = Instantiate(RaceInstance, RaceInstance.transform.parent);
-            instance.gameObject.SetActive(true);
-            instance.sprite = creature.Race.Icon;
+        if (RaceInstance)
+            if (creature.Race)
+            {
+                var instance = Instantiate(RaceInstance, RaceInstance.transform.parent);
+                instance.gameObject.SetActive(true);
+                instance.sprite = creature.Race.Icon;
 
-            InstantiatedObjects.Add(instance.gameObject);
-        }
+                InstantiatedObjects.Add(instance.gameObject);
+            }
 
 
-        foreach (var a in creature.Traits)
-        {
-            var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
-            instance.gameObject.SetActive(true);
-            instance.sprite = a.Icon;
+        if (AttributeInstance)
+            foreach (var a in creature.Traits)
+            {
+                var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
+                instance.gameObject.SetActive(true);
+                instance.sprite = a.Icon;
 
-            DescriptionText.text += $"<b>{a.name}</b>\n";
+                DescriptionText.text += $"<b>{a.name}</b>\n";
 
-            InstantiatedObjects.Add(instance.gameObject);
-        }
+                InstantiatedObjects.Add(instance.gameObject);
+            }
 
-        if (creature.SpecialAbility)
-        {
-            DescriptionText.text += $"{creature.SpecialAbility.Description(Card.Creature)}\n";
+        if (AttributeInstance)
+            if (creature.SpecialAbility)
+            {
+                DescriptionText.text += $"{creature.SpecialAbility.Description(Card.Creature)}\n";
 
-            var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
-            instance.gameObject.SetActive(true);
-            instance.sprite = IconManager.GetAbilityIconSprite(creature.SpecialAbility.ResultingAction.ActionType);
+                var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
+                instance.gameObject.SetActive(true);
+                instance.sprite = IconManager.GetAbilityIconSprite(creature.SpecialAbility.ResultingAction.ActionType);
 
-            InstantiatedObjects.Add(instance.gameObject);
-            
-            CardAnimation.SpecialAbilityIcon = instance;
-        }
+                InstantiatedObjects.Add(instance.gameObject);
+
+                CardAnimation.SpecialAbilityIcon = instance;
+            }
     }
 
     internal void StatModifier(int amount)
@@ -129,7 +139,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
         AttackText.text = Card.Attack.ToString("N0");
         HealthText.text = Card.CurrentHealth.ToString("N0");
-        HealthText.color = Card.CurrentHealth < Card.MaxHealth ? Color.red : 
+        HealthText.color = Card.CurrentHealth < Card.MaxHealth ? Color.red :
             Card.Creature.Health < Card.MaxHealth ? Color.green : Color.white;
 
         AttackText.color = Card.Creature.Attack < Card.Attack ? Color.green : Color.white;
@@ -139,7 +149,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
     {
         //todo: deck view/unflippable bool 
         if (AlwaysFaceUp) return;
-        
+
         CardBackHolder.SetActive(!Card.FaceUp);
         FrontHolder.SetActive(Card.FaceUp);
     }
@@ -165,7 +175,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if ( AlwaysFaceUp || (Card != null && Card.FaceUp))
+        if (AlwaysFaceUp || (Card != null && Card.FaceUp))
             CardHighlight.Show(this);
 
     }

@@ -66,11 +66,8 @@ public class CardHighlight : Singleton<CardHighlight>
 
         var card = cardUI.Card;
 
-        //public TextMeshProUGUI CardTitleText;
         CardTitleText.text = card.Name;
 
-
-        //public Image ImageMask, Image;
         if(card.Creature.IconImage)
         {
             Image.sprite = card.Creature.IconImage;

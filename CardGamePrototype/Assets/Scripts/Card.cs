@@ -42,17 +42,8 @@ public class Card
     public int CurrentHealth
     {
         get => currentHealth;
-        set
+        private set
         {
-            if (currentHealth > value)
-            {
-                OnDamage.Invoke(value- currentHealth);
-                FlowController.AddEvent(()=> Event.OnDamaged.Invoke(this));
-            }
-            else if (value > currentHealth && CombatManager.CombatRunning)
-                FlowController.AddEvent(() =>
-                        Event.OnHealed.Invoke(this));
-
             if (value > MaxHealth) value = MaxHealth;
 
             currentHealth = value;
@@ -222,6 +213,39 @@ public class Card
         moveToDeck.Add(this);
 
         ChangeLocation(Deck.Zone.Battlefield);
+    }
+
+    public void Damage(int damage)
+    {
+        if (damage < 1) return;
+
+        OnDamage.Invoke(damage);
+        FlowController.AddEvent(() => Event.OnDamaged.Invoke(this));
+
+        CurrentHealth -= damage;
+    }
+
+    public void Heal(int value)
+    {
+
+        if (value < 1) return;
+
+        FlowController.AddEvent(() =>
+                Event.OnHealed.Invoke(this));
+
+        CurrentHealth += value;
+    }
+
+
+    public void ResetAfterBattle()
+    {
+        ChangeLocation(Deck.Zone.Library);
+        
+        //todo: find a way to safe permanent buffs or drain
+        if (Attack != Creature.Attack) Attack = Creature.Attack;
+        if (MaxHealth != Creature.Health) MaxHealth= Creature.Health;
+
+        CurrentHealth = MaxHealth;
     }
 
     public void Click()

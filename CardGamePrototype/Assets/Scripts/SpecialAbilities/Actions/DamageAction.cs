@@ -16,7 +16,7 @@ public class DamageAction : AbilityAction
         FlowController.AddEvent(() =>
                 Event.OnAbilityTrigger.Invoke(ability, owner, targets));
         FlowController.AddEvent(() =>
-            targets.ForEach(c => c.CurrentHealth -= ability.ResultingAction.Amount));
+            targets.ForEach(c => c.Damage(ability.ResultingAction.Amount)));
     }
 
     public override float GetValue(float targetValue, int amount)

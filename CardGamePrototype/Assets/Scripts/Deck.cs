@@ -10,12 +10,14 @@ public class Deck
     public enum Zone { Library, Battlefield, Graveyard, Hand, COUNT }
     public bool PlayerDeck;
     public AI AI;
+    public DeckObject DeckObject;
 
     private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 
     public Deck(DeckObject deckObject,bool playerDeck)
         : this(deckObject.Creatures.Select(c => new Card(c)).ToList(), playerDeck)
     {
+        DeckObject = deckObject;
     }
 
     public Deck(List<Card> initialLibrary,bool playerDeck)
@@ -28,19 +30,26 @@ public class Deck
         PlayerDeck = playerDeck;
 
 
-        Creatures[Zone.Library] = initialLibrary;
-
         foreach (var card in initialLibrary)
         {
-            card.InDeck = this;
-            card.Location = Zone.Library;
+            AddCreature(card);
         }
 
         if (!playerDeck)
             AI = new AI(this);
 
     }
-    
+
+    public void AddCreature(Card card)
+    {
+        Debug.Log("adding card to deck: " + card.Name);
+
+        card.InDeck = this;
+        card.Location = Zone.Library;
+
+        Creatures[Zone.Library].Add(card);
+    }
+
     public List<Card> CreaturesInZone(Zone z)
         => Creatures[z];
 
@@ -66,6 +75,7 @@ public class Deck
         Draw(amountToDraw);
     }
 
+
     internal void PackUp()
     {
         //Debug.Log("Packing deck");
@@ -75,11 +85,9 @@ public class Deck
             Remove(Creatures[Zone.Graveyard].First());    
         
         foreach(var c in AllCreatures())
-        { 
-            c.ChangeLocation(Zone.Library);
-            c.CurrentHealth = c.MaxHealth;
+        {
+            c.ResetAfterBattle();
         }
-        
     }
 
     public void ShuffleLibrary()
@@ -87,9 +95,7 @@ public class Deck
         Debug.Log("shuffling deck");
         Creatures[Zone.Library] = Creatures[Zone.Library].OrderBy(x => Random.value).ToList();
     }
-
-
-
+       
     public void Draw(int amount)
     {
         if (Creatures[Zone.Library].Count() == 0 || amount < 0) return;

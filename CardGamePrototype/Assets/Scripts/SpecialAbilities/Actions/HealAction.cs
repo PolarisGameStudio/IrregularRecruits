@@ -14,9 +14,9 @@ public class HealAction : AbilityAction
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
         FlowController.AddEvent(() =>
-                Event.OnAbilityTrigger.Invoke(ability, owner, targets));
+            Event.OnAbilityTrigger.Invoke(ability, owner, targets));
         FlowController.AddEvent(() =>
-            targets.ForEach(c => c.CurrentHealth += ability.ResultingAction.Amount));
+            targets.ForEach(c => c.Heal(ability.ResultingAction.Amount)));
     }
 
     public override float GetValue(float targetValue,int amount)

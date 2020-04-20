@@ -15,6 +15,8 @@ public class CombatTest : Singleton<CombatTest>
     public Race[] AllRaces;
     public Creature[] AllCreatures;
 
+    public int CombatDifficultyIncrease, CombatRarityIncrease;
+
     void Start()
     {
         if (AllCreatures.Length == 0)
@@ -33,6 +35,10 @@ public class CombatTest : Singleton<CombatTest>
         if (EnemyDeck == null || EnemyDeck.Alive() == 0)
             EnemyDeck = GenerateDeck();
 
+        GameSettings.Instance.EnemyDeckSize += CombatDifficultyIncrease;
+        GameSettings.Instance.MaxRareEnemiesPrCombat += CombatRarityIncrease;
+
+
         CombatManager.StartCombat(PlayerDeck, EnemyDeck);
 
         NextCombatButton.gameObject.SetActive(false);
@@ -43,6 +49,10 @@ public class CombatTest : Singleton<CombatTest>
         Instance.PlayerDeck = deck;
     }
 
+    public void GetNewMinions()
+    {
+        AddMinionScreen.SetupMinionScreen(PlayerDeck);
+    }
 
     private Deck GenerateDeck(bool player = false)
     {

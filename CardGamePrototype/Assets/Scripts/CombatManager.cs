@@ -204,13 +204,13 @@ public class CombatManager : Singleton<CombatManager>
             StartCoroutine(AnimationSystem.AttackAnimation(attacker,target, AttackAnimationDuration));
             yield return new WaitForSeconds(AttackAnimationDuration);
 
-            target.CurrentHealth -= attacker.Attack;
+            target.Damage(attacker.Attack);
 
             //yield return new WaitUntil(() => !AbilityTriggering);
 
             //TODO: test that units that die still get to damage
             if (!attacker.Ranged() && target.Location == Deck.Zone.Battlefield)
-                attacker.CurrentHealth -= target.Attack;
+                attacker.Damage(target.Attack);
 
             //yield return new WaitUntil(() => !AbilityTriggering);
 
