@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class CombatTest : Singleton<CombatTest>
+public class CombatPrototype : Singleton<CombatPrototype>
 {
     public Button NextCombatButton;
     private Deck PlayerDeck;

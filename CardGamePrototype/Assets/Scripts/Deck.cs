@@ -32,7 +32,7 @@ public class Deck
 
         foreach (var card in initialLibrary)
         {
-            AddCreature(card);
+            AddCard(card);
         }
 
         if (!playerDeck)
@@ -40,7 +40,7 @@ public class Deck
 
     }
 
-    public void AddCreature(Card card)
+    public void AddCard(Card card)
     {
         Debug.Log("adding card to deck: " + card.Name);
 

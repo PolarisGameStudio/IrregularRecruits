@@ -66,7 +66,7 @@ public class DeckSelectionUI : MonoBehaviour
 
         Event.OnGameBegin.Invoke();
 
-        CombatTest.SetPlayerDeck( Decks[SelectedDeck]);
+        CombatPrototype.SetPlayerDeck( Decks[SelectedDeck]);
 
         Destroy(gameObject);
         //LeanTween.alpha(gameObject, 0, 2f).setOnComplete(() => Destroy(gameObject));

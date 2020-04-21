@@ -20,7 +20,7 @@ public class AddMinionScreen : Singleton<AddMinionScreen>
 
     private void SetupDeckChoice(Deck deck)
     {
-        var cs = CombatTest.Instance.AllCreatures;
+        var cs = CombatPrototype.Instance.AllCreatures;
 
         var friends = cs.Where(c => deck.DeckObject. FriendRaces.Contains(c.Race)).ToArray();
         var possibles = cs.Where(c => !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToArray();
@@ -50,7 +50,7 @@ public class AddMinionScreen : Singleton<AddMinionScreen>
         ui.UpdateCreature(creature);
         addButton.onClick.RemoveAllListeners();
 
-        addButton.onClick.AddListener(() => Deck.AddCreature(new Card(creature)));
+        addButton.onClick.AddListener(() => Deck.AddCard(new Card(creature)));
         addButton.onClick.AddListener(Close);
     }
 

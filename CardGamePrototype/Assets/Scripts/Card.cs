@@ -52,6 +52,11 @@ public class Card
         }
     }
 
+    public List<Trait> GetTraits()
+    {
+        return Creature.Traits;
+    }
+
     internal bool Avantgarde()
     {
         return Creature.Traits.Contains(CombatManager.Instance.AvantgardeTrait);
@@ -74,7 +79,8 @@ public class Card
     private int attack;
     public int Attack
     {
-        get => attack; set
+        get => attack; 
+        private set
         {
             attack = value;
             OnStatChange.Invoke();
@@ -92,7 +98,7 @@ public class Card
 
     public void ChangeLocation(Deck.Zone from, Deck.Zone to, float delay = 0f)
     {
-        Debug.Log($"Moving {this.Name} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
+        //Debug.Log($"Moving {this.Name} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
 
         if (InDeck == null)
         {
@@ -142,11 +148,14 @@ public class Card
 
     public bool Alive() => CurrentHealth > 0;
 
-    internal void StatModifier(int amount)
-    { 
+    public void StatModifier(int amount)
+    {
         MaxHealth += amount;
         CurrentHealth += amount;
         Attack += amount;
+
+        OnStatMod.Invoke(amount);
+
     }
 
     private void Flip(bool upsideUp)

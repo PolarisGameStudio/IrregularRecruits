@@ -68,7 +68,6 @@ public class CombatManager : Singleton<CombatManager>
         PlayerDeck.DrawInitialHand();
         EnemyDeck.DrawInitialHand(true);
 
-
         FlowController.AddEvent(() =>    Event.OnCombatStart.Invoke());
 
         StartCoroutine(NextTurn());
