@@ -168,8 +168,8 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 #if !UNITY_EDITOR
         if (CardHighlight.IsActive()) return;
 #endif
-
-        Card.Click();
+        if(Interactable && Card.BattleRepresentation == this)
+            Card.Click();
     }
 
     public void OnPointerExit(PointerEventData eventData)

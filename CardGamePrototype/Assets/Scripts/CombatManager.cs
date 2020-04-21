@@ -105,15 +105,15 @@ public class CombatManager : Singleton<CombatManager>
     {
         Debug.Log("Turn: " + Turn + " Started");
 
-        yield return new WaitUntil(() => FlowController.ReadyForNextAction);
+        yield return new WaitUntil(() => FlowController.ReadyForInput);
 
         //Enemy actions
         EnemyDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-        yield return new WaitUntil(() => FlowController.ReadyForNextAction);
+        yield return new WaitUntil(() => FlowController.ReadyForInput);
         EnemyDeck.AI?.MakeMoves();
 
-        yield return new WaitUntil(() => FlowController.ReadyForNextAction);
+        yield return new WaitUntil(() => FlowController.ReadyForInput);
         PlayerDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
         FlowController.AddEvent(() => 
@@ -122,7 +122,7 @@ public class CombatManager : Singleton<CombatManager>
         PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
 
 
-        yield return new WaitUntil(() => FlowController.ReadyForNextAction && (PlayerActionsLeft <= 0 || PlayerDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0));
+        yield return new WaitUntil(() => FlowController.ReadyForInput && (PlayerActionsLeft <= 0 || PlayerDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0));
 
         StartCoroutine(ResolveCombat());
     }
@@ -178,7 +178,7 @@ public class CombatManager : Singleton<CombatManager>
 
         while (attackOrder.Any(c => c.Alive()))
         {
-            yield return new WaitUntil(()=>FlowController.ReadyForNextAction);
+            yield return new WaitUntil(()=>FlowController.ReadyForInput);
 
             var attacker = attackOrder.First(c => c.Alive());
 

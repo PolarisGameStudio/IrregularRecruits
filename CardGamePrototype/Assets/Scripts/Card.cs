@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -259,14 +259,21 @@ public class Card
 
     public void Click()
     {
+        if(InDeck == null)
+        {
+            Debug.Log("Clicked card not in deck");
+            return;
+        }
+
         if (CombatManager.PlayerActionsLeft <= 0)
         {
             Debug.Log("No player actions left");
             return;
         }
 
-        //Debug.Log("Clicked card " + this);
-        if (!InDeck.PlayerDeck |! FaceUp |! BattleRepresentation.Interactable) return;
+        if (!InDeck.PlayerDeck |! FaceUp )
+            //|| (BattleRepresentation &!  BattleRepresentation.Interactable)) 
+            return;
 
         if (Location == Deck.Zone.Hand)
         {

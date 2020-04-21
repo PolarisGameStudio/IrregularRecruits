@@ -35,18 +35,23 @@ namespace Tests
 
             TestCard = new Card(TestCreature);
 
-            TestDeckObject = new DeckObject();
-            //TestDeck = new Deck(TestDeckObject, true);
-            //TestDeck.AddCard(TestCard);
+            TestDeckObject = new DeckObject()
+            {
+                Creatures = new List<Creature>(),
+            };
+            TestDeck = new Deck(TestDeckObject, true);
+            TestDeck.AddCard(TestCard);
 
+            //To make test run faster:
+            GameSettings.Instance.CombatSpeed = 0.01f;
         }
 
         [Test]
         public void CardHasCorrectCreatureStats()
         {
-            Assert.IsTrue(TestCreature.Attack == TestCard.Attack );
-            Assert.IsTrue(TestCreature.Health == TestCard.CurrentHealth );
-            Assert.IsTrue(TestCreature.Health == TestCard.MaxHealth );
+            Assert.IsTrue(TestCreature.Attack == TestCard.Attack);
+            Assert.IsTrue(TestCreature.Health == TestCard.CurrentHealth);
+            Assert.IsTrue(TestCreature.Health == TestCard.MaxHealth);
         }
 
         [Test]
@@ -89,38 +94,137 @@ namespace Tests
         [UnityTest]
         public IEnumerator ClickPlaysWhenActionAndOnHand()
         {
+            TestCard.ChangeLocation(Deck.Zone.Hand);
+            CombatManager.PlayerActionsLeft = 1;
 
-            yield return null;
+            TestCard.Click();
+
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
+            Assert.IsTrue(TestCard.Location == Deck.Zone.Battlefield);
+        }
+        [UnityTest]
+        public IEnumerator PlayTriggersOnPlayEvent()
+        {
+            TestCard.ChangeLocation(Deck.Zone.Hand);
+            CombatManager.PlayerActionsLeft = 1;
+
+            TestCard.Click();
+
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
+            Assert.IsTrue(false);
         }
         [UnityTest]
         public IEnumerator ClickPlaysNotWhenNotInHand()
         {
-            yield return null;
+            TestCard.ChangeLocation(Deck.Zone.Library);
+            CombatManager.PlayerActionsLeft = 1;
+
+            TestCard.Click();
+
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
+            Assert.IsTrue(TestCard.Location == Deck.Zone.Library);
         }
         [UnityTest]
         public IEnumerator ClickPlaysNotWhenNoAction()
         {
-            yield return null;
+            TestCard.ChangeLocation(Deck.Zone.Hand);
+            CombatManager.PlayerActionsLeft = 0;
+
+            TestCard.Click();
+
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
+            Assert.IsTrue(TestCard.Location == Deck.Zone.Hand);
         }
         [UnityTest]
         public IEnumerator ClickWithdrawsWhenActionAndOnBattlefield()
         {
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            CombatManager.PlayerActionsLeft = 1;
+
+            TestCard.Click();
+
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
+            Assert.IsTrue(TestCard.Location == Deck.Zone.Library);
+        }
+        [UnityTest]
+        public IEnumerator WithDrawTriggersWithdraw()
+        {
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            CombatManager.PlayerActionsLeft = 1;
+
+
             yield return null;
+
+            Assert.IsTrue(false);
         }
         [UnityTest]
         public IEnumerator ClickDoesNotWithdrawsWhenNoAction()
         {
-            yield return null;
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            CombatManager.PlayerActionsLeft = 0;
+
+            TestCard.Click();
+
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
+
+            Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
         }
         [UnityTest]
         public IEnumerator ClickWithdrawsNotWhenNotOnBattlefield()
         {
-            yield return null;
+            TestCard.ChangeLocation(Deck.Zone.Hand);
+            CombatManager.PlayerActionsLeft = 1;
+
+            TestCard.Click();
+
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
+
+            Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
         }
-        [UnityTest]
-        public IEnumerator HealHeals()
+        [Test]
+        public void HealHeals()
         {
-            yield return null;
+            var startHealth = TestCard.CurrentHealth;
+            var damage = 2;
+
+            TestCard.Damage(damage);
+
+            Assert.IsTrue(startHealth - damage == TestCard.CurrentHealth);
         }
         [Test]
         public void HealTriggersOnHeal()
@@ -137,9 +241,14 @@ namespace Tests
             Assert.IsTrue(check == TestCard);
         }
         [Test]
-        public void DamageDamages()
+        public void DamageChangesHealth()
         {
+            var startHealth = TestCard.CurrentHealth;
+            var damage = 2;
 
+            TestCard.Damage(damage);
+
+            Assert.IsTrue(startHealth - damage == TestCard.CurrentHealth);
         }
         [Test]
         public void DamageTriggersOnDamage()
@@ -153,8 +262,8 @@ namespace Tests
 
             Assert.IsTrue(check == damage);
         }
-        [Test]
-        public void DamageTriggersOnDamageEvent()
+        [UnityTest]
+        public IEnumerator DamageTriggersOnDamageEvent()
         {
             Card check = null;
 
@@ -163,6 +272,13 @@ namespace Tests
             Event.OnDamaged.AddListener(i => check = i);
 
             TestCard.Damage(damage);
+
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
 
             Assert.IsTrue(check == TestCard);
         }
@@ -177,9 +293,9 @@ namespace Tests
 
             TestCard.StatModifier(boost);
 
-            Assert.IsTrue(startAttack+boost == TestCard.Attack);
-            Assert.IsTrue(startHealth+boost == TestCard.CurrentHealth);
-            Assert.IsTrue(startMaxHealth+boost == TestCard.MaxHealth);
+            Assert.IsTrue(startAttack + boost == TestCard.Attack);
+            Assert.IsTrue(startHealth + boost == TestCard.CurrentHealth);
+            Assert.IsTrue(startMaxHealth + boost == TestCard.MaxHealth);
         }
         [Test]
         public void StatboostTriggersOnStatMod()
@@ -224,7 +340,15 @@ namespace Tests
         [Test]
         public void StatMinusDoesNotTriggerDamage()
         {
+            Card check = null;
 
+            var damage = 1;
+
+            Event.OnDamaged.AddListener(i => check = i);
+
+            TestCard.StatModifier(-damage);
+
+            Assert.IsFalse(check == TestCard);
         }
 
         [Test]
@@ -249,18 +373,37 @@ namespace Tests
             Assert.IsTrue(!TestCard.Alive());
             Assert.IsTrue(TestCard.Location == Deck.Zone.Graveyard);
         }
-        
-        [Test]
-        public void DiesKillsCard()
+
+        [UnityTest]
+        public IEnumerator DiesKillsCard()
         {
             Assert.IsTrue(TestCard.Alive());
             Assert.IsTrue(TestCard.Location != Deck.Zone.Graveyard);
 
             TestCard.Die();
 
+            while (!FlowController.ReadyForInput)
+            {
+                FlowController.TriggerNextAction();
+                yield return null;
+            }
+
+
             Assert.IsTrue(!TestCard.Alive());
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Graveyard);
+        }
+
+        [Test]
+        public void DiesTriggersOnDeathEvent()
+        {
+            Assert.IsTrue(TestCard.Alive());
+            Assert.IsTrue(TestCard.Location != Deck.Zone.Graveyard);
+
+            TestCard.Die();
+
+
+            Assert.IsTrue(false);
         }
 
 

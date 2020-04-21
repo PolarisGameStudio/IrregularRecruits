@@ -22140,7 +22140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b687705dbb7da646ad8fed758509fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlowSpeedFactors: []
 --- !u!1 &726722418
 GameObject:
   m_ObjectHideFlags: 0
@@ -24382,10 +24381,10 @@ RectTransform:
   m_Father: {fileID: 1066718295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 444.75003, y: -103.22}
+  m_SizeDelta: {x: 789.50006, y: 106.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910797087
 MonoBehaviour:
@@ -25976,7 +25975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1051119842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26827,7 +26826,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1124360580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5048ee5bb45f2349bc1b0a8ea881e28, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ea68007e04be6044ac3f763044f6b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   NextCombatButton: {fileID: 811981349}
@@ -33791,10 +33790,10 @@ RectTransform:
   m_Father: {fileID: 537136784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 283.7}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 859.50006, y: -131.85}
+  m_SizeDelta: {x: 300, y: 283.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1665298993
 CanvasRenderer:
@@ -43275,10 +43274,10 @@ RectTransform:
   m_Father: {fileID: 1066718295}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 444.75003, y: -311.44}
+  m_SizeDelta: {x: 789.50006, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2119130800
 MonoBehaviour:
@@ -43887,7 +43886,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1124360582}
+      objectReference: {fileID: 0}
     - target: {fileID: 422401185871058412, guid: 1bb3ea4ce2c3eed458c9165c840039e7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
