@@ -15,8 +15,4 @@ public class DeckObject : ScriptableObject
     public Race[] FriendRaces;
     public Race[] EnemyRaces;
 
-    internal void AddCreature(Creature creature)
-    {
-        throw new NotImplementedException();
-    }
 }

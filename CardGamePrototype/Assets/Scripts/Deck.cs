@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Deck 
@@ -42,8 +41,6 @@ public class Deck
 
     public void AddCard(Card card)
     {
-        Debug.Log("adding card to deck: " + card.Name);
-
         card.InDeck = this;
         card.Location = Zone.Library;
 
@@ -92,7 +89,6 @@ public class Deck
 
     public void ShuffleLibrary()
     {
-        Debug.Log("shuffling deck");
         Creatures[Zone.Library] = Creatures[Zone.Library].OrderBy(x => Random.value).ToList();
     }
        

@@ -36,8 +36,8 @@ namespace Tests
             TestCard = new Card(TestCreature);
 
             TestDeckObject = new DeckObject();
-            TestDeck = new Deck(TestDeckObject, true);
-            TestDeck.AddCard(TestCard);
+            //TestDeck = new Deck(TestDeckObject, true);
+            //TestDeck.AddCard(TestCard);
 
         }
 
@@ -65,7 +65,7 @@ namespace Tests
         public void IsInCorrectDeck()
         {
             Assert.IsTrue(TestCard.InDeck == TestDeck);
-
+            Assert.NotNull(TestCard.InDeck);
         }
 
         [UnityTest]
@@ -122,43 +122,112 @@ namespace Tests
         {
             yield return null;
         }
-        [UnityTest]
+        [Test]
         public void HealTriggersOnHeal()
         {
+            Card check = null;
+            TestCard.Damage(1);
 
+            var heal = 1;
+
+            Event.OnHealed.AddListener(i => check = i);
+
+            TestCard.Heal(heal);
+
+            Assert.IsTrue(check == TestCard);
         }
-        [UnityTest]
+        [Test]
         public void DamageDamages()
         {
 
         }
-        [UnityTest]
+        [Test]
         public void DamageTriggersOnDamage()
         {
+            var check = 0;
+            var damage = 3;
 
+            TestCard.OnDamage.AddListener(i => check = i);
+
+            TestCard.Damage(damage);
+
+            Assert.IsTrue(check == damage);
         }
-        [UnityTest]
+        [Test]
+        public void DamageTriggersOnDamageEvent()
+        {
+            Card check = null;
+
+            var damage = 1;
+
+            Event.OnDamaged.AddListener(i => check = i);
+
+            TestCard.Damage(damage);
+
+            Assert.IsTrue(check == TestCard);
+        }
+
+        [Test]
         public void StatboostBoosts()
         {
+            var startAttack = TestCard.Attack;
+            var startHealth = TestCard.CurrentHealth;
+            var startMaxHealth = TestCard.MaxHealth;
+            var boost = 31;
 
+            TestCard.StatModifier(boost);
+
+            Assert.IsTrue(startAttack+boost == TestCard.Attack);
+            Assert.IsTrue(startHealth+boost == TestCard.CurrentHealth);
+            Assert.IsTrue(startMaxHealth+boost == TestCard.MaxHealth);
         }
-        [UnityTest]
+        [Test]
+        public void StatboostTriggersOnStatMod()
+        {
+            var check = 0;
+            var boost = 3;
+
+            TestCard.OnStatMod.AddListener(i => check = i);
+
+            TestCard.StatModifier(boost);
+
+            Assert.IsTrue(check == boost);
+        }
+
+        //TODO: move to event test
+        [Test]
         public void StatboostDoesNotTriggerHeal()
         {
+            Card check = null;
+            var boost = 3;
 
+            Event.OnHealed.AddListener(i => check = i);
+
+            TestCard.StatModifier(boost);
+
+            Assert.IsFalse(check == TestCard);
         }
-        [UnityTest]
+        [Test]
         public void StatMinusMinusses()
         {
+            var startAttack = TestCard.Attack;
+            var startHealth = TestCard.CurrentHealth;
+            var startMaxHealth = TestCard.MaxHealth;
+            var boost = -1;
 
+            TestCard.StatModifier(boost);
+
+            Assert.IsTrue(startAttack + boost == TestCard.Attack);
+            Assert.IsTrue(startHealth + boost == TestCard.CurrentHealth);
+            Assert.IsTrue(startMaxHealth + boost == TestCard.MaxHealth);
         }
-        [UnityTest]
+        [Test]
         public void StatMinusDoesNotTriggerDamage()
         {
 
         }
 
-        [UnityTest]
+        [Test]
         public void FullDamageKillsCard()
         {
             Assert.IsTrue(TestCard.Alive());
@@ -169,7 +238,7 @@ namespace Tests
             Assert.IsTrue(!TestCard.Alive());
             Assert.IsTrue(TestCard.Location == Deck.Zone.Graveyard);
         }
-        [UnityTest]
+        [Test]
         public void FullStatMinusKillsCard()
         {
             Assert.IsTrue(TestCard.Alive());
@@ -181,7 +250,7 @@ namespace Tests
             Assert.IsTrue(TestCard.Location == Deck.Zone.Graveyard);
         }
         
-        [UnityTest]
+        [Test]
         public void DiesKillsCard()
         {
             Assert.IsTrue(TestCard.Alive());
