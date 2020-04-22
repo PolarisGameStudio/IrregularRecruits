@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class FlowController
+public static class FlowController
 {
     public static Queue<Action> ActionQueue = new Queue<Action>();
     public static bool ReadyForInput { get; private set; }
@@ -19,5 +19,11 @@ public class FlowController
         ActionQueue.Dequeue().Invoke();
         if (ActionQueue.Count == 0)
             ReadyForInput = true;
+    }
+
+    public static void ResolveAllActions()
+    {
+        while (!ReadyForInput)
+            TriggerNextAction();
     }
 }

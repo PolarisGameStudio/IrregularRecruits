@@ -11,6 +11,8 @@ using UnityEngine.UI;
 
 public class Card 
 {
+    private static bool ListenersCreated;
+
     [SerializeProperty("Creature")]
     [SerializeField]
     private Creature creature;
@@ -52,9 +54,42 @@ public class Card
         }
     }
 
+    public Card(Creature c)
+    {
+        Creature = c;
+
+        if (!ListenersCreated) SetupListeners();
+    }
+
     public List<Trait> GetTraits()
     {
         return Creature.Traits;
+    }
+
+    //Should only be called once
+    private static void SetupListeners()
+    {
+        if (ListenersCreated) return;
+
+        ListenersCreated = true;
+
+        Event.OnDeath.AddListener(c => c.BattleRepresentation?.CardAnimation.Dissolve());
+        Event.OnRessurrect.AddListener(c => c.BattleRepresentation?.CardAnimation.UnDissolve());
+
+        //TODO: this delay should be handled by the flow controller
+        Event.OnDeath.AddListener(c => c.ChangeLocation(Deck.Zone.Graveyard, 2f));
+        Event.OnRessurrect.AddListener(c => c.ChangeLocation(Deck.Zone.Battlefield, 2f));
+
+        Event.OnPlay.AddListener(c => c.ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield));
+
+        Event.OnWithdraw.AddListener(c => c.ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library));
+
+        Event.OnDraw.AddListener(c => c.ChangeLocation(Deck.Zone.Library, Deck.Zone.Hand));
+    }
+
+    public Ability Ability()
+    {
+        return Creature.SpecialAbility;
     }
 
     internal bool Avantgarde()
@@ -62,10 +97,6 @@ public class Card
         return Creature.Traits.Contains(CombatManager.Instance.AvantgardeTrait);
     }
 
-    public Card(Creature c)
-    {
-        Creature = c;
-    }
 
     public void Die()
     {
@@ -146,7 +177,7 @@ public class Card
     internal bool Ranged() =>
         Creature.Traits.Any(a => a.name == "Ranged");
 
-    public bool Alive() => CurrentHealth > 0;
+    public bool Alive() => Location != Deck.Zone.Graveyard;
 
     public void StatModifier(int amount)
     {
@@ -168,6 +199,8 @@ public class Card
     {
         if(BattleRepresentation)
             BattleRepresentation.Interactable = false;
+
+        Debug.Log("Playing card");
 
         FlowController.AddEvent(() =>    Event.OnPlay.Invoke(this));
     }

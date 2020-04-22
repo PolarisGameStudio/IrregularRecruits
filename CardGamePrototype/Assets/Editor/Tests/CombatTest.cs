@@ -24,53 +24,53 @@ namespace Tests
         public IEnumerator PlayerActionUsed()
         {
             yield return null;
+
+            Assert.IsTrue(false);
         }
 
         [UnityTest]
         public IEnumerator KillingUnitsEndsCombat()
         {
             yield return null;
+            Assert.IsTrue(false);
         }
         [UnityTest]
         public IEnumerator InitialDraws()
         {
             yield return null;
+            Assert.IsTrue(false);
         }
         [UnityTest]
         public IEnumerator DrawForTurn()
         {
             yield return null;
+            Assert.IsTrue(false);
         }
         [UnityTest]
         public IEnumerator LibraryDecreasesOnDraw()
         {
             yield return null;
+            Assert.IsTrue(false);
         }
 
         [UnityTest]
         public IEnumerator NoPlayerActionsLeftStartsCombat()
         {
             yield return null;
+            Assert.IsTrue(false);
         }
         [UnityTest]
         public IEnumerator CombatResolvesAutomatically()
         {
             yield return null;
+            Assert.IsTrue(false);
         }
         [UnityTest]
         public IEnumerator EachUnitGetsToAttack()
         {
             yield return null;
+            Assert.IsTrue(false);
         }
 
-        // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-        // `yield return null;` to skip a frame.
-        [UnityTest]
-        public IEnumerator AbilityTestWithEnumeratorPasses()
-        {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
-        }
     }
 }
