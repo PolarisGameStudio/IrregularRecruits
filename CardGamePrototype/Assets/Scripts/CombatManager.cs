@@ -27,7 +27,7 @@ public class CombatManager : Singleton<CombatManager>
     {
         Event.OnAbilityTrigger.AddListener((x,y,z) => StartCoroutine(WaitForTrigger()));
 
-        Event.OnCombatFinished.AddListener(EndCombat);
+        Event.OnBattleFinished.AddListener(EndCombat);
 
         Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
 
@@ -56,7 +56,7 @@ public class CombatManager : Singleton<CombatManager>
         PlayerDeck.DrawInitialHand();
         EnemyDeck.DrawInitialHand(true);
 
-        FlowController.AddEvent(() =>    Event.OnCombatStart.Invoke());
+        FlowController.AddEvent(() =>    Event.OnCombatSetup.Invoke(playerDeck,opponentDeck));
 
         StartCoroutine(NextTurn());
     }
@@ -97,11 +97,7 @@ public class CombatManager : Singleton<CombatManager>
 
         yield return new WaitUntil(() => FlowController.ReadyForInput);
 
-        //Enemy actions
-        EnemyDeck.Draw(GameSettings.Instance.DrawPrTurn);
-
-        yield return new WaitUntil(() => FlowController.ReadyForInput);
-        EnemyDeck.AI?.MakeMoves();
+        EnemyDeck.DeckController.YourTurn();
 
         yield return new WaitUntil(() => FlowController.ReadyForInput);
         PlayerDeck.Draw(GameSettings.Instance.DrawPrTurn);
@@ -212,13 +208,13 @@ public class CombatManager : Singleton<CombatManager>
         //Debug.Log("Combat round finished. Enemies left: "+ EnemyDeck.Alive());
 
         FlowController.AddEvent(() =>
-            Event.OnCombatRoundFinished.Invoke());
+            Event.OnCombatResolveFinished.Invoke());
 
         //TODO: just wait on eventcontroller
         yield return new WaitUntil(() => !AbilityTriggering);
 
         if (EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0)
-            FlowController.AddEvent(() => Event.OnCombatFinished.Invoke());
+            FlowController.AddEvent(() => Event.OnBattleFinished.Invoke());
         else
             StartCoroutine(NextTurn());
     }

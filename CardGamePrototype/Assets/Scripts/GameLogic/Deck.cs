@@ -8,8 +8,8 @@ public class Deck
 {
     public enum Zone { Library, Battlefield, Graveyard, Hand, COUNT }
     public bool PlayerDeck;
-    public AI AI;
     public DeckObject DeckObject;
+    public IDeckController DeckController;
 
     private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 
@@ -34,8 +34,8 @@ public class Deck
             AddCard(card);
         }
 
-        if (!playerDeck)
-            AI = new AI(this);
+        //if (!playerDeck)
+        //    AI = new AI(this);
 
     }
 

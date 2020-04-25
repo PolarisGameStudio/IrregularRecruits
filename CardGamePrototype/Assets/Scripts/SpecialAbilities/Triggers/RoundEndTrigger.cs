@@ -20,6 +20,6 @@ public class RoundEndTrigger : AbilityTrigger
 
     internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
     {
-        Event.OnCombatRoundFinished.AddListener(() => executeIfTrue.Invoke(null, owner, subjekt));
+        Event.OnCombatResolveFinished.AddListener(() => executeIfTrue.Invoke(null, owner, subjekt));
     }
 }

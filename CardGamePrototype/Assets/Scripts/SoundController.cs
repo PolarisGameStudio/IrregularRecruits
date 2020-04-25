@@ -21,10 +21,10 @@ public class SoundController : Singleton<SoundController>
         Event.OnGameOver.AddListener(() => ChangeMusic(SoundBank.Music.NoMusic));
         Event.OnGameOver.AddListener(()=> PlayStinger(SoundBank.Stinger.GameLoss));
         
-        Event.OnCombatStart.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
+        Event.OnCombatSetup.AddListener((p,c) => ChangeMusic(SoundBank.Music.Battle));
         
-        Event.OnCombatFinished.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
-        Event.OnCombatFinished.AddListener(() => PlayStinger(SoundBank.Stinger.BattleWon));
+        Event.OnBattleFinished.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
+        Event.OnBattleFinished.AddListener(() => PlayStinger(SoundBank.Stinger.BattleWon));
 
         Event.OnDraw.AddListener(c => PlayCardSound(SoundBank.CardSound.Draw));
         Event.OnWithdraw.AddListener(c => PlayCardSound(SoundBank.CardSound.Withdraw));

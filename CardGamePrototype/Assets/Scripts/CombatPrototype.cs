@@ -27,7 +27,7 @@ public class CombatPrototype : Singleton<CombatPrototype>
         PlayerDeck = GenerateDeck(true);
 
         NextCombatButton.onClick.AddListener( NextCombat);
-        Event.OnCombatFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
+        Event.OnBattleFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
     }
 
     private void NextCombat()

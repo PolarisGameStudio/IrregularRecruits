@@ -23,10 +23,18 @@ public class Event
     public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
 
     //COMBAT EVENTS
-    public static UnityEvent OnCombatFinished = new UnityEvent();
+    public class CombatEvent : UnityEvent<Deck, Deck> { }
+    //Inputs player deck and enemy deck, in that order
+    public static CombatEvent OnCombatSetup = new CombatEvent();
+    public static UnityEvent OnBattleFinished = new UnityEvent();
+
+    //TODO: replace with deck/card action and parse the relevant Controller/deck/card
     public static UnityEvent OnPlayerAction = new UnityEvent();
-    public static UnityEvent OnCombatStart = new UnityEvent();
-    public static UnityEvent OnCombatRoundFinished = new UnityEvent();
+
+    //TODO: should be handled by combat Resolver ;
+    public static UnityEvent OnCombatResolveStart = new UnityEvent();
+    public static UnityEvent OnCombatResolveFinished = new UnityEvent();
+
     public static UnityEvent OnTurnBegin = new UnityEvent();
 
     //GAME EVENTS
@@ -49,10 +57,10 @@ public class Event
 
         OnAbilityTrigger.RemoveAllListeners();
 
-        OnCombatFinished.RemoveAllListeners();
+        OnBattleFinished.RemoveAllListeners();
         OnPlayerAction.RemoveAllListeners();
-        OnCombatStart.RemoveAllListeners();
-        OnCombatRoundFinished.RemoveAllListeners();
+        OnCombatSetup.RemoveAllListeners();
+        OnCombatResolveFinished.RemoveAllListeners();
         OnTurnBegin.RemoveAllListeners();
 
         OnGameBegin.RemoveAllListeners();

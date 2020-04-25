@@ -11,7 +11,7 @@ public class ActionsLeftUI : MonoBehaviour
 
     private void Start()
     {
-        Event.OnCombatStart.AddListener(Initialize);
+        Event.OnCombatSetup.AddListener((p, c)=> Initialize());
     }
 
     void Initialize()

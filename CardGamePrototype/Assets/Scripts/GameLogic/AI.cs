@@ -1,19 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI
+public class AI : IDeckController
 {
     private Deck ControlledDeck;
+    private Action OnFinish;
 
-    public AI(Deck deck)
+    //this could be a more complex evaluation and move mechanics
+    public void YourTurn()
     {
-        this.ControlledDeck = deck;
-    }
+        ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-
-    public void MakeMoves()
-    {
         for (int i = 0; i < GameSettings.Instance.EnemyPlaysPrTurn; i++)
         {
             if (ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0)
@@ -21,5 +20,14 @@ public class AI
 
             ControlledDeck.CreaturesInZone(Deck.Zone.Hand)[0].PlayCard() ;
         }
+
+        OnFinish.Invoke();
     }
+
+    public void SetupDeckActions(Deck deck, Action onFinish)
+    {
+        ControlledDeck = deck;
+        OnFinish = onFinish;
+    }
+
 }

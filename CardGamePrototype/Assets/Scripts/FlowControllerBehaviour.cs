@@ -16,9 +16,9 @@ public class FlowControllerBehaviour : Singleton<FlowControllerBehaviour>
         Event.OnKill.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Killed a minion"));
         Event.OnWithdraw.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Withdrew"));
         Event.OnAbilityTrigger.AddListener((a,c,ts) => Debug.Log("Event: " + c.Creature.name + ": AbilityTriggered"));
-        Event.OnCombatFinished.AddListener(() => Debug.Log("Event: Combat Finished"));
-        Event.OnCombatRoundFinished.AddListener(() => Debug.Log("Event: Combat Round Finished"));
-        Event.OnCombatStart.AddListener(() => Debug.Log("Event: Combat started"));
+        Event.OnBattleFinished.AddListener(() => Debug.Log("Event: Combat Finished"));
+        Event.OnCombatResolveFinished.AddListener(() => Debug.Log("Event: Combat Round Finished"));
+        Event.OnCombatSetup.AddListener((p, c) => Debug.Log("Event: Combat started between: " +p + " and " + c ));
         Event.OnGameOver.AddListener(() => Debug.Log("Event: Game Over"));
 
         StartCoroutine(EventControlLoop());
