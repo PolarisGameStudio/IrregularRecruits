@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Event 
+public class Event
 {
     //CARD EVENTS
     public class CardEvent : UnityEvent<Card> { }
@@ -19,7 +19,7 @@ public class Event
     public static CardEvent OnWithdraw = new CardEvent();
 
     //Ability,Owner,Targets . TODO: use holder class
-    public class AbilityEvent : UnityEvent<Ability,Card,List<Card>> { }
+    public class AbilityEvent : UnityEvent<Ability, Card, List<Card>> { }
     public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
 
     //COMBAT EVENTS
@@ -34,5 +34,29 @@ public class Event
     public static UnityEvent OnGameOpen = new UnityEvent();
     public static UnityEvent OnGameBegin = new UnityEvent();
 
+    public static void ResetListeners()
+    {
+        OnDraw.RemoveAllListeners();
+        OnPlay.RemoveAllListeners();
+        OnDeath.RemoveAllListeners();
+        OnRessurrect.RemoveAllListeners();
+        OnKill.RemoveAllListeners();
+        OnAttack.RemoveAllListeners();
+        OnBeingAttacked.RemoveAllListeners();
+        OnDamaged.RemoveAllListeners();
+        OnHealed.RemoveAllListeners();
+        OnWithdraw.RemoveAllListeners();
 
+        OnAbilityTrigger.RemoveAllListeners();
+
+        OnCombatFinished.RemoveAllListeners();
+        OnPlayerAction.RemoveAllListeners();
+        OnCombatStart.RemoveAllListeners();
+        OnCombatRoundFinished.RemoveAllListeners();
+        OnTurnBegin.RemoveAllListeners();
+
+        OnGameBegin.RemoveAllListeners();
+        OnGameOpen.RemoveAllListeners();
+        OnGameOver.RemoveAllListeners();
+    }
 }

@@ -13,9 +13,11 @@ namespace Tests
         private DeckObject TestDeckObject;
         private Ability TestAbility;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void CardSetup()
         {
+            Event.ResetListeners();
+
             Trait trait = new Trait()
             {
                 Description = "Testing a trait",

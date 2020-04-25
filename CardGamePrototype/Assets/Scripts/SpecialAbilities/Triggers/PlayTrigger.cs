@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ETBTrigger : AbilityTrigger
+public class PlayTrigger : AbilityTrigger
 {
     public override Ability.Verb TriggerType => Ability.Verb.ETB;
 

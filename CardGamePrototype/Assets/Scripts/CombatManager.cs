@@ -89,6 +89,8 @@ public class CombatManager : Singleton<CombatManager>
         BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
     }
 
+
+    //TODO: remove ienumerator and instead make everything use flow controller
     private IEnumerator NextTurn()
     {
         Debug.Log("Turn: " + Turn + " Started");
@@ -225,8 +227,10 @@ public class CombatManager : Singleton<CombatManager>
     {
         List<Card> cardsInZone = new List<Card>();
 
-        cardsInZone.AddRange(PlayerDeck?.CreaturesInZone(zone));
-        cardsInZone.AddRange(EnemyDeck?.CreaturesInZone(zone));
+        if(PlayerDeck != null)
+            cardsInZone.AddRange(PlayerDeck.CreaturesInZone(zone));
+        if (EnemyDeck != null)
+            cardsInZone.AddRange(EnemyDeck.CreaturesInZone(zone));
 
         return cardsInZone;
     }

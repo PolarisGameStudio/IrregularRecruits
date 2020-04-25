@@ -19,7 +19,7 @@ public class AI
             if (ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0)
                 break;
 
-            ControlledDeck.CreaturesInZone(Deck.Zone.Hand)[0].ChangeLocation(Deck.Zone.Battlefield);
+            ControlledDeck.CreaturesInZone(Deck.Zone.Hand)[0].PlayCard() ;
         }
     }
 }

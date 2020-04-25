@@ -195,7 +195,7 @@ public class Card
 
         BattleRepresentation?.Flip();
     }
-    private void PlayCard()
+    public  void PlayCard()
     {
         if(BattleRepresentation)
             BattleRepresentation.Interactable = false;

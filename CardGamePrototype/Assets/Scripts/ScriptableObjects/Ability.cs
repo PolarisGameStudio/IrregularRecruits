@@ -65,7 +65,7 @@ public partial class Ability : ScriptableObject
         AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner,TriggerCondition.Subjekt,ExecuteIfTrue);
         //TODO: replace with CardEvent Reference
     }
-
+    
 
     public float GetValue()
     {
@@ -91,13 +91,15 @@ public partial class Ability : ScriptableObject
         AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteAction(this, owner,targets);        
     }
 
-    private List<Card> GetTargets(Noun targetType, Count count, Deck.Zone location, Card _owner, Card triggerExecuter)
+    public List<Card> GetTargets(Noun targetType, Count count, Deck.Zone location, Card _owner, Card triggerExecuter)
     {
-        List<Card> cs = CombatManager.GetCardsInZone(targetType.Location).Where(c =>
-            targetType.CorrectCharacter(c, _owner,triggerExecuter) &&
-            targetType.CorrectAllegiance(c,_owner)&&
+        List<Card> cardsInZone = CombatManager.GetCardsInZone(targetType.Location);
+
+        List<Card> cs = cardsInZone.Where(c =>
+            targetType.CorrectCharacter(c, _owner, triggerExecuter) &&
+            targetType.CorrectAllegiance(c, _owner) &&
             targetType.CorrectDamageState(c) &&
-            targetType.CorrectRace(c,_owner)).ToList();
+            targetType.CorrectRace(c, _owner)).ToList();
 
         return TakeCount(cs, ResultingAction.TargetCount);
     }
