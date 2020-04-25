@@ -13,8 +13,7 @@ public class ResurrectAction : AbilityAction
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> graveTargets)
     {
-        FlowController.AddEvent(() =>
-           Event.OnAbilityTrigger.Invoke(ability, owner, graveTargets));
+           Event.OnAbilityTrigger.Invoke(ability, owner, graveTargets);
         graveTargets.ForEach(c => c.Resurrect(ability.ResultingAction.Amount));
     }
 

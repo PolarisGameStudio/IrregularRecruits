@@ -8,12 +8,9 @@ public class CombatAutoResolver
 {
     private Deck PlayerDeck, EnemyDeck;
     private List<Card> attackOrder;
-    private bool ResolvingCombat;
 
     public CombatAutoResolver()
     {
-        FlowController.OnReadyForInput.AddListener(NextAttacker);
-
         Event.OnCombatResolveStart.AddListener(ResolveCombat);
     }
 
@@ -29,9 +26,7 @@ public class CombatAutoResolver
     {
         if (PlayerDeck == null || EnemyDeck == null)
             return;
-
-        ResolvingCombat = true;
-
+        
 
         attackOrder = new List<Card>();
 
@@ -60,32 +55,23 @@ public class CombatAutoResolver
                 break;
         };
 
-        NextAttacker();
-    }
-
-    private void NextAttacker()
-    {
-        if (!ResolvingCombat)
-            return;
-
-        if (attackOrder.Any(c => c.Alive()))
+        while (attackOrder.Any(c => c.Alive()))
         {
             var attacker = attackOrder.First(c => c.Alive());
 
-            var player = attacker.InDeck.PlayerDeck;
+            var otherDeck = attacker.InDeck == PlayerDeck ? EnemyDeck : PlayerDeck;
 
-            var target = player ? EnemyDeck.GetAttackTarget() : PlayerDeck.GetAttackTarget();
+            var target =  otherDeck.GetAttackTarget();
 
             if (target == null || attacker.Location != Deck.Zone.Battlefield)
             {
                 attackOrder.Remove(attacker);
+                continue;
             }
 
-            FlowController.AddEvent(() =>
-                Event.OnAttack.Invoke(attacker));
+            Event.OnAttack.Invoke(attacker);
 
-            FlowController.AddEvent(() =>
-                Event.OnBeingAttacked.Invoke(attacker));
+            Event.OnBeingAttacked.Invoke(target);
 
             target.Damage(attacker.Attack);
 
@@ -95,25 +81,18 @@ public class CombatAutoResolver
             attackOrder.Remove(attacker);
         }
 
-        if (!attackOrder.Any(c => c.Alive()))
-        {
-            FinishCombatRound();
-        }
+        FinishCombatRound();
     }
 
 
     private void FinishCombatRound()
     {
-        ResolvingCombat = false;
-
-        FlowController.AddEvent(() =>
-            Event.OnCombatResolveFinished.Invoke());
+        Event.OnCombatResolveFinished.Invoke();
 
         if (EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0)
-            FlowController.AddEvent(() => Event.OnBattleFinished.Invoke());
+            Event.OnBattleFinished.Invoke();
         else
-            FlowController.AddEvent(() =>
-                Event.OnTurnBegin.Invoke());
+            Event.OnTurnBegin.Invoke();
     }
 
 

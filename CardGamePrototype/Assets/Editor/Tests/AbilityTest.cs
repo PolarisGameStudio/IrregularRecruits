@@ -80,7 +80,7 @@ namespace Tests
 
             testCard.PlayCard();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsNotNull(triggeredAblity);
             Assert.IsTrue(triggeredAblity == testAbility);
@@ -106,7 +106,7 @@ namespace Tests
 
             other.PlayCard();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsNotNull(triggeredAblity);
             Assert.IsTrue(triggeredAblity == testAbility);
@@ -130,7 +130,7 @@ namespace Tests
 
             testCard.PlayCard();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsFalse(triggeredAblity == testAbility);
         }
@@ -155,7 +155,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(triggeredAblity == testAbility);
         }
@@ -181,7 +181,7 @@ namespace Tests
 
             otherCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 1);
@@ -208,7 +208,7 @@ namespace Tests
 
             otherCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 1);
@@ -237,7 +237,7 @@ namespace Tests
             
             otherCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 2);
@@ -266,7 +266,7 @@ namespace Tests
 
             otherCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 1);
@@ -293,7 +293,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(testCard.Alive());
 
@@ -329,7 +329,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(testCard.Alive());
 
@@ -372,7 +372,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(testCard.Alive());
 
@@ -413,7 +413,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(testCard.Alive());
 

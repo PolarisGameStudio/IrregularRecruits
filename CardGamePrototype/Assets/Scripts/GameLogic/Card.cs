@@ -9,7 +9,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Card 
+public class Card
 {
     private static bool ListenersCreated;
 
@@ -21,7 +21,7 @@ public class Card
         get => creature; set
         {
             creature = value;
-            SetCreature(value);            
+            SetCreature(value);
         }
     }
 
@@ -102,15 +102,15 @@ public class Card
     {
         //Debug.Log("Killing " + this);
 
-        FlowController.AddEvent(()=>
-            Event.OnDeath.Invoke(this));
+
+        Event.OnDeath.Invoke(this);
     }
-    
+
 
     private int attack;
     public int Attack
     {
-        get => attack; 
+        get => attack;
         private set
         {
             attack = value;
@@ -118,13 +118,13 @@ public class Card
         }
     }
 
-    public bool FaceUp = true; 
+    public bool FaceUp = true;
 
     public Deck.Zone Location;
 
-    public void ChangeLocation(Deck.Zone to,float delay = 0f)
+    public void ChangeLocation(Deck.Zone to, float delay = 0f)
     {
-        ChangeLocation(Location, to,delay);
+        ChangeLocation(Location, to, delay);
     }
 
     public void ChangeLocation(Deck.Zone from, Deck.Zone to, float delay = 0f)
@@ -147,7 +147,7 @@ public class Card
 
         Location = to;
 
-        BattleUI.Move(this, to, InDeck.PlayerDeck,delay);
+        BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
     }
 
     public void SetCreature(Creature creature)
@@ -195,14 +195,14 @@ public class Card
 
         BattleRepresentation?.Flip();
     }
-    public  void PlayCard()
+    public void PlayCard()
     {
-        if(BattleRepresentation)
+        if (BattleRepresentation)
             BattleRepresentation.Interactable = false;
 
         Debug.Log("Playing card");
 
-        FlowController.AddEvent(() =>    Event.OnPlay.Invoke(this));
+        Event.OnPlay.Invoke(this);
     }
 
     internal bool Ethereal()
@@ -219,8 +219,7 @@ public class Card
     {
         //TODO: replace with Waiting ON player Input
 
-        FlowController.AddEvent(() =>
-            Event.OnWithdraw.Invoke(this));
+        Event.OnWithdraw.Invoke(this);
 
     }
 
@@ -228,14 +227,13 @@ public class Card
     internal void Resurrect(int amount)
     {
         if (Location != Deck.Zone.Graveyard || Alive())
-            Debug.LogWarning("Resurrectting alive character; "+ Name);
+            Debug.LogWarning("Resurrectting alive character; " + Name);
 
-        FlowController.AddEvent(() =>
-            Event.OnRessurrect.Invoke(this));
+        Event.OnRessurrect.Invoke(this);
 
         CurrentHealth = amount;
 
-        
+
         //TODO: change race to UNDEAD?
     }
 
@@ -243,7 +241,7 @@ public class Card
     {
         //TODO: Demon + Undead not charmable? or is that fun?
 
-        if(moveToDeck == InDeck)
+        if (moveToDeck == InDeck)
         {
             Debug.Log($"cannot charm to own dekc; {this}");
         }
@@ -262,7 +260,7 @@ public class Card
         if (damage < 1) return;
 
         OnDamage.Invoke(damage);
-        FlowController.AddEvent(() => Event.OnDamaged.Invoke(this));
+        Event.OnDamaged.Invoke(this);
 
         CurrentHealth -= damage;
     }
@@ -272,8 +270,7 @@ public class Card
 
         if (value < 1) return;
 
-        FlowController.AddEvent(() =>
-                Event.OnHealed.Invoke(this));
+        Event.OnHealed.Invoke(this);
 
         CurrentHealth += value;
     }
@@ -282,17 +279,17 @@ public class Card
     public void ResetAfterBattle()
     {
         ChangeLocation(Deck.Zone.Library);
-        
+
         //todo: find a way to safe permanent buffs or drain
         if (Attack != Creature.Attack) Attack = Creature.Attack;
-        if (MaxHealth != Creature.Health) MaxHealth= Creature.Health;
+        if (MaxHealth != Creature.Health) MaxHealth = Creature.Health;
 
         CurrentHealth = MaxHealth;
     }
 
     public void Click()
     {
-        if(InDeck == null)
+        if (InDeck == null)
         {
             Debug.Log("Clicked card not in deck");
             return;
@@ -304,7 +301,7 @@ public class Card
             return;
         }
 
-        if (!InDeck.PlayerDeck |! FaceUp )
+        if (!InDeck.PlayerDeck | !FaceUp)
             //|| (BattleRepresentation &!  BattleRepresentation.Interactable)) 
             return;
 

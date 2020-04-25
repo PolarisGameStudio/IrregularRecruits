@@ -25,7 +25,7 @@ public class CombatManager : Singleton<CombatManager>
 
     private void Start()
     {
-        Event.OnAbilityTrigger.AddListener((x,y,z) => StartCoroutine(WaitForTrigger()));
+        Event.OnAbilityTrigger.AddListener((x, y, z) => StartCoroutine(WaitForTrigger()));
 
         Event.OnBattleFinished.AddListener(EndCombat);
 
@@ -56,7 +56,8 @@ public class CombatManager : Singleton<CombatManager>
         PlayerDeck.DrawInitialHand();
         EnemyDeck.DrawInitialHand(true);
 
-        FlowController.AddEvent(() =>    Event.OnCombatSetup.Invoke(playerDeck,opponentDeck));
+
+        Event.OnCombatSetup.Invoke(playerDeck, opponentDeck);
 
         StartCoroutine(NextTurn());
     }
@@ -102,8 +103,8 @@ public class CombatManager : Singleton<CombatManager>
         yield return new WaitUntil(() => FlowController.ReadyForInput);
         PlayerDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-        FlowController.AddEvent(() => 
-            Event.OnTurnBegin.Invoke());
+
+        Event.OnTurnBegin.Invoke();
 
         PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
 
@@ -157,14 +158,14 @@ public class CombatManager : Singleton<CombatManager>
                 break;
         };
 
-         AttackAnimationDuration = 1f;
+        AttackAnimationDuration = 1f;
 
         //To prevent wrong attack positions, if card have not reaach battle field yet
         yield return new WaitForSeconds(AttackAnimationDuration);
 
         while (attackOrder.Any(c => c.Alive()))
         {
-            yield return new WaitUntil(()=>FlowController.ReadyForInput);
+            yield return new WaitUntil(() => FlowController.ReadyForInput);
 
             var attacker = attackOrder.First(c => c.Alive());
 
@@ -172,21 +173,19 @@ public class CombatManager : Singleton<CombatManager>
 
             var target = player ? EnemyDeck.GetAttackTarget() : PlayerDeck.GetAttackTarget();
 
-            if (target == null ||attacker.Location != Deck.Zone.Battlefield)
+            if (target == null || attacker.Location != Deck.Zone.Battlefield)
             {
                 attackOrder.Remove(attacker);
-                break; 
+                break;
             }
 
             //yield return new WaitUntil(() => !AbilityTriggering);
-            FlowController.AddEvent(()=>
-                Event.OnAttack.Invoke(attacker));
+            Event.OnAttack.Invoke(attacker);
 
             //yield return new WaitUntil(() => !AbilityTriggering);
-            FlowController.AddEvent(() =>
-                Event.OnBeingAttacked.Invoke(attacker));
+            Event.OnBeingAttacked.Invoke(attacker);
 
-            StartCoroutine(AnimationSystem.AttackAnimation(attacker,target, AttackAnimationDuration));
+            StartCoroutine(AnimationSystem.AttackAnimation(attacker, target, AttackAnimationDuration));
             yield return new WaitForSeconds(AttackAnimationDuration);
 
             target.Damage(attacker.Attack);
@@ -207,14 +206,13 @@ public class CombatManager : Singleton<CombatManager>
 
         //Debug.Log("Combat round finished. Enemies left: "+ EnemyDeck.Alive());
 
-        FlowController.AddEvent(() =>
-            Event.OnCombatResolveFinished.Invoke());
+        Event.OnCombatResolveFinished.Invoke();
 
         //TODO: just wait on eventcontroller
         yield return new WaitUntil(() => !AbilityTriggering);
 
         if (EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0)
-            FlowController.AddEvent(() => Event.OnBattleFinished.Invoke());
+            Event.OnBattleFinished.Invoke();
         else
             StartCoroutine(NextTurn());
     }
@@ -223,7 +221,7 @@ public class CombatManager : Singleton<CombatManager>
     {
         List<Card> cardsInZone = new List<Card>();
 
-        if(PlayerDeck != null)
+        if (PlayerDeck != null)
             cardsInZone.AddRange(PlayerDeck.CreaturesInZone(zone));
         if (EnemyDeck != null)
             cardsInZone.AddRange(EnemyDeck.CreaturesInZone(zone));

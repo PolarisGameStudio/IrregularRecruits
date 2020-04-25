@@ -13,10 +13,10 @@ public class CharmAction : AbilityAction
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
-        FlowController.AddEvent(() =>
-                Event.OnAbilityTrigger.Invoke(ability, owner, targets));
-        FlowController.AddEvent(() =>
-            targets.ForEach(c => c.Charm(owner.InDeck)));
+
+        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+        
+        targets.ForEach(c => c.Charm(owner.InDeck));
     }
 
     public override float GetValue(float targetValue, int amount)

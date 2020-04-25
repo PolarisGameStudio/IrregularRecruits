@@ -13,8 +13,8 @@ public class DrawAction : AbilityAction
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
-        FlowController.AddEvent(() =>
-                Event.OnAbilityTrigger.Invoke(ability, owner, new List<Card>()));
+
+                Event.OnAbilityTrigger.Invoke(ability, owner, new List<Card>());
         owner.InDeck.Draw(ability.ResultingAction.Amount);
     }
 

@@ -107,10 +107,10 @@ public class Deck
 
     public void Draw(Card card)
     {
-        FlowController.AddEvent(() => Event.OnDraw.Invoke(card));
+        Event.OnDraw.Invoke(card);
     }
 
-    internal List<Card> AllCreatures()
+    public List<Card> AllCreatures()
     {
         return Creatures.SelectMany(x => x.Value).ToList();
     }

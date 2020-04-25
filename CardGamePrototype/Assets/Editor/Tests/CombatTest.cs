@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
 namespace Tests
 {
+    
+
     public class CombatTest
     {
         private BattleManager BattleManager;
 
-        private Card GenerateTestCreature(Ability ability, Race race = null)
+        private Card GenerateTestCreature(Ability ability, Race race = null,int attack = 2)
         {
             Trait trait = new Trait()
             {
@@ -20,7 +23,7 @@ namespace Tests
             var TestCreature = new Creature()
             {
                 name = "TesterOne",
-                Attack = 2,
+                Attack = attack,
                 Race = race,
                 Health = 5,
                 Traits = new List<Trait>()
@@ -37,7 +40,7 @@ namespace Tests
             return testCard;
         }
 
-        private Deck GenerateTestDeck(int creatures, bool playerDeck)
+        private Deck GenerateTestDeck(int creatures, bool playerDeck, bool onlyAbilityDamage = false)
         {
             var testDeckObject = new DeckObject()
             {
@@ -48,7 +51,13 @@ namespace Tests
 
             for (int i = 0; i < creatures; i++)
             {
-                var c = GenerateTestCreature(null);
+                var c = onlyAbilityDamage ? GenerateTestCreature(
+                    new Ability()
+                    {
+                        ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 5, new Noun(Noun.CharacterTyp.Any)),
+                        TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.RoundEnd),
+                    },null,0
+                    ): GenerateTestCreature(null);
 
                 testDeck.AddCard(c);
             }
@@ -56,18 +65,18 @@ namespace Tests
             return testDeck;
         }
 
-        [SetUp]
+        [OneTimeSetUp]
         public void BattleManagement()
         {
-            Event.ResetListeners();
             BattleManager = new BattleManager();
         }
+
 
         [Test]
         public void CombatStartsResolving()
         {
             var pDeck = GenerateTestDeck(2, true);
-            var enmDeck = GenerateTestDeck(1, true);
+            var enmDeck = GenerateTestDeck(1, false);
 
             var resolveStarted = false;
 
@@ -75,7 +84,6 @@ namespace Tests
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-            Event.OnTurnBegin.Invoke();
 
             Assert.IsTrue(resolveStarted);
         }
@@ -83,7 +91,7 @@ namespace Tests
         public void CombatResolveFinishes()
         {
             var pDeck = GenerateTestDeck(2, true);
-            var enmDeck = GenerateTestDeck(1, true);
+            var enmDeck = GenerateTestDeck(1, false);
 
             var resolveFinish = false;
 
@@ -91,15 +99,13 @@ namespace Tests
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-            Event.OnTurnBegin.Invoke();
-
             Assert.IsTrue(resolveFinish);
         }
         [Test]
         public void BattleResolvesAutomatically()
         {
             var pDeck = GenerateTestDeck(2, true);
-            var enmDeck = GenerateTestDeck(1, true);
+            var enmDeck = GenerateTestDeck(1, false);
 
             var battleFinished = false;
 
@@ -107,15 +113,14 @@ namespace Tests
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-            Event.OnTurnBegin.Invoke();
 
             Assert.IsTrue(battleFinished);
         }
         [Test]
-        public void BattleResolvesAutomaticallyGiant()
+        public void BattleResolvesAutomaticallyBigDeck()
         {
-            var pDeck = GenerateTestDeck(200, true);
-            var enmDeck = GenerateTestDeck(1000, true);
+            var pDeck = GenerateTestDeck(50, true);
+            var enmDeck = GenerateTestDeck(50, false);
 
             var battleFinished = false;
 
@@ -123,27 +128,45 @@ namespace Tests
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-            Event.OnTurnBegin.Invoke();
 
             Assert.IsTrue(battleFinished);
         }
-        [UnityTest]
-        public IEnumerator InitialDraws()
+        [Test]
+        public void BattleResolvesWithOnlyAbilityDamage()
         {
-            yield return null;
-            Assert.IsTrue(false);
+            var pDeck = GenerateTestDeck(3, true,true);
+            var enmDeck = GenerateTestDeck(3, false,true);
+
+            var battleFinished = false;
+
+            Event.OnBattleFinished.AddListener(() => battleFinished = true);
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+
+            Assert.IsTrue(battleFinished);
         }
-        [UnityTest]
-        public IEnumerator DrawForTurn()
+
+        [Test]
+        public void EachUnitGetsToAttack()
         {
-            yield return null;
-            Assert.IsTrue(false);
-        }
-        [UnityTest]
-        public IEnumerator EachUnitGetsToAttack()
-        {
-            yield return null;
-            Assert.IsTrue(false);
+            var pDeck = GenerateTestDeck(2, true);
+            var enmDeck = GenerateTestDeck(3, false);
+
+            var creatures = new List<Card>();
+
+            creatures.AddRange(pDeck.AllCreatures());
+            creatures.AddRange(enmDeck.AllCreatures());
+
+            HashSet<Card> attackers = new HashSet<Card>();
+
+            Event.OnAttack.AddListener(c=> attackers.Add(c));
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.IsTrue(attackers.Count == creatures.Count);
+
+            Assert.IsTrue(creatures.All(attackers.Contains));
         }
 
     }

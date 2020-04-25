@@ -13,10 +13,10 @@ public class DamageAction : AbilityAction
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
-        FlowController.AddEvent(() =>
-                Event.OnAbilityTrigger.Invoke(ability, owner, targets));
-        FlowController.AddEvent(() =>
-            targets.ForEach(c => c.Damage(ability.ResultingAction.Amount)));
+
+        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+
+        targets.ForEach(c => c.Damage(ability.ResultingAction.Amount));
     }
 
     public override float GetValue(float targetValue, int amount)

@@ -106,7 +106,7 @@ namespace Tests
 
             TestCard.Click();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Battlefield);
         }
@@ -122,7 +122,7 @@ namespace Tests
 
             TestCard.Click();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(triggered);
         }
@@ -134,7 +134,7 @@ namespace Tests
 
             TestCard.Click();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Library);
         }
@@ -146,7 +146,7 @@ namespace Tests
 
             TestCard.Click();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Hand);
         }
@@ -158,7 +158,7 @@ namespace Tests
 
             TestCard.Click();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Library);
         }
@@ -173,7 +173,7 @@ namespace Tests
 
             TestCard.Withdraw();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(triggered);
         }
@@ -186,7 +186,7 @@ namespace Tests
 
             TestCard.Click();
 
-            FlowController.ResolveAllActions();
+            
 
 
             Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
@@ -199,7 +199,7 @@ namespace Tests
 
             TestCard.Click();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
         }
@@ -210,7 +210,7 @@ namespace Tests
             var damage = 2;
 
             TestCard.Damage(damage);
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(startHealth - damage == TestCard.CurrentHealth);
         }
@@ -225,7 +225,7 @@ namespace Tests
             Event.OnHealed.AddListener(i => check = i);
 
             TestCard.Heal(heal);
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(check == TestCard);
         }
@@ -236,7 +236,7 @@ namespace Tests
             var damage = 2;
 
             TestCard.Damage(damage);
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(startHealth - damage == TestCard.CurrentHealth);
         }
@@ -249,7 +249,7 @@ namespace Tests
             TestCard.OnDamage.AddListener(i => check = i);
 
             TestCard.Damage(damage);
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(check == damage);
         }
@@ -264,7 +264,7 @@ namespace Tests
 
             TestCard.Damage(damage);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(check == TestCard);
         }
@@ -278,7 +278,7 @@ namespace Tests
             var boost = 31;
 
             TestCard.StatModifier(boost);
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(startAttack + boost == TestCard.Attack);
             Assert.IsTrue(startHealth + boost == TestCard.CurrentHealth);
@@ -293,7 +293,7 @@ namespace Tests
             TestCard.OnStatMod.AddListener(i => check = i);
 
             TestCard.StatModifier(boost);
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(check == boost);
         }
@@ -308,7 +308,7 @@ namespace Tests
             Event.OnHealed.AddListener(i => check = i);
 
             TestCard.StatModifier(boost);
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsFalse(check == TestCard);
         }
@@ -321,7 +321,7 @@ namespace Tests
             var boost = -1;
 
             TestCard.StatModifier(boost);
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(startAttack + boost == TestCard.Attack);
             Assert.IsTrue(startHealth + boost == TestCard.CurrentHealth);
@@ -338,7 +338,7 @@ namespace Tests
 
             TestCard.StatModifier(-damage);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsFalse(check == TestCard);
         }
@@ -350,7 +350,7 @@ namespace Tests
 
             TestCard.Damage(TestCard.MaxHealth);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(!TestCard.Alive());
         }
@@ -361,7 +361,7 @@ namespace Tests
 
             TestCard.StatModifier(-TestCard.MaxHealth);
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(!TestCard.Alive());
         }
@@ -374,7 +374,7 @@ namespace Tests
 
             TestCard.Die();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(!TestCard.Alive());
         }
@@ -391,7 +391,7 @@ namespace Tests
 
             TestCard.Die();
 
-            FlowController.ResolveAllActions();
+            
 
             Assert.IsTrue(triggered);
         }

@@ -33,6 +33,7 @@ public class BattleManager
         EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayerDeck.DeckController.YourTurn);
         PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, Event.OnCombatResolveStart.Invoke);
 
+        Event.OnTurnBegin.Invoke();
     }
 
     private void NextTurn()
