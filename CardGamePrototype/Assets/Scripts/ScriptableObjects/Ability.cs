@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 
@@ -50,6 +51,7 @@ namespace GameLogic
 
         public Trigger TriggerCondition;
         public Action ResultingAction;
+        private UnityAction RemoveListenerAction;
 
         public override string ToString()
         {
@@ -62,14 +64,14 @@ namespace GameLogic
 
         public void SetupListeners(Card _owner)
         {
-            AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner, TriggerCondition.Subjekt, ExecuteIfTrue);
+            RemoveListenerAction = AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner, TriggerCondition.Subjekt, ExecuteIfTrue);
             //TODO: replace with CardEvent Reference
         }
 
 
-        public void RemoveListeners(Card _owner)
+        public void RemoveListeners()
         {
-            AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).RemoveListener(_owner, TriggerCondition.Subjekt, ExecuteIfTrue);
+            RemoveListenerAction.Invoke();
 
         }
 

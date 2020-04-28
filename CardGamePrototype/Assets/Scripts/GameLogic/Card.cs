@@ -17,7 +17,6 @@ namespace GameLogic
         {
             get => creature; set
             {
-                creature = value;
                 SetCreature(value);
             }
         }
@@ -149,26 +148,30 @@ namespace GameLogic
             //BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
         }
 
-        public void SetCreature(Creature creature)
+        public void SetCreature(Creature newCreature)
         {
-            if (String.IsNullOrEmpty(creature.name)) creature.name = creature.ToString();
+            if (String.IsNullOrEmpty(newCreature.name)) newCreature.name = newCreature.ToString();
 
-            Name = creature?.name;// + " !" + Guid.NewGuid();
+            Name = newCreature?.name;// + " !" + Guid.NewGuid();
 
             //if (Creature && Creature.SpecialAbility)
             //    Creature.SpecialAbility.RemoveListeners(this);
 
-            MaxHealth = creature.Health;
-            CurrentHealth = creature.Health;
-            Attack = creature.Attack;
+            MaxHealth = newCreature.Health;
+            CurrentHealth = newCreature.Health;
+            Attack = newCreature.Attack;
 
-            OnCreatureChange.Invoke(creature);
+            OnCreatureChange.Invoke(newCreature);
 
-            //TODO: remove old listeners
-            if (creature.SpecialAbility)
+            if (creature?.SpecialAbility)
+                creature.SpecialAbility.RemoveListeners();
+
+            if (newCreature.SpecialAbility)
             {
-                creature.SpecialAbility.SetupListeners(this);
+                newCreature.SpecialAbility.SetupListeners(this);
             }
+
+            this.creature = newCreature;
         }
 
         internal bool Defender() =>

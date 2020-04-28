@@ -42,30 +42,30 @@ namespace GameLogic
         public static UnityEvent OnGameOpen = new UnityEvent();
         public static UnityEvent OnGameBegin = new UnityEvent();
 
-        public static void ResetListeners()
-        {
-            OnDraw.RemoveAllListeners();
-            OnPlay.RemoveAllListeners();
-            OnDeath.RemoveAllListeners();
-            OnRessurrect.RemoveAllListeners();
-            OnKill.RemoveAllListeners();
-            OnAttack.RemoveAllListeners();
-            OnBeingAttacked.RemoveAllListeners();
-            OnDamaged.RemoveAllListeners();
-            OnHealed.RemoveAllListeners();
-            OnWithdraw.RemoveAllListeners();
+        //public static void ResetListeners()
+        //{
+        //    OnDraw.RemoveAllListeners();
+        //    OnPlay.RemoveAllListeners();
+        //    OnDeath.RemoveAllListeners();
+        //    OnRessurrect.RemoveAllListeners();
+        //    OnKill.RemoveAllListeners();
+        //    OnAttack.RemoveAllListeners();
+        //    OnBeingAttacked.RemoveAllListeners();
+        //    OnDamaged.RemoveAllListeners();
+        //    OnHealed.RemoveAllListeners();
+        //    OnWithdraw.RemoveAllListeners();
 
-            OnAbilityTrigger.RemoveAllListeners();
+        //    OnAbilityTrigger.RemoveAllListeners();
 
-            OnBattleFinished.RemoveAllListeners();
-            OnPlayerAction.RemoveAllListeners();
-            OnCombatSetup.RemoveAllListeners();
-            OnCombatResolveFinished.RemoveAllListeners();
-            OnTurnBegin.RemoveAllListeners();
+        //    OnBattleFinished.RemoveAllListeners();
+        //    OnPlayerAction.RemoveAllListeners();
+        //    OnCombatSetup.RemoveAllListeners();
+        //    OnCombatResolveFinished.RemoveAllListeners();
+        //    OnTurnBegin.RemoveAllListeners();
 
-            OnGameBegin.RemoveAllListeners();
-            OnGameOpen.RemoveAllListeners();
-            OnGameOver.RemoveAllListeners();
-        }
+        //    OnGameBegin.RemoveAllListeners();
+        //    OnGameOpen.RemoveAllListeners();
+        //    OnGameOver.RemoveAllListeners();
+        //}
     }
 }

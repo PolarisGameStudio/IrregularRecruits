@@ -17,11 +17,11 @@ namespace Tests
         {
             if (TestCard != null && TestCard.Creature?.SpecialAbility)
             {
-                TestCard.Creature.SpecialAbility.RemoveListeners(TestCard);
+                TestCard.Creature.SpecialAbility.RemoveListeners();
             }
             if (OtherCard != null && OtherCard.Creature?.SpecialAbility)
             {
-                OtherCard.Creature.SpecialAbility.RemoveListeners(OtherCard);
+                OtherCard.Creature.SpecialAbility.RemoveListeners();
             }
         }
 
@@ -221,8 +221,6 @@ namespace Tests
             Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref targettedCards, ts));
 
             OtherCard.Damage(1);
-
-
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 1);

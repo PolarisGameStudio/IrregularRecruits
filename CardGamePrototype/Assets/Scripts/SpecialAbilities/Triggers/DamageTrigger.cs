@@ -16,13 +16,13 @@ namespace GameLogic
             return 3f;
         }
 
-        internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
+        internal override UnityAction SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
         {
-            Event.OnDamaged.AddListener(a => executeIfTrue.Invoke(a, owner, subjekt));
-        }
-        internal override void RemoveListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
-        {
-            Event.OnDamaged.RemoveListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+            UnityAction<Card> handler = a => executeIfTrue.Invoke(a, owner, subjekt);
+
+            Event.OnDamaged.AddListener(handler);
+
+            return () => Event.OnDamaged.RemoveListener(handler);
         }
     }
 }
