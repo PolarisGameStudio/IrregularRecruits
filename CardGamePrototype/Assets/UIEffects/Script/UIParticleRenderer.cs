@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,9 +31,9 @@ namespace SpriteParticleEmitter
 
         private Texture currentTexture;
 
-        #if UNITY_5_5_OR_NEWER
+#if UNITY_5_5_OR_NEWER
         private ParticleSystem.MainModule mainModule;
-        #endif
+#endif
 
         public override Texture mainTexture
         {
@@ -61,21 +59,21 @@ namespace SpriteParticleEmitter
                     return false;
                 }
 
-                #if UNITY_5_5_OR_NEWER
+#if UNITY_5_5_OR_NEWER
                 mainModule = pSystem.main;
                 if (pSystem.main.maxParticles > 14000)
                 {
                     mainModule.maxParticles = 14000;
                 }
-                #else
+#else
                     if (pSystem.maxParticles > 14000)
                         pSystem.maxParticles = 14000;
-                #endif
+#endif
 
                 pRenderer = pSystem.GetComponent<ParticleSystemRenderer>();
                 if (pRenderer != null)
                     pRenderer.enabled = false;
-                
+
                 Shader foundShader = Shader.Find("UI/Particles/Additive");
                 Material pMaterial = new Material(foundShader);
 
@@ -91,21 +89,21 @@ namespace SpriteParticleEmitter
                 }
                 material = currentMaterial;
                 // automatically set scaling
-                #if UNITY_5_5_OR_NEWER
+#if UNITY_5_5_OR_NEWER
                 mainModule.scalingMode = ParticleSystemScalingMode.Hierarchy;
-                #else
+#else
                     pSystem.scalingMode = ParticleSystemScalingMode.Hierarchy;
-                #endif
+#endif
 
                 particles = null;
             }
-            #if UNITY_5_5_OR_NEWER
+#if UNITY_5_5_OR_NEWER
             if (particles == null)
                 particles = new ParticleSystem.Particle[pSystem.main.maxParticles];
-            #else
+#else
                 if (particles == null)
                     particles = new ParticleSystem.Particle[pSystem.maxParticles];
-            #endif
+#endif
 
             imageUV = new Vector4(0, 0, 1, 1);
 
@@ -129,7 +127,7 @@ namespace SpriteParticleEmitter
                 enabled = false;
         }
 
-        
+
         protected override void OnPopulateMesh(VertexHelper vh)
         {
 #if UNITY_EDITOR
@@ -160,34 +158,34 @@ namespace SpriteParticleEmitter
                 ParticleSystem.Particle particle = particles[i];
 
                 // get particle properties
-                #if UNITY_5_5_OR_NEWER
+#if UNITY_5_5_OR_NEWER
                 Vector2 position = (mainModule.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : _transform.InverseTransformPoint(particle.position));
-                #else
+#else
                     Vector2 position = (pSystem.simulationSpace == ParticleSystemSimulationSpace.Local ? particle.position : _transform.InverseTransformPoint(particle.position));
-                #endif  
+#endif
                 float rotation = -particle.rotation * Mathf.Deg2Rad;
                 float rotation90 = rotation + Mathf.PI / 2;
                 Color32 color = particle.GetCurrentColor(pSystem);
                 float size = particle.GetCurrentSize(pSystem) * 0.5f;
 
                 // apply scale
-                #if UNITY_5_5_OR_NEWER
+#if UNITY_5_5_OR_NEWER
                 if (mainModule.scalingMode == ParticleSystemScalingMode.Shape)
                     position /= canvas.scaleFactor;
-                #else
+#else
                     if (pSystem.scalingMode == ParticleSystemScalingMode.Shape)
                         position /= canvas.scaleFactor;
-                #endif
+#endif
 
                 // apply texture sheet animation
                 Vector4 particleUV = imageUV;
                 if (textureSheetAnimation.enabled)
                 {
-                    #if UNITY_5_5_OR_NEWER
+#if UNITY_5_5_OR_NEWER
                     float frameProgress = textureSheetAnimation.frameOverTime.curveMin.Evaluate(1 - (particle.remainingLifetime / particle.startLifetime));
-                    #else
+#else
                     float frameProgress = 1 - (particle.lifetime / particle.startLifetime);
-                    #endif
+#endif
 
                     frameProgress = Mathf.Repeat(frameProgress * textureSheetAnimation.cycleCount, 1);
                     int frame = 0;
@@ -288,8 +286,8 @@ namespace SpriteParticleEmitter
                 pSystem.Simulate(Time.unscaledDeltaTime, false, false, true);
                 SetAllDirty();
 
-                if ((currentMaterial!= null && currentTexture != currentMaterial.mainTexture) ||
-                    (material!=null && currentMaterial != null && material.shader != currentMaterial.shader))
+                if ((currentMaterial != null && currentTexture != currentMaterial.mainTexture) ||
+                    (material != null && currentMaterial != null && material.shader != currentMaterial.shader))
                 {
                     pSystem = null;
                     Initialize();
@@ -317,7 +315,7 @@ namespace SpriteParticleEmitter
                     }
                 }
             }
-            if (material == currentMaterial) 
+            if (material == currentMaterial)
                 return;
             pSystem = null;
             Initialize();

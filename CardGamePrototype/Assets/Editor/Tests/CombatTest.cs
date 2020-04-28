@@ -1,18 +1,16 @@
-﻿using System.Collections;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using UnityEngine.TestTools;
 
 namespace Tests
 {
-    
+
 
     public class CombatTest
     {
         private BattleManager BattleManager;
 
-        private Card GenerateTestCreature(Ability ability, Race race = null,int attack = 2)
+        private Card GenerateTestCreature(Ability ability, Race race = null, int attack = 2)
         {
             Trait trait = new Trait()
             {
@@ -25,7 +23,7 @@ namespace Tests
                 name = "TesterOne",
                 Attack = attack,
                 Race = race,
-                Health = 5,
+                Health = 7,
                 Traits = new List<Trait>()
                 {
                     trait
@@ -56,8 +54,8 @@ namespace Tests
                     {
                         ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 5, new Noun(Noun.CharacterTyp.Any)),
                         TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.RoundEnd),
-                    },null,0
-                    ): GenerateTestCreature(null);
+                    }, null, 0
+                    ) : GenerateTestCreature(null);
 
                 testDeck.AddCard(c);
             }
@@ -134,8 +132,8 @@ namespace Tests
         [Test]
         public void BattleResolvesWithOnlyAbilityDamage()
         {
-            var pDeck = GenerateTestDeck(3, true,true);
-            var enmDeck = GenerateTestDeck(3, false,true);
+            var pDeck = GenerateTestDeck(3, true, true);
+            var enmDeck = GenerateTestDeck(3, false, true);
 
             var battleFinished = false;
 
@@ -160,7 +158,8 @@ namespace Tests
 
             HashSet<Card> attackers = new HashSet<Card>();
 
-            Event.OnAttack.AddListener(c=> attackers.Add(c));
+            Event.OnAttack.AddListener(c => attackers.Add(c));
+
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 

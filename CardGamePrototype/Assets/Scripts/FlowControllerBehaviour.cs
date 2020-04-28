@@ -15,10 +15,10 @@ public class FlowControllerBehaviour : Singleton<FlowControllerBehaviour>
         Event.OnHealed.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is healed"));
         Event.OnKill.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Killed a minion"));
         Event.OnWithdraw.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Withdrew"));
-        Event.OnAbilityTrigger.AddListener((a,c,ts) => Debug.Log("Event: " + c.Creature.name + ": AbilityTriggered"));
+        Event.OnAbilityTrigger.AddListener((a, c, ts) => Debug.Log("Event: " + c.Creature.name + ": AbilityTriggered"));
         Event.OnBattleFinished.AddListener(() => Debug.Log("Event: Combat Finished"));
         Event.OnCombatResolveFinished.AddListener(() => Debug.Log("Event: Combat Round Finished"));
-        Event.OnCombatSetup.AddListener((p, c) => Debug.Log("Event: Combat started between: " +p + " and " + c ));
+        Event.OnCombatSetup.AddListener((p, c) => Debug.Log("Event: Combat started between: " + p + " and " + c));
         Event.OnGameOver.AddListener(() => Debug.Log("Event: Game Over"));
 
         StartCoroutine(EventControlLoop());
@@ -28,7 +28,7 @@ public class FlowControllerBehaviour : Singleton<FlowControllerBehaviour>
     //If no actions to invoke, it will set ReadyForAction = true;
     private IEnumerator EventControlLoop()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForFixedUpdate();
 

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
-using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -46,7 +44,7 @@ public class CardEditor : Singleton<CardEditor>
         AbilityEditor.MoveTraitToOtherButton.onClick.AddListener(MoveAbilityToOtherCreature);
         AbilityEditor.DeleteTraitButton.onClick.AddListener(DeleteAbility);
 
-        TraitEditorInstance.AddTraitButton.onClick.AddListener(()=>AddTrait());
+        TraitEditorInstance.AddTraitButton.onClick.AddListener(() => AddTrait());
     }
 
     private void AddTrait(Trait t = null)
@@ -60,7 +58,7 @@ public class CardEditor : Singleton<CardEditor>
         entry.ChangeTraitButton.gameObject.SetActive(true);
         entry.AddTraitButton.enabled = false;
 
-        if(t)
+        if (t)
         {
             entry.UpdateTrait(t);
         }
@@ -75,7 +73,7 @@ public class CardEditor : Singleton<CardEditor>
     private void RemoveTrait(TraitEditorInstance entry)
     {
         Creature.Traits.Remove(entry.Trait);
-        
+
         EditorUtility.SetDirty(Creature);
 
         DeleteTraitEntry(entry);
@@ -107,7 +105,7 @@ public class CardEditor : Singleton<CardEditor>
 
     private void DeleteAbility()
     {
-        DestroyImmediate(Creature.SpecialAbility,true);
+        DestroyImmediate(Creature.SpecialAbility, true);
 
         Creature.SpecialAbility = null;
 
@@ -144,7 +142,7 @@ public class CardEditor : Singleton<CardEditor>
 
         do
         {
-            var index = Traits.IndexOf(newTrait)+1;
+            var index = Traits.IndexOf(newTrait) + 1;
             if (index < 0) index = 0;
             if (index >= Traits.Count) index = 0;
             newTrait = Traits[index];
@@ -209,10 +207,10 @@ public class CardEditor : Singleton<CardEditor>
     private void UpdateAbility()
     {
         AbilityEditor.Image.enabled = Creature.SpecialAbility;
-        if(Creature.SpecialAbility)
+        if (Creature.SpecialAbility)
         {
             AbilityEditor.Image.sprite = IconManager.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
-            AbilityEditor.Text.text = Creature.SpecialAbility.Description(Creature); 
+            AbilityEditor.Text.text = Creature.SpecialAbility.Description(Creature);
         }
         else
         {

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -53,7 +52,7 @@ namespace UnityStandardAssets.ImageEffects
             if (dx11Grain && supportDX11)
             {
 #if UNITY_EDITOR
-				dx11NoiseShader = Shader.Find("Hidden/NoiseAndGrainDX11");
+                dx11NoiseShader = Shader.Find("Hidden/NoiseAndGrainDX11");
 #endif
                 dx11NoiseMaterial = CheckShaderAndCreateMaterial(dx11NoiseShader, dx11NoiseMaterial);
             }

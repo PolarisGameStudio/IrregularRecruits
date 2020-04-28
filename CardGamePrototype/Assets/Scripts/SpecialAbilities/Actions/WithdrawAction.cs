@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class WithdrawAction : AbilityAction
 {
@@ -13,7 +11,7 @@ public class WithdrawAction : AbilityAction
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
-                Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
         targets.ForEach(c => c.Withdraw());
     }
 

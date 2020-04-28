@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using static Ability;
+﻿using System.Collections.Generic;
 
-public abstract class AbilityAction 
+public abstract class AbilityAction
 {
     public AbilityAction() { }
 

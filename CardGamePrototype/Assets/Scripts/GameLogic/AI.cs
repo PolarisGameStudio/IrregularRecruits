@@ -1,33 +1,33 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class AI : IDeckController
+namespace GameLogic
 {
-    private Deck ControlledDeck;
-    private Action OnFinish;
-
-    //this could be a more complex evaluation and move mechanics
-    public void YourTurn()
+    public class AI : IDeckController
     {
-        ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
+        private Deck ControlledDeck;
+        private Action OnFinish;
 
-        for (int i = 0; i < GameSettings.Instance.EnemyPlaysPrTurn; i++)
+        //this could be a more complex evaluation and move mechanics
+        public void YourTurn()
         {
-            if (ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0)
-                break;
+            ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-            ControlledDeck.CreaturesInZone(Deck.Zone.Hand)[0].PlayCard() ;
+            for (int i = 0; i < GameSettings.Instance.EnemyPlaysPrTurn; i++)
+            {
+                if (ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0)
+                    break;
+
+                ControlledDeck.CreaturesInZone(Deck.Zone.Hand)[0].PlayCard();
+            }
+
+            OnFinish.Invoke();
         }
 
-        OnFinish.Invoke();
-    }
+        public void SetupDeckActions(Deck deck, Action onFinish)
+        {
+            ControlledDeck = deck;
+            OnFinish = onFinish;
+        }
 
-    public void SetupDeckActions(Deck deck, Action onFinish)
-    {
-        ControlledDeck = deck;
-        OnFinish = onFinish;
     }
-
 }

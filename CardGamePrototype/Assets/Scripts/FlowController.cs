@@ -20,7 +20,7 @@ public static class FlowController
     {
         ActionQueue.Dequeue().Invoke();
         if (ActionQueue.Count == 0)
-        { 
+        {
             ReadyForInput = true;
             OnReadyForInput.Invoke();
         }

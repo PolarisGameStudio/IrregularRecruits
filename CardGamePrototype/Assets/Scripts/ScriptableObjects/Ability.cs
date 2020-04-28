@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu]
@@ -62,10 +59,10 @@ public partial class Ability : ScriptableObject
 
     public void SetupListeners(Card _owner)
     {
-        AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner,TriggerCondition.Subjekt,ExecuteIfTrue);
+        AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner, TriggerCondition.Subjekt, ExecuteIfTrue);
         //TODO: replace with CardEvent Reference
     }
-    
+
 
     public float GetValue()
     {
@@ -88,7 +85,7 @@ public partial class Ability : ScriptableObject
 
         List<Card> targets = GetTargets(ResultingAction.Target, ResultingAction.TargetCount, Deck.Zone.Battlefield, owner, triggerExecuter);
 
-        AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteAction(this, owner,targets);        
+        AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteAction(this, owner, targets);
     }
 
     public List<Card> GetTargets(Noun targetType, Count count, Deck.Zone location, Card _owner, Card triggerExecuter)

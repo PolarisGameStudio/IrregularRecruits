@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +24,7 @@ public class CombatPrototype : Singleton<CombatPrototype>
 
         PlayerDeck = GenerateDeck(true);
 
-        NextCombatButton.onClick.AddListener( NextCombat);
+        NextCombatButton.onClick.AddListener(NextCombat);
         Event.OnBattleFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
     }
 
@@ -63,14 +61,14 @@ public class CombatPrototype : Singleton<CombatPrototype>
         //Generate a deck full of the test creature
         if (TestCreature && player)
         {
-            creatures = new List<Creature>() { TestCreature }; 
+            creatures = new List<Creature>() { TestCreature };
         }
         else
         {
             Race[] possibleRaces = player ? AllRaces.Where(r => r.PlayerRace).ToArray() : AllRaces;
             var race = possibleRaces[Random.Range(0, possibleRaces.Length)];
 
-             creatures = AllCreatures.Where(c => c.Race == race).ToList();
+            creatures = AllCreatures.Where(c => c.Race == race).ToList();
         }
 
         var rares = creatures.Where(c => c.Rarity == Creature.RarityType.Rare || c.Rarity == Creature.RarityType.Unique).ToList();
@@ -92,7 +90,7 @@ public class CombatPrototype : Singleton<CombatPrototype>
 
 
             var card = new Card(notRares[Random.Range(0, notRares.Count())]);
-            
+
             library.Add(card);
         }
 

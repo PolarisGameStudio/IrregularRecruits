@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +14,7 @@ public class TraitEditorInstance : MonoBehaviour
     public void UpdateTrait(Trait t)
     {
         AddTraitButton.image.sprite = t.Icon;
-        Text.text = t.name + " ("+t.Description+")";
+        Text.text = t.name + " (" + t.Description + ")";
 
         Trait = t;
     }

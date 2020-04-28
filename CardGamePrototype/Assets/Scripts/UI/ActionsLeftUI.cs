@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ public class ActionsLeftUI : MonoBehaviour
 
     private void Start()
     {
-        Event.OnCombatSetup.AddListener((p, c)=> Initialize());
+        Event.OnCombatSetup.AddListener((p, c) => Initialize());
     }
 
     void Initialize()
@@ -21,7 +20,7 @@ public class ActionsLeftUI : MonoBehaviour
         Initialized = true;
 
         //TODO: does not take into account if amount of actions are changed. Move to on next turn and check there
-        for(int i = 0; i < GameSettings.Instance.PlayerPlaysPrTurn;i++)
+        for (int i = 0; i < GameSettings.Instance.PlayerPlaysPrTurn; i++)
         {
             ActionIcons.Add(Instantiate(ActionIconExample, ActionIconExample.transform.parent));
         }
@@ -33,7 +32,7 @@ public class ActionsLeftUI : MonoBehaviour
 
     private void OnActionUsed()
     {
-        if(ActionIcons.Any(a=> a.Active))
+        if (ActionIcons.Any(a => a.Active))
             ActionIcons.First(a => a.Active).Active = false;
     }
 

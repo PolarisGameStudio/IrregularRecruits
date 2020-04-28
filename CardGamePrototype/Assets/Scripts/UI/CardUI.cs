@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -89,7 +88,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
         InstantiatedObjects.ForEach(DestroyImmediate);
         InstantiatedObjects.Clear();
 
-        if(DescriptionText)
+        if (DescriptionText)
             DescriptionText.text = "";
 
         if (RaceInstance)
@@ -168,7 +167,7 @@ public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, 
 #if !UNITY_EDITOR
         if (CardHighlight.IsActive()) return;
 #endif
-        if(Interactable && Card.BattleRepresentation == this)
+        if (Interactable && Card.BattleRepresentation == this)
             Card.Click();
     }
 

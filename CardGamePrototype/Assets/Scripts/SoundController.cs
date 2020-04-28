@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SoundController : Singleton<SoundController>
 {
@@ -12,17 +10,17 @@ public class SoundController : Singleton<SoundController>
 
     private void Awake()
     {
-        Event.OnGameBegin.AddListener(()=> ChangeMusic(SoundBank.Music.Explore));
-        Event.OnGameBegin.AddListener(()=> PlayStinger(SoundBank.Stinger.GameStart));
+        Event.OnGameBegin.AddListener(() => ChangeMusic(SoundBank.Music.Explore));
+        Event.OnGameBegin.AddListener(() => PlayStinger(SoundBank.Stinger.GameStart));
 
         Event.OnGameOpen.AddListener(() => ChangeMusic(SoundBank.Music.Menu));
-        Event.OnGameOpen.AddListener(()=> PlayStinger(SoundBank.Stinger.MenuOpen));
+        Event.OnGameOpen.AddListener(() => PlayStinger(SoundBank.Stinger.MenuOpen));
 
         Event.OnGameOver.AddListener(() => ChangeMusic(SoundBank.Music.NoMusic));
-        Event.OnGameOver.AddListener(()=> PlayStinger(SoundBank.Stinger.GameLoss));
-        
-        Event.OnCombatSetup.AddListener((p,c) => ChangeMusic(SoundBank.Music.Battle));
-        
+        Event.OnGameOver.AddListener(() => PlayStinger(SoundBank.Stinger.GameLoss));
+
+        Event.OnCombatSetup.AddListener((p, c) => ChangeMusic(SoundBank.Music.Battle));
+
         Event.OnBattleFinished.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
         Event.OnBattleFinished.AddListener(() => PlayStinger(SoundBank.Stinger.BattleWon));
 
@@ -44,13 +42,13 @@ public class SoundController : Singleton<SoundController>
     {
         Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityTrigger(type));
     }
-    
+
     public static void PlayAbilityHit(Ability.ActionType type)
     {
         Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityHit(type));
     }
 
-        public static void PlayStinger(SoundBank.Stinger type)
+    public static void PlayStinger(SoundBank.Stinger type)
     {
         Instance.StingerAudioSource.PlayOneShot(SoundBank.GetSound(type));
 
@@ -66,7 +64,7 @@ public class SoundController : Singleton<SoundController>
 
     }
 
-    
+
     //TODO: create fade
     public static void ChangeMusic(SoundBank.Music type)
     {
@@ -77,7 +75,7 @@ public class SoundController : Singleton<SoundController>
         }
 
         var f = SoundBank.GetSound(type);
-        
+
         if (Instance.MusicAudioSource.clip != f)
         {
             Instance.MusicAudioSource.clip = f;

@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Tests
+﻿namespace Tests
 {
-    public class TraitTest 
+    public class TraitTest
     {
     }
 }

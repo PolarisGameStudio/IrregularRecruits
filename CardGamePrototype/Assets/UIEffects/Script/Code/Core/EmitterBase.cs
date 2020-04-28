@@ -79,20 +79,20 @@ namespace SpriteParticleEmitter
             }
 
             //Set base varibles in the system for this emitter work as expected
-            #if UNITY_5_5_OR_NEWER
+#if UNITY_5_5_OR_NEWER
             mainModule = particlesSystem.main;
             mainModule.loop = false;
             mainModule.playOnAwake = false;
             particlesSystem.Stop();
             //validate simulation Space
             SimulationSpace = mainModule.simulationSpace;
-            #else
+#else
                 particlesSystem.loop = false;
                 particlesSystem.playOnAwake = false;
                 particlesSystem.Stop();
                 //validate simulation Space
                 SimulationSpace = particlesSystem.simulationSpace;
-            #endif
+#endif
         }
 
         #region Abstract Methods

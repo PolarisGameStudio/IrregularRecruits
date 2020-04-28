@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CardHighlight : Singleton<CardHighlight>
@@ -43,8 +41,8 @@ public class CardHighlight : Singleton<CardHighlight>
     //remember color the same as health and attack of card
     public static void Show(CardUI card)
     {
-        if(ShowAfterDelayRoutine == null)
-            ShowAfterDelayRoutine = Instance.StartCoroutine( Instance.ShowAfterDelay(card));
+        if (ShowAfterDelayRoutine == null)
+            ShowAfterDelayRoutine = Instance.StartCoroutine(Instance.ShowAfterDelay(card));
     }
 
     private IEnumerator ShowAfterDelay(CardUI card)
@@ -58,7 +56,7 @@ public class CardHighlight : Singleton<CardHighlight>
     {
         ShowAfterDelayRoutine = null;
 
-        Creature = cardUI.Card != null ? cardUI.Card.Creature: cardUI.Creature;
+        Creature = cardUI.Card != null ? cardUI.Card.Creature : cardUI.Creature;
 
         InstantiatedObjects.ForEach(t => Destroy(t.gameObject));
 
@@ -66,7 +64,7 @@ public class CardHighlight : Singleton<CardHighlight>
 
         CardTitleText.text = Creature.name;
 
-        if(Creature.IconImage)
+        if (Creature.IconImage)
         {
             Image.sprite = Creature.IconImage;
             ImageMask.enabled = false;
@@ -84,7 +82,7 @@ public class CardHighlight : Singleton<CardHighlight>
 
         //public TextMeshProUGUI HealthText;
         HealthText.text =
-            (cardUI.Card != null ? cardUI.Card.CurrentHealth.ToString("N0") +"/" + cardUI.Card.MaxHealth.ToString("N0"):
+            (cardUI.Card != null ? cardUI.Card.CurrentHealth.ToString("N0") + "/" + cardUI.Card.MaxHealth.ToString("N0") :
             Creature.Health.ToString("N0"));
         HealthText.color = (cardUI.Card != null ? cardUI.HealthText.color : Color.white);
 
@@ -97,13 +95,14 @@ public class CardHighlight : Singleton<CardHighlight>
 
         AbilityIcon.gameObject.SetActive(Creature.SpecialAbility);
 
-        if (Creature.SpecialAbility) {
+        if (Creature.SpecialAbility)
+        {
             AbilityIcon.Text.text = Creature.SpecialAbility?.Description(Creature);
             AbilityIcon.Image.sprite = IconManager.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
         }
 
         //public ImageTextEntry TraitPrefab;
-        foreach(var t in Creature.Traits)
+        foreach (var t in Creature.Traits)
         {
             var trait = Instantiate(TraitPrefab, TraitPrefab.transform.parent);
             trait.Text.text = $" <b>{t.name}</b> <i>({t.Description})</i>";

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public partial class Ability
 {
@@ -21,8 +19,8 @@ public partial class Ability
 
     [Serializable]
     public struct Trigger
-    { 
-    
+    {
+
         public Noun Subjekt;
         public Verb TriggerAction;
 
@@ -32,7 +30,8 @@ public partial class Ability
             TriggerAction = triggerAction;
         }
 
-        public string Description(Creature _owner) {
+        public string Description(Creature _owner)
+        {
             return AbilityProcessor.GetTrigger(TriggerAction).Description(Subjekt.NounAsString(_owner));
 
         }
@@ -49,7 +48,7 @@ public partial class Ability
 
             //The more common the higher the value. So each constraint subtracts the value
             var value = 1.4f;
-                                   
+
             if (Subjekt.Relationship != Noun.Allegiance.Any)
                 value -= 0.1f;
             if (Subjekt.Race != Noun.RaceType.Any)
@@ -69,9 +68,9 @@ public partial class Ability
 
     }
 
-        //internal bool AnyTriggerInconsistencies()
-        //{
-        //    return InconsistentNounVerbs.Any(a => a.Key == TriggerCondition.TriggerAction && a.Value.Contains(TriggerCondition.Subject));
-        //}
+    //internal bool AnyTriggerInconsistencies()
+    //{
+    //    return InconsistentNounVerbs.Any(a => a.Key == TriggerCondition.TriggerAction && a.Value.Contains(TriggerCondition.Subject));
+    //}
 
-    }
+}

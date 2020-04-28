@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -20,7 +18,7 @@ public class DissolveEffect : MonoBehaviour
 
     private void Update()
     {
-        if(IsDissolving)
+        if (IsDissolving)
         {
             DissolveAmount = Mathf.Clamp01(DissolveAmount + Time.deltaTime);
             Material.SetFloat("DissolveAmount", DissolveAmount);

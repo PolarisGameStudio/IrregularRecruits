@@ -1,165 +1,166 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
 
-public class Deck 
+namespace GameLogic
 {
-    public enum Zone { Library, Battlefield, Graveyard, Hand, COUNT }
-    public bool PlayerDeck;
-    public DeckObject DeckObject;
-    public IDeckController DeckController;
-
-    private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
-
-    public Deck(DeckObject deckObject,bool playerDeck)
-        : this(deckObject.Creatures.Select(c => new Card(c)).ToList(), playerDeck)
+    public class Deck
     {
-        DeckObject = deckObject;
-    }
+        public enum Zone { Library, Battlefield, Graveyard, Hand, COUNT }
+        public bool PlayerDeck;
+        public DeckObject DeckObject;
+        public IDeckController DeckController;
 
-    public Deck(List<Card> initialLibrary,bool playerDeck)
-    {
-        for (int i = (int)Zone.Library; i < (int)Zone.COUNT; i++)
+        private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
+
+        public Deck(DeckObject deckObject, bool playerDeck)
+            : this(deckObject.Creatures.Select(c => new Card(c)).ToList(), playerDeck)
         {
-            Creatures[(Zone)i] = new List<Card>();
+            DeckObject = deckObject;
         }
 
-        PlayerDeck = playerDeck;
-
-
-        foreach (var card in initialLibrary)
+        public Deck(List<Card> initialLibrary, bool playerDeck)
         {
-            AddCard(card);
+            for (int i = (int)Zone.Library; i < (int)Zone.COUNT; i++)
+            {
+                Creatures[(Zone)i] = new List<Card>();
+            }
+
+            PlayerDeck = playerDeck;
+
+
+            foreach (var card in initialLibrary)
+            {
+                AddCard(card);
+            }
+
+            //if (!playerDeck)
+            //    AI = new AI(this);
+
         }
 
-        //if (!playerDeck)
-        //    AI = new AI(this);
-
-    }
-
-    public void AddCard(Card card)
-    {
-        card.InDeck = this;
-        card.Location = Zone.Library;
-
-        Creatures[Zone.Library].Add(card);
-    }
-
-    public List<Card> CreaturesInZone(Zone z)
-        => Creatures[z];
-
-    internal void DrawInitialHand(bool enemy = false)
-    {
-        ShuffleLibrary();
-
-        var amountToDraw = GameSettings.StartingHandSize(enemy);
-
-        //Move AVANTGARDE cards to the front and shuffle the rest
-        foreach(var c in CreaturesInZone(Zone.Library).Where(c=>c.Avantgarde()))
+        public void AddCard(Card card)
         {
-            Draw(c);
-            amountToDraw--;
+            card.InDeck = this;
+            card.Location = Zone.Library;
+
+            Creatures[Zone.Library].Add(card);
         }
 
-        if (enemy)
+        public List<Card> CreaturesInZone(Zone z)
+            => Creatures[z];
+
+        internal void DrawInitialHand(bool enemy = false)
         {
-            for (int i = 0; i < GameSettings.Instance.EnemyBattlefieldSize; i++)
-                MoveTopCardToBattleField();
+            ShuffleLibrary();
+
+            var amountToDraw = GameSettings.StartingHandSize(enemy);
+
+            //Move AVANTGARDE cards to the front and shuffle the rest
+            foreach (var c in CreaturesInZone(Zone.Library).Where(c => c.Avantgarde()))
+            {
+                Draw(c);
+                amountToDraw--;
+            }
+
+            if (enemy)
+            {
+                for (int i = 0; i < GameSettings.Instance.EnemyBattlefieldSize; i++)
+                    MoveTopCardToBattleField();
+            }
+
+            Draw(amountToDraw);
         }
-        
-        Draw(amountToDraw);
-    }
 
 
-    internal void PackUp()
-    {
-        //Debug.Log("Packing deck");
-
-        //removing dead creatures
-        while (Creatures[Zone.Graveyard].Any())
-            Remove(Creatures[Zone.Graveyard].First());    
-        
-        foreach(var c in AllCreatures())
+        internal void PackUp()
         {
-            c.ResetAfterBattle();
+            //Debug.Log("Packing deck");
+
+            //removing dead creatures
+            while (Creatures[Zone.Graveyard].Any())
+                Remove(Creatures[Zone.Graveyard].First());
+
+            foreach (var c in AllCreatures())
+            {
+                c.ResetAfterBattle();
+            }
         }
-    }
 
-    public void ShuffleLibrary()
-    {
-        Creatures[Zone.Library] = Creatures[Zone.Library].OrderBy(x => Random.value).ToList();
-    }
-       
-    public void Draw(int amount)
-    {
-        if (Creatures[Zone.Library].Count() == 0 || amount < 0) return;
-        if (Creatures[Zone.Library].Count() < amount) amount = Creatures[Zone.Library].Count();
-
-        var draws = Creatures[Zone.Library].Take(amount);
-
-        foreach (var card in draws)
+        public void ShuffleLibrary()
         {
-            Draw(card);
+            Creatures[Zone.Library] = Creatures[Zone.Library].OrderBy(x => Random.value).ToList();
         }
-    }
 
-    public void Draw(Card card)
-    {
-        Event.OnDraw.Invoke(card);
-    }
-
-    public List<Card> AllCreatures()
-    {
-        return Creatures.SelectMany(x => x.Value).ToList();
-    }
-
-    public void MoveTopCardToBattleField()
-    {
-        if (Creatures[Zone.Library].Count() == 0) return;
-
-        Creatures[Zone.Library][0].ChangeLocation(Zone.Library, Zone.Battlefield);
-    }
-
-    //returns count of all creatures not in Graveyard
-    public int Alive() => Creatures.Sum(a => a.Key == Zone.Graveyard ? 0 : a.Value.Count);
-
-    internal Card GetAttackTarget()
-    {
-        //empty list check?
-        if (CreaturesInZone(Zone.Battlefield).Count > 0)
+        public void Draw(int amount)
         {
-            List<Card> battlefield = CreaturesInZone(Zone.Battlefield).Where(c=> !c.Ethereal()).ToList();
-            var defenders = battlefield.Where(c => c.Defender()).ToList();
+            if (Creatures[Zone.Library].Count() == 0 || amount < 0) return;
+            if (Creatures[Zone.Library].Count() < amount) amount = Creatures[Zone.Library].Count();
 
-            if (defenders.Any())
-                return defenders[Random.Range(0, defenders.Count())];
+            var draws = Creatures[Zone.Library].Take(amount);
 
-            if (!battlefield.Any()) //meaning only ethereals
-                return CreaturesInZone(Zone.Battlefield)[Random.Range(0, CreaturesInZone(Zone.Battlefield).Count)];
-
-            return battlefield[Random.Range(0, battlefield.Count())];
+            foreach (var card in draws)
+            {
+                Draw(card);
+            }
         }
-        else if (CreaturesInZone(Zone.Hand).Count > 0)
+
+        public void Draw(Card card)
         {
-            return CreaturesInZone(Zone.Hand)[Random.Range(0, CreaturesInZone(Zone.Hand).Count())];
+            Event.OnDraw.Invoke(card);
         }
-        else if (CreaturesInZone(Zone.Library).Count > 0)
+
+        public List<Card> AllCreatures()
         {
-            return CreaturesInZone(Zone.Library)[Random.Range(0, CreaturesInZone(Zone.Library).Count())];
+            return Creatures.SelectMany(x => x.Value).ToList();
         }
-        else return null;
-    }
 
-    internal void Remove(Card card)
-    {
-        Creatures[card.Location].Remove(card);
-        card.InDeck = null;
-    }
+        public void MoveTopCardToBattleField()
+        {
+            if (Creatures[Zone.Library].Count() == 0) return;
 
-    internal void Add(Card card)
-    {
-        Creatures[card.Location].Add(card);
+            Creatures[Zone.Library][0].ChangeLocation(Zone.Library, Zone.Battlefield);
+        }
+
+        //returns count of all creatures not in Graveyard
+        public int Alive() => Creatures.Sum(a => a.Key == Zone.Graveyard ? 0 : a.Value.Count);
+
+        internal Card GetAttackTarget()
+        {
+            //empty list check?
+            if (CreaturesInZone(Zone.Battlefield).Count > 0)
+            {
+                List<Card> battlefield = CreaturesInZone(Zone.Battlefield).Where(c => !c.Ethereal()).ToList();
+                var defenders = battlefield.Where(c => c.Defender()).ToList();
+
+                if (defenders.Any())
+                    return defenders[Random.Range(0, defenders.Count())];
+
+                if (!battlefield.Any()) //meaning only ethereals
+                    return CreaturesInZone(Zone.Battlefield)[Random.Range(0, CreaturesInZone(Zone.Battlefield).Count)];
+
+                return battlefield[Random.Range(0, battlefield.Count())];
+            }
+            else if (CreaturesInZone(Zone.Hand).Count > 0)
+            {
+                return CreaturesInZone(Zone.Hand)[Random.Range(0, CreaturesInZone(Zone.Hand).Count())];
+            }
+            else if (CreaturesInZone(Zone.Library).Count > 0)
+            {
+                return CreaturesInZone(Zone.Library)[Random.Range(0, CreaturesInZone(Zone.Library).Count())];
+            }
+            else return null;
+        }
+
+        internal void Remove(Card card)
+        {
+            Creatures[card.Location].Remove(card);
+            card.InDeck = null;
+        }
+
+        internal void Add(Card card)
+        {
+            Creatures[card.Location].Add(card);
+        }
     }
 }

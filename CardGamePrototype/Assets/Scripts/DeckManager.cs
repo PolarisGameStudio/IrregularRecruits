@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class DeckManager : Singleton<DeckManager>
 {
@@ -9,7 +7,7 @@ public class DeckManager : Singleton<DeckManager>
     public static List<DeckObject> GetDecks()
     {
 #if UNITY_EDITOR
-        if (Instance.Decks == null ||Instance.Decks.Count == 0)
+        if (Instance.Decks == null || Instance.Decks.Count == 0)
             Instance.Decks = AssetManager.GetAssetsOfType<DeckObject>();
 #endif
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ActionIcon : MonoBehaviour
@@ -13,7 +11,7 @@ public class ActionIcon : MonoBehaviour
 
     public bool Active
     {
-        get => active; 
+        get => active;
         set
         {
             active = value;

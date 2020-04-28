@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 
 public class SoundBank : Singleton<SoundBank>
 {
-    
+
     public enum UiSound
     {
         TapClick,
@@ -57,14 +54,14 @@ public class SoundBank : Singleton<SoundBank>
     }
 
 
-    
+
     [System.Serializable]
     public struct FXReference
     {
         public CardSound Type;
         public AudioClip[] Audio;
     }
-    
+
     [System.Serializable]
     public struct AbilitySound
     {
@@ -105,7 +102,7 @@ public class SoundBank : Singleton<SoundBank>
     public MusicRef[] Musics;
     public AbilitySound[] AbilitySounds;
 
-    
+
     internal static AudioClip GetSound(CardSound type)
     {
         if (!Instance.FXReferences.Any(s => s.Type == type))
@@ -160,7 +157,7 @@ public class SoundBank : Singleton<SoundBank>
 
         return Rnd(Instance.Musics.First(s => s.Type == sound).Audio);
     }
-    
+
     public static AudioClip GetAbilityTrigger(Ability.ActionType sound)
     {
         if (!Instance.AbilitySounds.Any(s => s.Type == sound))

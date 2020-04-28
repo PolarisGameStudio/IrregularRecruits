@@ -1,44 +1,43 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-	//responsible for keeping track of deck currently in combat and setting up actions 
-public class BattleManager 
+﻿namespace GameLogic
 {
-    public Deck PlayerDeck;
-    public Deck EnemyDeck;
-
-    public BattleManager()
+    //responsible for keeping track of deck currently in combat and setting up actions 
+    public class BattleManager
     {
-        Event.OnCombatSetup.AddListener(SetupCombat);
+        public Deck PlayerDeck;
+        public Deck EnemyDeck;
 
-        Event.OnTurnBegin.AddListener(NextTurn);
-    }
+        public BattleManager()
+        {
+            Event.OnCombatSetup.AddListener(SetupCombat);
 
-    private void SetupCombat(Deck playerDeck, Deck enemyDeck)
-    {
-        if (playerDeck.DeckController == null)
-            playerDeck.DeckController = new AI();
-        if (enemyDeck.DeckController == null)
-            enemyDeck.DeckController = new AI();
+            Event.OnTurnBegin.AddListener(NextTurn);
+        }
 
-        CombatAutoResolver combatAutoResolver = new CombatAutoResolver();
+        private void SetupCombat(Deck playerDeck, Deck enemyDeck)
+        {
+            if (playerDeck.DeckController == null)
+                playerDeck.DeckController = new AI();
+            if (enemyDeck.DeckController == null)
+                enemyDeck.DeckController = new AI();
 
-        combatAutoResolver.StartCombat(playerDeck, enemyDeck);
+            CombatAutoResolver combatAutoResolver = new CombatAutoResolver();
 
-        PlayerDeck = playerDeck;
-        EnemyDeck = enemyDeck;
+            combatAutoResolver.StartCombat(playerDeck, enemyDeck);
 
-        EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayerDeck.DeckController.YourTurn);
-        PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, Event.OnCombatResolveStart.Invoke);
+            PlayerDeck = playerDeck;
+            EnemyDeck = enemyDeck;
 
-        Event.OnTurnBegin.Invoke();
-    }
+            EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayerDeck.DeckController.YourTurn);
+            PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, Event.OnCombatResolveStart.Invoke);
 
-    private void NextTurn()
-    {
-        //Could control which player goes  first
-        EnemyDeck.DeckController.YourTurn();
+            Event.OnTurnBegin.Invoke();
+        }
+
+        private void NextTurn()
+        {
+            //Could control which player goes  first
+            if (EnemyDeck != null)
+                EnemyDeck.DeckController.YourTurn();
+        }
     }
 }

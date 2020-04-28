@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -29,7 +28,7 @@ public class BattleSummary : Singleton<BattleSummary>
             Destroy(i.gameObject);
         InstantiatedObjects.Clear();
 
-        var killed = initialEnemyDeck.Where(c => !finalEnemyDeck.Contains(c) &! finalPlayerDeck.Contains(c));
+        var killed = initialEnemyDeck.Where(c => !finalEnemyDeck.Contains(c) & !finalPlayerDeck.Contains(c));
         var lost = initialPlayerDeck.Where(c => !finalPlayerDeck.Contains(c));
         var gained = finalPlayerDeck.Where(c => !initialPlayerDeck.Contains(c));
         SetupIcons(killed, BattleSummaryKilledIcon);

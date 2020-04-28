@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class HealAction : AbilityAction
 {
@@ -13,11 +11,11 @@ public class HealAction : AbilityAction
 
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
-            Event.OnAbilityTrigger.Invoke(ability, owner, targets);
-            targets.ForEach(c => c.Heal(ability.ResultingAction.Amount));
+        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+        targets.ForEach(c => c.Heal(ability.ResultingAction.Amount));
     }
 
-    public override float GetValue(float targetValue,int amount)
+    public override float GetValue(float targetValue, int amount)
     {
         return 0.5f * targetValue * (1 + amount / 20f);
     }

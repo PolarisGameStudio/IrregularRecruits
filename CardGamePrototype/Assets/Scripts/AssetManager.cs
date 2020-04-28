@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
 
-public class AssetManager 
+public class AssetManager
 {
 
 #if UNITY_EDITOR
@@ -35,14 +34,14 @@ public class AssetManager
     [MenuItem("Content/Divide abilities")]
     public static void DivideAbilitiesToCreature()
     {
-        if(!creatureObjects.Any())
-            creatureObjects = GetAssetsOfType<Creature>().Where(c=>c.Race ).ToList();
+        if (!creatureObjects.Any())
+            creatureObjects = GetAssetsOfType<Creature>().Where(c => c.Race).ToList();
 
 
         List<Ability> abilities = new List<Ability>();
 
         abilities = GetAssetsOfType<Ability>();
-               
+
         foreach (var a in abilities)
         {
             //if already distributed
@@ -81,7 +80,7 @@ public class AssetManager
         {
             selected.First().SpecialAbility = a;
             EditorUtility.SetDirty(selected.First());
-            Debug.Log("moved ability: " + a+ "; to: "+selected.First());
+            Debug.Log("moved ability: " + a + "; to: " + selected.First());
         }
         else
             Debug.Log("no suitable creature found for ability: " + a);
@@ -89,12 +88,12 @@ public class AssetManager
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
-    
+
     [MenuItem("Content/Do stuff")]
     public static void DoStuff()
     {
         List<Creature> creatureObjects = new List<Creature>();
-        creatureObjects = GetAssetsOfType<Creature>().Where(c=>c.Race ).ToList();
+        creatureObjects = GetAssetsOfType<Creature>().Where(c => c.Race).ToList();
 
         List<Ability> abilities = new List<Ability>();
         abilities = GetAssetsOfType<Ability>();
@@ -131,12 +130,12 @@ public class AssetManager
         do
         {
             ability = ScriptableObject.CreateInstance<Ability>();
-            
+
             var triggerCondition = new Noun(
                 Random.value > 0.4f ? Noun.CharacterTyp.This : Noun.CharacterTyp.Any,
                 Random.value > 0.2f ? Noun.Allegiance.Any : (Random.value > 0.5f ? Noun.Allegiance.Friend : Noun.Allegiance.Enemy),
                 Random.value > 0.05f ? Noun.DamageType.Any : (Random.value > 0.5f ? Noun.DamageType.Damaged : Noun.DamageType.Undamaged),
-                Random.value > 0.15f ? Noun.RaceType.Any: (Random.value > 0.4f ? Noun.RaceType.Same: Noun.RaceType.Different)                    
+                Random.value > 0.15f ? Noun.RaceType.Any : (Random.value > 0.4f ? Noun.RaceType.Same : Noun.RaceType.Different)
                 );
 
             Ability.Verb triggerAction = (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ?
@@ -148,7 +147,7 @@ public class AssetManager
                 triggerAction);
 
             ability.FixTriggerInconsistencies();
-                
+
             var abilityTarget = new Noun(
                 Random.value > 0.6f ? Noun.CharacterTyp.This : Random.value > 0.5f ? Noun.CharacterTyp.It : Noun.CharacterTyp.Any,
                 Random.value > 0.2f ? Noun.Allegiance.Any : (Random.value > 0.5f ? Noun.Allegiance.Friend : Noun.Allegiance.Enemy),
@@ -170,7 +169,7 @@ public class AssetManager
 
         string path = "Assets/Resources/Abilities/";
 
-        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + ability.TriggerCondition.TriggerAction + "-" + ability.ResultingAction.ActionType  + Random.Range(0, 10000) + ".asset");
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + ability.TriggerCondition.TriggerAction + "-" + ability.ResultingAction.ActionType + Random.Range(0, 10000) + ".asset");
 
         AssetDatabase.CreateAsset(ability, assetPathAndName);
 

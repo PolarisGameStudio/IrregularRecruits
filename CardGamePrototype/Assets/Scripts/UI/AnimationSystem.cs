@@ -25,12 +25,12 @@ public class AnimationSystem : Singleton<AnimationSystem>
 
     private void Start()
     {
-        Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab,0,true)));
-        Event.OnPlay.AddListener(c => StartCoroutine(PlayCardFX(c, ETBParticlesPrefab,BattleUI.Instance.MoveDuration+0.1f)));
-        Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab,0.1f)));
+        Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab, 0, true)));
+        Event.OnPlay.AddListener(c => StartCoroutine(PlayCardFX(c, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f)));
+        Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
         Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
 
-        Event.OnAbilityTrigger.AddListener((a,c,ts) => PlayAbilityFx(a,c,ts,0.25f));
+        Event.OnAbilityTrigger.AddListener((a, c, ts) => PlayAbilityFx(a, c, ts, 0.25f));
     }
 
     public static IEnumerator AttackAnimation(Card owner, Card target, float duration)
@@ -51,16 +51,16 @@ public class AnimationSystem : Singleton<AnimationSystem>
     }
 
 
-    private IEnumerator PlayCardFX(Card card, ParticleSystem[] fxs,float delay = 0, bool instantiateInWorldSpace = false)
+    private IEnumerator PlayCardFX(Card card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
     {
         yield return new WaitForSeconds(delay);
 
         if (!card.BattleRepresentation) yield break;
         //vector2 to ignore z position to prevent oddities
         Vector2 position = card.BattleRepresentation.transform.position;
-        PlayFx(fxs, position, instantiateInWorldSpace ? null: card.BattleRepresentation.transform);
+        PlayFx(fxs, position, instantiateInWorldSpace ? null : card.BattleRepresentation.transform);
     }
-    private IEnumerator PlayAbilityIconFx(Card abilityOwner, ParticleSystem[] fxs,float delay = 0)
+    private IEnumerator PlayAbilityIconFx(Card abilityOwner, ParticleSystem[] fxs, float delay = 0)
     {
         yield return new WaitForSeconds(delay);
 
@@ -72,7 +72,7 @@ public class AnimationSystem : Singleton<AnimationSystem>
 
     }
 
-    private static void PlayFx(ParticleSystem[] fxs, Vector2 position,Transform parent)
+    private static void PlayFx(ParticleSystem[] fxs, Vector2 position, Transform parent)
     {
         foreach (var fx in fxs)
         {
@@ -84,7 +84,7 @@ public class AnimationSystem : Singleton<AnimationSystem>
         }
     }
 
-    private void PlayAbilityFx(Ability ability,Card owner, List<Card> targets, float delay = 0)
+    private void PlayAbilityFx(Ability ability, Card owner, List<Card> targets, float delay = 0)
     {
         var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
 
@@ -92,7 +92,7 @@ public class AnimationSystem : Singleton<AnimationSystem>
 
         StartCoroutine(PlayCardFX(owner, abilityFx.OwnerFX, delay * i++));
         StartCoroutine(PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, delay * i++));
-        foreach(var t in targets)
-            StartCoroutine(PlayCardFX(t, abilityFx.TargetFX,delay*i++));
+        foreach (var t in targets)
+            StartCoroutine(PlayCardFX(t, abilityFx.TargetFX, delay * i++));
     }
 }

@@ -1,11 +1,9 @@
 ﻿using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class CardTest 
+    public class CardTest
     {
         private Card TestCard;
         private Creature TestCreature;
@@ -16,7 +14,7 @@ namespace Tests
         [SetUp]
         public void CardSetup()
         {
-            Event.ResetListeners();
+            //Event.ResetListeners();
 
             Trait trait = new Trait()
             {
@@ -106,8 +104,6 @@ namespace Tests
 
             TestCard.Click();
 
-            
-
             Assert.IsTrue(TestCard.Location == Deck.Zone.Battlefield);
         }
 
@@ -122,7 +118,7 @@ namespace Tests
 
             TestCard.Click();
 
-            
+
 
             Assert.IsTrue(triggered);
         }
@@ -134,7 +130,7 @@ namespace Tests
 
             TestCard.Click();
 
-            
+
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Library);
         }
@@ -146,7 +142,7 @@ namespace Tests
 
             TestCard.Click();
 
-            
+
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Hand);
         }
@@ -158,7 +154,7 @@ namespace Tests
 
             TestCard.Click();
 
-            
+
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Library);
         }
@@ -173,7 +169,7 @@ namespace Tests
 
             TestCard.Withdraw();
 
-            
+
 
             Assert.IsTrue(triggered);
         }
@@ -186,7 +182,7 @@ namespace Tests
 
             TestCard.Click();
 
-            
+
 
 
             Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
@@ -199,7 +195,7 @@ namespace Tests
 
             TestCard.Click();
 
-            
+
 
             Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
         }
@@ -210,7 +206,7 @@ namespace Tests
             var damage = 2;
 
             TestCard.Damage(damage);
-            
+
 
             Assert.IsTrue(startHealth - damage == TestCard.CurrentHealth);
         }
@@ -225,7 +221,7 @@ namespace Tests
             Event.OnHealed.AddListener(i => check = i);
 
             TestCard.Heal(heal);
-            
+
 
             Assert.IsTrue(check == TestCard);
         }
@@ -236,7 +232,7 @@ namespace Tests
             var damage = 2;
 
             TestCard.Damage(damage);
-            
+
 
             Assert.IsTrue(startHealth - damage == TestCard.CurrentHealth);
         }
@@ -249,7 +245,7 @@ namespace Tests
             TestCard.OnDamage.AddListener(i => check = i);
 
             TestCard.Damage(damage);
-            
+
 
             Assert.IsTrue(check == damage);
         }
@@ -264,7 +260,7 @@ namespace Tests
 
             TestCard.Damage(damage);
 
-            
+
 
             Assert.IsTrue(check == TestCard);
         }
@@ -278,7 +274,7 @@ namespace Tests
             var boost = 31;
 
             TestCard.StatModifier(boost);
-            
+
 
             Assert.IsTrue(startAttack + boost == TestCard.Attack);
             Assert.IsTrue(startHealth + boost == TestCard.CurrentHealth);
@@ -293,7 +289,7 @@ namespace Tests
             TestCard.OnStatMod.AddListener(i => check = i);
 
             TestCard.StatModifier(boost);
-            
+
 
             Assert.IsTrue(check == boost);
         }
@@ -308,7 +304,7 @@ namespace Tests
             Event.OnHealed.AddListener(i => check = i);
 
             TestCard.StatModifier(boost);
-            
+
 
             Assert.IsFalse(check == TestCard);
         }
@@ -321,7 +317,7 @@ namespace Tests
             var boost = -1;
 
             TestCard.StatModifier(boost);
-            
+
 
             Assert.IsTrue(startAttack + boost == TestCard.Attack);
             Assert.IsTrue(startHealth + boost == TestCard.CurrentHealth);
@@ -338,7 +334,7 @@ namespace Tests
 
             TestCard.StatModifier(-damage);
 
-            
+
 
             Assert.IsFalse(check == TestCard);
         }
@@ -350,7 +346,7 @@ namespace Tests
 
             TestCard.Damage(TestCard.MaxHealth);
 
-            
+
 
             Assert.IsTrue(!TestCard.Alive());
         }
@@ -361,7 +357,7 @@ namespace Tests
 
             TestCard.StatModifier(-TestCard.MaxHealth);
 
-            
+
 
             Assert.IsTrue(!TestCard.Alive());
         }
@@ -374,7 +370,7 @@ namespace Tests
 
             TestCard.Die();
 
-            
+
 
             Assert.IsTrue(!TestCard.Alive());
         }
@@ -391,7 +387,7 @@ namespace Tests
 
             TestCard.Die();
 
-            
+
 
             Assert.IsTrue(triggered);
         }

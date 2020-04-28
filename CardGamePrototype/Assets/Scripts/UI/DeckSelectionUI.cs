@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +26,7 @@ public class DeckSelectionUI : MonoBehaviour
 
             InstantiatedIcons.Add(icon);
 
-            Decks.Add(deck, new Deck(deck,true));
+            Decks.Add(deck, new Deck(deck, true));
         }
 
         Destroy(DeckIconInstance.gameObject);
@@ -66,7 +65,7 @@ public class DeckSelectionUI : MonoBehaviour
 
         Event.OnGameBegin.Invoke();
 
-        CombatPrototype.SetPlayerDeck( Decks[SelectedDeck]);
+        CombatPrototype.SetPlayerDeck(Decks[SelectedDeck]);
 
         Destroy(gameObject);
         //LeanTween.alpha(gameObject, 0, 2f).setOnComplete(() => Destroy(gameObject));

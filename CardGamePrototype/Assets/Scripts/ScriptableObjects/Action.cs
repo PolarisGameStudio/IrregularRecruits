@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public partial class Ability
 {
@@ -37,15 +35,16 @@ public partial class Ability
             Amount = amount;
         }
 
-        public string Description(Creature owner) {
-            return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, TargetCount),Amount);
+        public string Description(Creature owner)
+        {
+            return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, TargetCount), Amount);
         }
 
 
         //Negative for an enemy target. Positive for a friendly or neutral target. More impactfull raises value
         public float GetValue()
         {
-            return AbilityProcessor.GetAction(ActionType).GetValue(GetTargetTypeValue() * GetAmountOfTargetsValue(),Amount);
+            return AbilityProcessor.GetAction(ActionType).GetValue(GetTargetTypeValue() * GetAmountOfTargetsValue(), Amount);
         }
 
         //Negative if enemy target - so kill enemy becomes a net positive ability

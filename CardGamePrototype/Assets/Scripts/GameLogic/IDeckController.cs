@@ -1,8 +1,11 @@
 ﻿using System;
 
-public interface IDeckController
+namespace GameLogic
 {
-     void SetupDeckActions(Deck deck, Action onfinish);
-     void YourTurn();
+    public interface IDeckController
+    {
+        void SetupDeckActions(Deck deck, Action onfinish);
+        void YourTurn();
 
+    }
 }

@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
 namespace Tests
 {
@@ -8,7 +7,16 @@ namespace Tests
         private Creature TestCreature;
         private Deck TestDeck;
         private DeckObject TestDeckObject;
-        
+        private BattleManager BattleManager;
+
+        [OneTimeSetUp]
+        public void BattleManagement()
+        {
+            BattleManager = new BattleManager();
+        }
+
+
+
         private Card GenerateTestCreature(Ability ability, Race race = null)
         {
             Trait trait = new Trait()
@@ -27,19 +35,22 @@ namespace Tests
                 {
                     trait
                 }
-                
+
             };
 
-            TestDeckObject = new DeckObject()
+            if (CombatManager.PlayerDeck == null)
             {
-                Creatures = new List<Creature>(),
-            };
+                TestDeckObject = new DeckObject()
+                {
+                    Creatures = new List<Creature>(),
+                };
 
-            TestDeck = new Deck(TestDeckObject, true);
+                BattleManager.PlayerDeck = new Deck(TestDeckObject, true);
+            }
 
-            CombatManager.PlayerDeck = TestDeck;
-            
-            if(ability)
+            TestDeck = BattleManager.PlayerDeck;
+
+            if (ability)
                 TestCreature.SpecialAbility = ability;
 
             var testCard = new Card(TestCreature);
@@ -49,9 +60,9 @@ namespace Tests
             return testCard;
         }
 
-        private void SetObjectIfCorrectAbility<T>(Ability thisAbility,Ability otherAb, ref T toBeSet,T value)
+        private void SetObjectIfCorrectAbility<T>(Ability thisAbility, Ability otherAb, ref T toBeSet, T value)
         {
-            if (thisAbility == otherAb) 
+            if (thisAbility == otherAb)
                 toBeSet = value;
         }
 
@@ -67,7 +78,7 @@ namespace Tests
             var testAbility = new Ability()
             {
                 ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.This)),
-                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.This,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Hand), Ability.Verb.ETB),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.This, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Any, Deck.Zone.Hand), Ability.Verb.ETB),
             };
 
             var testCard = GenerateTestCreature(testAbility);
@@ -80,7 +91,7 @@ namespace Tests
 
             testCard.PlayCard();
 
-            
+
 
             Assert.IsNotNull(triggeredAblity);
             Assert.IsTrue(triggeredAblity == testAbility);
@@ -106,7 +117,7 @@ namespace Tests
 
             other.PlayCard();
 
-            
+
 
             Assert.IsNotNull(triggeredAblity);
             Assert.IsTrue(triggeredAblity == testAbility);
@@ -130,7 +141,7 @@ namespace Tests
 
             testCard.PlayCard();
 
-            
+
 
             Assert.IsFalse(triggeredAblity == testAbility);
         }
@@ -155,7 +166,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            
+
 
             Assert.IsTrue(triggeredAblity == testAbility);
         }
@@ -181,7 +192,7 @@ namespace Tests
 
             otherCard.Damage(1);
 
-            
+
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 1);
@@ -208,13 +219,13 @@ namespace Tests
 
             otherCard.Damage(1);
 
-            
+
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 1);
             Assert.IsTrue(targettedCards.Contains(otherCard));
         }
-        
+
         [Test]
         public void NounsTargetsCharacterAny()
         {
@@ -232,12 +243,10 @@ namespace Tests
             otherCard.ChangeLocation(Deck.Zone.Battlefield);
 
             List<Card> targettedCards = null;
-            
-            Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref targettedCards, ts));
-            
-            otherCard.Damage(1);
 
-            
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref targettedCards, ts));
+
+            otherCard.Damage(1);
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 2);
@@ -266,7 +275,7 @@ namespace Tests
 
             otherCard.Damage(1);
 
-            
+
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 1);
@@ -293,7 +302,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            
+
 
             Assert.IsTrue(testCard.Alive());
 
@@ -307,18 +316,18 @@ namespace Tests
         {
             var testAbility = new Ability()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.Withdraw, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same)),
+                ResultingAction = new Ability.Action(Ability.ActionType.Withdraw, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same)),
                 TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
             };
 
             var race = new Race()
             {
                 name = "testrace",
-                
+
             };
 
-            var testCard = GenerateTestCreature(testAbility,race);
-            var otherCard = GenerateTestCreature(null,race);
+            var testCard = GenerateTestCreature(testAbility, race);
+            var otherCard = GenerateTestCreature(null, race);
 
             testCard.ChangeLocation(Deck.Zone.Battlefield);
             otherCard.ChangeLocation(Deck.Zone.Battlefield);
@@ -329,7 +338,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            
+
 
             Assert.IsTrue(testCard.Alive());
 
@@ -337,8 +346,8 @@ namespace Tests
             Assert.IsTrue(targettedCards.Count == 2);
             Assert.IsTrue(targettedCards.Contains(otherCard));
             Assert.IsTrue(targettedCards.Contains(testCard));
-        }        
-        
+        }
+
         [Test]
         public void NounsTargetsRaceSameButNoTargets()
         {
@@ -353,7 +362,7 @@ namespace Tests
                 name = "testrace",
 
             };
-            
+
             var otherRace = new Race()
             {
                 name = "otherrace",
@@ -372,7 +381,7 @@ namespace Tests
 
             testCard.Damage(1);
 
-            
+
 
             Assert.IsTrue(testCard.Alive());
 
@@ -413,8 +422,6 @@ namespace Tests
 
             testCard.Damage(1);
 
-            
-
             Assert.IsTrue(testCard.Alive());
 
             Assert.IsNotNull(targettedCards);
@@ -433,7 +440,7 @@ namespace Tests
 
             Assert.IsTrue(false);
         }
-        
+
         [Test]
         public void NounsTriggersCharacterAny()
         {

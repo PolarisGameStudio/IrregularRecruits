@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class DeckViewerUI : Singleton<DeckViewerUI>
@@ -19,7 +18,7 @@ public class DeckViewerUI : Singleton<DeckViewerUI>
 
         Instance.ViewDeck(deck);
     }
-    
+
     public void ViewDeck(Deck deck)
     {
         InstatiatedObjects.ForEach(Destroy);
@@ -27,7 +26,7 @@ public class DeckViewerUI : Singleton<DeckViewerUI>
 
         foreach (var c in deck.AllCreatures())
         {
-            var inst = Instantiate(CardUIInstance,CardUIInstance.transform.parent);
+            var inst = Instantiate(CardUIInstance, CardUIInstance.transform.parent);
 
             inst.Card = c;
 
@@ -39,7 +38,7 @@ public class DeckViewerUI : Singleton<DeckViewerUI>
 
         Holder.SetActive(true);
     }
-    
+
 
     public void Close()
     {

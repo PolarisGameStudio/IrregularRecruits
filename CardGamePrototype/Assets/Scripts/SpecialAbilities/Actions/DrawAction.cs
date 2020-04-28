@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class DrawAction : AbilityAction
 {
@@ -14,7 +12,7 @@ public class DrawAction : AbilityAction
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
 
-                Event.OnAbilityTrigger.Invoke(ability, owner, new List<Card>());
+        Event.OnAbilityTrigger.Invoke(ability, owner, new List<Card>());
         owner.InDeck.Draw(ability.ResultingAction.Amount);
     }
 

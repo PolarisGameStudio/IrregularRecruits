@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -18,11 +17,12 @@ public class BattleUI : Singleton<BattleUI>
     public Button ViewPlayerDeckButton;
 
     [Serializable]
-    public struct UIZone { 
-        public Deck.Zone Zone; 
-        public RectTransform RectTransform; 
-        public int CardRotation; 
-        public int CardPosAdjust; 
+    public struct UIZone
+    {
+        public Deck.Zone Zone;
+        public RectTransform RectTransform;
+        public int CardRotation;
+        public int CardPosAdjust;
     }
 
     public TextMeshProUGUI PlayerDeckDescription, EnemyDeckDescription;
@@ -31,8 +31,8 @@ public class BattleUI : Singleton<BattleUI>
 
     void Awake()
     {
-        Event.OnDraw.AddListener(c=> UpdateLibrary());
-        Event.OnWithdraw.AddListener(c=> UpdateLibrary());
+        Event.OnDraw.AddListener(c => UpdateLibrary());
+        Event.OnWithdraw.AddListener(c => UpdateLibrary());
         ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(CombatManager.PlayerDeck));
     }
 
@@ -57,27 +57,27 @@ public class BattleUI : Singleton<BattleUI>
 
     public static void UpdateLibrary()
     {
-        Instance.PlayerDeckDescription.text = "Deck size: "+ CombatManager.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
-        Instance.EnemyDeckDescription.text = "Deck size: "+ CombatManager.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
+        Instance.PlayerDeckDescription.text = "Deck size: " + CombatManager.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
+        Instance.EnemyDeckDescription.text = "Deck size: " + CombatManager.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
     }
 
-    public static void Move(Card card, Deck.Zone zone, bool player,float delay = 0)
+    public static void Move(Card card, Deck.Zone zone, bool player, float delay = 0)
     {
-        Instance.StartCoroutine(Instance.MoveCard(card, zone, player,delay));
+        Instance.StartCoroutine(Instance.MoveCard(card, zone, player, delay));
     }
 
-    private IEnumerator MoveCard(Card card, Deck.Zone zone,bool player, float delay)
+    private IEnumerator MoveCard(Card card, Deck.Zone zone, bool player, float delay)
     {
         if (!card.BattleRepresentation) yield break;
 
         yield return new WaitForSeconds(delay);
-                               
+
         var rect = card.BattleRepresentation.GetComponent<RectTransform>();
         var startPos = rect.position;
-        var zoneRect = GetZoneHolder(zone,!player);
+        var zoneRect = GetZoneHolder(zone, !player);
 
         if (!zoneRect) yield break;
-        
+
         var startTime = Time.time;
         var posAdjust = GetZoneAdjust(zone, !player);
         var rot = GetZoneRotation(zone, !player);
@@ -87,7 +87,7 @@ public class BattleUI : Singleton<BattleUI>
             endPosition = zoneRect.GetChild(zoneRect.childCount - 1).position;
         }
         else
-           endPosition  = zoneRect.position;
+            endPosition = zoneRect.position;
 
         endPosition += new Vector3(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
 
@@ -111,7 +111,7 @@ public class BattleUI : Singleton<BattleUI>
         rect.localScale = Vector3.one;
         rect.SetParent(zoneRect);
         rect.SetAsLastSibling();
-        
+
         if (card.BattleRepresentation)
             card.BattleRepresentation.Interactable = true;
     }

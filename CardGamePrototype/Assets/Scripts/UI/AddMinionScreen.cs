@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +20,7 @@ public class AddMinionScreen : Singleton<AddMinionScreen>
     {
         var cs = CombatPrototype.Instance.AllCreatures;
 
-        var friends = cs.Where(c => deck.DeckObject. FriendRaces.Contains(c.Race)).ToArray();
+        var friends = cs.Where(c => deck.DeckObject.FriendRaces.Contains(c.Race)).ToArray();
         var possibles = cs.Where(c => !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToArray();
 
         DeckIcon.sprite = deck.DeckObject.DeckIcon;

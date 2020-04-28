@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class StatMinusAction : AbilityAction
 {
@@ -14,8 +12,8 @@ public class StatMinusAction : AbilityAction
     public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
     {
 
-                Event.OnAbilityTrigger.Invoke(ability, owner, targets);
-            targets.ForEach(c => c.StatModifier(-ability.ResultingAction.Amount));
+        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+        targets.ForEach(c => c.StatModifier(-ability.ResultingAction.Amount));
     }
 
     public override float GetValue(float targetValue, int amount)
