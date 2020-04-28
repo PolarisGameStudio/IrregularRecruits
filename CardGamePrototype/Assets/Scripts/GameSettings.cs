@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Event = GameLogic.Event;
 
 public class GameSettings : Singleton<GameSettings>
 {

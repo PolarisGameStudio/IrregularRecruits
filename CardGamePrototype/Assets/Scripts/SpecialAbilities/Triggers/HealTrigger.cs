@@ -1,21 +1,28 @@
 ﻿using UnityEngine.Events;
 
-public class HealTrigger : AbilityTrigger
+namespace GameLogic
 {
-    public override Ability.Verb TriggerType => Ability.Verb.IsHealed;
-
-    internal override string Description(string instigatorString)
+    public class HealTrigger : AbilityTrigger
     {
-        return $"When {instigatorString } is healed";
-    }
+        public override Ability.Verb TriggerType => Ability.Verb.IsHealed;
 
-    internal override float GetValue()
-    {
-        return 0.5f;
-    }
+        internal override string Description(string instigatorString)
+        {
+            return $"When {instigatorString } is healed";
+        }
 
-    internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
-    {
-        Event.OnHealed.AddListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        internal override float GetValue()
+        {
+            return 0.5f;
+        }
+
+        internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
+        {
+            Event.OnHealed.AddListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        }
+        internal override void RemoveListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
+        {
+            Event.OnHealed.RemoveListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        }
     }
 }

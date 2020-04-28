@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Event = GameLogic.Event;
 
 //Responsible for controlling the timed invoke of events, by a readyforaction boolean and adding the event to an action queue.
 //TODO: replace event fields with an enum a create event in a dictionary, to better control 

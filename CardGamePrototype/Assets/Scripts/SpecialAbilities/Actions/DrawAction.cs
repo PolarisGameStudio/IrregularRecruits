@@ -1,23 +1,26 @@
 ﻿using System.Collections.Generic;
 
-public class DrawAction : AbilityAction
+namespace GameLogic
 {
-    public override Ability.ActionType ActionType => Ability.ActionType.Draw;
-
-    public override string Description(string target, int amount)
+    public class DrawAction : AbilityAction
     {
-        return $"draw {amount} cards";
-    }
+        public override Ability.ActionType ActionType => Ability.ActionType.Draw;
 
-    public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
-    {
+        public override string Description(string target, int amount)
+        {
+            return $"draw {amount} cards";
+        }
 
-        Event.OnAbilityTrigger.Invoke(ability, owner, new List<Card>());
-        owner.InDeck.Draw(ability.ResultingAction.Amount);
-    }
+        public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
+        {
 
-    public override float GetValue(float targetValue, int amount)
-    {
-        return 1f * amount;
+            Event.OnAbilityTrigger.Invoke(ability, owner, new List<Card>());
+            owner.InDeck.Draw(ability.ResultingAction.Amount);
+        }
+
+        public override float GetValue(float targetValue, int amount)
+        {
+            return 1f * amount;
+        }
     }
 }

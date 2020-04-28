@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using GameLogic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Event = GameLogic.Event;
 using Random = UnityEngine.Random;
 
 public class CombatPrototype : Singleton<CombatPrototype>
@@ -36,8 +38,7 @@ public class CombatPrototype : Singleton<CombatPrototype>
         GameSettings.Instance.EnemyDeckSize += CombatDifficultyIncrease;
         GameSettings.Instance.MaxRareEnemiesPrCombat += CombatRarityIncrease;
 
-
-        CombatManager.StartCombat(PlayerDeck, EnemyDeck);
+        Event.OnCombatSetup.Invoke(PlayerDeck, EnemyDeck);
 
         NextCombatButton.gameObject.SetActive(false);
     }

@@ -1,24 +1,27 @@
 ﻿using System.Collections.Generic;
 
-public class DamageAction : AbilityAction
+namespace GameLogic
 {
-    public override Ability.ActionType ActionType => Ability.ActionType.DealDamage;
-
-    public override string Description(string target, int amount)
+    public class DamageAction : AbilityAction
     {
-        return $"Deal {amount} damage to {target}";
-    }
+        public override Ability.ActionType ActionType => Ability.ActionType.DealDamage;
 
-    public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
-    {
+        public override string Description(string target, int amount)
+        {
+            return $"Deal {amount} damage to {target}";
+        }
 
-        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+        public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
+        {
 
-        targets.ForEach(c => c.Damage(ability.ResultingAction.Amount));
-    }
+            Event.OnAbilityTrigger.Invoke(ability, owner, targets);
 
-    public override float GetValue(float targetValue, int amount)
-    {
-        return -1f * targetValue * (1 + amount / 20f);
+            targets.ForEach(c => c.Damage(ability.ResultingAction.Amount));
+        }
+
+        public override float GetValue(float targetValue, int amount)
+        {
+            return -1f * targetValue * (1 + amount / 20f);
+        }
     }
 }

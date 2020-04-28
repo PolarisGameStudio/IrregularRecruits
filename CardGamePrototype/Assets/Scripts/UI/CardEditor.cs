@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using GameLogic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

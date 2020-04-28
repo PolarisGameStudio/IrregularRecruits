@@ -1,24 +1,27 @@
 ﻿using System.Collections.Generic;
 
-public class CharmAction : AbilityAction
+namespace GameLogic
 {
-    public override Ability.ActionType ActionType => Ability.ActionType.Charm;
-
-    public override string Description(string target, int amount)
+    public class CharmAction : AbilityAction
     {
-        return "take control of " + target;
-    }
+        public override Ability.ActionType ActionType => Ability.ActionType.Charm;
 
-    public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
-    {
+        public override string Description(string target, int amount)
+        {
+            return "take control of " + target;
+        }
 
-        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+        public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
+        {
 
-        targets.ForEach(c => c.Charm(owner.InDeck));
-    }
+            Event.OnAbilityTrigger.Invoke(ability, owner, targets);
 
-    public override float GetValue(float targetValue, int amount)
-    {
-        return -4f * targetValue;
+            targets.ForEach(c => c.Charm(owner.InDeck));
+        }
+
+        public override float GetValue(float targetValue, int amount)
+        {
+            return -4f * targetValue;
+        }
     }
 }

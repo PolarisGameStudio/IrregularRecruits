@@ -1,21 +1,28 @@
 ﻿using UnityEngine.Events;
 
-public class DrawTrigger : AbilityTrigger
+namespace GameLogic
 {
-    public override Ability.Verb TriggerType => Ability.Verb.Draw;
-
-    internal override string Description(string instigatorString)
+    public class DrawTrigger : AbilityTrigger
     {
-        return $"When {instigatorString}'s controller draws a card";
-    }
+        public override Ability.Verb TriggerType => Ability.Verb.Draw;
 
-    internal override float GetValue()
-    {
-        return 1f;
-    }
+        internal override string Description(string instigatorString)
+        {
+            return $"When {instigatorString}'s controller draws a card";
+        }
 
-    internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
-    {
-        Event.OnDraw.AddListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        internal override float GetValue()
+        {
+            return 1f;
+        }
+
+        internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
+        {
+            Event.OnDraw.AddListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        }
+        internal override void RemoveListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
+        {
+            Event.OnDraw.RemoveListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        }
     }
 }

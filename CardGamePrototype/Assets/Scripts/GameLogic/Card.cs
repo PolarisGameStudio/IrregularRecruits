@@ -70,6 +70,7 @@ namespace GameLogic
 
             ListenersCreated = true;
 
+            //TODO: remove this from Game Logic
             Event.OnDeath.AddListener(c => c.BattleRepresentation?.CardAnimation.Dissolve());
             Event.OnRessurrect.AddListener(c => c.BattleRepresentation?.CardAnimation.UnDissolve());
 
@@ -87,11 +88,6 @@ namespace GameLogic
         public Ability Ability()
         {
             return Creature.SpecialAbility;
-        }
-
-        internal bool Avantgarde()
-        {
-            return Creature.Traits.Contains(CombatManager.Instance.AvantgardeTrait);
         }
 
 
@@ -134,17 +130,23 @@ namespace GameLogic
                 return;
             }
 
+            if (!InDeck.CreaturesInZone(from).Contains(this))
+            {
+                Debug.LogWarning($"{Creature} not in correct zone: {from}");
+                return;
+            }
+            
+            InDeck.CreaturesInZone(from).Remove(this);
+
             Flip(to != Deck.Zone.Library & !(!InDeck.PlayerDeck && to == Deck.Zone.Hand));
 
-            if (!InDeck.CreaturesInZone(from).Contains(this))
-                Debug.LogWarning($"{Creature} not in correct zone: {from}");
-            else InDeck.CreaturesInZone(from).Remove(this);
 
             InDeck.CreaturesInZone(to).Add(this);
 
             Location = to;
 
-            BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
+            //TODO: this should be controlled by ui level
+            //BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
         }
 
         public void SetCreature(Creature creature)
@@ -174,6 +176,12 @@ namespace GameLogic
         internal bool Ranged() =>
             Creature.Traits.Any(a => a.name == "Ranged");
 
+        internal bool Avantgarde() =>
+            Creature.Traits.Any(a => a.name == "Avantgarde");
+
+        internal bool Ethereal() =>
+            Creature.Traits.Any(a => a.name == "Ethereal");
+
         public bool Alive() => Location != Deck.Zone.Graveyard;
 
         public void StatModifier(int amount)
@@ -202,10 +210,6 @@ namespace GameLogic
             Event.OnPlay.Invoke(this);
         }
 
-        internal bool Ethereal()
-        {
-            return Creature.Traits.Contains(CombatManager.Instance.EtherealTrait);
-        }
 
         internal bool CanAttack()
         {
@@ -292,7 +296,7 @@ namespace GameLogic
                 return;
             }
 
-            if (CombatManager.PlayerActionsLeft <= 0)
+            if (BattleManager.Instance.PlayerActionsLeft <= 0)
             {
                 Debug.Log("No player actions left");
                 return;

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using GameLogic;
+using System;
 using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Event = GameLogic.Event;
 using Random = UnityEngine.Random;
 
 public class BattleUI : Singleton<BattleUI>
@@ -33,7 +35,7 @@ public class BattleUI : Singleton<BattleUI>
     {
         Event.OnDraw.AddListener(c => UpdateLibrary());
         Event.OnWithdraw.AddListener(c => UpdateLibrary());
-        ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(CombatManager.PlayerDeck));
+        ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
     }
 
     public static Transform GetZoneHolder(Deck.Zone zone, bool enm)
@@ -57,8 +59,8 @@ public class BattleUI : Singleton<BattleUI>
 
     public static void UpdateLibrary()
     {
-        Instance.PlayerDeckDescription.text = "Deck size: " + CombatManager.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
-        Instance.EnemyDeckDescription.text = "Deck size: " + CombatManager.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
+        Instance.PlayerDeckDescription.text = "Deck size: " + BattleManager.Instance.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
+        Instance.EnemyDeckDescription.text = "Deck size: " + BattleManager.Instance.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
     }
 
     public static void Move(Card card, Deck.Zone zone, bool player, float delay = 0)

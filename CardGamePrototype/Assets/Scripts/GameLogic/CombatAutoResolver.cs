@@ -23,7 +23,7 @@ namespace GameLogic
             EnemyDeck = enemyDeck;
         }
 
-        //
+        //TODO: make static and parse the decks
         private void ResolveCombat()
         {
             if (PlayerDeck == null || EnemyDeck == null)

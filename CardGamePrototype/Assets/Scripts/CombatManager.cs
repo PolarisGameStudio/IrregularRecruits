@@ -1,241 +1,241 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.Linq;
+//using UnityEngine;
 
-public class CombatManager : Singleton<CombatManager>
-{
-    public int Turn = 0;
-    public static int PlayerActionsLeft;
-    public static Deck PlayerDeck;
-    public static Deck EnemyDeck;
-    public static bool CombatRunning;
+//public class CombatManager : Singleton<BattleManager.Instance>
+//{
+//    public int Turn = 0;
+//    public static int PlayerActionsLeft;
+//    public static Deck PlayerDeck;
+//    public static Deck EnemyDeck;
+//    public static bool CombatRunning;
 
-    public Trait AvantgardeTrait;
-    public Trait EtherealTrait;
+//    public Trait AvantgardeTrait;
+//    public Trait EtherealTrait;
 
-    //to keep track of losses and kills
-    private List<Card> InitialPlayerDeck, InitialEnemyDeck;
+//    //to keep track of losses and kills
+//    private List<Card> InitialPlayerDeck, InitialEnemyDeck;
 
-    public float AttackAnimationDuration = 1f;
-    public float AbilityTriggerDuration = 1f;
+//    public float AttackAnimationDuration = 1f;
+//    public float AbilityTriggerDuration = 1f;
 
-    public static bool AbilityTriggering;
+//    public static bool AbilityTriggering;
 
-    private void Start()
-    {
-        Event.OnAbilityTrigger.AddListener((x, y, z) => StartCoroutine(WaitForTrigger()));
+//    private void Start()
+//    {
+//        Event.OnAbilityTrigger.AddListener((x, y, z) => StartCoroutine(WaitForTrigger()));
 
-        Event.OnBattleFinished.AddListener(EndCombat);
+//        Event.OnBattleFinished.AddListener(EndCombat);
 
-        Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
+//        Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
 
-    }
+//    }
 
-    public static void StartCombat(Deck playerDeck, Deck opponentDeck)
-    {
-        Instance.BeginCombat(playerDeck, opponentDeck);
-    }
+//    public static void StartCombat(Deck playerDeck, Deck opponentDeck)
+//    {
+//        Instance.BeginCombat(playerDeck, opponentDeck);
+//    }
 
-    private void BeginCombat(Deck playerDeck, Deck opponentDeck)
-    {
-        CombatRunning = true;
+//    private void BeginCombat(Deck playerDeck, Deck opponentDeck)
+//    {
+//        CombatRunning = true;
 
-        Turn = 0;
+//        Turn = 0;
 
-        PlayerDeck = playerDeck;
-        EnemyDeck = opponentDeck;
+//        PlayerDeck = playerDeck;
+//        EnemyDeck = opponentDeck;
 
-        SetupUI(playerDeck);
-        SetupUI(EnemyDeck);
+//        SetupUI(playerDeck);
+//        SetupUI(EnemyDeck);
 
-        InitialPlayerDeck = PlayerDeck.AllCreatures();
-        InitialEnemyDeck = EnemyDeck.AllCreatures();
+//        InitialPlayerDeck = PlayerDeck.AllCreatures();
+//        InitialEnemyDeck = EnemyDeck.AllCreatures();
 
-        PlayerDeck.DrawInitialHand();
-        EnemyDeck.DrawInitialHand(true);
+//        PlayerDeck.DrawInitialHand();
+//        EnemyDeck.DrawInitialHand(true);
 
 
-        Event.OnCombatSetup.Invoke(playerDeck, opponentDeck);
+//        Event.OnCombatSetup.Invoke(playerDeck, opponentDeck);
 
-        StartCoroutine(NextTurn());
-    }
+//        StartCoroutine(NextTurn());
+//    }
 
-    private void SetupUI(Deck deck)
-    {
-        foreach (var card in deck.AllCreatures())
-        {
-            if (card.BattleRepresentation)
-                continue;
+//    private void SetupUI(Deck deck)
+//    {
+//        foreach (var card in deck.AllCreatures())
+//        {
+//            if (card.BattleRepresentation)
+//                continue;
 
-            var ui = Instantiate<CardUI>(BattleUI.Instance.CardPrefab);
+//            var ui = Instantiate<CardUI>(BattleUI.Instance.CardPrefab);
 
-            ui.Card = card;
-            card.BattleRepresentation = ui;
+//            ui.Card = card;
+//            card.BattleRepresentation = ui;
 
-            card.ChangeLocation(Deck.Zone.Library);
+//            card.ChangeLocation(Deck.Zone.Library);
 
-            BattleUI.Move(card, card.Location, deck.PlayerDeck);
-        }
-    }
+//            BattleUI.Move(card, card.Location, deck.PlayerDeck);
+//        }
+//    }
 
-    private void EndCombat()
-    {
-        CombatRunning = false;
+//    private void EndCombat()
+//    {
+//        CombatRunning = false;
 
-        PlayerDeck.PackUp();
-        EnemyDeck.PackUp();
+//        PlayerDeck.PackUp();
+//        EnemyDeck.PackUp();
 
-        BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
-    }
+//        BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
+//    }
 
 
-    //TODO: remove ienumerator and instead make everything use flow controller
-    private IEnumerator NextTurn()
-    {
-        Debug.Log("Turn: " + Turn + " Started");
+//    //TODO: remove ienumerator and instead make everything use flow controller
+//    private IEnumerator NextTurn()
+//    {
+//        Debug.Log("Turn: " + Turn + " Started");
 
-        yield return new WaitUntil(() => FlowController.ReadyForInput);
+//        yield return new WaitUntil(() => FlowController.ReadyForInput);
 
-        EnemyDeck.DeckController.YourTurn();
+//        EnemyDeck.DeckController.YourTurn();
 
-        yield return new WaitUntil(() => FlowController.ReadyForInput);
-        PlayerDeck.Draw(GameSettings.Instance.DrawPrTurn);
+//        yield return new WaitUntil(() => FlowController.ReadyForInput);
+//        PlayerDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
 
-        Event.OnTurnBegin.Invoke();
+//        Event.OnTurnBegin.Invoke();
 
-        PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
+//        PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
 
 
-        yield return new WaitUntil(() => FlowController.ReadyForInput && (PlayerActionsLeft <= 0 || PlayerDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0));
+//        yield return new WaitUntil(() => FlowController.ReadyForInput && (PlayerActionsLeft <= 0 || PlayerDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0));
 
-        StartCoroutine(ResolveCombat());
-    }
+//        StartCoroutine(ResolveCombat());
+//    }
 
-    private IEnumerator WaitForTrigger()
-    {
-        AbilityTriggering = true;
+//    private IEnumerator WaitForTrigger()
+//    {
+//        AbilityTriggering = true;
 
-        //Time.timeScale = 0;
+//        //Time.timeScale = 0;
 
-        yield return new WaitForSecondsRealtime(AbilityTriggerDuration);
+//        yield return new WaitForSecondsRealtime(AbilityTriggerDuration);
 
-        AbilityTriggering = false;
-        //Time.timeScale = 1f;
+//        AbilityTriggering = false;
+//        //Time.timeScale = 1f;
 
-    }
+//    }
 
-    //TODO: Should this be a routine to wait for animations?
-    private IEnumerator ResolveCombat()
-    {
-        //Debug.Log("Resolving combat");
-        var attackOrder = new List<Card>();
+//    //TODO: Should this be a routine to wait for animations?
+//    private IEnumerator ResolveCombat()
+//    {
+//        //Debug.Log("Resolving combat");
+//        var attackOrder = new List<Card>();
 
-        attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
-        attackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
+//        attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
+//        attackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
 
-        //Differentiate between player and enemy creatures?
-        switch (GameSettings.Instance.AttackOrderParadigm)
-        {
-            case GameSettings.AttackParadigm.Random:
-                attackOrder = attackOrder.OrderBy(x => Random.value).ToList();
-                break;
-            case GameSettings.AttackParadigm.HighestHealthFirst:
-                attackOrder = attackOrder.OrderByDescending(x => x.Creature.Health).ToList();
-                break;
-            case GameSettings.AttackParadigm.LowestHealthFirst:
-                attackOrder = attackOrder.OrderBy(x => x.Creature.Health).ToList();
-                break;
-            case GameSettings.AttackParadigm.HighestAttackFirst:
-                attackOrder = attackOrder.OrderByDescending(x => x.Creature.Attack).ToList();
-                break;
-            case GameSettings.AttackParadigm.LowestAttackFirst:
-                attackOrder = attackOrder.OrderBy(x => x.Creature.Attack).ToList();
-                break;
-            default:
-                break;
-        };
+//        //Differentiate between player and enemy creatures?
+//        switch (GameSettings.Instance.AttackOrderParadigm)
+//        {
+//            case GameSettings.AttackParadigm.Random:
+//                attackOrder = attackOrder.OrderBy(x => Random.value).ToList();
+//                break;
+//            case GameSettings.AttackParadigm.HighestHealthFirst:
+//                attackOrder = attackOrder.OrderByDescending(x => x.Creature.Health).ToList();
+//                break;
+//            case GameSettings.AttackParadigm.LowestHealthFirst:
+//                attackOrder = attackOrder.OrderBy(x => x.Creature.Health).ToList();
+//                break;
+//            case GameSettings.AttackParadigm.HighestAttackFirst:
+//                attackOrder = attackOrder.OrderByDescending(x => x.Creature.Attack).ToList();
+//                break;
+//            case GameSettings.AttackParadigm.LowestAttackFirst:
+//                attackOrder = attackOrder.OrderBy(x => x.Creature.Attack).ToList();
+//                break;
+//            default:
+//                break;
+//        };
 
-        AttackAnimationDuration = 1f;
+//        AttackAnimationDuration = 1f;
 
-        //To prevent wrong attack positions, if card have not reaach battle field yet
-        yield return new WaitForSeconds(AttackAnimationDuration);
+//        //To prevent wrong attack positions, if card have not reaach battle field yet
+//        yield return new WaitForSeconds(AttackAnimationDuration);
 
-        while (attackOrder.Any(c => c.Alive()))
-        {
-            yield return new WaitUntil(() => FlowController.ReadyForInput);
+//        while (attackOrder.Any(c => c.Alive()))
+//        {
+//            yield return new WaitUntil(() => FlowController.ReadyForInput);
 
-            var attacker = attackOrder.First(c => c.Alive());
+//            var attacker = attackOrder.First(c => c.Alive());
 
-            var player = attacker.InDeck.PlayerDeck;
+//            var player = attacker.InDeck.PlayerDeck;
 
-            var target = player ? EnemyDeck.GetAttackTarget() : PlayerDeck.GetAttackTarget();
+//            var target = player ? EnemyDeck.GetAttackTarget() : PlayerDeck.GetAttackTarget();
 
-            if (target == null || attacker.Location != Deck.Zone.Battlefield)
-            {
-                attackOrder.Remove(attacker);
-                break;
-            }
+//            if (target == null || attacker.Location != Deck.Zone.Battlefield)
+//            {
+//                attackOrder.Remove(attacker);
+//                break;
+//            }
 
-            //yield return new WaitUntil(() => !AbilityTriggering);
-            Event.OnAttack.Invoke(attacker);
+//            //yield return new WaitUntil(() => !AbilityTriggering);
+//            Event.OnAttack.Invoke(attacker);
 
-            //yield return new WaitUntil(() => !AbilityTriggering);
-            Event.OnBeingAttacked.Invoke(attacker);
+//            //yield return new WaitUntil(() => !AbilityTriggering);
+//            Event.OnBeingAttacked.Invoke(attacker);
 
-            StartCoroutine(AnimationSystem.AttackAnimation(attacker, target, AttackAnimationDuration));
-            yield return new WaitForSeconds(AttackAnimationDuration);
+//            StartCoroutine(AnimationSystem.AttackAnimation(attacker, target, AttackAnimationDuration));
+//            yield return new WaitForSeconds(AttackAnimationDuration);
 
-            target.Damage(attacker.Attack);
+//            target.Damage(attacker.Attack);
 
-            //yield return new WaitUntil(() => !AbilityTriggering);
+//            //yield return new WaitUntil(() => !AbilityTriggering);
 
-            //TODO: test that units that die still get to damage
-            if (!attacker.Ranged() && target.Location == Deck.Zone.Battlefield)
-                attacker.Damage(target.Attack);
+//            //TODO: test that units that die still get to damage
+//            if (!attacker.Ranged() && target.Location == Deck.Zone.Battlefield)
+//                attacker.Damage(target.Attack);
 
-            //yield return new WaitUntil(() => !AbilityTriggering);
+//            //yield return new WaitUntil(() => !AbilityTriggering);
 
-            attackOrder.Remove(attacker);
-        }
+//            attackOrder.Remove(attacker);
+//        }
 
-        //To allow for death creatures to change zone
-        yield return new WaitForSeconds(AttackAnimationDuration);
+//        //To allow for death creatures to change zone
+//        yield return new WaitForSeconds(AttackAnimationDuration);
 
-        //Debug.Log("Combat round finished. Enemies left: "+ EnemyDeck.Alive());
+//        //Debug.Log("Combat round finished. Enemies left: "+ EnemyDeck.Alive());
 
-        Event.OnCombatResolveFinished.Invoke();
+//        Event.OnCombatResolveFinished.Invoke();
 
-        //TODO: just wait on eventcontroller
-        yield return new WaitUntil(() => !AbilityTriggering);
+//        //TODO: just wait on eventcontroller
+//        yield return new WaitUntil(() => !AbilityTriggering);
 
-        if (EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0)
-            Event.OnBattleFinished.Invoke();
-        else
-            StartCoroutine(NextTurn());
-    }
+//        if (EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0)
+//            Event.OnBattleFinished.Invoke();
+//        else
+//            StartCoroutine(NextTurn());
+//    }
 
-    public static List<Card> GetCardsInZone(Deck.Zone zone)
-    {
-        List<Card> cardsInZone = new List<Card>();
+//    public static List<Card> GetCardsInZone(Deck.Zone zone)
+//    {
+//        List<Card> cardsInZone = new List<Card>();
 
-        if (PlayerDeck != null)
-            cardsInZone.AddRange(PlayerDeck.CreaturesInZone(zone));
-        if (EnemyDeck != null)
-            cardsInZone.AddRange(EnemyDeck.CreaturesInZone(zone));
+//        if (PlayerDeck != null)
+//            cardsInZone.AddRange(PlayerDeck.CreaturesInZone(zone));
+//        if (EnemyDeck != null)
+//            cardsInZone.AddRange(EnemyDeck.CreaturesInZone(zone));
 
-        return cardsInZone;
-    }
+//        return cardsInZone;
+//    }
 
 
-    public static void Pause()
-    {
-        Time.timeScale = 0;
-    }
+//    public static void Pause()
+//    {
+//        Time.timeScale = 0;
+//    }
 
-    public static void UnPause()
-    {
-        Time.timeScale = 1;
-    }
-}
+//    public static void UnPause()
+//    {
+//        Time.timeScale = 1;
+//    }
+//}

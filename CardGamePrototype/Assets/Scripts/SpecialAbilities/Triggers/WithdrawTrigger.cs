@@ -1,21 +1,28 @@
 ﻿using UnityEngine.Events;
 
-public class WithdrawTrigger : AbilityTrigger
+namespace GameLogic
 {
-    public override Ability.Verb TriggerType => Ability.Verb.Withdraw;
-
-    internal override string Description(string instigatorString)
+    public class WithdrawTrigger : AbilityTrigger
     {
-        return $"When {instigatorString } is withdrawn";
-    }
+        public override Ability.Verb TriggerType => Ability.Verb.Withdraw;
 
-    internal override float GetValue()
-    {
-        return 1;
-    }
+        internal override string Description(string instigatorString)
+        {
+            return $"When {instigatorString } is withdrawn";
+        }
 
-    internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
-    {
-        Event.OnWithdraw.AddListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        internal override float GetValue()
+        {
+            return 1;
+        }
+
+        internal override void SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
+        {
+            Event.OnWithdraw.AddListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        }
+        internal override void RemoveListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
+        {
+            Event.OnWithdraw.RemoveListener(a => executeIfTrue.Invoke(a, owner, subjekt));
+        }
     }
 }

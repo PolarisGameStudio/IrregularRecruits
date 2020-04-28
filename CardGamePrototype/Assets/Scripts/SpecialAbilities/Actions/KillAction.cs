@@ -1,23 +1,26 @@
 ﻿using System.Collections.Generic;
 
-public class KillAction : AbilityAction
+namespace GameLogic
 {
-    public override Ability.ActionType ActionType => Ability.ActionType.Kill;
-
-    public override string Description(string target, int amount)
+    public class KillAction : AbilityAction
     {
-        return "kill " + target;
-    }
+        public override Ability.ActionType ActionType => Ability.ActionType.Kill;
 
-    public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
-    {
+        public override string Description(string target, int amount)
+        {
+            return "kill " + target;
+        }
 
-        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
-        targets.ForEach(c => c.Die());
-    }
+        public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
+        {
 
-    public override float GetValue(float targetValue, int amount)
-    {
-        return -3f * targetValue;
+            Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+            targets.ForEach(c => c.Die());
+        }
+
+        public override float GetValue(float targetValue, int amount)
+        {
+            return -3f * targetValue;
+        }
     }
 }

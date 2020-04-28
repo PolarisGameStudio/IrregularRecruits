@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using GameLogic;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Event = GameLogic.Event;
 
 public class DeckSelectionUI : MonoBehaviour
 {

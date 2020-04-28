@@ -1,22 +1,25 @@
 ﻿using System.Collections.Generic;
 
-public class WithdrawAction : AbilityAction
+namespace GameLogic
 {
-    public override Ability.ActionType ActionType => Ability.ActionType.Withdraw;
-
-    public override string Description(string target, int amount)
+    public class WithdrawAction : AbilityAction
     {
-        return "withdraw " + target;
-    }
+        public override Ability.ActionType ActionType => Ability.ActionType.Withdraw;
 
-    public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
-    {
-        Event.OnAbilityTrigger.Invoke(ability, owner, targets);
-        targets.ForEach(c => c.Withdraw());
-    }
+        public override string Description(string target, int amount)
+        {
+            return "withdraw " + target;
+        }
 
-    public override float GetValue(float targetValue, int amount)
-    {
-        return targetValue;
+        public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
+        {
+            Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+            targets.ForEach(c => c.Withdraw());
+        }
+
+        public override float GetValue(float targetValue, int amount)
+        {
+            return targetValue;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GameLogic;
+using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;

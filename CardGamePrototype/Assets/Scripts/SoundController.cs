@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using GameLogic;
+using UnityEngine;
+using Event = GameLogic.Event;
 
 public class SoundController : Singleton<SoundController>
 {

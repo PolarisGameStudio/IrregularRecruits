@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GameLogic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DeckViewerUI : Singleton<DeckViewerUI>

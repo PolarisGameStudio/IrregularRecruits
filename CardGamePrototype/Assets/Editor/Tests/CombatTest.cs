@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using GameLogic;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -62,13 +63,6 @@ namespace Tests
 
             return testDeck;
         }
-
-        [OneTimeSetUp]
-        public void BattleManagement()
-        {
-            BattleManager = new BattleManager();
-        }
-
 
         [Test]
         public void CombatStartsResolving()
