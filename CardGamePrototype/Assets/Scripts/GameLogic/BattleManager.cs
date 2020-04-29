@@ -32,7 +32,7 @@ namespace GameLogic
             Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
         }
 
-        private void PackUp()
+        public void PackUp()
         {
             PlayerDeck?.PackUp();
             EnemyDeck?.PackUp();
