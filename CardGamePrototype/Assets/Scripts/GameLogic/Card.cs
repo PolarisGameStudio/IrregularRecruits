@@ -208,7 +208,7 @@ namespace GameLogic
             if (BattleRepresentation)
                 BattleRepresentation.Interactable = false;
 
-            Debug.Log("Playing card");
+            Debug.Log("Playing card: " + Name);
 
             Event.OnPlay.Invoke(this);
         }

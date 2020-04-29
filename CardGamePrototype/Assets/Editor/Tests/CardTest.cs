@@ -120,8 +120,6 @@ namespace Tests
 
             TestCard.Click();
 
-
-
             Assert.IsTrue(triggered);
         }
         [Test]

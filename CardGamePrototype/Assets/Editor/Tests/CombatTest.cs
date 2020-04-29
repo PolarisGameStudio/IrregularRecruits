@@ -2,14 +2,18 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using Event = GameLogic.Event;
 
 namespace Tests
 {
-
-
     public class CombatTest
-    {
-        private BattleManager BattleManager;
+    { 
+        [OneTimeSetUp]
+        public void BattleManage()
+        {
+            var neededForBM = BattleManager.Instance;
+        }
 
         private Card GenerateTestCreature(Ability ability, Race race = null, int attack = 2)
         {
@@ -21,7 +25,7 @@ namespace Tests
 
             var TestCreature = new Creature()
             {
-                name = "TesterOne",
+                name = "Tester"+ Random.Range(0,1000),
                 Attack = attack,
                 Race = race,
                 Health = 7,
@@ -73,9 +77,7 @@ namespace Tests
             var resolveStarted = false;
 
             Event.OnCombatResolveStart.AddListener(() => resolveStarted = true);
-
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
-
 
             Assert.IsTrue(resolveStarted);
         }
@@ -153,7 +155,6 @@ namespace Tests
             HashSet<Card> attackers = new HashSet<Card>();
 
             Event.OnAttack.AddListener(c => attackers.Add(c));
-
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 

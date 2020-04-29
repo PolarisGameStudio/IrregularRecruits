@@ -36,6 +36,9 @@ namespace GameLogic
         {
             PlayerDeck?.PackUp();
             EnemyDeck?.PackUp();
+
+            PlayerDeck = null;
+            EnemyDeck = null;
         }
 
         private void SetupCombat(Deck playerDeck, Deck enemyDeck)
