@@ -2,20 +2,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TraitEditorInstance : MonoBehaviour
+namespace UI
 {
-    public Button AddTraitButton;
-    public TextMeshProUGUI Text;
-    public Button ChangeTraitButton;
-    public Button RemoveTraitButton;
-    public Trait Trait;
-
-
-    public void UpdateTrait(Trait t)
+    public class TraitEditorInstance : MonoBehaviour
     {
-        AddTraitButton.image.sprite = t.Icon;
-        Text.text = t.name + " (" + t.Description + ")";
+        public Button AddTraitButton;
+        public TextMeshProUGUI Text;
+        public Button ChangeTraitButton;
+        public Button RemoveTraitButton;
+        public Trait Trait;
 
-        Trait = t;
+
+        public void UpdateTrait(Trait t)
+        {
+            AddTraitButton.image.sprite = t.Icon;
+            Text.text = t.name + " (" + t.Description + ")";
+
+            Trait = t;
+        }
     }
 }

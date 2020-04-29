@@ -12,6 +12,7 @@ namespace GameLogic
         public int Turn = 0;
 
         private static BattleManager instance;
+        private CombatAutoResolver CombatAutoResolver;
 
         public static BattleManager Instance { get {
                 if (instance == null)
@@ -30,6 +31,9 @@ namespace GameLogic
             Event.OnBattleFinished.AddListener(PackUp);
 
             Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
+
+            CombatAutoResolver = new CombatAutoResolver();
+
         }
 
         public void PackUp()
@@ -48,9 +52,7 @@ namespace GameLogic
             if (enemyDeck.DeckController == null)
                 enemyDeck.DeckController = new AI();
 
-            CombatAutoResolver combatAutoResolver = new CombatAutoResolver();
-
-            combatAutoResolver.StartCombat(playerDeck, enemyDeck);
+            CombatAutoResolver.StartCombat(playerDeck, enemyDeck);
 
             PlayerDeck = playerDeck;
             EnemyDeck = enemyDeck;

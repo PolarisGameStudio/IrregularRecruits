@@ -21,7 +21,7 @@ namespace GameLogic
             }
         }
 
-        public CardUI BattleRepresentation;
+        //public CardUI BattleRepresentation;
 
         public string Name;
 
@@ -69,9 +69,6 @@ namespace GameLogic
 
             ListenersCreated = true;
 
-            //TODO: remove this from Game Logic
-            Event.OnDeath.AddListener(c => c.BattleRepresentation?.CardAnimation.Dissolve());
-            Event.OnRessurrect.AddListener(c => c.BattleRepresentation?.CardAnimation.UnDissolve());
 
             //TODO: this delay should be handled by the flow controller
             Event.OnDeath.AddListener(c => c.ChangeLocation(Deck.Zone.Graveyard, 2f));
@@ -201,12 +198,9 @@ namespace GameLogic
         {
             FaceUp = upsideUp;
 
-            BattleRepresentation?.Flip();
         }
         public void PlayCard()
         {
-            if (BattleRepresentation)
-                BattleRepresentation.Interactable = false;
 
             Debug.Log("Playing card: " + Name);
 

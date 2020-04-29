@@ -3,43 +3,47 @@ using System.Linq;
 using UnityEngine;
 using Event = GameLogic.Event;
 
-public class ActionsLeftUI : MonoBehaviour
+namespace UI
 {
-    public ActionIcon ActionIconExample;
-    private List<ActionIcon> ActionIcons = new List<ActionIcon>();
-    private bool Initialized;
 
-    private void Start()
+    public class ActionsLeftUI : MonoBehaviour
     {
-        Event.OnCombatSetup.AddListener((p, c) => Initialize());
-    }
+        public ActionIcon ActionIconExample;
+        private List<ActionIcon> ActionIcons = new List<ActionIcon>();
+        private bool Initialized;
 
-    void Initialize()
-    {
-        if (Initialized) return;
-
-        Initialized = true;
-
-        //TODO: does not take into account if amount of actions are changed. Move to on next turn and check there
-        for (int i = 0; i < GameSettings.Instance.PlayerPlaysPrTurn; i++)
+        private void Start()
         {
-            ActionIcons.Add(Instantiate(ActionIconExample, ActionIconExample.transform.parent));
+            Event.OnCombatSetup.AddListener((p, c) => Initialize());
         }
-        Destroy(ActionIconExample.gameObject);
 
-        Event.OnPlayerAction.AddListener(OnActionUsed);
-        Event.OnTurnBegin.AddListener(OnNextTurn);
+        void Initialize()
+        {
+            if (Initialized) return;
+
+            Initialized = true;
+
+            //TODO: does not take into account if amount of actions are changed. Move to on next turn and check there
+            for (int i = 0; i < GameSettings.Instance.PlayerPlaysPrTurn; i++)
+            {
+                ActionIcons.Add(Instantiate(ActionIconExample, ActionIconExample.transform.parent));
+            }
+            Destroy(ActionIconExample.gameObject);
+
+            Event.OnPlayerAction.AddListener(OnActionUsed);
+            Event.OnTurnBegin.AddListener(OnNextTurn);
+        }
+
+        private void OnActionUsed()
+        {
+            if (ActionIcons.Any(a => a.Active))
+                ActionIcons.First(a => a.Active).Active = false;
+        }
+
+        private void OnNextTurn()
+        {
+            ActionIcons.ForEach(a => a.Active = true);
+        }
+
     }
-
-    private void OnActionUsed()
-    {
-        if (ActionIcons.Any(a => a.Active))
-            ActionIcons.First(a => a.Active).Active = false;
-    }
-
-    private void OnNextTurn()
-    {
-        ActionIcons.ForEach(a => a.Active = true);
-    }
-
 }

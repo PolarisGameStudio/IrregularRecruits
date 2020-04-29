@@ -2,17 +2,20 @@
 using System.Linq;
 using UnityEngine;
 
-public class IconManager : Singleton<IconManager>
+namespace UI
 {
-    [System.Serializable]
-    public struct AbilityActionIcon { public Ability.ActionType ActionType; public Sprite Sprite; }
-
-    public AbilityActionIcon[] AbilityActionIcons;
-
-    public static Sprite GetAbilityIconSprite(Ability.ActionType actionType)
+    public class IconManager : Singleton<IconManager>
     {
-        if (!Instance.AbilityActionIcons.Any(ai => ai.ActionType == actionType)) return null;
+        [System.Serializable]
+        public struct AbilityActionIcon { public Ability.ActionType ActionType; public Sprite Sprite; }
 
-        return Instance.AbilityActionIcons.First(ai => ai.ActionType == actionType).Sprite;
+        public AbilityActionIcon[] AbilityActionIcons;
+
+        public static Sprite GetAbilityIconSprite(Ability.ActionType actionType)
+        {
+            if (!Instance.AbilityActionIcons.Any(ai => ai.ActionType == actionType)) return null;
+
+            return Instance.AbilityActionIcons.First(ai => ai.ActionType == actionType).Sprite;
+        }
     }
 }

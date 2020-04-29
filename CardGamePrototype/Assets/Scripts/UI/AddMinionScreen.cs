@@ -3,58 +3,62 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AddMinionScreen : Singleton<AddMinionScreen>
+
+namespace UI
 {
-    public GameObject Holder;
-    public Image DeckIcon;
-    //todo: replace with holder array and holder script containing ref to button and ui
-    public CardUI FirstCreatureChoice, SecondCreatureChoice, ThirdCreatureChoice;
-    public Button AddFirstCreature, AddSecondCreature, AddThirdCreature;
-    private Deck Deck;
-
-    public static void SetupMinionScreen(Deck deck)
+    public class AddMinionScreen : Singleton<AddMinionScreen>
     {
-        Instance.SetupDeckChoice(deck);
-    }
+        public GameObject Holder;
+        public Image DeckIcon;
+        //todo: replace with holder array and holder script containing ref to button and ui
+        public CardUI FirstCreatureChoice, SecondCreatureChoice, ThirdCreatureChoice;
+        public Button AddFirstCreature, AddSecondCreature, AddThirdCreature;
+        private Deck Deck;
 
-    private void SetupDeckChoice(Deck deck)
-    {
-        var cs = CombatPrototype.Instance.AllCreatures;
-
-        var friends = cs.Where(c => deck.DeckObject.FriendRaces.Contains(c.Race)).ToArray();
-        var possibles = cs.Where(c => !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToArray();
-
-        DeckIcon.sprite = deck.DeckObject.DeckIcon;
-        Deck = deck;
-
-        if (!possibles.Any())
+        public static void SetupMinionScreen(Deck deck)
         {
-            possibles = cs;
-        }
-        if (!friends.Any())
-        {
-            friends = possibles;
+            Instance.SetupDeckChoice(deck);
         }
 
-        SetupChoice(FirstCreatureChoice, AddFirstCreature, friends[Random.Range(0, friends.Length)]);
-        SetupChoice(SecondCreatureChoice, AddSecondCreature, friends[Random.Range(0, friends.Length)]);
-        SetupChoice(ThirdCreatureChoice, AddThirdCreature, possibles[Random.Range(0, friends.Length)]);
+        private void SetupDeckChoice(Deck deck)
+        {
+            var cs = CombatPrototype.Instance.AllCreatures;
+
+            var friends = cs.Where(c => deck.DeckObject.FriendRaces.Contains(c.Race)).ToArray();
+            var possibles = cs.Where(c => !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToArray();
+
+            DeckIcon.sprite = deck.DeckObject.DeckIcon;
+            Deck = deck;
+
+            if (!possibles.Any())
+            {
+                possibles = cs;
+            }
+            if (!friends.Any())
+            {
+                friends = possibles;
+            }
+
+            SetupChoice(FirstCreatureChoice, AddFirstCreature, friends[Random.Range(0, friends.Length)]);
+            SetupChoice(SecondCreatureChoice, AddSecondCreature, friends[Random.Range(0, friends.Length)]);
+            SetupChoice(ThirdCreatureChoice, AddThirdCreature, possibles[Random.Range(0, friends.Length)]);
 
 
-        Holder.SetActive(true);
-    }
+            Holder.SetActive(true);
+        }
 
-    private void SetupChoice(CardUI ui, Button addButton, Creature creature)
-    {
-        ui.UpdateCreature(creature);
-        addButton.onClick.RemoveAllListeners();
+        private void SetupChoice(CardUI ui, Button addButton, Creature creature)
+        {
+            ui.UpdateCreature(creature);
+            addButton.onClick.RemoveAllListeners();
 
-        addButton.onClick.AddListener(() => Deck.AddCard(new Card(creature)));
-        addButton.onClick.AddListener(Close);
-    }
+            addButton.onClick.AddListener(() => Deck.AddCard(new Card(creature)));
+            addButton.onClick.AddListener(Close);
+        }
 
-    private void Close()
-    {
-        Holder.SetActive(false);
+        private void Close()
+        {
+            Holder.SetActive(false);
+        }
     }
 }
