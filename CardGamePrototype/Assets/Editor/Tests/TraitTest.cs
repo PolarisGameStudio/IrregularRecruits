@@ -1,5 +1,6 @@
 ﻿using GameLogic;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Event = GameLogic.Event;
@@ -15,7 +16,7 @@ namespace Tests
             var neededForBM = BattleManager.Instance;
         }
 
-        private Card GenerateTestCreature(string traitName)
+        private Card GenerateTestCreature(string traitName,int attack = 2,int health = 10)
         {
             Trait trait = new Trait()
             {
@@ -25,9 +26,9 @@ namespace Tests
 
             var TestCreature = new Creature()
             {
-                name = "Tester" + Random.Range(0, 1000),
-                Attack = 2,
-                Health = 10,
+                name = "Tester" + UnityEngine.Random.Range(0, 1000),
+                Attack = attack,
+                Health = health,
                 Traits = string.IsNullOrEmpty(traitName) ? new List<Trait>() : new List<Trait>()
                 {
                     trait
@@ -78,48 +79,119 @@ namespace Tests
             enmDeck.AddCard(nonDefEnm);
 
             var attacked = new List<Card>();
+            var attackedInFirstRound = new List<Card>();
 
-            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+            Event.OnBeingAttacked.AddListener(c =>  attacked.Add(c));
+            Event.OnCombatResolveFinished.AddListener(() => DoIfTrue(() => attackedInFirstRound.AddRange(attacked), attackedInFirstRound.Count == 0));
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-            Assert.IsTrue(attacked.Contains(defPlayer));
-            Assert.IsTrue(attacked.Contains(defEnm));
-            Assert.IsFalse(attacked.Contains(nonDefPlayer));
-            Assert.IsFalse(attacked.Contains(nonDefEnm));
+            Assert.IsTrue(attackedInFirstRound.Contains(defPlayer));
+            Assert.IsTrue(attackedInFirstRound.Contains(defEnm));
+            Assert.IsFalse(attackedInFirstRound.Contains(nonDefPlayer));
+            Assert.IsFalse(attackedInFirstRound.Contains(nonDefEnm));
         }
+
+        private void DoIfTrue(Action p, bool v)
+        {
+            if (v) p.Invoke();
+        }
+
+
         [Test]
         public void RangedDoesNotTakeDamageAttacking()
         {
-            var pDeck = GenerateTestDeck(5, true);
-            var enmDeck = GenerateTestDeck(3, false);
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
 
-            
+            Card defPlayer = GenerateTestCreature("Defender");
+            Card rangedCharacter = GenerateTestCreature("Ranged");
+            Card defEnm = GenerateTestCreature("Defender");
+
+            pDeck.AddCard(defPlayer);
+            pDeck.AddCard(rangedCharacter);
+
+            enmDeck.AddCard(defEnm);
+
+            var finished = false;
+
+            Event.OnBattleFinished.AddListener(()=> finished = true);
+
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-            Assert.IsTrue(false);
+            Assert.IsTrue(rangedCharacter.CurrentHealth == rangedCharacter.MaxHealth);
+            Assert.IsTrue(finished);
         }
         [Test]
-        public void EtherealIsNotAtaackedwwhileOthers()
+        public void EtherealIsNotAttackedWhileOtherNonEthereals()
         {
-            var pDeck = GenerateTestDeck(5, true);
-            var enmDeck = GenerateTestDeck(3, false);
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
 
-            
+            Card ethereal = GenerateTestCreature("Ethereal");
+            Card nonEthereal = GenerateTestCreature("");
+            Card nonEthereal2 = GenerateTestCreature("");
+            Card enm = GenerateTestCreature("");
+
+            pDeck.AddCard(ethereal);
+            pDeck.AddCard(nonEthereal);
+            pDeck.AddCard(nonEthereal2);
+
+            enmDeck.AddCard(enm);
+
+            List<Card> attacked = new List<Card>(); 
+            List<Card> attackers = new List<Card>();
+
+            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+            Event.OnAttack.AddListener(c => attackers.Add(c));
+
+            var finished = false;
+
+            Event.OnBattleFinished.AddListener(() => finished = true);
+
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-            Assert.IsTrue(false);
+            Assert.IsTrue(ethereal.CurrentHealth == nonEthereal.MaxHealth);
+            Assert.IsFalse(attacked.Contains(ethereal));
+            Assert.IsFalse(attackers.Contains(ethereal));
+            Assert.IsTrue(finished);
+
         }
         [Test]
-        public void EtherealIsAtaackedwWhileOtherEthereals()
+        public void EtherealIsAttackedWhileOtherEtherealsOnly()
         {
-            var pDeck = GenerateTestDeck(5, true);
-            var enmDeck = GenerateTestDeck(3, false);
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
 
-            
+            Card ethereal = GenerateTestCreature("Ethereal");
+            Card etherereal1 = GenerateTestCreature("Ethereal");
+            Card ethereal2 = GenerateTestCreature("Ethereal");
+
+            Card enm = GenerateTestCreature("");
+
+            pDeck.AddCard(ethereal);
+            pDeck.AddCard(etherereal1);
+            pDeck.AddCard(ethereal2);
+
+            enmDeck.AddCard(enm);
+
+            List<Card> attacked = new List<Card>();
+            List<Card> attackers = new List<Card>();
+
+            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+            Event.OnAttack.AddListener(c => attackers.Add(c));
+
+            var finished = false;
+
+            Event.OnBattleFinished.AddListener(() => finished = true);
+
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-            Assert.IsTrue(false);
+            Assert.IsTrue(finished);
+            Assert.IsTrue(attacked.Contains(ethereal));
+            Assert.IsFalse(attackers.Contains(ethereal));
+            Assert.IsTrue(attacked.Contains(ethereal2));
+            Assert.IsFalse(attackers.Contains(ethereal2));
         }
     }
 }

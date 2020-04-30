@@ -89,9 +89,6 @@ namespace GameLogic
 
         public void Die()
         {
-            //Debug.Log("Killing " + this);
-
-
             Event.OnDeath.Invoke(this);
         }
 
@@ -257,10 +254,13 @@ namespace GameLogic
         {
             if (damage < 1) return;
 
-            OnDamage.Invoke(damage);
-            Event.OnDamaged.Invoke(this);
 
             CurrentHealth -= damage;
+
+            OnDamage.Invoke(damage);            
+            
+            Event.OnDamaged.Invoke(this);
+
         }
 
         public void Heal(int value)

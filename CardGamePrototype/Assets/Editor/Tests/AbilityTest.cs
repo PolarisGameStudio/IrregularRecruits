@@ -78,7 +78,7 @@ namespace Tests
 
 
         [Test]
-        public void PlayTriggers()
+        public void TriggerPlayTriggersThis()
         {
             var testAbility = new Ability()
             {
@@ -100,7 +100,7 @@ namespace Tests
             Assert.IsTrue(triggeredAblity == testAbility);
         }
         [Test]
-        public void PlayTriggersOnOther()
+        public void TriggerPlayTriggersOnOther()
         {
             var testAbility = new Ability()
             {
@@ -125,8 +125,36 @@ namespace Tests
             Assert.IsNotNull(triggeredAblity);
             Assert.IsTrue(triggeredAblity == testAbility);
         }
+
         [Test]
-        public void ETBTriggersNotFromLibrary()
+        public void TriggerDeathTriggers()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Resurrect, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Other), Ability.Verb.DIES),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card death = null;
+
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+            Event.OnDeath.AddListener((c) => death = c);
+
+            OtherCard.Die();
+
+            Assert.NotNull(death);
+            Assert.IsTrue(triggered);
+        }
+
+        [Test]
+        public void TriggerETBTriggersNotFromLibrary()
         {
             var testAbility = new Ability()
             {
@@ -151,7 +179,7 @@ namespace Tests
 
 
         [Test]
-        public void DamageTriggersAbility()
+        public void TriggerDamageTriggers()
         {
             var testAbility = new Ability()
             {
@@ -168,8 +196,6 @@ namespace Tests
             Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref triggeredAblity, a));
 
             TestCard.Damage(1);
-
-
 
             Assert.IsTrue(triggeredAblity == testAbility);
         }
@@ -700,7 +726,312 @@ namespace Tests
 
             Assert.IsFalse(triggered);
         }
+        [Test]
+        public void ActionWithdrawExecutes()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Withdraw, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card withdrawn = null;
+
+            Event.OnWithdraw.AddListener(c => withdrawn = c);
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.Damage(1);
+
+            Assert.IsTrue(triggered);
+            Assert.IsNotNull(withdrawn);
+        }
+        [Test]
+        public void ActionCharmExecutes()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Charm, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card withdrawn = null;
+
+            Event.OnWithdraw.AddListener(c => withdrawn = c);
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.Damage(1);
+
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(false);
+            Assert.IsNotNull(withdrawn);
+        }
+        [Test]
+        public void ActionCloneExecutes()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Clone, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card withdrawn = null;
+
+            Event.OnWithdraw.AddListener(c => withdrawn = c);
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.Damage(1);
+
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(false);
+            Assert.IsNotNull(withdrawn);
+        }
+        [Test]
+        public void ActionCopyExecutes()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Copy, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card withdrawn = null;
+
+            Event.OnWithdraw.AddListener(c => withdrawn = c);
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.Damage(1);
+
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(false);
+            Assert.IsNotNull(withdrawn);
+        }
+        [Test]
+        public void ActionDealDamageExecutes()
+        {
+            int dmg = 1;
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.All, dmg, new Noun(Noun.CharacterTyp.This)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.Withdraw),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card damaged = null;
+
+            Event.OnDamaged.AddListener(c => damaged = c);
+            Event.OnWithdraw.AddListener((c) => triggered = true);
+
+            OtherCard.Withdraw();
+
+            Assert.IsTrue(triggered);
+            Assert.IsNotNull(damaged);
+            Assert.AreEqual(damaged, TestCard);
+            Assert.AreEqual(TestCard.MaxHealth - dmg, TestCard.CurrentHealth);
+
+        }
+        [Test]
+        public void ActionDrawExecutes()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Draw, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Library);
+
+            bool triggered = false;
+            Card drawn = null;
+
+            Event.OnDraw.AddListener(c => drawn = c);
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            TestCard.Damage(1);
+
+            Assert.IsTrue(triggered);
+            Assert.IsNotNull(drawn);
+            Assert.AreEqual(drawn.Location, Deck.Zone.Hand);
+        }
+        [Test]
+        public void ActionHealExecutes()
+        {
+            int amount = 1;
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Heal, Ability.Count.All, amount, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card healed = null;
+
+            Event.OnHealed.AddListener(c => healed = c);
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.Damage(amount);
+
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(OtherCard.MaxHealth == OtherCard.CurrentHealth);
+            Assert.IsNotNull(healed);
+        }
+        [Test]
+        public void ActionKillExecutes()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Kill, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Other)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card killed = null;
+
+            Event.OnDeath.AddListener(c => killed = c);
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.Damage(1);
+
+            Assert.IsTrue(triggered);
+            Assert.AreEqual(killed, OtherCard);
+            Assert.IsFalse(OtherCard.Alive());
+        }
+        [Test]
+        public void ActionResurrectExecutes()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Resurrect, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Other), Ability.Verb.DIES),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card death = null;
+
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+            Event.OnDeath.AddListener((c) => death = c);
+
+            OtherCard.Die();
+
+            Assert.NotNull(death);
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(OtherCard.Alive());
+        }
+        [Test]
+        public void ActionStatminusExecutes()
+        {
+            const int amount = 2;
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.StatMinus, Ability.Count.One, amount, new Noun(Noun.CharacterTyp.Other)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.This), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            var expectedAttack = OtherCard.Attack - amount;
+            var expectedHealth = OtherCard.CurrentHealth - amount;
+            var expectedMaxHealth = OtherCard.MaxHealth- amount;
+
+            bool triggered = false;
 
 
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            TestCard.Damage(1);
+
+            Assert.IsTrue(triggered);
+            Assert.AreEqual(expectedAttack, OtherCard.Attack);
+            Assert.AreEqual(expectedHealth, OtherCard.CurrentHealth);
+            Assert.AreEqual(expectedMaxHealth, OtherCard.MaxHealth);
+
+        }
+        
+        [Test]
+        public void ActionSummonExecutes()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Summon, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card withdrawn = null;
+
+            Event.OnWithdraw.AddListener(c => withdrawn = c);
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.Damage(1);
+
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(false);
+            Assert.IsNotNull(withdrawn);
+        }
     }
 }
