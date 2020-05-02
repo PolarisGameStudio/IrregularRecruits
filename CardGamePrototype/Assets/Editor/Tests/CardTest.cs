@@ -218,7 +218,7 @@ namespace Tests
 
             var heal = 1;
 
-            Event.OnHealed.AddListener(i => check = i);
+            Event.OnHealed.AddListener((i, val) => check = i);
 
             TestCard.Heal(heal);
 
@@ -256,7 +256,7 @@ namespace Tests
 
             var damage = 1;
 
-            Event.OnDamaged.AddListener(i => check = i);
+            Event.OnDamaged.AddListener((i, val) => check = i);
 
             TestCard.Damage(damage);
 
@@ -301,7 +301,7 @@ namespace Tests
             Card check = null;
             var boost = 3;
 
-            Event.OnHealed.AddListener(i => check = i);
+            Event.OnHealed.AddListener((i,val) => check = i);
 
             TestCard.StatModifier(boost);
 
@@ -330,7 +330,7 @@ namespace Tests
 
             var damage = 1;
 
-            Event.OnDamaged.AddListener(i => check = i);
+            Event.OnDamaged.AddListener((i, val) => check = i);
 
             TestCard.StatModifier(-damage);
 

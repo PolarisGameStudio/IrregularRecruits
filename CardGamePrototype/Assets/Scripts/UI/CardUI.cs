@@ -47,6 +47,9 @@ namespace UI
         public bool AlwaysFaceUp;
         public bool Interactable = true;
 
+        //Not equal to Card.health, since UI may be behind
+        public int HealthValueDisplayed;
+
         private void AddListeners(Card c)
         {
             if (c == null) return;

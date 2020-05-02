@@ -47,12 +47,41 @@ namespace UI
 
             return z.FirstOrDefault(u => u.Zone == zone).RectTransform;
         }
+        
+        //Handles death/ etb / withdraw / resurrection / draw animation
+        internal static void Move(Card card, Deck.Zone library)
+        {
+            throw new NotImplementedException();
+        }
+
         public static int GetZoneAdjust(Deck.Zone zone, bool enm)
         {
             var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;
 
             return z.FirstOrDefault(u => u.Zone == zone).CardPosAdjust;
         }
+
+        internal static void SetAttackTarget(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        //negative for damage, positive for heal
+        internal static void CardHealthChange(Card card, int val)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void SetAttacker(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void CardStatsModified(Card card, int val)
+        {
+            throw new NotImplementedException();
+        }
+
         public static int GetZoneRotation(Deck.Zone zone, bool enm)
         {
             var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;

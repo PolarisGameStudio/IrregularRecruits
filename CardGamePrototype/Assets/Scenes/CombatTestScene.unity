@@ -21034,6 +21034,7 @@ MonoBehaviour:
   InstantiatedObjects: []
   AlwaysFaceUp: 1
   Interactable: 1
+  HealthValueDisplayed: 0
 --- !u!114 &593056760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22126,7 +22127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1638672459}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &723976508
 MonoBehaviour:
@@ -24381,10 +24382,10 @@ RectTransform:
   m_Father: {fileID: 1066718295}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 444.75003, y: -103.22}
-  m_SizeDelta: {x: 789.50006, y: 106.44}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910797087
 MonoBehaviour:
@@ -25975,7 +25976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1051119842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30850,6 +30851,7 @@ MonoBehaviour:
   InstantiatedObjects: []
   AlwaysFaceUp: 1
   Interactable: 1
+  HealthValueDisplayed: 0
 --- !u!114 &1473150617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33627,7 +33629,6 @@ Transform:
   - {fileID: 453068599}
   - {fileID: 947290327}
   - {fileID: 1221026022}
-  - {fileID: 1907279812}
   - {fileID: 723976507}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -33790,10 +33791,10 @@ RectTransform:
   m_Father: {fileID: 537136784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 859.50006, y: -131.85}
-  m_SizeDelta: {x: 300, y: 283.7}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 283.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1665298993
 CanvasRenderer:
@@ -40668,54 +40669,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894531718}
   m_CullTransparentMesh: 0
---- !u!1 &1907279811
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1907279812}
-  - component: {fileID: 1907279814}
-  m_Layer: 0
-  m_Name: CombatManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1907279812
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907279811}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54.85437, y: 207.67831, z: 141.0686}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1638672459}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1907279814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907279811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c8d21d7afcdff2409c19c01c0bb1580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Turn: 0
-  AvantgardeTrait: {fileID: 11400000, guid: 7a817369293f625469ed09b70b07e03c, type: 2}
-  EtherealTrait: {fileID: 11400000, guid: 2075b1581c3413a4c8d1ac53c8aef4de, type: 2}
-  AttackAnimationDuration: 0.5
-  AbilityTriggerDuration: 1
 --- !u!1 &1908468736
 GameObject:
   m_ObjectHideFlags: 0
@@ -42849,6 +42802,7 @@ MonoBehaviour:
   InstantiatedObjects: []
   AlwaysFaceUp: 1
   Interactable: 1
+  HealthValueDisplayed: 0
 --- !u!1 &2072303240
 GameObject:
   m_ObjectHideFlags: 0
@@ -43274,10 +43228,10 @@ RectTransform:
   m_Father: {fileID: 1066718295}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 444.75003, y: -311.44}
-  m_SizeDelta: {x: 789.50006, y: 250}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2119130800
 MonoBehaviour:

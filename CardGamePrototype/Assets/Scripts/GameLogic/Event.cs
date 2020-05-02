@@ -14,9 +14,12 @@ namespace GameLogic
         public static CardEvent OnKill = new CardEvent();
         public static CardEvent OnAttack = new CardEvent();
         public static CardEvent OnBeingAttacked = new CardEvent();
-        public static CardEvent OnDamaged = new CardEvent();
-        public static CardEvent OnHealed = new CardEvent();
         public static CardEvent OnWithdraw = new CardEvent();
+
+        public class CardValueEvent : UnityEvent<Card,int> { }
+        public static CardValueEvent OnDamaged = new CardValueEvent();
+        public static CardValueEvent OnHealed = new CardValueEvent();
+        public static CardValueEvent OnStatMod = new CardValueEvent();
 
         //Ability,Owner,Targets . TODO: use holder class
         public class AbilityEvent : UnityEvent<Ability, Card, List<Card>> { }

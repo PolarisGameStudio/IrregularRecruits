@@ -259,7 +259,7 @@ namespace GameLogic
 
             OnDamage.Invoke(damage);            
             
-            Event.OnDamaged.Invoke(this);
+            Event.OnDamaged.Invoke(this,damage);
 
         }
 
@@ -268,7 +268,7 @@ namespace GameLogic
 
             if (value < 1) return;
 
-            Event.OnHealed.Invoke(this);
+            Event.OnHealed.Invoke(this,value);
 
             CurrentHealth += value;
         }

@@ -11,9 +11,9 @@ public class FlowControllerBehaviour : Singleton<FlowControllerBehaviour>
         //Debugs texts
         Event.OnAttack.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Attacking"));
         Event.OnBeingAttacked.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is Attacked"));
-        Event.OnDamaged.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is Damaged"));
+        Event.OnDamaged.AddListener((c,i) => Debug.Log("Event: " + c.Creature.name + ": Is Damaged for "+ i));
         Event.OnDeath.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is dead"));
-        Event.OnHealed.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is healed"));
+        Event.OnHealed.AddListener((c, i) => Debug.Log("Event: " + c.Creature.name + ": Is healed for " + i));
         Event.OnKill.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Killed a minion"));
         Event.OnWithdraw.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Withdrew"));
         Event.OnAbilityTrigger.AddListener((a, c, ts) => Debug.Log("Event: " + c.Creature.name + ": AbilityTriggered"));

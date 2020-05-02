@@ -852,7 +852,7 @@ namespace Tests
             bool triggered = false;
             Card damaged = null;
 
-            Event.OnDamaged.AddListener(c => damaged = c);
+            Event.OnDamaged.AddListener((c,i) => damaged = c);
             Event.OnWithdraw.AddListener((c) => triggered = true);
 
             OtherCard.Withdraw();
@@ -909,7 +909,7 @@ namespace Tests
             bool triggered = false;
             Card healed = null;
 
-            Event.OnHealed.AddListener(c => healed = c);
+            Event.OnHealed.AddListener((c, i) => healed = c);
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
             OtherCard.Damage(amount);
