@@ -228,9 +228,9 @@ namespace UI
             AssetDatabase.Refresh();
             AssetDatabase.SaveAssets();
 
-            foreach (var cardUI in FindObjectsOfType<CardUI>())
-                if (cardUI.Card.Creature == Creature)
-                    cardUI.Card.SetCreature(Creature);
+            //foreach (var cardUI in FindObjectsOfType<CardUI>())
+            //    if (cardUI.Card.Creature == Creature)
+            //        cardUI.Card.SetCreature(Creature);
 
             Creature = null;
 

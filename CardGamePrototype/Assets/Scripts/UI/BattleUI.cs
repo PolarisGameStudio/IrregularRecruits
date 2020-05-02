@@ -43,11 +43,44 @@ namespace UI
         {
 
             //should be handle by calls to move instead
-            Event.OnDraw.AddListener(c => UpdateLibrary());
-            Event.OnWithdraw.AddListener(c => UpdateLibrary());
-
+            //Event.OnDraw.AddListener(c => UpdateLibrary());
+            //Event.OnWithdraw.AddListener(c => UpdateLibrary());
 
             ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
+
+            Event.OnCombatSetup.AddListener(SetupDecks);
+        }
+
+
+        private void SetupDecks(Deck playerDeck, Deck opponentDeck)
+        {
+            SetupUI(playerDeck);
+            SetupUI(opponentDeck);
+        }
+
+        private void SetupUI(Deck deck)
+        {
+            foreach (var card in deck.AllCreatures())
+            {
+                var ui = Instantiate<CardUI>(BattleUI.Instance.CardPrefab);
+
+                ui.SetCard(card);
+
+                CardUIs[card] = ui;
+                
+                //Should we just move it to library nomatter what?
+                Move(ui,card.Location,deck.PlayerDeck);
+            }
+        }
+
+        public static void CleanUpUI()
+        {
+            Debug.Log("Destroying all card uis");
+
+            foreach (var kp in Instance.CardUIs)
+                Destroy(kp.Value);
+
+            Instance.CardUIs.Clear();
         }
 
         public static Transform GetZoneHolder(Deck.Zone zone, bool enm)
@@ -56,7 +89,7 @@ namespace UI
 
             return z.FirstOrDefault(u => u.Zone == zone).RectTransform;
         }
-        
+
         public static int GetZoneAdjust(Deck.Zone zone, bool enm)
         {
             var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;
@@ -68,8 +101,8 @@ namespace UI
         internal static void Move(Card card, Deck.Zone to, Deck.Zone from)
         {
             CardUI ui;
-            
-            Debug.Log("Moving card: "+ card + " from: "+ from + "; to:" + to);
+
+            Debug.Log("Moving card: " + card + " from: " + from + "; to:" + to);
         }
 
 
@@ -140,6 +173,12 @@ namespace UI
         {
             Instance.PlayerDeckDescription.text = "Deck size: " + BattleManager.Instance.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
             Instance.EnemyDeckDescription.text = "Deck size: " + BattleManager.Instance.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
+        }
+        
+        //otherwise make an onclick event in CardUI
+        internal static void Clicked(CardUI cardUI)
+        {
+            Instance.CardUIs.First(kp => kp.Value == cardUI).Key.Click();
         }
 
         public static void Move(CardUI card, Deck.Zone zone, bool player, float delay = 0)

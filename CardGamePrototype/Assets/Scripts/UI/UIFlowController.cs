@@ -41,6 +41,8 @@ namespace UI
             //On Stat Change-> (Card, amount)
             Event.OnStatMod.AddListener((card, val) => AddCardEvent(() => BattleUI.CardStatsModified(card, val), 0.5f));
 
+            Event.OnBattleFinished.AddListener(() => AddCardEvent(() => BattleUI.CleanUpUI()));
+
             //On Ability trigger->All the current Ability animation param
 
         }

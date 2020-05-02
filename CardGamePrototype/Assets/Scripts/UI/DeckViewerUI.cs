@@ -31,7 +31,7 @@ namespace UI
             {
                 var inst = Instantiate(CardUIInstance, CardUIInstance.transform.parent);
 
-                inst.Card = c;
+                inst.SetCard( c);
 
                 inst.gameObject.SetActive(true);
                 inst.AlwaysFaceUp = true;

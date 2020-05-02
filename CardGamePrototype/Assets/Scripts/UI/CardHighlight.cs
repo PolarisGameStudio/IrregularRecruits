@@ -59,7 +59,7 @@ namespace UI
         {
             ShowAfterDelayRoutine = null;
 
-            Creature = cardUI.Card != null ? cardUI.Card.Creature : cardUI.Creature;
+            Creature =  cardUI.Creature;
 
             InstantiatedObjects.ForEach(t => Destroy(t.gameObject));
 
@@ -79,15 +79,17 @@ namespace UI
             }
 
             //public TextMeshProUGUI AttackText;
-            AttackText.text = (cardUI.Card != null ? cardUI.Card.Attack.ToString("N0") :
-                Creature.Attack.ToString("N0"));
-            AttackText.color = (cardUI.Card != null ? cardUI.AttackText.color : Color.white);
+            AttackText.text = //(cardUI.Card != null ? cardUI.Card.Attack.ToString("N0") :
+                Creature.Attack.ToString("N0");
+            AttackText.color = //(cardUI.Card != null ? cardUI.AttackText.color : 
+                Color.white;
 
             //public TextMeshProUGUI HealthText;
             HealthText.text =
-                (cardUI.Card != null ? cardUI.Card.CurrentHealth.ToString("N0") + "/" + cardUI.Card.MaxHealth.ToString("N0") :
-                Creature.Health.ToString("N0"));
-            HealthText.color = (cardUI.Card != null ? cardUI.HealthText.color : Color.white);
+                //(cardUI.Card != null ? cardUI.Card.CurrentHealth.ToString("N0") + "/" + cardUI.Card.MaxHealth.ToString("N0") :
+                Creature.Health.ToString("N0");
+            HealthText.color = //(cardUI.Card != null ? cardUI.HealthText.color : 
+                Color.white;
 
             //public ImageTextEntry RaceIcon;
             RaceIcon.Text.text = Creature.Race.name;

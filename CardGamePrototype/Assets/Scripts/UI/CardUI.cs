@@ -12,21 +12,6 @@ namespace UI
     [RequireComponent(typeof(RectTransform))]
     public class CardUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
     {
-        private Card card;
-        public Card Card
-        {
-            get => card;
-            set
-            {
-                if (card != value)
-                {
-                    RemoveListeners(card);
-                    card = value;
-                    AddListeners(card);
-                }
-            }
-        }
-
         public Creature Creature;
 
         [Header("UI Refs")]
@@ -49,29 +34,10 @@ namespace UI
         //Not equal to Card.health, since UI may be behind
         public int HealthValueDisplayed;
 
-        private void AddListeners(Card c)
+        public void SetCard(Card c)
         {
-            if (c == null) return;
-
-            c.OnCreatureChange.AddListener(UpdateCreature);
-            c.OnStatChange.AddListener(UpdateStats);
-            //c.OnAbilityTrigger.AddListener(CardAnimation.HighlightAbility);
-            c.OnStatMod.AddListener(StatModifier);
-            c.OnDamage.AddListener(CardAnimation.DamageAnimation.Show);
-
             UpdateCreature(c.Creature);
             UpdateStats();
-        }
-
-        private void RemoveListeners(Card c)
-        {
-            if (c == null) return;
-
-            c.OnCreatureChange.RemoveListener(UpdateCreature);
-            c.OnStatChange.RemoveListener(UpdateStats);
-            //c.OnAbilityTrigger.RemoveListener(CardAnimation.HighlightAbility);
-            c.OnStatMod.RemoveListener(StatModifier);
-            c.OnDamage.RemoveListener(CardAnimation.DamageAnimation.Show);
         }
 
         public void UpdateCreature(Creature creature)
@@ -123,7 +89,7 @@ namespace UI
             if (AttributeInstance)
                 if (creature.SpecialAbility)
                 {
-                    DescriptionText.text += $"{creature.SpecialAbility.Description(Card.Creature)}\n";
+                    DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
 
                     var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
                     instance.gameObject.SetActive(true);
@@ -145,24 +111,28 @@ namespace UI
 
         private void UpdateStats()
         {
-            if (!Card.Creature) return;
+            if (!Creature) return;
 
-            AttackText.text = Card.Attack.ToString("N0");
-            HealthText.text = Card.CurrentHealth.ToString("N0");
-            HealthText.color = Card.CurrentHealth < Card.MaxHealth ? Color.red :
-                Card.Creature.Health < Card.MaxHealth ? Color.green : Color.white;
+            AttackText.text = Creature.Attack.ToString("N0");
+            HealthText.text = Creature.Health.ToString("N0");
+            //HealthText.color = Card.CurrentHealth < Card.MaxHealth ? Color.red :
+            //    Card.Creature.Health < Card.MaxHealth ? Color.green : Color.white;
 
-            AttackText.color = Card.Creature.Attack < Card.Attack ? Color.green : Color.white;
+            //AttackText.color = Card.Creature.Attack < Card.Attack ? Color.green : Color.white;
         }
 
-        public void Flip()
-        {
-            //todo: deck view/unflippable bool 
-            if (AlwaysFaceUp) return;
+        public bool FaceUp() => FrontHolder.activeInHierarchy;
 
-            CardBackHolder.SetActive(!Card.FaceUp);
-            FrontHolder.SetActive(Card.FaceUp);
-        }
+        //public void Flip()
+        //{
+        //    //todo: deck view/unflippable bool 
+        //    if (AlwaysFaceUp) return;
+
+        //    CardBackHolder.SetActive(!Card.FaceUp);
+        //    FrontHolder.SetActive(Card.FaceUp);
+        //}
+
+            
 
         #region Input Handling
 #if true
@@ -174,7 +144,7 @@ namespace UI
         if (CardHighlight.IsActive()) return;
 #endif
             if (Interactable )//&& Card.BattleRepresentation == this)
-                Card.Click();
+                BattleUI.Clicked(this);
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -185,7 +155,7 @@ namespace UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (AlwaysFaceUp || (Card != null && Card.FaceUp))
+            if (AlwaysFaceUp || (FaceUp()))
                 CardHighlight.Show(this);
 
         }
