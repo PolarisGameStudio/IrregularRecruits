@@ -27,7 +27,6 @@ namespace UI
             }
         }
 
-        //If not a card yet
         public Creature Creature;
 
         [Header("UI Refs")]

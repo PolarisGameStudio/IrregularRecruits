@@ -1,6 +1,7 @@
 ﻿using GameLogic;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace UI
     {
 
         public CardUI CardPrefab;
+
+        private Dictionary<Card, CardUI> CardUIs = new Dictionary<Card, CardUI>();
 
         public UIZone[] PlayerUIZones;
         public UIZone[] EnemyUIZones;
@@ -33,11 +36,17 @@ namespace UI
         public TextMeshProUGUI PlayerDeckDescription, EnemyDeckDescription;
 
         public float MoveDuration = 0.2f;
+        private Card Attacker;
+        private Card AttackTarget;
 
         void Awake()
         {
+
+            //should be handle by calls to move instead
             Event.OnDraw.AddListener(c => UpdateLibrary());
             Event.OnWithdraw.AddListener(c => UpdateLibrary());
+
+
             ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
         }
 
@@ -48,12 +57,6 @@ namespace UI
             return z.FirstOrDefault(u => u.Zone == zone).RectTransform;
         }
         
-        //Handles death/ etb / withdraw / resurrection / draw animation
-        internal static void Move(Card card, Deck.Zone library)
-        {
-            throw new NotImplementedException();
-        }
-
         public static int GetZoneAdjust(Deck.Zone zone, bool enm)
         {
             var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;
@@ -61,25 +64,69 @@ namespace UI
             return z.FirstOrDefault(u => u.Zone == zone).CardPosAdjust;
         }
 
-        internal static void SetAttackTarget(Card card)
+        //Handles death/ etb / withdraw / resurrection / draw animation
+        internal static void Move(Card card, Deck.Zone to, Deck.Zone from)
         {
-            throw new NotImplementedException();
+            CardUI ui;
+            
+            Debug.Log("Moving card: "+ card + " from: "+ from + "; to:" + to);
         }
+
+
 
         //negative for damage, positive for heal
         internal static void CardHealthChange(Card card, int val)
         {
-            throw new NotImplementedException();
+            if (val < 0)
+            {
+
+                Debug.Log($"{card} damaged for {val}");
+            }
+            else if (val > 0)
+            {
+
+                Debug.Log($"{card} healed for {val}");
+            }
+            else
+                Debug.LogError("health change of 0");
         }
 
         internal static void SetAttacker(Card card)
         {
-            throw new NotImplementedException();
+            Instance.Attacker = card;
+
+            //do ready attack animation
+        }
+
+        internal static void SetAttackTarget(Card card)
+        {
+            Instance.AttackTarget = card;
+
+            Instance.AttackAnimation();
+        }
+
+        private void AttackAnimation()
+        {
+            //null check
+            if (AttackTarget == null) Debug.LogError("no attacktarget");
+            if (Attacker == null) Debug.LogError("no attacker");
+
+            Debug.Log($"{Attacker} attacking {AttackTarget}");
         }
 
         internal static void CardStatsModified(Card card, int val)
         {
-            throw new NotImplementedException();
+            if (val < 0)
+            {
+
+                Debug.Log($"{card} Stat changes by {val}");
+            }
+            else if (val > 0)
+            {
+                Debug.Log($"{card} stat changes by {val}");
+            }
+            else
+                Debug.LogError("stat change change of 0");
         }
 
         public static int GetZoneRotation(Deck.Zone zone, bool enm)

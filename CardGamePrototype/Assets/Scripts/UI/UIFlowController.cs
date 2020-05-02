@@ -13,19 +13,20 @@ namespace UI
     public class UIFlowController : Singleton<UIFlowController>
     {
         public Queue<ControlledUIEvent> ActionQueue = new Queue<ControlledUIEvent>();
-        public bool ReadyForInput { get; private set; }
-        public UnityEvent OnReadyForInput = new UnityEvent();
         public Coroutine ControlRoutine;
 
-        public UIFlowController()
+        public void Start()
         {
+            var bm = BattleManager.Instance;
+
             //SETUP listeners
             //    Move->deckmanager(Card, Zone) Handles death/ etb / withdraw / resurrection / draw animation
-           Event.OnDeath.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Graveyard)));
-           Event.OnPlay.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Battlefield)));
-           Event.OnWithdraw.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Library)));
-           Event.OnRessurrect.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Battlefield)));
-           Event.OnDraw.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Hand)));
+            // if an action moves a card a zone from different locations, the cards current location is used
+           Event.OnDeath.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Graveyard,card.Location)));
+           Event.OnPlay.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Battlefield,card.Location)));
+           Event.OnWithdraw.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Library,Deck.Zone.Battlefield)));
+           Event.OnRessurrect.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Battlefield,Deck.Zone.Graveyard)));
+           Event.OnDraw.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Hand,Deck.Zone.Library ),0.2f));
 
             //OnAttack-> (Card) Attack animation
             Event.OnAttack.AddListener(card => AddCardEvent(() => BattleUI.SetAttacker(card),0.5f));
