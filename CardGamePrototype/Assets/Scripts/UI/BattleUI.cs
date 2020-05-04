@@ -227,8 +227,8 @@ namespace UI
             else
                 Debug.LogError("stat change change of 0");
 
-            ui.UpdateHealth(card.CurrentHealth, damaged);
-            ui.UpdateAttack(card.Attack);
+            ui.UpdateHealth(currentHealth, damaged);
+            ui.UpdateAttack(currentAttack);
             yield return null;
         }
 

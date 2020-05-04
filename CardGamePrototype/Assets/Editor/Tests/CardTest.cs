@@ -241,13 +241,16 @@ namespace Tests
         {
             var check = 0;
             var damage = 3;
+            Card card = null;
 
-            TestCard.OnDamage.AddListener(i => check = i);
+            Event.OnDamaged.AddListener((c,i) => check = i);
+            Event.OnDamaged.AddListener((c,i) => card = c);
 
             TestCard.Damage(damage);
 
-
+            Assert.NotNull(card);
             Assert.IsTrue(check == damage);
+            Assert.AreEqual(card, TestCard);
         }
         [Test]
         public void DamageTriggersOnDamageEvent()
@@ -285,13 +288,16 @@ namespace Tests
         {
             var check = 0;
             var boost = 3;
+            Card card = null;
 
-            TestCard.OnStatMod.AddListener(i => check = i);
+            Event.OnStatMod.AddListener((c, i) => check = i);
+            Event.OnStatMod.AddListener((c, i) => card = c);
 
             TestCard.StatModifier(boost);
 
-
             Assert.IsTrue(check == boost);
+            Assert.NotNull(card);
+            Assert.AreEqual(card, TestCard);
         }
 
         //TODO: move to event test

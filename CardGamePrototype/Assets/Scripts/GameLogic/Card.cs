@@ -25,10 +25,6 @@ namespace GameLogic
 
         public string Name;
 
-        public UnityEvent OnStatChange = new UnityEvent();
-        public class StatChangeEvent : UnityEvent<int> { }
-        public StatChangeEvent OnDamage = new StatChangeEvent();
-        public StatChangeEvent OnStatMod = new StatChangeEvent();
         public class CreatureChangeEvent : UnityEvent<Creature> { }
         public CreatureChangeEvent OnCreatureChange = new CreatureChangeEvent();
         public UnityEvent OnAbilityTrigger = new UnityEvent();
@@ -46,7 +42,6 @@ namespace GameLogic
 
                 currentHealth = value;
                 if (value <= 0) Die();
-                OnStatChange.Invoke();
             }
         }
 
@@ -104,7 +99,6 @@ namespace GameLogic
             private set
             {
                 attack = value;
-                OnStatChange.Invoke();
             }
         }
 
@@ -191,7 +185,7 @@ namespace GameLogic
             CurrentHealth += amount;
             Attack += amount;
 
-            OnStatMod.Invoke(amount);
+            Event.OnStatMod.Invoke(this,amount);
 
         }
 
@@ -261,9 +255,7 @@ namespace GameLogic
             if (damage < 1) return;
 
 
-            CurrentHealth -= damage;
-
-            OnDamage.Invoke(damage);            
+            CurrentHealth -= damage;  
             
             Event.OnDamaged.Invoke(this,damage);
 
