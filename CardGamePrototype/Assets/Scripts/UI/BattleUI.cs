@@ -294,7 +294,8 @@ namespace UI
             rect.localScale = Vector3.one;
             rect.SetAsLastSibling();
 
-            card.Flip(zone != Deck.Zone.Library);
+            
+            yield return card.Flip(zone == Deck.Zone.Library || (!player && zone == Deck.Zone.Hand));
 
             card.Interactable = true;
         }

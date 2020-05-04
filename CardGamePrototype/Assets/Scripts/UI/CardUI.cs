@@ -1,5 +1,6 @@
 ﻿using GameLogic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -138,15 +139,6 @@ namespace UI
 
         public bool FaceUp() => FrontHolder.activeInHierarchy;
 
-        public void Flip(bool faceUp)
-        {
-            //todo: deck view/unflippable bool 
-            if (AlwaysFaceUp) return;
-
-            CardBackHolder.SetActive(!faceUp);
-            FrontHolder.SetActive(faceUp);
-        }
-
 
 
         #region Input Handling
@@ -175,6 +167,27 @@ namespace UI
 
         public void OnDrag(PointerEventData eventData)
         {
+        }
+
+        internal IEnumerator Flip(bool faceDown)
+        {
+            //already correct face up
+            if (faceDown != FaceUp()) yield break;
+            
+            if (AlwaysFaceUp) yield break;
+
+            var flipTime = 0.2f;
+
+            gameObject.LeanScaleX(0, flipTime);
+            
+            yield return new WaitForSeconds(flipTime);
+
+            CardBackHolder.SetActive(faceDown);
+            FrontHolder.SetActive(!faceDown);
+
+            gameObject.LeanScaleX(1, flipTime);
+
+            yield return new WaitForSeconds(flipTime);
         }
 #endif
 #if false

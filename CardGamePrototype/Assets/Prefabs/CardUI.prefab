@@ -5688,9 +5688,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce174aa9d08c90478426b29f36fb55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Creature: {fileID: 0}
   FrontHolder: {fileID: 292642175116116442}
   CardBackHolder: {fileID: 3983243860329674903}
   CardImage: {fileID: 3647378738829383159}
+  IconImage: {fileID: 0}
   RaceInstance: {fileID: 7829417301979537092}
   AttributeInstance: {fileID: 3640668363075213114}
   CardAnimation: {fileID: 6328246388895847416}
@@ -5701,6 +5703,7 @@ MonoBehaviour:
   InstantiatedObjects: []
   AlwaysFaceUp: 0
   Interactable: 1
+  HealthValueDisplayed: 0
 --- !u!114 &4991445251926434332
 MonoBehaviour:
   m_ObjectHideFlags: 0
