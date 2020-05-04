@@ -32,7 +32,9 @@ namespace GameLogic
         public static UnityEvent OnBattleFinished = new UnityEvent();
 
         //TODO: replace with deck/card action and parse the relevant Controller/deck/card
-        public static UnityEvent OnPlayerAction = new UnityEvent();
+        public class DeckEvent : UnityEvent<Deck> { }
+
+        public static DeckEvent OnPlayerAction = new DeckEvent();
 
         //TODO: should be handled by combat Resolver ;
         public static UnityEvent OnCombatResolveStart = new UnityEvent();

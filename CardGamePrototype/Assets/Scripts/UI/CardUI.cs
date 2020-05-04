@@ -37,7 +37,7 @@ namespace UI
         public void SetCard(Card c)
         {
             UpdateCreature(c.Creature);
-            UpdateStats();
+            UpdateStats(c.Attack,c.CurrentHealth,c.Damaged());
         }
 
         public void UpdateCreature(Creature creature)
@@ -109,16 +109,31 @@ namespace UI
                 CardAnimation.StatMinusAnimation.Show(amount);
         }
 
-        private void UpdateStats()
+        private void UpdateStats(int attack,int health,bool damaged = false)
         {
             if (!Creature) return;
 
-            AttackText.text = Creature.Attack.ToString("N0");
-            HealthText.text = Creature.Health.ToString("N0");
-            //HealthText.color = Card.CurrentHealth < Card.MaxHealth ? Color.red :
-            //    Card.Creature.Health < Card.MaxHealth ? Color.green : Color.white;
+            UpdateHealth(health, damaged);
+            UpdateAttack(attack);
+        }
 
-            //AttackText.color = Card.Creature.Attack < Card.Attack ? Color.green : Color.white;
+        public void UpdateAttack(int attack)
+        {
+            AttackText.text = attack.ToString("N0");
+
+            AttackText.color = Creature.Attack < attack ? Color.green :
+                attack < Creature.Attack ? Color.gray :
+                Color.white;
+        }
+
+        public void UpdateHealth(int health, bool damaged)
+        {
+            HealthText.text = health.ToString("N0");
+
+            HealthText.color = damaged ? Color.red :
+                health > Creature.Health ? Color.green :
+                health < Creature.Health ? Color.gray :
+                Color.white;
         }
 
         public bool FaceUp() => FrontHolder.activeInHierarchy;
@@ -138,12 +153,10 @@ namespace UI
 #if true
         public void OnPointerClick(PointerEventData eventData)
         {
-            //Debug.Log("Clicked card " + this);
-            //TODO: hack to prevent holding from trigggering clicks
 #if !UNITY_EDITOR
         if (CardHighlight.IsActive()) return;
 #endif
-            if (Interactable )//&& Card.BattleRepresentation == this)
+            if (Interactable )
                 BattleUI.Clicked(this);
         }
 

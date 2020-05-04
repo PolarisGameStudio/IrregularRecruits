@@ -85,7 +85,7 @@ namespace UI
             PlayFx(fxs, position, instantiateInWorldSpace ? null : card.transform);
         }
 
-        internal static void ZoneMoveEffects(CardUI card, Deck.Zone from, Deck.Zone to)
+        internal static IEnumerator ZoneMoveEffects(CardUI card, Deck.Zone from, Deck.Zone to)
         {
             switch (to)
             {
@@ -93,12 +93,13 @@ namespace UI
                     Instance.WithdrawParticles(card);
                     break;
                 case Deck.Zone.Battlefield:
+                    if(from == Deck.Zone.Graveyard)
+                        yield return card.CardAnimation.UnDissolve();
                     Instance.PlayParticles(card);
                     break;
                 case Deck.Zone.Graveyard:
+                    yield return card.CardAnimation.Dissolve();
                     Instance.DeathParticles(card);
-                    break;
-                default:
                     break;
             }
         }
@@ -115,6 +116,13 @@ namespace UI
 
         }
 
+        internal static IEnumerator StartAttack(CardUI ui)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+
+        }
+
         private static void PlayFx(ParticleSystem[] fxs, Vector2 position, Transform parent)
         {
             foreach (var fx in fxs)
@@ -127,16 +135,16 @@ namespace UI
             }
         }
 
-        private void PlayAbilityFx(Ability ability, CardUI owner, List<CardUI> targets, float delay = 0)
+        public IEnumerator PlayAbilityFx(Ability ability, CardUI owner, List<CardUI> targets, float delay = 0)
         {
             var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
 
             int i = 0;
 
-            StartCoroutine(PlayCardFX(owner, abilityFx.OwnerFX, delay * i++));
-            StartCoroutine(PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, delay * i++));
+            yield return PlayCardFX(owner, abilityFx.OwnerFX, delay * i++);
+            yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, delay * i++);
             foreach (var t in targets)
-                StartCoroutine(PlayCardFX(t, abilityFx.TargetFX, delay * i++));
+                yield return PlayCardFX(t, abilityFx.TargetFX, delay * i++);
         }
     }
 }

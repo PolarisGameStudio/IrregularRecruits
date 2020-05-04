@@ -6,22 +6,29 @@ namespace GameLogic
     {
         private Deck ControlledDeck;
         private Action TurnFinished;
-        private bool MyTurn = false;
+
+        public int PlayerActionsLeft;
 
         public void SetupDeckActions(Deck deck, Action onfinish)
         {
             ControlledDeck = deck;
 
             TurnFinished = onfinish;
+            
+            Event.OnPlayerAction.AddListener(UsedPlayerAction);
 
-            Event.OnPlayerAction.AddListener(CheckForTurnfinish);
+            deck.DrawInitialHand();
         }
 
-        private void CheckForTurnfinish()
+        private void UsedPlayerAction(Deck deck)
         {
-            if (BattleManager.Instance.PlayerActionsLeft <= 0 && MyTurn)
+            if (deck != ControlledDeck)
+                return;
+
+            PlayerActionsLeft--;
+
+            if (PlayerActionsLeft <= 0)
             {
-                MyTurn = false;
                 TurnFinished.Invoke(); 
             }
 
@@ -29,12 +36,15 @@ namespace GameLogic
 
         public void YourTurn()
         {
-            MyTurn = true;
-
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-            BattleManager.Instance.PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
+            PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
 
+        }
+
+        public bool ActionAvailable()
+        {
+            return PlayerActionsLeft > 0;
         }
     }
 }

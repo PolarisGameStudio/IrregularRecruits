@@ -25243,7 +25243,7 @@ MonoBehaviour:
   DeckDamageParadigm: 0
   MaxRareEnemiesPrCombat: 0
   CombatSpeed: 0.6
-  AiControlledPlayer: 0
+  AiControlledPlayer: 1
 --- !u!1 &947375142
 GameObject:
   m_ObjectHideFlags: 0

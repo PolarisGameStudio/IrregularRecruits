@@ -92,6 +92,10 @@ namespace GameLogic
             Event.OnDeath.Invoke(this);
         }
 
+        internal bool Damaged()
+        {
+            return CurrentHealth < MaxHealth;
+        }
 
         private int attack;
         public int Attack
@@ -202,6 +206,8 @@ namespace GameLogic
             Debug.Log("Playing card: " + Name);
 
             Event.OnPlay.Invoke(this);
+
+            Event.OnPlayerAction.Invoke(this.InDeck);
         }
 
 
@@ -293,7 +299,7 @@ namespace GameLogic
                 return;
             }
 
-            if (BattleManager.Instance.PlayerActionsLeft <= 0)
+            if (!InDeck.DeckController.ActionAvailable())
             {
                 Debug.Log("No player actions left");
                 return;

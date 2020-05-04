@@ -69,18 +69,20 @@ namespace UI
                 CardUIs[card] = ui;
                 
                 //Should we just move it to library nomatter what?
-                Move(ui,card.Location,deck.PlayerDeck);
+                StartCoroutine(MoveCard(ui,card.Location,deck.PlayerDeck));
             }
         }
 
-        public static void CleanUpUI()
+        public static IEnumerator CleanUpUI()
         {
             Debug.Log("Destroying all card uis");
 
             foreach (var kp in CardUIs)
-                Destroy(kp.Value);
+                Destroy(kp.Value.gameObject);
 
             CardUIs.Clear();
+
+            yield return null;
         }
 
         public static Transform GetZoneHolder(Deck.Zone zone, bool enm)
@@ -98,32 +100,76 @@ namespace UI
         }
 
         //Handles death/ etb / withdraw / resurrection / draw animation
-        internal static void Move(Card card, Deck.Zone to, Deck.Zone from,bool playerDeck)
+        internal static IEnumerator Move(Card card, Deck.Zone to, Deck.Zone from,bool playerDeck)
         {
-            Instance.MoveCard(card, to, from, playerDeck);
+            yield return Instance.MoveCard(card, to, from, playerDeck);
         }
 
-        private void MoveCard(Card card, Deck.Zone to, Deck.Zone from, bool playerDeck)
+        private IEnumerator MoveCard(Card card, Deck.Zone to, Deck.Zone from, bool playerDeck)
         {
             Debug.Log("Moving card: " + card.Name + " from: " + from + "; to:" + to);
 
-            if (!CardUIs.ContainsKey(card))
-                Debug.LogError("trying to move card without a ui instantiated");
+            CardUI ui = GetCardUI(card);
 
-            CardUI ui = CardUIs[card];
-
-            AnimationSystem.ZoneMoveEffects(ui, from, to);
-
-            Move(ui, to, playerDeck);
+            //TODO: should the effect be bfore or after?
+            yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
+            
+            yield return MoveCard(ui, to, playerDeck);
         }
 
-        //negative for damage, positive for heal
-        internal static void CardHealthChange(Card card, int val)
+        internal static IEnumerator SetAttacker(Card card)
+        {
+            CardUI ui = GetCardUI(card);
+
+            Instance.Attacker = ui;
+
+            yield return AnimationSystem.StartAttack(ui);
+
+            //do ready attack animation
+        }
+
+        internal static IEnumerator AbilityTriggered(Ability a, Card card, List<Card> ts)
+        {
+            CardUI ui = GetCardUI(card);
+
+            yield return AnimationSystem.Instance.PlayAbilityFx(a, ui, ts.Select(GetCardUI).ToList(), 0.25f);
+        }
+
+        private static CardUI GetCardUI(Card card)
         {
             if (!CardUIs.ContainsKey(card))
                 Debug.LogError("trying to move card without a ui instantiated");
 
             CardUI ui = CardUIs[card];
+            return ui;
+        }
+
+        internal static IEnumerator SetAttackTarget(Card card)
+        {
+            CardUI ui = GetCardUI(card);
+
+            Instance.AttackTarget = ui;
+
+            yield return Instance.AttackAnimation();
+        }
+
+        private IEnumerator AttackAnimation()
+        {
+            //null check
+            if (AttackTarget == null) Debug.LogError("no attacktarget");
+            if (Attacker == null) Debug.LogError("no attacker");
+
+            Debug.Log($"{Attacker.Creature.name} attacking {AttackTarget.Creature.name}");
+
+            yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
+
+            AttackTarget = Attacker = null;
+        }
+
+        //negative for damage, positive for heal
+        internal static IEnumerator CardHealthChange(Card card, int val, int currentHealth, int maxHealth)
+        {
+            CardUI ui = GetCardUI(card);
 
             if (val < 0)
             {
@@ -137,58 +183,20 @@ namespace UI
             }
             else
                 Debug.LogError("health change of 0");
+
+            ui.UpdateHealth(currentHealth, currentHealth < maxHealth);
+
+            yield return null;
         }
 
-        internal static void SetAttacker(Card card)
+        internal static IEnumerator CardStatsModified(Card card, int val,int currentHealth,int currentAttack, bool damaged)
         {
-            if (!CardUIs.ContainsKey(card))
-                Debug.LogError("trying to move card without a ui instantiated");
-
-            CardUI ui = CardUIs[card];
-
-            Instance.Attacker = ui;
-
-            //do ready attack animation
-        }
-
-        internal static void SetAttackTarget(Card card)
-        {
-            if (!CardUIs.ContainsKey(card))
-                Debug.LogError("trying to move card without a ui instantiated");
-
-            CardUI ui = CardUIs[card];
-
-            Instance.AttackTarget = ui;
-
-            Instance.AttackAnimation();
-        }
-
-        private void AttackAnimation()
-        {
-            //null check
-            if (AttackTarget == null) Debug.LogError("no attacktarget");
-            if (Attacker == null) Debug.LogError("no attacker");
-
-            Debug.Log($"{Attacker.Creature.name} attacking {AttackTarget.Creature.name}");
-
-            StartCoroutine(AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
-
-            AttackTarget = Attacker = null;
-        }
-
-        internal static void CardStatsModified(Card card, int val)
-        {
-            if (!CardUIs.ContainsKey(card))
-                Debug.LogError("trying to mod card without a ui instantiated");
-
-            CardUI ui = CardUIs[card];
+            CardUI ui = GetCardUI(card);
 
             if (val < 0)
             {
-
                 Debug.Log($"{card.Name} Stat changes by {val}");
                 ui.CardAnimation.StatPlusAnimation.Show(val);
-
             }
             else if (val > 0)
             {
@@ -197,6 +205,10 @@ namespace UI
             }
             else
                 Debug.LogError("stat change change of 0");
+
+            ui.UpdateHealth(card.CurrentHealth, damaged);
+            ui.UpdateAttack(card.Attack);
+            yield return null;
         }
 
         public static int GetZoneRotation(Deck.Zone zone, bool enm)
@@ -218,16 +230,9 @@ namespace UI
             CardUIs.First(kp => kp.Value == cardUI).Key.Click();
         }
 
-        public  void Move(CardUI card, Deck.Zone zone, bool player, float delay = 0)
-        {
-            StartCoroutine(Instance.MoveCard(card, zone, player, delay));
-        }
-
-        private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player, float delay)
+        private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player)
         {
             if (!card) yield break;
-
-            yield return new WaitForSeconds(delay);
 
             var rect = card.GetComponent<RectTransform>();
             var startPos = rect.position;

@@ -30,7 +30,6 @@ namespace GameLogic
 
             Event.OnBattleFinished.AddListener(PackUp);
 
-            Event.OnPlayerAction.AddListener(() => PlayerActionsLeft--);
 
             CombatAutoResolver = new CombatAutoResolver();
 

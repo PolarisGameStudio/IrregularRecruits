@@ -21,10 +21,7 @@ namespace UI
 
         [Range(0.1f, 3)]
         public float DissolveSpeed = 1f;
-
         private float DissolveAmount;
-        private bool IsDissolving;
-        private UnityAction OnDissolved;
 
         public ParticleSystem PushoutParticles;
 
@@ -45,44 +42,34 @@ namespace UI
             foreach (var i in ControlledImages)
                 i.material = DissolveMaterial;
         }
-
-        private void Update()
+        
+        public IEnumerator Dissolve()
         {
-            if (IsDissolving)
+            //Debug.Log("Dissolving " + gameObject.name + ", controlled images:" + ControlledImages.Length);
+
+            while (DissolveAmount < 1)
             {
                 DissolveAmount = Mathf.Clamp01(DissolveAmount + Time.deltaTime * DissolveSpeed);
                 DissolveMaterial.SetFloat("DissolveAmount", DissolveAmount);
 
                 foreach (var t in ControlledTexts)
                     t.alpha = 1 - DissolveAmount;
+                yield return null;
             }
-            else if (DissolveAmount > 0f)
+
+        }
+        public IEnumerator UnDissolve()
+        {
+
+            while (DissolveAmount > 0)
             {
                 DissolveAmount = Mathf.Clamp01(DissolveAmount - Time.deltaTime);
                 DissolveMaterial.SetFloat("DissolveAmount", DissolveAmount);
 
                 foreach (var t in ControlledTexts)
                     t.alpha = 1 - DissolveAmount;
+                yield return null;
             }
-
-            if (DissolveAmount >= 1f && OnDissolved != null)
-            {
-                OnDissolved.Invoke();
-                OnDissolved = null;
-            }
-
-        }
-
-        public void Dissolve(UnityAction onFinishDissolving = null)
-        {
-            //Debug.Log("Dissolving " + gameObject.name + ", controlled images:" + ControlledImages.Length);
-
-            IsDissolving = true;
-            OnDissolved = onFinishDissolving;
-        }
-        public void UnDissolve()
-        {
-            IsDissolving = false;
         }
 
         public void HighlightAbility()

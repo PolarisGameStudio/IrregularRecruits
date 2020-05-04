@@ -27,7 +27,14 @@ namespace GameLogic
         {
             ControlledDeck = deck;
             OnFinish = onFinish;
+
+            deck.DrawInitialHand(true);
         }
 
+        public bool ActionAvailable()
+        {
+            //TODO: should AI actions always be possible?
+            return true;
+        }
     }
 }

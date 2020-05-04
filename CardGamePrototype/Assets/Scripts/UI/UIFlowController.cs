@@ -12,7 +12,7 @@ namespace UI
     //Responsible for the timely and orderly execution of UI. with a wait between each ui event execution, determined by the event type
     public class UIFlowController : Singleton<UIFlowController>
     {
-        public Queue<ControlledUIEvent> ActionQueue = new Queue<ControlledUIEvent>();
+        public Queue<IEnumerator> ActionQueue = new Queue<IEnumerator>();
         public Coroutine ControlRoutine;
 
         public void Start()
@@ -45,21 +45,23 @@ namespace UI
            Event.OnDraw.AddListener(card=> AddMoveEvent(card, Deck.Zone.Hand, Deck.Zone.Library));
 
             //OnAttack-> (Card) Attack animation
-            Event.OnAttack.AddListener(card => AddCardEvent(() => BattleUI.SetAttacker(card),0.5f));
+            Event.OnAttack.AddListener(card => AddCardEvent(BattleUI.SetAttacker(card)));
             //On Being Attacked->
-            Event.OnBeingAttacked.AddListener(card => AddCardEvent(() => BattleUI.SetAttackTarget(card),0.5f));
+            Event.OnBeingAttacked.AddListener(card => AddCardEvent(BattleUI.SetAttackTarget(card)));
 
             //On Damage-> (Card, amount) & new health?
-            Event.OnDamaged.AddListener((card, val) => AddCardEvent(() => BattleUI.CardHealthChange(card, -val), 0.1f));
+            //TODO: maybe the damaged state used is not the correct one
+            Event.OnDamaged.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card, -val,card.CurrentHealth,card.MaxHealth)));
             //On healed
-            Event.OnHealed.AddListener((card, val) => AddCardEvent(() => BattleUI.CardHealthChange(card, val), 0.1f));
+            Event.OnHealed.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card, val, card.CurrentHealth, card.MaxHealth)));
 
             //On Stat Change-> (Card, amount)
-            Event.OnStatMod.AddListener((card, val) => AddCardEvent(() => BattleUI.CardStatsModified(card, val), 0.5f));
+            Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card, val, card.CurrentHealth, card.Attack,card.Damaged())));
 
-            Event.OnBattleFinished.AddListener(() => AddCardEvent(() => BattleUI.CleanUpUI()));
+            Event.OnBattleFinished.AddListener(() => AddCardEvent(BattleUI.CleanUpUI()));
 
             //On Ability trigger->All the current Ability animation param
+            Event.OnAbilityTrigger.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c,ts)));
 
         }
 
@@ -67,16 +69,12 @@ namespace UI
         {
             var playerdeck = card.InDeck.PlayerDeck;
 
-            AddCardEvent(() => BattleUI.Move(card, to, from, playerdeck));
+            AddCardEvent( BattleUI.Move(card, to, from, playerdeck));
         }
 
-        private void AddCardEvent (UnityAction action, float timeToExecute = 1f)
-        {
-            AddCardEvent(new ControlledUIEvent(timeToExecute,action));
-        }
 
         //TODO: replace with coroutines
-        private void AddCardEvent(ControlledUIEvent uIEvent)
+        private void AddCardEvent(IEnumerator uIEvent)
         {
             ActionQueue.Enqueue(uIEvent);
 
@@ -88,10 +86,7 @@ namespace UI
         {
             while(ActionQueue.Count > 0)
             {
-                var nextEvent = ActionQueue.Dequeue();
-
-                nextEvent.UIAction.Invoke();
-                yield return new WaitForSeconds(nextEvent.TimeToExecute);
+                yield return ActionQueue.Dequeue();
             }
 
             ControlRoutine = null;
@@ -99,15 +94,4 @@ namespace UI
 
     }
 
-    public struct ControlledUIEvent
-    {
-        public float TimeToExecute;
-        public UnityAction UIAction;
-
-        public ControlledUIEvent(float timeToExecute, UnityAction action)
-        {
-            TimeToExecute = timeToExecute;
-            UIAction = action;
-        }
-    } 
 }

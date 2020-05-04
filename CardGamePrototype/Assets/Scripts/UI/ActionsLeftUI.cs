@@ -30,7 +30,7 @@ namespace UI
             }
             Destroy(ActionIconExample.gameObject);
 
-            Event.OnPlayerAction.AddListener(OnActionUsed);
+            Event.OnPlayerAction.AddListener(d=>OnActionUsed());
             Event.OnTurnBegin.AddListener(OnNextTurn);
         }
 

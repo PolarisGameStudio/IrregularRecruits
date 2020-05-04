@@ -65,9 +65,9 @@ namespace GameLogic
                 case DamageType.Any:
                     return true;
                 case DamageType.Damaged:
-                    return instigator.CurrentHealth < instigator.MaxHealth;
+                    return instigator.Damaged();
                 case DamageType.Undamaged:
-                    return instigator.CurrentHealth < instigator.MaxHealth;
+                    return !instigator.Damaged();
                 default:
                     return true;
             }
