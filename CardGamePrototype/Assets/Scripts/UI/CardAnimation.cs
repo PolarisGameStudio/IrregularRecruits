@@ -30,7 +30,7 @@ namespace UI
         public LayoutElement LayoutElement;
         private float prefWidth;
 
-        void Start()
+        void Awake()
         {
             ControlledImages = GetComponentsInChildren<Image>(true);
             ControlledTexts = GetComponentsInChildren<TextMeshProUGUI>(true);
@@ -105,7 +105,6 @@ namespace UI
                 LayoutElement.preferredWidth = Mathf.Lerp(0f, prefWidth, (Time.time - start) / anitime);
                 yield return null;
             }
-
         }
 
         public void EnterBattleField()

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Event = GameLogic.Event;
 using Random = UnityEngine.Random;
@@ -38,6 +39,11 @@ namespace UI
         public float MoveDuration = 0.2f;
         private CardUI Attacker;
         private CardUI AttackTarget;
+        private Deck PlayerDeck;
+        private Deck EnemyDeck;
+        private List<Card> InitialEnemyDeck;
+        private List<Card> InitialPlayerDeck;
+        internal static UnityEvent OnBattleFinished = new UnityEvent();
 
         void Awake()
         {
@@ -56,6 +62,12 @@ namespace UI
         {
             SetupUI(playerDeck);
             SetupUI(opponentDeck);
+
+            PlayerDeck = playerDeck;
+            EnemyDeck = opponentDeck;
+
+            InitialPlayerDeck = playerDeck.AllCreatures();
+            InitialEnemyDeck = opponentDeck.AllCreatures();
         }
 
         private void SetupUI(Deck deck)
@@ -75,6 +87,13 @@ namespace UI
 
         public static IEnumerator CleanUpUI()
         {
+
+            yield return null;
+            Instance.EndBattle();
+        }
+
+        private  void EndBattle()
+        {
             Debug.Log("Destroying all card uis");
 
             foreach (var kp in CardUIs)
@@ -82,7 +101,9 @@ namespace UI
 
             CardUIs.Clear();
 
-            yield return null;
+            OnBattleFinished.Invoke();
+
+            BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(),EnemyDeck.AllCreatures());
         }
 
         public static Transform GetZoneHolder(Deck.Zone zone, bool enm)
