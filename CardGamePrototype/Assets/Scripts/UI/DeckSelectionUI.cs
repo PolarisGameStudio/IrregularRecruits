@@ -20,7 +20,7 @@ namespace UI
 
         private void Awake()
         {
-            foreach (var deck in DeckManager.GetDecks())
+            foreach (var deck in DeckLibrary.GetDecks())
             {
                 var icon = Instantiate(DeckIconInstance, DeckIconInstance.transform.parent);
 

@@ -123,16 +123,16 @@ namespace UI
 
         public bool FaceUp() => FrontHolder.activeInHierarchy;
 
-        //public void Flip()
-        //{
-        //    //todo: deck view/unflippable bool 
-        //    if (AlwaysFaceUp) return;
+        public void Flip(bool faceUp)
+        {
+            //todo: deck view/unflippable bool 
+            if (AlwaysFaceUp) return;
 
-        //    CardBackHolder.SetActive(!Card.FaceUp);
-        //    FrontHolder.SetActive(Card.FaceUp);
-        //}
+            CardBackHolder.SetActive(!faceUp);
+            FrontHolder.SetActive(faceUp);
+        }
 
-            
+
 
         #region Input Handling
 #if true

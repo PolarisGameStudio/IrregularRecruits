@@ -19,14 +19,30 @@ namespace UI
         {
             var bm = BattleManager.Instance;
 
+            //Debugs -----------------------
+
+            Event.OnAttack.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Attacking"));
+            Event.OnBeingAttacked.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is Attacked"));
+            Event.OnDamaged.AddListener((c, i) => Debug.Log("Event: " + c.Creature.name + ": Is Damaged for " + i));
+            Event.OnDeath.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Is dead"));
+            Event.OnHealed.AddListener((c, i) => Debug.Log("Event: " + c.Creature.name + ": Is healed for " + i));
+            Event.OnKill.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Killed a minion"));
+            Event.OnWithdraw.AddListener(c => Debug.Log("Event: " + c.Creature.name + ": Withdrew"));
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => Debug.Log("Event: " + c.Creature.name + ": AbilityTriggered"));
+            Event.OnBattleFinished.AddListener(() => Debug.Log("Event: Combat Finished"));
+            Event.OnCombatResolveFinished.AddListener(() => Debug.Log("Event: Combat Round Finished"));
+            Event.OnCombatSetup.AddListener((p, c) => Debug.Log("Event: Combat started between: " + p + " and " + c));
+            Event.OnGameOver.AddListener(() => Debug.Log("Event: Game Over"));
+
+
             //SETUP listeners
             //    Move->deckmanager(Card, Zone) Handles death/ etb / withdraw / resurrection / draw animation
             // if an action moves a card a zone from different locations, the cards current location is used
-           Event.OnDeath.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Graveyard,card.Location)));
-           Event.OnPlay.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Battlefield,card.Location)));
-           Event.OnWithdraw.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Library,Deck.Zone.Battlefield)));
-           Event.OnRessurrect.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Battlefield,Deck.Zone.Graveyard)));
-           Event.OnDraw.AddListener(card=> AddCardEvent( ()=> BattleUI.Move(card,Deck.Zone.Hand,Deck.Zone.Library ),0.2f));
+            Event.OnDeath.AddListener(card=> AddMoveEvent(card,Deck.Zone.Graveyard,card.Location));
+           Event.OnPlay.AddListener(card=> AddMoveEvent(card, Deck.Zone.Battlefield, card.Location));
+           Event.OnWithdraw.AddListener(card=> AddMoveEvent(card, Deck.Zone.Library, Deck.Zone.Battlefield));
+           Event.OnRessurrect.AddListener(card=> AddMoveEvent(card, Deck.Zone.Battlefield, Deck.Zone.Graveyard));
+           Event.OnDraw.AddListener(card=> AddMoveEvent(card, Deck.Zone.Hand, Deck.Zone.Library));
 
             //OnAttack-> (Card) Attack animation
             Event.OnAttack.AddListener(card => AddCardEvent(() => BattleUI.SetAttacker(card),0.5f));
@@ -47,9 +63,22 @@ namespace UI
 
         }
 
-        private void AddCardEvent (Action action, float timeToExecute = 1f)
+        private void AddMoveEvent(Card card, Deck.Zone to, Deck.Zone from)
         {
-            ActionQueue.Enqueue(new ControlledUIEvent(timeToExecute,action));
+            var playerdeck = card.InDeck.PlayerDeck;
+
+            AddCardEvent(() => BattleUI.Move(card, to, from, playerdeck));
+        }
+
+        private void AddCardEvent (UnityAction action, float timeToExecute = 1f)
+        {
+            AddCardEvent(new ControlledUIEvent(timeToExecute,action));
+        }
+
+        //TODO: replace with coroutines
+        private void AddCardEvent(ControlledUIEvent uIEvent)
+        {
+            ActionQueue.Enqueue(uIEvent);
 
             if (ControlRoutine == null)
                 ControlRoutine = StartCoroutine(UIRoutine());
@@ -73,9 +102,9 @@ namespace UI
     public struct ControlledUIEvent
     {
         public float TimeToExecute;
-        public Action UIAction;
+        public UnityAction UIAction;
 
-        public ControlledUIEvent(float timeToExecute, Action action)
+        public ControlledUIEvent(float timeToExecute, UnityAction action)
         {
             TimeToExecute = timeToExecute;
             UIAction = action;

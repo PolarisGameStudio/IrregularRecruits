@@ -43,6 +43,8 @@ public class GameSettings : Singleton<GameSettings>
     [Range(0.1f, 3f)]
     public float CombatSpeed = 1f;
 
+    public bool AiControlledPlayer;
+
     public enum DeckDamage
     {
         DamageToTopCard,
@@ -50,6 +52,10 @@ public class GameSettings : Singleton<GameSettings>
         AnyDamageKillsTopCard
     }
 
+    public void AiControlsPlayer(bool ai)
+    {
+        AiControlledPlayer = ai;
+    }
     public void SetCombatSpeed(float f)
     {
         CombatSpeed = f;

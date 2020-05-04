@@ -47,8 +47,8 @@ namespace GameLogic
 
         private void SetupCombat(Deck playerDeck, Deck enemyDeck)
         {
-            if (playerDeck.DeckController == null)
-                playerDeck.DeckController = new AI();
+            if (playerDeck.DeckController == null )
+                playerDeck.DeckController = GameSettings.Instance.AiControlledPlayer ?(IDeckController) new AI(): (IDeckController)new PlayerController();
             if (enemyDeck.DeckController == null)
                 enemyDeck.DeckController = new AI();
 
@@ -63,6 +63,7 @@ namespace GameLogic
             Event.OnTurnBegin.Invoke();
         }
 
+        //TODO: this should be done by the player controller
         private void NextTurn()
         {
             //Could control which player goes  first

@@ -17,7 +17,7 @@ namespace UI
 
         public CardUI CardPrefab;
 
-        private Dictionary<Card, CardUI> CardUIs = new Dictionary<Card, CardUI>();
+        private static Dictionary<Card, CardUI> CardUIs = new Dictionary<Card, CardUI>();
 
         public UIZone[] PlayerUIZones;
         public UIZone[] EnemyUIZones;
@@ -36,8 +36,8 @@ namespace UI
         public TextMeshProUGUI PlayerDeckDescription, EnemyDeckDescription;
 
         public float MoveDuration = 0.2f;
-        private Card Attacker;
-        private Card AttackTarget;
+        private CardUI Attacker;
+        private CardUI AttackTarget;
 
         void Awake()
         {
@@ -77,10 +77,10 @@ namespace UI
         {
             Debug.Log("Destroying all card uis");
 
-            foreach (var kp in Instance.CardUIs)
+            foreach (var kp in CardUIs)
                 Destroy(kp.Value);
 
-            Instance.CardUIs.Clear();
+            CardUIs.Clear();
         }
 
         public static Transform GetZoneHolder(Deck.Zone zone, bool enm)
@@ -98,27 +98,42 @@ namespace UI
         }
 
         //Handles death/ etb / withdraw / resurrection / draw animation
-        internal static void Move(Card card, Deck.Zone to, Deck.Zone from)
+        internal static void Move(Card card, Deck.Zone to, Deck.Zone from,bool playerDeck)
         {
-            CardUI ui;
-
-            Debug.Log("Moving card: " + card + " from: " + from + "; to:" + to);
+            Instance.MoveCard(card, to, from, playerDeck);
         }
 
+        private void MoveCard(Card card, Deck.Zone to, Deck.Zone from, bool playerDeck)
+        {
+            Debug.Log("Moving card: " + card.Name + " from: " + from + "; to:" + to);
 
+            if (!CardUIs.ContainsKey(card))
+                Debug.LogError("trying to move card without a ui instantiated");
+
+            CardUI ui = CardUIs[card];
+
+            AnimationSystem.ZoneMoveEffects(ui, from, to);
+
+            Move(ui, to, playerDeck);
+        }
 
         //negative for damage, positive for heal
         internal static void CardHealthChange(Card card, int val)
         {
+            if (!CardUIs.ContainsKey(card))
+                Debug.LogError("trying to move card without a ui instantiated");
+
+            CardUI ui = CardUIs[card];
+
             if (val < 0)
             {
-
-                Debug.Log($"{card} damaged for {val}");
+                Debug.Log($"{card.Name} damaged for {val}");
+                ui.CardAnimation.DamageAnimation.Show(val);
             }
             else if (val > 0)
             {
 
-                Debug.Log($"{card} healed for {val}");
+                Debug.Log($"{card.Name} healed for {val}");
             }
             else
                 Debug.LogError("health change of 0");
@@ -126,14 +141,24 @@ namespace UI
 
         internal static void SetAttacker(Card card)
         {
-            Instance.Attacker = card;
+            if (!CardUIs.ContainsKey(card))
+                Debug.LogError("trying to move card without a ui instantiated");
+
+            CardUI ui = CardUIs[card];
+
+            Instance.Attacker = ui;
 
             //do ready attack animation
         }
 
         internal static void SetAttackTarget(Card card)
         {
-            Instance.AttackTarget = card;
+            if (!CardUIs.ContainsKey(card))
+                Debug.LogError("trying to move card without a ui instantiated");
+
+            CardUI ui = CardUIs[card];
+
+            Instance.AttackTarget = ui;
 
             Instance.AttackAnimation();
         }
@@ -144,19 +169,31 @@ namespace UI
             if (AttackTarget == null) Debug.LogError("no attacktarget");
             if (Attacker == null) Debug.LogError("no attacker");
 
-            Debug.Log($"{Attacker} attacking {AttackTarget}");
+            Debug.Log($"{Attacker.Creature.name} attacking {AttackTarget.Creature.name}");
+
+            StartCoroutine(AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
+
+            AttackTarget = Attacker = null;
         }
 
         internal static void CardStatsModified(Card card, int val)
         {
+            if (!CardUIs.ContainsKey(card))
+                Debug.LogError("trying to mod card without a ui instantiated");
+
+            CardUI ui = CardUIs[card];
+
             if (val < 0)
             {
 
-                Debug.Log($"{card} Stat changes by {val}");
+                Debug.Log($"{card.Name} Stat changes by {val}");
+                ui.CardAnimation.StatPlusAnimation.Show(val);
+
             }
             else if (val > 0)
             {
-                Debug.Log($"{card} stat changes by {val}");
+                Debug.Log($"{card.Name} stat changes by {val}");
+                ui.CardAnimation.StatMinusAnimation.Show(val);
             }
             else
                 Debug.LogError("stat change change of 0");
@@ -178,12 +215,12 @@ namespace UI
         //otherwise make an onclick event in CardUI
         internal static void Clicked(CardUI cardUI)
         {
-            Instance.CardUIs.First(kp => kp.Value == cardUI).Key.Click();
+            CardUIs.First(kp => kp.Value == cardUI).Key.Click();
         }
 
-        public static void Move(CardUI card, Deck.Zone zone, bool player, float delay = 0)
+        public  void Move(CardUI card, Deck.Zone zone, bool player, float delay = 0)
         {
-            Instance.StartCoroutine(Instance.MoveCard(card, zone, player, delay));
+            StartCoroutine(Instance.MoveCard(card, zone, player, delay));
         }
 
         private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player, float delay)
@@ -211,7 +248,6 @@ namespace UI
 
             endPosition += new Vector3(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
 
-
             rect.Rotate(new Vector3(0, 0, Random.Range(-rot, rot)));
 
             //TODO: use lean tween instead
@@ -227,13 +263,14 @@ namespace UI
                 rect.position = Vector3.LerpUnclamped(startPos, endPosition, (Time.time - startTime) / MoveDuration);
             }
 
+            rect.SetParent(zoneRect);
             //TODO: hack that should not be needed
             rect.localScale = Vector3.one;
-            rect.SetParent(zoneRect);
             rect.SetAsLastSibling();
 
-            if (card)
-                card.Interactable = true;
+            card.Flip(zone != Deck.Zone.Library);
+
+            card.Interactable = true;
         }
 
 

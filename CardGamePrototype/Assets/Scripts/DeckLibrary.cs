@@ -1,7 +1,7 @@
 ﻿using GameLogic;
 using System.Collections.Generic;
 
-public class DeckManager : Singleton<DeckManager>
+public class DeckLibrary : Singleton<DeckLibrary>
 {
     public List<DeckObject> Decks;
 

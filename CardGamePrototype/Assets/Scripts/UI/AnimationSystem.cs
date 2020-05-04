@@ -54,6 +54,26 @@ namespace UI
             }
         }
 
+        public void WithdrawParticles(CardUI cardUI)
+        {
+            StartCoroutine(PlayCardFX(cardUI, WithdrawParticlesPrefab, 0, true));
+        }
+        //Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab, 0, true)));
+        //Event.OnPlay.AddListener(c => StartCoroutine(PlayCardFX(c, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f)));
+        public void PlayParticles(CardUI cardUI)
+        {
+            StartCoroutine(PlayCardFX(cardUI, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f));
+        }
+        //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
+        public void DeathParticles(CardUI cardUI)
+        {
+            StartCoroutine(PlayCardFX(cardUI, DeathParticlesPrefab, 0.1f));
+        }
+        //Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
+        public void DamageParticles(CardUI c)
+        {
+            StartCoroutine(PlayCardFX(c, DamageParticlesPrefab));
+        }
 
         private IEnumerator PlayCardFX(CardUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
         {
@@ -64,6 +84,25 @@ namespace UI
             Vector2 position = card.transform.position;
             PlayFx(fxs, position, instantiateInWorldSpace ? null : card.transform);
         }
+
+        internal static void ZoneMoveEffects(CardUI card, Deck.Zone from, Deck.Zone to)
+        {
+            switch (to)
+            {
+                case Deck.Zone.Library:
+                    Instance.WithdrawParticles(card);
+                    break;
+                case Deck.Zone.Battlefield:
+                    Instance.PlayParticles(card);
+                    break;
+                case Deck.Zone.Graveyard:
+                    Instance.DeathParticles(card);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private IEnumerator PlayAbilityIconFx(CardUI abilityOwner, ParticleSystem[] fxs, float delay = 0)
         {
             yield return new WaitForSeconds(delay);
