@@ -36,7 +36,10 @@ namespace UI
 
         public TextMeshProUGUI PlayerDeckDescription, EnemyDeckDescription;
 
+        [Header("Movement")]
         public float MoveDuration = 0.2f;
+        public AnimationCurve MoveAnimationCurve;
+
         private CardUI Attacker;
         private CardUI AttackTarget;
         private Deck PlayerDeck;
@@ -270,12 +273,21 @@ namespace UI
 
             card.CardAnimation.ChangeLayoutSizeWhileMoving();
 
+            var adjustDirection = (startPos - endPosition);
+
+            adjustDirection = new Vector2(adjustDirection.y, -adjustDirection.x).normalized;
+
             while (Time.time < startTime + MoveDuration)
             {
                 yield return null;
 
+                float t = (Time.time - startTime) / MoveDuration;
+
                 //TODO: use animation curve
-                rect.position = Vector3.LerpUnclamped(startPos, endPosition, (Time.time - startTime) / MoveDuration);
+                rect.position = Vector3.LerpUnclamped(startPos, endPosition, t);
+
+                rect.position += MoveAnimationCurve.Evaluate(t) * adjustDirection;
+
             }
 
             rect.SetParent(zoneRect);
