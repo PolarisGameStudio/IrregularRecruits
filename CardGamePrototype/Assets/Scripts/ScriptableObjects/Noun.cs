@@ -37,8 +37,9 @@ namespace GameLogic
                 CorrectCharacter(instigator, abilityOwner) &&
                 CorrectRace(instigator, abilityOwner) &&
                 CorrectAllegiance(instigator, abilityOwner) &&
-                CorrectDamageState(instigator) &&
-                instigator.Location == this.Location;
+                CorrectDamageState(instigator) 
+                //&& instigator.Location == this.Location
+                ;
         }
 
         public bool CorrectCharacter(Card instigator, Card abilityOwner, Card triggerExecuter = null)

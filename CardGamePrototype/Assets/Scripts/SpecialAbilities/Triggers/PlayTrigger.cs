@@ -20,7 +20,7 @@ namespace GameLogic
         {
             UnityAction<Card> handler = a => executeIfTrue.Invoke(a, owner, subjekt);
 
-            Event.CardEvent trigger = Event.OnPlay;
+            Event.CardEvent trigger = Event.OnEtb;
 
             trigger.AddListener(handler);
 

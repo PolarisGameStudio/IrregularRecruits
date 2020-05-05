@@ -39,7 +39,7 @@ namespace UI
             //    Move->deckmanager(Card, Zone) Handles death/ etb / withdraw / resurrection / draw animation
             // if an action moves a card a zone from different locations, the cards current location is used
             Event.OnDeath.AddListener(card=> AddMoveEvent(card,Deck.Zone.Graveyard,card.Location));
-           Event.OnPlay.AddListener(card=> AddMoveEvent(card, Deck.Zone.Battlefield, card.Location));
+           Event.OnEtb.AddListener(card=> AddMoveEvent(card, Deck.Zone.Battlefield, card.Location));
            Event.OnWithdraw.AddListener(card=> AddMoveEvent(card, Deck.Zone.Library, Deck.Zone.Battlefield));
            Event.OnRessurrect.AddListener(card=> AddMoveEvent(card, Deck.Zone.Battlefield, Deck.Zone.Graveyard));
            Event.OnDraw.AddListener(card=> AddMoveEvent(card, Deck.Zone.Hand, Deck.Zone.Library));

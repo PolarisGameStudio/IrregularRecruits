@@ -12,11 +12,23 @@ namespace UI
     {
         public AnimationCurve AttackAnimationCurve;
 
+        public ZoneMoveAnimation[] ZoneMoveAnimations;
+
         public ParticleSystem[] WithdrawParticlesPrefab;
         public ParticleSystem[] ETBParticlesPrefab;
         public ParticleSystem[] DamageParticlesPrefab;
         public ParticleSystem[] DeathParticlesPrefab;
         public AbilityAnimationFX[] AbilityFx;
+
+        [Serializable]
+        public struct ZoneMoveAnimation
+        {
+            public Deck.Zone TargetZone;
+            public Deck.Zone? FromZone;
+            public ParticleSystem StartParticles;
+            public ParticleSystem ArriveParticles;
+            public ParticleSystem MoveParticles;
+        }
 
         [Serializable]
         public struct AbilityAnimationFX
@@ -26,17 +38,7 @@ namespace UI
             public ParticleSystem[] TargetFX;
             public ParticleSystem[] OwnerFX;
         }
-
-        private void Start()
-        {
-            //Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab, 0, true)));
-            //Event.OnPlay.AddListener(c => StartCoroutine(PlayCardFX(c, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f)));
-            //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
-            //Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
-
-            //Event.OnAbilityTrigger.AddListener((a, c, ts) => PlayAbilityFx(a, c, ts, 0.25f));
-        }
-
+        
         public static IEnumerator AttackAnimation(CardUI owner, CardUI target, float duration)
         {
             var rect = owner.GetComponent<RectTransform>();
@@ -98,8 +100,8 @@ namespace UI
                     Instance.PlayParticles(card);
                     break;
                 case Deck.Zone.Graveyard:
-                    yield return card.CardAnimation.Dissolve();
                     Instance.DeathParticles(card);
+                    yield return card.CardAnimation.Dissolve();
                     break;
             }
         }

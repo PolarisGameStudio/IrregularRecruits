@@ -28,7 +28,7 @@ public class SoundController : Singleton<SoundController>
 
         Event.OnDraw.AddListener(c => PlayCardSound(SoundBank.CardSound.Draw));
         Event.OnWithdraw.AddListener(c => PlayCardSound(SoundBank.CardSound.Withdraw));
-        Event.OnPlay.AddListener(c => PlayCardSound(SoundBank.CardSound.ETB));
+        Event.OnEtb.AddListener(c => PlayCardSound(SoundBank.CardSound.ETB));
         Event.OnDamaged.AddListener((c,i) => PlayCardSound(SoundBank.CardSound.Hit));
         Event.OnDeath.AddListener(c => PlayCardSound(SoundBank.CardSound.Death));
         Event.OnRessurrect.AddListener(c => PlayCardSound(SoundBank.CardSound.Resurrect));

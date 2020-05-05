@@ -1,8 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace GameLogic
 {
     public partial class Ability
     {
+        private static Dictionary<ActionType, Deck.Zone> ForcedActionTargetLocations = new Dictionary<ActionType, Deck.Zone>()
+        {
+            { ActionType.Resurrect,Deck.Zone.Graveyard },
+            { ActionType.Withdraw,Deck.Zone.Battlefield },
+        };
 
         //Also includes redundant statements like heal damaged
         //TODO: should be moved to a value in Verb Classes
@@ -34,6 +41,10 @@ namespace GameLogic
                 TargetCount = targetCount;
                 Target = target;
                 Amount = amount;
+
+                //force target locations for action types. TODO: should be defined through structs instead of a switch
+                if (ForcedActionTargetLocations.ContainsKey(actionType))
+                    Target.Location = ForcedActionTargetLocations[actionType];
             }
 
             public string Description(Creature owner)

@@ -11,6 +11,11 @@ namespace Tests
         private Card TestCard;
         private Card OtherCard;
 
+        [SetUp]
+        public void ResetListeners()
+        {
+            Event.ResetListeners();
+        }
 
         [TearDown]
         public void CleanAbility()
@@ -83,7 +88,7 @@ namespace Tests
             var testAbility = new Ability()
             {
                 ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.This)),
-                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.This, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Any, Deck.Zone.Hand), Ability.Verb.ETB),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.This), Ability.Verb.ETB),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -119,8 +124,6 @@ namespace Tests
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggeredAblity = a);
 
             other.PlayCard();
-
-
 
             Assert.IsNotNull(triggeredAblity);
             Assert.IsTrue(triggeredAblity == testAbility);
@@ -950,7 +953,7 @@ namespace Tests
         {
             var testAbility = new Ability()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.Resurrect, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                ResultingAction = new Ability.Action(Ability.ActionType.Resurrect, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard)),
                 TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Other), Ability.Verb.DIES),
             };
 

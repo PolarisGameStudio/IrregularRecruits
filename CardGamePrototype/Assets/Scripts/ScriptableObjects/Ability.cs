@@ -93,14 +93,13 @@ namespace GameLogic
         {
             Debug.Log("Trigger: " + TriggerCondition.Description(owner.Creature) + " is true");
             Debug.Log("Executing: " + ResultingAction.Description(owner.Creature));
-            owner.OnAbilityTrigger.Invoke();
-
-            List<Card> targets = GetTargets(ResultingAction.Target, ResultingAction.TargetCount, Deck.Zone.Battlefield, owner, triggerExecuter);
+            
+            List<Card> targets = GetTargets(ResultingAction.Target, owner, triggerExecuter);
 
             AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteAction(this, owner, targets);
         }
 
-        public List<Card> GetTargets(Noun targetType, Count count, Deck.Zone location, Card _owner, Card triggerExecuter)
+        public List<Card> GetTargets(Noun targetType, Card _owner, Card triggerExecuter)
         {
             List<Card> cardsInZone = BattleManager.Instance.GetCardsInZone(targetType.Location);
 

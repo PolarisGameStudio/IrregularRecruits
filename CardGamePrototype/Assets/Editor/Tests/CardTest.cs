@@ -116,7 +116,7 @@ namespace Tests
             BattleManager.Instance.PlayerActionsLeft = 1;
             var triggered = false;
 
-            Event.OnPlay.AddListener(c => triggered = true);
+            Event.OnEtb.AddListener(c => triggered = true);
 
             TestCard.Click();
 

@@ -8,8 +8,6 @@ namespace GameLogic
 {
     public class Card
     {
-        private static bool ListenersCreated;
-
         [SerializeProperty("Creature")]
         [SerializeField]
         private Creature creature;
@@ -25,9 +23,6 @@ namespace GameLogic
 
         public string Name;
 
-        public class CreatureChangeEvent : UnityEvent<Creature> { }
-        public CreatureChangeEvent OnCreatureChange = new CreatureChangeEvent();
-        public UnityEvent OnAbilityTrigger = new UnityEvent();
 
         [Header("Battle specific")]
         public Deck InDeck;
@@ -49,31 +44,11 @@ namespace GameLogic
         {
             Creature = c;
 
-            if (!ListenersCreated) SetupListeners();
         }
 
         public List<Trait> GetTraits()
         {
             return Creature.Traits;
-        }
-
-        //Should only be called once
-        private static void SetupListeners()
-        {
-            if (ListenersCreated) return;
-
-            ListenersCreated = true;
-
-
-            //TODO: this delay should be handled by the flow controller
-            Event.OnDeath.AddListener(c => c.ChangeLocation(Deck.Zone.Graveyard, 2f));
-            Event.OnRessurrect.AddListener(c => c.ChangeLocation(Deck.Zone.Battlefield, 2f));
-
-            Event.OnPlay.AddListener(c => c.ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield));
-
-            Event.OnWithdraw.AddListener(c => c.ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library));
-
-            Event.OnDraw.AddListener(c => c.ChangeLocation(Deck.Zone.Library, Deck.Zone.Hand));
         }
 
         public Ability Ability()
@@ -84,6 +59,7 @@ namespace GameLogic
 
         public void Die()
         {
+            ChangeLocation(Deck.Zone.Graveyard);
             Event.OnDeath.Invoke(this);
         }
 
@@ -106,12 +82,12 @@ namespace GameLogic
 
         public Deck.Zone Location;
 
-        public void ChangeLocation(Deck.Zone to, float delay = 0f)
+        public void ChangeLocation(Deck.Zone to)
         {
-            ChangeLocation(Location, to, delay);
+            ChangeLocation(Location, to);
         }
 
-        public void ChangeLocation(Deck.Zone from, Deck.Zone to, float delay = 0f)
+        public void ChangeLocation(Deck.Zone from, Deck.Zone to)
         {
             //Debug.Log($"Moving {this.Name} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
 
@@ -152,8 +128,6 @@ namespace GameLogic
             MaxHealth = newCreature.Health;
             CurrentHealth = newCreature.Health;
             Attack = newCreature.Attack;
-
-            OnCreatureChange.Invoke(newCreature);
 
             if (creature?.SpecialAbility)
                 creature.SpecialAbility.RemoveListeners();
@@ -199,7 +173,8 @@ namespace GameLogic
 
             Debug.Log("Playing card: " + Name);
 
-            Event.OnPlay.Invoke(this);
+            ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
+            Event.OnEtb.Invoke(this);
 
             Event.OnPlayerAction.Invoke(this.InDeck);
         }
@@ -215,19 +190,20 @@ namespace GameLogic
             //TODO: replace with Waiting ON player Input
 
             Event.OnWithdraw.Invoke(this);
+            ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library);
 
         }
 
         //should this method be called from OnRessurrect or the other way around?
         internal void Resurrect(int amount)
         {
-            if (Location != Deck.Zone.Graveyard || Alive())
+            if (!Alive())
                 Debug.LogWarning("Resurrectting alive character; " + Name);
 
+            ChangeLocation(Deck.Zone.Battlefield);
             Event.OnRessurrect.Invoke(this);
 
             CurrentHealth = amount;
-
 
             //TODO: change race to UNDEAD?
         }

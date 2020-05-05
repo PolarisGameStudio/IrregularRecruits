@@ -6,9 +6,10 @@ namespace GameLogic
     public class Event
     {
         //CARD EVENTS
+        //Any move event happens after the event is called
         public class CardEvent : UnityEvent<Card> { }
         public static CardEvent OnDraw = new CardEvent();
-        public static CardEvent OnPlay = new CardEvent();
+        public static CardEvent OnEtb = new CardEvent();
         public static CardEvent OnDeath = new CardEvent();
         public static CardEvent OnRessurrect = new CardEvent();
         public static CardEvent OnKill = new CardEvent();
@@ -47,30 +48,30 @@ namespace GameLogic
         public static UnityEvent OnGameOpen = new UnityEvent();
         public static UnityEvent OnGameBegin = new UnityEvent();
 
-        //public static void ResetListeners()
-        //{
-        //    OnDraw.RemoveAllListeners();
-        //    OnPlay.RemoveAllListeners();
-        //    OnDeath.RemoveAllListeners();
-        //    OnRessurrect.RemoveAllListeners();
-        //    OnKill.RemoveAllListeners();
-        //    OnAttack.RemoveAllListeners();
-        //    OnBeingAttacked.RemoveAllListeners();
-        //    OnDamaged.RemoveAllListeners();
-        //    OnHealed.RemoveAllListeners();
-        //    OnWithdraw.RemoveAllListeners();
+        public static void ResetListeners()
+        {
+            OnDraw.RemoveAllListeners();
+            OnEtb.RemoveAllListeners();
+            OnDeath.RemoveAllListeners();
+            OnRessurrect.RemoveAllListeners();
+            OnKill.RemoveAllListeners();
+            OnAttack.RemoveAllListeners();
+            OnBeingAttacked.RemoveAllListeners();
+            OnDamaged.RemoveAllListeners();
+            OnHealed.RemoveAllListeners();
+            OnWithdraw.RemoveAllListeners();
 
-        //    OnAbilityTrigger.RemoveAllListeners();
+            OnAbilityTrigger.RemoveAllListeners();
 
-        //    OnBattleFinished.RemoveAllListeners();
-        //    OnPlayerAction.RemoveAllListeners();
-        //    OnCombatSetup.RemoveAllListeners();
-        //    OnCombatResolveFinished.RemoveAllListeners();
-        //    OnTurnBegin.RemoveAllListeners();
+            OnBattleFinished.RemoveAllListeners();
+            OnPlayerAction.RemoveAllListeners();
+            OnCombatSetup.RemoveAllListeners();
+            OnCombatResolveFinished.RemoveAllListeners();
+            OnTurnBegin.RemoveAllListeners();
 
-        //    OnGameBegin.RemoveAllListeners();
-        //    OnGameOpen.RemoveAllListeners();
-        //    OnGameOver.RemoveAllListeners();
-        //}
+            OnGameBegin.RemoveAllListeners();
+            OnGameOpen.RemoveAllListeners();
+            OnGameOver.RemoveAllListeners();
+        }
     }
 }
