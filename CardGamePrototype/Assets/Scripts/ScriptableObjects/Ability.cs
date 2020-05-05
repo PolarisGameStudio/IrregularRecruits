@@ -68,20 +68,16 @@ namespace GameLogic
             //TODO: replace with CardEvent Reference
         }
 
-
         public void RemoveListeners()
         {
             RemoveListenerAction.Invoke();
-
         }
-
 
         public float GetValue()
         {
             Value = TriggerCondition.GetValue() * ResultingAction.GetValue();
             return Value;
         }
-
 
         private void ExecuteIfTrue(Card instigator, Card abilityOwner, Noun subject)
         {
@@ -132,6 +128,5 @@ namespace GameLogic
                     return cards;
             }
         }
-
     }
 }

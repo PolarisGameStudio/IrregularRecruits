@@ -18,7 +18,7 @@ namespace UI
 
         public CardUI CardPrefab;
 
-        private static Dictionary<Card, CardUI> CardUIs = new Dictionary<Card, CardUI>();
+        private static Dictionary<Guid, CardUI> CardUIs = new Dictionary<Guid, CardUI>();
 
         public UIZone[] PlayerUIZones;
         public UIZone[] EnemyUIZones;
@@ -81,7 +81,7 @@ namespace UI
 
                 ui.SetCard(card);
 
-                CardUIs[card] = ui;
+                CardUIs[card.Guid] = ui;
                 
                 //Should we just move it to library nomatter what?
                 StartCoroutine(MoveCard(ui,card.Location,deck.PlayerDeck));
@@ -124,15 +124,13 @@ namespace UI
         }
 
         //Handles death/ etb / withdraw / resurrection / draw animation
-        internal static IEnumerator Move(Card card, Deck.Zone to, Deck.Zone from,bool playerDeck)
+        internal static IEnumerator Move(Guid card, Deck.Zone to, Deck.Zone from,bool playerDeck)
         {
             yield return Instance.MoveCard(card, to, from, playerDeck);
         }
 
-        private IEnumerator MoveCard(Card card, Deck.Zone to, Deck.Zone from, bool playerDeck)
+        private IEnumerator MoveCard(Guid card, Deck.Zone to, Deck.Zone from, bool playerDeck)
         {
-            Debug.Log("Moving card: " + card.Name + " from: " + from + "; to:" + to);
-
             CardUI ui = GetCardUI(card);
 
             //TODO: should the effect be bfore or after?
@@ -141,7 +139,7 @@ namespace UI
             yield return MoveCard(ui, to, playerDeck);
         }
 
-        internal static IEnumerator SetAttacker(Card card)
+        internal static IEnumerator SetAttacker(Guid card)
         {
             CardUI ui = GetCardUI(card);
 
@@ -151,24 +149,24 @@ namespace UI
 
             //do ready attack animation
         }
-
-        internal static IEnumerator AbilityTriggered(Ability a, Card card, List<Card> ts)
+        
+        internal static IEnumerator AbilityTriggered(Ability a, Guid card, IEnumerable<Guid> ts)
         {
             CardUI ui = GetCardUI(card);
 
             yield return AnimationSystem.Instance.PlayAbilityFx(a, ui, ts.Select(GetCardUI).ToList(), 0.25f);
         }
 
-        private static CardUI GetCardUI(Card card)
+        private static CardUI GetCardUI(Guid cardGuid)
         {
-            if (!CardUIs.ContainsKey(card))
+            if (!CardUIs.ContainsKey(cardGuid))
                 Debug.LogError("trying to move card without a ui instantiated");
 
-            CardUI ui = CardUIs[card];
+            CardUI ui = CardUIs[cardGuid];
             return ui;
         }
 
-        internal static IEnumerator SetAttackTarget(Card card)
+        internal static IEnumerator SetAttackTarget(Guid card)
         {
             CardUI ui = GetCardUI(card);
 
@@ -191,19 +189,19 @@ namespace UI
         }
 
         //negative for damage, positive for heal
-        internal static IEnumerator CardHealthChange(Card card, int val, int currentHealth, int maxHealth)
+        internal static IEnumerator CardHealthChange(Guid card, int val, int currentHealth, int maxHealth)
         {
             CardUI ui = GetCardUI(card);
 
             if (val < 0)
             {
-                Debug.Log($"{card.Name} damaged for {val}");
+                Debug.Log($"{ui} damaged for {val}");
                 ui.CardAnimation.DamageAnimation.Show(val);
             }
             else if (val > 0)
             {
 
-                Debug.Log($"{card.Name} healed for {val}");
+                Debug.Log($"{ui} healed for {val}");
             }
             else
                 Debug.LogError("health change of 0");
@@ -213,7 +211,7 @@ namespace UI
             yield return null;
         }
 
-        internal static IEnumerator CardStatsModified(Card card, int val,int currentHealth,int currentAttack, bool damaged)
+        internal static IEnumerator CardStatsModified(Guid card, int val,int currentHealth,int currentAttack, bool damaged)
         {
             CardUI ui = GetCardUI(card);
 
@@ -238,10 +236,6 @@ namespace UI
         }
         
         //otherwise make an onclick event in CardUI
-        internal static void Clicked(CardUI cardUI)
-        {
-            CardUIs.First(kp => kp.Value == cardUI).Key.Click();
-        }
 
         private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player)
         {

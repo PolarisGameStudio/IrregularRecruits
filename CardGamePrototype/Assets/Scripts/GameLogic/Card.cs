@@ -22,6 +22,7 @@ namespace GameLogic
         //public CardUI BattleRepresentation;
 
         public string Name;
+        public Guid Guid = System.Guid.NewGuid();
 
 
         [Header("Battle specific")]
@@ -112,8 +113,19 @@ namespace GameLogic
 
             Location = to;
 
+            if (IsSummon() && to != Deck.Zone.Battlefield)
+                Unsummon();
+
             //TODO: this should be controlled by ui level
             //BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
+        }
+
+        private void Unsummon()
+        {
+            if (!IsSummon())
+                return;
+
+
         }
 
         public void SetCreature(Creature newCreature)
@@ -144,12 +156,12 @@ namespace GameLogic
             Creature.Traits.Any(a => a.name == "Defender");
         internal bool Ranged() =>
             Creature.Traits.Any(a => a.name == "Ranged");
-
         internal bool Avantgarde() =>
             Creature.Traits.Any(a => a.name == "Avantgarde");
-
         internal bool Ethereal() =>
             Creature.Traits.Any(a => a.name == "Ethereal");
+        internal bool IsSummon() =>
+            Creature.IsSummon();
 
         public bool Alive() => Location != Deck.Zone.Graveyard;
 

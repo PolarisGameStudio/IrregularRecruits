@@ -16,6 +16,7 @@ namespace GameLogic
         public static CardEvent OnAttack = new CardEvent();
         public static CardEvent OnBeingAttacked = new CardEvent();
         public static CardEvent OnWithdraw = new CardEvent();
+        public static CardEvent OnSummon = new CardEvent();
 
         public class CardValueEvent : UnityEvent<Card,int> { }
         public static CardValueEvent OnDamaged = new CardValueEvent();
@@ -60,6 +61,7 @@ namespace GameLogic
             OnDamaged.RemoveAllListeners();
             OnHealed.RemoveAllListeners();
             OnWithdraw.RemoveAllListeners();
+            OnSummon.RemoveAllListeners();
 
             OnAbilityTrigger.RemoveAllListeners();
 

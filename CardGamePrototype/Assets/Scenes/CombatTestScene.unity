@@ -210,6 +210,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  ZoneMoveAnimations: []
   WithdrawParticlesPrefab:
   - {fileID: 19800018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
   ETBParticlesPrefab:
@@ -13373,6 +13374,30 @@ MonoBehaviour:
   PlayerDeckDescription: {fileID: 91827993}
   EnemyDeckDescription: {fileID: 1969274343}
   MoveDuration: 0.2
+  MoveAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.7998835
+      outSlope: -0.7998835
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.63734776
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -5.409672
+      outSlope: -5.409672
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.03382951
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &306062492
 GameObject:
   m_ObjectHideFlags: 0

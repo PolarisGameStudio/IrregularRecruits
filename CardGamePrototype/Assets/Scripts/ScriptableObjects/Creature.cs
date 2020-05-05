@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GameLogic
@@ -22,5 +23,10 @@ namespace GameLogic
 
 
         public enum RarityType { Common, Rare, Unique }
+
+        internal bool IsSummon()
+        {
+            return Traits.Any(a => a.name == "Summoned");
+        }
     }
 }

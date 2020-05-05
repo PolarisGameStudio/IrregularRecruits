@@ -74,6 +74,27 @@ namespace Tests
 
             return testCard;
         }
+        private Creature GenerateSummon()
+        {
+            Trait trait = new Trait()
+            {
+                name = "Summoned"
+            };
+
+            var testCreature = new Creature()
+            {
+                name = "TesterOne",
+                Attack = 2,
+                Health = 30,
+                Traits = new List<Trait>()
+                {
+                    trait
+                }
+
+            };
+
+            return testCreature;
+        }
 
         private void SetObjectIfCorrectAbility<T>(Ability thisAbility, Ability otherAb, ref T toBeSet, T value)
         {
@@ -1012,9 +1033,11 @@ namespace Tests
         [Test]
         public void ActionSummonExecutes()
         {
+            var summon = GenerateSummon();
+
             var testAbility = new Ability()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.Summon, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                ResultingAction = new Ability.Action(Ability.ActionType.Summon, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any),summon),
                 TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
             };
 
@@ -1025,16 +1048,16 @@ namespace Tests
             OtherCard.ChangeLocation(Deck.Zone.Battlefield);
 
             bool triggered = false;
-            Card withdrawn = null;
+            Card summoned = null;
 
-            Event.OnWithdraw.AddListener(c => withdrawn = c);
+            Event.OnSummon.AddListener(c => summoned = c);
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
             OtherCard.Damage(1);
 
             Assert.IsTrue(triggered);
-            Assert.IsTrue(false);
-            Assert.IsNotNull(withdrawn);
+            Assert.IsNotNull(summoned);
+            Assert.AreEqual(summoned.Creature, summon);
         }
     }
 }

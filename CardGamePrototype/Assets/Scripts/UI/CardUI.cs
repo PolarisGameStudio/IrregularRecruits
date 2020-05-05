@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -31,6 +32,7 @@ namespace UI
         //For deck view and the like
         public bool AlwaysFaceUp;
         public bool Interactable = true;
+        private UnityEvent OnClick = new UnityEvent();
 
         //Not equal to Card.health, since UI may be behind
         public int HealthValueDisplayed;
@@ -39,6 +41,7 @@ namespace UI
         {
             UpdateCreature(c.Creature);
             UpdateStats(c.Attack,c.CurrentHealth,c.Damaged());
+            OnClick.AddListener(c.Click);
         }
 
         public void UpdateCreature(Creature creature)
@@ -148,8 +151,8 @@ namespace UI
 #if !UNITY_EDITOR
         if (CardHighlight.IsActive()) return;
 #endif
-            if (Interactable )
-                BattleUI.Clicked(this);
+            if (Interactable)
+                OnClick.Invoke();
         }
 
         public void OnPointerExit(PointerEventData eventData)

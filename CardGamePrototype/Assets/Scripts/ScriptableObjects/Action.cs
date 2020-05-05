@@ -34,13 +34,20 @@ namespace GameLogic
             public Count TargetCount;
             public Noun Target;
             public int Amount;
+            public Creature Summons;
 
-            public Action(ActionType actionType, Count targetCount, int amount, Noun target)
+            public Action(ActionType actionType, Count targetCount, int amount, Noun target, Creature summon = null)
             {
                 ActionType = actionType;
                 TargetCount = targetCount;
                 Target = target;
                 Amount = amount;
+                Summons = summon;
+
+                if (actionType == ActionType.Summon && !summon)
+                    throw new Exception("No summon for summon ability");
+                if (summon &! summon.IsSummon())
+                    throw new Exception($"Summon {summon} is not a summon");
 
                 //force target locations for action types. TODO: should be defined through structs instead of a switch
                 if (ForcedActionTargetLocations.ContainsKey(actionType))
@@ -49,7 +56,7 @@ namespace GameLogic
 
             public string Description(Creature owner)
             {
-                return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, TargetCount), Amount);
+                return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, TargetCount), Amount,Summons);
             }
 
 
