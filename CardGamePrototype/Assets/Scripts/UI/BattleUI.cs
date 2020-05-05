@@ -214,19 +214,8 @@ namespace UI
         {
             CardUI ui = GetCardUI(card);
 
-            if (val < 0)
-            {
-                Debug.Log($"{card.Name} Stat changes by {val}");
-                ui.CardAnimation.StatPlusAnimation.Show(val);
-            }
-            else if (val > 0)
-            {
-                Debug.Log($"{card.Name} stat changes by {val}");
-                ui.CardAnimation.StatMinusAnimation.Show(val);
-            }
-            else
-                Debug.LogError("stat change change of 0");
-
+            ui.StatModifier(val);
+            
             ui.UpdateHealth(currentHealth, damaged);
             ui.UpdateAttack(currentAttack);
             yield return null;

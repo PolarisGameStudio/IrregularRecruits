@@ -59,6 +59,7 @@ namespace UI
         private void Close()
         {
             Holder.SetActive(false);
+            CardHighlight.Hide();
         }
     }
 }

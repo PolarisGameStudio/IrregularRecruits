@@ -102,7 +102,7 @@ namespace UI
                 }
         }
 
-        internal void StatModifier(int amount)
+        public void StatModifier(int amount)
         {
             if (amount > 0)
                 CardAnimation.StatPlusAnimation.Show(amount);
