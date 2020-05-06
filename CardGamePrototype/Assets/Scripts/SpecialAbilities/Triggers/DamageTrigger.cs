@@ -18,9 +18,9 @@ namespace GameLogic
 
         internal override UnityAction SetupListener(Card owner, Noun subjekt, UnityAction<Card, Card, Noun> executeIfTrue)
         {
-            UnityAction<Card, int> handler = (a, i) => executeIfTrue.Invoke(a, owner, subjekt);
+            UnityAction<Card> handler = (a) => executeIfTrue.Invoke(a, owner, subjekt);
 
-            Event.CardValueEvent trigger = Event.OnDamaged;
+            Event.CardEvent trigger = Event.OnDamaged;
 
             trigger.AddListener(handler);
 

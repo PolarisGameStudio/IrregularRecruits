@@ -254,8 +254,8 @@ namespace Tests
             var damage = 3;
             Card card = null;
 
-            Event.OnDamaged.AddListener((c,i) => check = i);
-            Event.OnDamaged.AddListener((c,i) => card = c);
+            Event.OnHealthLoss.AddListener((c,i) => check = i);
+            Event.OnDamaged.AddListener((c) => card = c);
 
             TestCard.Damage(damage);
 
@@ -270,7 +270,7 @@ namespace Tests
 
             var damage = 1;
 
-            Event.OnDamaged.AddListener((i, val) => check = i);
+            Event.OnDamaged.AddListener((i) => check = i);
 
             TestCard.Damage(damage);
 
@@ -347,11 +347,9 @@ namespace Tests
 
             var damage = 1;
 
-            Event.OnDamaged.AddListener((i, val) => check = i);
+            Event.OnDamaged.AddListener((i) => check = i);
 
             TestCard.StatModifier(-damage);
-
-
 
             Assert.IsFalse(check == TestCard);
         }

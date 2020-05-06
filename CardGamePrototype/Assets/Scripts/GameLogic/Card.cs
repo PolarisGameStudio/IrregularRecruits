@@ -240,9 +240,10 @@ namespace GameLogic
             if (damage < 1) return;
 
 
-            CurrentHealth -= damage;  
-            
-            Event.OnDamaged.Invoke(this,damage);
+            CurrentHealth -= damage;
+
+            Event.OnHealthLoss.Invoke(this, damage);
+            Event.OnDamaged.Invoke(this);
 
         }
 

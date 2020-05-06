@@ -871,7 +871,7 @@ namespace Tests
             bool triggered = false;
             Card damaged = null;
 
-            Event.OnDamaged.AddListener((c,i) => damaged = c);
+            Event.OnDamaged.AddListener((c) => damaged = c);
             Event.OnWithdraw.AddListener((c) => triggered = true);
 
             OtherCard.Withdraw();

@@ -52,7 +52,7 @@ namespace UI
 
             //On Damage-> (Card, amount) & new health?
             //TODO: maybe the damaged state used is not the correct one
-            Event.OnDamaged.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, -val,card.CurrentHealth,card.MaxHealth)));
+            Event.OnHealthLoss.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, -val,card.CurrentHealth,card.MaxHealth)));
             //On healed
             Event.OnHealed.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
 
