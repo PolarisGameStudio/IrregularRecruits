@@ -24,6 +24,8 @@ namespace GameLogic
 
         private BattleManager()
         {
+            //throw new Exception("test exeeptino");
+
             Event.OnCombatSetup.AddListener(SetupCombat);
 
             Event.OnTurnBegin.AddListener(NextTurn);

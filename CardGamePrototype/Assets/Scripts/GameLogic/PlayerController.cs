@@ -11,11 +11,14 @@ namespace GameLogic
 
         public void SetupDeckActions(Deck deck, Action onfinish)
         {
-            ControlledDeck = deck;
+            if (ControlledDeck != deck)
+            {
+                ControlledDeck = deck;
 
-            TurnFinished = onfinish;
-            
-            Event.OnPlayerAction.AddListener(UsedPlayerAction);
+                TurnFinished = onfinish;
+
+                Event.OnPlayerAction.AddListener(UsedPlayerAction);
+            }
 
             deck.DrawInitialHand();
         }

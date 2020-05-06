@@ -182,9 +182,6 @@ namespace GameLogic
         }
         public void PlayCard()
         {
-
-            Debug.Log("Playing card: " + Name);
-
             ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
             Event.OnEtb.Invoke(this);
 
