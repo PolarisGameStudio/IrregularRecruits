@@ -1,4 +1,4 @@
-using GameLogic;
+﻿using GameLogic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace UI
         public TextMeshProUGUI PlayerDeckDescription, EnemyDeckDescription;
 
         [Header("Movement")]
-        public float MoveDuration = 0.2f;
+        public float MoveDuration = 0.5f;
         public AnimationCurve MoveAnimationCurve;
 
         private CardUI Attacker;
@@ -47,13 +47,15 @@ namespace UI
         private List<Card> InitialEnemyDeck;
         private List<Card> InitialPlayerDeck;
         internal static UnityEvent OnBattleFinished = new UnityEvent();
+        internal static UnityEvent OnBattleBegin = new UnityEvent();
 
         void Awake()
         {
-
             //should be handle by calls to move instead
-            //Event.OnDraw.AddListener(c => UpdateLibrary());
-            //Event.OnWithdraw.AddListener(c => UpdateLibrary());
+            AnimationSystem.OnDraw.AddListener(UpdateLibrary);
+            AnimationSystem.OnWithdraw.AddListener(UpdateLibrary);
+
+            MoveDuration = GameSettings.Instance.CombatSpeed;
 
             ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
 
@@ -71,6 +73,8 @@ namespace UI
 
             InitialPlayerDeck = playerDeck.AllCreatures();
             InitialEnemyDeck = opponentDeck.AllCreatures();
+
+            OnBattleBegin.Invoke();
         }
 
         private void SetupUI(Deck deck)
@@ -133,7 +137,7 @@ namespace UI
         {
             CardUI ui = GetCardUI(card);
 
-            //TODO: should the effect be bfore or after?
+            //TODO: should the effect be bfore or after
             yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
             
             yield return MoveCard(ui, to, playerDeck);
@@ -197,10 +201,10 @@ namespace UI
             {
                 Debug.Log($"{ui} damaged for {val}");
                 ui.CardAnimation.DamageAnimation.Show(val);
+                AnimationSystem.OnDamaged.Invoke();
             }
             else if (val > 0)
             {
-
                 Debug.Log($"{ui} healed for {val}");
             }
             else

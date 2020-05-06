@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Event = GameLogic.Event;
 
 namespace UI
@@ -19,6 +20,13 @@ namespace UI
         public ParticleSystem[] DamageParticlesPrefab;
         public ParticleSystem[] DeathParticlesPrefab;
         public AbilityAnimationFX[] AbilityFx;
+
+        internal static UnityEvent OnDraw = new UnityEvent();
+        internal static UnityEvent OnWithdraw = new UnityEvent();
+        internal static UnityEvent OnEtb = new UnityEvent();
+        internal static UnityEvent OnDamaged = new UnityEvent();
+        internal static UnityEvent OnDeath = new UnityEvent();
+        internal static UnityEvent OnResurrect = new UnityEvent();
 
         [Serializable]
         public struct ZoneMoveAnimation
@@ -45,7 +53,8 @@ namespace UI
             var startPos = rect.position;
             var endPos = target.GetComponent<RectTransform>();
 
-
+            duration *= GameSettings.Instance.CombatSpeed;
+            
             var startTime = Time.time;
 
             while (Time.time < startTime + duration)
@@ -59,22 +68,26 @@ namespace UI
         public void WithdrawParticles(CardUI cardUI)
         {
             StartCoroutine(PlayCardFX(cardUI, WithdrawParticlesPrefab, 0, true));
+            OnWithdraw.Invoke();
         }
         //Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab, 0, true)));
         //Event.OnPlay.AddListener(c => StartCoroutine(PlayCardFX(c, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f)));
         public void PlayParticles(CardUI cardUI)
         {
             StartCoroutine(PlayCardFX(cardUI, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f));
+            OnEtb.Invoke();
         }
         //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
         public void DeathParticles(CardUI cardUI)
         {
             StartCoroutine(PlayCardFX(cardUI, DeathParticlesPrefab, 0.1f));
+            OnDeath.Invoke();
         }
         //Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
         public void DamageParticles(CardUI c)
         {
             StartCoroutine(PlayCardFX(c, DamageParticlesPrefab));
+
         }
 
         private IEnumerator PlayCardFX(CardUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
@@ -102,6 +115,9 @@ namespace UI
                 case Deck.Zone.Graveyard:
                     Instance.DeathParticles(card);
                     yield return card.CardAnimation.Dissolve();
+                    break;
+                case Deck.Zone.Hand:
+                    OnDraw.Invoke();
                     break;
             }
         }
