@@ -1,4 +1,4 @@
-﻿using GameLogic;
+using GameLogic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -231,8 +231,8 @@ namespace UI
 
         public static void UpdateLibrary()
         {
-            Instance.PlayerDeckDescription.text = "Deck size: " + BattleManager.Instance.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
-            Instance.EnemyDeckDescription.text = "Deck size: " + BattleManager.Instance.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
+            //Instance.PlayerDeckDescription.text = "Deck size: " + BattleManager.Instance.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
+            //Instance.EnemyDeckDescription.text = "Deck size: " + BattleManager.Instance.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
         }
         
         //otherwise make an onclick event in CardUI
