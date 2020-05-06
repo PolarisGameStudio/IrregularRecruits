@@ -1,4 +1,4 @@
-﻿using GameLogic;
+﻿using UI;
 using UnityEngine;
 using Event = GameLogic.Event;
 
@@ -21,17 +21,17 @@ public class SoundController : Singleton<SoundController>
         Event.OnGameOver.AddListener(() => ChangeMusic(SoundBank.Music.NoMusic));
         Event.OnGameOver.AddListener(() => PlayStinger(SoundBank.Stinger.GameLoss));
 
-        Event.OnCombatSetup.AddListener((p, c) => ChangeMusic(SoundBank.Music.Battle));
+        BattleUI.OnBattleBegin.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
 
-        Event.OnBattleFinished.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
-        Event.OnBattleFinished.AddListener(() => PlayStinger(SoundBank.Stinger.BattleWon));
+        BattleUI.OnBattleFinished.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
+        BattleUI.OnBattleFinished.AddListener(() => PlayStinger(SoundBank.Stinger.BattleWon));
 
-        Event.OnDraw.AddListener(c => PlayCardSound(SoundBank.CardSound.Draw));
-        Event.OnWithdraw.AddListener(c => PlayCardSound(SoundBank.CardSound.Withdraw));
-        Event.OnEtb.AddListener(c => PlayCardSound(SoundBank.CardSound.ETB));
-        Event.OnDamaged.AddListener((c,i) => PlayCardSound(SoundBank.CardSound.Hit));
-        Event.OnDeath.AddListener(c => PlayCardSound(SoundBank.CardSound.Death));
-        Event.OnRessurrect.AddListener(c => PlayCardSound(SoundBank.CardSound.Resurrect));
+        AnimationSystem.OnDraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Draw));
+        AnimationSystem.OnWithdraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Withdraw));
+        AnimationSystem.OnEtb.AddListener(() => PlayCardSound(SoundBank.CardSound.ETB));
+        AnimationSystem.OnDamaged.AddListener(() => PlayCardSound(SoundBank.CardSound.Hit));
+        AnimationSystem.OnDeath.AddListener(() => PlayCardSound(SoundBank.CardSound.Death));
+        AnimationSystem.OnResurrect.AddListener(() => PlayCardSound(SoundBank.CardSound.Resurrect));
     }
 
     public void PlayButtonClick()
@@ -40,12 +40,12 @@ public class SoundController : Singleton<SoundController>
 
     }
 
-    public static void PlayAbilityTrigger(Ability.ActionType type)
+    public static void PlayAbilityTrigger(GameLogic.Ability.ActionType type)
     {
         Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityTrigger(type));
     }
 
-    public static void PlayAbilityHit(Ability.ActionType type)
+    public static void PlayAbilityHit(GameLogic.Ability.ActionType type)
     {
         Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityHit(type));
     }
