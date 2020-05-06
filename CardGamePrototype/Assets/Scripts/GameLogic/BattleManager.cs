@@ -8,7 +8,6 @@ namespace GameLogic
     {
         public Deck PlayerDeck;
         public Deck EnemyDeck;
-        public int PlayerActionsLeft;
         public int Turn = 0;
 
         private static BattleManager instance;

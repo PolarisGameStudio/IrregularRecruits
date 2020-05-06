@@ -11,6 +11,7 @@ namespace Tests
         private Creature TestCreature;
         private Deck TestDeck;
         private DeckObject TestDeckObject;
+        private PlayerController TestDeckController;
         private Ability TestAbility;
 
         [SetUp]
@@ -50,7 +51,13 @@ namespace Tests
             {
                 Creatures = new List<Creature>(),
             };
+
+            TestDeckController = new PlayerController();
+
             TestDeck = new Deck(TestDeckObject, true);
+
+            TestDeck.DeckController = TestDeckController;
+
             TestDeck.AddCard(TestCard);
         }
 
@@ -102,7 +109,8 @@ namespace Tests
         public void ClickPlaysWhenActionAndOnHand()
         {
             TestCard.ChangeLocation(Deck.Zone.Hand);
-            BattleManager.Instance.PlayerActionsLeft = 1;
+            TestDeckController.PlayerActionsLeft = 1;
+
 
             TestCard.Click();
 
@@ -113,7 +121,8 @@ namespace Tests
         public void PlayTriggersOnPlayEvent()
         {
             TestCard.ChangeLocation(Deck.Zone.Hand);
-            BattleManager.Instance.PlayerActionsLeft = 1;
+            TestDeckController.PlayerActionsLeft = 1;
+
             var triggered = false;
 
             Event.OnEtb.AddListener(c => triggered = true);
@@ -126,7 +135,8 @@ namespace Tests
         public void ClickPlaysNotWhenNotInHand()
         {
             TestCard.ChangeLocation(Deck.Zone.Library);
-            BattleManager.Instance.PlayerActionsLeft = 1;
+            TestDeckController.PlayerActionsLeft = 1;
+
 
             TestCard.Click();
 
@@ -138,7 +148,7 @@ namespace Tests
         public void ClickPlaysNotWhenNoAction()
         {
             TestCard.ChangeLocation(Deck.Zone.Hand);
-            BattleManager.Instance.PlayerActionsLeft = 0;
+            TestDeckController.PlayerActionsLeft = 0;
 
             TestCard.Click();
 
@@ -150,7 +160,8 @@ namespace Tests
         public void ClickWithdrawsWhenActionAndOnBattlefield()
         {
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
-            BattleManager.Instance.PlayerActionsLeft = 1;
+
+            TestDeckController.PlayerActionsLeft = 1;
 
             TestCard.Click();
 
@@ -178,11 +189,10 @@ namespace Tests
         public void ClickDoesNotWithdrawsWhenNoAction()
         {
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
-            BattleManager.Instance.PlayerActionsLeft = 0;
+
+            TestDeckController.PlayerActionsLeft = 0;
 
             TestCard.Click();
-
-
 
 
             Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
@@ -191,7 +201,8 @@ namespace Tests
         public void ClickWithdrawsNotWhenNotOnBattlefield()
         {
             TestCard.ChangeLocation(Deck.Zone.Hand);
-            BattleManager.Instance.PlayerActionsLeft = 1;
+
+            TestDeckController.PlayerActionsLeft = 1;
 
             TestCard.Click();
 
