@@ -1,9 +1,6 @@
-﻿using GameLogic;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace UI
@@ -79,8 +76,6 @@ namespace UI
             LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one * 3.5f, 0.4f).setOnComplete(() =>
                 LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one, 0.3f));
 
-            //PushoutParticles.Play();
-
         }
 
         public void ChangeLayoutSizeWhileMoving()
@@ -106,11 +101,6 @@ namespace UI
                 yield return null;
             }
         }
-
-        public void EnterBattleField()
-        {
-            //PushoutParticles.Play();
-        }
-
+        
     }
 }
