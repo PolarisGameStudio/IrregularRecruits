@@ -9,7 +9,7 @@ namespace Tests
 {
     public class CombatTest
     { 
-        [OneTimeSetUp]
+        [SetUp]
         public void BattleManage()
         {
             var neededForBM = BattleManager.Instance;
