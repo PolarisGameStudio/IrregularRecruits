@@ -1,4 +1,4 @@
-﻿using GameLogic;
+using GameLogic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -47,15 +47,15 @@ namespace UI
         private List<Card> InitialEnemyDeck;
         private List<Card> InitialPlayerDeck;
         internal static UnityEvent OnBattleFinished = new UnityEvent();
-        internal static UnityEvent OnBattleBegin = new UnityEvent();
 
         void Awake()
         {
-            //should be handle by calls to move instead
-            AnimationSystem.OnDraw.AddListener(UpdateLibrary);
-            AnimationSystem.OnWithdraw.AddListener(UpdateLibrary);
 
-            MoveDuration = GameSettings.Instance.CombatSpeed;
+            //should be handle by calls to move instead
+            //AnimationSystem.OnDraw.AddListener(UpdateLibrary);
+            //AnimationSystem.OnWithdraw.AddListener(UpdateLibrary);
+
+            //MoveDuration = GameSettings.Instance.CombatSpeed;
 
             ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
 
@@ -73,8 +73,6 @@ namespace UI
 
             InitialPlayerDeck = playerDeck.AllCreatures();
             InitialEnemyDeck = opponentDeck.AllCreatures();
-
-            OnBattleBegin.Invoke();
         }
 
         private void SetupUI(Deck deck)
