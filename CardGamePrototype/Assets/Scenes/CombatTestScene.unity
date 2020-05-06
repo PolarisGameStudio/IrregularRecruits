@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -25224,7 +25224,7 @@ MonoBehaviour:
   AttackOrderParadigm: 0
   DeckDamageParadigm: 0
   MaxRareEnemiesPrCombat: 0
-  CombatSpeed: 0.6
+  CombatSpeed: 1
   AiControlledPlayer: 1
 --- !u!1 &947375142
 GameObject:

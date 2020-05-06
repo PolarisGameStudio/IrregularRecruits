@@ -67,8 +67,8 @@ namespace GameLogic
 
             OnBattleFinished.RemoveAllListeners();
             OnPlayerAction.RemoveAllListeners();
-            OnCombatSetup.RemoveAllListeners();
             OnCombatResolveFinished.RemoveAllListeners();
+
             OnTurnBegin.RemoveAllListeners();
 
             OnGameBegin.RemoveAllListeners();

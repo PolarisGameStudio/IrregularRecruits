@@ -46,7 +46,7 @@ namespace GameLogic
 
                 if (actionType == ActionType.Summon && !summon)
                     throw new Exception("No summon for summon ability");
-                if (summon &! summon.IsSummon())
+                if (summon && !summon.IsSummon())
                     throw new Exception($"Summon {summon} is not a summon");
 
                 //force target locations for action types. TODO: should be defined through structs instead of a switch

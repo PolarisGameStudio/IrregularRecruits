@@ -40,7 +40,7 @@ public class GameSettings : Singleton<GameSettings>
     //make all rare creatures have abilities and all normal 
     public int MaxRareEnemiesPrCombat = 1;
 
-    [Range(0.1f, 3f)]
+    [Range(0.5f, 1.5f)]
     public float CombatSpeed = 1f;
 
     public bool AiControlledPlayer;

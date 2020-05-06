@@ -12,6 +12,7 @@ namespace GameLogic
         public int Turn = 0;
 
         private static BattleManager instance;
+
         private CombatAutoResolver CombatAutoResolver;
 
         public static BattleManager Instance { get {

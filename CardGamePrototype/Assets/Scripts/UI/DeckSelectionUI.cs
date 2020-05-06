@@ -65,8 +65,6 @@ namespace UI
 
         public void Submit()
         {
-            Debug.Log("Deck Selected: " + SelectedDeck.name);
-
             Event.OnGameBegin.Invoke();
 
             CombatPrototype.SetPlayerDeck(Decks[SelectedDeck]);

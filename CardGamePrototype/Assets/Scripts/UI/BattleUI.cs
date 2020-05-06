@@ -47,6 +47,7 @@ namespace UI
         private List<Card> InitialEnemyDeck;
         private List<Card> InitialPlayerDeck;
         internal static UnityEvent OnBattleFinished = new UnityEvent();
+        internal static UnityEvent OnBattleBegin = new UnityEvent();
 
         void Awake()
         {
@@ -65,6 +66,9 @@ namespace UI
 
         private void SetupDecks(Deck playerDeck, Deck opponentDeck)
         {
+
+            MoveDuration = GameSettings.Instance.CombatSpeed /2;
+
             SetupUI(playerDeck);
             SetupUI(opponentDeck);
 
@@ -73,6 +77,9 @@ namespace UI
 
             InitialPlayerDeck = playerDeck.AllCreatures();
             InitialEnemyDeck = opponentDeck.AllCreatures();
+
+            OnBattleBegin.Invoke();
+
         }
 
         private void SetupUI(Deck deck)
