@@ -97,7 +97,7 @@ namespace GameLogic
             if (Creatures[Zone.Library].Count() == 0 || amount < 0) return;
             if (Creatures[Zone.Library].Count() < amount) amount = Creatures[Zone.Library].Count();
 
-            var draws = Creatures[Zone.Library].Take(amount);
+            var draws = Creatures[Zone.Library].Take(amount).ToArray();
 
             foreach (var card in draws)
             {

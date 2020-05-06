@@ -49,31 +49,5 @@ namespace GameLogic
         public static UnityEvent OnGameOpen = new UnityEvent();
         public static UnityEvent OnGameBegin = new UnityEvent();
 
-        public static void ResetListeners()
-        {
-            OnDraw.RemoveAllListeners();
-            OnEtb.RemoveAllListeners();
-            OnDeath.RemoveAllListeners();
-            OnRessurrect.RemoveAllListeners();
-            OnKill.RemoveAllListeners();
-            OnAttack.RemoveAllListeners();
-            OnBeingAttacked.RemoveAllListeners();
-            OnDamaged.RemoveAllListeners();
-            OnHealed.RemoveAllListeners();
-            OnWithdraw.RemoveAllListeners();
-            OnSummon.RemoveAllListeners();
-
-            OnAbilityTrigger.RemoveAllListeners();
-
-            OnBattleFinished.RemoveAllListeners();
-            OnPlayerAction.RemoveAllListeners();
-            OnCombatResolveFinished.RemoveAllListeners();
-
-            OnTurnBegin.RemoveAllListeners();
-
-            OnGameBegin.RemoveAllListeners();
-            OnGameOpen.RemoveAllListeners();
-            OnGameOver.RemoveAllListeners();
-        }
     }
 }

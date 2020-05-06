@@ -51,7 +51,6 @@ namespace UI
 
         void Awake()
         {
-
             //should be handle by calls to move instead
             //AnimationSystem.OnDraw.AddListener(UpdateLibrary);
             //AnimationSystem.OnWithdraw.AddListener(UpdateLibrary);
@@ -66,7 +65,6 @@ namespace UI
 
         private void SetupDecks(Deck playerDeck, Deck opponentDeck)
         {
-
             MoveDuration = GameSettings.Instance.CombatSpeed /2;
 
             SetupUI(playerDeck);
@@ -79,7 +77,6 @@ namespace UI
             InitialEnemyDeck = opponentDeck.AllCreatures();
 
             OnBattleBegin.Invoke();
-
         }
 
         private void SetupUI(Deck deck)
@@ -99,7 +96,6 @@ namespace UI
 
         public static IEnumerator CleanUpUI()
         {
-
             yield return null;
             Instance.EndBattle();
         }
@@ -118,7 +114,7 @@ namespace UI
             BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(),EnemyDeck.AllCreatures());
         }
 
-        public static Transform GetZoneHolder(Deck.Zone zone, bool enm)
+        public static RectTransform GetZoneHolder(Deck.Zone zone, bool enm)
         {
             var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;
 
@@ -252,7 +248,7 @@ namespace UI
 
             var rect = card.GetComponent<RectTransform>();
             var startPos = rect.position;
-            var zoneRect = GetZoneHolder(zone, !player);
+            var zoneRect =GetZoneHolder(zone, !player);
 
             if (!zoneRect) yield break;
 

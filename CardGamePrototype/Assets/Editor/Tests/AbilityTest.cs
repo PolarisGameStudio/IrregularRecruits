@@ -11,11 +11,6 @@ namespace Tests
         private Card TestCard;
         private Card OtherCard;
 
-        [SetUp]
-        public void ResetListeners()
-        {
-            Event.ResetListeners();
-        }
 
         [TearDown]
         public void CleanAbility()

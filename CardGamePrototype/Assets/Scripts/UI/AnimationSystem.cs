@@ -137,8 +137,6 @@ namespace UI
         internal static IEnumerator StartAttack(CardUI ui)
         {
             yield return new WaitForSeconds(0.5f);
-
-
         }
 
         private static void PlayFx(ParticleSystem[] fxs, Vector2 position, Transform parent)
