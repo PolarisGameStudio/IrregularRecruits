@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: CatWizard
+  m_Name: Mirekeeper
   m_EditorClassIdentifier: 
-  name: Cat Wizard
-  Rarity: 1
+  name: Mirekeeper
+  Rarity: 2
   Locked: 0
-  Image: {fileID: 21300000, guid: 368431dbabe7a454d86c463ca9cbd67e, type: 3}
+  Image: {fileID: 21300000, guid: f0721ddeaaedde94cb135618c0b44c2f, type: 3}
   IconImage: {fileID: 0}
   Attack: 2
-  Health: 5
+  Health: 15
   Traits:
-  - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 07d88e177f624e448944e385b22f7a90, type: 2}
-  Race: {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}
+  - {fileID: 11400000, guid: c9b29c97bdfe17e46b7515b6c49d6943, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: e6218ac9e9736a64eb6b2448d3b66d1d, type: 2}
+  Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}

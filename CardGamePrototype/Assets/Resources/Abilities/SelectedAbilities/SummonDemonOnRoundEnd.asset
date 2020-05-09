@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
-  m_Name: IsDAMAGED-Resurrect5279
+  m_Name: SummonDemonOnRoundEnd
   m_EditorClassIdentifier: 
-  Value: 21.235498
+  Value: 0
   TriggerCondition:
     Subjekt:
       Character: 0
       Location: 1
       Relationship: 0
       DamageState: 0
-      Race: 2
-    TriggerAction: 3
+      Race: 0
+    TriggerAction: 9
   ResultingAction:
-    ActionType: 6
-    TargetCount: 3
+    ActionType: 9
+    TargetCount: 0
     Target:
-      Character: 1
-      Location: 2
+      Character: 0
+      Location: 1
       Relationship: 0
       DamageState: 0
       Race: 0
-    Amount: 8
-    Summons: {fileID: 0}
+    Amount: 1
+    Summons: {fileID: 11400000, guid: 26eda7ce4b960684db0a10236fef921b, type: 2}

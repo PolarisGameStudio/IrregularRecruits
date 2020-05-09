@@ -78,8 +78,8 @@ namespace GameLogic
             //Debug.Log("Packing deck");
 
             //removing dead creatures
-            while (Creatures[Zone.Graveyard].Any())
-                Remove(Creatures[Zone.Graveyard].First());
+            while (Creatures[Zone.Graveyard].Any(c=>!c.Deathless()))
+                Remove(Creatures[Zone.Graveyard].First(c => !c.Deathless()));
 
             foreach (var c in AllCreatures())
             {

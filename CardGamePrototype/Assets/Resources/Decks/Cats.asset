@@ -19,22 +19,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89383700738110c46aaf0c9e1a65c973, type: 2}
   - {fileID: 11400000, guid: 89383700738110c46aaf0c9e1a65c973, type: 2}
   - {fileID: 11400000, guid: 6fd6eb573d1c53349b6e80273e7335d5, type: 2}
-  - {fileID: 11400000, guid: 3ac44313b8209ff43a827b2a7b2cbfe0, type: 2}
-  - {fileID: 11400000, guid: 3ac44313b8209ff43a827b2a7b2cbfe0, type: 2}
-  - {fileID: 11400000, guid: 3ac44313b8209ff43a827b2a7b2cbfe0, type: 2}
-  - {fileID: 11400000, guid: 3ac44313b8209ff43a827b2a7b2cbfe0, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
-  - {fileID: 11400000, guid: 06b422bbbc7800b4b9146f8eaaceea71, type: 2}
-  - {fileID: 11400000, guid: 06b422bbbc7800b4b9146f8eaaceea71, type: 2}
-  - {fileID: 11400000, guid: 06b422bbbc7800b4b9146f8eaaceea71, type: 2}
-  - {fileID: 11400000, guid: 89383700738110c46aaf0c9e1a65c973, type: 2}
   - {fileID: 11400000, guid: 6fd6eb573d1c53349b6e80273e7335d5, type: 2}
   - {fileID: 11400000, guid: 6fd6eb573d1c53349b6e80273e7335d5, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
   - {fileID: 11400000, guid: 06b422bbbc7800b4b9146f8eaaceea71, type: 2}
-  - {fileID: 11400000, guid: 89383700738110c46aaf0c9e1a65c973, type: 2}
+  - {fileID: 11400000, guid: 06b422bbbc7800b4b9146f8eaaceea71, type: 2}
+  - {fileID: 11400000, guid: 06b422bbbc7800b4b9146f8eaaceea71, type: 2}
+  - {fileID: 11400000, guid: 019189cc08f72a443afefec5ec92af3f, type: 2}
+  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
+  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
+  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
+  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
+  - {fileID: 11400000, guid: 3ac44313b8209ff43a827b2a7b2cbfe0, type: 2}
+  - {fileID: 11400000, guid: 3ac44313b8209ff43a827b2a7b2cbfe0, type: 2}
+  - {fileID: 11400000, guid: 3ac44313b8209ff43a827b2a7b2cbfe0, type: 2}
+  - {fileID: 11400000, guid: 548686969d256fd45b48b95539b59ca0, type: 2}
+  - {fileID: 11400000, guid: 548686969d256fd45b48b95539b59ca0, type: 2}
+  - {fileID: 11400000, guid: 548686969d256fd45b48b95539b59ca0, type: 2}
   DeckIcon: {fileID: 21300000, guid: 829193eec1da30748b2ac27ef8cfe0ad, type: 3}
   DeckImage: {fileID: 21300000, guid: 0f3a61879da8b23469c0b394b46e80f0, type: 3}
   FriendRaces:

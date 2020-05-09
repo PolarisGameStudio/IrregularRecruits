@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Ghost
+  m_Name: Wraith
   m_EditorClassIdentifier: 
-  name: Ghost
-  Rarity: 0
+  name: Wraith
+  Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: 7b80b96e5cedd154e9d983e197746dc0, type: 3}
   IconImage: {fileID: 21300000, guid: 7e0b783698cf71c44b35abe6213436c1, type: 3}
@@ -21,5 +21,5 @@ MonoBehaviour:
   Health: 18
   Traits:
   - {fileID: 11400000, guid: 2075b1581c3413a4c8d1ac53c8aef4de, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 0eecf1e9a45e9d44d9a11999eee25a60, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: dbe4da5c075a26c4eb0436c4d10911ac, type: 2}
   Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}

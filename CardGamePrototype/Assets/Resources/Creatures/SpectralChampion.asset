@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: SpectralWarrior
+  m_Name: SpectralChampion
   m_EditorClassIdentifier: 
-  name: Spectral Warrior
-  Rarity: 0
+  name: Spectral Champion
+  Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: f3454c0784bae0549b36d1e2edcf416d, type: 3}
   IconImage: {fileID: 0}
-  Attack: 2
-  Health: 12
+  Attack: 4
+  Health: 15
   Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 0}
+  - {fileID: 11400000, guid: c9b29c97bdfe17e46b7515b6c49d6943, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 9b87a660655f9c148a2a92ab25e95beb, type: 2}
   Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}

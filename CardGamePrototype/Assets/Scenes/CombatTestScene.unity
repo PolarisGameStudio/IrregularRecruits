@@ -19302,11 +19302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Decks:
   - {fileID: 11400000, guid: ac957de51484b374f877b1f4ee357d26, type: 2}
-  - {fileID: 11400000, guid: ea1b23f69add59540a67413b0426018d, type: 2}
-  - {fileID: 11400000, guid: 7ca23db7d5049ed4e80915e3b1cd4802, type: 2}
-  - {fileID: 11400000, guid: 51ae29e0aadb2aa45b7dcace62350e95, type: 2}
-  - {fileID: 11400000, guid: e58503075e30e0d488f79796dd1d528f, type: 2}
   - {fileID: 11400000, guid: f965b2a83c7badf41ae67fb2186437f1, type: 2}
+  - {fileID: 11400000, guid: e58503075e30e0d488f79796dd1d528f, type: 2}
 --- !u!4 &453068599
 Transform:
   m_ObjectHideFlags: 0
@@ -22474,7 +22471,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 0.55}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -200, y: 0}
-  m_Pivot: {x: 0.5, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &736405591
 MonoBehaviour:
   m_ObjectHideFlags: 0

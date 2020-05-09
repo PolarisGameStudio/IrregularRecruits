@@ -71,14 +71,7 @@ namespace GameLogic
                     continue;
                 }
 
-                Event.OnAttack.Invoke(attacker);
-
-                Event.OnBeingAttacked.Invoke(target);
-
-                target.Damage(attacker.Attack);
-
-                if (!attacker.Ranged() && target.Location == Deck.Zone.Battlefield)
-                    attacker.Damage(target.Attack);
+                attacker.AttackCard(target);
 
                 attackOrder.Remove(attacker);
             }

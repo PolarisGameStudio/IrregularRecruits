@@ -81,6 +81,23 @@ namespace Tests
 
             Assert.IsTrue(resolveStarted);
         }
+
+        [Test]
+        public void EqualCreaturesBothDie()
+        {
+            var pDeck = GenerateTestDeck(1, true);
+            var enmDeck = GenerateTestDeck(1, false);
+
+            List<Card> deads = new List<Card>();
+
+            Event.OnDeath.AddListener(c => deads.Add(c));
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.AreEqual(pDeck.AllCreatures().Count, 0);
+            Assert.AreEqual(enmDeck.AllCreatures().Count, 0);
+            Assert.AreEqual(deads.Count, 2);
+
+        }
         [Test]
         public void CombatResolveFinishes()
         {
@@ -124,6 +141,25 @@ namespace Tests
 
 
             Assert.IsTrue(battleFinished);
+        }
+        [Test]
+        public void DeadCreaturesRemovedFromDeck()
+        {
+            const int creatures = 5;
+
+            var pDeck = GenerateTestDeck(creatures, true);
+            var enmDeck = GenerateTestDeck(creatures, false);
+
+            var battleFinished = false;
+
+            Event.OnBattleFinished.AddListener(() => battleFinished = true);
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.IsTrue(battleFinished);
+            Assert.IsTrue(pDeck.AllCreatures().Count < creatures);
+            Assert.IsTrue(enmDeck.AllCreatures().Count < creatures);
+            Assert.IsTrue(pDeck.AllCreatures().Count == 0 || enmDeck.AllCreatures().Count == 0);
         }
         [Test]
         public void BattleResolvesWithOnlyAbilityDamage()

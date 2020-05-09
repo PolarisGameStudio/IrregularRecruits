@@ -120,6 +120,28 @@ namespace GameLogic
             //BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
         }
 
+        public void AttackCard(Card target)
+        {
+            if (!Alive() || !target.Alive())
+                return;
+            
+            Event.OnAttack.Invoke(this);
+
+            Event.OnBeingAttacked.Invoke(target);
+
+            if (Location != Deck.Zone.Battlefield || !target.Alive())
+                return;
+
+            target.Damage(this.Attack);
+
+            if (!this.Ranged())
+                this.Damage(target.Attack);
+
+            if (!Alive() && target.Alive()) Event.OnKill.Invoke(target);
+            else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this);
+
+        }
+
         private void Unsummon()
         {
             if (!IsSummon())
@@ -160,6 +182,8 @@ namespace GameLogic
             Creature.Traits.Any(a => a.name == "Avantgarde");
         internal bool Ethereal() =>
             Creature.Traits.Any(a => a.name == "Ethereal");
+        internal bool Deathless() =>
+            Creature.Traits.Any(a => a.name == "Deathless");
         internal bool IsSummon() =>
             Creature.IsSummon();
 
@@ -237,8 +261,7 @@ namespace GameLogic
 
         public void Damage(int damage)
         {
-            if (damage < 1) return;
-
+            if (damage < 1 ||! Alive()) return;
 
             CurrentHealth -= damage;
 

@@ -123,6 +123,28 @@ namespace Tests
             Assert.IsTrue(finished);
         }
         [Test]
+        public void DeathlessNotRemovedAfterDeath()
+        {
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            Card defPlayer = GenerateTestCreature("Deathless");
+            Card defEnm = GenerateTestCreature("Deathless");
+
+            pDeck.AddCard(defPlayer);
+            enmDeck.AddCard(defEnm);
+
+            var finished = false;
+
+            Event.OnBattleFinished.AddListener(()=> finished = true);
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.IsTrue(pDeck.AllCreatures().Contains(defPlayer));
+            Assert.IsTrue(enmDeck.AllCreatures().Contains(defEnm));
+            Assert.IsTrue(finished);
+        }
+        [Test]
         public void EtherealIsNotAttackedWhileOtherNonEthereals()
         {
             var pDeck = GenerateTestDeck(0, true);

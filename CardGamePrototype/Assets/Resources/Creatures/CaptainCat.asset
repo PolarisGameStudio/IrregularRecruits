@@ -20,5 +20,5 @@ MonoBehaviour:
   Attack: 3
   Health: 12
   Traits: []
-  SpecialAbility: {fileID: 0}
+  SpecialAbility: {fileID: 11400000, guid: 7f7dcde4b6580d242b87c6d490a38636, type: 2}
   Race: {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}

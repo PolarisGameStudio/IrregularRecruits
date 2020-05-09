@@ -146,6 +146,65 @@ namespace Tests
         }
 
         [Test]
+        public void TriggerKillsTriggersOnAttack()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Resurrect, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.This), Ability.Verb.KILLS),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.StatModifier(50);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card killer = null;
+
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+            Event.OnKill.AddListener((c) => killer = c);
+
+            TestCard.AttackCard(OtherCard);
+
+            Assert.IsTrue(triggered);
+            Assert.NotNull(killer);
+            Assert.AreEqual(killer,TestCard);
+        }
+        [Test]
+        public void TriggerKillsTriggersOnBeingAttacked()
+        {
+            var testAbility = new Ability()
+            {
+                ResultingAction = new Ability.Action(Ability.ActionType.Resurrect, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.This), Ability.Verb.KILLS),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.StatModifier(50);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+            Card killer = null;
+
+            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+            Event.OnKill.AddListener((c) => killer = c);
+
+            OtherCard.AttackCard(TestCard);
+
+            Assert.IsTrue(triggered);
+            Assert.NotNull(killer);
+            Assert.AreEqual(killer, TestCard);
+        }
+
+        [Test]
         public void TriggerDeathTriggers()
         {
             var testAbility = new Ability()
