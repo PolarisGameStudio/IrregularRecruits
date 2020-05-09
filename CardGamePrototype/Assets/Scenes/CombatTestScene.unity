@@ -12899,7 +12899,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &275630288
 GameObject:
   m_ObjectHideFlags: 0
@@ -25393,7 +25393,7 @@ MonoBehaviour:
   DeckDamageParadigm: 0
   MaxRareEnemiesPrCombat: 0
   CombatSpeed: 1
-  AiControlledPlayer: 1
+  AiControlledPlayer: 0
 --- !u!1 &947375142
 GameObject:
   m_ObjectHideFlags: 0
