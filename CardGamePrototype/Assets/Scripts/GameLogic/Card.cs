@@ -98,11 +98,15 @@ namespace GameLogic
                 return;
             }
 
+            if (from == to)
+                return;
+
             if (!InDeck.CreaturesInZone(from).Contains(this))
             {
                 Debug.LogWarning($"{Creature} not in correct zone: {from}");
                 return;
             }
+
             
             InDeck.CreaturesInZone(from).Remove(this);
 
@@ -116,6 +120,8 @@ namespace GameLogic
             if (IsSummon() && to != Deck.Zone.Battlefield)
                 Unsummon();
 
+
+            Event.OnChangeLocation.Invoke(this, from, to);
             //TODO: this should be controlled by ui level
             //BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
         }
@@ -283,6 +289,7 @@ namespace GameLogic
 
         public void ResetAfterBattle()
         {
+            if(Location != Deck.Zone.Library)
             ChangeLocation(Deck.Zone.Library);
 
             //todo: find a way to safe permanent buffs or drain

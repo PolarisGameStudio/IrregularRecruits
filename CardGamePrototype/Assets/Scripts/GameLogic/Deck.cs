@@ -75,8 +75,6 @@ namespace GameLogic
 
         internal void PackUp()
         {
-            //Debug.Log("Packing deck");
-
             //removing dead creatures
             while (Creatures[Zone.Graveyard].Any(c=>!c.Deathless()))
                 Remove(Creatures[Zone.Graveyard].First(c => !c.Deathless()));

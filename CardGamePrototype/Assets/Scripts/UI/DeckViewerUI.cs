@@ -1,5 +1,6 @@
 ﻿using GameLogic;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace UI
@@ -27,7 +28,7 @@ namespace UI
             InstatiatedObjects.ForEach(Destroy);
             InstatiatedObjects.Clear();
 
-            foreach (var c in deck.AllCreatures())
+            foreach (var c in deck.AllCreatures().OrderBy(c=> c.Name))
             {
                 var inst = Instantiate(CardUIInstance, CardUIInstance.transform.parent);
 

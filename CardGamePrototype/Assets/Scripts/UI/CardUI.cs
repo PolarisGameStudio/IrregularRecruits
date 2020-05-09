@@ -36,6 +36,7 @@ namespace UI
 
         //Not equal to Card.health, since UI may be behind
         public int HealthValueDisplayed;
+        private Color ReducedStatsColor = new Color(0.75f, 0.75f, 0.75f);
 
         public void SetCard(Card c)
         {
@@ -126,7 +127,7 @@ namespace UI
             AttackText.text = attack.ToString("N0");
 
             AttackText.color = Creature.Attack < attack ? Color.green :
-                attack < Creature.Attack ? Color.gray :
+                attack < Creature.Attack ? ReducedStatsColor :
                 Color.white;
         }
 

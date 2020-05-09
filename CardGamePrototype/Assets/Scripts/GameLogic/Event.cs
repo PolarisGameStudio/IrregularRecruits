@@ -50,5 +50,9 @@ namespace GameLogic
         public static UnityEvent OnGameOpen = new UnityEvent();
         public static UnityEvent OnGameBegin = new UnityEvent();
 
+        //moved Card. From. To
+        //should only be used by ui to determine card locations
+        public class LocationChangeEvent : UnityEvent<Card, Deck.Zone, Deck.Zone> { }
+        public static LocationChangeEvent OnChangeLocation = new LocationChangeEvent();
     }
 }

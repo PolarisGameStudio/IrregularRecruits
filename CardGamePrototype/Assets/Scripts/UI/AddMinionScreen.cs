@@ -22,10 +22,10 @@ namespace UI
 
         private void SetupDeckChoice(Deck deck)
         {
-            var cs = CombatPrototype.Instance.AllCreatures;
+            var cs = CombatPrototype.Instance.AllCreatures.ToList();
 
-            var friends = cs.Where(c => deck.DeckObject.FriendRaces.Contains(c.Race)).ToArray();
-            var possibles = cs.Where(c => !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToArray();
+            var friends = cs.Where(c => deck.DeckObject.FriendRaces.Contains(c.Race)).ToList();
+            var possibles = cs.Where(c => !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToList();
 
             DeckIcon.sprite = deck.DeckObject.DeckIcon;
             Deck = deck;
@@ -39,10 +39,20 @@ namespace UI
                 friends = possibles;
             }
 
-            SetupChoice(FirstCreatureChoice, AddFirstCreature, friends[Random.Range(0, friends.Length)]);
-            SetupChoice(SecondCreatureChoice, AddSecondCreature, friends[Random.Range(0, friends.Length)]);
-            SetupChoice(ThirdCreatureChoice, AddThirdCreature, possibles[Random.Range(0, friends.Length)]);
+            Creature selected = friends[Random.Range(0, friends.Count())];
+            SetupChoice(FirstCreatureChoice, AddFirstCreature, selected);
 
+            if(friends.Count() > 1)
+                friends.Remove(selected);
+            Creature selected2 = friends[Random.Range(0, friends.Count())];
+            SetupChoice(SecondCreatureChoice, AddSecondCreature, selected2);
+
+            if (possibles.Count() > 2)
+            {
+                possibles.Remove(selected);
+                possibles.Remove(selected2);
+            }
+            SetupChoice(ThirdCreatureChoice, AddThirdCreature, possibles[Random.Range(0, possibles.Count())]);
 
             Holder.SetActive(true);
         }
