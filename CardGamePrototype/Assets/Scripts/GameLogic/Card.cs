@@ -272,7 +272,6 @@ namespace GameLogic
             CurrentHealth -= damage;
 
             Event.OnHealthLoss.Invoke(this, damage);
-
             Event.OnDamaged.Invoke(this);
 
         }
