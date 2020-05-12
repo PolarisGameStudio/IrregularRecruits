@@ -64,7 +64,7 @@ namespace GameLogic
             Event.OnDeath.Invoke(this);
         }
 
-        internal bool Damaged()
+        public bool Damaged()
         {
             return CurrentHealth < MaxHealth;
         }
@@ -130,6 +130,8 @@ namespace GameLogic
         {
             if (!Alive() || !target.Alive())
                 return;
+
+            var returnDamage = !this.Ranged() && (target.Location == Deck.Zone.Battlefield);
             
             Event.OnAttack.Invoke(this);
 
@@ -140,7 +142,7 @@ namespace GameLogic
 
             target.Damage(this.Attack);
 
-            if (!this.Ranged())
+            if (returnDamage)
                 this.Damage(target.Attack);
 
             if (!Alive() && target.Alive()) Event.OnKill.Invoke(target);

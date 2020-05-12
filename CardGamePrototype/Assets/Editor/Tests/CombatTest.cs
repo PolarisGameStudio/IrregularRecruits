@@ -13,6 +13,7 @@ namespace Tests
         public void BattleManage()
         {
             var neededForBM = BattleManager.Instance;
+            GameSettings.Instance.AiControlledPlayer = true;
         }
 
         private Card GenerateTestCreature(Ability ability, Race race = null, int attack = 2)
@@ -197,6 +198,112 @@ namespace Tests
             Assert.IsTrue(attackers.Count == creatures.Count);
 
             Assert.IsTrue(creatures.All(attackers.Contains));
+        }
+        
+        [Test]
+        public void AttackingDamagesBoth()
+        {
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            var creature1 = GenerateTestCreature(null);
+            var creature2 = GenerateTestCreature(null);
+
+            pDeck.AddCard(creature1);
+            enmDeck.AddCard(creature2);
+
+            creature1.ChangeLocation(Deck.Zone.Battlefield);
+            creature2.ChangeLocation(Deck.Zone.Battlefield);
+
+            Assert.IsTrue(!creature1.Damaged());
+            Assert.IsTrue(!creature2.Damaged());
+
+            creature1.AttackCard(creature2);
+
+            Assert.IsTrue(creature1.Damaged());
+            Assert.IsTrue(creature2.Damaged());
+
+            Assert.AreEqual(creature1.MaxHealth - creature1.CurrentHealth, creature2.Attack);
+            Assert.AreEqual(creature2.MaxHealth - creature2.CurrentHealth, creature1.Attack);
+        }
+        
+        [Test]
+        public void AttackingInHandDamagesOnlyTarget()
+        {
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            var creature1 = GenerateTestCreature(null);
+            var creature2 = GenerateTestCreature(null);
+
+            pDeck.AddCard(creature1);
+            enmDeck.AddCard(creature2);
+
+            creature1.ChangeLocation(Deck.Zone.Battlefield);
+            creature2.ChangeLocation(Deck.Zone.Hand);
+
+            Assert.IsTrue(!creature1.Damaged());
+            Assert.IsTrue(!creature2.Damaged());
+
+            creature1.AttackCard(creature2);
+            
+            Assert.IsTrue(creature2.Damaged());
+            Assert.IsFalse(creature1.Damaged());
+
+            Assert.AreEqual(creature2.MaxHealth - creature2.CurrentHealth, creature1.Attack);
+        }
+        [Test]
+        public void AttackingInDeckDamagesOnlyTarget()
+        {
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            var creature1 = GenerateTestCreature(null);
+            var creature2 = GenerateTestCreature(null);
+
+            pDeck.AddCard(creature1);
+            enmDeck.AddCard(creature2);
+
+            creature1.ChangeLocation(Deck.Zone.Battlefield);
+            creature2.ChangeLocation(Deck.Zone.Library);
+
+            Assert.IsTrue(!creature1.Damaged());
+            Assert.IsTrue(!creature2.Damaged());
+
+            creature1.AttackCard(creature2);
+
+            Assert.IsTrue(creature2.Damaged());
+            Assert.IsFalse(creature1.Damaged());
+
+            Assert.AreEqual(creature2.MaxHealth - creature2.CurrentHealth, creature1.Attack);
+        }
+
+        [Test]
+        public void AttackingAndKillingDamagesBoth()
+        {
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            var creature1 = GenerateTestCreature(null);
+            var creature2 = GenerateTestCreature(null);
+
+            pDeck.AddCard(creature1);
+            enmDeck.AddCard(creature2);
+
+            creature1.ChangeLocation(Deck.Zone.Battlefield);
+            creature2.ChangeLocation(Deck.Zone.Battlefield);
+
+            creature1.StatModifier(creature2.CurrentHealth);
+
+            Assert.IsFalse(creature1.Damaged());
+            Assert.IsTrue(creature2.Alive());
+
+            creature1.AttackCard(creature2);
+
+            Assert.IsFalse(creature2.Alive());
+            Assert.IsTrue(creature1.Damaged());
+
+            Assert.AreEqual(creature1.MaxHealth - creature1.CurrentHealth, creature2.Attack);
         }
 
     }

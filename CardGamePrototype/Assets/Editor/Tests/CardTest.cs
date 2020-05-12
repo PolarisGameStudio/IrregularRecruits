@@ -19,22 +19,7 @@ namespace Tests
         {
             //Event.ResetListeners();
 
-            Trait trait = new Trait()
-            {
-                Description = "Testing a trait",
-                name = "TestTrait"
-            };
-
-            TestCreature = new Creature()
-            {
-                name = "Testeron",
-                Attack = 2,
-                Health = 3,
-                Traits = new List<Trait>()
-                {
-                    trait
-                }
-            };
+            TestCreature = CreateCreature();
 
             TestAbility = new Ability()
             {
@@ -43,9 +28,13 @@ namespace Tests
             };
 
             TestCreature.SpecialAbility = TestAbility;
+            TestCard = CreateCard();
 
-            TestCard = new Card(TestCreature);
+        }
 
+        private Card CreateCard()
+        {
+            var TestCard = new Card(TestCreature);
 
             TestDeckObject = new DeckObject()
             {
@@ -59,6 +48,30 @@ namespace Tests
             TestDeck.DeckController = TestDeckController;
 
             TestDeck.AddCard(TestCard);
+
+            return TestCard;
+        }
+
+        private static Creature CreateCreature()
+        {
+
+            Trait trait = new Trait()
+            {
+                Description = "Testing a trait",
+                name = "TestTrait"
+            };
+
+
+            return new Creature()
+            {
+                name = "Testeron",
+                Attack = 2,
+                Health = 3,
+                Traits = new List<Trait>()
+                {
+                    trait
+                }
+            };
         }
 
         [Test]
@@ -406,7 +419,5 @@ namespace Tests
 
             Assert.IsTrue(triggered);
         }
-
-
     }
 }

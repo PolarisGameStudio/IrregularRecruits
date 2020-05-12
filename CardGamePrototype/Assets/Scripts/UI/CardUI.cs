@@ -152,7 +152,7 @@ namespace UI
 #if !UNITY_EDITOR
         if (CardHighlight.IsActive()) return;
 #endif
-            if (Interactable)
+            if (Interactable && UIFlowController.Instance.EmptyQueue())
                 OnClick.Invoke();
         }
 

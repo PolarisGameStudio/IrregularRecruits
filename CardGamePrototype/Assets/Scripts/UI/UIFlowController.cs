@@ -13,8 +13,8 @@ namespace UI
     //Responsible for the timely and orderly execution of UI. with a wait between each ui event execution, determined by the event type
     public class UIFlowController : Singleton<UIFlowController>
     {
-        public Queue<IEnumerator> ActionQueue = new Queue<IEnumerator>();
-        public Coroutine ControlRoutine;
+        private Queue<IEnumerator> ActionQueue = new Queue<IEnumerator>();
+        private Coroutine ControlRoutine;
 
         public void Start()
         {
@@ -86,13 +86,15 @@ namespace UI
 
         private IEnumerator UIRoutine()
         {
-            while(ActionQueue.Count > 0)
+            while(!EmptyQueue())
             {
                 yield return ActionQueue.Dequeue();
             }
 
             ControlRoutine = null;
         }
+
+        public bool EmptyQueue() => ActionQueue.Count == 0;
 
     }
 
