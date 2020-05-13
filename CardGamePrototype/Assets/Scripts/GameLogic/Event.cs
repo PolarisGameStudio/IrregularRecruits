@@ -20,7 +20,7 @@ namespace GameLogic
         public static CardEvent OnDamaged = new CardEvent();
 
         public class CardValueEvent : UnityEvent<Card,int> { }
-        public static CardValueEvent OnHealthLoss = new CardValueEvent();
+        public static CardValueEvent OnHealthChange = new CardValueEvent();
         public static CardValueEvent OnHealed = new CardValueEvent();
         public static CardValueEvent OnStatMod = new CardValueEvent();
 

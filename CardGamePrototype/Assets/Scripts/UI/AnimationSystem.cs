@@ -25,6 +25,7 @@ namespace UI
         internal static UnityEvent OnWithdraw = new UnityEvent();
         internal static UnityEvent OnEtb = new UnityEvent();
         internal static UnityEvent OnDamaged = new UnityEvent();
+        internal static UnityEvent OnHeal = new UnityEvent();
         internal static UnityEvent OnDeath = new UnityEvent();
         internal static UnityEvent OnResurrect = new UnityEvent();
 

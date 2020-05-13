@@ -209,6 +209,8 @@ namespace UI
             else if (val > 0)
             {
                 Debug.Log($"{ui} healed for {val}");
+                AnimationSystem.OnHeal.Invoke();
+
             }
             else
                 Debug.LogError("health change of 0");

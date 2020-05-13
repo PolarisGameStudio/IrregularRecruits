@@ -30,6 +30,7 @@ public class SoundController : Singleton<SoundController>
         AnimationSystem.OnWithdraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Withdraw));
         AnimationSystem.OnEtb.AddListener(() => PlayCardSound(SoundBank.CardSound.ETB));
         AnimationSystem.OnDamaged.AddListener(() => PlayCardSound(SoundBank.CardSound.Hit));
+        AnimationSystem.OnHeal.AddListener(() => PlayCardSound(SoundBank.CardSound.Heal));
         AnimationSystem.OnDeath.AddListener(() => PlayCardSound(SoundBank.CardSound.Death));
         AnimationSystem.OnResurrect.AddListener(() => PlayCardSound(SoundBank.CardSound.Resurrect));
     }

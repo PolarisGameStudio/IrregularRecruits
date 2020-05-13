@@ -6920,6 +6920,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 21b3fa0abfe97334f80df8fcfc00850d, type: 3}
   - Type: 6
     Audio: []
+  - Type: 8
+    Audio:
+    - {fileID: 8300000, guid: 58b45f50e4c549141a40116cb913f3d8, type: 3}
   UiSounds:
   - Type: 1
     Audio:
@@ -25442,7 +25445,7 @@ MonoBehaviour:
   DeckDamageParadigm: 0
   MaxRareEnemiesPrCombat: 0
   CombatSpeed: 1
-  AiControlledPlayer: 1
+  AiControlledPlayer: 0
 --- !u!1 &947375142
 GameObject:
   m_ObjectHideFlags: 0

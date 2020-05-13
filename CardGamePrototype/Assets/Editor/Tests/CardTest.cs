@@ -267,7 +267,7 @@ namespace Tests
             var damage = 3;
             Card card = null;
 
-            Event.OnHealthLoss.AddListener((c,i) => check = i);
+            Event.OnHealthChange.AddListener((c,i) => check = i);
             Event.OnDamaged.AddListener((c) => card = c);
 
             TestCard.Damage(damage);

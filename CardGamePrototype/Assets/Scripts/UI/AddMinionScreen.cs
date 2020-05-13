@@ -24,6 +24,9 @@ namespace UI
         {
             var cs = CombatPrototype.Instance.AllCreatures.ToList();
 
+            if (deck  == null|| !deck.DeckObject)
+                return;
+
             var friends = cs.Where(c => deck.DeckObject.FriendRaces.Contains(c.Race)).ToList();
             var possibles = cs.Where(c => !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToList();
 

@@ -20,7 +20,6 @@ namespace UI
         {
             var bm = BattleManager.Instance;
 
-
             //SETUP listeners
             //    Move->deckmanager(Card, Zone) Handles death/ etb / withdraw / resurrection / draw animation
             // if an action moves a card a zone from different locations, the cards current location is used
@@ -32,9 +31,9 @@ namespace UI
             Event.OnBeingAttacked.AddListener(card => AddCardEvent(BattleUI.SetAttackTarget(card.Guid)));
 
             //On Damage-> (Card, amount) & new health?
-            //TODO: maybe the damaged state used is not the correct one
-            Event.OnHealthLoss.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, -val,card.CurrentHealth,card.MaxHealth)));
             //On healed
+            Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val,card.CurrentHealth,card.MaxHealth)));
+            
             Event.OnHealed.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
 
             //On Stat Change-> (Card, amount)
