@@ -42,8 +42,8 @@ namespace UI
 
         private CardUI Attacker;
         private CardUI AttackTarget;
-        private Deck PlayerDeck;
-        private Deck EnemyDeck;
+        public Deck PlayerDeck;
+        public Deck EnemyDeck;
         private List<Card> InitialEnemyDeck;
         private List<Card> InitialPlayerDeck;
         internal static UnityEvent OnBattleFinished = new UnityEvent();
@@ -67,8 +67,8 @@ namespace UI
         {
             MoveDuration = GameSettings.Instance.CombatSpeed / 2;
 
-            SetupUI(playerDeck);
-            SetupUI(opponentDeck);
+            SetupUI(playerDeck,true);
+            SetupUI(opponentDeck,false);
 
             PlayerDeck = playerDeck;
             EnemyDeck = opponentDeck;
@@ -79,7 +79,7 @@ namespace UI
             OnBattleBegin.Invoke();
         }
 
-        private void SetupUI(Deck deck)
+        private void SetupUI(Deck deck,bool playerDeck)
         {
             foreach (var card in deck.AllCreatures())
             {
@@ -92,7 +92,7 @@ namespace UI
                 StartCoroutine(ui.Flip(true, 0f));
 
                 //Should we just move it to library nomatter what?
-                StartCoroutine(MoveCard(ui, card.Location, deck.PlayerDeck));
+                StartCoroutine(MoveCard(ui, card.Location, playerDeck));
             }
         }
 

@@ -9,10 +9,13 @@ namespace GameLogic
     {
         private Deck ControlledDeck;
         private Action OnFinish;
+        private bool MyTurn;
 
         //this could be a more complex evaluation and move mechanics
         public void YourTurn()
         {
+            MyTurn = true;
+
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
             for (int i = 0; i < GameSettings.Instance.EnemyPlaysPrTurn; i++)
@@ -38,6 +41,8 @@ namespace GameLogic
                 }
             }
 
+            MyTurn = false;
+
             OnFinish.Invoke();
         }
 
@@ -52,7 +57,7 @@ namespace GameLogic
         public bool ActionAvailable()
         {
             //TODO: should AI actions always be possible?
-            return true;
+            return MyTurn;
         }
     }
 }

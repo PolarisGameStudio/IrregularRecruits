@@ -96,7 +96,7 @@ public class CombatPrototype : Singleton<CombatPrototype>
             library.Add(card);
         }
 
-        var deck = new Deck(library, player);
+        var deck = new Deck(library);
 
 
         return deck;

@@ -34,8 +34,6 @@ namespace UI
             //On healed
             Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val,card.CurrentHealth,card.MaxHealth)));
             
-            Event.OnHealed.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
-
             //On Stat Change-> (Card, amount)
             Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack,card.Damaged())));
 
@@ -48,7 +46,7 @@ namespace UI
 
         private void AddMoveEvent(Card card, Deck.Zone from, Deck.Zone to)
         {
-            var playerdeck = card.InDeck.PlayerDeck;
+            var playerdeck = BattleUI.Instance.PlayerDeck == card.InDeck;
 
             AddCardEvent( BattleUI.Move(card.Guid, to, from, playerdeck));
         }

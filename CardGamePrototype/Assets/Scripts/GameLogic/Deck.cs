@@ -7,28 +7,24 @@ namespace GameLogic
     public class Deck
     {
         public enum Zone { Library, Battlefield, Graveyard, Hand, COUNT }
-        public bool PlayerDeck;
         public DeckObject DeckObject;
         public IDeckController DeckController;
 
         private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 
         public Deck(DeckObject deckObject, bool playerDeck)
-            : this(deckObject.Creatures.Select(c => new Card(c)).ToList(), playerDeck)
+            : this(deckObject.Creatures.Select(c => new Card(c)).ToList())
         {
             DeckObject = deckObject;
         }
 
-        public Deck(List<Card> initialLibrary, bool playerDeck)
+        public Deck(List<Card> initialLibrary)
         {
             for (int i = (int)Zone.Library; i < (int)Zone.COUNT; i++)
             {
                 Creatures[(Zone)i] = new List<Card>();
             }
-
-            PlayerDeck = playerDeck;
-
-
+            
             foreach (var card in initialLibrary)
             {
                 AddCard(card);

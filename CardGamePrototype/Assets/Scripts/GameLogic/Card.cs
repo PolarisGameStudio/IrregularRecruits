@@ -306,13 +306,8 @@ namespace GameLogic
 
             if (!InDeck.DeckController.ActionAvailable())
             {
-                Debug.Log("No player actions left");
                 return;
             }
-
-            if (!InDeck.PlayerDeck )
-                //|| (BattleRepresentation &!  BattleRepresentation.Interactable)) 
-                return;
 
             if (Location == Deck.Zone.Hand)
             {
