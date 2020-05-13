@@ -92,12 +92,12 @@ namespace UI
 
         private IEnumerator PlayCardFX(CardUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
         {
-            yield return new WaitForSeconds(delay);
-
             if (!card) yield break;
             //vector2 to ignore z position to prevent oddities
             Vector2 position = card.transform.position;
             PlayFx(fxs, position, instantiateInWorldSpace ? null : card.transform);
+
+            yield return new WaitForSeconds(delay);
         }
 
         internal static IEnumerator ZoneMoveEffects(CardUI card, Deck.Zone from, Deck.Zone to)
@@ -124,13 +124,15 @@ namespace UI
 
         private IEnumerator PlayAbilityIconFx(CardUI abilityOwner, ParticleSystem[] fxs, float delay = 0)
         {
-            yield return new WaitForSeconds(delay);
-
             if (!abilityOwner || !abilityOwner.CardAnimation.SpecialAbilityIcon) yield break;
             abilityOwner.CardAnimation.HighlightAbility();
             //vector2 to ignore z position to prevent oddities
             Vector2 position = abilityOwner.CardAnimation.SpecialAbilityIcon.transform.position;
             PlayFx(fxs, position, abilityOwner.CardAnimation.SpecialAbilityIcon.transform);
+
+
+            yield return new WaitForSeconds(delay);
+
 
         }
 
@@ -155,12 +157,12 @@ namespace UI
         {
             var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
 
-            int i = 0;
 
-            yield return PlayCardFX(owner, abilityFx.OwnerFX, delay * i++);
-            yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, delay * i++);
+            yield return PlayCardFX(owner, abilityFx.OwnerFX, delay );
+            yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, delay );
+
             foreach (var t in targets)
-                yield return PlayCardFX(t, abilityFx.TargetFX, delay * i++);
+                yield return PlayCardFX(t, abilityFx.TargetFX, delay  / targets.Count());
         }
     }
 }

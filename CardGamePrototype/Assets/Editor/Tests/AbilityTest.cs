@@ -24,7 +24,7 @@ namespace Tests
                 OtherCard.Creature.SpecialAbility.RemoveListeners();
             }
 
-            BattleManager.Instance.PackUp();
+            BattleManager.Instance.PackUp(null);
         }
 
         private Card GenerateTestCreature(Ability ability, Race race = null)

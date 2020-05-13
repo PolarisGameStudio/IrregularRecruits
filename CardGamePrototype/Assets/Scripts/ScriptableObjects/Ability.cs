@@ -87,8 +87,8 @@ namespace GameLogic
 
         private void ExecuteAction(Card owner, Card triggerExecuter)
         {
-            Debug.Log("Trigger: " + TriggerCondition.Description(owner.Creature) + " is true");
-            Debug.Log("Executing: " + ResultingAction.Description(owner.Creature));
+            //Debug.Log("Trigger: " + TriggerCondition.Description(owner.Creature) + " is true");
+            //Debug.Log("Executing: " + ResultingAction.Description(owner.Creature));
             
             List<Card> targets = GetTargets(ResultingAction.Target, owner, triggerExecuter);
 

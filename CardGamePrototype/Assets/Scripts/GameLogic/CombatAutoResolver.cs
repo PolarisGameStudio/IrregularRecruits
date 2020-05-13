@@ -84,8 +84,10 @@ namespace GameLogic
         {
             Event.OnCombatResolveFinished.Invoke();
 
-            if (EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0)
-                Event.OnBattleFinished.Invoke();
+            if (EnemyDeck.Alive() == 0)
+                Event.OnBattleFinished.Invoke(PlayerDeck);
+            else if (PlayerDeck.Alive() == 0)
+                Event.OnBattleFinished.Invoke(EnemyDeck);
             else
                 Event.OnTurnBegin.Invoke();
         }

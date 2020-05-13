@@ -30,4 +30,5 @@ MonoBehaviour:
       Relationship: 2
       DamageState: 0
       Race: 0
-    Amount: 2
+    Amount: 3
+    Summons: {fileID: 0}

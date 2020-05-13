@@ -115,7 +115,7 @@ namespace Tests
 
             var finished = false;
 
-            Event.OnBattleFinished.AddListener(()=> finished = true);
+            Event.OnBattleFinished.AddListener(d=> finished = true);
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
@@ -136,7 +136,7 @@ namespace Tests
 
             var finished = false;
 
-            Event.OnBattleFinished.AddListener(()=> finished = true);
+            Event.OnBattleFinished.AddListener(d=> finished = true);
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
@@ -169,7 +169,7 @@ namespace Tests
 
             var finished = false;
 
-            Event.OnBattleFinished.AddListener(() => finished = true);
+            Event.OnBattleFinished.AddListener(d => finished = true);
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
@@ -205,7 +205,7 @@ namespace Tests
 
             var finished = false;
 
-            Event.OnBattleFinished.AddListener(() => finished = true);
+            Event.OnBattleFinished.AddListener(d => finished = true);
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 

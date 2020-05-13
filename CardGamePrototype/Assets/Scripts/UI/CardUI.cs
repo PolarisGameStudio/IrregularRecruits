@@ -173,14 +173,12 @@ namespace UI
         {
         }
 
-        internal IEnumerator Flip(bool faceDown)
+        internal IEnumerator Flip(bool faceDown, float flipTime = 0.2f)
         {
             //already correct face up
             if (faceDown != FaceUp()) yield break;
             
             if (AlwaysFaceUp) yield break;
-
-            var flipTime = 0.2f;
 
             gameObject.LeanScaleX(0, flipTime);
             

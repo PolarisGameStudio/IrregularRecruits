@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -21518,6 +21518,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622460339}
   m_CullTransparentMesh: 0
+--- !u!1 &635869295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635869296}
+  - component: {fileID: 635869297}
+  m_Layer: 0
+  m_Name: Simulation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &635869296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635869295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.004629612, y: 0.004629612, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &635869297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635869295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee30166f20f4de4da712c94aa815e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecksToSimulate:
+  - {fileID: 11400000, guid: ac957de51484b374f877b1f4ee357d26, type: 2}
+  - {fileID: 11400000, guid: e58503075e30e0d488f79796dd1d528f, type: 2}
+  - {fileID: 11400000, guid: f965b2a83c7badf41ae67fb2186437f1, type: 2}
+  BattlesToSimulate: 50
+  MatchUpResults: []
 --- !u!1 &643572233
 GameObject:
   m_ObjectHideFlags: 0
@@ -25393,7 +25442,7 @@ MonoBehaviour:
   DeckDamageParadigm: 0
   MaxRareEnemiesPrCombat: 0
   CombatSpeed: 1
-  AiControlledPlayer: 0
+  AiControlledPlayer: 1
 --- !u!1 &947375142
 GameObject:
   m_ObjectHideFlags: 0

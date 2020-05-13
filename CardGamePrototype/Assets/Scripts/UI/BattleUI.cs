@@ -1,4 +1,4 @@
-using GameLogic;
+﻿using GameLogic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,7 +65,7 @@ namespace UI
 
         private void SetupDecks(Deck playerDeck, Deck opponentDeck)
         {
-            MoveDuration = GameSettings.Instance.CombatSpeed /2;
+            MoveDuration = GameSettings.Instance.CombatSpeed / 2;
 
             SetupUI(playerDeck);
             SetupUI(opponentDeck);
@@ -88,9 +88,11 @@ namespace UI
                 ui.SetCard(card);
 
                 CardUIs[card.Guid] = ui;
-                
+
+                StartCoroutine(ui.Flip(true, 0f));
+
                 //Should we just move it to library nomatter what?
-                StartCoroutine(MoveCard(ui,card.Location,deck.PlayerDeck));
+                StartCoroutine(MoveCard(ui, card.Location, deck.PlayerDeck));
             }
         }
 
@@ -100,7 +102,7 @@ namespace UI
             Instance.EndBattle();
         }
 
-        private  void EndBattle()
+        private void EndBattle()
         {
             Debug.Log("Destroying all card uis");
 
@@ -111,7 +113,7 @@ namespace UI
 
             OnBattleFinished.Invoke();
 
-            BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(),EnemyDeck.AllCreatures());
+            BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
         }
 
         public static RectTransform GetZoneHolder(Deck.Zone zone, bool enm)
@@ -129,7 +131,7 @@ namespace UI
         }
 
         //Handles death/ etb / withdraw / resurrection / draw animation
-        internal static IEnumerator Move(Guid card, Deck.Zone to, Deck.Zone from,bool playerDeck)
+        internal static IEnumerator Move(Guid card, Deck.Zone to, Deck.Zone from, bool playerDeck)
         {
             yield return Instance.MoveCard(card, to, from, playerDeck);
         }
@@ -140,7 +142,7 @@ namespace UI
 
             //TODO: should the effect be bfore or after
             yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
-            
+
             yield return MoveCard(ui, to, playerDeck);
         }
 
@@ -154,7 +156,7 @@ namespace UI
 
             //do ready attack animation
         }
-        
+
         internal static IEnumerator AbilityTriggered(Ability a, Guid card, IEnumerable<Guid> ts)
         {
             CardUI ui = GetCardUI(card);
@@ -216,12 +218,12 @@ namespace UI
             yield return null;
         }
 
-        internal static IEnumerator CardStatsModified(Guid card, int val,int currentHealth,int currentAttack, bool damaged)
+        internal static IEnumerator CardStatsModified(Guid card, int val, int currentHealth, int currentAttack, bool damaged)
         {
             CardUI ui = GetCardUI(card);
 
             ui.StatModifier(val);
-            
+
             ui.UpdateHealth(currentHealth, damaged);
             ui.UpdateAttack(currentAttack);
             yield return null;
@@ -239,7 +241,7 @@ namespace UI
             //Instance.PlayerDeckDescription.text = "Deck size: " + BattleManager.Instance.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
             //Instance.EnemyDeckDescription.text = "Deck size: " + BattleManager.Instance.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
         }
-        
+
         //otherwise make an onclick event in CardUI
 
         private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player)
@@ -248,7 +250,7 @@ namespace UI
 
             var rect = card.GetComponent<RectTransform>();
             var startPos = rect.position;
-            var zoneRect =GetZoneHolder(zone, !player);
+            var zoneRect = GetZoneHolder(zone, !player);
 
             if (!zoneRect) yield break;
 
@@ -294,7 +296,7 @@ namespace UI
             rect.localScale = Vector3.one;
             rect.SetAsLastSibling();
 
-            
+
             yield return card.Flip(zone == Deck.Zone.Library || (!player && zone == Deck.Zone.Hand));
 
             card.Interactable = true;

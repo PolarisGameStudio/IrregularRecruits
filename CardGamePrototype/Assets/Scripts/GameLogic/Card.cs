@@ -238,7 +238,7 @@ namespace GameLogic
         //should this method be called from OnRessurrect or the other way around?
         internal void Resurrect(int amount)
         {
-            if (!Alive())
+            if (Alive())
                 Debug.LogWarning("Resurrectting alive character; " + Name);
 
             ChangeLocation(Deck.Zone.Battlefield);

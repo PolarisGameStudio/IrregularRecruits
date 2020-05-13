@@ -32,7 +32,7 @@ namespace GameLogic
         public class CombatEvent : UnityEvent<Deck, Deck> { }
         //Inputs player deck and enemy deck, in that order
         public static CombatEvent OnCombatSetup = new CombatEvent();
-        public static UnityEvent OnBattleFinished = new UnityEvent();
+        public static DeckEvent OnBattleFinished = new DeckEvent();
 
         //TODO: replace with deck/card action and parse the relevant Controller/deck/card
         public class DeckEvent : UnityEvent<Deck> { }

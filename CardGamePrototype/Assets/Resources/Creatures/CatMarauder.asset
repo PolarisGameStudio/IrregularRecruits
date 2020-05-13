@@ -18,7 +18,7 @@ MonoBehaviour:
   Image: {fileID: 21300000, guid: 33bd1e46d40dfb247aa3867251a0a4ec, type: 3}
   IconImage: {fileID: 21300000, guid: 32eca9faa76dd3940aa03c64efce0287, type: 3}
   Attack: 3
-  Health: 12
+  Health: 15
   Traits: []
   SpecialAbility: {fileID: 11400000, guid: a816e7b064771094c84ba4d37e3786ab, type: 2}
   Race: {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}

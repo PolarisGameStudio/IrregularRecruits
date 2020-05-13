@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace GameLogic
 {
@@ -18,6 +21,21 @@ namespace GameLogic
                     break;
 
                 ControlledDeck.CreaturesInZone(Deck.Zone.Hand)[0].PlayCard();
+            }
+
+            var opponent = BattleManager.Instance.GetEnemyDeck(ControlledDeck);
+
+            var myBattlefield = ControlledDeck.CreaturesInZone(Deck.Zone.Battlefield);
+            var opposingBattlefield = opponent.CreaturesInZone(Deck.Zone.Battlefield);
+
+            if (opposingBattlefield.Count < myBattlefield.Count && myBattlefield.Count > 2 && opposingBattlefield.Any())
+            {
+                //TODO: should account for ranged.  Maybe by a potential damage method?
+                var scaredCat = myBattlefield.FirstOrDefault(c => c.Damaged() && opposingBattlefield.Any(opp => opp.Attack * 2 > c.CurrentHealth));
+                if (scaredCat != null)
+                {
+                    scaredCat.Withdraw();
+                }
             }
 
             OnFinish.Invoke();

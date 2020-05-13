@@ -37,13 +37,19 @@ namespace GameLogic
 
         }
 
-        public void PackUp()
+        public void PackUp(Deck d)
         {
             PlayerDeck?.PackUp();
             EnemyDeck?.PackUp();
 
             PlayerDeck = null;
             EnemyDeck = null;
+        }
+
+        public Deck GetEnemyDeck(Deck myDeck)
+        {
+            if (myDeck == PlayerDeck) return EnemyDeck;
+            else return PlayerDeck;
         }
 
         private void SetupCombat(Deck playerDeck, Deck enemyDeck)
