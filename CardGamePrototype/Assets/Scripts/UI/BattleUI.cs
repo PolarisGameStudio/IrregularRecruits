@@ -188,8 +188,6 @@ namespace UI
             if (AttackTarget == null) Debug.LogError("no attacktarget");
             if (Attacker == null) Debug.LogError("no attacker");
 
-            Debug.Log($"{Attacker.Creature.name} attacking {AttackTarget.Creature.name}");
-
             yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
 
             AttackTarget = Attacker = null;
@@ -202,13 +200,11 @@ namespace UI
 
             if (val < 0)
             {
-                Debug.Log($"{ui} damaged for {val}");
                 ui.CardAnimation.DamageAnimation.Show(val);
                 AnimationSystem.OnDamaged.Invoke();
             }
             else if (val > 0)
             {
-                Debug.Log($"{ui} healed for {val}");
                 AnimationSystem.OnHeal.Invoke();
 
             }

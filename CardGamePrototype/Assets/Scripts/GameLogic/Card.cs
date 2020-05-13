@@ -79,8 +79,6 @@ namespace GameLogic
             }
         }
 
-        public bool FaceUp = true;
-
         public Deck.Zone Location;
 
         public void ChangeLocation(Deck.Zone to)
@@ -109,10 +107,7 @@ namespace GameLogic
 
             
             InDeck.CreaturesInZone(from).Remove(this);
-
-            Flip(to != Deck.Zone.Library & !(!InDeck.PlayerDeck && to == Deck.Zone.Hand));
-
-
+            
             InDeck.CreaturesInZone(to).Add(this);
 
             Location = to;
@@ -207,11 +202,6 @@ namespace GameLogic
 
         }
 
-        private void Flip(bool upsideUp)
-        {
-            FaceUp = upsideUp;
-
-        }
         public void PlayCard()
         {
             ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
@@ -244,8 +234,11 @@ namespace GameLogic
             ChangeLocation(Deck.Zone.Battlefield);
             Event.OnRessurrect.Invoke(this);
 
+            var healthChange = amount - CurrentHealth;
+
             CurrentHealth = amount;
 
+            Event.OnHealthChange.Invoke(this, healthChange);
             //TODO: change race to UNDEAD?
         }
 
@@ -317,7 +310,7 @@ namespace GameLogic
                 return;
             }
 
-            if (!InDeck.PlayerDeck | !FaceUp)
+            if (!InDeck.PlayerDeck )
                 //|| (BattleRepresentation &!  BattleRepresentation.Interactable)) 
                 return;
 

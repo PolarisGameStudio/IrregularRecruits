@@ -41,7 +41,7 @@ namespace UI
         public void SetCard(Card c)
         {
             UpdateCreature(c.Creature);
-            UpdateStats(c.Attack,c.CurrentHealth,c.Damaged());
+            UpdateStats(c.Attack, c.CurrentHealth, c.Damaged());
             OnClick.AddListener(c.Click);
         }
 
@@ -114,7 +114,7 @@ namespace UI
                 CardAnimation.StatMinusAnimation.Show(amount);
         }
 
-        private void UpdateStats(int attack,int health,bool damaged = false)
+        private void UpdateStats(int attack, int health, bool damaged = false)
         {
             if (!Creature) return;
 
@@ -141,7 +141,7 @@ namespace UI
                 Color.white;
         }
 
-        public bool FaceUp() => FrontHolder.activeInHierarchy;
+        public bool FaceUp() => FrontHolder && FrontHolder.activeInHierarchy;
 
 
 
@@ -152,7 +152,7 @@ namespace UI
 #if !UNITY_EDITOR
         if (CardHighlight.IsActive()) return;
 #endif
-            if (Interactable && UIFlowController.Instance.EmptyQueue())
+            if (FaceUp() && Interactable && UIFlowController.Instance.EmptyQueue())
                 OnClick.Invoke();
         }
 
@@ -177,11 +177,11 @@ namespace UI
         {
             //already correct face up
             if (faceDown != FaceUp()) yield break;
-            
+
             if (AlwaysFaceUp) yield break;
 
             gameObject.LeanScaleX(0, flipTime);
-            
+
             yield return new WaitForSeconds(flipTime);
 
             CardBackHolder.SetActive(faceDown);

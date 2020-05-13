@@ -273,7 +273,7 @@ namespace Tests
             TestCard.Damage(damage);
 
             Assert.NotNull(card);
-            Assert.IsTrue(check == damage);
+            Assert.AreEqual(check,-damage);
             Assert.AreEqual(card, TestCard);
         }
         [Test]
