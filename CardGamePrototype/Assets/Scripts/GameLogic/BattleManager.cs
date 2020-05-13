@@ -10,10 +10,10 @@ namespace GameLogic
         public Deck EnemyDeck;
         public int Turn = 0;
 
-        private static BattleManager instance;
-
         private CombatAutoResolver CombatAutoResolver;
 
+        private static BattleManager instance;
+        
         public static BattleManager Instance { get {
                 if (instance == null)
                     instance = new BattleManager();

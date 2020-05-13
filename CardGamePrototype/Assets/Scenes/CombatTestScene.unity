@@ -5857,7 +5857,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: SetRareEnemiesPrBattle
         m_Mode: 0
         m_Arguments:
@@ -12891,7 +12891,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: AiControlsPlayer
         m_Mode: 0
         m_Arguments:
@@ -18819,7 +18819,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: SetPlayerActionsPrTurn
         m_Mode: 0
         m_Arguments:
@@ -21716,7 +21716,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: SetEnemyPlaysPrTurn
         m_Mode: 0
         m_Arguments:
@@ -25379,7 +25379,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: SetEnemyStartCreatures
         m_Mode: 0
         m_Arguments:
@@ -25390,62 +25390,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &947290326
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 947290327}
-  - component: {fileID: 947290328}
-  m_Layer: 0
-  m_Name: GameSettings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &947290327
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947290326}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1638672459}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &947290328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947290326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9df2439aac0ff24cb3bad7bd563a2c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyBattlefieldSize: 0
-  EnemyDeckSize: 1
-  EnemyPlaysPrTurn: 2
-  PlayerDeckSize: 20
-  PlayerStartingHandSize: 3
-  PlayerPlaysPrTurn: 2
-  DrawPrTurn: 2
-  MaxCreaturesOnBattlefield: 10
-  AttackOrderParadigm: 0
-  DeckDamageParadigm: 0
-  MaxRareEnemiesPrCombat: 0
-  CombatSpeed: 1
-  AiControlledPlayer: 0
 --- !u!1 &947375142
 GameObject:
   m_ObjectHideFlags: 0
@@ -26286,7 +26230,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1638672459}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1044065743
 MonoBehaviour:
@@ -27878,7 +27822,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1638672459}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1221026023
 MonoBehaviour:
@@ -28878,7 +28822,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: SetStartingHandSize
         m_Mode: 0
         m_Arguments:
@@ -31016,7 +30960,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: SetDrawsPrTurn
         m_Mode: 0
         m_Arguments:
@@ -33081,7 +33025,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: SetEnemyDeckSize
         m_Mode: 0
         m_Arguments:
@@ -33343,7 +33287,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 947290328}
+      - m_Target: {fileID: 0}
         m_MethodName: SetCombatSpeed
         m_Mode: 0
         m_Arguments:
@@ -34117,7 +34061,6 @@ Transform:
   m_Children:
   - {fileID: 9553757}
   - {fileID: 453068599}
-  - {fileID: 947290327}
   - {fileID: 1221026022}
   - {fileID: 1044065742}
   m_Father: {fileID: 0}

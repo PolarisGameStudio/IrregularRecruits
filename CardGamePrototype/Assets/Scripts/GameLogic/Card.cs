@@ -1,15 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using UnityEngine.Events;
 
 namespace GameLogic
 {
     public class Card
     {
-        [SerializeProperty("Creature")]
-        [SerializeField]
         private Creature creature;
         public Creature Creature
         {
@@ -25,7 +21,6 @@ namespace GameLogic
         public Guid Guid = System.Guid.NewGuid();
 
 
-        [Header("Battle specific")]
         public Deck InDeck;
         public int MaxHealth;
         private int currentHealth;
@@ -92,7 +87,6 @@ namespace GameLogic
 
             if (InDeck == null)
             {
-                Debug.LogError("Not able to move card not in a deck");
                 return;
             }
 
@@ -101,7 +95,6 @@ namespace GameLogic
 
             if (!InDeck.CreaturesInZone(from).Contains(this))
             {
-                Debug.LogWarning($"{Creature} not in correct zone: {from}");
                 return;
             }
 
@@ -228,9 +221,6 @@ namespace GameLogic
         //should this method be called from OnRessurrect or the other way around?
         internal void Resurrect(int amount)
         {
-            if (Alive())
-                Debug.LogWarning("Resurrectting alive character; " + Name);
-
             ChangeLocation(Deck.Zone.Battlefield);
             Event.OnRessurrect.Invoke(this);
 
@@ -248,7 +238,6 @@ namespace GameLogic
 
             if (moveToDeck == InDeck)
             {
-                Debug.Log($"cannot charm to own dekc; {this}");
             }
 
             InDeck.Remove(this);
@@ -300,7 +289,6 @@ namespace GameLogic
         {
             if (InDeck == null)
             {
-                Debug.Log("Clicked card not in deck");
                 return;
             }
 

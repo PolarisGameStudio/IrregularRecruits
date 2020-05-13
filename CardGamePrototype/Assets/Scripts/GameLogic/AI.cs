@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace GameLogic
 {
@@ -18,7 +17,7 @@ namespace GameLogic
 
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-            for (int i = 0; i < GameSettings.Instance.EnemyPlaysPrTurn; i++)
+            for (int i = 0; i < GameSettings.Instance.PlaysPrTurn; i++)
             {
                 if (ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0)
                     break;

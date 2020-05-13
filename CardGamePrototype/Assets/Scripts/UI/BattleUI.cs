@@ -282,7 +282,6 @@ namespace UI
 
                 float t = (Time.time - startTime) / MoveDuration;
 
-                //TODO: use animation curve
                 rect.position = Vector3.LerpUnclamped(startPos, endPosition, t);
 
                 rect.position += MoveAnimationCurve.Evaluate(t) * adjustDirection;

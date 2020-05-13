@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 
 namespace GameLogic
@@ -39,7 +38,7 @@ namespace GameLogic
             switch (GameSettings.Instance.AttackOrderParadigm)
             {
                 case GameSettings.AttackParadigm.Random:
-                    attackOrder = attackOrder.OrderBy(x => Random.value).ToList();
+                    attackOrder = attackOrder.OrderBy(x => UnityEngine.Random.value).ToList();
                     break;
                 case GameSettings.AttackParadigm.HighestHealthFirst:
                     attackOrder = attackOrder.OrderByDescending(x => x.Creature.Health).ToList();

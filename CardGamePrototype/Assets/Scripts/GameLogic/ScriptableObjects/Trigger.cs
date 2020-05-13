@@ -63,7 +63,7 @@ namespace GameLogic
             }
         }
 
-        internal void FixTriggerInconsistencies()
+        public void FixTriggerInconsistencies()
         {
             //TODO: fix inconsistencies
 

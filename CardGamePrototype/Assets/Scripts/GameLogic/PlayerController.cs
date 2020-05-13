@@ -41,7 +41,7 @@ namespace GameLogic
         {
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
-            PlayerActionsLeft = GameSettings.Instance.PlayerPlaysPrTurn;
+            PlayerActionsLeft = GameSettings.Instance.PlaysPrTurn;
 
         }
 

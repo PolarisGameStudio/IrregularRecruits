@@ -52,7 +52,6 @@ namespace UI
         }
 
 
-        //TODO: replace with coroutines
         private void AddCardEvent(IEnumerator uIEvent)
         {
             ActionQueue.Enqueue(uIEvent);

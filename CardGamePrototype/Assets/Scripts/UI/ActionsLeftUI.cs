@@ -24,7 +24,7 @@ namespace UI
             Initialized = true;
 
             //TODO: does not take into account if amount of actions are changed. Move to on next turn and check there
-            for (int i = 0; i < GameSettings.Instance.PlayerPlaysPrTurn; i++)
+            for (int i = 0; i < GameSettings.Instance.PlaysPrTurn; i++)
             {
                 ActionIcons.Add(Instantiate(ActionIconExample, ActionIconExample.transform.parent));
             }

@@ -1,30 +1,35 @@
 ﻿using System;
-using UnityEngine;
 using Event = GameLogic.Event;
 
-public class GameSettings : Singleton<GameSettings>
+public class GameSettings
 {
-    [Serializable]
-    public class SettingValue
+    private static GameSettings instance;
+
+    public static GameSettings Instance
     {
-        public int Minimum;
-        public int Maximum;
+        get
+        {
+            if (instance == null)
+                instance = new GameSettings();
+            return instance;
+        }
+        private set => instance = value;
     }
 
-    public int EnemyBattlefieldSize;
-    public int EnemyDeckSize;
-    public int EnemyPlaysPrTurn;
+
+    public int EnemyBattlefieldSize = 2;
+    public int EnemyDeckSize = 1;
     //Player deck size
-    public int PlayerDeckSize;
+    public int PlayerDeckSize = 5;
     //Player starting hand size
-    public int PlayerStartingHandSize;
-    public int PlayerPlaysPrTurn;
+    public int StartingHandSize = 3;
+    public int PlaysPrTurn = 2;
     //player draw amount
-    public int DrawPrTurn;
+    public int DrawPrTurn = 2;
     //Battlefield size
     public int MaxCreaturesOnBattlefield;
     //AttackOrderParadigm
-    public AttackParadigm AttackOrderParadigm;
+    public AttackParadigm AttackOrderParadigm = AttackParadigm.Random;
     public enum AttackParadigm
     {
         Random,
@@ -34,16 +39,14 @@ public class GameSettings : Singleton<GameSettings>
         LowestAttackFirst
     }
     //DamageToDeckSystem
-    public DeckDamage DeckDamageParadigm;
+    public DeckDamage DeckDamageParadigm = DeckDamage.DamageToTopCard;
 
-    [Range(0, 10)]
     //make all rare creatures have abilities and all normal 
     public int MaxRareEnemiesPrCombat = 1;
 
-    [Range(0.5f, 1.5f)]
     public float CombatSpeed = 1f;
 
-    public bool AiControlledPlayer;
+    public bool AiControlledPlayer = false;
 
     public enum DeckDamage
     {
@@ -52,6 +55,8 @@ public class GameSettings : Singleton<GameSettings>
         AnyDamageKillsTopCard
     }
 
+
+    //TODO: move the settings to a gamesettings Behaviour
     public void AiControlsPlayer(bool ai)
     {
         AiControlledPlayer = ai;
@@ -63,7 +68,7 @@ public class GameSettings : Singleton<GameSettings>
 
     public void SetStartingHandSize(float val)
     {
-        PlayerStartingHandSize = (int)val;
+        StartingHandSize = (int)val;
     }
     public void SetDrawsPrTurn(float val)
     {
@@ -71,7 +76,7 @@ public class GameSettings : Singleton<GameSettings>
     }
     public void SetPlayerActionsPrTurn(float val)
     {
-        PlayerPlaysPrTurn = (int)val;
+        PlaysPrTurn = (int)val;
     }
     public void SetEnemyStartCreatures(float val)
     {
@@ -81,17 +86,11 @@ public class GameSettings : Singleton<GameSettings>
     {
         EnemyDeckSize = (int)val;
     }
-    public void SetEnemyPlaysPrTurn(float val)
-    {
-        EnemyPlaysPrTurn = (int)val;
-    }
     public void SetRareEnemiesPrBattle(float val)
     {
         MaxRareEnemiesPrCombat = (int)val;
     }
 
-    //using same size for enemies and player right now
-    internal static int StartingHandSize(bool enemy) => enemy ? Instance.PlayerStartingHandSize : Instance.PlayerStartingHandSize;
 
     public static int DeckSize(bool player) => player ? Instance.PlayerDeckSize : Instance.EnemyDeckSize;
 

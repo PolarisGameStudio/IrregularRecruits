@@ -50,7 +50,7 @@ namespace GameLogic
         {
             ShuffleLibrary();
 
-            var amountToDraw = GameSettings.StartingHandSize(enemy);
+            var amountToDraw = GameSettings.Instance.StartingHandSize;
 
             //Move AVANTGARDE cards to the front and shuffle the rest
             foreach (var c in CreaturesInZone(Zone.Library).Where(c => c.Avantgarde()))
