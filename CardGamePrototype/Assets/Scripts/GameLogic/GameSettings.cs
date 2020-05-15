@@ -17,7 +17,6 @@ public class GameSettings
     }
 
 
-    public int EnemyBattlefieldSize = 2;
     public int EnemyDeckSize = 1;
     //Player deck size
     public int PlayerDeckSize = 5;

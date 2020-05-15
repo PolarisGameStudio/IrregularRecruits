@@ -35,10 +35,6 @@ namespace UI
         {
             GS.PlaysPrTurn = (int)val;
         }
-        public void SetEnemyStartCreatures(float val)
-        {
-            GS.EnemyBattlefieldSize = (int)val;
-        }
         public void SetEnemyDeckSize(float val)
         {
             GS.EnemyDeckSize = (int)val;

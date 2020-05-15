@@ -59,11 +59,6 @@ namespace GameLogic
                 amountToDraw--;
             }
 
-            if (enemy)
-            {
-                for (int i = 0; i < GameSettings.Instance.EnemyBattlefieldSize; i++)
-                    MoveTopCardToBattleField();
-            }
 
             Draw(amountToDraw);
         }
@@ -108,13 +103,6 @@ namespace GameLogic
         public List<Card> AllCreatures()
         {
             return Creatures.SelectMany(x => x.Value).ToList();
-        }
-
-        public void MoveTopCardToBattleField()
-        {
-            if (Creatures[Zone.Library].Count() == 0) return;
-
-            Creatures[Zone.Library][0].ChangeLocation(Zone.Library, Zone.Battlefield);
         }
 
         //returns count of all creatures not in Graveyard
