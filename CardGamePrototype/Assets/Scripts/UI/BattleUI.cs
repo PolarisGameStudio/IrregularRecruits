@@ -83,17 +83,22 @@ namespace UI
         {
             foreach (var card in deck.AllCreatures())
             {
-                var ui = Instantiate<CardUI>(BattleUI.Instance.CardPrefab);
-
-                ui.SetCard(card);
-
-                CardUIs[card.Guid] = ui;
-
-                StartCoroutine(ui.Flip(true, 0f));
-
-                //Should we just move it to library nomatter what?
-                StartCoroutine(MoveCard(ui, card.Location, playerDeck));
+                CreateCardUI(card,playerDeck);
             }
+        }
+
+        private void CreateCardUI(Card card, bool playerDeck)
+        {
+            var ui = Instantiate(Instance.CardPrefab);
+
+            ui.SetCard(card);
+
+            CardUIs[card.Guid] = ui;
+
+            StartCoroutine(ui.Flip(card.Location == Deck.Zone.Library, 0f));
+
+            //Should we just move it to library nomatter what?
+            StartCoroutine(MoveCard(ui, card.Location, playerDeck));
         }
 
         public static IEnumerator CleanUpUI()
@@ -101,6 +106,24 @@ namespace UI
             yield return null;
             Instance.EndBattle();
         }
+
+        public static IEnumerator Summon(Card summon,bool playerdekc)
+        {
+            Instance.CreateCardUI(summon, playerdekc);
+            yield return null;
+        }
+        public static IEnumerator UnSummon(Guid summon)
+        {
+            CardUI ui = GetCardUI(summon);
+
+            //TODO: should the effect be bfore or after
+            yield return AnimationSystem.UnsummonFx(ui);
+
+
+            Destroy(CardUIs[summon].gameObject);
+        }
+
+
 
         private void EndBattle()
         {

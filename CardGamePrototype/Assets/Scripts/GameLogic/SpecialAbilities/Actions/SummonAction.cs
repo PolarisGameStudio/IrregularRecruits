@@ -16,7 +16,23 @@ namespace GameLogic
             var summon = ability.ResultingAction.Summons;
 
             Event.OnAbilityTrigger.Invoke(ability, owner, targets);
-            targets.ForEach(c => c.Withdraw());
+
+            if (owner == null || owner.InDeck == null || !ability.ResultingAction.Summons)
+                return;
+            Summon(ability.ResultingAction.Summons, owner);
+        }
+
+        private static void Summon(Creature summon, Card owner)
+        {
+            var card = new Card(summon);
+
+            owner.InDeck.AddCard(card);
+
+            Event.OnSummon.Invoke(card);
+
+            card.ChangeLocation(Deck.Zone.Battlefield);
+
+            Event.OnEtb.Invoke(card);
         }
 
         public override float GetValue(float targetValue, int amount)

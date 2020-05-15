@@ -143,7 +143,11 @@ namespace GameLogic
             if (!IsSummon())
                 return;
 
+            //TODO: remove all listeners
 
+            InDeck.Remove(this);
+
+            Event.OnUnSummon.Invoke(this);
         }
 
         public void SetCreature(Creature newCreature)

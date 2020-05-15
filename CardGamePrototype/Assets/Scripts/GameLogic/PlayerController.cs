@@ -30,7 +30,7 @@ namespace GameLogic
 
             PlayerActionsLeft--;
 
-            if (PlayerActionsLeft <= 0)
+            if (PlayerActionsLeft <= 0 || ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0)
             {
                 TurnFinished.Invoke(); 
             }

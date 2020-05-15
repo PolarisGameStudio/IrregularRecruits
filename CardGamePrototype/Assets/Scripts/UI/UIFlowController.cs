@@ -25,6 +25,10 @@ namespace UI
             // if an action moves a card a zone from different locations, the cards current location is used
             Event.OnChangeLocation.AddListener(AddMoveEvent);
 
+            Event.OnSummon.AddListener(card => AddCardEvent(BattleUI.Summon(card, card.InDeck == BattleUI.Instance.PlayerDeck)));
+
+            Event.OnUnSummon.AddListener(card => AddCardEvent(BattleUI.UnSummon(card.Guid)));
+
             //OnAttack-> (Card) Attack animation
             Event.OnAttack.AddListener(card => AddCardEvent(BattleUI.SetAttacker(card.Guid)));
             //On Being Attacked->

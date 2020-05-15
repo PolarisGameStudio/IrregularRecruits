@@ -14,6 +14,8 @@ namespace Tests
         public void BattleManage()
         {
             var neededForBM = BattleManager.Instance;
+
+            GameSettings.Instance.AiControlledPlayer = true;
         }
 
         private Card GenerateTestCreature(string traitName,int attack = 2,int health = 10)
@@ -210,10 +212,16 @@ namespace Tests
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
             Assert.IsTrue(finished);
+
+            Assert.IsFalse(attacked.Contains(enm));
+            Assert.IsTrue(attackers.Contains(enm));
+
             Assert.IsTrue(attacked.Contains(ethereal));
             Assert.IsFalse(attackers.Contains(ethereal));
             Assert.IsTrue(attacked.Contains(ethereal2));
             Assert.IsFalse(attackers.Contains(ethereal2));
+            Assert.IsTrue(attacked.Contains(etherereal1));
+            Assert.IsFalse(attackers.Contains(etherereal1));
         }
     }
 }

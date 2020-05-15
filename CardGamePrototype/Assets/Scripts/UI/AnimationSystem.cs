@@ -91,6 +91,11 @@ namespace UI
 
         }
 
+        internal static IEnumerator UnsummonFx(CardUI ui)
+        {
+            yield return ui.CardAnimation.Dissolve();
+        }
+
         private IEnumerator PlayCardFX(CardUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
         {
             if (!card) yield break;
@@ -133,8 +138,6 @@ namespace UI
 
 
             yield return new WaitForSeconds(delay);
-
-
         }
 
         internal static IEnumerator StartAttack(CardUI ui)

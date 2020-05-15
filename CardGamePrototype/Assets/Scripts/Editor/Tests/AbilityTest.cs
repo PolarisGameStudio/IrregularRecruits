@@ -6,8 +6,6 @@ namespace Tests
     public class AbilityTest
     {
         private Creature TestCreature;
-        private Deck TestDeck;
-        private DeckObject TestDeckObject;
         private Card TestCard;
         private Card OtherCard;
 
@@ -27,7 +25,7 @@ namespace Tests
             BattleManager.Instance.PackUp(null);
         }
 
-        private Card GenerateTestCreature(Ability ability, Race race = null)
+        private Card GenerateTestCreature(Ability ability, Race race = null,bool playerdeck = true)
         {
             Trait trait = new Trait()
             {
@@ -48,24 +46,43 @@ namespace Tests
 
             };
 
-            if (BattleManager.Instance.PlayerDeck == null)
+            Deck testDeck = null;
+
+            if (playerdeck)
             {
-                TestDeckObject = new DeckObject()
+                if (BattleManager.Instance.PlayerDeck == null)
                 {
-                    Creatures = new List<Creature>(),
-                };
+                    var TestDeckObject = new DeckObject()
+                    {
+                        Creatures = new List<Creature>(),
+                    };
 
-                BattleManager.Instance.PlayerDeck = new Deck(TestDeckObject, true);
+                    BattleManager.Instance.PlayerDeck = new Deck(TestDeckObject, true);
+                }
+
+                testDeck = BattleManager.Instance.PlayerDeck;
             }
+            else
+            {
+                if (BattleManager.Instance.EnemyDeck == null)
+                {
+                    var TestDeckObject = new DeckObject()
+                    {
+                        Creatures = new List<Creature>(),
+                    };
 
-            TestDeck = BattleManager.Instance.PlayerDeck;
+                    BattleManager.Instance.EnemyDeck = new Deck(TestDeckObject, true);
+                }
+
+                testDeck = BattleManager.Instance.EnemyDeck;
+            }
 
             if (ability)
                 TestCreature.SpecialAbility = ability;
 
             var testCard = new Card(TestCreature);
 
-            TestDeck.AddCard(testCard);
+            testDeck.AddCard(testCard);
 
             return testCard;
         }
@@ -835,82 +852,28 @@ namespace Tests
         {
             var testAbility = new Ability()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.Charm, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                ResultingAction = new Ability.Action(Ability.ActionType.Charm, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.It)),
                 TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
-            OtherCard = GenerateTestCreature(null);
+            OtherCard = GenerateTestCreature(null,null,false);
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
             OtherCard.ChangeLocation(Deck.Zone.Battlefield);
 
             bool triggered = false;
-            Card withdrawn = null;
 
-            Event.OnWithdraw.AddListener(c => withdrawn = c);
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
+
+            Assert.AreNotEqual(TestCard.InDeck, OtherCard.InDeck);
 
             OtherCard.Damage(1);
 
             Assert.IsTrue(triggered);
-            Assert.IsTrue(false);
-            Assert.IsNotNull(withdrawn);
+            Assert.AreEqual(TestCard.InDeck, OtherCard.InDeck);
         }
-        [Test]
-        public void ActionCloneExecutes()
-        {
-            var testAbility = new Ability()
-            {
-                ResultingAction = new Ability.Action(Ability.ActionType.Clone, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
-            };
 
-            TestCard = GenerateTestCreature(testAbility);
-            OtherCard = GenerateTestCreature(null);
-
-            TestCard.ChangeLocation(Deck.Zone.Battlefield);
-            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
-
-            bool triggered = false;
-            Card withdrawn = null;
-
-            Event.OnWithdraw.AddListener(c => withdrawn = c);
-            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
-
-            OtherCard.Damage(1);
-
-            Assert.IsTrue(triggered);
-            Assert.IsTrue(false);
-            Assert.IsNotNull(withdrawn);
-        }
-        [Test]
-        public void ActionCopyExecutes()
-        {
-            var testAbility = new Ability()
-            {
-                ResultingAction = new Ability.Action(Ability.ActionType.Copy, Ability.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.IsDAMAGED),
-            };
-
-            TestCard = GenerateTestCreature(testAbility);
-            OtherCard = GenerateTestCreature(null);
-
-            TestCard.ChangeLocation(Deck.Zone.Battlefield);
-            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
-
-            bool triggered = false;
-            Card withdrawn = null;
-
-            Event.OnWithdraw.AddListener(c => withdrawn = c);
-            Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
-
-            OtherCard.Damage(1);
-
-            Assert.IsTrue(triggered);
-            Assert.IsTrue(false);
-            Assert.IsNotNull(withdrawn);
-        }
         [Test]
         public void ActionDealDamageExecutes()
         {
