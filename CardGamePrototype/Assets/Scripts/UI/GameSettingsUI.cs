@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace UI
@@ -7,10 +8,33 @@ namespace UI
     {
         private GameSettings GS;
 
+        public Slider CombatSpeedSlider;
+        public Slider StartingHandSlider;
+        public Slider DrawSlider;
+        public Slider ActionsPrTurnSlider;
+        public Slider EnemyDeckSizeSlider;
+        public Slider EnemyAdditionsSlider;
+        public Slider RareEnemySlider;
+
         private void Start()
         {
             GS = GameSettings.Instance;
+
+            CombatSpeedSlider.value = GS.CombatSpeed; 
+            CombatSpeedSlider.onValueChanged.AddListener(i => GS.CombatSpeed = i);
+            StartingHandSlider.value = GS.StartingHandSize;
+            StartingHandSlider.onValueChanged.AddListener(i => GS.StartingHandSize = (int)i);
+            DrawSlider.value = GS.DrawPrTurn;
+            DrawSlider.onValueChanged.AddListener(i => GS.DrawPrTurn = (int)i);
+            ActionsPrTurnSlider.value = GS.PlaysPrTurn;
+            ActionsPrTurnSlider.onValueChanged.AddListener(i => GS.PlaysPrTurn = (int)i);
+            EnemyAdditionsSlider.value = CombatPrototype.Instance.CombatDifficultyIncrease;
+            EnemyAdditionsSlider.onValueChanged.AddListener(i=>  CombatPrototype.Instance.CombatDifficultyIncrease = (int)i);
+            EnemyDeckSizeSlider.value = GS.EnemyDeckSize;
+            EnemyDeckSizeSlider.onValueChanged.AddListener(i => GS.EnemyDeckSize = (int)i);
+
         }
+
 
 
         //TODO: move the settings to a gamesettings Behaviour
@@ -18,31 +42,7 @@ namespace UI
         {
             GS.AiControlledPlayer = ai;
         }
-        public void SetCombatSpeed(float f)
-        {
-            GS.CombatSpeed = f;
-        }
 
-        public void SetStartingHandSize(float val)
-        {
-            GS.StartingHandSize = (int)val;
-        }
-        public void SetDrawsPrTurn(float val)
-        {
-            GS.DrawPrTurn = (int)val;
-        }
-        public void SetPlayerActionsPrTurn(float val)
-        {
-            GS.PlaysPrTurn = (int)val;
-        }
-        public void SetEnemyDeckSize(float val)
-        {
-            GS.EnemyDeckSize = (int)val;
-        }
-        public void SetRareEnemiesPrBattle(float val)
-        {
-            GS.MaxRareEnemiesPrCombat = (int)val;
-        }
 
     }
 }
