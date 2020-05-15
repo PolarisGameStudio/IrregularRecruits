@@ -56,41 +56,6 @@ public class GameSettings
     }
 
 
-    //TODO: move the settings to a gamesettings Behaviour
-    public void AiControlsPlayer(bool ai)
-    {
-        AiControlledPlayer = ai;
-    }
-    public void SetCombatSpeed(float f)
-    {
-        CombatSpeed = f;
-    }
-
-    public void SetStartingHandSize(float val)
-    {
-        StartingHandSize = (int)val;
-    }
-    public void SetDrawsPrTurn(float val)
-    {
-        DrawPrTurn = (int)val;
-    }
-    public void SetPlayerActionsPrTurn(float val)
-    {
-        PlaysPrTurn = (int)val;
-    }
-    public void SetEnemyStartCreatures(float val)
-    {
-        EnemyBattlefieldSize = (int)val;
-    }
-    public void SetEnemyDeckSize(float val)
-    {
-        EnemyDeckSize = (int)val;
-    }
-    public void SetRareEnemiesPrBattle(float val)
-    {
-        MaxRareEnemiesPrCombat = (int)val;
-    }
-
 
     public static int DeckSize(bool player) => player ? Instance.PlayerDeckSize : Instance.EnemyDeckSize;
 

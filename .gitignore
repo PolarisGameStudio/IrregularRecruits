@@ -13,3 +13,5 @@ CardGamePrototype/Build/
 *.cache
 
 CardGamePrototype/Assets/Sounds/Music/
+
+WebBuild/

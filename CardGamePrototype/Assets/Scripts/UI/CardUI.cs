@@ -149,7 +149,7 @@ namespace UI
 #if true
         public void OnPointerClick(PointerEventData eventData)
         {
-#if !UNITY_EDITOR
+#if UNITY_ANDROID
         if (CardHighlight.IsActive()) return;
 #endif
             if (FaceUp() && Interactable && UIFlowController.Instance.EmptyQueue())
