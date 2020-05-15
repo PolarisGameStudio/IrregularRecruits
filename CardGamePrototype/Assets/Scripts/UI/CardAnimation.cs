@@ -67,6 +67,8 @@ namespace UI
                     t.alpha = 1 - DissolveAmount;
                 yield return null;
             }
+
+            AnimationSystem.OnResurrect.Invoke();
         }
 
         public void HighlightAbility()

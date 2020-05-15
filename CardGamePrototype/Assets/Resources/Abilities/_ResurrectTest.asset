@@ -26,7 +26,7 @@ MonoBehaviour:
     TargetCount: 1
     Target:
       Character: 3
-      Location: 2
+      Location: 1
       Relationship: 0
       DamageState: 0
       Race: 0
