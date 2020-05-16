@@ -290,7 +290,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref triggeredAblity, a));
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
             Assert.IsTrue(triggeredAblity == testAbility);
         }
@@ -314,7 +314,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref targettedCards, ts));
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
 
 
@@ -341,7 +341,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref targettedCards, ts));
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 1);
@@ -369,7 +369,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref targettedCards, ts));
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsNotNull(targettedCards);
             Assert.IsTrue(targettedCards.Count == 2);
@@ -396,7 +396,7 @@ namespace Tests
             Event.OnAbilityTrigger.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref targettedCards, ts));
 
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
 
 
@@ -423,7 +423,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => targettedCards = ts);
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
 
 
@@ -459,7 +459,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => targettedCards = ts);
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
 
 
@@ -502,7 +502,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => targettedCards = ts);
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
 
 
@@ -543,7 +543,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => targettedCards = ts);
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
             Assert.IsTrue(TestCard.Alive());
 
@@ -570,7 +570,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
         }
@@ -593,7 +593,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsFalse(triggered);
         }
@@ -616,7 +616,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
         }
@@ -639,7 +639,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
             Assert.IsFalse(triggered);
         }
@@ -687,8 +687,8 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            TestCard.Damage(1);            
-            OtherCard.Damage(1);
+            TestCard.HealthChange(-1);            
+            OtherCard.HealthChange(-1);
 
             Assert.IsFalse(triggered);
         }
@@ -721,7 +721,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
         }
@@ -753,7 +753,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
         }
@@ -785,7 +785,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsFalse(triggered);
         }
@@ -817,7 +817,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsFalse(triggered);
         }
@@ -842,7 +842,7 @@ namespace Tests
             Event.OnWithdraw.AddListener(c => withdrawn = c);
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
             Assert.IsNotNull(withdrawn);
@@ -868,7 +868,7 @@ namespace Tests
 
             Assert.AreNotEqual(TestCard.InDeck, OtherCard.InDeck);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
             Assert.AreEqual(TestCard.InDeck, OtherCard.InDeck);
@@ -925,7 +925,7 @@ namespace Tests
             Event.OnDraw.AddListener(c => drawn = c);
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
             Assert.IsNotNull(drawn);
@@ -953,7 +953,7 @@ namespace Tests
             Event.OnHealed.AddListener((c, i) => healed = c);
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(amount);
+            OtherCard.HealthChange(-amount);
 
             Assert.IsTrue(triggered);
             Assert.IsTrue(OtherCard.MaxHealth == OtherCard.CurrentHealth);
@@ -980,7 +980,7 @@ namespace Tests
             Event.OnDeath.AddListener(c => killed = c);
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
             Assert.AreEqual(killed, OtherCard);
@@ -1038,7 +1038,7 @@ namespace Tests
 
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            TestCard.Damage(1);
+            TestCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
             Assert.AreEqual(expectedAttack, OtherCard.Attack);
@@ -1070,7 +1070,7 @@ namespace Tests
             Event.OnSummon.AddListener(c => summoned = c);
             Event.OnAbilityTrigger.AddListener((a, c, ts) => triggered = true);
 
-            OtherCard.Damage(1);
+            OtherCard.HealthChange(-1);
 
             Assert.IsTrue(triggered);
             Assert.IsNotNull(summoned);

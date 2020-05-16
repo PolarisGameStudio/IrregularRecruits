@@ -229,7 +229,7 @@ namespace Tests
             var startHealth = TestCard.CurrentHealth;
             var damage = 2;
 
-            TestCard.Damage(damage);
+            TestCard.HealthChange(-damage);
 
 
             Assert.IsTrue(startHealth - damage == TestCard.CurrentHealth);
@@ -238,13 +238,13 @@ namespace Tests
         public void HealTriggersOnHeal()
         {
             Card check = null;
-            TestCard.Damage(1);
+            TestCard.HealthChange(1);
 
             var heal = 1;
 
             Event.OnHealed.AddListener((i, val) => check = i);
 
-            TestCard.Heal(heal);
+            TestCard.HealthChange(heal);
 
 
             Assert.IsTrue(check == TestCard);
@@ -255,7 +255,7 @@ namespace Tests
             var startHealth = TestCard.CurrentHealth;
             var damage = 2;
 
-            TestCard.Damage(damage);
+            TestCard.HealthChange(-damage);
 
 
             Assert.IsTrue(startHealth - damage == TestCard.CurrentHealth);
@@ -270,7 +270,7 @@ namespace Tests
             Event.OnHealthChange.AddListener((c,i) => check = i);
             Event.OnDamaged.AddListener((c) => card = c);
 
-            TestCard.Damage(damage);
+            TestCard.HealthChange(-damage);
 
             Assert.NotNull(card);
             Assert.AreEqual(check,-damage);
@@ -285,11 +285,29 @@ namespace Tests
 
             Event.OnDamaged.AddListener((i) => check = i);
 
-            TestCard.Damage(damage);
+            TestCard.HealthChange(-damage);
 
 
 
             Assert.IsTrue(check == TestCard);
+        }
+        [Test]
+        public void HealthChangeTriggersBeforeDeathEvent()
+        {
+            Card damaged = null;
+            bool hasBeenDamagedFirst = false;
+
+
+
+            var damage = 1000;
+
+            Event.OnHealthChange.AddListener((i,v) => damaged = i);
+            Event.OnDeath.AddListener((i) => hasBeenDamagedFirst = i == damaged);
+
+            TestCard.HealthChange(-damage);
+
+            Assert.IsTrue(damaged == TestCard);
+            Assert.IsTrue(hasBeenDamagedFirst);
         }
 
         [Test]
@@ -372,7 +390,7 @@ namespace Tests
         {
             Assert.IsTrue(TestCard.Alive());
 
-            TestCard.Damage(TestCard.MaxHealth);
+            TestCard.HealthChange(-TestCard.MaxHealth);
 
 
 

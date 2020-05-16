@@ -16,7 +16,7 @@ namespace GameLogic
 
             Event.OnAbilityTrigger.Invoke(ability, owner, targets);
 
-            targets.ForEach(c => c.Damage(ability.ResultingAction.Amount));
+            targets.ForEach(c => c.HealthChange(-ability.ResultingAction.Amount));
         }
 
         public override float GetValue(float targetValue, int amount)

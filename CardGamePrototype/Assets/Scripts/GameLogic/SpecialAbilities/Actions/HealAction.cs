@@ -14,7 +14,7 @@ namespace GameLogic
         public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
         {
             Event.OnAbilityTrigger.Invoke(ability, owner, targets);
-            targets.ForEach(c => c.Heal(ability.ResultingAction.Amount));
+            targets.ForEach(c => c.HealthChange(ability.ResultingAction.Amount));
         }
 
         public override float GetValue(float targetValue, int amount)

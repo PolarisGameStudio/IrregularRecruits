@@ -32,7 +32,6 @@ namespace GameLogic
                 if (value > MaxHealth) value = MaxHealth;
 
                 currentHealth = value;
-                if (value <= 0) Die();
             }
         }
 
@@ -128,10 +127,10 @@ namespace GameLogic
             if (Location != Deck.Zone.Battlefield || !target.Alive())
                 return;
 
-            target.Damage(this.Attack);
+            target.HealthChange(-this.Attack);
 
             if (returnDamage)
-                this.Damage(target.Attack);
+                this.HealthChange(-target.Attack);
 
             if (!Alive() && target.Alive()) Event.OnKill.Invoke(target);
             else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this);
@@ -197,6 +196,9 @@ namespace GameLogic
 
             Event.OnStatMod.Invoke(this,amount);
 
+            if (CurrentHealth <= 0)
+                Die();
+
         }
 
         public void PlayCard()
@@ -253,28 +255,22 @@ namespace GameLogic
             ChangeLocation(Deck.Zone.Battlefield);
         }
 
-        public void Damage(int damage)
+        public void HealthChange(int change)
         {
-            if (damage < 1 ||! Alive()) return;
+            if (change == 0 || ! Alive()) return;
 
-            CurrentHealth -= damage;
+            CurrentHealth += change;
 
-            Event.OnHealthChange.Invoke(this, -damage);
-            Event.OnDamaged.Invoke(this);
+            Event.OnHealthChange.Invoke(this, change);
 
+            if (CurrentHealth <= 0) Die();
+
+            if (change < 0)
+                Event.OnDamaged.Invoke(this);
+            if (change > 0)
+                Event.OnHealed.Invoke(this, change);
         }
 
-        public void Heal(int value)
-        {
-
-            if (value < 1) return;
-
-            CurrentHealth += value;
-
-            Event.OnHealthChange.Invoke(this, value);
-            Event.OnHealed.Invoke(this,value);
-
-        }
 
 
         public void ResetAfterBattle()
