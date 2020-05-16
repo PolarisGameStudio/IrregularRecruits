@@ -46,8 +46,8 @@ namespace UI
         public Deck EnemyDeck;
         private List<Card> InitialEnemyDeck;
         private List<Card> InitialPlayerDeck;
-        internal static UnityEvent OnBattleFinished = new UnityEvent();
-        internal static UnityEvent OnBattleBegin = new UnityEvent();
+        public static UnityEvent OnBattleFinished = new UnityEvent();
+        public static UnityEvent OnBattleBegin = new UnityEvent();
 
         void Awake()
         {

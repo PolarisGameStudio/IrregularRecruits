@@ -33,7 +33,7 @@ namespace UI
             return Instance.Holder.activeSelf;
         }
 
-        internal static Creature GetCreature()
+        public static Creature GetCreature()
         {
             if (!IsActive()) return null;
 
