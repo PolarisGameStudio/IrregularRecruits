@@ -96,7 +96,6 @@ namespace GameLogic
 
         public void Draw(Card card)
         {
-            Event.OnDraw.Invoke(card);
             card.ChangeLocation(Deck.Zone.Library, Deck.Zone.Hand);
         }
 

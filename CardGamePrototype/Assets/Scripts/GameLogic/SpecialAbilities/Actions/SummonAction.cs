@@ -32,7 +32,6 @@ namespace GameLogic
 
             card.ChangeLocation(Deck.Zone.Battlefield);
 
-            Event.OnEtb.Invoke(card);
         }
 
         public override float GetValue(float targetValue, int amount)

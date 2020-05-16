@@ -116,9 +116,14 @@ namespace UI
         {
             CardUI ui = GetCardUI(summon);
 
+
+            ui.CardAnimation.Highlight();
+
             //TODO: should the effect be bfore or after
             yield return AnimationSystem.UnsummonFx(ui);
 
+
+            ui.CardAnimation.TurnOffHighlight();
 
             Destroy(CardUIs[summon].gameObject);
         }
@@ -163,10 +168,14 @@ namespace UI
         {
             CardUI ui = GetCardUI(card);
 
+            ui.CardAnimation.Highlight();
+
             //TODO: should the effect be bfore or after
             yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
 
             yield return MoveCard(ui, to, playerDeck);
+
+            ui.CardAnimation.TurnOffHighlight();
         }
 
         internal static IEnumerator SetAttacker(Guid card)
@@ -184,7 +193,11 @@ namespace UI
         {
             CardUI ui = GetCardUI(card);
 
+            ui.CardAnimation.Highlight();
+
             yield return AnimationSystem.Instance.PlayAbilityFx(a, ui, ts.Select(GetCardUI).ToList(), 0.25f);
+
+            ui.CardAnimation.TurnOffHighlight();
         }
 
         private static CardUI GetCardUI(Guid cardGuid)
@@ -211,8 +224,13 @@ namespace UI
             if (AttackTarget == null) Debug.LogError("no attacktarget");
             if (Attacker == null) Debug.LogError("no attacker");
 
+            AttackTarget.CardAnimation.Highlight();
+            Attacker.CardAnimation.Highlight();
+
             yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
 
+            AttackTarget.CardAnimation.TurnOffHighlight();
+            Attacker.CardAnimation.TurnOffHighlight();
             AttackTarget = Attacker = null;
         }
 
@@ -283,7 +301,7 @@ namespace UI
             //if children and a layout group
             if (zoneRect.childCount > 0 && zoneRect.GetComponent<LayoutGroup>())
             {
-                endPosition = zoneRect.GetChild(zoneRect.childCount - 1).position;
+                endPosition = zoneRect.GetChild(0).position;
             }
             else
                 endPosition = zoneRect.position;

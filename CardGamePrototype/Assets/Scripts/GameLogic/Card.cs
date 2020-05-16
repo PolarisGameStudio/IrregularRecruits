@@ -55,7 +55,6 @@ namespace GameLogic
         public void Die()
         {
             ChangeLocation(Deck.Zone.Graveyard);
-            Event.OnDeath.Invoke(this);
         }
 
         public bool Damaged()
@@ -107,8 +106,24 @@ namespace GameLogic
             if (IsSummon() && to != Deck.Zone.Battlefield)
                 Unsummon();
 
-
             Event.OnChangeLocation.Invoke(this, from, to);
+
+            switch (to)
+            {
+                case Deck.Zone.Library:
+                    Event.OnWithdraw.Invoke(this);
+                    break;
+                case Deck.Zone.Battlefield:
+                    Event.OnEtb.Invoke(this);
+                    break;
+                case Deck.Zone.Graveyard:
+                    Event.OnDeath.Invoke(this);
+                    break;
+                case Deck.Zone.Hand:
+                    Event.OnDraw.Invoke(this);
+                    break;
+            }
+
             //TODO: this should be controlled by ui level
             //BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
         }
@@ -204,7 +219,6 @@ namespace GameLogic
         public void PlayCard()
         {
             ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
-            Event.OnEtb.Invoke(this);
 
             Event.OnPlayerAction.Invoke(this.InDeck);
         }
@@ -219,7 +233,6 @@ namespace GameLogic
         {
             //TODO: replace with Waiting ON player Input
 
-            Event.OnWithdraw.Invoke(this);
             ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library);
 
         }
@@ -287,7 +300,7 @@ namespace GameLogic
 
         public void Click()
         {
-            if (InDeck == null)
+            if (InDeck == null || InDeck.DeckController == null)
             {
                 return;
             }

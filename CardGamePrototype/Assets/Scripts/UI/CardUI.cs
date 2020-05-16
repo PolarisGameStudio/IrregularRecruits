@@ -158,6 +158,7 @@ namespace UI
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            CardAnimation.TurnOffHighlight();
             CardHighlight.Hide();
 
         }
@@ -165,7 +166,10 @@ namespace UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (AlwaysFaceUp || (FaceUp()))
+            { 
                 CardHighlight.Show(this);
+                CardAnimation.Highlight();
+            }
 
         }
 

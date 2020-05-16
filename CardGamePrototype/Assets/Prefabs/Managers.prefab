@@ -154,7 +154,7 @@ MonoBehaviour:
     AbilityIconFX:
     - {fileID: 19800006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
     TargetFX:
-    - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
+    - {fileID: 19800000, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
     OwnerFX: []
   - ActionType: 7
     AbilityIconFX:

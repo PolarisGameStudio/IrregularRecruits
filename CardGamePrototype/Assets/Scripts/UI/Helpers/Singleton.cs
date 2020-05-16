@@ -32,7 +32,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private void Awake()
     {
         //To prevent duplicates
-        if (instance)
+        if (instance && instance != this)
             Destroy(this.gameObject);
     }
 }

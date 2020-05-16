@@ -7,7 +7,9 @@ namespace UI
 {
     public class CardAnimation : MonoBehaviour
     {
-        public Material DissolveMaterial, HighlightMaterial;
+        public Material DissolveMaterial;
+
+        public ParticleSystem HighlightParticles;
 
         public EffectAnimation DamageAnimation, StatPlusAnimation, StatMinusAnimation;
 
@@ -20,8 +22,6 @@ namespace UI
         public float DissolveSpeed = 1f;
         private float DissolveAmount;
 
-        public ParticleSystem PushoutParticles;
-
         public Image SpecialAbilityIcon;
 
         public LayoutElement LayoutElement;
@@ -32,7 +32,6 @@ namespace UI
             ControlledImages = GetComponentsInChildren<Image>(true);
             ControlledTexts = GetComponentsInChildren<TextMeshProUGUI>(true);
             DissolveMaterial = Instantiate(DissolveMaterial);
-            HighlightMaterial = Instantiate(HighlightMaterial);
 
             prefWidth = LayoutElement.preferredWidth;
 
@@ -53,8 +52,17 @@ namespace UI
                     t.alpha = 1 - DissolveAmount;
                 yield return null;
             }
-
         }
+
+        public void Highlight()
+        {
+            //HighlightParticles.Play();
+        }
+        public void TurnOffHighlight()
+        {
+            //HighlightParticles.Stop();
+        }
+
         public IEnumerator UnDissolve()
         {
 

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -649,8 +649,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5b0f8dea4e2b3f4c89a3744e855f1c3, type: 2}
   - {fileID: 11400000, guid: 33a715d309f0b224997a4931936a1ab3, type: 2}
   - {fileID: 11400000, guid: 5eae458e1e71eeb4db8fbee78566b48c, type: 2}
-  CombatDifficultyIncrease: 3
-  CombatRarityIncrease: 1
 --- !u!1001 &1613703174279177226
 PrefabInstance:
   m_ObjectHideFlags: 0
