@@ -12,7 +12,7 @@ namespace GameLogic
 
         private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 
-        public Deck(DeckObject deckObject, bool playerDeck)
+        public Deck(DeckObject deckObject)
             : this(deckObject.Creatures.Select(c => new Card(c)).ToList())
         {
             DeckObject = deckObject;
@@ -53,9 +53,9 @@ namespace GameLogic
             var amountToDraw = GameSettings.Instance.StartingHandSize;
 
             //Move AVANTGARDE cards to the front and shuffle the rest
-            foreach (var c in CreaturesInZone(Zone.Library).Where(c => c.Avantgarde()))
+            while (CreaturesInZone(Zone.Library).Any(c => c.Avantgarde()))
             {
-                Draw(c);
+                Draw(CreaturesInZone(Zone.Library).First(c => c.Avantgarde()));
                 amountToDraw--;
             }
 

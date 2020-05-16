@@ -28,8 +28,8 @@ namespace UI
             DrawSlider.onValueChanged.AddListener(i => GS.DrawPrTurn = (int)i);
             ActionsPrTurnSlider.value = GS.PlaysPrTurn;
             ActionsPrTurnSlider.onValueChanged.AddListener(i => GS.PlaysPrTurn = (int)i);
-            EnemyAdditionsSlider.value = CombatPrototype.Instance.CombatDifficultyIncrease;
-            EnemyAdditionsSlider.onValueChanged.AddListener(i=>  CombatPrototype.Instance.CombatDifficultyIncrease = (int)i);
+            EnemyAdditionsSlider.value = CombatPrototype.Instance.GetCombatDifficultyIncrease();
+            EnemyAdditionsSlider.onValueChanged.AddListener(i=>  CombatPrototype.Instance.SetCombatDifficultyIncrease( (int)i));
             EnemyDeckSizeSlider.value = GS.EnemyDeckSize;
             EnemyDeckSizeSlider.onValueChanged.AddListener(i => GS.EnemyDeckSize = (int)i);
 

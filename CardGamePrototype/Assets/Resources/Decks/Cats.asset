@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cats
   m_EditorClassIdentifier: 
   name: Cat Nation
-  Description: A cat army full of cat people like cat burglars and sailors.
+  Description: A cat army full of cat people. They are tricky and deadly. They make
+    their enemies withdraw, and then strike them before they get a chance to act.
   Creatures:
   - {fileID: 11400000, guid: 3e0362a2e2d236d459f13f0340abe02a, type: 2}
   - {fileID: 11400000, guid: 89383700738110c46aaf0c9e1a65c973, type: 2}

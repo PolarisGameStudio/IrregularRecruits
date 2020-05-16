@@ -8146,7 +8146,7 @@ MonoBehaviour:
   - Zone: 0
     RectTransform: {fileID: 3660017128940815640}
     CardRotation: 3
-    CardPosAdjust: 0
+    CardPosAdjust: 0.1
   - Zone: 3
     RectTransform: {fileID: 3660017128968660167}
     CardRotation: 2
@@ -8163,7 +8163,7 @@ MonoBehaviour:
   - Zone: 0
     RectTransform: {fileID: 3660017128170685123}
     CardRotation: 2
-    CardPosAdjust: 0
+    CardPosAdjust: 0.1
   - Zone: 1
     RectTransform: {fileID: 3660017128962911756}
     CardRotation: 0

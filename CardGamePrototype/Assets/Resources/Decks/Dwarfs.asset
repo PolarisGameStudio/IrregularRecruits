@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
   m_Name: Dwarfs
   m_EditorClassIdentifier: 
-  name: Dwarven Army
-  Description: Small and sturdy. Beards
+  name: Company of Dwarves
+  Description: 'The dwarfs are resilient and strong. They will keep on fighting and
+    grow strong as they do. '
   Creatures:
   - {fileID: 11400000, guid: cba74a2b26beef44293c048057b62e35, type: 2}
   - {fileID: 11400000, guid: cba74a2b26beef44293c048057b62e35, type: 2}

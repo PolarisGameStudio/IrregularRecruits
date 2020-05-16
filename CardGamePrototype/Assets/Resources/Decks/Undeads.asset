@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
   m_Name: Undeads
   m_EditorClassIdentifier: 
-  name: Legion
-  Description: The dead walks again. Every moment is torment and they pass on the
-    pain like infections. When they die, they rise again.
+  name: The Dead Legion
+  Description: These warriors might not be the strongest, but they have long forgotten
+    how to die. After each battle they rise again.
   Creatures:
   - {fileID: 11400000, guid: 5b2a7c6ef11b1dd49baf1c92f00dcd0f, type: 2}
   - {fileID: 11400000, guid: 5b2a7c6ef11b1dd49baf1c92f00dcd0f, type: 2}

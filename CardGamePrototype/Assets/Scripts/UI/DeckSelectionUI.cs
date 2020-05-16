@@ -30,7 +30,7 @@ namespace UI
 
                 InstantiatedIcons.Add(icon);
 
-                Decks.Add(deck, new Deck(deck, true));
+                Decks.Add(deck, new Deck(deck));
             }
 
             Destroy(DeckIconInstance.gameObject);

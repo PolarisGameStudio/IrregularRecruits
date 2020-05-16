@@ -43,7 +43,7 @@ namespace Tests
 
             TestDeckController = new PlayerController();
 
-            TestDeck = new Deck(TestDeckObject, true);
+            TestDeck = new Deck(TestDeckObject);
 
             TestDeck.DeckController = TestDeckController;
 

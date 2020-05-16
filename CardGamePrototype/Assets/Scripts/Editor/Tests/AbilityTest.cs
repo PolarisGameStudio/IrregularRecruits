@@ -57,7 +57,7 @@ namespace Tests
                         Creatures = new List<Creature>(),
                     };
 
-                    BattleManager.Instance.PlayerDeck = new Deck(TestDeckObject, true);
+                    BattleManager.Instance.PlayerDeck = new Deck(TestDeckObject);
                 }
 
                 testDeck = BattleManager.Instance.PlayerDeck;
@@ -71,7 +71,7 @@ namespace Tests
                         Creatures = new List<Creature>(),
                     };
 
-                    BattleManager.Instance.EnemyDeck = new Deck(TestDeckObject, true);
+                    BattleManager.Instance.EnemyDeck = new Deck(TestDeckObject);
                 }
 
                 testDeck = BattleManager.Instance.EnemyDeck;

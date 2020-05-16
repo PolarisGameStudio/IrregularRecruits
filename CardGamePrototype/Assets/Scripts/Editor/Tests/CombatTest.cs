@@ -51,7 +51,7 @@ namespace Tests
                 Creatures = new List<Creature>(),
             };
 
-            var testDeck = new Deck(testDeckObject, playerDeck);
+            var testDeck = new Deck(testDeckObject);
 
             for (int i = 0; i < creatures; i++)
             {

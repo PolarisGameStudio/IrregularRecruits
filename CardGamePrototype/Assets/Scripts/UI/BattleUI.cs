@@ -31,7 +31,7 @@ namespace UI
             public Deck.Zone Zone;
             public RectTransform RectTransform;
             public int CardRotation;
-            public int CardPosAdjust;
+            public float CardPosAdjust;
         }
 
         public TextMeshProUGUI PlayerDeckDescription, EnemyDeckDescription;
@@ -139,14 +139,14 @@ namespace UI
             BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
         }
 
-        public static RectTransform GetZoneHolder(Deck.Zone zone, bool enm)
+        private RectTransform GetZoneHolder(Deck.Zone zone, bool enm)
         {
             var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;
 
             return z.FirstOrDefault(u => u.Zone == zone).RectTransform;
         }
 
-        public static int GetZoneAdjust(Deck.Zone zone, bool enm)
+        private float GetZoneAdjust(Deck.Zone zone, bool enm)
         {
             var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;
 
@@ -276,10 +276,12 @@ namespace UI
             if (!zoneRect) yield break;
 
             var startTime = Time.time;
-            var posAdjust = GetZoneAdjust(zone, !player);
+            float posAdjust = GetZoneAdjust(zone, !player);
             var rot = GetZoneRotation(zone, !player);
             Vector3 endPosition;
-            if (zoneRect.childCount > 0)
+
+            //if children and a layout group
+            if (zoneRect.childCount > 0 && zoneRect.GetComponent<LayoutGroup>())
             {
                 endPosition = zoneRect.GetChild(zoneRect.childCount - 1).position;
             }
@@ -314,7 +316,7 @@ namespace UI
             rect.SetParent(zoneRect);
             //TODO: hack that should not be needed
             rect.localScale = Vector3.one;
-            rect.SetAsLastSibling();
+            rect.SetAsFirstSibling();
 
 
             yield return card.Flip(zone == Deck.Zone.Library || (!player && zone == Deck.Zone.Hand));
