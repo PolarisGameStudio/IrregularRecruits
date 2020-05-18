@@ -46,6 +46,8 @@ namespace UI
             //On Ability trigger->All the current Ability animation param
             Event.OnAbilityTrigger.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.Guid,ts.Select(t=>t.Guid))));
 
+            Event.OnPlayerAction.AddListener(d => AddCardEvent(ActionUsed(d)));
+            Event.OnTurnBegin.AddListener(() => AddCardEvent(RefreshActions()));
         }
 
         private void AddMoveEvent(Card card, Deck.Zone from, Deck.Zone to)
@@ -53,6 +55,20 @@ namespace UI
             var playerdeck = BattleUI.Instance.PlayerDeck == card.InDeck;
 
             AddCardEvent( BattleUI.Move(card.Guid, to, from, playerdeck));
+        }
+
+        private IEnumerator RefreshActions()
+        {
+            yield return null;
+
+            ActionsLeftUI.ActionsRefreshed.Invoke();
+        }
+        private IEnumerator ActionUsed(Deck deck)
+        {
+            if (deck != BattleUI.Instance.PlayerDeck)
+                yield break;
+
+            ActionsLeftUI.ActionUsed.Invoke();
         }
 
 

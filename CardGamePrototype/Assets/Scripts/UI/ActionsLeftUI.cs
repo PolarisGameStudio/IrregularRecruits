@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using GameLogic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Event = GameLogic.Event;
 
 namespace UI
@@ -12,9 +14,12 @@ namespace UI
         private List<ActionIcon> ActionIcons = new List<ActionIcon>();
         private bool Initialized;
 
+        public static UnityEvent ActionUsed = new UnityEvent() ;
+        public static UnityEvent ActionsRefreshed = new UnityEvent();
+
         private void Start()
         {
-            Event.OnCombatSetup.AddListener((p, c) => Initialize());
+            Initialize();
         }
 
         void Initialize()
@@ -23,6 +28,11 @@ namespace UI
 
             Initialized = true;
 
+            ActionUsed.RemoveAllListeners();
+            ActionsRefreshed.RemoveAllListeners();
+            ActionUsed.AddListener(OnActionUsed);
+            ActionsRefreshed.AddListener(RefreshActions);
+
             //TODO: does not take into account if amount of actions are changed. Move to on next turn and check there
             for (int i = 0; i < GameSettings.Instance.PlaysPrTurn; i++)
             {
@@ -30,8 +40,6 @@ namespace UI
             }
             Destroy(ActionIconExample.gameObject);
 
-            Event.OnPlayerAction.AddListener(d=>OnActionUsed());
-            Event.OnTurnBegin.AddListener(OnNextTurn);
         }
 
         private void OnActionUsed()
@@ -40,7 +48,7 @@ namespace UI
                 ActionIcons.First(a => a.Active).Active = false;
         }
 
-        private void OnNextTurn()
+        private void RefreshActions()
         {
             ActionIcons.ForEach(a => a.Active = true);
         }
