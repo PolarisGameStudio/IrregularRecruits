@@ -33,8 +33,10 @@ namespace SpriteParticleEmitter
         //! Save data as an array for better access performance, also not putting it on a struct for GC not to become crazy
         protected Color[] particleInitColorCache;
 
+#pragma warning disable 0067
         public override event SimpleEvent OnCacheEnded;
         public override event SimpleEvent OnAvailableToPlay;
+#pragma warning restore 0067
 
         protected override void Awake()
         {

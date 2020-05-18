@@ -119,9 +119,12 @@ namespace SpriteParticleEmitter
         public abstract bool IsAvailableToPlay();
         #endregion
 
+#pragma warning disable 0067
         //! Event will be called when Sprite Cache as ended
         public virtual event SimpleEvent OnCacheEnded;
         //! Event will be called when the system is available to be played
         public virtual event SimpleEvent OnAvailableToPlay;
+
+#pragma warning restore 0067
     }
 }

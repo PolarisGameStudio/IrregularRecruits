@@ -192,20 +192,20 @@ public class AssetManager
     {
         return true;
 
-        var v = ability.GetValue();
+        //var v = ability.GetValue();
 
-        if (v < 0) return false;
+        //if (v < 0) return false;
 
-        if (v < -8)
-            return rarity == Creature.RarityType.Unique;
-        else if (v < -2)
-            return rarity == Creature.RarityType.Rare;
-        else if (v <= 2)
-            return rarity == Creature.RarityType.Common;
-        else if (v <= 6)
-            return rarity == Creature.RarityType.Rare;
-        else
-            return rarity == Creature.RarityType.Unique;
+        //if (v < -8)
+        //    return rarity == Creature.RarityType.Unique;
+        //else if (v < -2)
+        //    return rarity == Creature.RarityType.Rare;
+        //else if (v <= 2)
+        //    return rarity == Creature.RarityType.Common;
+        //else if (v <= 6)
+        //    return rarity == Creature.RarityType.Rare;
+        //else
+        //    return rarity == Creature.RarityType.Unique;
 
     }
     public static List<T> GetAssetsOfType<T>() where T : UnityEngine.Object
