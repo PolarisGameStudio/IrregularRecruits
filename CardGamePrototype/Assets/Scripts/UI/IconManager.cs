@@ -7,11 +7,11 @@ namespace UI
     public class IconManager : Singleton<IconManager>
     {
         [System.Serializable]
-        public struct AbilityActionIcon { public Ability.ActionType ActionType; public Sprite Sprite; }
+        public struct AbilityActionIcon { public PassiveAbility.ActionType ActionType; public Sprite Sprite; }
 
         public AbilityActionIcon[] AbilityActionIcons;
 
-        public static Sprite GetAbilityIconSprite(Ability.ActionType actionType)
+        public static Sprite GetAbilityIconSprite(PassiveAbility.ActionType actionType)
         {
             if (!Instance.AbilityActionIcons.Any(ai => ai.ActionType == actionType)) return null;
 

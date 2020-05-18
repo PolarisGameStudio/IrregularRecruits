@@ -42,7 +42,7 @@ namespace UI
         [Serializable]
         public struct AbilityAnimationFX
         {
-            public Ability.ActionType ActionType;
+            public PassiveAbility.ActionType ActionType;
             public ParticleSystem[] AbilityIconFX;
             public ParticleSystem[] TargetFX;
             public ParticleSystem[] OwnerFX;
@@ -157,7 +157,7 @@ namespace UI
             }
         }
 
-        public IEnumerator PlayAbilityFx(Ability ability, CardUI owner, List<CardUI> targets, float delay = 0)
+        public IEnumerator PlayAbilityFx(PassiveAbility ability, CardUI owner, List<CardUI> targets, float delay = 0)
         {
             var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
 

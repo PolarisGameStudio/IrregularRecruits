@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class WithdrawTrigger : AbilityTrigger
     {
-        public override Ability.Verb TriggerType => Ability.Verb.Withdraw;
+        public override PassiveAbility.Verb TriggerType => PassiveAbility.Verb.Withdraw;
 
         internal override string Description(string instigatorString)
         {

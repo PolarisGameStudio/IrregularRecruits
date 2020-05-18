@@ -11,8 +11,8 @@ namespace GameLogic
         public string Description;
         public bool PlayerRace;
         public int GroupSize;
-        public Ability.ActionType[] FavoriteActions;
-        public Ability.Verb[] FavoriteTriggers;
+        public PassiveAbility.ActionType[] FavoriteActions;
+        public PassiveAbility.Verb[] FavoriteTriggers;
 
     }
 }

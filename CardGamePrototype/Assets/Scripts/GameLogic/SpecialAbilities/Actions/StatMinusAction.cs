@@ -4,14 +4,14 @@ namespace GameLogic
 {
     public class StatMinusAction : AbilityAction
     {
-        public override Ability.ActionType ActionType => Ability.ActionType.StatMinus;
+        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.StatMinus;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return $"{target} lose {amount} Attack and Health";
         }
 
-        public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
+        public override void ExecuteAction(PassiveAbility ability, Card owner, List<Card> targets)
         {
 
             Event.OnAbilityTrigger.Invoke(ability, owner, targets);

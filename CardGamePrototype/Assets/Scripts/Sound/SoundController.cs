@@ -41,12 +41,12 @@ public class SoundController : Singleton<SoundController>
 
     }
 
-    public static void PlayAbilityTrigger(GameLogic.Ability.ActionType type)
+    public static void PlayAbilityTrigger(GameLogic.PassiveAbility.ActionType type)
     {
         Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityTrigger(type));
     }
 
-    public static void PlayAbilityHit(GameLogic.Ability.ActionType type)
+    public static void PlayAbilityHit(GameLogic.PassiveAbility.ActionType type)
     {
         Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityHit(type));
     }

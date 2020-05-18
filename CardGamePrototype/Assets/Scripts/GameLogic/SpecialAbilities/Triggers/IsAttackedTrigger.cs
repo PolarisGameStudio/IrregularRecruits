@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class IsAttackedTrigger : AbilityTrigger
     {
-        public override Ability.Verb TriggerType => Ability.Verb.IsATTACKED;
+        public override PassiveAbility.Verb TriggerType => PassiveAbility.Verb.IsATTACKED;
 
         internal override string Description(string instigatorString)
         {

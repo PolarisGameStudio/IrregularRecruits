@@ -39,9 +39,9 @@ public class AssetManager
             creatureObjects = GetAssetsOfType<Creature>().Where(c => c.Race).ToList();
 
 
-        List<Ability> abilities = new List<Ability>();
+        List<PassiveAbility> abilities = new List<PassiveAbility>();
 
-        abilities = GetAssetsOfType<Ability>();
+        abilities = GetAssetsOfType<PassiveAbility>();
 
         foreach (var a in abilities)
         {
@@ -60,7 +60,7 @@ public class AssetManager
 
     }
 
-    public static void MoveAbilityToOtherCreature(Ability a)
+    public static void MoveAbilityToOtherCreature(PassiveAbility a)
     {
         if (!creatureObjects.Any())
             creatureObjects = GetAssetsOfType<Creature>().Where(c => c.Race).ToList();
@@ -96,8 +96,8 @@ public class AssetManager
         List<Creature> creatureObjects = new List<Creature>();
         creatureObjects = GetAssetsOfType<Creature>().Where(c => c.Race).ToList();
 
-        List<Ability> abilities = new List<Ability>();
-        abilities = GetAssetsOfType<Ability>();
+        List<PassiveAbility> abilities = new List<PassiveAbility>();
+        abilities = GetAssetsOfType<PassiveAbility>();
 
         //creatureObjects.ForEach(c => c.Health *= 2);
 
@@ -127,10 +127,10 @@ public class AssetManager
         int amountMax = 4;
 
         //todo: rarity should be a factor
-        Ability ability;
+        PassiveAbility ability;
         do
         {
-            ability = ScriptableObject.CreateInstance<Ability>();
+            ability = ScriptableObject.CreateInstance<PassiveAbility>();
 
             var triggerCondition = new Noun(
                 Random.value > 0.4f ? Noun.CharacterTyp.This : Noun.CharacterTyp.Any,
@@ -139,11 +139,11 @@ public class AssetManager
                 Random.value > 0.15f ? Noun.RaceType.Any : (Random.value > 0.4f ? Noun.RaceType.Same : Noun.RaceType.Different)
                 );
 
-            Ability.Verb triggerAction = (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ?
+            PassiveAbility.Verb triggerAction = (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ?
                 c.Race.FavoriteTriggers[Random.Range(0, c.Race.FavoriteTriggers.Length)]
-                : (Ability.Verb)Random.Range(0, (int)Ability.Verb.COUNT);
+                : (PassiveAbility.Verb)Random.Range(0, (int)PassiveAbility.Verb.COUNT);
 
-            ability.TriggerCondition = new Ability.Trigger(
+            ability.TriggerCondition = new PassiveAbility.Trigger(
                 triggerCondition,
                 triggerAction);
 
@@ -157,9 +157,9 @@ public class AssetManager
                 );
 
 
-            ability.ResultingAction = new Ability.Action(
-                (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (Ability.ActionType)Random.Range(0, (int)Ability.ActionType.Summon),
-                (Ability.Count)Random.Range(0, (int)Ability.Count.COUNT),
+            ability.ResultingAction = new PassiveAbility.Action(
+                (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (PassiveAbility.ActionType)Random.Range(0, (int)PassiveAbility.ActionType.Summon),
+                (PassiveAbility.Count)Random.Range(0, (int)PassiveAbility.Count.COUNT),
                 Random.Range(amountMin, amountMax),
                 abilityTarget
                 );
@@ -188,7 +188,7 @@ public class AssetManager
     }
 
 
-    private static bool AbilityFitsRarity(Ability ability, Creature.RarityType rarity)
+    private static bool AbilityFitsRarity(PassiveAbility ability, Creature.RarityType rarity)
     {
         return true;
 

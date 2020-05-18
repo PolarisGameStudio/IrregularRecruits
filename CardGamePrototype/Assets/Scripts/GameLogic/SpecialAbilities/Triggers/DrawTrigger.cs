@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class DrawTrigger : AbilityTrigger
     {
-        public override Ability.Verb TriggerType => Ability.Verb.Draw;
+        public override PassiveAbility.Verb TriggerType => PassiveAbility.Verb.Draw;
 
         internal override string Description(string instigatorString)
         {

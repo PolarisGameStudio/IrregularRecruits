@@ -46,7 +46,7 @@ namespace GameLogic
             return Creature.Traits;
         }
 
-        public Ability Ability()
+        public PassiveAbility Ability()
         {
             return Creature.SpecialAbility;
         }

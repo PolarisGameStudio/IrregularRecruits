@@ -4,14 +4,14 @@ namespace GameLogic
 {
     public class HealAction : AbilityAction
     {
-        public override Ability.ActionType ActionType => Ability.ActionType.Heal;
+        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.Heal;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return $"Heal {target} for {amount}";
         }
 
-        public override void ExecuteAction(Ability ability, Card owner, List<Card> targets)
+        public override void ExecuteAction(PassiveAbility ability, Card owner, List<Card> targets)
         {
             Event.OnAbilityTrigger.Invoke(ability, owner, targets);
             targets.ForEach(c => c.HealthChange(ability.ResultingAction.Amount));

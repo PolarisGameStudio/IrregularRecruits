@@ -105,7 +105,7 @@ namespace GameLogic
             }
         }
 
-        public string NounAsString(Creature _owner, Ability.Count count = Ability.Count.One)
+        public string NounAsString(Creature _owner, PassiveAbility.Count count = PassiveAbility.Count.One)
         {
             var str = "";
 
@@ -116,13 +116,13 @@ namespace GameLogic
                 case CharacterTyp.It:
                     return "it";
                 case CharacterTyp.Any:
-                    if (count == Ability.Count.One)
+                    if (count == PassiveAbility.Count.One)
                         str += "a ";
                     else
                         str += count.ToString() + " ";
                     break;
                 case CharacterTyp.Other:
-                    if (count == Ability.Count.One)
+                    if (count == PassiveAbility.Count.One)
                         str += "another ";
                     else
                         str += count.ToString() + " other ";
@@ -155,13 +155,13 @@ namespace GameLogic
             switch (Race)
             {
                 case RaceType.Any:
-                    str += "minion" + (count == Ability.Count.One ? "" : "s");
+                    str += "minion" + (count == PassiveAbility.Count.One ? "" : "s");
                     break;
                 case RaceType.Same:
-                    str += _owner.Race?.name + (count == Ability.Count.One ? "" : "s");
+                    str += _owner.Race?.name + (count == PassiveAbility.Count.One ? "" : "s");
                     break;
                 case RaceType.Different:
-                    str += "non-" + _owner.Race?.name + (count == Ability.Count.One ? "" : "s");
+                    str += "non-" + _owner.Race?.name + (count == PassiveAbility.Count.One ? "" : "s");
                     break;
             }
 

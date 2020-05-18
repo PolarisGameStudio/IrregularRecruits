@@ -16,7 +16,7 @@ namespace Tests
             GameSettings.Instance.AiControlledPlayer = true;
         }
 
-        private Card GenerateTestCreature(Ability ability, Race race = null, int attack = 2)
+        private Card GenerateTestCreature(PassiveAbility ability, Race race = null, int attack = 2)
         {
             Trait trait = new Trait()
             {
@@ -56,10 +56,10 @@ namespace Tests
             for (int i = 0; i < creatures; i++)
             {
                 var c = onlyAbilityDamage ? GenerateTestCreature(
-                    new Ability()
+                    new PassiveAbility()
                     {
-                        ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 5, new Noun(Noun.CharacterTyp.Any)),
-                        TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.Any), Ability.Verb.RoundEnd),
+                        ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.DealDamage, PassiveAbility.Count.One, 5, new Noun(Noun.CharacterTyp.Any)),
+                        TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.RoundEnd),
                     }, null, 0
                     ) : GenerateTestCreature(null);
 

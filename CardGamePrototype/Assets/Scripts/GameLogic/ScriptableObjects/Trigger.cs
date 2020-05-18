@@ -1,7 +1,7 @@
 ﻿using System;
 namespace GameLogic
 {
-    public partial class Ability
+    public partial class PassiveAbility
     {
 
         //Also includes redundant statements like heal damaged

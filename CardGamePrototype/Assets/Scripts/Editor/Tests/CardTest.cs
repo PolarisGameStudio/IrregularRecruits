@@ -12,7 +12,7 @@ namespace Tests
         private Deck TestDeck;
         private DeckObject TestDeckObject;
         private PlayerController TestDeckController;
-        private Ability TestAbility;
+        private PassiveAbility TestAbility;
 
         [SetUp]
         public void CardSetup()
@@ -21,10 +21,10 @@ namespace Tests
 
             TestCreature = CreateCreature();
 
-            TestAbility = new Ability()
+            TestAbility = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun()),
-                TriggerCondition = new Ability.Trigger(new Noun(Noun.CharacterTyp.This), Ability.Verb.ETB),
+                ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.DealDamage, PassiveAbility.Count.One, 1, new Noun()),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.This), PassiveAbility.Verb.ETB),
             };
 
             TestCreature.SpecialAbility = TestAbility;

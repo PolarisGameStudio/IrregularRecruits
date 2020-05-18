@@ -67,7 +67,7 @@ public class SoundBank : Singleton<SoundBank>
     [System.Serializable]
     public struct AbilitySound
     {
-        public Ability.ActionType Type;
+        public PassiveAbility.ActionType Type;
         public AudioClip[] TriggerAudio;
         public AudioClip[] TargetAudio;
     }
@@ -160,7 +160,7 @@ public class SoundBank : Singleton<SoundBank>
         return Rnd(Instance.Musics.First(s => s.Type == sound).Audio);
     }
 
-    public static AudioClip GetAbilityTrigger(Ability.ActionType sound)
+    public static AudioClip GetAbilityTrigger(PassiveAbility.ActionType sound)
     {
         if (!Instance.AbilitySounds.Any(s => s.Type == sound))
         {
@@ -170,7 +170,7 @@ public class SoundBank : Singleton<SoundBank>
 
         return Rnd(Instance.AbilitySounds.First(s => s.Type == sound).TriggerAudio);
     }
-    public static AudioClip GetAbilityHit(Ability.ActionType sound)
+    public static AudioClip GetAbilityHit(PassiveAbility.ActionType sound)
     {
         if (!Instance.AbilitySounds.Any(s => s.Type == sound))
         {
