@@ -12,20 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: FRIENDLYKILLS-StatPlusCardInOwnersDeck5943
   m_EditorClassIdentifier: 
-  Value: 2.7
-  TriggerCondition:
-    Subject: 3
-    Subjekt:
-      Character: 0
-      Location: 1
-      Relationship: 1
-      DamageState: 0
-      Race: 0
-    TriggerAction: 2
   ResultingAction:
     ActionType: 2
     TargetCount: 3
-    Targets: 12
     Target:
       Character: 0
       Location: 0
@@ -33,3 +22,13 @@ MonoBehaviour:
       DamageState: 0
       Race: 0
     Amount: 1
+    Summons: {fileID: 0}
+  Value: 2.7
+  TriggerCondition:
+    Subjekt:
+      Character: 0
+      Location: 1
+      Relationship: 1
+      DamageState: 0
+      Race: 0
+    TriggerAction: 2

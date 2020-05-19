@@ -12,15 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: OwnerRACEETB-StatPlusUNDAMAGED3194
   m_EditorClassIdentifier: 
-  Value: 1.8000001
-  TriggerCondition:
-    Subjekt:
-      Character: 0
-      Location: 1
-      Relationship: 1
-      DamageState: 0
-      Race: 1
-    TriggerAction: 4
   ResultingAction:
     ActionType: 2
     TargetCount: 0
@@ -31,3 +22,13 @@ MonoBehaviour:
       DamageState: 0
       Race: 0
     Amount: 1
+    Summons: {fileID: 0}
+  Value: 1.8000001
+  TriggerCondition:
+    Subjekt:
+      Character: 0
+      Location: 1
+      Relationship: 1
+      DamageState: 0
+      Race: 1
+    TriggerAction: 4

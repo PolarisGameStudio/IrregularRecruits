@@ -12,20 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: KILLS-StatMinus7333
   m_EditorClassIdentifier: 
-  Value: 1.65
-  TriggerCondition:
-    Subject: 6
-    Subjekt:
-      Character: 0
-      Location: 1
-      Relationship: 0
-      DamageState: 0
-      Race: 2
-    TriggerAction: 2
   ResultingAction:
     ActionType: 3
     TargetCount: 3
-    Targets: 6
     Target:
       Character: 0
       Location: 1
@@ -33,3 +22,13 @@ MonoBehaviour:
       DamageState: 0
       Race: 2
     Amount: 1
+    Summons: {fileID: 0}
+  Value: 1.65
+  TriggerCondition:
+    Subjekt:
+      Character: 0
+      Location: 1
+      Relationship: 0
+      DamageState: 0
+      Race: 2
+    TriggerAction: 2

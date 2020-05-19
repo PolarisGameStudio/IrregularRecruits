@@ -12,20 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: ENEMYETB-StatPlusFRIENDLY652
   m_EditorClassIdentifier: 
-  Value: 2.7
-  TriggerCondition:
-    Subject: 4
-    Subjekt:
-      Character: 0
-      Location: 1
-      Relationship: 2
-      DamageState: 0
-      Race: 0
-    TriggerAction: 4
   ResultingAction:
     ActionType: 2
     TargetCount: 3
-    Targets: 3
     Target:
       Character: 0
       Location: 1
@@ -33,3 +22,13 @@ MonoBehaviour:
       DamageState: 0
       Race: 0
     Amount: 1
+    Summons: {fileID: 0}
+  Value: 2.7
+  TriggerCondition:
+    Subjekt:
+      Character: 0
+      Location: 1
+      Relationship: 2
+      DamageState: 0
+      Race: 0
+    TriggerAction: 4

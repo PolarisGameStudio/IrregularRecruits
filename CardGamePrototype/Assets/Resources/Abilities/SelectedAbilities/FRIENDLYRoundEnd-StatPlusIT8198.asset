@@ -12,15 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: FRIENDLYRoundEnd-StatPlusIT8198
   m_EditorClassIdentifier: 
-  Value: 1.875
-  TriggerCondition:
-    Subjekt:
-      Character: 1
-      Location: 1
-      Relationship: 1
-      DamageState: 0
-      Race: 0
-    TriggerAction: 9
   ResultingAction:
     ActionType: 2
     TargetCount: 2
@@ -31,3 +22,13 @@ MonoBehaviour:
       DamageState: 0
       Race: 0
     Amount: 2
+    Summons: {fileID: 0}
+  Value: 1.875
+  TriggerCondition:
+    Subjekt:
+      Character: 1
+      Location: 1
+      Relationship: 1
+      DamageState: 0
+      Race: 0
+    TriggerAction: 9

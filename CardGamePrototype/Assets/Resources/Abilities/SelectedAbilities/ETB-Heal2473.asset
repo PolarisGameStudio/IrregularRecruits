@@ -12,15 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: ETB-Heal2473
   m_EditorClassIdentifier: 
-  Value: 0.55
-  TriggerCondition:
-    Subjekt:
-      Character: 0
-      Location: 1
-      Relationship: 0
-      DamageState: 0
-      Race: 2
-    TriggerAction: 4
   ResultingAction:
     ActionType: 5
     TargetCount: 1
@@ -31,3 +22,13 @@ MonoBehaviour:
       DamageState: 1
       Race: 1
     Amount: 2
+    Summons: {fileID: 0}
+  Value: 0.55
+  TriggerCondition:
+    Subjekt:
+      Character: 0
+      Location: 1
+      Relationship: 0
+      DamageState: 0
+      Race: 2
+    TriggerAction: 4

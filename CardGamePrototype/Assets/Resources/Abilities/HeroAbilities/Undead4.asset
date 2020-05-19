@@ -27,7 +27,7 @@ MonoBehaviour:
   TriggerCondition:
     Subjekt:
       Character: 0
-      Location: 1
+      Location: 2
       Relationship: 0
       DamageState: 0
       Race: 2

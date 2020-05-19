@@ -96,6 +96,8 @@ public class AssetManager
         List<PassiveAbility> abilities = new List<PassiveAbility>();
         abilities = GetAssetsOfType<PassiveAbility>();
 
+        Debug.Log("Checking abilities: " + abilities.Count);
+
         foreach (var item in abilities)
         {
             item.FixTriggerInconsistencies();
@@ -207,7 +209,8 @@ public class AssetManager
         //    return rarity == Creature.RarityType.Unique;
 
     }
-    public static List<T> GetAssetsOfType<T>() where T : UnityEngine.Object
+
+    public static List<T> GetAssetsOfType<T>() where T : UnityEngine.ScriptableObject
     {
         var guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);  //FindAssets uses tags check documentation for more info
         return guids.Select(guid => AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guid))).ToList();
