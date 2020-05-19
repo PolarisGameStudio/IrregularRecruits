@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 namespace Tests
 {
-    public class AbilityTest
+    public partial class AbilityTest
     {
         private Creature TestCreature;
         private Card TestCard;
