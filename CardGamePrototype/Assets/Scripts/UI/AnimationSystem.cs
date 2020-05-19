@@ -157,7 +157,7 @@ namespace UI
             }
         }
 
-        public IEnumerator PlayAbilityFx(PassiveAbility ability, CardUI owner, List<CardUI> targets, float delay = 0)
+        public IEnumerator PlayAbilityFx(Ability ability, CardUI owner, List<CardUI> targets, float delay = 0)
         {
             var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
 

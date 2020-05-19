@@ -11,9 +11,9 @@ namespace GameLogic
             return $"resurrect {target} with {amount} health";
         }
 
-        public override void ExecuteAction(PassiveAbility ability, Card owner, List<Card> graveTargets)
+        public override void ExecuteAction(Ability ability, IAbilityHolder owner, List<Card> graveTargets)
         {
-            Event.OnAbilityTrigger.Invoke(ability, owner, graveTargets);
+            Event.OnAbilityExecution.Invoke(ability, owner, graveTargets);
             graveTargets.ForEach(c => c.Resurrect(ability.ResultingAction.Amount));
         }
 

@@ -189,7 +189,7 @@ namespace UI
             //do ready attack animation
         }
 
-        internal static IEnumerator AbilityTriggered(PassiveAbility a, Guid card, IEnumerable<Guid> ts)
+        internal static IEnumerator AbilityTriggered(Ability a, Guid card, IEnumerable<Guid> ts)
         {
             CardUI ui = GetCardUI(card);
 

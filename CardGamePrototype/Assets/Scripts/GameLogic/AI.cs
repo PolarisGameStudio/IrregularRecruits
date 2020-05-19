@@ -58,5 +58,10 @@ namespace GameLogic
             //TODO: should AI actions always be possible?
             return MyTurn;
         }
+
+        public Hero GetHero()
+        {
+            return null;
+        }
     }
 }

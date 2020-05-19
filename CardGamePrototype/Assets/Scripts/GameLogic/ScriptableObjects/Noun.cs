@@ -24,11 +24,11 @@ namespace GameLogic
             DamageState = damageState;
             Race = race;
         }
-        public bool CorrectNoun(Card instigator, Card abilityOwner)
+        public bool CorrectNoun(Card instigator, IAbilityHolder abilityOwner)
         {
             //TODO: THIs should be a more complex check depending on the ability. Now this + etb won't trigger for instance
             // maybe all abilities should have a locations allowed for onwer
-            if (abilityOwner.Location != Deck.Zone.Battlefield) return false;
+            //if (abilityOwner.Location != Deck.Zone.Battlefield) return false;
 
             //Trigger Actions without instigators always has correct noun
             if (instigator == null) return true;
@@ -42,7 +42,7 @@ namespace GameLogic
                 ;
         }
 
-        public bool CorrectCharacter(Card instigator, Card abilityOwner, Card triggerExecuter = null)
+        public bool CorrectCharacter(Card instigator, IAbilityHolder abilityOwner, Card triggerExecuter = null)
         {
             switch (Character)
             {
@@ -73,23 +73,23 @@ namespace GameLogic
                     return true;
             }
         }
-        public bool CorrectRace(Card instigator, Card abilityOwner)
+        public bool CorrectRace(Card instigator, IAbilityHolder abilityOwner)
         {
             switch (Race)
             {
                 case RaceType.Any:
                     return true;
                 case RaceType.Same:
-                    return instigator.Creature.Race == abilityOwner.Creature.Race;
+                    return instigator.Creature.Race == abilityOwner.Race();
                 case RaceType.Different:
-                    return instigator.Creature.Race != abilityOwner.Creature.Race;
+                    return instigator.Creature.Race != abilityOwner.Race();
                 default:
                     return true;
             }
         }
-        public bool CorrectAllegiance(Card instigator, Card abilityOwner)
+        public bool CorrectAllegiance(Card instigator, IAbilityHolder abilityOwner)
         {
-            if (instigator.InDeck == null || abilityOwner.InDeck == null)
+            if (instigator.InDeck == null || abilityOwner.InDeck() == null)
                 return false;
 
             switch (Relationship)
@@ -97,9 +97,9 @@ namespace GameLogic
                 case Allegiance.Any:
                     return true;
                 case Allegiance.Friend:
-                    return instigator.InDeck == abilityOwner.InDeck;
+                    return instigator.InDeck == abilityOwner.InDeck();
                 case Allegiance.Enemy:
-                    return instigator.InDeck != abilityOwner.InDeck;
+                    return instigator.InDeck != abilityOwner.InDeck();
                 default:
                     return true;
             }

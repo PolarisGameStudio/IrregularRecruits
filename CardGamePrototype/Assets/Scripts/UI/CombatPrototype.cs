@@ -16,6 +16,7 @@ public class CombatPrototype : Singleton<CombatPrototype>
     public Creature TestCreature;
     public Race[] AllRaces;
     public Creature[] AllCreatures;
+    public Creature[] AllHeroes;
 
     void Start()
     {

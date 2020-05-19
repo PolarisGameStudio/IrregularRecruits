@@ -649,6 +649,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5b0f8dea4e2b3f4c89a3744e855f1c3, type: 2}
   - {fileID: 11400000, guid: 33a715d309f0b224997a4931936a1ab3, type: 2}
   - {fileID: 11400000, guid: 5eae458e1e71eeb4db8fbee78566b48c, type: 2}
+  AllHeroes: []
 --- !u!1001 &1613703174279177226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1134,6 +1135,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323152121225803596, guid: d7a08821e93447e4e980c0cfb0934917,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 128590201}
+    - target: {fileID: 7323152121225803596, guid: d7a08821e93447e4e980c0cfb0934917,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayButtonClick
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7a08821e93447e4e980c0cfb0934917, type: 3}

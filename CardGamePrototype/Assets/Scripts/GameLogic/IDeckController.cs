@@ -8,5 +8,6 @@ namespace GameLogic
         void SetupDeckActions(Deck deck, Action onfinish);
         void YourTurn();
         bool ActionAvailable();
+        Hero GetHero();
     }
 }

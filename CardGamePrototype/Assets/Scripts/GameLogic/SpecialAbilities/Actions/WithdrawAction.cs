@@ -11,9 +11,9 @@ namespace GameLogic
             return "withdraw " + target;
         }
 
-        public override void ExecuteAction(PassiveAbility ability, Card owner, List<Card> targets)
+        public override void ExecuteAction(Ability ability, IAbilityHolder owner, List<Card> targets)
         {
-            Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+            Event.OnAbilityExecution.Invoke(ability, owner, targets);
             targets.ForEach(c => c.Withdraw());
         }
 

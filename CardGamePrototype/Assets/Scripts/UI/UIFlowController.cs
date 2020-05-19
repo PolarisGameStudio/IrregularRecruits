@@ -44,7 +44,7 @@ namespace UI
             Event.OnBattleFinished.AddListener(d => AddCardEvent(BattleUI.CleanUpUI()));
 
             //On Ability trigger->All the current Ability animation param
-            Event.OnAbilityTrigger.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.Guid,ts.Select(t=>t.Guid))));
+            Event.OnAbilityExecution.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.Guid(),ts.Select(t=>t.Guid))));
 
             Event.OnPlayerAction.AddListener(d => AddCardEvent(ActionUsed(d)));
             Event.OnTurnBegin.AddListener(() => AddCardEvent(RefreshActions()));

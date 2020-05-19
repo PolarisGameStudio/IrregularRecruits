@@ -6,6 +6,7 @@ namespace GameLogic
     {
         private Deck ControlledDeck;
         private Action TurnFinished;
+        public Hero PlayerHero;
 
         public int PlayerActionsLeft;
 
@@ -48,6 +49,11 @@ namespace GameLogic
         public bool ActionAvailable()
         {
             return PlayerActionsLeft > 0;
+        }
+
+        public Hero GetHero()
+        {
+            return null;
         }
     }
 }

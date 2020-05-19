@@ -4,7 +4,8 @@ using System.Linq;
 
 namespace GameLogic
 {
-    public class Card
+
+    public class Card : IAbilityHolder
     {
         private Creature creature;
         public Creature Creature
@@ -168,7 +169,7 @@ namespace GameLogic
         {
             if (String.IsNullOrEmpty(newCreature.name)) newCreature.name = newCreature.ToString();
 
-            Name = newCreature?.name;// + " !" + Guid.NewGuid();
+            Name = newCreature.name;// + " !" + Guid.NewGuid();
 
             //if (Creature && Creature.SpecialAbility)
             //    Creature.SpecialAbility.RemoveListeners(this);
@@ -177,7 +178,7 @@ namespace GameLogic
             CurrentHealth = newCreature.Health;
             Attack = newCreature.Attack;
 
-            if (creature?.SpecialAbility)
+            if (creature && creature.SpecialAbility)
                 creature.SpecialAbility.RemoveListeners();
 
             if (newCreature.SpecialAbility)
@@ -320,5 +321,16 @@ namespace GameLogic
             }
         }
 
+        public Race Race()
+        {
+            return Creature.Race;
+        }
+
+        Deck IAbilityHolder.InDeck()
+        {
+            return InDeck;
+        }
+
+        Guid IAbilityHolder.Guid() => Guid;
     }
 }

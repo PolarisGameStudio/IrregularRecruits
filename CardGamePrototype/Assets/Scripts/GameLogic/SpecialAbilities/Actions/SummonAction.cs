@@ -11,22 +11,22 @@ namespace GameLogic
             return $"summon a {summon.Attack}/{summon.Health} {summon.name}" ;
         }
 
-        public override void ExecuteAction(PassiveAbility ability, Card owner, List<Card> targets)
+        public override void ExecuteAction(Ability ability, IAbilityHolder owner, List<Card> targets)
         {
             var summon = ability.ResultingAction.Summons;
 
-            Event.OnAbilityTrigger.Invoke(ability, owner, targets);
+            Event.OnAbilityExecution.Invoke(ability, owner, targets);
 
-            if (owner == null || owner.InDeck == null || !ability.ResultingAction.Summons)
+            if (owner == null || owner.InDeck() == null || !summon)
                 return;
-            Summon(ability.ResultingAction.Summons, owner);
+            Summon(summon, owner);
         }
 
-        private static void Summon(Creature summon, Card owner)
+        private static void Summon(Creature summon, IAbilityHolder owner)
         {
             var card = new Card(summon);
 
-            owner.InDeck.AddCard(card);
+            owner.InDeck().AddCard(card);
 
             Event.OnSummon.Invoke(card);
 
