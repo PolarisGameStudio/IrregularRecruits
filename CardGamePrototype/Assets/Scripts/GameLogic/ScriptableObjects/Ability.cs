@@ -6,10 +6,8 @@ using System.Collections.Generic;
 
 namespace GameLogic
 {
-
     public abstract class Ability : ScriptableObject
     {
-
         protected static Dictionary<ActionType, Deck.Zone> ForcedActionTargetLocations = new Dictionary<ActionType, Deck.Zone>()
         {
             { ActionType.Resurrect,Deck.Zone.Graveyard },

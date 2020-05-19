@@ -9,19 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11dc8372b41758d429c1eb3ac0a9ce31, type: 3}
-  m_Name: Undead1
+  m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
+  m_Name: Undead4
   m_EditorClassIdentifier: 
   ResultingAction:
-    ActionType: 3
+    ActionType: 9
     TargetCount: 1
     Target:
       Character: 0
       Location: 1
-      Relationship: 2
+      Relationship: 0
       DamageState: 0
       Race: 0
-    Amount: 3
-    Summons: {fileID: 0}
-  Cost: 1
-  OncePrCombat: 0
+    Amount: 1
+    Summons: {fileID: 11400000, guid: 5b2a7c6ef11b1dd49baf1c92f00dcd0f, type: 2}
+  Value: 1
+  TriggerCondition:
+    Subjekt:
+      Character: 0
+      Location: 1
+      Relationship: 0
+      DamageState: 0
+      Race: 2
+    TriggerAction: 3

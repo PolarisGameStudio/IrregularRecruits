@@ -16,11 +16,11 @@ MonoBehaviour:
   Description: These warriors might not be the strongest, but they have long forgotten
     how to die. After each battle they rise again.
   Creatures:
-  - {fileID: 11400000, guid: 5b2a7c6ef11b1dd49baf1c92f00dcd0f, type: 2}
-  - {fileID: 11400000, guid: 5b2a7c6ef11b1dd49baf1c92f00dcd0f, type: 2}
-  - {fileID: 11400000, guid: 5b2a7c6ef11b1dd49baf1c92f00dcd0f, type: 2}
-  - {fileID: 11400000, guid: 5b2a7c6ef11b1dd49baf1c92f00dcd0f, type: 2}
-  - {fileID: 11400000, guid: 5b2a7c6ef11b1dd49baf1c92f00dcd0f, type: 2}
+  - {fileID: 11400000, guid: 55d29a7216ca02e4cabe58648e4f3960, type: 2}
+  - {fileID: 11400000, guid: c74c0de1df1bf9d40a6030fc43ddfec1, type: 2}
+  - {fileID: 11400000, guid: c74c0de1df1bf9d40a6030fc43ddfec1, type: 2}
+  - {fileID: 11400000, guid: 182ab94bccaafb148be23e697c3e0de1, type: 2}
+  - {fileID: 11400000, guid: 182ab94bccaafb148be23e697c3e0de1, type: 2}
   - {fileID: 11400000, guid: 182ab94bccaafb148be23e697c3e0de1, type: 2}
   - {fileID: 11400000, guid: 182ab94bccaafb148be23e697c3e0de1, type: 2}
   - {fileID: 11400000, guid: 182ab94bccaafb148be23e697c3e0de1, type: 2}

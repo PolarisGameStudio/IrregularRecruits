@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11dc8372b41758d429c1eb3ac0a9ce31, type: 3}
-  m_Name: Undead1
+  m_Name: Undead3
   m_EditorClassIdentifier: 
   ResultingAction:
     ActionType: 3
-    TargetCount: 1
+    TargetCount: 0
     Target:
       Character: 0
       Location: 1
       Relationship: 2
       DamageState: 0
       Race: 0
-    Amount: 3
+    Amount: 1
     Summons: {fileID: 0}
   Cost: 1
   OncePrCombat: 0
