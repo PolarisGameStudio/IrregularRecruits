@@ -93,17 +93,16 @@ public class AssetManager
     [MenuItem("Content/Do stuff")]
     public static void DoStuff()
     {
-        List<Creature> creatureObjects = new List<Creature>();
-        creatureObjects = GetAssetsOfType<Creature>().Where(c => c.Race).ToList();
-
         List<PassiveAbility> abilities = new List<PassiveAbility>();
         abilities = GetAssetsOfType<PassiveAbility>();
 
-        //creatureObjects.ForEach(c => c.Health *= 2);
+        foreach (var item in abilities)
+        {
+            item.FixTriggerInconsistencies();
+        }
 
         AssetDatabase.Refresh();
         abilities.ForEach(a => EditorUtility.SetDirty(a));
-        creatureObjects.ForEach(a => EditorUtility.SetDirty(a));
         AssetDatabase.SaveAssets();
 
     }

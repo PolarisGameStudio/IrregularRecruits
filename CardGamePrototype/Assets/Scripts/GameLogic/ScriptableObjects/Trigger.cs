@@ -1,8 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace GameLogic
 {
     public partial class PassiveAbility
     {
+
+        public static Dictionary<Verb, Deck.Zone> CorrectInstigatorLocations = new Dictionary<Verb, Deck.Zone>()
+        {
+                { Verb.ATTACKS,Deck.Zone.Battlefield },
+                { Verb.DIES, Deck.Zone.Graveyard },
+                { Verb.ETB, Deck.Zone.Battlefield},
+                 { Verb.Withdraw,Deck.Zone.Battlefield},
+        };
 
         //Also includes redundant statements like heal damaged
         //TODO: should be moved to a value in Verb Classes
@@ -63,10 +74,16 @@ namespace GameLogic
             }
         }
 
+        //TODO: move to Trigger instead
         public void FixTriggerInconsistencies()
         {
             //TODO: fix inconsistencies
+            if(CorrectInstigatorLocations.ContainsKey( TriggerCondition.TriggerAction) && CorrectInstigatorLocations[TriggerCondition.TriggerAction] != TriggerCondition.Subjekt.Location)
+            {
+                Debug.Log($"Fixed ability trigger {name}. '{TriggerCondition.TriggerAction}' instigator location should be {CorrectInstigatorLocations[TriggerCondition.TriggerAction]}, not {TriggerCondition.Subjekt.Location} ");
 
+                TriggerCondition.Subjekt.Location = CorrectInstigatorLocations[TriggerCondition.TriggerAction];
+            }
         }
 
         //internal bool AnyTriggerInconsistencies()
