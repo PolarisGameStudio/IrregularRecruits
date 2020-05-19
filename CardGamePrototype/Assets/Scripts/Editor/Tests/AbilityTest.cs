@@ -227,7 +227,7 @@ namespace Tests
             var testAbility = new PassiveAbility()
             {
                 ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.Resurrect, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Other), PassiveAbility.Verb.DIES),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Other,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard), PassiveAbility.Verb.DIES),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -375,6 +375,87 @@ namespace Tests
             Assert.IsTrue(targettedCards.Count == 2);
             Assert.IsTrue(targettedCards.Contains(OtherCard));
             Assert.IsTrue(targettedCards.Contains(TestCard));
+        }
+
+        [Test]
+        public void OwnerOnHandDoesNotTriggerAbility()
+        {
+
+            var testAbility = new PassiveAbility()
+            {
+                ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.Withdraw, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Hand);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            var triggered = false;
+
+            Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.HealthChange(-1);
+
+            Assert.AreEqual(OtherCard.MaxHealth - 1, OtherCard.CurrentHealth);
+
+            Assert.IsFalse(triggered);
+        }
+
+        [Test]
+        public void OwnerInDeckDoesNotTriggerAbility()
+        {
+
+            var testAbility = new PassiveAbility()
+            {
+                ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.Withdraw, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Library);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            var triggered = false;
+
+            Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.HealthChange(-1);
+
+            Assert.AreEqual(OtherCard.MaxHealth - 1, OtherCard.CurrentHealth);
+
+            Assert.IsFalse(triggered);
+        }
+
+        [Test]
+        public void OwnerOnBattlefieldTriggersAbility()
+        {
+
+            var testAbility = new PassiveAbility()
+            {
+                ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.Withdraw, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            var triggered = false;
+
+            Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
+
+            OtherCard.HealthChange(-1);
+
+            Assert.AreEqual(OtherCard.MaxHealth - 1, OtherCard.CurrentHealth);
+
+            Assert.IsTrue(triggered);
         }
         [Test]
         public void NounsTargetsCharacterItWhenOther()
@@ -649,8 +730,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.Withdraw, PassiveAbility.Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.DIES),
+                ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.Withdraw, PassiveAbility.Count.All, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -663,8 +744,8 @@ namespace Tests
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered++);
 
-            OtherCard.Die();
-            TestCard.Die();
+            OtherCard.HealthChange(-1);
+            TestCard.HealthChange(-1);
 
             Assert.AreEqual(triggered, 2);
         }
@@ -881,7 +962,7 @@ namespace Tests
             var testAbility = new PassiveAbility()
             {
                 ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.DealDamage, PassiveAbility.Count.All, dmg, new Noun(Noun.CharacterTyp.This)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.Withdraw),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Library), PassiveAbility.Verb.Withdraw),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -992,7 +1073,7 @@ namespace Tests
             var testAbility = new PassiveAbility()
             {
                 ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.Resurrect, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Other), PassiveAbility.Verb.DIES),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Other,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard), PassiveAbility.Verb.DIES),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -1013,6 +1094,32 @@ namespace Tests
             Assert.IsTrue(triggered);
             Assert.IsTrue(OtherCard.Alive());
         }
+        [Test]
+        public void TriggerThisDiesTriggers()
+        {
+
+            var testAbility = new PassiveAbility()
+            {
+                ResultingAction = new PassiveAbility.Action(PassiveAbility.ActionType.Resurrect, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.This, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Any, Deck.Zone.Graveyard), PassiveAbility.Verb.DIES),
+            };
+
+            TestCard = GenerateTestCreature(testAbility);
+            OtherCard = GenerateTestCreature(null);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            bool triggered = false;
+
+            Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
+
+            TestCard.Die();
+
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(TestCard.Alive());
+        }
+
         [Test]
         public void ActionStatminusExecutes()
         {

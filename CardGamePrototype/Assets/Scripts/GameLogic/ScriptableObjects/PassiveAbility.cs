@@ -41,7 +41,7 @@ namespace GameLogic
             return $"{TriggerCondition.Description(owner)}, {ResultingAction.Description(owner)}.";
         }
 
-        public void SetupListeners(IAbilityHolder _owner)
+        public void SetupListeners(AbilityHolder _owner)
         {
             RemoveListenerAction = AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner, TriggerCondition.Subjekt, ExecuteIfTrue);
             //TODO: replace with CardEvent Reference
@@ -58,7 +58,7 @@ namespace GameLogic
             return Value;
         }
 
-        private void ExecuteIfTrue(Card instigator, IAbilityHolder abilityOwner, Noun subject)
+        private void ExecuteIfTrue(Card instigator, AbilityHolder abilityOwner, Noun subject)
         {
             if (subject.CorrectNoun(instigator, abilityOwner))
                 ExecuteAction(abilityOwner, instigator);

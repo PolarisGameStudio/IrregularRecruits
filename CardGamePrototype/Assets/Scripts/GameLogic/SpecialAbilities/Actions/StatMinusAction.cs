@@ -11,7 +11,7 @@ namespace GameLogic
             return $"{target} lose {amount} Attack and Health";
         }
 
-        public override void ExecuteAction(Ability ability, IAbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, targets);

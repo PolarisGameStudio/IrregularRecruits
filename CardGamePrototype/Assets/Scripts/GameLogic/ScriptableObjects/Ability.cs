@@ -40,7 +40,7 @@ namespace GameLogic
 
         public Action ResultingAction;
 
-        protected void ExecuteAction(IAbilityHolder owner, Card triggerExecuter)
+        protected void ExecuteAction(AbilityHolder owner, Card triggerExecuter)
         {
             //Debug.Log("Trigger: " + TriggerCondition.Description(owner.Creature) + " is true");
             //Debug.Log("Executing: " + ResultingAction.Description(owner.Creature));
@@ -50,7 +50,7 @@ namespace GameLogic
             AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteAction(this, owner, targets);
         }
 
-        public List<Card> GetTargets(Noun targetType, IAbilityHolder _owner, Card triggerExecuter)
+        public List<Card> GetTargets(Noun targetType, AbilityHolder _owner, Card triggerExecuter)
         {
             List<Card> cardsInZone = BattleManager.Instance.GetCardsInZone(targetType.Location);
 

@@ -26,7 +26,7 @@ namespace GameLogic
         public static CardValueEvent OnStatMod = new CardValueEvent();
 
         //Ability,Owner,Targets . TODO: use holder class
-        public class AbilityEvent : UnityEvent<Ability, IAbilityHolder, List<Card>> { }
+        public class AbilityEvent : UnityEvent<Ability, AbilityHolder, List<Card>> { }
         public static AbilityEvent OnAbilityExecution = new AbilityEvent();
 
         //COMBAT EVENTS

@@ -11,7 +11,7 @@ namespace GameLogic
             return $"Heal {target} for {amount}";
         }
 
-        public override void ExecuteAction(Ability ability, IAbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
             targets.ForEach(c => c.HealthChange(ability.ResultingAction.Amount));

@@ -11,11 +11,11 @@ namespace GameLogic
             return $"draw {amount} cards";
         }
 
-        public override void ExecuteAction(Ability ability, IAbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, new List<Card>());
-            owner.InDeck().Draw(ability.ResultingAction.Amount);
+            owner.GetDeck().Draw(ability.ResultingAction.Amount);
         }
 
         public override float GetValue(float targetValue, int amount)

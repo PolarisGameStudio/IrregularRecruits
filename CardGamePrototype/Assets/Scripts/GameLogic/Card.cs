@@ -5,7 +5,7 @@ using System.Linq;
 namespace GameLogic
 {
 
-    public class Card : IAbilityHolder
+    public class Card : AbilityHolder
     {
         private Creature creature;
         public Creature Creature
@@ -19,7 +19,7 @@ namespace GameLogic
         //public CardUI BattleRepresentation;
 
         public string Name;
-        public Guid Guid = System.Guid.NewGuid();
+        private Guid Guid = System.Guid.NewGuid();
 
 
         public Deck InDeck;
@@ -321,16 +321,16 @@ namespace GameLogic
             }
         }
 
-        public Race Race()
+        public override Race GetRace()
         {
             return Creature.Race;
         }
 
-        Deck IAbilityHolder.InDeck()
+        public override Deck GetDeck()
         {
             return InDeck;
         }
 
-        Guid IAbilityHolder.Guid() => Guid;
+         public override Guid GetGuid() => Guid;
     }
 }

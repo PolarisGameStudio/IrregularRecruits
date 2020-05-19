@@ -93,7 +93,7 @@ namespace UI
 
             ui.SetCard(card);
 
-            CardUIs[card.Guid] = ui;
+            CardUIs[card.GetGuid()] = ui;
 
             StartCoroutine(ui.Flip(card.Location == Deck.Zone.Library, 0f));
 

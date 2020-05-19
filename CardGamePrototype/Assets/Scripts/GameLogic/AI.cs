@@ -63,5 +63,10 @@ namespace GameLogic
         {
             return null;
         }
+
+        public void UsedAction(Deck deck)
+        {
+
+        }
     }
 }

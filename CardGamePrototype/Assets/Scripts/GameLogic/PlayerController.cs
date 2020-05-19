@@ -18,13 +18,13 @@ namespace GameLogic
 
                 TurnFinished = onfinish;
 
-                Event.OnPlayerAction.AddListener(UsedPlayerAction);
+                Event.OnPlayerAction.AddListener(UsedAction);
             }
 
             deck.DrawInitialHand();
         }
 
-        private void UsedPlayerAction(Deck deck)
+        public void UsedAction(Deck deck )
         {
             if (deck != ControlledDeck)
                 return;
