@@ -193,7 +193,7 @@ namespace GameLogic
                 case Deck.Zone.Battlefield:
                     return str;
                 case Deck.Zone.Graveyard:
-                    return str + ", that are dead"; //TODO: remove. just for debugging now
+                    return "dead " + str; //TODO: remove. just for debugging now
                 case Deck.Zone.Hand:
                     switch (Relationship)
                     {
