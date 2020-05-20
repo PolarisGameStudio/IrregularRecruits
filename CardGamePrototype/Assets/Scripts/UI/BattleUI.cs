@@ -18,7 +18,7 @@ namespace UI
 
         public CardUI CardPrefab;
 
-        private static Dictionary<Guid, CardUI> CardUIs = new Dictionary<Guid, CardUI>();
+        private static Dictionary<Guid, AbilityHolderUI> CardUIs = new Dictionary<Guid, AbilityHolderUI>();
 
         public UIZone[] PlayerUIZones;
         public UIZone[] EnemyUIZones;
@@ -69,6 +69,11 @@ namespace UI
 
             SetupUI(playerDeck,true);
             SetupUI(opponentDeck,false);
+
+            if(playerDeck.Hero!= null)
+            {
+                HeroUI.Instance.SetHero(playerDeck.Hero);
+            }
 
             PlayerDeck = playerDeck;
             EnemyDeck = opponentDeck;
@@ -194,17 +199,14 @@ namespace UI
             //do ready attack animation
         }
 
-        internal static IEnumerator AbilityTriggered(Ability a, Guid card, IEnumerable<Guid> ts)
+        internal static IEnumerator AbilityTriggered(Ability a, Guid guid, IEnumerable<Guid> ts)
         {
-            CardUI ui = GetCardUI(card);
+            var ui = GetAbilityHolderUI(guid);
 
             if (!ui) yield break;
 
-            ui.CardAnimation.Highlight();
-
             yield return AnimationSystem.Instance.PlayAbilityFx(a, ui, ts.Select(GetCardUI).ToList(), 0.25f);
 
-            ui.CardAnimation.TurnOffHighlight();
         }
 
         private static CardUI GetCardUI(Guid cardGuid)
@@ -215,7 +217,23 @@ namespace UI
                 return null;
             }
 
-            CardUI ui = CardUIs[cardGuid];
+            var ui = CardUIs[cardGuid];
+
+            if (ui is CardUI)
+                return ui as CardUI;
+            else
+                return null;
+        }
+        
+        private static AbilityHolderUI GetAbilityHolderUI(Guid guid)
+        {
+            if (!CardUIs.ContainsKey(guid))
+            {
+                Debug.LogError("ui for guid not instantiated");
+                return null;
+            }
+
+            var ui = CardUIs[guid];
             return ui;
         }
 

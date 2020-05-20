@@ -96,7 +96,7 @@ namespace UI
             yield return ui.CardAnimation.Dissolve();
         }
 
-        private IEnumerator PlayCardFX(CardUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
+        private IEnumerator PlayCardFX(AbilityHolderUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
         {
             if (!card) yield break;
             //vector2 to ignore z position to prevent oddities
@@ -128,14 +128,14 @@ namespace UI
             }
         }
 
-        private IEnumerator PlayAbilityIconFx(CardUI abilityOwner, ParticleSystem[] fxs, float delay = 0)
+        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs, float delay = 0)
         {
-            if (!abilityOwner || !abilityOwner.CardAnimation.SpecialAbilityIcon) yield break;
-            abilityOwner.CardAnimation.HighlightAbility();
+            if (!abilityOwner ) yield break;
+            abilityOwner.HighlightAbility();
             //vector2 to ignore z position to prevent oddities
-            Vector2 position = abilityOwner.CardAnimation.SpecialAbilityIcon.transform.position;
-            PlayFx(fxs, position, abilityOwner.CardAnimation.SpecialAbilityIcon.transform);
 
+            Vector2 position = abilityOwner.SpecialAbilityIcon.transform.position;
+            PlayFx(fxs, position, abilityOwner.SpecialAbilityIcon.transform);
 
             yield return new WaitForSeconds(delay);
         }
@@ -157,7 +157,7 @@ namespace UI
             }
         }
 
-        public IEnumerator PlayAbilityFx(Ability ability, CardUI owner, List<CardUI> targets, float delay = 0)
+        public IEnumerator PlayAbilityFx(Ability ability, AbilityHolderUI owner, List<CardUI> targets, float delay = 0)
         {
             var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
 

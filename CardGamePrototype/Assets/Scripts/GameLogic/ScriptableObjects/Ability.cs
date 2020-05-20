@@ -37,6 +37,8 @@ namespace GameLogic
             All, One, Two, Three,
             COUNT
         }
+
+        public string Name;
         public Sprite Icon;
 
         public Action ResultingAction;

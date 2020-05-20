@@ -22,8 +22,6 @@ namespace UI
         public float DissolveSpeed = 1f;
         private float DissolveAmount;
 
-        public Image SpecialAbilityIcon;
-
         public LayoutElement LayoutElement;
         private float prefWidth;
 
@@ -79,14 +77,6 @@ namespace UI
             AnimationSystem.OnResurrect.Invoke();
         }
 
-        public void HighlightAbility()
-        {
-            if (!SpecialAbilityIcon) return;
-
-            LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one * 3.5f, 0.4f).setOnComplete(() =>
-                LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one, 0.3f));
-
-        }
 
         public void ChangeLayoutSizeWhileMoving()
         {

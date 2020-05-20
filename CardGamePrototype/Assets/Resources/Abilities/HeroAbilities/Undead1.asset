@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11dc8372b41758d429c1eb3ac0a9ce31, type: 3}
   m_Name: Undead1
   m_EditorClassIdentifier: 
+  Name: Drain Life
+  Icon: {fileID: 21300000, guid: 46afe013994398a4ca1a4a6a6440136f, type: 3}
   ResultingAction:
     ActionType: 3
     TargetCount: 1
@@ -23,5 +25,4 @@ MonoBehaviour:
       Race: 0
     Amount: 3
     Summons: {fileID: 0}
-  Cost: 1
   OncePrCombat: 0

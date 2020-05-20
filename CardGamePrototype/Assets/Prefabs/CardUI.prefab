@@ -876,7 +876,6 @@ MonoBehaviour:
   StatPlusAnimation: {fileID: 4710035850358601697}
   StatMinusAnimation: {fileID: 5181561675151185336}
   DissolveSpeed: 0.6
-  SpecialAbilityIcon: {fileID: 0}
   LayoutElement: {fileID: 4991445251926434332}
 --- !u!114 &6978953058678933244
 MonoBehaviour:
@@ -890,6 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce174aa9d08c90478426b29f36fb55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpecialAbilityIcon: {fileID: 3640668363075213114}
   Creature: {fileID: 0}
   FrontHolder: {fileID: 292642175116116442}
   CardBackHolder: {fileID: 3983243860329674903}

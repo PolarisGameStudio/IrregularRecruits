@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11dc8372b41758d429c1eb3ac0a9ce31, type: 3}
   m_Name: Undead3
   m_EditorClassIdentifier: 
+  Name: Poisonous Cloud
+  Icon: {fileID: 21300000, guid: 78154f5913bdf5449b9f86195dc8039b, type: 3}
   ResultingAction:
     ActionType: 3
     TargetCount: 0
@@ -23,5 +25,4 @@ MonoBehaviour:
       Race: 0
     Amount: 1
     Summons: {fileID: 0}
-  Cost: 1
   OncePrCombat: 0

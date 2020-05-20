@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: _HeroTestAbility
   m_EditorClassIdentifier: 
+  Name: Fury
+  Icon: {fileID: 21300000, guid: 574b5c2520dc4c14a91002629394a6da, type: 3}
   ResultingAction:
     ActionType: 1
     TargetCount: 1
