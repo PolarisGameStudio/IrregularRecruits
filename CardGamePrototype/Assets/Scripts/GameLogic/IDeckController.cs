@@ -9,6 +9,7 @@ namespace GameLogic
         void YourTurn();
         bool ActionAvailable();
         void UsedAction(Deck deck);
-        Hero GetHero();
+        void ResetActions();
+        int ActionsLeft();
     }
 }

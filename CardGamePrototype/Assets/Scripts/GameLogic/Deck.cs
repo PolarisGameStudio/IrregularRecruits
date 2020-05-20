@@ -12,6 +12,8 @@ namespace GameLogic
 
         private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 
+        public Hero Hero;
+
         public Deck(DeckObject deckObject)
             : this(deckObject.Creatures.Select(c => new Card(c)).ToList())
         {

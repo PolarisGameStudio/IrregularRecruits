@@ -22,7 +22,7 @@ namespace GameLogic
 
         public Deck InDeck;
 
-        public List<Ability> Abilities;
+        public List<Ability> Abilities = new List<Ability>();
 
         public int CurrentLevel = GetLevel(0);
 
@@ -53,7 +53,7 @@ namespace GameLogic
             this.heroObject = hero;
         }
 
-        private void AddAbility(Ability ability)
+        public void AddAbility(Ability ability)
         {
             if (ability as PassiveAbility)
                 (ability as PassiveAbility).SetupListeners(this);

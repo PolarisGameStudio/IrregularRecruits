@@ -1,5 +1,4 @@
-﻿using GameLogic;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,8 +7,9 @@ using Event = GameLogic.Event;
 namespace UI
 {
 
-    public class ActionsLeftUI : MonoBehaviour
+    public partial class ActionsLeftUI : MonoBehaviour
     {
+
         public ActionIcon ActionIconExample;
         private List<ActionIcon> ActionIcons = new List<ActionIcon>();
         private bool Initialized;

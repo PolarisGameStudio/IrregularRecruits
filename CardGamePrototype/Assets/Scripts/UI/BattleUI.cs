@@ -116,6 +116,7 @@ namespace UI
         {
             CardUI ui = GetCardUI(summon);
 
+            if (!ui) yield break;
 
             ui.CardAnimation.Highlight();
 
@@ -168,6 +169,8 @@ namespace UI
         {
             CardUI ui = GetCardUI(card);
 
+            if (!ui) yield break;
+
             ui.CardAnimation.Highlight();
 
             //TODO: should the effect be bfore or after
@@ -182,6 +185,8 @@ namespace UI
         {
             CardUI ui = GetCardUI(card);
 
+            if (!ui) yield break;
+
             Instance.Attacker = ui;
 
             yield return AnimationSystem.StartAttack(ui);
@@ -193,6 +198,8 @@ namespace UI
         {
             CardUI ui = GetCardUI(card);
 
+            if (!ui) yield break;
+
             ui.CardAnimation.Highlight();
 
             yield return AnimationSystem.Instance.PlayAbilityFx(a, ui, ts.Select(GetCardUI).ToList(), 0.25f);
@@ -203,7 +210,10 @@ namespace UI
         private static CardUI GetCardUI(Guid cardGuid)
         {
             if (!CardUIs.ContainsKey(cardGuid))
-                Debug.LogError("trying to move card without a ui instantiated");
+            {
+                Debug.LogError("ui for guid not instantiated");
+                return null;
+            }
 
             CardUI ui = CardUIs[cardGuid];
             return ui;
@@ -212,6 +222,8 @@ namespace UI
         internal static IEnumerator SetAttackTarget(Guid card)
         {
             CardUI ui = GetCardUI(card);
+
+            if (!ui) yield break;
 
             Instance.AttackTarget = ui;
 
@@ -239,6 +251,8 @@ namespace UI
         {
             CardUI ui = GetCardUI(card);
 
+            if (!ui) yield break;
+
             if (val < 0)
             {
                 ui.CardAnimation.DamageAnimation.Show(val);
@@ -260,6 +274,8 @@ namespace UI
         internal static IEnumerator CardStatsModified(Guid card, int val, int currentHealth, int currentAttack, bool damaged)
         {
             CardUI ui = GetCardUI(card);
+
+            if (!ui) yield break;
 
             ui.StatModifier(val);
 

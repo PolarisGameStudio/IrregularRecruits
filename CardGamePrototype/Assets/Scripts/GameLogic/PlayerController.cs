@@ -42,6 +42,11 @@ namespace GameLogic
         {
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
+            ResetActions();
+        }
+
+        public void ResetActions()
+        {
             PlayerActionsLeft = GameSettings.Instance.PlaysPrTurn;
 
         }
@@ -51,9 +56,6 @@ namespace GameLogic
             return PlayerActionsLeft > 0;
         }
 
-        public Hero GetHero()
-        {
-            return null;
-        }
+        public int ActionsLeft() => PlayerActionsLeft;
     }
 }

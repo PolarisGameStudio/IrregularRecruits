@@ -14,13 +14,14 @@ public class CombatPrototype : Singleton<CombatPrototype>
     private GameControl GC;
 
     public Creature TestCreature;
+    public HeroObject TestHero;
     public Race[] AllRaces;
     public Creature[] AllCreatures;
     public Creature[] AllHeroes;
 
     void Start()
     {
-        GC = new GameControl(TestCreature, AllRaces, AllCreatures);
+        GC = new GameControl(TestCreature, AllRaces, AllCreatures,TestHero);
 
         NextCombatButton.onClick.AddListener(GC.NextCombat);
         NextCombatButton.onClick.AddListener(() => NextCombatButton.gameObject.SetActive(false));

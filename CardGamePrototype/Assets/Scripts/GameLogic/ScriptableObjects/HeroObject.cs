@@ -14,7 +14,7 @@ namespace GameLogic
         public Race Race;
 
         public Sprite Portrait;
-        public PassiveAbility StartingAbility;
+        public Ability StartingAbility;
 
         public LevelOption Class;
         public LevelOption RaceOption;

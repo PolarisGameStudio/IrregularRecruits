@@ -6,14 +6,16 @@ namespace GameLogic
 {
     public class AI : IDeckController
     {
-        private Deck ControlledDeck;
+        public Deck ControlledDeck;
         private Action OnFinish;
-        private bool MyTurn;
+        public int ActionsLft;
+
+
 
         //this could be a more complex evaluation and move mechanics
         public void YourTurn()
         {
-            MyTurn = true;
+            ResetActions();
 
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
@@ -40,9 +42,12 @@ namespace GameLogic
                 }
             }
 
-            MyTurn = false;
-
             OnFinish.Invoke();
+        }
+
+        public void ResetActions()
+        {
+            ActionsLft = GameSettings.Instance.PlaysPrTurn;
         }
 
         public void SetupDeckActions(Deck deck, Action onFinish)
@@ -50,23 +55,23 @@ namespace GameLogic
             ControlledDeck = deck;
             OnFinish = onFinish;
 
+            Event.OnPlayerAction.AddListener(UsedAction);
+
             deck.DrawInitialHand(true);
         }
 
         public bool ActionAvailable()
         {
             //TODO: should AI actions always be possible?
-            return MyTurn;
+            return ActionsLft>0;
         }
 
-        public Hero GetHero()
-        {
-            return null;
-        }
+
+        public int ActionsLeft() => ActionsLft;
 
         public void UsedAction(Deck deck)
         {
-
+            if (deck == ControlledDeck) ActionsLft--;
         }
     }
 }

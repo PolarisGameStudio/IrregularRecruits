@@ -10,14 +10,16 @@ namespace GameLogic
         public  Deck PlayerDeck;
         public Deck EnemyDeck;
         public Creature TestCreature;
+        public HeroObject TestHero;
         public Race[] SpawnableRaces;
         public Creature[] EnemyCreatures;
         public int CombatDifficultyIncrease = 3;
         public int CombatRarityIncrease = 1;
 
-        public GameControl(Creature testCreature, Race[] races, Creature[] enmCreatures)
+        public GameControl(Creature testCreature, Race[] races, Creature[] enmCreatures,HeroObject testHero = null)
         {
             TestCreature = testCreature;
+            TestHero = testHero;
             SpawnableRaces = races; 
             EnemyCreatures = enmCreatures;
             
@@ -85,6 +87,15 @@ namespace GameLogic
             }
 
             var deck = new Deck(library);
+
+            if(player && TestHero)
+            {
+                var hero = new Hero(TestHero);
+
+                hero.InDeck = deck;
+
+                deck.Hero = hero;
+            }
 
 
             return deck;
