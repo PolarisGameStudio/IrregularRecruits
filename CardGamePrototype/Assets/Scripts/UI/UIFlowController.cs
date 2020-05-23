@@ -61,6 +61,8 @@ namespace UI
         {
             yield return null;
 
+            HeroUI.Instance?.UnlockAbilities();
+
             ActionsLeftUI.ActionsRefreshed.Invoke();
         }
         private IEnumerator ActionUsed(Deck deck)

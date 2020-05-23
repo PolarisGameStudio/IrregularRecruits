@@ -23,6 +23,9 @@ namespace UI
         public UIZone[] PlayerUIZones;
         public UIZone[] EnemyUIZones;
 
+        [Header("Ability Icons")]
+        public Color UnactivatableAbilityColor;
+
         public Button ViewPlayerDeckButton;
 
         [Serializable]
@@ -90,6 +93,15 @@ namespace UI
             {
                 CreateCardUI(card,playerDeck);
             }
+
+            if (deck.Hero != null)
+            {
+                CardUIs[deck.Hero.GetGuid()] = HeroUI.Instance;
+            }
+            else
+                HeroUI.Instance?.Disable();
+
+
         }
 
         private void CreateCardUI(Card card, bool playerDeck)
@@ -141,8 +153,12 @@ namespace UI
             Debug.Log("Destroying all card uis");
 
             foreach (var kp in CardUIs)
-                Destroy(kp.Value.gameObject);
+            {
+                if (kp.Value is HeroUI)
+                    continue;
 
+                Destroy(kp.Value.gameObject);
+            }
             CardUIs.Clear();
 
             OnBattleFinished.Invoke();

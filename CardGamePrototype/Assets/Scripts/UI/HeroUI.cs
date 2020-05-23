@@ -1,14 +1,21 @@
 ﻿using GameLogic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class HeroUI : Singleton<HeroUI>
+    public class HeroUI : AbilityHolderUI
     {
         public GameObject Holder;
         public Image HeroImage;
-        public Image AbilityImagePrefab;
+        public List<AbilityUI> AbilityImages;
+        public static HeroUI Instance;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
 
         public void SetHero(Hero hero)
@@ -23,18 +30,48 @@ namespace UI
 
             HeroImage.sprite = hero.HeroObject.Portrait;
 
-            AbilityImagePrefab.gameObject.SetActive(false);
+            AbilityImages.ForEach(a=> a.gameObject.SetActive(false));
 
-            foreach (var abil in hero.Abilities)
+            if (AbilityImages.Count < hero.Abilities.Count) 
+                Debug.LogError("not enough ability icons for Hero abilities");
+
+            for (int i = 0; i < hero.Abilities.Count; i++)
             {
-                var ui = Instantiate(AbilityImagePrefab, AbilityImagePrefab.transform.parent);
+                var ui = AbilityImages[i];
+                var abil = hero.Abilities[i];
 
-                ui.sprite = abil.Icon;
+                ui.SetAbility(abil,hero);
 
                 ui.gameObject.SetActive(true);
+
+                //TODO: set passive or active ability
+
+                AbilityIcons[abil] = ui;
             }
 
         }
+
+        public void LockAbilities()
+        {
+            foreach (var item in AbilityImages)
+            {
+                item.LockAbility();
+            }
+        }
+
+        public void UnlockAbilities()
+        {
+            foreach (var item in AbilityImages)
+            {
+                item.SetAbilityAsActivable();
+            }
+        }
+
+        public void Disable()
+        {
+            Holder.SetActive(false);
+        }
+
     }
 
 }

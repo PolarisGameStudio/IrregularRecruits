@@ -15,6 +15,6 @@ MonoBehaviour:
   name: Testoman
   Race: {fileID: 11400000, guid: 5635c48887d99084a9876306e16e608b, type: 2}
   Portrait: {fileID: 21300000, guid: 670025c3474fec048a80346209a2b43d, type: 3}
-  StartingAbility: {fileID: 11400000, guid: 4ba6096981e5a0f4fb96f0e1b16bcc44, type: 2}
+  StartingAbility: {fileID: 11400000, guid: abd86583d79d029478c6db6ccd497c73, type: 2}
   Class: {fileID: 0}
   RaceOption: {fileID: 0}

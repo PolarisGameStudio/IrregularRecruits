@@ -11,26 +11,10 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    [RequireComponent(typeof(RectTransform))]
-    public abstract class AbilityHolderUI : MonoBehaviour
-    {
-        public Image SpecialAbilityIcon;
-
-        internal void HighlightAbility()
-        {
-            if (!SpecialAbilityIcon) return;
-
-            LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one * 3.5f, 0.4f).setOnComplete(() =>
-                LeanTween.scale(SpecialAbilityIcon.rectTransform, Vector3.one, 0.3f));
-        }
-    }
 
     [RequireComponent(typeof(RectTransform))]
     public class CardUI : AbilityHolderUI,  IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
     {
-
-
-
         public Creature Creature;
 
         [Header("UI Refs")]

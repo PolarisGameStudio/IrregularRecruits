@@ -24,6 +24,11 @@ namespace GameLogic
 
         public List<Ability> Abilities = new List<Ability>();
 
+        public bool CanActivateAbility(Ability ability)
+        {
+            return GetDeck().DeckController.ActionAvailable();
+        }
+
         public int CurrentLevel = GetLevel(0);
 
         public static int[] LevelCaps = { 0, 10, 20, 30, 50, 80, 130, 210, 340, 550, 890, 20000 };

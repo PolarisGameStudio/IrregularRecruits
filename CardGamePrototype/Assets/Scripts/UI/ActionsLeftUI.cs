@@ -46,6 +46,9 @@ namespace UI
         {
             if (ActionIcons.Any(a => a.Active))
                 ActionIcons.First(a => a.Active).Active = false;
+
+            if (!ActionIcons.Any(a => a.Active))
+                HeroUI.Instance?.LockAbilities();
         }
 
         private void RefreshActions()

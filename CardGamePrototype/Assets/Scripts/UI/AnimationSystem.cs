@@ -128,14 +128,16 @@ namespace UI
             }
         }
 
-        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs, float delay = 0)
+        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs,Ability ability, float delay = 0)
         {
             if (!abilityOwner ) yield break;
-            abilityOwner.HighlightAbility();
+            var image = abilityOwner.HighlightAbility(ability);
+            if (!image) yield break;
+
             //vector2 to ignore z position to prevent oddities
 
-            Vector2 position = abilityOwner.SpecialAbilityIcon.transform.position;
-            PlayFx(fxs, position, abilityOwner.SpecialAbilityIcon.transform);
+            //Vector2 position = abilityOwner.SpecialAbilityIcon.transform.position;
+            PlayFx(fxs, image.transform.position, image.transform);
 
             yield return new WaitForSeconds(delay);
         }
@@ -163,7 +165,7 @@ namespace UI
 
 
             yield return PlayCardFX(owner, abilityFx.OwnerFX, delay );
-            yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, delay );
+            yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX,ability, delay );
 
             foreach (var t in targets)
                 yield return PlayCardFX(t, abilityFx.TargetFX, delay  / targets.Count());
