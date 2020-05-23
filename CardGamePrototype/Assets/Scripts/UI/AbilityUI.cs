@@ -15,6 +15,7 @@ namespace UI
         public Material OutlineMaterial;
         public Ability Ability;
         public Hero Owner;
+        public Button Button;
 
 
         public void SetAbilityAsActivable()
