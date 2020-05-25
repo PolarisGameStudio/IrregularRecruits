@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3693894c8fcfe5b4faad90f60259a824, type: 3}
-  m_Name: Summoner
+  m_Script: {fileID: 11500000, guid: 5075d7bc0f246934e900a42dc541a5b8, type: 3}
+  m_Name: Necromancer
   m_EditorClassIdentifier: 
-  name: 
-  Race: {fileID: 0}
-  Portrait: {fileID: 0}
-  StartingAbility: {fileID: 0}
-  Class: {fileID: 0}
+  Options: []

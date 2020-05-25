@@ -12,7 +12,7 @@ namespace UI
         public bool ActiveAbility;
         public Image AbilityImage;
         public Image BorderImage;
-        public Material OutlineMaterial;
+        public ParticleSystem OutlineParticles;
         public Ability Ability;
         public Hero Owner;
         public Button Button;
@@ -22,7 +22,8 @@ namespace UI
         {
             if (!ActiveAbility) return;
 
-            BorderImage.material.SetFloat("OutlineThickness", 3);
+            OutlineParticles.Play();
+
             AbilityImage.color = Color.white;
         }
 
@@ -30,7 +31,8 @@ namespace UI
         {
             if (!ActiveAbility) return;
 
-            BorderImage.material.SetFloat("OutlineThickness", 0);
+            OutlineParticles.Stop();
+
             AbilityImage.color = BattleUI.Instance.UnactivatableAbilityColor;
         }
 
@@ -71,12 +73,7 @@ namespace UI
 
             if (ActiveAbility)
             {
-                OutlineMaterial = Instantiate(OutlineMaterial);
-
-                BorderImage.material = OutlineMaterial;
-
                 SetAbilityAsActivable();
-
             }
         }
 

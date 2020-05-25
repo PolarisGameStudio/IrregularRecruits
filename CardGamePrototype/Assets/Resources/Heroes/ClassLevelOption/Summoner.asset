@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5075d7bc0f246934e900a42dc541a5b8, type: 3}
+  m_Name: Summoner
+  m_EditorClassIdentifier: 
+  Options:
+  - {fileID: 11400000, guid: 373e725c51a3d54478634fc3b9845474, type: 2}
+  - {fileID: 11400000, guid: 737a058f47e8dd74e8843b9e4c73c077, type: 2}
+  - {fileID: 11400000, guid: 9e5edfa048ef71c4591aa3ca00c5ca64, type: 2}
+  - {fileID: 11400000, guid: 87d5742623a58bc4ca17d335964e88bc, type: 2}
+  - {fileID: 11400000, guid: 5ea55e5d771ac474785ba247917c0db0, type: 2}

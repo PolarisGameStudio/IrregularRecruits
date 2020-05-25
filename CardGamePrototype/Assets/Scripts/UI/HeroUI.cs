@@ -8,15 +8,19 @@ namespace UI
     public class HeroUI : AbilityHolderUI
     {
         public GameObject Holder;
-        public Image HeroImage;
+        public Button HeroImage;
         public List<AbilityUI> AbilityImages;
         public static HeroUI Instance;
+        private Hero CurrentHero;
 
         private void Awake()
         {
             Instance = this;
 
+            HeroImage.onClick.AddListener(() => HeroView.Open(CurrentHero));
+
         }
+
 
 
         public void SetHero(Hero hero)
@@ -29,9 +33,11 @@ namespace UI
                 return;
             }
 
+            CurrentHero = hero;
+
             Holder.SetActive(true);
 
-            HeroImage.sprite = hero.HeroObject.Portrait;
+            HeroImage.image.sprite = hero.HeroObject.Portrait;
 
             AbilityImages.ForEach(a=> a.gameObject.SetActive(false));
 
