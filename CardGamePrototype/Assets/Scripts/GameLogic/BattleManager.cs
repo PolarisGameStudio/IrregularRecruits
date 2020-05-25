@@ -39,6 +39,9 @@ namespace GameLogic
 
         public void PackUp(Deck d)
         {
+            if(EnemyDeck!=null)
+                PlayerDeck?.Hero?.AwardXp(EnemyDeck.GetXpValue());
+
             PlayerDeck?.PackUp();
             EnemyDeck?.PackUp();
 

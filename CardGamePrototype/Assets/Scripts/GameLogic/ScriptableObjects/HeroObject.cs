@@ -1,5 +1,4 @@
-﻿    using GameLogic;
-using System;
+﻿using GameLogic;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace GameLogic
 {
 
     [CreateAssetMenu]
-    public class HeroObject : ScriptableObject
+    public partial class HeroObject : ScriptableObject
     {
         public new string name;
         public Race Race;
@@ -19,18 +18,12 @@ namespace GameLogic
         public LevelOption Class;
         public LevelOption RaceOption;
 
-        [CreateAssetMenu]
-        [Serializable]
-        public class LevelOption : ScriptableObject
-        {
-            public List<PassiveAbility> Options = new List<PassiveAbility>();
-        }
-
 
         //first level is 0
-        public List<PassiveAbility> GetLevelChoices(int level)
+        //TODO: remove
+        public List<Ability> GetLevelChoices(int level)
         {
-            var choices = new List<PassiveAbility>();
+            var choices = new List<Ability>();
 
             if (Class && Class.Options.Count > level)
             {

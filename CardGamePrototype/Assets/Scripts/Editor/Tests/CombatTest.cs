@@ -129,6 +129,38 @@ namespace Tests
             Assert.IsTrue(battleFinished);
         }
         [Test]
+        public void BattleRewardsCorrectXp()
+        {
+            var pDeck = GenerateTestDeck(6, true);
+            var enmDeck = GenerateTestDeck(2, false);
+
+            enmDeck.AddCard(new Card(new Creature()
+            {
+                Rarity = Creature.RarityType.Unique
+            }));
+            
+            enmDeck.AddCard(new Card(new Creature()
+            {
+                Rarity = Creature.RarityType.Rare
+            }));
+
+            Hero hero = new Hero(new HeroObject());
+            pDeck.Hero = hero;
+
+            var xp = hero.Xp;
+
+            var battleFinished = false;
+
+            var xpValue = enmDeck.GetXpValue();
+
+            Event.OnBattleFinished.AddListener(d => battleFinished = true);
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.IsTrue(battleFinished);
+            Assert.AreEqual(xp + xpValue, hero.Xp);
+        }
+        [Test]
         public void BattleResolvesAutomaticallyBigDeck()
         {
             var pDeck = GenerateTestDeck(50, true);

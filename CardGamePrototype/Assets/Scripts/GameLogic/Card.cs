@@ -64,6 +64,22 @@ namespace GameLogic
         }
 
         private int attack;
+
+        internal int XpValue()
+        {
+            switch (creature.Rarity)
+            {
+                case Creature.RarityType.Common:
+                    return 1;
+                case Creature.RarityType.Rare:
+                    return 3;
+                case Creature.RarityType.Unique:
+                    return 10;
+                default:
+                    return 1;
+            }
+        }
+
         public int Attack
         {
             get => attack;

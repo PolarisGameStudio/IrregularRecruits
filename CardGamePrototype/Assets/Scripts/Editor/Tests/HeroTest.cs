@@ -94,13 +94,14 @@ namespace Tests
             return testCard;
         }
 
-        private Hero GenerateHero(Ability ability, Race race = null)
+        private Hero GenerateHero(Ability ability, Race race = null,List<Ability> heroRaceAbilities = null)
         {
             var hero = new Hero(new HeroObject()
             {
                 StartingAbility = ability,
                 name = "Testeron",
-                Race = race
+                Race = race,
+                RaceOption = new LevelOption() { Options = heroRaceAbilities}
             });
 
             Deck testDeck = null;
@@ -402,6 +403,168 @@ namespace Tests
             Assert.IsNull(triggeredAblity);
             Assert.AreEqual(actions, 0);
             Assert.AreEqual(actions, TestHero.InDeck.DeckController.ActionsLeft()); 
+        }
+
+        [Test]
+        public void XpTriggersLevelUp()
+        {
+            TestHero = GenerateHero(null);
+
+            bool lvlUp = false;
+
+            var heroLevel = TestHero.CurrentLevel;
+
+            var levelPoints = TestHero.LevelUpPoints;
+
+            var xp = Hero.LevelCaps[heroLevel];
+
+            TestHero.OnLevelUp.AddListener(()=>lvlUp = true);
+
+            TestHero.AwardXp(xp);
+
+            Assert.IsTrue(lvlUp);
+            Assert.AreEqual(heroLevel + 1, TestHero.CurrentLevel);
+            Assert.AreEqual(levelPoints + 1, TestHero.LevelUpPoints);
+        }
+
+        [Test]
+        public void XpTriggersMultipleLevelUps()
+        {
+            TestHero = GenerateHero(null);
+
+            bool lvlUp = false;
+
+            var heroLevel = TestHero.CurrentLevel;
+            var levelPoints = TestHero.LevelUpPoints;
+
+            var xp = Hero.LevelCaps[heroLevel + 2];
+
+            TestHero.OnLevelUp.AddListener(() => lvlUp = true);
+
+            TestHero.AwardXp(xp);
+
+            Assert.IsTrue(lvlUp);
+            Assert.AreEqual(heroLevel + 3, TestHero.CurrentLevel);
+            Assert.AreEqual(levelPoints + 3, TestHero.LevelUpPoints);
+        }
+
+        [Test]
+        public void XpDoesNotTriggerLevelUp()
+        {
+
+            TestHero = GenerateHero(null);
+
+            bool lvlUp = false;
+
+            var heroLevel = TestHero.CurrentLevel;
+            var levelPoints = TestHero.LevelUpPoints;
+
+            TestHero.OnLevelUp.AddListener(() => lvlUp = true);
+
+            TestHero.AwardXp(1);
+
+            Assert.IsFalse(lvlUp);
+            Assert.AreEqual(heroLevel , TestHero.CurrentLevel);
+            Assert.AreEqual(levelPoints , TestHero.LevelUpPoints);
+        }
+
+        [Test]
+        public void AbilitySelectWhenLevelUpPoints()
+        {
+            var levelOptions = new List<Ability> { 
+                new PassiveAbility() { Name = "passive0" }, 
+                new ActiveAbility() { Name = "active1" }, 
+                new ActiveAbility() { Name = "active2" },
+                new PassiveAbility() { Name = "passive3" },
+                new ActiveAbility() { Name = "active4" } 
+            };
+
+            TestHero = GenerateHero(null,null, levelOptions);
+
+            var xp = Hero.LevelCaps[TestHero.CurrentLevel + 1];
+
+            TestHero.AwardXp(xp);
+
+            var levelPoints = TestHero.LevelUpPoints;
+
+            TestHero.SelectLevelUpAbility(levelOptions[0]);
+
+            Assert.IsTrue(TestHero.Abilities.Contains(levelOptions[0]));
+            Assert.AreEqual(levelPoints-1, TestHero.LevelUpPoints);
+        }
+
+        [Test]
+        public void AbilitySelectNotTooHighLevel()
+        {
+
+            var levelOptions = new List<Ability> {
+                new PassiveAbility() { Name = "passive0" },
+                new ActiveAbility() { Name = "active1" },
+                new ActiveAbility() { Name = "active2" },
+                new PassiveAbility() { Name = "passive3" },
+                new ActiveAbility() { Name = "active4" }
+            };
+
+            TestHero = GenerateHero(null, null, levelOptions);
+
+            var xp = Hero.LevelCaps[TestHero.CurrentLevel + 1];
+
+            TestHero.AwardXp(xp);
+
+            var levelPoints = TestHero.LevelUpPoints;
+
+            TestHero.SelectLevelUpAbility(levelOptions[TestHero.CurrentLevel]);
+
+            Assert.IsFalse(TestHero.Abilities.Contains(levelOptions[0]));
+            Assert.AreEqual(levelPoints, TestHero.LevelUpPoints);
+        }
+
+        [Test]
+        public void AbilitySelectNotPossibleWhenNoPoints()
+        {
+            var levelOptions = new List<Ability> {
+                new PassiveAbility() { Name = "passive0" },
+                new ActiveAbility() { Name = "active1" },
+                new ActiveAbility() { Name = "active2" },
+                new PassiveAbility() { Name = "passive3" },
+                new ActiveAbility() { Name = "active4" }
+            };
+
+            TestHero = GenerateHero(null, null, levelOptions);
+
+            var levelPoints = TestHero.LevelUpPoints;
+
+            TestHero.SelectLevelUpAbility(levelOptions[0]);
+
+            Assert.AreEqual(levelPoints, 0);
+            Assert.IsFalse(TestHero.Abilities.Contains(levelOptions[0]));
+            Assert.AreEqual(levelPoints, TestHero.LevelUpPoints);
+        }
+
+        [Test]
+        public void AbilitySelectNotPossibleWhenAlreadyHas()
+        {
+            var levelOptions = new List<Ability> {
+                new PassiveAbility() { Name = "passive0" },
+                new ActiveAbility() { Name = "active1" },
+                new ActiveAbility() { Name = "active2" },
+                new PassiveAbility() { Name = "passive3" },
+                new ActiveAbility() { Name = "active4" }
+            };
+
+            TestHero = GenerateHero(levelOptions[0], null, levelOptions);
+
+            var xp = Hero.LevelCaps[TestHero.CurrentLevel + 1];
+
+            TestHero.AwardXp(xp);
+
+            var levelPoints = TestHero.LevelUpPoints;
+
+            TestHero.SelectLevelUpAbility(levelOptions[0]);
+
+            Assert.IsTrue(TestHero.Abilities.Contains(levelOptions[0]));
+            //Not used points
+            Assert.AreEqual(levelPoints , TestHero.LevelUpPoints);
         }
     }
 

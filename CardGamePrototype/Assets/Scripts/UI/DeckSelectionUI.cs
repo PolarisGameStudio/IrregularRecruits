@@ -7,6 +7,7 @@ using Event = GameLogic.Event;
 
 namespace UI
 {
+
     public class DeckSelectionUI : MonoBehaviour
     {
         public Icon DeckIconInstance;
@@ -65,9 +66,9 @@ namespace UI
 
         public void Submit()
         {
-            Event.OnGameBegin.Invoke();
-
             CombatPrototype.SetPlayerDeck(Decks[SelectedDeck]);
+
+            Event.OnGameBegin.Invoke();
 
             Destroy(gameObject);
             //LeanTween.alpha(gameObject, 0, 2f).setOnComplete(() => Destroy(gameObject));

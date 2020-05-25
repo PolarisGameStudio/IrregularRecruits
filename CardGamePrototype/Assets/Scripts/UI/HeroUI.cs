@@ -15,11 +15,14 @@ namespace UI
         private void Awake()
         {
             Instance = this;
+
         }
 
 
         public void SetHero(Hero hero)
         {
+            Debug.Log("updating hero");
+
             if (hero == null)
             {
                 Holder.SetActive(false);

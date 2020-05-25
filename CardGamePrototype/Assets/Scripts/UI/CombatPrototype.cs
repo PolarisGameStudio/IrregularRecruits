@@ -48,4 +48,9 @@ public class CombatPrototype : Singleton<CombatPrototype>
     {
         GC.CombatDifficultyIncrease = i;
     }
+
+    internal static void SetPlayerHero(HeroObject heroObject)
+    {
+        Instance.GC.PlayerDeck.Hero = new Hero(heroObject);
+    }
 }

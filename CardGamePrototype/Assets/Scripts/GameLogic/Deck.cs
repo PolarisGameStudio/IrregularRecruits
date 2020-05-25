@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
@@ -43,6 +44,11 @@ namespace GameLogic
             card.Location = Zone.Library;
 
             Creatures[Zone.Library].Add(card);
+        }
+
+        public int GetXpValue()
+        {
+            return AllCreatures().Sum(creature => creature.XpValue());
         }
 
         public List<Card> CreaturesInZone(Zone z)

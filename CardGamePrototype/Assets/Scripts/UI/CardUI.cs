@@ -159,7 +159,7 @@ namespace UI
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            CardAnimation.TurnOffHighlight();
+            CardAnimation?.TurnOffHighlight();
             CardHighlight.Hide();
 
         }

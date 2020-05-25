@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3693894c8fcfe5b4faad90f60259a824, type: 3}
-  m_Name: Lich
+  m_Name: CatHero
   m_EditorClassIdentifier: 
-  name: Lakatos the Eternal
-  Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
-  Portrait: {fileID: 21300000, guid: 62a64e04e00b8584b8e86837affb347c, type: 3}
+  name: Black Catrine
+  Race: {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}
+  Portrait: {fileID: 21300000, guid: 7334a5d3f79d0ba4a814ecfc2dcb0453, type: 3}
   StartingAbility: {fileID: 11400000, guid: 4ba6096981e5a0f4fb96f0e1b16bcc44, type: 2}
   Class: {fileID: 0}
   RaceOption: {fileID: 11400000, guid: 4902f0fe36509294a9c82fbb7dbadf96, type: 2}

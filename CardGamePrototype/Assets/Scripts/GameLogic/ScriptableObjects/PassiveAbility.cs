@@ -49,7 +49,7 @@ namespace GameLogic
 
         public void RemoveListeners()
         {
-            RemoveListenerAction.Invoke();
+            RemoveListenerAction?.Invoke();
         }
 
         public float GetValue()

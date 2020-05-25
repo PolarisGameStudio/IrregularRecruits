@@ -1,9 +1,11 @@
 ﻿using GameLogic;
+using System;
 using System.Collections.Generic;
 
 public class DeckLibrary : Singleton<DeckLibrary>
 {
     public List<DeckObject> Decks;
+    public List<HeroObject> Heroes;
 
     public static List<DeckObject> GetDecks()
     {
@@ -14,5 +16,10 @@ public class DeckLibrary : Singleton<DeckLibrary>
 
         return Instance.Decks;
 
+    }
+
+    internal static List<HeroObject> GetHeroes()
+    {
+        return Instance.Heroes ;
     }
 }

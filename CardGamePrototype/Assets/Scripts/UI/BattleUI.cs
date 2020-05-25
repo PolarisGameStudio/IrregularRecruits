@@ -154,7 +154,7 @@ namespace UI
 
             foreach (var kp in CardUIs)
             {
-                if (kp.Value is HeroUI)
+                if (kp.Value is HeroUI || !kp.Value)
                     continue;
 
                 Destroy(kp.Value.gameObject);

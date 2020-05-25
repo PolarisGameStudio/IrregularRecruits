@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Events;
 
 namespace GameLogic
 {
@@ -31,7 +32,7 @@ namespace GameLogic
 
         public int CurrentLevel = GetLevel(0);
 
-        public static int[] LevelCaps = { 0, 10, 20, 30, 50, 80, 130, 210, 340, 550, 890, 20000 };
+        public static int[] LevelCaps = {  10, 20, 30, 50, 80, 130, 210, 340, 550, 890, 20000 };
         public static int GetLevel(int xp)
         {
             int level = 0;
@@ -41,11 +42,70 @@ namespace GameLogic
             return level - 1;
         }
 
+        public UnityEvent OnLevelUp = new UnityEvent();
+
+        public int LevelUpPoints { get; private set; }
+
+        private int xp = 0;
+
+        public int Xp
+        {
+            get
+            {
+                return xp;
+            }
+            set
+            {
+                if (value == xp)
+                    return;
+                xp = value;
+                var lvl = GetLevel((int)value);
+                //TODO: should check for extra level 
+                while (lvl > CurrentLevel)
+                {
+                    LevelUpPoints++;
+                    CurrentLevel++;
+                    OnLevelUp.Invoke();
+                }
+            }
+        }
+        
         public Hero(HeroObject h)
         {
             HeroObject = h;
         }
 
+        public void AwardXp(int xp)
+        {
+            Xp += xp;
+        }
+
+        public void SelectLevelUpAbility(Ability ability)
+        {
+            if (LevelUpPoints <= 0)
+                return;
+
+            if (!GetLevelUpOptions().Contains(ability))
+                return;
+
+            LevelUpPoints--;
+            AddAbility(ability);
+        }
+
+        public List<Ability> GetLevelUpOptions()
+        {
+            List<Ability> abilities = new List<Ability>();
+
+            if(heroObject.RaceOption)
+                abilities.AddRange(heroObject.RaceOption.Options.Take(GetLevel(Xp)));
+            if (heroObject.Class)
+                abilities.AddRange(heroObject.Class.Options.Take(GetLevel(Xp)));
+
+            abilities.RemoveAll(Abilities.Contains);
+
+            return abilities;
+
+        }
 
         public void SetHeroObject(HeroObject hero)
         {

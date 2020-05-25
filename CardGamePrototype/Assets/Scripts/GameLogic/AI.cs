@@ -10,8 +10,6 @@ namespace GameLogic
         private Action OnFinish;
         public int ActionsLft;
 
-
-
         //this could be a more complex evaluation and move mechanics
         public void YourTurn()
         {
@@ -55,6 +53,11 @@ namespace GameLogic
             ControlledDeck = deck;
             OnFinish = onFinish;
 
+            if(deck.Hero!= null)
+            {
+                deck.Hero.OnLevelUp.AddListener(SelectAbility);
+            }
+
             Event.OnPlayerAction.AddListener(UsedAction);
 
             deck.DrawInitialHand(true);
@@ -72,6 +75,16 @@ namespace GameLogic
         public void UsedAction(Deck deck)
         {
             if (deck == ControlledDeck) ActionsLft--;
+        }
+
+        private void SelectAbility()
+        {
+            var hero = ControlledDeck.Hero;
+
+            var possibleAbilities = hero.GetLevelUpOptions();
+
+            if(possibleAbilities.Count >0)
+                hero.SelectLevelUpAbility(possibleAbilities[UnityEngine.Random.Range(0, possibleAbilities.Count)]);
         }
     }
 }

@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 5075d7bc0f246934e900a42dc541a5b8, type: 3}
   m_Name: Undead
-  m_EditorClassIdentifier: GameLogic::HeroObject/LevelOption
+  m_EditorClassIdentifier: 
   Options:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 53ab7f4fe1b63c9478d886a4511e5fd0, type: 2}
+  - {fileID: 11400000, guid: 48429bdfc624e1e4486d3aba49ff84e5, type: 2}
+  - {fileID: 11400000, guid: b95666da3fbf8574f9037b331137d085, type: 2}
+  - {fileID: 11400000, guid: 40ec44e8772d5844492b9b4c971d0f89, type: 2}
+  - {fileID: 11400000, guid: dd72a52805530af4c815c0fcb32733ab, type: 2}
