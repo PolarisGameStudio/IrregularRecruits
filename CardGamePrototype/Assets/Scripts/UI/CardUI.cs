@@ -39,6 +39,9 @@ namespace UI
         public int HealthValueDisplayed;
         private Color ReducedStatsColor = new Color(0.75f, 0.75f, 0.75f);
 
+        //being dragged? maybe change name
+        public bool Moving { get; internal set; }
+
         public void SetCard(Card c)
         {
             UpdateCreature(c.Creature);

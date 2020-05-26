@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 
 namespace UI
 {
+
     public class BattleUI : Singleton<BattleUI>
     {
 
@@ -354,6 +355,7 @@ namespace UI
             //if children and a layout group
             if (zoneRect.childCount > 0 && zoneRect.GetComponent<LayoutGroup>())
             {
+
                 endPosition = zoneRect.GetChild(0).position;
             }
             else
