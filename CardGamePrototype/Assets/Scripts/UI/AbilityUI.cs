@@ -53,11 +53,13 @@ namespace UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Highlight
+            AbilityHighlight.Show(this);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             //dehighlight
+            AbilityHighlight.Hide();
         }
 
         public void SetAbility(Ability ability,Hero owner)

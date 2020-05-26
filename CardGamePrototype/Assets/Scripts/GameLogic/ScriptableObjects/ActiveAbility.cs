@@ -20,7 +20,7 @@ namespace GameLogic
 
         public override string Description(ICharacter owner)
         {
-            return $"{owner.GetName()} {ResultingAction.Description(owner)}.";
+            return $"Activate: {ResultingAction.Description(owner)}.";
         }
 
     }
