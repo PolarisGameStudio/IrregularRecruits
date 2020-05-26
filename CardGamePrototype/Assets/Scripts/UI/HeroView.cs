@@ -5,19 +5,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Event = GameLogic.Event;
 
 namespace UI
 {
     public class HeroView : Singleton<HeroView>
     {
-        public Material OutlineMaterial;
-
         public Image HeroImage;
         public TextMeshProUGUI HeroName;
         public TextMeshProUGUI XpText;
         public TextMeshProUGUI RaceText;
         public TextMeshProUGUI ClassText;
         public AbilityUI StartingAbility;
+        public Color NormalAbilityColor, NotSelectedColor, UnselectableColor;
 
         public GameObject Holder;
 
@@ -30,6 +30,11 @@ namespace UI
             public AbilityUI Class;
         }
 
+        private void Start()
+        {
+            Event.OnLevelUpSelection.AddListener(UpdateIcons);
+            Event.OnLevelUp.AddListener(UpdateIcons);
+        }
 
         public static void Open(Hero hero)
         {
@@ -45,18 +50,26 @@ namespace UI
 
             HeroImage.sprite = hero.HeroObject.Portrait;
 
-            HeroName.text = hero.Name;
+            HeroName.text = hero.GetName();
 
             XpText.text = $" {hero.Xp} / {Hero.LevelCaps[hero.CurrentLevel]}";
 
-            if(raceopt)
+            if (raceopt)
                 RaceText.text = raceopt.name;
 
-            if(classopt)
+            if (classopt)
                 ClassText.text = classopt.name;
 
             StartingAbility.SetAbility(hero.HeroObject.StartingAbility, hero);
 
+            UpdateIcons(hero);
+        }
+
+        private void UpdateIcons(Hero hero)
+        {
+
+            var raceopt = hero.HeroObject.RaceOption;
+            var classopt = hero.HeroObject.Class;
 
             for (int i = 0; i < LevelAbilities.Length; i++)
             {
@@ -66,11 +79,8 @@ namespace UI
                     opt.Race?.SetAbility(raceopt.Options[i], hero);
 
                 if (classopt && classopt.Options.Count > i)
-                    opt.Race?.SetAbility(classopt.Options[i], hero);
+                    opt.Class?.SetAbility(classopt.Options[i], hero);
             }
         }
-
-
-
     }
 }

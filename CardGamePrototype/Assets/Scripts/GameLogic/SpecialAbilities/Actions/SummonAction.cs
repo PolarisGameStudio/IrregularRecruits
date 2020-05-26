@@ -17,7 +17,7 @@ namespace GameLogic
 
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
 
-            if (owner == null || owner.GetDeck() == null || !summon)
+            if (owner == null || owner.InDeck == null || !summon)
                 return;
             Summon(summon, owner);
         }
@@ -26,7 +26,7 @@ namespace GameLogic
         {
             var card = new Card(summon);
 
-            owner.GetDeck().AddCard(card);
+            owner.InDeck.AddCard(card);
 
             Event.OnSummon.Invoke(card);
 

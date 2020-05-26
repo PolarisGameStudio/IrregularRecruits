@@ -142,8 +142,7 @@ MonoBehaviour:
     - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
-    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
+    OwnerFX: []
   - ActionType: 5
     AbilityIconFX:
     - {fileID: 19800006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
@@ -161,36 +160,31 @@ MonoBehaviour:
     - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
-    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
+    OwnerFX: []
   - ActionType: 8
     AbilityIconFX:
     - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
     TargetFX:
     - {fileID: 19800006, guid: bcaff8fc36e95584bb27cc3cf7c6cb14, type: 3}
-    OwnerFX:
-    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
+    OwnerFX: []
   - ActionType: 9
     AbilityIconFX:
     - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
-    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
+    OwnerFX: []
   - ActionType: 10
     AbilityIconFX:
     - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
-    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
+    OwnerFX: []
   - ActionType: 11
     AbilityIconFX:
     - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
-    OwnerFX:
-    - {fileID: 19800008, guid: e3d819d8722fa1f47a3f68574b56dfb3, type: 3}
+    OwnerFX: []
 --- !u!1 &6037112471735336766
 GameObject:
   m_ObjectHideFlags: 0

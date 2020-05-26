@@ -55,5 +55,11 @@ namespace GameLogic
         //should only be used by ui to determine card locations
         public class LocationChangeEvent : UnityEvent<Card, Deck.Zone, Deck.Zone> { }
         public static LocationChangeEvent OnChangeLocation = new LocationChangeEvent();
+
+
+        public class HeroEvent : UnityEvent<Hero> { }
+
+        public static HeroEvent OnLevelUpSelection = new HeroEvent();
+        public static HeroEvent OnLevelUp = new HeroEvent();
     }
 }

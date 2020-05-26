@@ -36,7 +36,7 @@ namespace GameLogic
         {
             return base.ToString();
         }
-        public string Description(Creature owner)
+        public override string Description(ICharacter owner)
         {
             return $"{TriggerCondition.Description(owner)}, {ResultingAction.Description(owner)}.";
         }

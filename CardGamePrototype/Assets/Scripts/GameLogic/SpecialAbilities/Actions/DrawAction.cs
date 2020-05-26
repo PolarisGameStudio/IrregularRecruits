@@ -15,7 +15,7 @@ namespace GameLogic
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, new List<Card>());
-            owner.GetDeck().Draw(ability.ResultingAction.Amount);
+            owner.InDeck.Draw(ability.ResultingAction.Amount);
         }
 
         public override float GetValue(float targetValue, int amount)

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GameLogic
 {
     [CreateAssetMenu]
-    public class Creature : ScriptableObject
+    public class Creature : ScriptableObject, ICharacter
     {
         public new string name;
         public RarityType Rarity;
@@ -27,5 +27,16 @@ namespace GameLogic
         {
             return Traits.Any(a => a.name == "Summoned");
         }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public Race GetRace()
+        {
+            return Race;
+        }
+
     }
 }

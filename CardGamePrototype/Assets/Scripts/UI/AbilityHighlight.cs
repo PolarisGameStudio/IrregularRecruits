@@ -1,61 +1,48 @@
-﻿using GameLogic;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
-    public class AbilityHighlight : Singleton<AbilityHighlight>
+    public class AbilityHighlight: Singleton<AbilityHighlight>
     {
-        public TextMeshProUGUI CardTitleText;
-        public TextMeshProUGUI AbilityDescription;
-        public TextMeshProUGUI AbilityTypeText;
-        public ImageTextEntry AbilityIcon;
-        public static Coroutine ShowAfterDelayRoutine;
-        private Ability Ability;
-
+        public TextMeshProUGUI Title;
+        public TextMeshProUGUI Description;
         public GameObject Holder;
 
-        private void Start()
-        {
-            Hide();
-        }
-
-        public static bool IsActive()
-        {
-            return Instance.Holder.activeSelf;
-        }
+        public static Coroutine ShowAfterDelayRoutine;
 
         //DISABLE mask if creature has small image
         //remember color the same as health and attack of card
-        public static void Show(AbilityUI ability)
+        public static void Show(AbilityUI card)
         {
             if (ShowAfterDelayRoutine == null)
-                ShowAfterDelayRoutine = Instance.StartCoroutine(Instance.ShowAfterDelay(ability));
+                ShowAfterDelayRoutine = Instance.StartCoroutine(Instance.ShowAfterDelay(card));
         }
 
-        private IEnumerator ShowAfterDelay(AbilityUI abili)
+        private IEnumerator ShowAfterDelay(AbilityUI ability)
         {
             yield return new WaitForSeconds(0.3f);
 
-            ShowCard(abili);
+            ShowCard(ability);
         }
 
-        private void ShowCard(AbilityUI abilityui)
+        private void ShowCard(AbilityUI abilityUI)
         {
             ShowAfterDelayRoutine = null;
 
+            Title.text = abilityUI.Ability.Name;
+            Description.text = abilityUI.Ability.Description(abilityUI.Owner);
+            
 
             var rect = GetComponent<RectTransform>();
-            rect.position = abilityui.GetComponent<RectTransform>().position;
+            rect.position = abilityUI.GetComponent<RectTransform>().position;
 
-            Instance.Holder.transform.localScale = Vector3.zero;
+            Holder.transform.localScale = Vector3.zero;
 
             LeanTween.scale(Instance.Holder, Vector3.one, 0.15f);
 
-            Instance.Holder.SetActive(true);
+            Holder.SetActive(true);
         }
 
         public static void Hide()
@@ -68,5 +55,7 @@ namespace UI
                 ShowAfterDelayRoutine = null;
             }
         }
+
+
     }
 }

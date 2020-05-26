@@ -16,7 +16,7 @@ namespace GameLogic
 
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
 
-            targets.ForEach(c => c.Charm(owner.GetDeck()));
+            targets.ForEach(c => c.Charm(owner.InDeck));
         }
 
         public override float GetValue(float targetValue, int amount)

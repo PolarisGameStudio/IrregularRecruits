@@ -18,16 +18,11 @@ namespace GameLogic
 
         //public CardUI BattleRepresentation;
 
-        public string Name;
-        private Guid Guid = System.Guid.NewGuid();
-
-        public Deck InDeck;
-
         public List<Ability> Abilities = new List<Ability>();
 
         public bool CanActivateAbility(Ability ability)
         {
-            return GetDeck().DeckController.ActionAvailable();
+            return InDeck.DeckController.ActionAvailable();
         }
 
         public int CurrentLevel = GetLevel(0);
@@ -42,7 +37,6 @@ namespace GameLogic
             return level - 1;
         }
 
-        public UnityEvent OnLevelUp = new UnityEvent();
 
         public int LevelUpPoints { get; private set; }
 
@@ -62,10 +56,10 @@ namespace GameLogic
                 var lvl = GetLevel((int)value);
                 //TODO: should check for extra level 
                 while (lvl > CurrentLevel)
-                {
+                { 
                     LevelUpPoints++;
                     CurrentLevel++;
-                    OnLevelUp.Invoke();
+                    Event.OnLevelUp.Invoke(this);
                 }
             }
         }
@@ -90,6 +84,7 @@ namespace GameLogic
 
             LevelUpPoints--;
             AddAbility(ability);
+            Event.OnLevelUpSelection.Invoke(this);
         }
 
         public List<Ability> GetLevelUpOptions()
@@ -129,14 +124,8 @@ namespace GameLogic
 
         public override Race GetRace()
         {
-            return HeroObject.Race;
+            return heroObject.Race;
         }
 
-        public override Deck GetDeck()
-        {
-            return InDeck;
-        }
-
-        public override Guid GetGuid() => Guid;
     }
 }

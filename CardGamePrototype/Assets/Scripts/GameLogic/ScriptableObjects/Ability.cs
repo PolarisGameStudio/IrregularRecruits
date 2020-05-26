@@ -85,7 +85,10 @@ namespace GameLogic
                 default:
                     return cards;
             }
+
         }
+
+        public abstract string Description(ICharacter owner);
 
         [Serializable]
         public struct Action
@@ -114,7 +117,7 @@ namespace GameLogic
                     Target.Location = ForcedActionTargetLocations[actionType];
             }
 
-            public string Description(Creature owner)
+            public string Description(ICharacter owner)
             {
                 return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, TargetCount), Amount, Summons);
             }

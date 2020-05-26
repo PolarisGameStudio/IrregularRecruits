@@ -10,12 +10,19 @@ namespace GameLogic
         public void ActivateAbility(AbilityHolder owner)
         {
             //TODO: should have different costs?
-            if (!owner.GetDeck().DeckController.ActionAvailable())
+            if (!owner.InDeck.DeckController.ActionAvailable())
                 return;
 
             ExecuteAction(owner, null);
 
-            owner.GetDeck().DeckController.UsedAction(owner.GetDeck());
+            owner.InDeck.DeckController.UsedAction(owner.InDeck);
         }
+
+        public override string Description(ICharacter owner)
+        {
+            return $"{owner.GetName()} {ResultingAction.Description(owner)}.";
+        }
+
     }
+
 }

@@ -101,7 +101,7 @@ namespace GameLogic
         }
         public bool CorrectAllegiance(Card instigator, AbilityHolder abilityOwner)
         {
-            if (instigator.InDeck == null || abilityOwner.GetDeck() == null)
+            if (instigator.InDeck == null || abilityOwner.InDeck == null)
                 return false;
 
             switch (Relationship)
@@ -109,22 +109,22 @@ namespace GameLogic
                 case Allegiance.Any:
                     return true;
                 case Allegiance.Friend:
-                    return instigator.InDeck == abilityOwner.GetDeck();
+                    return instigator.InDeck == abilityOwner.InDeck;
                 case Allegiance.Enemy:
-                    return instigator.InDeck != abilityOwner.GetDeck();
+                    return instigator.InDeck != abilityOwner.InDeck;
                 default:
                     return true;
             }
         }
 
-        public string NounAsString(Creature _owner, PassiveAbility.Count count = PassiveAbility.Count.One)
+        public string NounAsString(ICharacter _owner, PassiveAbility.Count count = PassiveAbility.Count.One)
         {
             var str = "";
 
             switch (Character)
             {
                 case CharacterTyp.This:
-                    return _owner.name;
+                    return _owner.GetName();
                 case CharacterTyp.It:
                     return "it";
                 case CharacterTyp.Any:
@@ -170,10 +170,10 @@ namespace GameLogic
                     str += "minion" + (count == PassiveAbility.Count.One ? "" : "s");
                     break;
                 case RaceType.Same:
-                    str += _owner.Race?.name + (count == PassiveAbility.Count.One ? "" : "s");
+                    str += _owner.GetRace()?.name + (count == PassiveAbility.Count.One ? "" : "s");
                     break;
                 case RaceType.Different:
-                    str += "non-" + _owner.Race?.name + (count == PassiveAbility.Count.One ? "" : "s");
+                    str += "non-" + _owner.GetRace()?.name + (count == PassiveAbility.Count.One ? "" : "s");
                     break;
             }
 
@@ -183,7 +183,7 @@ namespace GameLogic
                     switch (Relationship)
                     {
                         case Allegiance.Friend:
-                            return $"{str.Replace("friendly ", "")} in {_owner.name}'s deck";
+                            return $"{str.Replace("friendly ", "")} in {_owner.GetName()}'s deck";
                         case Allegiance.Enemy:
                             return $"{str.Replace("enemy ", "")} in the enemy deck";
                         case Allegiance.Any:
@@ -198,7 +198,7 @@ namespace GameLogic
                     switch (Relationship)
                     {
                         case Allegiance.Friend:
-                            return $"{str.Replace("friendly ", "")} in {_owner.name}'s hand";
+                            return $"{str.Replace("friendly ", "")} in {_owner.GetName()}'s hand";
                         case Allegiance.Enemy:
                             return $"{str.Replace("enemy ", "")} in the enemy hand";
                         case Allegiance.Any:

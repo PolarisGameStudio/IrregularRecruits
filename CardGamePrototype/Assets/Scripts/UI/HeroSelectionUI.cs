@@ -49,9 +49,6 @@ namespace UI
 
         private void ChooseHero(int i)
         {
-            Debug.Log("chosen:" + i);
-
-
             if(i >= AllHeroes.Count)
             {
                 HeroImage.gameObject.SetActive(false);

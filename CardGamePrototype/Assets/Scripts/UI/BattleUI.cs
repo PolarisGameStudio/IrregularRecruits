@@ -96,7 +96,7 @@ namespace UI
 
             if (deck.Hero != null)
             {
-                CardUIs[deck.Hero.GetGuid()] = HeroUI.Instance;
+                CardUIs[deck.Hero.Guid] = HeroUI.Instance;
             }
             else
                 HeroUI.Instance?.Disable();
@@ -110,7 +110,7 @@ namespace UI
 
             ui.SetCard(card);
 
-            CardUIs[card.GetGuid()] = ui;
+            CardUIs[card.Guid] = ui;
 
             StartCoroutine(ui.Flip(card.Location == Deck.Zone.Library, 0f));
 

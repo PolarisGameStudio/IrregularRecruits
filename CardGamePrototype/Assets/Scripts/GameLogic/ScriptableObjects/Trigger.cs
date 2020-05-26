@@ -42,7 +42,7 @@ namespace GameLogic
                 TriggerAction = triggerAction;
             }
 
-            public string Description(Creature _owner)
+            public string Description(ICharacter _owner)
             {
                 return AbilityProcessor.GetTrigger(TriggerAction).Description(Subjekt.NounAsString(_owner));
 

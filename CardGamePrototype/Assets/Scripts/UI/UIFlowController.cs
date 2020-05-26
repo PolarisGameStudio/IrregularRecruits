@@ -27,24 +27,24 @@ namespace UI
 
             Event.OnSummon.AddListener(card => AddCardEvent(BattleUI.Summon(card, card.InDeck == BattleUI.Instance.PlayerDeck)));
 
-            Event.OnUnSummon.AddListener(card => AddCardEvent(BattleUI.UnSummon(card.GetGuid())));
+            Event.OnUnSummon.AddListener(card => AddCardEvent(BattleUI.UnSummon(card.Guid)));
 
             //OnAttack-> (Card) Attack animation
-            Event.OnAttack.AddListener(card => AddCardEvent(BattleUI.SetAttacker(card.GetGuid())));
+            Event.OnAttack.AddListener(card => AddCardEvent(BattleUI.SetAttacker(card.Guid)));
             //On Being Attacked->
-            Event.OnBeingAttacked.AddListener(card => AddCardEvent(BattleUI.SetAttackTarget(card.GetGuid())));
+            Event.OnBeingAttacked.AddListener(card => AddCardEvent(BattleUI.SetAttackTarget(card.Guid)));
 
             //On Damage-> (Card, amount) & new health?
             //On healed
-            Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.GetGuid(), val,card.CurrentHealth,card.MaxHealth)));
+            Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val,card.CurrentHealth,card.MaxHealth)));
             
             //On Stat Change-> (Card, amount)
-            Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.GetGuid(), val, card.CurrentHealth, card.Attack,card.Damaged())));
+            Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack,card.Damaged())));
 
             Event.OnBattleFinished.AddListener(d => AddCardEvent(BattleUI.CleanUpUI()));
 
             //On Ability trigger->All the current Ability animation param
-            Event.OnAbilityExecution.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.GetGuid(),ts.Select(t=>t.GetGuid()))));
+            Event.OnAbilityExecution.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.Guid,ts.Select(t=>t.Guid))));
 
             Event.OnPlayerAction.AddListener(d => AddCardEvent(ActionUsed(d)));
             Event.OnTurnBegin.AddListener(() => AddCardEvent(RefreshActions()));
@@ -54,7 +54,7 @@ namespace UI
         {
             var playerdeck = BattleUI.Instance.PlayerDeck == card.InDeck;
 
-            AddCardEvent( BattleUI.Move(card.GetGuid(), to, from, playerdeck));
+            AddCardEvent( BattleUI.Move(card.Guid, to, from, playerdeck));
         }
 
         private IEnumerator RefreshActions()

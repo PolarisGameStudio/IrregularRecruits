@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
+
     public class CardHighlight : Singleton<CardHighlight>
     {
         public TextMeshProUGUI CardTitleText;
@@ -19,7 +20,7 @@ namespace UI
         public static Coroutine ShowAfterDelayRoutine;
         private Creature Creature;
 
-        private List<ImageTextEntry> InstantiatedObjects = new List<ImageTextEntry>();
+        private readonly List<ImageTextEntry> InstantiatedObjects = new List<ImageTextEntry>();
 
         public GameObject Holder;
 
@@ -120,11 +121,11 @@ namespace UI
             var rect = GetComponent<RectTransform>();
             rect.position = cardUI.GetComponent<RectTransform>().position;
 
-            Instance.Holder.transform.localScale = Vector3.zero;
+            Holder.transform.localScale = Vector3.zero;
 
             LeanTween.scale(Instance.Holder, Vector3.one, 0.15f);
 
-            Instance.Holder.SetActive(true);
+            Holder.SetActive(true);
         }
 
         public static void Hide()

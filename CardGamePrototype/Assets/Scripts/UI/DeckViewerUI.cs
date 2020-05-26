@@ -28,7 +28,7 @@ namespace UI
             InstatiatedObjects.ForEach(Destroy);
             InstatiatedObjects.Clear();
 
-            foreach (var c in deck.AllCreatures().OrderBy(c=> c.Name))
+            foreach (var c in deck.AllCreatures().OrderBy(c=> c.GetName()))
             {
                 var inst = Instantiate(CardUIInstance, CardUIInstance.transform.parent);
 

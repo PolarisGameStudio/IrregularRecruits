@@ -13,7 +13,7 @@ namespace UI
         internal void Setup(Card c)
         {
             Portrait.sprite = c.Creature.Image;
-            NameText.text = c.Name;
+            NameText.text = c.GetName();
         }
     }
 }

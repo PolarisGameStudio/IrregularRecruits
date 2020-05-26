@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class AbilityUI : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler
+    public class AbilityUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
     {
         //false == passive
+        public bool HeroViewAbility;
         public bool ActiveAbility;
         public Image AbilityImage;
         public Image BorderImage;
@@ -17,14 +18,19 @@ namespace UI
         public Hero Owner;
         public Button Button;
 
+        private void Start()
+        {
+            if (HeroViewAbility)
+                Button.onClick.AddListener(SelectLevelUp);
+            else
+                Button.onClick.AddListener(Activate);
+        }
 
         public void SetAbilityAsActivable()
         {
             if (!ActiveAbility) return;
 
             OutlineParticles.Play();
-
-            AbilityImage.color = Color.white;
         }
 
         public void LockAbility()
@@ -36,18 +42,13 @@ namespace UI
             AbilityImage.color = BattleUI.Instance.UnactivatableAbilityColor;
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (ActiveAbility)
-                Activate();
-        }
 
         private void Activate()
         {
-            (Ability as ActiveAbility).ActivateAbility(Owner);
-        }
+            if (!Ability || !(Ability is ActiveAbility)) return;
 
-        
+            (Ability as ActiveAbility).ActivateAbility(Owner);
+        }        
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -61,8 +62,6 @@ namespace UI
 
         public void SetAbility(Ability ability,Hero owner)
         {
-            if (ability == Ability) return;
-
             Ability = ability;
 
             ActiveAbility = ability is ActiveAbility;
@@ -71,12 +70,52 @@ namespace UI
 
             AbilityImage.sprite = ability.Icon;
 
-            if (ActiveAbility)
+            OutlineParticles.Stop();
+
+            if (HeroViewAbility)
+            {
+                //normal look
+                if(owner.Abilities.Contains(ability))
+                {
+                    AbilityImage.color = HeroView.Instance.NormalAbilityColor;
+
+                }
+                else if(owner.GetLevelUpOptions().Contains(ability))
+                {
+                    // Level up ability possible
+                    if(owner.LevelUpPoints >0)
+                    {
+                        OutlineParticles.Play();
+                        Button.interactable = true;
+                    }
+                    else
+                    {
+                        //unselected 
+                        AbilityImage.color = HeroView.Instance.NotSelectedColor;
+
+                        Button.interactable = false;
+                    }
+                }
+                else
+                {
+                    //unselectable look
+                    AbilityImage.color = HeroView.Instance.UnselectableColor;
+
+                    Button.interactable = false;
+
+                }
+            }
+            else if (ActiveAbility)
             {
                 SetAbilityAsActivable();
             }
         }
 
+        private void SelectLevelUp()
+        {
+            if(HeroViewAbility && OutlineParticles.isPlaying)
+                Owner.SelectLevelUpAbility(Ability);
+        }
 
     }
 

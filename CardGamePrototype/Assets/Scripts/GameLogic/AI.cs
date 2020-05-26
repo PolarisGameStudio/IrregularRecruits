@@ -55,7 +55,8 @@ namespace GameLogic
 
             if(deck.Hero!= null)
             {
-                deck.Hero.OnLevelUp.AddListener(SelectAbility);
+                //TODO: test that it was the correct hero
+                Event.OnLevelUp.AddListener(h=> SelectAbility());
             }
 
             Event.OnPlayerAction.AddListener(UsedAction);

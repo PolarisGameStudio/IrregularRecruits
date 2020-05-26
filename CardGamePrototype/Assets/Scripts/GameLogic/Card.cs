@@ -15,14 +15,10 @@ namespace GameLogic
                 SetCreature(value);
             }
         }
-
         //public CardUI BattleRepresentation;
 
-        public string Name;
-        private Guid Guid = System.Guid.NewGuid();
 
 
-        public Deck InDeck;
         public int MaxHealth;
         private int currentHealth;
         public int CurrentHealth
@@ -341,12 +337,5 @@ namespace GameLogic
         {
             return Creature.Race;
         }
-
-        public override Deck GetDeck()
-        {
-            return InDeck;
-        }
-
-         public override Guid GetGuid() => Guid;
     }
 }

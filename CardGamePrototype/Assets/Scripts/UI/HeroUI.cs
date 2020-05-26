@@ -21,12 +21,15 @@ namespace UI
 
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.X) && CurrentHero != null)
+                CurrentHero.AwardXp(Hero.LevelCaps[CurrentHero.CurrentLevel]);
+        }
 
 
         public void SetHero(Hero hero)
         {
-            Debug.Log("updating hero");
-
             if (hero == null)
             {
                 Holder.SetActive(false);

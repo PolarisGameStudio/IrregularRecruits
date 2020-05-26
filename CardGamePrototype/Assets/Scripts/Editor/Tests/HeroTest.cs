@@ -418,7 +418,7 @@ namespace Tests
 
             var xp = Hero.LevelCaps[heroLevel];
 
-            TestHero.OnLevelUp.AddListener(()=>lvlUp = true);
+            Event.OnLevelUp.AddListener(c => lvlUp = true);
 
             TestHero.AwardXp(xp);
 
@@ -439,7 +439,7 @@ namespace Tests
 
             var xp = Hero.LevelCaps[heroLevel + 2];
 
-            TestHero.OnLevelUp.AddListener(() => lvlUp = true);
+            Event.OnLevelUp.AddListener(c => lvlUp = true);
 
             TestHero.AwardXp(xp);
 
@@ -459,7 +459,7 @@ namespace Tests
             var heroLevel = TestHero.CurrentLevel;
             var levelPoints = TestHero.LevelUpPoints;
 
-            TestHero.OnLevelUp.AddListener(() => lvlUp = true);
+            Event.OnLevelUp.AddListener(c => lvlUp = true);
 
             TestHero.AwardXp(1);
 
