@@ -31,6 +31,8 @@ namespace UI
             if (!ActiveAbility) return;
 
             OutlineParticles.Play();
+
+            AbilityImage.color = HeroView.Instance.NormalAbilityColor;
         }
 
         public void LockAbility()
@@ -39,7 +41,7 @@ namespace UI
 
             OutlineParticles.Stop();
 
-            AbilityImage.color = BattleUI.Instance.UnactivatableAbilityColor;
+            AbilityImage.color = HeroView.Instance.UnselectableColor;
         }
 
 

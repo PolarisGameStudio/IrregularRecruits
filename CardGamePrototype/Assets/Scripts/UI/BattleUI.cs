@@ -23,9 +23,6 @@ namespace UI
         public UIZone[] PlayerUIZones;
         public UIZone[] EnemyUIZones;
 
-        [Header("Ability Icons")]
-        public Color UnactivatableAbilityColor;
-
         public Button ViewPlayerDeckButton;
 
         [Serializable]
@@ -51,6 +48,8 @@ namespace UI
         private List<Card> InitialPlayerDeck;
         public static UnityEvent OnBattleFinished = new UnityEvent();
         public static UnityEvent OnBattleBegin = new UnityEvent();
+
+        private int XpAtStartOfBattle;
 
         void Awake()
         {
@@ -83,6 +82,8 @@ namespace UI
 
             InitialPlayerDeck = playerDeck.AllCreatures();
             InitialEnemyDeck = opponentDeck.AllCreatures();
+
+            if (playerDeck.Hero != null) XpAtStartOfBattle = playerDeck.Hero.Xp;
 
             OnBattleBegin.Invoke();
         }
@@ -163,7 +164,9 @@ namespace UI
 
             OnBattleFinished.Invoke();
 
-            BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures());
+            var endXp = PlayerDeck.Hero != null ? PlayerDeck.Hero. Xp : 0;
+
+            BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp);
         }
 
         private RectTransform GetZoneHolder(Deck.Zone zone, bool enm)

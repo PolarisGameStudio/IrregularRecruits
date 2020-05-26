@@ -15,7 +15,8 @@ namespace GameLogic
 
             ExecuteAction(owner, null);
 
-            owner.InDeck.DeckController.UsedAction(owner.InDeck);
+            Event.OnPlayerAction.Invoke(owner.InDeck);
+            //owner.InDeck.DeckController.UsedAction(owner.InDeck);
         }
 
         public override string Description(ICharacter owner)

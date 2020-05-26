@@ -23,7 +23,7 @@ namespace GameLogic
 
         public enum RarityType { Common, Rare, Unique }
 
-        internal bool IsSummon()
+        public bool IsSummon()
         {
             return Traits.Any(a => a.name == "Summoned");
         }

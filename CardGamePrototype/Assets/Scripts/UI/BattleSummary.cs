@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace UI
 {
+
+
     public class BattleSummary : Singleton<BattleSummary>
     {
         [Header("Battle summary")]
@@ -13,6 +15,7 @@ namespace UI
         public UnitIcon BattleSummaryLostIcon;
         public UnitIcon BattleSummaryKilledIcon;
         public UnitIcon BattleSummaryGainedIcon;
+        public XpBar XpBar;
         private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
 
         private void Start()
@@ -20,9 +23,11 @@ namespace UI
             BattleSummaryHolder.SetActive(false);
         }
 
-        public static void ShowSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck)
+        public static void ShowSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck,int startXp, int endXp)
         {
             Instance.ShowBattleSummary(initialPlayerDeck, initialEnemyDeck, finalPlayerDeck, finalEnemyDeck);
+
+            Instance.XpBar.ShowXpGain(startXp, endXp);
         }
 
         private void ShowBattleSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck)

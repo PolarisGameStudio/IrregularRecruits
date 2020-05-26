@@ -27,8 +27,8 @@ namespace UI
             if (deck  == null|| !deck.DeckObject)
                 return;
 
-            var friends = cs.Where(c => deck.DeckObject.FriendRaces.Contains(c.Race)).ToList();
-            var possibles = cs.Where(c => !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToList();
+            var friends = cs.Where(c => !c.IsSummon() && deck.DeckObject.FriendRaces.Contains(c.Race)).ToList();
+            var possibles = cs.Where(c => !c.IsSummon() && !deck.DeckObject.EnemyRaces.Contains(c.Race)).ToList();
 
             DeckIcon.sprite = deck.DeckObject.DeckIcon;
             Deck = deck;
