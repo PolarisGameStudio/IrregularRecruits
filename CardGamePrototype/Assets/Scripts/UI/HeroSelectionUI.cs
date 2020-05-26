@@ -7,7 +7,7 @@ using Event = GameLogic.Event;
 
 namespace UI
 {
-    public class HeroSelectionUI : MonoBehaviour
+    public class HeroSelectionUI : Singleton<HeroSelectionUI>
     {
         public TextMeshProUGUI HeroName;
         public Button PreviousButton, NextButton;
@@ -23,9 +23,7 @@ namespace UI
             PreviousButton.onClick.AddListener(Previous);
             NextButton.onClick.AddListener(Next);
 
-            //HeroImage.onClick.AddListener(Showhero);
-
-            Event.OnGameBegin.AddListener(SelectHero);
+            //HeroImage.onClick.AddListener(()=>HeroView.Open(SelectedHero));
 
             Chosen = AllHeroes.Count;
         }
@@ -66,7 +64,7 @@ namespace UI
 
         }
 
-        private void SelectHero()
+        public void SubmitHero()
         {
             if (Chosen < AllHeroes.Count)
                 CombatPrototype.SetPlayerHero(AllHeroes[Chosen]);

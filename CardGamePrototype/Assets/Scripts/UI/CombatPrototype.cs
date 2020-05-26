@@ -25,6 +25,9 @@ public class CombatPrototype : Singleton<CombatPrototype>
 
         NextCombatButton.onClick.AddListener(GC.NextCombat);
         NextCombatButton.onClick.AddListener(() => NextCombatButton.gameObject.SetActive(false));
+
+        Event.OnGameBegin.AddListener(NextCombatButton.onClick.Invoke);
+
         BattleUI.OnBattleFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
     }
 
@@ -51,6 +54,8 @@ public class CombatPrototype : Singleton<CombatPrototype>
 
     internal static void SetPlayerHero(HeroObject heroObject)
     {
-        Instance.GC.PlayerDeck.Hero = new Hero(heroObject);
+        Hero hero = new Hero(heroObject);
+        Instance.GC.PlayerDeck.Hero = hero;
+        hero.InDeck = Instance.GC.PlayerDeck;
     }
 }

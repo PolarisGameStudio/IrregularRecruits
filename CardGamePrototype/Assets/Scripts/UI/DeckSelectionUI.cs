@@ -68,6 +68,8 @@ namespace UI
         {
             CombatPrototype.SetPlayerDeck(Decks[SelectedDeck]);
 
+            HeroSelectionUI.Instance.SubmitHero();
+
             Event.OnGameBegin.Invoke();
 
             Destroy(gameObject);
