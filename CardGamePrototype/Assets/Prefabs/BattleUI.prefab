@@ -8862,7 +8862,7 @@ MonoBehaviour:
     RectTransform: {fileID: 3660017128358087258}
     CardRotation: 0
     CardPosAdjust: 0
-  UnactivatableAbilityColor: {r: 0, g: 0, b: 0, a: 0}
+  UnactivatableAbilityColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.78431374}
   ViewPlayerDeckButton: {fileID: 3660017127621418220}
   PlayerDeckDescription: {fileID: 3660017127621418222}
   EnemyDeckDescription: {fileID: 3660017128962117136}
