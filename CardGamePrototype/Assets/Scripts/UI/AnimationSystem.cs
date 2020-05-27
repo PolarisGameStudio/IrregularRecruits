@@ -19,6 +19,8 @@ namespace UI
         public ParticleSystem[] ETBParticlesPrefab;
         public ParticleSystem[] DamageParticlesPrefab;
         public ParticleSystem[] DeathParticlesPrefab;
+        public ParticleSystem AbilitySelectParticles;
+        public ParticleSystem LevelUpParticles;
         public AbilityAnimationFX[] AbilityFx;
 
         public static UnityEvent OnDraw = new UnityEvent();
@@ -94,6 +96,15 @@ namespace UI
         internal static IEnumerator UnsummonFx(CardUI ui)
         {
             yield return ui.CardAnimation.Dissolve();
+        }
+
+        public static void PlayLevelupFX(Vector2 postion)
+        {
+            PlayFx( new [] { Instance.LevelUpParticles}, postion, null);
+        }
+        public static void PlayAbilitySelection(Vector2 postion)
+        {
+            PlayFx( new [] { Instance.AbilitySelectParticles}, postion, null);
         }
 
         private IEnumerator PlayCardFX(AbilityHolderUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)

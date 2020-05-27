@@ -112,6 +112,10 @@ MonoBehaviour:
   DeathParticlesPrefab:
   - {fileID: 198247871303120836, guid: e473029e4c70ad543a6879b82a732f4f, type: 3}
   - {fileID: 198330214428362902, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
+  AbilitySelectParticles: {fileID: 198858562690846188, guid: 968c924d2be019d4b9e67647551eec3e,
+    type: 3}
+  LevelUpParticles: {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68,
+    type: 3}
   AbilityFx:
   - ActionType: 0
     AbilityIconFX:

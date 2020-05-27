@@ -25,6 +25,10 @@ public class SoundController : Singleton<SoundController>
 
         BattleUI.OnBattleFinished.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
         BattleUI.OnBattleFinished.AddListener(() => PlayStinger(SoundBank.Stinger.BattleWon));
+        BattleUI.OnAbilitySelect.AddListener(() => PlayCardSound(SoundBank.CardSound.AbilitySelection));
+        BattleUI.OnLevelUp.AddListener(() => PlayCardSound(SoundBank.CardSound.LevelUp));
+
+
 
         AnimationSystem.OnDraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Draw));
         AnimationSystem.OnWithdraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Withdraw));

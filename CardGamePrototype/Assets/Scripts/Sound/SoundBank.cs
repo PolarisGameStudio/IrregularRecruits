@@ -52,7 +52,9 @@ public class SoundBank : Singleton<SoundBank>
         Draw,
         NoAbilityTarget,
         Resurrect,
-        Heal
+        Heal,
+        AbilitySelection,
+        LevelUp
     }
 
 

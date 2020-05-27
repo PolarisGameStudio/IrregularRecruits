@@ -125,6 +125,10 @@ namespace UI
         {
             if(HeroViewAbility && OutlineParticles.isPlaying)
                 Owner.SelectLevelUpAbility(Ability);
+
+            AnimationSystem.PlayAbilitySelection(transform.position);
+
+            BattleUI.OnAbilitySelect.Invoke();
         }
 
     }

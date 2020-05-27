@@ -48,8 +48,14 @@ namespace UI
         public Deck EnemyDeck;
         private List<Card> InitialEnemyDeck;
         private List<Card> InitialPlayerDeck;
+
         public static UnityEvent OnBattleFinished = new UnityEvent();
         public static UnityEvent OnBattleBegin = new UnityEvent();
+
+        //TODO: move these to animation system
+        public static UnityEvent OnAbilitySelect = new UnityEvent();
+        public static UnityEvent OnLevelUp = new UnityEvent();
+
 
         private int XpAtStartOfBattle;
 

@@ -42,6 +42,9 @@ namespace UI
                 if (startLevel < currentLevel)
                 {
                     XpBarText.text = "LEVEL UP!!!";
+                    BattleUI.OnLevelUp.Invoke();
+                    AnimationSystem.PlayAbilitySelection(XpBarText.transform.position);
+
 
                     //trigger levelup in ui
 
