@@ -15,12 +15,12 @@ namespace UI
 
         void OnEnable()
         {
-            Hide();
+            HideNow();
         }
 
         public void Show(int dmg)
         {
-            Hide();
+            HideNow();
 
             Text.text = dmg.ToString("N0");
             if (gameObject)
@@ -39,10 +39,13 @@ namespace UI
             }
         }
 
-        public void Hide()
+        private void HideNow()
         {
+            gameObject.transform.localScale = Vector3.zero;
+        }
 
-
+        private void Hide()
+        {
             LeanTween.scale(gameObject, Vector3.zero, 0.2f).setEase(TweenType);
 
         }

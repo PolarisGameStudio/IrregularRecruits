@@ -44,7 +44,7 @@ namespace GameLogic
 
             public string Description(ICharacter _owner)
             {
-                return AbilityProcessor.GetTrigger(TriggerAction).Description(Subjekt.NounAsString(_owner));
+                return AbilityProcessor.GetTrigger(TriggerAction).Description(Subjekt.NounAsString(_owner,Count.One,TriggerAction));
 
             }
 

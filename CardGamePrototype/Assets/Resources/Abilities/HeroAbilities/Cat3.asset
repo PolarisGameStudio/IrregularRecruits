@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
-  m_Name: WhenRaceIsWithDrawnWithdrawEnemy
+  m_Name: Cat3
   m_EditorClassIdentifier: 
-  Name: 
-  Icon: {fileID: 0}
+  Name: Playing with the Prey
+  Icon: {fileID: 21300000, guid: 858d1b3c0fcc6ac4d855bda87493d991, type: 3}
   ResultingAction:
     ActionType: 4
     TargetCount: 1
@@ -28,7 +28,7 @@ MonoBehaviour:
   Value: 0
   TriggerCondition:
     Subjekt:
-      Character: 2
+      Character: 0
       Location: 0
       Relationship: 1
       DamageState: 0

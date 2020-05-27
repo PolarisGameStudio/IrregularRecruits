@@ -117,7 +117,7 @@ namespace GameLogic
             }
         }
 
-        public string NounAsString(ICharacter _owner, PassiveAbility.Count count = PassiveAbility.Count.One)
+        public string NounAsString(ICharacter _owner, Ability.Count count = Ability.Count.One, PassiveAbility.Verb triggerAction = PassiveAbility.Verb.COUNT)
         {
             var str = "";
 
@@ -180,6 +180,9 @@ namespace GameLogic
             switch (Location)
             {
                 case Deck.Zone.Library:
+                    //redundant to describe withdraw to library
+                    if (triggerAction == PassiveAbility.Verb.Withdraw)
+                        return str;
                     switch (Relationship)
                     {
                         case Allegiance.Friend:
@@ -193,8 +196,14 @@ namespace GameLogic
                 case Deck.Zone.Battlefield:
                     return str;
                 case Deck.Zone.Graveyard:
-                    return str; //TODO: remove. just for debugging now
+
+                    if (triggerAction == PassiveAbility.Verb.DIES)
+                        return str;
+                    return str + ", that is dead"; //TODO: remove. just for debugging now
                 case Deck.Zone.Hand:
+                    if (triggerAction == PassiveAbility.Verb.Draw)
+                        return str;
+
                     switch (Relationship)
                     {
                         case Allegiance.Friend:
