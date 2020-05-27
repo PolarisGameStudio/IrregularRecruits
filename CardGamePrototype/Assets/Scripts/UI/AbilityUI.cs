@@ -32,7 +32,9 @@ namespace UI
 
             OutlineParticles.Play();
 
-            AbilityImage.color = HeroView.Instance.NormalAbilityColor;
+            Button.interactable = true;
+
+            //AbilityImage.color = HeroView.Instance.NormalAbilityColor;
         }
 
         public void LockAbility()
@@ -41,13 +43,17 @@ namespace UI
 
             OutlineParticles.Stop();
 
-            AbilityImage.color = HeroView.Instance.UnselectableColor;
+            Button.interactable = false;
+
+            //AbilityImage.color = HeroView.Instance.UnselectableColor;
         }
 
 
         private void Activate()
         {
             if (!Ability || !(Ability is ActiveAbility)) return;
+
+            LockAbility();
 
             (Ability as ActiveAbility).ActivateAbility(Owner);
         }        
