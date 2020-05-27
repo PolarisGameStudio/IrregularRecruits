@@ -20,15 +20,18 @@ namespace UI
         private IEnumerator XpGainAnimation(int from, int gain)
         {
             var currentLevel = Hero.GetLevel(from);
-            var startLevel = currentLevel;
+            var lastLevel = currentLevel;
             var currentValue = from;
             var targetValue = from + gain;
+
+            bool leveledUp = false;
 
             while (currentValue < targetValue)
             {
                 currentValue += FillSpeed;
 
-                XpBarText.text = $"{currentValue - from} XP gained!";
+                if(!leveledUp)
+                    XpBarText.text = $"{currentValue - from} XP gained!";
 
                 currentLevel = Hero.GetLevel(currentValue);
 
@@ -39,12 +42,14 @@ namespace UI
                 FillImage.fillAmount = Mathf.Lerp(0f, 1f, (currentValue-lastXp)/(float)(nextlevelXp-lastXp) );
 
                 yield return new WaitForSeconds(0.2f);
-                if (startLevel < currentLevel)
+                if (lastLevel < currentLevel)
                 {
+                    lastLevel = currentLevel;
+                    leveledUp = true;
+
                     XpBarText.text = "LEVEL UP!!!";
                     BattleUI.OnLevelUp.Invoke();
                     AnimationSystem.PlayAbilitySelection(XpBarText.transform.position);
-
 
                     //trigger levelup in ui
 

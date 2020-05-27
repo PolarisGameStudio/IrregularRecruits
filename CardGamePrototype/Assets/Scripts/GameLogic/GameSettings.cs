@@ -24,7 +24,7 @@ public class GameSettings
     public int StartingHandSize = 3;
     public int PlaysPrTurn = 2;
     //player draw amount
-    public int DrawPrTurn = 2;
+    public int DrawPrTurn = 1;
     //Battlefield size
     public int MaxCreaturesOnBattlefield;
     //AttackOrderParadigm
