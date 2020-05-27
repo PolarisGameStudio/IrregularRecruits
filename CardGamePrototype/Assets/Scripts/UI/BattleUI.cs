@@ -31,6 +31,7 @@ namespace UI
         {
             public Deck.Zone Zone;
             public RectTransform RectTransform;
+            public CardLayoutGroup CardLayout;
             public int CardRotation;
             public float CardPosAdjust;
         }
@@ -170,11 +171,11 @@ namespace UI
             BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp);
         }
 
-        private RectTransform GetZoneHolder(Deck.Zone zone, bool enm)
+        private CardLayoutGroup GetZoneHolder(Deck.Zone zone, bool enm)
         {
             var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;
 
-            return z.FirstOrDefault(u => u.Zone == zone).RectTransform;
+            return z.FirstOrDefault(u => u.Zone == zone).CardLayout;
         }
 
         private float GetZoneAdjust(Deck.Zone zone, bool enm)
@@ -342,33 +343,33 @@ namespace UI
             if (!card) yield break;
 
             var rect = card.GetComponent<RectTransform>();
-            var startPos = rect.position;
-            var zoneRect = GetZoneHolder(zone, !player);
+            Vector2 startPos = rect.position;
+            var zoneHolder = GetZoneHolder(zone, !player);
 
-            if (!zoneRect) yield break;
+            if (!zoneHolder) yield break;
 
             var startTime = Time.time;
             float posAdjust = GetZoneAdjust(zone, !player);
             var rot = GetZoneRotation(zone, !player);
-            Vector3 endPosition;
+            Vector2 endPosition =  zoneHolder.GetLastPosition();
 
             //if children and a layout group
-            if (zoneRect.childCount > 0 && zoneRect.GetComponent<LayoutGroup>())
-            {
+            //if (zoneRect.childCount > 0 && zoneRect.GetComponent<LayoutGroup>())
+            //{
 
-                endPosition = zoneRect.GetChild(0).position;
-            }
-            else
-                endPosition = zoneRect.position;
+            //    endPosition = zoneRect.GetChild(0).position;
+            //}
+            //else
+            //    endPosition = zoneRect.position;
 
-            endPosition += new Vector3(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
+            endPosition += new Vector2(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
 
             rect.Rotate(new Vector3(0, 0, Random.Range(-rot, rot)));
 
             //TODO: use lean tween instead
             //LeanTween.move(card.BattleRepresentation.gameObject, endPosition, duration).setEaseInExpo();//.setOnComplete(c => rect.SetParent(zoneRect));
 
-            card.CardAnimation.ChangeLayoutSizeWhileMoving();
+            //card.CardAnimation.ChangeLayoutSizeWhileMoving();
 
             var adjustDirection = (startPos - endPosition);
 
@@ -382,14 +383,14 @@ namespace UI
 
                 rect.position = Vector3.LerpUnclamped(startPos, endPosition, t);
 
-                rect.position += MoveAnimationCurve.Evaluate(t) * adjustDirection;
+                rect.position += (Vector3) (MoveAnimationCurve.Evaluate(t) * adjustDirection);
 
             }
 
-            rect.SetParent(zoneRect);
+            zoneHolder.AddChild(card);
             //TODO: hack that should not be needed
-            rect.localScale = Vector3.one;
-            rect.SetAsFirstSibling();
+            //rect.localScale = Vector3.one;
+            //rect.SetAsFirstSibling();
 
 
             yield return card.Flip(zone == Deck.Zone.Library || (!player && zone == Deck.Zone.Hand));

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,48 +9,46 @@ namespace UI
     [RequireComponent(typeof(RectTransform))]
     public class CardLayoutGroup : MonoBehaviour
     {
+        [Header("If the layout should stick to one point")]
+        public bool PointOnly;
         public AnimationCurve XPosition;
         public AnimationCurve YPosition;
         private RectTransform RectTransform;
-        public float StopThreshold = 0.02f;
+
+        public int MinimumPositions = 4;
+        public int MaximumPositions = 8;
 
         private List<CardUI> ChildCards = new List<CardUI>();
 
         private Vector2[] ChildDesiredPositions;
+        private Vector2 StartPos, EndPos;
+
 
         private void OnEnable()
         {
             ChildCards = GetComponentsInChildren<CardUI>().ToList();
             RectTransform = GetComponent<RectTransform>();
+
+            Vector3[] v = new Vector3[4];
+            RectTransform.GetWorldCorners(v);
+
+            StartPos = v[0];
+            EndPos = v[2];
         }
 
-        //private void Update()
-        //{
-        //    if (ChildCards.Count != ChildDesiredPositions.Length)
-        //        UpdateChildrenPositions();
-
-        //    for (int i = 0; i < ChildCards.Count; i++)
-        //    {
-        //        var card = ChildCards[i];
-        //        var desiredPos = ChildDesiredPositions[i];
-
-        //        Vector2 position = card.transform.position;
-
-        //        if ((position - desiredPos).SqrMagnitude() <= StopThreshold)
-        //            continue;
-
-        //    }
-        //}
 
         public void AddChild(CardUI cardUI)
         {
             var parent = cardUI.GetComponentInParent<CardLayoutGroup>();
 
-            parent.RemoveChild(cardUI);
+            if(parent)
+                parent.RemoveChild(cardUI);
 
             ChildCards.Add(cardUI);
 
             cardUI.transform.parent = this.RectTransform;
+
+            cardUI.transform.localScale = Vector3.one;
 
             UpdateChildrenPositions();
         }
@@ -64,19 +63,21 @@ namespace UI
         //Should ensure that each card has a 
         private void UpdateChildrenPositions()
         {
+            ChildCards.RemoveAll((c) => !c );
+
+
             int count = ChildCards.Count;
 
             //should the movements be set in 
             ChildDesiredPositions = new Vector2[count];
 
             Vector2 middle = RectTransform.position;
-            var bottomLeft = middle - RectTransform.sizeDelta / 2;
+            //var bottomLeft = middle - RectTransform.sizeDelta / 2;
+            //var topRight = middle + RectTransform.sizeDelta / 2;
 
             for (int i = 0; i < count; i++)
             {
-                var x = i / count;
-
-                ChildDesiredPositions[i] = new Vector2(XPosition.Evaluate(x), YPosition.Evaluate(x)) + bottomLeft;
+                ChildDesiredPositions[i] = EvaluatePosition( i);
             }
 
 
@@ -85,11 +86,45 @@ namespace UI
                 var card = ChildCards[i];
                 var desiredPos = ChildDesiredPositions[i];
 
-                card.transform.LeanMove(desiredPos, Random.Range(0.1f, 0.3f));
-
+                if(!PointOnly)
+                    card.transform.LeanMove(desiredPos, UnityEngine.Random.Range(0.1f, 0.3f));
             }
 
             // update child as movingToPosition, to only check those cards
+        }
+
+        private Vector2 EvaluatePosition(int index)
+        {
+            if (PointOnly) return RectTransform.position;
+
+            if (index < 0) index = 0;
+
+            int count = ChildCards.Count > 0 ? ChildCards.Count : 1;
+
+            if(count < MinimumPositions)
+            {
+                var newCount = MinimumPositions % 2 == count % 2 ? MinimumPositions : MinimumPositions -1; 
+
+                index += Mathf.RoundToInt((newCount - count) / 2f);
+
+                count = newCount;
+            }
+            else if(count > MaximumPositions)
+            {
+                var newCount = MaximumPositions % 2 == count % 2 ? MaximumPositions : MaximumPositions + 1;
+
+                index += Mathf.RoundToInt((newCount - count) / 2f);
+
+                count = newCount;
+            }
+
+            var relativePos = (index + 0.5f) / count;
+
+            Vector2 vector2 = new Vector2(
+                Mathf.LerpUnclamped(StartPos.x, EndPos.x, XPosition.Evaluate(relativePos)),
+                Mathf.LerpUnclamped(StartPos.y, EndPos.y, YPosition.Evaluate(relativePos)));
+
+            return vector2;
         }
 
 
@@ -126,6 +161,11 @@ namespace UI
 
             }
 
+        }
+
+        internal Vector2 GetLastPosition()
+        {
+            return EvaluatePosition(ChildCards.Count-1);
         }
     }
 

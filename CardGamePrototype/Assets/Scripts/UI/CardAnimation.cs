@@ -78,29 +78,29 @@ namespace UI
         }
 
 
-        public void ChangeLayoutSizeWhileMoving()
-        {
-            StartCoroutine(ChangeWidthToMove());
-        }
+        //public void ChangeLayoutSizeWhileMoving()
+        //{
+        //    StartCoroutine(ChangeWidthToMove());
+        //}
 
-        private IEnumerator ChangeWidthToMove()
-        {
-            var parent = transform.parent;
+        //private IEnumerator ChangeWidthToMove()
+        //{
+        //    var parent = transform.parent;
 
-            var anitime = 0.2f;
-            var start = Time.time;
+        //    var anitime = 0.2f;
+        //    var start = Time.time;
 
-            LayoutElement.preferredWidth = 0;
+        //    LayoutElement.preferredWidth = 0;
 
-            yield return new WaitUntil(() => parent != transform.parent);
+        //    yield return new WaitUntil(() => parent != transform.parent);
 
-            start = Time.time;
-            while (Time.time < start + anitime)
-            {
-                LayoutElement.preferredWidth = Mathf.Lerp(0f, prefWidth, (Time.time - start) / anitime);
-                yield return null;
-            }
-        }
+        //    start = Time.time;
+        //    while (Time.time < start + anitime)
+        //    {
+        //        LayoutElement.preferredWidth = Mathf.Lerp(0f, prefWidth, (Time.time - start) / anitime);
+        //        yield return null;
+        //    }
+        //}
         
     }
 }
