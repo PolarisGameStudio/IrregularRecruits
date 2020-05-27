@@ -30,6 +30,9 @@ namespace UI
         public static UnityEvent OnHeal = new UnityEvent();
         public static UnityEvent OnDeath = new UnityEvent();
         public static UnityEvent OnResurrect = new UnityEvent();
+        public class AbilityEvent : UnityEvent<Ability.ActionType> { }
+        public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
+        public static AbilityEvent OnAbilityTargetHit = new AbilityEvent();
 
         [Serializable]
         public struct ZoneMoveAnimation
@@ -174,12 +177,16 @@ namespace UI
         {
             var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
 
+            OnAbilityTrigger.Invoke(ability.ResultingAction.ActionType);
 
             yield return PlayCardFX(owner, abilityFx.OwnerFX, delay );
             yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX,ability, delay );
 
             foreach (var t in targets)
-                yield return PlayCardFX(t, abilityFx.TargetFX, delay  / targets.Count());
+            { 
+                OnAbilityTargetHit.Invoke(ability.ResultingAction.ActionType);
+                yield return PlayCardFX(t, abilityFx.TargetFX, delay / targets.Count()); 
+            }
         }
     }
 }

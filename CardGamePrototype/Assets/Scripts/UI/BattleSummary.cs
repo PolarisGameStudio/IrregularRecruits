@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -15,6 +16,8 @@ namespace UI
         public UnitIcon BattleSummaryLostIcon;
         public UnitIcon BattleSummaryKilledIcon;
         public UnitIcon BattleSummaryGainedIcon;
+        public Button HeroPortrait;
+
         public XpBar XpBar;
         private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
 
@@ -42,6 +45,7 @@ namespace UI
             SetupIcons(killed, BattleSummaryKilledIcon);
             SetupIcons(lost, BattleSummaryLostIcon);
             SetupIcons(gained, BattleSummaryGainedIcon);
+
 
             BattleSummaryHolder.SetActive(true);
         }
