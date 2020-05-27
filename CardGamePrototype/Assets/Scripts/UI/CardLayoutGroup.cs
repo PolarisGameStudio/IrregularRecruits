@@ -46,7 +46,7 @@ namespace UI
 
             ChildCards.Add(cardUI);
 
-            cardUI.transform.parent = this.RectTransform;
+            cardUI.transform.SetParent(this.RectTransform,true);
 
             cardUI.transform.localScale = Vector3.one;
 

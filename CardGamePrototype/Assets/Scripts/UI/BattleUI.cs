@@ -353,23 +353,10 @@ namespace UI
             var rot = GetZoneRotation(zone, !player);
             Vector2 endPosition =  zoneHolder.GetLastPosition();
 
-            //if children and a layout group
-            //if (zoneRect.childCount > 0 && zoneRect.GetComponent<LayoutGroup>())
-            //{
-
-            //    endPosition = zoneRect.GetChild(0).position;
-            //}
-            //else
-            //    endPosition = zoneRect.position;
 
             endPosition += new Vector2(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
 
             rect.Rotate(new Vector3(0, 0, Random.Range(-rot, rot)));
-
-            //TODO: use lean tween instead
-            //LeanTween.move(card.BattleRepresentation.gameObject, endPosition, duration).setEaseInExpo();//.setOnComplete(c => rect.SetParent(zoneRect));
-
-            //card.CardAnimation.ChangeLayoutSizeWhileMoving();
 
             var adjustDirection = (startPos - endPosition);
 
@@ -388,10 +375,6 @@ namespace UI
             }
 
             zoneHolder.AddChild(card);
-            //TODO: hack that should not be needed
-            //rect.localScale = Vector3.one;
-            //rect.SetAsFirstSibling();
-
 
             yield return card.Flip(zone == Deck.Zone.Library || (!player && zone == Deck.Zone.Hand));
 
