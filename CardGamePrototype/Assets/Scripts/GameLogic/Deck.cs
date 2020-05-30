@@ -9,7 +9,7 @@ namespace GameLogic
     {
         public enum Zone { Library, Battlefield, Graveyard, Hand, COUNT }
         public DeckObject DeckObject;
-        public IDeckController DeckController;
+        public DeckController DeckController;
 
         private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 

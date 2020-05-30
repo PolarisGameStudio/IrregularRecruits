@@ -115,9 +115,7 @@ namespace Tests
 
                 BattleManager.Instance.PlayerDeck = new Deck(TestDeckObject);
 
-                var ai = new AI();
-
-                ai.ControlledDeck = BattleManager.Instance.PlayerDeck;
+                var ai = new AI(BattleManager.Instance.PlayerDeck);
 
                 BattleManager.Instance.PlayerDeck.DeckController = ai;
             }
@@ -247,7 +245,7 @@ namespace Tests
 
             TestHero.InDeck.DeckController.ResetActions();
 
-            var actions = TestHero.InDeck.DeckController.ActionsLeft();
+            var actions = TestHero.InDeck.DeckController.ActionsLeft;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -255,7 +253,7 @@ namespace Tests
 
             Assert.IsNotNull(triggeredAblity);
             Assert.IsTrue(triggeredAblity == testAbility);
-            Assert.AreEqual(actions-1, TestHero.InDeck.DeckController.ActionsLeft());
+            Assert.AreEqual(actions-1, TestHero.InDeck.DeckController.ActionsLeft);
         }
 
         [Test]
@@ -394,7 +392,7 @@ namespace Tests
             TestHero.InDeck.DeckController.UsedAction(TestHero.InDeck);
             TestHero.InDeck.DeckController.UsedAction(TestHero.InDeck);
 
-            var actions = TestHero.InDeck.DeckController.ActionsLeft();
+            var actions = TestHero.InDeck.DeckController.ActionsLeft;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -402,7 +400,7 @@ namespace Tests
 
             Assert.IsNull(triggeredAblity);
             Assert.AreEqual(actions, 0);
-            Assert.AreEqual(actions, TestHero.InDeck.DeckController.ActionsLeft()); 
+            Assert.AreEqual(actions, TestHero.InDeck.DeckController.ActionsLeft); 
         }
 
         [Test]

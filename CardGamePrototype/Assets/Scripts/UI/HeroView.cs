@@ -30,6 +30,11 @@ namespace UI
             public AbilityUI Class;
         }
 
+        internal static void Close()
+        {
+            Instance.Holder.SetActive(false);
+        }
+
         private void Start()
         {
             Event.OnLevelUpSelection.AddListener(UpdateIcons);

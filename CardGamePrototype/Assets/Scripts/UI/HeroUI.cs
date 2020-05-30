@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,8 +18,16 @@ namespace UI
         {
             Instance = this;
 
-            HeroImage.onClick.AddListener(() => HeroView.Open(CurrentHero));
+            HeroImage.onClick.AddListener(ClickedHero);
 
+        }
+
+        private void ClickedHero()
+        {
+            if (!HeroView.Instance.Holder.activeSelf)
+                HeroView.Open(CurrentHero);
+            else
+                HeroView.Close();
         }
 
         private void Update()

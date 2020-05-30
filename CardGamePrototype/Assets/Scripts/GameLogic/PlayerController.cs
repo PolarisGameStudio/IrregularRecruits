@@ -2,60 +2,43 @@
 
 namespace GameLogic
 {
-    public class PlayerController : IDeckController
+    public class PlayerController : DeckController
     {
-        private Deck ControlledDeck;
-        private Action TurnFinished;
+
         public Hero PlayerHero;
 
-        public int PlayerActionsLeft;
-
-        public void SetupDeckActions(Deck deck, Action onfinish)
+        public PlayerController(Deck controlledDeck) : base(controlledDeck)
         {
-            if (ControlledDeck != deck)
-            {
-                ControlledDeck = deck;
+        }
 
-                TurnFinished = onfinish;
+        public override void SetupDeckActions(Deck deck, Action onfinish)
+        {
+            ControlledDeck = deck;
 
-                Event.OnPlayerAction.AddListener(UsedAction);
-            }
+            OnFinish = onfinish;
 
             deck.DrawInitialHand();
         }
 
-        public void UsedAction(Deck deck )
-        {
-            if (deck != ControlledDeck)
-                return;
-
-            PlayerActionsLeft--;
-
-            if (PlayerActionsLeft <= 0 || ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0)
-            {
-                TurnFinished.Invoke(); 
-            }
-
-        }
-
-        public void YourTurn()
+        public override void YourTurn()
         {
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
             ResetActions();
         }
 
-        public void ResetActions()
+        public override void UsedAction(Deck deck)
         {
-            PlayerActionsLeft = GameSettings.Instance.PlaysPrTurn;
+            if (deck != ControlledDeck)
+                return;
 
+            ActionsLeft--;
+
+            if ((ActionsLeft <= 0 || ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0) && OnFinish != null)
+            {
+                OnFinish.Invoke();
+            }
         }
 
-        public bool ActionAvailable()
-        {
-            return PlayerActionsLeft > 0;
-        }
-
-        public int ActionsLeft() => PlayerActionsLeft;
     }
 }

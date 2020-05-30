@@ -40,11 +40,10 @@ namespace Tests
             {
                 Creatures = new List<Creature>(),
             };
-
-            TestDeckController = new PlayerController();
-
             TestDeck = new Deck(TestDeckObject);
 
+            TestDeckController = new PlayerController(TestDeck);
+            
             TestDeck.DeckController = TestDeckController;
 
             TestDeck.AddCard(TestCard);
@@ -122,19 +121,31 @@ namespace Tests
         public void ClickPlaysWhenActionAndOnHand()
         {
             TestCard.ChangeLocation(Deck.Zone.Hand);
-            TestDeckController.PlayerActionsLeft = 1;
+            TestDeckController.ActionsLeft = 1;
 
 
             TestCard.Click();
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Battlefield);
         }
+        
+
+        [Test]
+        public void ClickPlaysUsesAction()
+        {
+            TestCard.ChangeLocation(Deck.Zone.Hand);
+            TestDeckController.ActionsLeft = 1;
+
+
+            TestCard.Click();
+            Assert.AreEqual(0,TestDeckController.ActionsLeft);
+        }
 
         [Test]
         public void PlayTriggersOnPlayEvent()
         {
             TestCard.ChangeLocation(Deck.Zone.Hand);
-            TestDeckController.PlayerActionsLeft = 1;
+            TestDeckController.ActionsLeft = 1;
 
             var triggered = false;
 
@@ -148,7 +159,7 @@ namespace Tests
         public void ClickPlaysNotWhenNotInHand()
         {
             TestCard.ChangeLocation(Deck.Zone.Library);
-            TestDeckController.PlayerActionsLeft = 1;
+            TestDeckController.ActionsLeft = 1;
 
 
             TestCard.Click();
@@ -161,24 +172,31 @@ namespace Tests
         public void ClickPlaysNotWhenNoAction()
         {
             TestCard.ChangeLocation(Deck.Zone.Hand);
-            TestDeckController.PlayerActionsLeft = 0;
+            TestDeckController.ActionsLeft = 0;
 
             TestCard.Click();
 
-
-
             Assert.IsTrue(TestCard.Location == Deck.Zone.Hand);
+        }
+        [Test]
+        public void ClickWithdrawsUsesAction()
+        {
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            TestDeckController.ActionsLeft = 1;
+
+            TestCard.Click();
+
+            Assert.AreEqual(TestDeckController.ActionsLeft, 0);
         }
         [Test]
         public void ClickWithdrawsWhenActionAndOnBattlefield()
         {
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            TestDeckController.PlayerActionsLeft = 1;
+            TestDeckController.ActionsLeft = 1;
 
             TestCard.Click();
-
-
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Library);
         }
@@ -203,10 +221,9 @@ namespace Tests
         {
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            TestDeckController.PlayerActionsLeft = 0;
+            TestDeckController.ActionsLeft = 0;
 
             TestCard.Click();
-
 
             Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
         }
@@ -215,7 +232,7 @@ namespace Tests
         {
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            TestDeckController.PlayerActionsLeft = 1;
+            TestDeckController.ActionsLeft = 1;
 
             TestCard.Click();
 

@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace GameLogic
 {
-    public class AI : IDeckController
+    public class AI : DeckController
     {
-        public Deck ControlledDeck;
-        private Action OnFinish;
-        public int ActionsLft;
+        public AI(Deck controlledDeck) : base(controlledDeck)
+        {
+        }
 
         //this could be a more complex evaluation and move mechanics
-        public void YourTurn()
+        public override void YourTurn()
         {
             ResetActions();
 
@@ -40,17 +40,13 @@ namespace GameLogic
                 }
             }
 
-            ActionsLft = 0;
+            ActionsLeft = 0;
 
             OnFinish.Invoke();
         }
 
-        public void ResetActions()
-        {
-            ActionsLft = GameSettings.Instance.PlaysPrTurn;
-        }
 
-        public void SetupDeckActions(Deck deck, Action onFinish)
+        public override void SetupDeckActions(Deck deck, Action onFinish)
         {
             ControlledDeck = deck;
             OnFinish = onFinish;
@@ -61,23 +57,13 @@ namespace GameLogic
                 Event.OnLevelUp.AddListener(h=> SelectAbility());
             }
 
-            Event.OnPlayerAction.AddListener(UsedAction);
-
             deck.DrawInitialHand(true);
         }
 
-        public bool ActionAvailable()
+
+        public override void UsedAction(Deck deck)
         {
-            //TODO: should AI actions always be possible?
-            return ActionsLft>0;
-        }
-
-
-        public int ActionsLeft() => ActionsLft;
-
-        public void UsedAction(Deck deck)
-        {
-            if (deck == ControlledDeck) ActionsLft--;
+            if (deck == ControlledDeck) ActionsLeft--;
         }
 
         private void SelectAbility()

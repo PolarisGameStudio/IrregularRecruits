@@ -233,7 +233,6 @@ namespace GameLogic
         {
             ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
 
-            Event.OnPlayerAction.Invoke(this.InDeck);
         }
 
 
@@ -331,6 +330,8 @@ namespace GameLogic
             {
                 Withdraw();
             }
+
+            Event.OnPlayerAction.Invoke(this.InDeck);
         }
 
         public override Race GetRace()
