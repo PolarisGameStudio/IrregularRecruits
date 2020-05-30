@@ -17,6 +17,7 @@ namespace UI
         public UnitIcon BattleSummaryKilledIcon;
         public UnitIcon BattleSummaryGainedIcon;
         public Button HeroPortrait;
+        public Hero Hero;
 
         public XpBar XpBar;
         private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
@@ -24,21 +25,34 @@ namespace UI
         private void Start()
         {
             BattleSummaryHolder.SetActive(false);
+
+            HeroPortrait.onClick.AddListener(HeroClick);
         }
 
-        public static void ShowSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck,int startXp, int endXp)
+        private void HeroClick()
         {
-            Instance.ShowBattleSummary(initialPlayerDeck, initialEnemyDeck, finalPlayerDeck, finalEnemyDeck);
+            if(Hero!=null)
+                HeroView.Open(Hero);
+        }
+
+        public static void ShowSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck,int startXp, int endXp,Hero hero)
+        {
+            Instance.ShowBattleSummary(initialPlayerDeck, initialEnemyDeck, finalPlayerDeck, finalEnemyDeck,hero);
 
             Instance.XpBar.ShowXpGain(startXp, endXp);
         }
 
-        private void ShowBattleSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck)
+        private void ShowBattleSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck,Hero hero)
         {
             foreach (var i in InstantiatedObjects)
                 Destroy(i.gameObject);
             InstantiatedObjects.Clear();
 
+            if (hero != null)
+            {
+                Hero = hero;
+                HeroPortrait.image.sprite = hero.HeroObject.Portrait;
+            }
             var killed = initialEnemyDeck.Where(c => !finalEnemyDeck.Contains(c) & !finalPlayerDeck.Contains(c));
             var lost = initialPlayerDeck.Where(c => !finalPlayerDeck.Contains(c));
             var gained = finalPlayerDeck.Where(c => !initialPlayerDeck.Contains(c));

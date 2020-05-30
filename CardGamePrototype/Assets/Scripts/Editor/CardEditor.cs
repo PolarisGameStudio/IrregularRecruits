@@ -90,8 +90,8 @@ namespace UI
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.E) && CardHighlight.IsActive())
-                Open(CardHighlight.GetCreature());
+            if (Input.GetKeyDown(KeyCode.E) && CardHoverInfo.IsActive())
+                Open(CardHoverInfo.GetCreature());
         }
 
         private void MoveAbilityToOtherCreature()

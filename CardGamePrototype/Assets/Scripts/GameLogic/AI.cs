@@ -40,6 +40,8 @@ namespace GameLogic
                 }
             }
 
+            ActionsLft = 0;
+
             OnFinish.Invoke();
         }
 

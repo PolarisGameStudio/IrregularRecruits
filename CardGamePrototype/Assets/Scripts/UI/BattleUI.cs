@@ -174,7 +174,7 @@ namespace UI
 
             var endXp = PlayerDeck.Hero != null ? PlayerDeck.Hero. Xp : 0;
 
-            BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp);
+            BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp,PlayerDeck.Hero);
         }
 
         private CardLayoutGroup GetZoneHolder(Deck.Zone zone, bool enm)
@@ -347,6 +347,9 @@ namespace UI
         private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player)
         {
             if (!card) yield break;
+
+            if (zone == Deck.Zone.Graveyard) 
+                yield return card.Flip(false);
 
             var rect = card.GetComponent<RectTransform>();
             Vector2 startPos = rect.position;

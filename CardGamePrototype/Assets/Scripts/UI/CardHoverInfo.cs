@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace UI
 {
 
-    public class CardHighlight : Singleton<CardHighlight>
+    public class CardHoverInfo : Singleton<CardHoverInfo>
     {
         public TextMeshProUGUI CardTitleText;
         public TextMeshProUGUI AttackText;

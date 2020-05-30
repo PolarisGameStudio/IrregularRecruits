@@ -374,7 +374,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 164390af64bc3764c84510ca46bf5e56, type: 3}
     - {fileID: 8300000, guid: d78036d16db55934f841e1d9d5760ce3, type: 3}
     - {fileID: 8300000, guid: f9f8a97bc8f1c7f47afbed3ec815c790, type: 3}
-    TargetAudio: []
+    TargetAudio:
+    - {fileID: 8300000, guid: 7e5430840c73a0a49826650c7d88a862, type: 3}
   - Type: 10
     TriggerAudio:
     - {fileID: 8300000, guid: de7d54d66469534498e0aa9c97f6c3a6, type: 3}

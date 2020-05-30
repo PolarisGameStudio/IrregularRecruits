@@ -12,17 +12,16 @@ namespace UI
         public TextMeshProUGUI XpBarText;
         public int FillSpeed =1 ;
 
-        public void ShowXpGain(int from, int gain)
+        public void ShowXpGain(int from, int to)
         {
-            StartCoroutine(XpGainAnimation(from, gain));
+            StartCoroutine(XpGainAnimation(from, to));
         }
 
-        private IEnumerator XpGainAnimation(int from, int gain)
+        private IEnumerator XpGainAnimation(int from, int targetValue)
         {
             var currentLevel = Hero.GetLevel(from);
             var lastLevel = currentLevel;
             var currentValue = from;
-            var targetValue = from + gain;
 
             bool leveledUp = false;
 

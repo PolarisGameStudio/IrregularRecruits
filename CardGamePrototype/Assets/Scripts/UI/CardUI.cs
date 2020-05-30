@@ -154,7 +154,7 @@ namespace UI
         public void OnPointerClick(PointerEventData eventData)
         {
 #if UNITY_ANDROID
-        if (CardHighlight.IsActive()) return;
+        if (CardHoverInfo.IsActive()) return;
 #endif
             if (FaceUp() && Interactable && UIFlowController.Instance.EmptyQueue())
                 OnClick.Invoke();
@@ -163,7 +163,7 @@ namespace UI
         public void OnPointerExit(PointerEventData eventData)
         {
             CardAnimation?.TurnOffHighlight();
-            CardHighlight.Hide();
+            CardHoverInfo.Hide();
 
         }
 
@@ -171,7 +171,7 @@ namespace UI
         {
             if (AlwaysFaceUp || (FaceUp()))
             { 
-                CardHighlight.Show(this);
+                CardHoverInfo.Show(this);
                 CardAnimation?.Highlight();
             }
 

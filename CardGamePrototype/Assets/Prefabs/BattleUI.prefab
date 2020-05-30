@@ -1899,8 +1899,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 122.53503, y: -82.653755}
-  m_SizeDelta: {x: 245.07005, y: 45.30751}
+  m_AnchoredPosition: {x: 122.53503, y: -90.93108}
+  m_SizeDelta: {x: 245.07005, y: 61.862164}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &641072287561303979
 MeshFilter:
@@ -1967,14 +1967,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
+  m_fontSize: 52.3
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 1026
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1984,7 +1984,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -4258,8 +4258,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 122.53503, y: -275}
-  m_SizeDelta: {x: 245.07005, y: 339.38495}
+  m_AnchoredPosition: {x: 122.53503, y: -284.2522}
+  m_SizeDelta: {x: 245.07005, y: 324.78003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5422036386914667859
 CanvasRenderer:
@@ -28583,7 +28583,7 @@ MonoBehaviour:
   BattleSummaryLostIcon: {fileID: 3660017128737820545}
   BattleSummaryKilledIcon: {fileID: 3660017127696074749}
   BattleSummaryGainedIcon: {fileID: 3660017129064465501}
-  HeroPortrait: {fileID: 0}
+  HeroPortrait: {fileID: 2055879523714234212}
   XpBar: {fileID: 1542755693117479028}
 --- !u!1 &3660017128594239150
 GameObject:
@@ -34363,7 +34363,7 @@ GameObject:
   - component: {fileID: 9186878925827116654}
   - component: {fileID: 6284005617188656109}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36498,8 +36498,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3660017129127853375}
-  - component: {fileID: 6731866258851574365}
   - component: {fileID: 2391220879412875744}
+  - component: {fileID: 6092861414890806165}
   m_Layer: 5
   m_Name: CardHighLight
   m_TagString: Untagged
@@ -36527,27 +36527,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6731866258851574365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5092915872372054010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e74a16d2958074298f8cfd62e69df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CardTitleText: {fileID: 4303235431774074608}
-  AttackText: {fileID: 3068031628125863729}
-  HealthText: {fileID: 6284005617188656109}
-  RaceIcon: {fileID: 2964267043014884025}
-  AbilityIcon: {fileID: 9066273102432569374}
-  TraitPrefab: {fileID: 7911962685815800373}
-  ImageMask: {fileID: 8089381340381041030}
-  Image: {fileID: 8132132617572125126}
-  Holder: {fileID: 5084955104877570799}
 --- !u!225 &2391220879412875744
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -36560,6 +36539,27 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &6092861414890806165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092915872372054010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b749a406c792646b53ae02692be5a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CardTitleText: {fileID: 4303235431774074608}
+  AttackText: {fileID: 3068031628125863729}
+  HealthText: {fileID: 6284005617188656109}
+  RaceIcon: {fileID: 2964267043014884025}
+  AbilityIcon: {fileID: 9066273102432569374}
+  TraitPrefab: {fileID: 7911962685815800373}
+  ImageMask: {fileID: 8089381340381041030}
+  Image: {fileID: 8132132617572125126}
+  Holder: {fileID: 5084955104877570799}
 --- !u!1 &5107696504114218837
 GameObject:
   m_ObjectHideFlags: 0
@@ -44007,7 +44007,7 @@ GameObject:
   - component: {fileID: 2541946461613226036}
   - component: {fileID: 3068031628125863729}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AttackText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44160,7 +44160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3467838049948357454}
   - component: {fileID: 2418820104939703374}
-  - component: {fileID: 8937307102206950575}
+  - component: {fileID: 4358156294164207548}
   m_Layer: 5
   m_Name: AbilityHighlight
   m_TagString: Untagged
@@ -44200,7 +44200,7 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &8937307102206950575
+--- !u!114 &4358156294164207548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44209,7 +44209,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6620345657614200726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05c7492c307f8614c9d1d2f034b89300, type: 3}
+  m_Script: {fileID: 11500000, guid: c8952603c2a1d1244ab6b6317dfd2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Title: {fileID: 737691944203084230}
@@ -45548,7 +45548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 122.53503, y: -444.69244}
+  m_AnchoredPosition: {x: 122.53503, y: -446.6422}
   m_SizeDelta: {x: 245.07005, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1569475623965311753
@@ -51642,8 +51642,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 122.53503, y: -467.3462}
-  m_SizeDelta: {x: 245.07005, y: 45.30751}
+  m_AnchoredPosition: {x: 122.53503, y: -468.3211}
+  m_SizeDelta: {x: 245.07005, y: 43.35777}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &2885825643291277702
 MeshFilter:

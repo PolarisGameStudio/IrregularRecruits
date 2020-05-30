@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,10 +21,20 @@ namespace UI
 
         private void Start()
         {
+            Button.onClick.AddListener(Click);
+
+        }
+
+        private void Click()
+        {
+            if (AbilityHoverInfo.IsActive())
+                return;
+
+
             if (HeroViewAbility)
-                Button.onClick.AddListener(SelectLevelUp);
+                SelectLevelUp();
             else
-                Button.onClick.AddListener(Activate);
+                Activate();
         }
 
         public void SetAbilityAsActivable()
@@ -61,13 +72,13 @@ namespace UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Highlight
-            AbilityHighlight.Show(this);
+            AbilityHoverInfo.Show(this);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             //dehighlight
-            AbilityHighlight.Hide();
+            AbilityHoverInfo.Hide();
         }
 
         public void SetAbility(Ability ability,Hero owner)
@@ -123,6 +134,7 @@ namespace UI
 
         private void SelectLevelUp()
         {
+
             if(HeroViewAbility && OutlineParticles.isPlaying)
                 Owner.SelectLevelUpAbility(Ability);
 

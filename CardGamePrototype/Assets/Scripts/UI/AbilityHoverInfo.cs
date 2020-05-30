@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 namespace UI
 {
-    public class AbilityHighlight: Singleton<AbilityHighlight>
+    public class AbilityHoverInfo: Singleton<AbilityHoverInfo>
     {
         public TextMeshProUGUI Title;
         public TextMeshProUGUI Description;
@@ -25,6 +26,11 @@ namespace UI
             yield return new WaitForSeconds(0.3f);
 
             ShowCard(ability);
+        }
+
+        internal static bool IsActive()
+        {
+            return Instance.Holder.activeSelf;
         }
 
         private void ShowCard(AbilityUI abilityUI)
