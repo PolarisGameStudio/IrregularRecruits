@@ -101,9 +101,6 @@ namespace GameLogic
                 return;
             }
 
-            if (from == to)
-                return;
-
             if (!InDeck.CreaturesInZone(from).Contains(this))
             {
                 return;
@@ -120,6 +117,9 @@ namespace GameLogic
                 Unsummon();
 
             Event.OnChangeLocation.Invoke(this, from, to);
+
+            if (from == to)
+                return;
 
             switch (to)
             {
@@ -269,6 +269,7 @@ namespace GameLogic
 
             if (moveToDeck == InDeck)
             {
+                return;
             }
 
             InDeck.Remove(this);

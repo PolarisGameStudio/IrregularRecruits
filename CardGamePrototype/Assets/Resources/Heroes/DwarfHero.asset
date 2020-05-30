@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3693894c8fcfe5b4faad90f60259a824, type: 3}
   m_Name: DwarfHero
   m_EditorClassIdentifier: 
-  name: General Bharrun Plateborn
+  name: General Bharrun
   Race: {fileID: 11400000, guid: 4728fa16fe828ca41a23864bdfa561af, type: 2}
   Portrait: {fileID: 21300000, guid: df8e6cf552719894598f5f00406067a6, type: 3}
   StartingAbility: {fileID: 11400000, guid: dcc6922316029d845be74e7c8c4847e9, type: 2}
