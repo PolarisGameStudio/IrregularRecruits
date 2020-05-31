@@ -228,7 +228,7 @@ namespace Tests
         }
 
         [Test]
-        public void ActiveAbilityUsesAction()
+        public void ActiveAbilityOnlyOneTimePrRound()
         {
             var testAbility = new ActiveAbility()
             {
@@ -241,19 +241,18 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            Ability triggeredAblity = null;
+            int triggeredAblity = 0;
 
             TestHero.InDeck.DeckController.ResetActions();
 
             var actions = TestHero.InDeck.DeckController.ActionsLeft;
 
-            Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
+            Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity++);
 
             testAbility.ActivateAbility(TestHero);
+            testAbility.ActivateAbility(TestHero);
 
-            Assert.IsNotNull(triggeredAblity);
-            Assert.IsTrue(triggeredAblity == testAbility);
-            Assert.AreEqual(actions-1, TestHero.InDeck.DeckController.ActionsLeft);
+            Assert.AreEqual(1, triggeredAblity);
         }
 
         [Test]
