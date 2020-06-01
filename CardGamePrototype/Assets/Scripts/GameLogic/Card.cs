@@ -92,7 +92,7 @@ namespace GameLogic
             ChangeLocation(Location, to);
         }
 
-        public void ChangeLocation(Deck.Zone from, Deck.Zone to)
+        public void ChangeLocation(Deck.Zone from, Deck.Zone to, bool noAbilityTrigger = false)
         {
             //Debug.Log($"Moving {this.Name} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
 
@@ -106,15 +106,18 @@ namespace GameLogic
                 return;
             }
 
-            
+
             InDeck.CreaturesInZone(from).Remove(this);
-            
+
             InDeck.CreaturesInZone(to).Add(this);
 
             Location = to;
 
             if (IsSummon() && to != Deck.Zone.Battlefield)
                 Unsummon();
+
+            if (noAbilityTrigger)
+                return;
 
             Event.OnChangeLocation.Invoke(this, from, to);
 
@@ -147,7 +150,7 @@ namespace GameLogic
                 return;
 
             var returnDamage = !this.Ranged() && (target.Location == Deck.Zone.Battlefield);
-            
+
             Event.OnAttack.Invoke(this);
 
             Event.OnBeingAttacked.Invoke(target);
@@ -222,7 +225,7 @@ namespace GameLogic
             CurrentHealth += amount;
             Attack += amount;
 
-            Event.OnStatMod.Invoke(this,amount);
+            Event.OnStatMod.Invoke(this, amount);
 
             if (CurrentHealth <= 0)
                 Die();
@@ -283,7 +286,7 @@ namespace GameLogic
 
         public void HealthChange(int change)
         {
-            if (change == 0 || ! Alive()) return;
+            if (change == 0 || !Alive()) return;
 
             CurrentHealth += change;
 
@@ -301,8 +304,8 @@ namespace GameLogic
 
         public void ResetAfterBattle()
         {
-            if(Location != Deck.Zone.Library)
-            ChangeLocation(Deck.Zone.Library);
+            if (Location != Deck.Zone.Library)
+                ChangeLocation(Location, Deck.Zone.Library, true);
 
             //todo: find a way to safe permanent buffs or drain
             if (Attack != Creature.Attack) Attack = Creature.Attack;

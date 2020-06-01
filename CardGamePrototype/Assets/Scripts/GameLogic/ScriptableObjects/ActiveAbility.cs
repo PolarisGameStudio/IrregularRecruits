@@ -27,7 +27,7 @@ namespace GameLogic
         public void ActivateAbility(AbilityHolder owner)
         {
             //TODO: should have different costs?
-            if (!owner.InDeck.DeckController.ActionAvailable() &! ActivatedThisTurn)
+            if (!owner.InDeck.DeckController.ActionAvailable() || ActivatedThisTurn)
                 return;
 
             ActivatedThisTurn = true;

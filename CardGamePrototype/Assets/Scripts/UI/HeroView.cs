@@ -18,6 +18,7 @@ namespace UI
         public TextMeshProUGUI ClassText;
         public AbilityUI StartingAbility;
         public Color NormalAbilityColor, NotSelectedColor, UnselectableColor;
+        public TextMeshProUGUI SelectLevelUpText;
 
         public GameObject Holder;
 
@@ -37,7 +38,7 @@ namespace UI
 
         private void Start()
         {
-            Event.OnLevelUpSelection.AddListener(UpdateIcons);
+            Event.OnLevelUpSelection.AddListener(Open);
             Event.OnLevelUp.AddListener(UpdateIcons);
         }
 
@@ -58,6 +59,8 @@ namespace UI
             HeroName.text = hero.GetName();
 
             XpText.text = $" {hero.Xp} / {Hero.LevelCaps[hero.CurrentLevel]}";
+
+            SelectLevelUpText.text = hero.LevelUpPoints > 0 ? "Select A New Skill!" : "";
 
             if (raceopt)
                 RaceText.text = raceopt.name;

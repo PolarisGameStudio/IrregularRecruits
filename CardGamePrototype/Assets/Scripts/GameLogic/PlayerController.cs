@@ -34,11 +34,17 @@ namespace GameLogic
 
             ActionsLeft--;
 
-            if ((ActionsLeft <= 0 || ControlledDeck.CreaturesInZone(Deck.Zone.Hand).Count == 0) && OnFinish != null)
+            if ((ActionsLeft <= 0 ))
             {
-                OnFinish.Invoke();
+                FinishTurn();
             }
         }
 
+        public void FinishTurn()
+        {
+
+            if (OnFinish != null )
+                OnFinish.Invoke();
+        }
     }
 }

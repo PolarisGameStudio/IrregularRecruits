@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class AbilityUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
+    public class AbilityUI : MonoBehaviour,IPointerClickHandler,  IPointerExitHandler, IPointerEnterHandler
     {
         //false == passive
         public bool HeroViewAbility;
@@ -27,8 +27,14 @@ namespace UI
 
         private void Click()
         {
+            //TODO: write nicer
             if (AbilityHoverInfo.IsActive())
+            {
+                AbilityHoverInfo.Hide();
                 return;
+            }
+
+            AbilityHoverInfo.Hide();
 
 
             if (HeroViewAbility)
@@ -42,10 +48,8 @@ namespace UI
             if (!ActiveAbility) return;
 
             OutlineParticles.Play();
-
-            Button.interactable = true;
-
-            //AbilityImage.color = HeroView.Instance.NormalAbilityColor;
+            
+            AbilityImage.color = HeroView.Instance.NormalAbilityColor;
         }
 
         public void LockAbility()
@@ -54,9 +58,7 @@ namespace UI
 
             OutlineParticles.Stop();
 
-            Button.interactable = false;
-
-            //AbilityImage.color = HeroView.Instance.UnselectableColor;
+            AbilityImage.color = HeroView.Instance.UnselectableColor;
         }
 
 
@@ -107,14 +109,14 @@ namespace UI
                     if(owner.LevelUpPoints >0)
                     {
                         OutlineParticles.Play();
-                        Button.interactable = true;
+
+                        AbilityImage.color = HeroView.Instance.NormalAbilityColor;
                     }
                     else
                     {
                         //unselected 
                         AbilityImage.color = HeroView.Instance.NotSelectedColor;
 
-                        Button.interactable = false;
                     }
                 }
                 else
@@ -122,7 +124,6 @@ namespace UI
                     //unselectable look
                     AbilityImage.color = HeroView.Instance.UnselectableColor;
 
-                    Button.interactable = false;
 
                 }
             }
@@ -134,15 +135,20 @@ namespace UI
 
         private void SelectLevelUp()
         {
+            if (!HeroViewAbility || !OutlineParticles.isPlaying)
+                return;
 
-            if(HeroViewAbility && OutlineParticles.isPlaying)
-                Owner.SelectLevelUpAbility(Ability);
+            Owner.SelectLevelUpAbility(Ability);            
 
             AnimationSystem.PlayAbilitySelection(transform.position);
 
             BattleUI.OnAbilitySelect.Invoke();
         }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            AbilityHoverInfo.Hide();
+        }
     }
 
 }

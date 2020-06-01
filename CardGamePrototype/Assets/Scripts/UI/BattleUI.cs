@@ -56,6 +56,8 @@ namespace UI
         public static UnityEvent OnAbilitySelect = new UnityEvent();
         public static UnityEvent OnLevelUp = new UnityEvent();
 
+        public Button EndTurnButton;
+
 
         private int XpAtStartOfBattle;
 
@@ -70,8 +72,16 @@ namespace UI
             ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
 
             Event.OnCombatSetup.AddListener(SetupDecks);
+
+            EndTurnButton.onClick.AddListener(EndPlayerTurn);
+
         }
 
+        private void EndPlayerTurn()
+        {
+            if (PlayerDeck.DeckController is PlayerController)
+                (PlayerDeck.DeckController as PlayerController).FinishTurn();
+        }
 
         private void SetupDecks(Deck playerDeck, Deck opponentDeck)
         {
