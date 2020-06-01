@@ -137,6 +137,7 @@ namespace GameLogic
                 //OTHER factors could change value up or down
 
                 if (Target.Relationship == Noun.Allegiance.Enemy || (neutralAsNegative && Target.Relationship == Noun.Allegiance.Any)) value *= -1;
+                else if (Target.Race == Noun.RaceType.Different ) value *= -1;
 
                 return value;
             }

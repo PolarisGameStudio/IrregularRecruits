@@ -12,7 +12,6 @@ namespace UI
         public Slider StartingHandSlider;
         public Slider DrawSlider;
         public Slider ActionsPrTurnSlider;
-        public Slider EnemyDeckSizeSlider;
         public Slider EnemyAdditionsSlider;
         public Slider RareEnemySlider;
 
@@ -30,9 +29,6 @@ namespace UI
             ActionsPrTurnSlider.onValueChanged.AddListener(i => GS.PlaysPrTurn = (int)i);
             EnemyAdditionsSlider.value = CombatPrototype.Instance.GetCombatDifficultyIncrease();
             EnemyAdditionsSlider.onValueChanged.AddListener(i=>  CombatPrototype.Instance.SetCombatDifficultyIncrease( (int)i));
-            EnemyDeckSizeSlider.value = GS.EnemyDeckSize;
-            EnemyDeckSizeSlider.onValueChanged.AddListener(i => GS.EnemyDeckSize = (int)i);
-
         }
 
 

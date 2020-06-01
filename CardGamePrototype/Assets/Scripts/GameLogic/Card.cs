@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace GameLogic
 {
@@ -63,17 +64,18 @@ namespace GameLogic
 
         internal int XpValue()
         {
-            switch (creature.Rarity)
-            {
-                case Creature.RarityType.Common:
-                    return 1;
-                case Creature.RarityType.Rare:
-                    return 3;
-                case Creature.RarityType.Unique:
-                    return 10;
-                default:
-                    return 1;
-            }
+            return Mathf.RoundToInt(creature.CR / 4f);
+            //switch (creature.Rarity)
+            //{
+            //    case Creature.RarityType.Common:
+            //        return 1;
+            //    case Creature.RarityType.Rare:
+            //        return 3;
+            //    case Creature.RarityType.Unique:
+            //        return 10;
+            //    default:
+            //        return 1;
+            //}
         }
 
         public int Attack
@@ -158,10 +160,10 @@ namespace GameLogic
             if (Location != Deck.Zone.Battlefield || !target.Alive())
                 return;
 
-            target.HealthChange(-this.Attack);
+            target.HealthChange(- Mathf.Max(0, Attack));
 
             if (returnDamage)
-                this.HealthChange(-target.Attack);
+                this.HealthChange(-Mathf.Max(0, target.Attack));
 
             if (!Alive() && target.Alive()) Event.OnKill.Invoke(target);
             else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this);

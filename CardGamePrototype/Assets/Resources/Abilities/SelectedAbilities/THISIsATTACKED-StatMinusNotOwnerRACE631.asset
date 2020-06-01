@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: THISIsATTACKED-StatMinusNotOwnerRACE631
   m_EditorClassIdentifier: 
+  Name: 
+  Icon: {fileID: 0}
   ResultingAction:
     ActionType: 3
     TargetCount: 0
@@ -23,7 +25,7 @@ MonoBehaviour:
       Race: 2
     Amount: 2
     Summons: {fileID: 0}
-  Value: 7.2000003
+  Value: 12.999999
   TriggerCondition:
     Subjekt:
       Character: 1

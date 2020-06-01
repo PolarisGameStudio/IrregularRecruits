@@ -13,7 +13,9 @@ namespace GameLogic
         public HeroObject TestHero;
         public Race[] SpawnableRaces;
         public Creature[] EnemyCreatures;
-        public int CombatDifficultyIncrease = 3;
+        public int CombatDifficultyIncrease = 20;
+        public int CurrentCombatDifficulty;
+        public int MaxEnemyDeckSize = 10;
         public int CombatRarityIncrease = 1;
 
         public GameControl(Creature testCreature, Race[] races, Creature[] enmCreatures,HeroObject testHero = null)
@@ -28,16 +30,22 @@ namespace GameLogic
             if (SpawnableRaces == null || SpawnableRaces.Length == 0)
                 SpawnableRaces = Resources.FindObjectsOfTypeAll<Race>();
 
-            PlayerDeck = GenerateDeck(true);
+            if(TestCreature)
+                PlayerDeck = GenerateDeck(true);
 
         }
 
         public void NextCombat()
         {
+            CurrentCombatDifficulty += CombatDifficultyIncrease;
+
             if (EnemyDeck == null || EnemyDeck.Alive() == 0)
                 EnemyDeck = GenerateDeck();
 
-            GameSettings.Instance.EnemyDeckSize += CombatDifficultyIncrease;
+            if(GameSettings.Instance.EnemyDeckSize < MaxEnemyDeckSize)
+                GameSettings.Instance.EnemyDeckSize ++;
+
+            //TODO: remove
             GameSettings.Instance.MaxRareEnemiesPrCombat += CombatRarityIncrease;
 
             Event.OnCombatSetup.Invoke(PlayerDeck, EnemyDeck);
@@ -62,26 +70,35 @@ namespace GameLogic
 
                 creatures = EnemyCreatures.Where(c => c.Race == race).ToList();
             }
+            
+            var difficultyLeft = CurrentCombatDifficulty;
 
-            var rares = creatures.Where(c => c.Rarity == Creature.RarityType.Rare || c.Rarity == Creature.RarityType.Unique).ToList();
-            var notRares = creatures.Except(rares).ToList();
-            if (!notRares.Any())
-                notRares = rares;
+            if (!creatures.Any(c => c.CR <= difficultyLeft) &! (player&&TestCreature))
+                throw new System.Exception("Creatures of type " + creatures.First().Race + " has no creature with CR below " + difficultyLeft);
 
-            for (int i = 0; i < (GameSettings.DeckSize(player)); i++)
+            int v = (GameSettings.DeckSize(player));
+            for (int i = 0; i < v; i++)
             {
-                if (rares.Any())
-                {
-                    for (; i < GameSettings.Instance.MaxRareEnemiesPrCombat; i++)
-                    {
-                        var rare = new Card(rares[Random.Range(0, rares.Count())]);
+                Creature selected;
 
-                        library.Add(rare);
-                    }
+                if(player && TestCreature)
+                {
+                    selected = creatures[Random.Range(0, creatures.Count())];
+                }
+                else
+                {
+                    if (!creatures.Any(c => c.CR <= difficultyLeft && c.CR > difficultyLeft/(v*1.5f) & !player))
+                        break;
+
+                    var below = creatures.Where(c => c.CR <= difficultyLeft && c.CR > difficultyLeft / (v * 1.5f)).ToList();
+
+                     selected = below[Random.Range(0, below.Count())];
+
                 }
 
+                var card = new Card(selected);
 
-                var card = new Card(notRares[Random.Range(0, notRares.Count())]);
+                difficultyLeft -= selected.CR;
 
                 library.Add(card);
             }

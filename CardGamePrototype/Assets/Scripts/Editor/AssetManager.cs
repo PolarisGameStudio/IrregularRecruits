@@ -93,18 +93,18 @@ public class AssetManager
     [MenuItem("Content/Do stuff")]
     public static void DoStuff()
     {
-        List<PassiveAbility> abilities = new List<PassiveAbility>();
-        abilities = GetAssetsOfType<PassiveAbility>();
+        List<Creature> creatures = new List<Creature>();
+        creatures = GetAssetsOfType<Creature>();
 
-        Debug.Log("Checking abilities: " + abilities.Count);
+        //Debug.Log("Checking abilities: " + creatures.Count);
 
-        foreach (var item in abilities)
+        foreach (var item in creatures)
         {
-            item.FixTriggerInconsistencies();
+            item.CR = CalculateCR(item);
         }
 
         AssetDatabase.Refresh();
-        abilities.ForEach(a => EditorUtility.SetDirty(a));
+        creatures.ForEach(a => EditorUtility.SetDirty(a));
         AssetDatabase.SaveAssets();
 
     }
@@ -188,6 +188,22 @@ public class AssetManager
         return triggerCondition;
     }
 
+
+    public static int CalculateCR(Creature creature)
+    {
+        int cr = 0;
+
+        cr += creature.Attack + creature.Health;
+
+        if (creature.SpecialAbility)
+            cr += (int)(creature.SpecialAbility.GetValue()*2);
+
+        foreach (var item in creature.Traits)
+        {
+            cr += item.CR;
+        }
+        return cr;
+    }
 
     private static bool AbilityFitsRarity(PassiveAbility ability, Creature.RarityType rarity)
     {

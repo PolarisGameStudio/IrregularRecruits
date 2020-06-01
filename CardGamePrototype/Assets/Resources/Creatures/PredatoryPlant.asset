@@ -21,4 +21,5 @@ MonoBehaviour:
   Health: 10
   Traits: []
   SpecialAbility: {fileID: 11400000, guid: 31440cf27f8dd344c9ec9148769aa5aa, type: 2}
+  CR: 15
   Race: {fileID: 11400000, guid: 13c15678981d7d6448215a1dab454c59, type: 2}

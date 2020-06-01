@@ -15,3 +15,4 @@ MonoBehaviour:
   name: Deathless
   Icon: {fileID: 21300000, guid: 7a2c68cff50e35842821ae7430ba3735, type: 3}
   Description: is not removed from your army if killed in combat
+  CR: 0

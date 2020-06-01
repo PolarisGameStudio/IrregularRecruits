@@ -17,7 +17,8 @@ public class Simulation : Singleton<Simulation>
     public int BattlesToSimulate;
     public List<MatchUpResult> MatchUpResults;
     public List<GameRunResult> GameWins;
-    public List<Creature> Creatures;
+    public Creature[] Creatures;
+    public Race[] AllRaces;
 
     [System.Serializable]
     public struct MatchUpResult
@@ -122,7 +123,7 @@ public class Simulation : Singleton<Simulation>
 
     private int SimulateRun(DeckObject playerDeck)
     {
-        var gc = new GameControl(null, null, null);
+        var gc = new GameControl(null, AllRaces, Creatures);
         gc.PlayerDeck = new Deck(playerDeck);
 
         var wins = -1;
