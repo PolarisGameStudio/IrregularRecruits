@@ -234,7 +234,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ac957de51484b374f877b1f4ee357d26, type: 2}
   - {fileID: 11400000, guid: e58503075e30e0d488f79796dd1d528f, type: 2}
   - {fileID: 11400000, guid: f965b2a83c7badf41ae67fb2186437f1, type: 2}
-  BattlesToSimulate: 10
+  BattlesToSimulate: 1
   MatchUpResults:
   - FirstDeck: Dwarven Army
     SecondDeck: Legion

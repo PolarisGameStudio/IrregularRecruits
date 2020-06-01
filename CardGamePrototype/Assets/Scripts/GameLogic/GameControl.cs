@@ -87,12 +87,12 @@ namespace GameLogic
                 }
                 else
                 {
-                    if (!creatures.Any(c => c.CR <= difficultyLeft && c.CR > difficultyLeft/(v*1.5f) & !player))
+                    if (!creatures.Any(c => c.CR <= difficultyLeft) || player)
                         break;
 
-                    var below = creatures.Where(c => c.CR <= difficultyLeft && c.CR > difficultyLeft / (v * 1.5f)).ToList();
+                    var below = creatures.Where(c => c.CR <= difficultyLeft).ToList();
 
-                     selected = below[Random.Range(0, below.Count())];
+                    selected = below.OrderByDescending(b => b.CR * Random.value).First();
 
                 }
 
