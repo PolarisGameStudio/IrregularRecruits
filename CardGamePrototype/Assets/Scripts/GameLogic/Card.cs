@@ -188,9 +188,6 @@ namespace GameLogic
 
             Name = newCreature.name;// + " !" + Guid.NewGuid();
 
-            //if (Creature && Creature.SpecialAbility)
-            //    Creature.SpecialAbility.RemoveListeners(this);
-
             MaxHealth = newCreature.Health;
             CurrentHealth = newCreature.Health;
             Attack = newCreature.Attack;
@@ -240,6 +237,11 @@ namespace GameLogic
 
         }
 
+        public void CleanListeners()
+        {
+            if (Creature && Creature.SpecialAbility)
+                Creature.SpecialAbility.RemoveListeners();
+        }
 
         internal bool CanAttack()
         {

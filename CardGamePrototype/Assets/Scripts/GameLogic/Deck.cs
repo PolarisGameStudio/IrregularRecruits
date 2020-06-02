@@ -10,6 +10,8 @@ namespace GameLogic
         public enum Zone { Library, Battlefield, Graveyard, Hand, COUNT }
         public DeckObject DeckObject;
         public DeckController DeckController;
+        public int CR;
+        public HashSet<Race> Races = new HashSet<Race>();
 
         private Dictionary<Zone, List<Card>> Creatures = new Dictionary<Zone, List<Card>>();
 
@@ -43,6 +45,14 @@ namespace GameLogic
             card.InDeck = this;
             card.Location = Zone.Library;
 
+            //TODO: test that this correctly reflects CR?
+            if (!card.IsSummon())
+            {
+                CR += card.Creature.CR;
+
+                Races.Add(card.Creature.Race);
+            }
+
             Creatures[Zone.Library].Add(card);
         }
 
@@ -72,10 +82,14 @@ namespace GameLogic
         }
 
 
-        internal void PackUp()
+        public void PackUp(bool removeAll = false)
         {
+            if (removeAll)
+                while (AllCreatures().Any())
+                    Remove(AllCreatures().First());
+
             //removing dead creatures
-            while (Creatures[Zone.Graveyard].Any(c=>!c.Deathless()))
+            while (Creatures[Zone.Graveyard].Any(c=> !c.Deathless()))
                 Remove(Creatures[Zone.Graveyard].First(c => !c.Deathless()));
 
             foreach (var c in AllCreatures())
@@ -146,6 +160,7 @@ namespace GameLogic
         {
             Creatures[card.Location].Remove(card);
             card.InDeck = null;
+            card.CleanListeners();
         }
 
         internal void Add(Card card)

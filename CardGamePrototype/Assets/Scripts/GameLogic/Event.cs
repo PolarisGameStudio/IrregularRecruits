@@ -5,6 +5,7 @@ namespace GameLogic
 {
     public class Event
     {
+
         //CARD EVENTS
         //Any move event happens after the event is called
         public class CardEvent : UnityEvent<Card> { }
@@ -18,6 +19,7 @@ namespace GameLogic
         public static CardEvent OnWithdraw = new CardEvent();
         public static CardEvent OnSummon = new CardEvent();
         public static CardEvent OnUnSummon = new CardEvent();
+
         public static CardEvent OnDamaged = new CardEvent();
 
         public class CardValueEvent : UnityEvent<Card,int> { }
@@ -61,5 +63,71 @@ namespace GameLogic
 
         public static HeroEvent OnLevelUpSelection = new HeroEvent();
         public static HeroEvent OnLevelUp = new HeroEvent();
+
+        //TODO: remove this and instead use a event manager with a lifetime. and remove card listeners correctly, when they are removed
+        public static void ResetEvents()
+        {
+            //public static CardEvent OnDraw = new CardEvent();
+            OnDraw.RemoveAllListeners();
+            //public static CardEvent OnEtb = new CardEvent();
+            OnEtb.RemoveAllListeners();
+            //public static CardEvent OnDeath = new CardEvent();
+            OnDeath.RemoveAllListeners();
+            //public static CardEvent OnRessurrect = new CardEvent();
+            OnRessurrect.RemoveAllListeners();
+            //public static CardEvent OnKill = new CardEvent();
+            OnKill.RemoveAllListeners();
+            //public static CardEvent OnAttack = new CardEvent();
+            OnAttack.RemoveAllListeners();
+            //public static CardEvent OnBeingAttacked = new CardEvent();
+            OnBeingAttacked.RemoveAllListeners();
+            //public static CardEvent OnWithdraw = new CardEvent();
+            OnWithdraw.RemoveAllListeners();
+            //public static CardEvent OnSummon = new CardEvent();
+            OnSummon.RemoveAllListeners();
+            //public static CardEvent OnUnSummon = new CardEvent();
+            OnUnSummon.RemoveAllListeners();
+
+            //public static CardEvent OnDamaged = new CardEvent();
+            OnDamaged.RemoveAllListeners();
+
+            //public static CardValueEvent OnHealthChange = new CardValueEvent();
+            OnHealthChange.RemoveAllListeners();
+            //public static CardValueEvent OnHealed = new CardValueEvent();
+            OnHealed.RemoveAllListeners();
+            //public static CardValueEvent OnStatMod = new CardValueEvent();
+            OnStatMod.RemoveAllListeners();
+
+            //public static AbilityEvent OnAbilityExecution = new AbilityEvent();
+            OnAbilityExecution.RemoveAllListeners();
+
+            //public static CombatEvent OnCombatSetup = new CombatEvent();
+            OnCombatSetup.RemoveAllListeners();
+            //public static DeckEvent OnBattleFinished = new DeckEvent();
+            OnBattleFinished.RemoveAllListeners();
+
+            //public static DeckEvent OnPlayerAction = new DeckEvent();
+            OnPlayerAction.RemoveAllListeners();
+
+            //public static UnityEvent OnCombatResolveStart = new UnityEvent();
+            OnCombatResolveStart.RemoveAllListeners();
+            //public static UnityEvent OnCombatResolveFinished = new UnityEvent();
+            OnCombatResolveFinished.RemoveAllListeners();
+
+            //public static UnityEvent OnGameOver = new UnityEvent();
+            OnGameOver.RemoveAllListeners();
+            //public static UnityEvent OnGameOpen = new UnityEvent();
+            OnGameOpen.RemoveAllListeners();
+            //public static UnityEvent OnGameBegin = new UnityEvent();
+            OnGameBegin.RemoveAllListeners();
+
+            //public static LocationChangeEvent OnChangeLocation = new LocationChangeEvent();
+            OnChangeLocation.RemoveAllListeners();
+
+            //public static HeroEvent OnLevelUpSelection = new HeroEvent();
+            OnLevelUpSelection.RemoveAllListeners();
+            //public static HeroEvent OnLevelUp = new HeroEvent();
+            OnLevelUp.RemoveAllListeners();
+        }
     }
 }

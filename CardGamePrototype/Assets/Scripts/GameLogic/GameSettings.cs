@@ -17,7 +17,7 @@ public class GameSettings
     }
 
 
-    public int EnemyDeckSize = 1;
+    public int EnemyDeckSize = 3;
     //Player deck size
     public int PlayerDeckSize = 5;
     //Player starting hand size

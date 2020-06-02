@@ -13,7 +13,7 @@ namespace GameLogic
         public HeroObject TestHero;
         public Race[] SpawnableRaces;
         public Creature[] EnemyCreatures;
-        public int CombatDifficultyIncrease = 20;
+        public int CombatDifficultyIncrease = 50;
         public int CurrentCombatDifficulty;
         public int MaxEnemyDeckSize = 10;
         public int CombatRarityIncrease = 1;
@@ -39,8 +39,8 @@ namespace GameLogic
         {
             CurrentCombatDifficulty += CombatDifficultyIncrease;
 
-            if (EnemyDeck == null || EnemyDeck.Alive() == 0)
-                EnemyDeck = GenerateDeck();
+            //if (EnemyDeck == null || EnemyDeck.Alive() == 0)
+            EnemyDeck = GenerateDeck();
 
             if(GameSettings.Instance.EnemyDeckSize < MaxEnemyDeckSize)
                 GameSettings.Instance.EnemyDeckSize ++;

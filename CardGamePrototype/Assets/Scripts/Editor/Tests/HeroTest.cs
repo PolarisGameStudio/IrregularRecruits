@@ -8,7 +8,6 @@ namespace Tests
 
         private Creature TestCreature;
         private Card TestCard;
-        private Card OtherCard;
         private Hero TestHero;
 
         [TearDown]
@@ -17,10 +16,6 @@ namespace Tests
             if (TestCard != null && TestCard.Creature?.SpecialAbility)
             {
                 TestCard.Creature.SpecialAbility.RemoveListeners();
-            }
-            if (OtherCard != null && OtherCard.Creature?.SpecialAbility)
-            {
-                OtherCard.Creature.SpecialAbility.RemoveListeners();
             }
             if (TestHero != null)
             {
@@ -357,6 +352,7 @@ namespace Tests
             TestHero = GenerateHero(testAbility);
 
             TestCard = GenerateTestCreature(null, null, true);
+
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 

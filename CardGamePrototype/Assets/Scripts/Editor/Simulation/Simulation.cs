@@ -19,6 +19,7 @@ public class Simulation : Singleton<Simulation>
     public List<GameRunResult> GameWins;
     public Creature[] Creatures;
     public Race[] AllRaces;
+    private readonly int MaxRun = 50;
 
     [System.Serializable]
     public struct MatchUpResult
@@ -101,7 +102,7 @@ public class Simulation : Singleton<Simulation>
     public static void DeckGameRunSimulation()
     {
         if (Instance.DecksToSimulate.Count < 1)
-            Debug.LogError("no decks to simulate");
+            Debug.LogError("no decks to simulate. Are you using the correct scene?");
 
         var x = BattleManager.Instance;
         
@@ -123,6 +124,8 @@ public class Simulation : Singleton<Simulation>
 
     private int SimulateRun(DeckObject playerDeck)
     {
+        //Event.ResetEvents();
+
         var gc = new GameControl(null, AllRaces, Creatures);
         gc.PlayerDeck = new Deck(playerDeck);
 
@@ -132,13 +135,20 @@ public class Simulation : Singleton<Simulation>
         
         Event.OnBattleFinished.AddListener(d => winner = d);
 
-        while (winner == gc.PlayerDeck && gc.PlayerDeck.Alive() > 0)
+        while (wins <= MaxRun &&  winner == gc.PlayerDeck && gc.PlayerDeck.Alive() > 0)
         {
             wins++;
 
             gc.NextCombat();
         }
 
+        Debug.Log($"final enemy Races:{gc.EnemyDeck.Races.Aggregate("",  (current, next) => current.ToString() + " " + next.ToString())} CR: {gc.EnemyDeck.CR} ");
+
+        gc.PlayerDeck.AllCreatures().ForEach(c => c.CleanListeners());
+
+        gc.PlayerDeck.PackUp(true);
+
+        
         return wins;
     }
 

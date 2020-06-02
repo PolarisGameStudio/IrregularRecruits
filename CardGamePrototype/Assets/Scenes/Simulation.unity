@@ -231,10 +231,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DecksToSimulate:
-  - {fileID: 11400000, guid: ac957de51484b374f877b1f4ee357d26, type: 2}
   - {fileID: 11400000, guid: e58503075e30e0d488f79796dd1d528f, type: 2}
   - {fileID: 11400000, guid: f965b2a83c7badf41ae67fb2186437f1, type: 2}
-  BattlesToSimulate: 1
+  - {fileID: 11400000, guid: ac957de51484b374f877b1f4ee357d26, type: 2}
+  BattlesToSimulate: 10
   MatchUpResults:
   - FirstDeck: Dwarven Army
     SecondDeck: Legion
@@ -248,7 +248,22 @@ MonoBehaviour:
     SecondDeck: Cat Nation
     FirstDeckWins: 16
     SecondDeckWins: 34
-  GameWins: []
+  GameWins:
+  - Deck: The Dead Legion
+    Runs: 03000000060000000d0000000300000003000000
+    AverageRun: 5.6
+    HighestRun: 13
+    LowestRun: 3
+  - Deck: Cat Nation
+    Runs: 0300000005000000020000000300000006000000
+    AverageRun: 3.8
+    HighestRun: 6
+    LowestRun: 2
+  - Deck: Company of Dwarves
+    Runs: 060000000700000002000000070000000a000000
+    AverageRun: 6.4
+    HighestRun: 10
+    LowestRun: 2
   Creatures:
   - {fileID: 11400000, guid: 75db06fe635810f44ab7e0e4e2902161, type: 2}
   - {fileID: 11400000, guid: 6a65715886a552a4a80ef503db4a44a7, type: 2}

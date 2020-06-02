@@ -7,6 +7,7 @@ using Event = GameLogic.Event;
 
 namespace Tests
 {
+
     public class CombatTest
     { 
         [SetUp]

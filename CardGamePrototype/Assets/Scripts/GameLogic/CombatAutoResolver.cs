@@ -9,6 +9,9 @@ namespace GameLogic
     {
         private Deck PlayerDeck, EnemyDeck;
         private List<Card> attackOrder;
+        public int Turn = 0;
+
+        private const int MaxTurns = 100;
 
         public CombatAutoResolver()
         {
@@ -18,6 +21,7 @@ namespace GameLogic
         //TODO: should be removed and other
         public void StartCombat(Deck playerDeck, Deck enemyDeck)
         {
+            Turn = 0;
             PlayerDeck = playerDeck;
             EnemyDeck = enemyDeck;
         }
@@ -28,6 +32,7 @@ namespace GameLogic
             if (PlayerDeck == null || EnemyDeck == null)
                 return;
 
+            Turn++;
 
             attackOrder = new List<Card>();
 
@@ -58,6 +63,8 @@ namespace GameLogic
 
             while (attackOrder.Any(c => c.Alive()))
             {
+                Ability.AbilityStackCount = 0;
+
                 var attacker = attackOrder.First(c => c.Alive());
 
                 var otherDeck = attacker.InDeck == PlayerDeck ? EnemyDeck : PlayerDeck;
@@ -75,6 +82,8 @@ namespace GameLogic
                 attackOrder.Remove(attacker);
             }
 
+            Ability.AbilityStackCount = 0;
+
             FinishCombatRound();
         }
 
@@ -83,7 +92,7 @@ namespace GameLogic
         {
             Event.OnCombatResolveFinished.Invoke();
 
-            if (EnemyDeck.Alive() == 0)
+            if (EnemyDeck.Alive() == 0 || Turn >= MaxTurns)
                 Event.OnBattleFinished.Invoke(PlayerDeck);
             else if (PlayerDeck.Alive() == 0)
                 Event.OnBattleFinished.Invoke(EnemyDeck);

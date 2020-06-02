@@ -32,6 +32,7 @@ namespace GameLogic
 
             Event.OnBattleFinished.AddListener(PackUp);
 
+            Event.OnPlayerAction.AddListener(d => Ability.AbilityStackCount = 0);
 
             CombatAutoResolver = new CombatAutoResolver();
 
@@ -43,7 +44,7 @@ namespace GameLogic
                 PlayerDeck?.Hero?.AwardXp(EnemyDeck.GetXpValue());
 
             PlayerDeck?.PackUp();
-            EnemyDeck?.PackUp();
+            EnemyDeck?.PackUp(true);
 
             PlayerDeck = null;
             EnemyDeck = null;

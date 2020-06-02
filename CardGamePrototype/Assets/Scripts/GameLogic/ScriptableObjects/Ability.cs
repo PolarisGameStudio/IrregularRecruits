@@ -14,6 +14,9 @@ namespace GameLogic
             { ActionType.Withdraw,Deck.Zone.Battlefield },
         };
 
+        public static int AbilityStackCount;
+        private static readonly int MaxAbilityStack = 40;
+
         public enum ActionType
         {
             Kill,
@@ -48,9 +51,19 @@ namespace GameLogic
             //Debug.Log("Trigger: " + TriggerCondition.Description(owner.Creature) + " is true");
             //Debug.Log("Executing: " + ResultingAction.Description(owner.Creature));
 
+            AbilityStackCount++;
+
+            if(AbilityStackCount >= MaxAbilityStack)
+            {
+                Debug.LogWarning("Terminating ability, due to stack size");
+                return;
+            }
+
+
             List<Card> targets = GetTargets(ResultingAction.Target, owner, triggerExecuter);
 
             AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteAction(this, owner, targets);
+            
         }
 
         public List<Card> GetTargets(Noun targetType, AbilityHolder _owner, Card triggerExecuter)
