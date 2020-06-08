@@ -125,7 +125,7 @@ namespace Tests
             Assert.IsTrue(finished);
         }
         [Test]
-        public void DeathlessNotRemovedAfterDeath()
+        public void PlayersDeathlessNotRemovedAfterDeath()
         {
             var pDeck = GenerateTestDeck(0, true);
             var enmDeck = GenerateTestDeck(0, false);
@@ -143,7 +143,7 @@ namespace Tests
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
             Assert.IsTrue(pDeck.AllCreatures().Contains(defPlayer));
-            Assert.IsTrue(enmDeck.AllCreatures().Contains(defEnm));
+            Assert.IsFalse(enmDeck.AllCreatures().Contains(defEnm));
             Assert.IsTrue(finished);
         }
         [Test]

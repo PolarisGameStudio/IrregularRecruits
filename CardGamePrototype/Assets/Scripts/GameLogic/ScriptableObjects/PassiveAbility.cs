@@ -7,8 +7,6 @@ using Random = UnityEngine.Random;
 
 namespace GameLogic
 {
-
-
     [CreateAssetMenu]
     public partial class PassiveAbility : Ability
     {
@@ -29,8 +27,8 @@ namespace GameLogic
             COUNT
         }
 
+
         public Trigger TriggerCondition;
-        private UnityAction RemoveListenerAction;
 
         public override string ToString()
         {
@@ -41,15 +39,26 @@ namespace GameLogic
             return $"{TriggerCondition.Description(owner)}, {ResultingAction.Description(owner)}.";
         }
 
+        /// <returns>return the remove listener action</returns>
         public void SetupListeners(AbilityHolder _owner)
         {
-            RemoveListenerAction = AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner, TriggerCondition.Subjekt, ExecuteIfTrue);
-            //TODO: replace with CardEvent Reference
+            if (_owner.ListenersInitialized)
+                Debug.LogWarning("Initializating listeners already done");
+
+            _owner.ListenersInitialized = true;
+
+            _owner.RemoveListenerAction = AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner, TriggerCondition.Subjekt, ExecuteIfTrue);
         }
 
-        public void RemoveListeners()
+        public void RemoveListeners(AbilityHolder _owner)
         {
-            RemoveListenerAction?.Invoke();
+            if (!_owner.ListenersInitialized)
+                Debug.LogWarning("removing non-initialized listeners ");
+
+            _owner.RemoveListenerAction?.Invoke();
+
+            _owner.ListenersInitialized = false;
+            _owner.RemoveListenerAction = null;
         }
 
         public float GetValue()

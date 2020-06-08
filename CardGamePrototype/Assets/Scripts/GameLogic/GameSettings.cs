@@ -39,10 +39,7 @@ public class GameSettings
     }
     //DamageToDeckSystem
     public DeckDamage DeckDamageParadigm = DeckDamage.DamageToTopCard;
-
-    //make all rare creatures have abilities and all normal 
-    public int MaxRareEnemiesPrCombat = 1;
-
+    
     public float CombatSpeed = 1f;
 
     public bool AiControlledPlayer = false;

@@ -166,6 +166,9 @@ namespace GameLogic
         internal void Add(Card card)
         {
             Creatures[card.Location].Add(card);
+
+            if (card.Creature.SpecialAbility & !card.ListenersInitialized)
+                card.Creature.SpecialAbility.SetupListeners(card);
         }
     }
 }

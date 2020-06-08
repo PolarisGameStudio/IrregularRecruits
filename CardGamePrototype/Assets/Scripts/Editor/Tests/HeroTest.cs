@@ -15,12 +15,12 @@ namespace Tests
         {
             if (TestCard != null && TestCard.Creature?.SpecialAbility)
             {
-                TestCard.Creature.SpecialAbility.RemoveListeners();
+                TestCard.Creature.SpecialAbility.RemoveListeners(TestCard);
             }
             if (TestHero != null)
             {
                 foreach (var a in TestHero.Abilities)
-                    (a as PassiveAbility)?.RemoveListeners();
+                    (a as PassiveAbility)?.RemoveListeners(TestHero);
             }
 
 
@@ -173,7 +173,7 @@ namespace Tests
             };
             var testAbility2 = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(PassiveAbility.ActionType.DealDamage, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
                 TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.ETB),
             };
 

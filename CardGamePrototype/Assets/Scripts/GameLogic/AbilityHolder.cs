@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Events;
 
 namespace GameLogic
 {
@@ -16,6 +17,9 @@ namespace GameLogic
         protected string Name;
         public Deck InDeck;
         public Guid Guid = System.Guid.NewGuid();
+
+        public UnityAction RemoveListenerAction;
+        public bool ListenersInitialized = false;
 
         public abstract Race GetRace();
 

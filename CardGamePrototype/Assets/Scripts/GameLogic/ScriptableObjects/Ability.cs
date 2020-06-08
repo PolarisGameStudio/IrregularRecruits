@@ -15,7 +15,7 @@ namespace GameLogic
         };
 
         public static int AbilityStackCount;
-        private static readonly int MaxAbilityStack = 40;
+        private static readonly int MaxAbilityStack = 12;
 
         public enum ActionType
         {

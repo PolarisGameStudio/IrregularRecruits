@@ -8,6 +8,8 @@ namespace GameLogic
 
     public class Card : AbilityHolder
     {
+        #region Fields
+
         private Creature creature;
         public Creature Creature
         {
@@ -16,9 +18,6 @@ namespace GameLogic
                 SetCreature(value);
             }
         }
-        //public CardUI BattleRepresentation;
-
-
 
         public int MaxHealth;
         private int currentHealth;
@@ -31,33 +30,6 @@ namespace GameLogic
 
                 currentHealth = value;
             }
-        }
-
-        public Card(Creature c)
-        {
-            Creature = c;
-
-        }
-
-        public List<Trait> GetTraits()
-        {
-            return Creature.Traits;
-        }
-
-        public PassiveAbility Ability()
-        {
-            return Creature.SpecialAbility;
-        }
-
-
-        public void Die()
-        {
-            ChangeLocation(Deck.Zone.Graveyard);
-        }
-
-        public bool Damaged()
-        {
-            return CurrentHealth < MaxHealth;
         }
 
         private int attack;
@@ -88,6 +60,37 @@ namespace GameLogic
         }
 
         public Deck.Zone Location;
+
+
+
+        #endregion
+
+        public Card(Creature c)
+        {
+            Creature = c;
+
+        }
+
+        public List<Trait> GetTraits()
+        {
+            return Creature.Traits;
+        }
+
+        public PassiveAbility Ability()
+        {
+            return Creature.SpecialAbility;
+        }
+
+
+        public void Die()
+        {
+            ChangeLocation(Deck.Zone.Graveyard);
+        }
+
+        public bool Damaged()
+        {
+            return CurrentHealth < MaxHealth;
+        }
 
         public void ChangeLocation(Deck.Zone to)
         {
@@ -193,7 +196,7 @@ namespace GameLogic
             Attack = newCreature.Attack;
 
             if (creature && creature.SpecialAbility)
-                creature.SpecialAbility.RemoveListeners();
+                creature.SpecialAbility.RemoveListeners(this);
 
             if (newCreature.SpecialAbility)
             {
@@ -240,7 +243,7 @@ namespace GameLogic
         public void CleanListeners()
         {
             if (Creature && Creature.SpecialAbility)
-                Creature.SpecialAbility.RemoveListeners();
+                Creature.SpecialAbility.RemoveListeners(this);
         }
 
         internal bool CanAttack()

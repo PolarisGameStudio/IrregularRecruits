@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameLogic
 {
@@ -19,12 +20,12 @@ namespace GameLogic
                     instance = new BattleManager();
                 return instance; 
             } 
-            private set => instance = value; 
+            set => instance = value; 
         }
 
-        private BattleManager()
+        public BattleManager()
         {
-            //throw new Exception("test exeeptino");
+            //Event.ResetEvents();
 
             Event.OnCombatSetup.AddListener(SetupCombat);
 
@@ -33,6 +34,8 @@ namespace GameLogic
             Event.OnBattleFinished.AddListener(PackUp);
 
             Event.OnPlayerAction.AddListener(d => Ability.AbilityStackCount = 0);
+
+            Ability.AbilityStackCount = 0;
 
             CombatAutoResolver = new CombatAutoResolver();
 

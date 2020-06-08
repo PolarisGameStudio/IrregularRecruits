@@ -13,15 +13,18 @@ namespace Tests
         [TearDown]
         public void CleanAbility()
         {
-            if (TestCard != null && TestCard.Creature?.SpecialAbility)
-            {
-                TestCard.Creature.SpecialAbility.RemoveListeners();
-            }
-            if (OtherCard != null && OtherCard.Creature?.SpecialAbility)
-            {
-                OtherCard.Creature.SpecialAbility.RemoveListeners();
-            }
+            //if (TestCard != null && TestCard.Creature?.SpecialAbility)
+            //{
+            //    TestCard.Creature.SpecialAbility.RemoveListeners();
+            //}
+            //if (OtherCard != null && OtherCard.Creature?.SpecialAbility)
+            //{
+            //    OtherCard.Creature.SpecialAbility.RemoveListeners();
+            //}
 
+            Ability.AbilityStackCount = 0;
+
+            Event.ResetEvents();
             BattleManager.Instance.PackUp(null);
         }
 

@@ -13,8 +13,9 @@ namespace Tests
         [SetUp]
         public void BattleManage()
         {
-            var neededForBM = BattleManager.Instance;
+            BattleManager.Instance = new BattleManager();
             GameSettings.Instance.AiControlledPlayer = true;
+
         }
 
         private Card GenerateTestCreature(PassiveAbility ability, Race race = null, int attack = 2)
@@ -125,6 +126,7 @@ namespace Tests
             Event.OnBattleFinished.AddListener(d => battleFinished = true);
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
 
 
             Assert.IsTrue(battleFinished);

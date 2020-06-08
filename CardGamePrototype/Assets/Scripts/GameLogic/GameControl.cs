@@ -16,7 +16,6 @@ namespace GameLogic
         public int CombatDifficultyIncrease = 50;
         public int CurrentCombatDifficulty;
         public int MaxEnemyDeckSize = 10;
-        public int CombatRarityIncrease = 1;
 
         public GameControl(Creature testCreature, Race[] races, Creature[] enmCreatures,HeroObject testHero = null)
         {
@@ -44,9 +43,6 @@ namespace GameLogic
 
             if(GameSettings.Instance.EnemyDeckSize < MaxEnemyDeckSize)
                 GameSettings.Instance.EnemyDeckSize ++;
-
-            //TODO: remove
-            GameSettings.Instance.MaxRareEnemiesPrCombat += CombatRarityIncrease;
 
             Event.OnCombatSetup.Invoke(PlayerDeck, EnemyDeck);
         }

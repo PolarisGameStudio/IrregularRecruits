@@ -85,6 +85,8 @@ namespace UI
 
         private void SetupDecks(Deck playerDeck, Deck opponentDeck)
         {
+            Debug.Log("setting up ui");
+
             MoveDuration = GameSettings.Instance.CombatSpeed / 2;
 
             SetupUI(playerDeck,true);

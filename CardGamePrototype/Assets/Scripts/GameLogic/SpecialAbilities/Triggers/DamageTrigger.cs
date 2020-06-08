@@ -24,7 +24,7 @@ namespace GameLogic
 
             trigger.AddListener(handler);
 
-            return () => Event.OnDamaged.RemoveListener(handler);
+            return () => trigger.RemoveListener(handler);
         }
     }
 }
