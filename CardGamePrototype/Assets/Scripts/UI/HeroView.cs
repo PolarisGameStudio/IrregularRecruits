@@ -17,12 +17,18 @@ namespace UI
         public TextMeshProUGUI RaceText;
         public TextMeshProUGUI ClassText;
         public AbilityUI StartingAbility;
-        public Color NormalAbilityColor, NotSelectedColor, UnselectableColor;
+
         public TextMeshProUGUI SelectLevelUpText;
 
         public GameObject Holder;
 
         public LevelAbility[] LevelAbilities;
+
+        [Header("Ability looks")]
+        //TODO: lerp saturation levels
+        public Material GrayScaleMaterial;
+        public Material NormalMaterial;
+        public Color NormalAbilityColor, NotSelectedColor, UnselectableColor;
 
         [Serializable]
         public struct LevelAbility

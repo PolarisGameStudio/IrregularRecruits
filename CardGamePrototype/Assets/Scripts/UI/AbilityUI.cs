@@ -15,6 +15,7 @@ namespace UI
         public Image AbilityImage;
         public Image BorderImage;
         public ParticleSystem OutlineParticles;
+
         public Ability Ability;
         public Hero Owner;
         public Button Button;
@@ -50,6 +51,7 @@ namespace UI
             OutlineParticles.Play();
             
             AbilityImage.color = HeroView.Instance.NormalAbilityColor;
+            AbilityImage.material = HeroView.Instance.NormalMaterial;
         }
 
         public void LockAbility()
@@ -59,6 +61,7 @@ namespace UI
             OutlineParticles.Stop();
 
             AbilityImage.color = HeroView.Instance.UnselectableColor;
+            AbilityImage.material = HeroView.Instance.GrayScaleMaterial;
         }
 
 
@@ -101,6 +104,7 @@ namespace UI
                 if(owner.Abilities.Contains(ability))
                 {
                     AbilityImage.color = HeroView.Instance.NormalAbilityColor;
+                    AbilityImage.material = HeroView.Instance.NormalMaterial;
 
                 }
                 else if(owner.GetLevelUpOptions().Contains(ability))
@@ -111,11 +115,13 @@ namespace UI
                         OutlineParticles.Play();
 
                         AbilityImage.color = HeroView.Instance.NormalAbilityColor;
+                        AbilityImage.material = HeroView.Instance.NormalMaterial;
                     }
                     else
                     {
                         //unselected 
                         AbilityImage.color = HeroView.Instance.NotSelectedColor;
+                        AbilityImage.material = HeroView.Instance.NormalMaterial;
 
                     }
                 }
@@ -123,6 +129,7 @@ namespace UI
                 {
                     //unselectable look
                     AbilityImage.color = HeroView.Instance.UnselectableColor;
+                    AbilityImage.material = HeroView.Instance.GrayScaleMaterial;
 
 
                 }

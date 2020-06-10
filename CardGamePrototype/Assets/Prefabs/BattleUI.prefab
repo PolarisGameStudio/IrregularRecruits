@@ -2383,9 +2383,6 @@ MonoBehaviour:
   RaceText: {fileID: 5101476349488431575}
   ClassText: {fileID: 3835768079880328077}
   StartingAbility: {fileID: 549632869543044439}
-  NormalAbilityColor: {r: 1, g: 1, b: 1, a: 1}
-  NotSelectedColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
-  UnselectableColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 0.78431374}
   SelectLevelUpText: {fileID: 7723919462875708135}
   Holder: {fileID: 2330032524264514007}
   LevelAbilities:
@@ -2399,6 +2396,11 @@ MonoBehaviour:
     Class: {fileID: 6873266452470487900}
   - Race: {fileID: 3820927005748028476}
     Class: {fileID: 1122576058143324087}
+  GrayScaleMaterial: {fileID: 2100000, guid: f98b83aa647272546812b43c6e7afc5f, type: 2}
+  NormalMaterial: {fileID: 2100000, guid: fce78be606381de4a82e22b575b72f1a, type: 2}
+  NormalAbilityColor: {r: 1, g: 1, b: 1, a: 1}
+  NotSelectedColor: {r: 1, g: 1, b: 1, a: 0.47058824}
+  UnselectableColor: {r: 1, g: 1, b: 1, a: 0.78431374}
 --- !u!1 &1379044782049278177
 GameObject:
   m_ObjectHideFlags: 0
