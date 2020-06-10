@@ -145,7 +145,9 @@ namespace UI
         private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs,Ability ability, float delay = 0)
         {
             if (!abilityOwner ) yield break;
-            var image = abilityOwner.HighlightAbility(ability);
+
+            var image = abilityOwner.GetAbilityImage(ability);
+
             if (!image) yield break;
 
             //vector2 to ignore z position to prevent oddities

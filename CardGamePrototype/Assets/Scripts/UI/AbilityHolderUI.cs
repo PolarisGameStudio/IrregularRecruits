@@ -12,21 +12,12 @@ namespace UI
         protected Image SpecialAbilityIcon;
         public Dictionary<Ability, AbilityUI> AbilityIcons = new Dictionary<Ability, AbilityUI>();
 
-        internal Image HighlightAbility(Ability ability = null)
+        internal Image GetAbilityImage(Ability ability = null)
         {
-            if (!ability || !AbilityIcons.ContainsKey(ability)) return HighlightAnimation(SpecialAbilityIcon);
+            if (!ability || !AbilityIcons.ContainsKey(ability)) return SpecialAbilityIcon;
 
-            return HighlightAnimation(AbilityIcons[ability].AbilityImage);
+            return AbilityIcons[ability].AbilityImage;
         }
 
-        private Image HighlightAnimation(Image abilityImage)
-        {
-            if (!abilityImage) return null;
-
-            LeanTween.scale(abilityImage.rectTransform, Vector3.one * 3.5f, 0.4f).setOnComplete(() =>
-                LeanTween.scale(abilityImage.rectTransform, Vector3.one, 0.3f));
-
-            return abilityImage;
-        }
     }
 }
