@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapController 
+namespace MapLogic
 {
+    public class MapController
+    {
+        public List<MapNode> Nodes;
 
+    }
 }

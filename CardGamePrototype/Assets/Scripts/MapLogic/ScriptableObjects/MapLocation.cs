@@ -8,6 +8,9 @@ namespace MapLogic
     public class MapLocation : ScriptableObject
     {
         public string Name;
+        public bool ExecuteRandomCombatOptionAutomatically;
+        //0 = all options. 
+        public int NumberOfApplicableOptionsSelected;
         public string LocationDescription;
         public Sprite LocationIcon;
         public Sprite LocationImage;
