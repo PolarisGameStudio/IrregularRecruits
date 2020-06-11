@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Create Game Objects/Creature")]
     public class Creature : ScriptableObject, ICharacter
     {
         public new string name;

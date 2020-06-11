@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Create Game Objects/Active Ability")]
     public class ActiveAbility : Ability
     {
         public bool OncePrCombat;

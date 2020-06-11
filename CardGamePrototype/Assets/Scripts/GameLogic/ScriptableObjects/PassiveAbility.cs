@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace GameLogic
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Create Game Objects/Passive Ability")]
     public partial class PassiveAbility : Ability
     {
         [SerializeField]

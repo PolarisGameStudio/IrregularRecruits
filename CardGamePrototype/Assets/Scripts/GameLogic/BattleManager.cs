@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    //responsible for keeping track of decks currently in combat and setting up actions 
-    public class BattleManager
+
+
+    public class BattleManager 
     {
         public Deck PlayerDeck;
         public Deck EnemyDeck;

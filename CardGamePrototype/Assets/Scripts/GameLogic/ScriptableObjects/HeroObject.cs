@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GameLogic
 {
 
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Create Game Objects/Hero")]
     public partial class HeroObject : ScriptableObject
     {
         public new string name;

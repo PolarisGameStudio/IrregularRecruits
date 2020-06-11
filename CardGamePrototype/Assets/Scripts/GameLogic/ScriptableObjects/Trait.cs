@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Create Game Objects/Trait")]
 public class Trait : ScriptableObject
 {
     public new string name;

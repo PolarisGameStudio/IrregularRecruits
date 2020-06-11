@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace GameLogic
 {
-        [CreateAssetMenu]
-        [Serializable]
+    [CreateAssetMenu(menuName = "Create Game Objects/Level Option")]
+    [Serializable]
         public class LevelOption : ScriptableObject
         {
             public List<Ability> Options = new List<Ability>();

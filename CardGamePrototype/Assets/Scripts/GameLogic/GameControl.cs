@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace GameLogic
 {
-    public class GameControl
+    public class GameControl 
     {
         public  Deck PlayerDeck;
         public Deck EnemyDeck;

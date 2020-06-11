@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Create Game Objects/Race")]
     //TODO: merge with ability
     public class Race : ScriptableObject
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Create Game Objects/Deck")]
     public class DeckObject : ScriptableObject
     {
         public new string name;
