@@ -4,9 +4,16 @@ using UnityEngine;
 
 namespace MapLogic
 {
-    public class MapController
-    {
-        public List<MapNode> Nodes;
 
+    public class MapController : ScriptableObject
+    {
+        private List<MapNode> Nodes;
+
+        public void CreateMap()
+        {
+
+
+
+        }
     }
 }

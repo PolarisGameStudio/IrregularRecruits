@@ -146,5 +146,12 @@ namespace Tests
             Assert.IsTrue(false);
 
         }
+
+        [Test]
+        public void GeneratedMapAllRoadsLeadToWin()
+        {
+            Assert.IsTrue(false);
+
+        }
     }
 }

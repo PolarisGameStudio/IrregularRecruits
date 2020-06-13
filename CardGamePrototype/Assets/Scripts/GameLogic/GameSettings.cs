@@ -1,21 +1,10 @@
 ﻿using System;
+using UnityEngine;
 using Event = GameLogic.Event;
 
-public class GameSettings
+[CreateAssetMenu]
+public class GameSettings : SingletonScriptableObject<GameSettings>
 {
-    private static GameSettings instance;
-
-    public static GameSettings Instance
-    {
-        get
-        {
-            if (instance == null)
-                instance = new GameSettings();
-            return instance;
-        }
-        private set => instance = value;
-    }
-
 
     public int EnemyDeckSize = 3;
     //Player deck size

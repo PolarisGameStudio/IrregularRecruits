@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9df2439aac0ff24cb3bad7bd563a2c5, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  EnemyDeckSize: 3
+  PlayerDeckSize: 5
+  StartingHandSize: 3
+  PlaysPrTurn: 2
+  DrawPrTurn: 1
+  MaxCreaturesOnBattlefield: 0
+  AttackOrderParadigm: 0
+  DeckDamageParadigm: 0
+  CombatSpeed: 1
+  AiControlledPlayer: 0

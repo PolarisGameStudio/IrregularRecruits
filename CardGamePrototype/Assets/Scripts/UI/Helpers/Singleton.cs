@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 /// <summary>
 /// Implementing this manages the creating of a MonoBehaviour Singleton 
 /// It uses lazy initialization, so the singleton is initialized on first call to it
