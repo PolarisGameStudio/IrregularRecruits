@@ -8,8 +8,10 @@ namespace MapLogic
     public class MapLocation : ScriptableObject
     {
         public string Name;
+        public int Difficulty;
         public bool ExecuteRandomCombatOptionAutomatically;
         public bool WinNode;
+        public bool StartNode;
         //only once pr. game
         public bool UniqueNode;
         //0 = all options. 
