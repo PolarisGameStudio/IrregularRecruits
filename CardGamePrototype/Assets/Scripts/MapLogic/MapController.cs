@@ -6,7 +6,7 @@ using UnityEngine;
 namespace MapLogic
 {
 
-    public class MapController 
+    public class MapController
     {
         private List<MapNode> Nodes = new List<MapNode>();
 
@@ -51,7 +51,7 @@ namespace MapLogic
 
             locations = locations.OrderBy(d => d.Difficulty + settings.RandomnessToDifficulty * Random.value).ToList();
 
-            MapNode[] lastStep = { GenerateNode(locations.First(l => l.StartNode),locations) };
+            MapNode[] lastStep = { GenerateNode(locations.First(l => l.StartNode), locations) };
 
             for (int i = 0; i < settings.MapLength - 1; i++)
             {
@@ -62,22 +62,25 @@ namespace MapLogic
 
                 for (int j = 0; j < nodesAtStep[i]; j++)
                 {
-                    step[j] = GenerateNode(locations.First(l=>!l.WinNode), locations);
+                    if (i == settings.MapLength - 1)
+                        step[j] = GenerateNode(locations.First(l => l.WinNode), locations);
+                    else
+                        step[j] = GenerateNode(locations.First(l => !l.WinNode), locations);
                 }
 
-                var edgesPrNode = step.Length /(float) lastStep.Length;
+                var edgesPrNode = step.Length / (float)lastStep.Length;
 
-                while (lastStep.Any(c=>c.LeadsTo.Count == 0) || step.Any(s=> !Nodes.Any(n=>n.LeadsTo.Contains(n) )))
+                while (lastStep.Any(c => c.LeadsTo.Count == 0) || step.Any(s => !Nodes.Any(n => n.LeadsTo.Contains(n))))
                 {
                     //Select a node to create the edge from
-                    var l = 
-                        Random.value > 0.5f ? 
+                    var l =
+                        Random.value > 0.5f ?
                         lastStep[Random.Range(0, lastStep.Length)] :
-                        lastStep.First(l=> l.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
+                        lastStep.First(l => l.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
 
                     //find the corresponding position of the next step
                     var pos = lastStep.ToList().IndexOf(l);
-                    var desiredNodePos = Mathf.Clamp( Mathf.RoundToInt(pos * edgesPrNode),0,step.Length-1);
+                    var desiredNodePos = Mathf.Clamp(Mathf.RoundToInt(pos * edgesPrNode), 0, step.Length - 1);
 
                     var mapNode = step[desiredNodePos];
 
@@ -109,7 +112,7 @@ namespace MapLogic
 
         }
 
-        private  MapNode GenerateNode(MapLocation locationObject, List<MapLocation> locations)
+        private MapNode GenerateNode(MapLocation locationObject, List<MapLocation> locations)
         {
             locations.Remove(locationObject);
 
