@@ -69,16 +69,42 @@ namespace MapLogic
 
                 while (lastStep.Any(c=>c.LeadsTo.Count == 0) || step.Any(s=> !Nodes.Any(n=>n.LeadsTo.Contains(n) )))
                 {
-                    //could select randomly for crazy/less distributed maze
-                    var l = lastStep.First(l=> l.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
+                    //Select a node to create the edge from
+                    var l = 
+                        Random.value > 0.5f ? 
+                        lastStep[Random.Range(0, lastStep.Length)] :
+                        lastStep.First(l=> l.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
 
+                    //find the corresponding position of the next step
                     var pos = lastStep.ToList().IndexOf(l);
-
                     var desiredNodePos = Mathf.Clamp( Mathf.RoundToInt(pos * edgesPrNode),0,step.Length-1);
-                    
+
+                    var mapNode = step[desiredNodePos];
+
+                    int minimum = step.Min(s => s.LeadsTo.Count);
+
+                    var leftOrRight = Random.value > 0.5f ? 1 : -1;
+
+                    //select the closest minimum
+                    while (mapNode.LeadsTo.Count > minimum)
+                    {
+                        desiredNodePos += leftOrRight;
+                        leftOrRight++;
+                        leftOrRight *= -1;
+
+                        //wrapping. could also limit
+                        if (desiredNodePos > step.Length - 1) desiredNodePos = 0;
+                        if (desiredNodePos < 0) desiredNodePos = step.Length - 1;
+
+                        mapNode = step[desiredNodePos];
+
+                    }
+
+                    //establish connection
+                    l.LeadsTo.Add(mapNode);
                 }
 
-                //Make sure a location does not lead to the same location type if possible
+                lastStep = step;
             }
 
         }
