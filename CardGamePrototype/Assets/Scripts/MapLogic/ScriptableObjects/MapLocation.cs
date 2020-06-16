@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 
@@ -20,6 +21,14 @@ namespace MapLogic
         public Sprite LocationIcon;
         public Sprite LocationImage;
         [SerializeField]
-        private MapOption[] LocationOptions;
+        public MapOption[] LocationOptions;
+
+
+        public string[] GetOptionDescriptions() => LocationOptions.Select(lo => lo.OptionDescription).ToArray();
+
+        public void SelectOption()
+        {
+
+        }
     }
 }

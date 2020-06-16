@@ -4,7 +4,7 @@ using UnityEngine;
 namespace MapLogic
 {
     [CreateAssetMenu(menuName = "Create Map Objects/Option Composite")]
-    class MapOptionComposite : MapOption
+    public class MapOptionComposite : MapOption
     {
         public List<MapOption> Options;
 

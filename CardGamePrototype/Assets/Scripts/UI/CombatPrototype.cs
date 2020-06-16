@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public class CombatPrototype : Singleton<CombatPrototype>
 {
     public Button NextCombatButton;
-    private GameControl GC;
+    private PrototypeGameControl GC;
 
     public Creature TestCreature;
     public HeroObject TestHero;
@@ -21,7 +21,7 @@ public class CombatPrototype : Singleton<CombatPrototype>
 
     void Start()
     {
-        GC = new GameControl(TestCreature, AllRaces, AllCreatures,TestHero);
+        GC = new PrototypeGameControl(TestCreature, AllRaces, AllCreatures,TestHero);
 
         NextCombatButton.onClick.AddListener(GC.NextCombat);
         NextCombatButton.onClick.AddListener(() => NextCombatButton.gameObject.SetActive(false));

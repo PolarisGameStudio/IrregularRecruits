@@ -1,13 +1,13 @@
 ﻿using GameLogic;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Event = GameLogic.Event;
 
 namespace MapLogic
 {
 
     [CreateAssetMenu(menuName = "Create Map Objects/Combat Option")]
-    class CombatOption : MapOption
+    public class CombatOption : MapOption
     {
         [Header("Creatures always spawned")]
         public List<Creature> SpawnCreatures;
@@ -17,7 +17,10 @@ namespace MapLogic
 
         public override void ExecuteOption(MapLocation owner)
         {
-            throw new System.NotImplementedException();
+            var deck =  DeckGeneration.GenerateDeck(CRValue, PossibleRaces, SpawnCreatures);
+
+            MapController.Instance.StartCombat(deck);
+
         }
     }
 }

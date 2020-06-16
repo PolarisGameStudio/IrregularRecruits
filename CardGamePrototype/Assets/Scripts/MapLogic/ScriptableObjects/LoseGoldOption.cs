@@ -5,9 +5,9 @@ using UnityEngine;
 namespace MapLogic
 {
     [CreateAssetMenu(menuName = "Create Map Objects/Lose Gold Option")]
-    class LoseGoldOption : MapOption
+    public class LoseGoldOption : MapOption
     {
-        public List<Creature> Creatures;
+        public int Amount;
 
         public override void ExecuteOption(MapLocation owner)
         {

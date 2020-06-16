@@ -1,14 +1,26 @@
-﻿using System.Collections;
+﻿using GameLogic;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Event = GameLogic.Event;
 
 namespace MapLogic
 {
-
-    public class MapController
+    public class MapController 
     {
-        private List<MapNode> Nodes = new List<MapNode>();
+        private static MapController instance;
+
+        public List<MapNode> Nodes = new List<MapNode>();
+        public Deck PlayerDeck;
+        public int PlayerGold;
+
+        public static MapController Instance { get {
+                if (instance == null)
+                    instance = new MapController();
+                return instance;
+            }
+        }
 
         public void CreateMap()
         {
@@ -53,7 +65,7 @@ namespace MapLogic
 
             MapNode[] lastStep = { GenerateNode(locations.First(l => l.StartNode), locations) };
 
-            for (int i = 0; i < settings.MapLength - 1; i++)
+            for (int i = 1; i < settings.MapLength ; i++)
             {
                 if (nodesAtStep[i] < 1)
                     Debug.LogError("Generated pathless map");
@@ -70,13 +82,16 @@ namespace MapLogic
 
                 var edgesPrNode = step.Length / (float)lastStep.Length;
 
-                while (lastStep.Any(c => c.LeadsTo.Count == 0) || step.Any(s => !Nodes.Any(n => n.LeadsTo.Contains(n))))
+                while (lastStep.Any(c => c.LeadsTo.Count == 0) || step.Any(s => !Nodes.Any(n => n.LeadsTo.Contains(s))))
                 {
                     //Select a node to create the edge from
                     var l =
                         Random.value > 0.5f ?
                         lastStep[Random.Range(0, lastStep.Length)] :
-                        lastStep.First(l => l.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
+                        lastStep.First(pro => pro.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
+
+                    if(l.LeadsTo.Count == step.Length)
+                        l = lastStep.First(pro => pro.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
 
                     //find the corresponding position of the next step
                     var pos = lastStep.ToList().IndexOf(l);
@@ -84,24 +99,31 @@ namespace MapLogic
 
                     var mapNode = step[desiredNodePos];
 
-                    int minimum = step.Min(s => s.LeadsTo.Count);
+                    int minimum = step.Min(s => Nodes.Count(n => n.LeadsTo.Contains(s)));
 
                     var leftOrRight = Random.value > 0.5f ? 1 : -1;
 
                     //select the closest minimum
-                    while (mapNode.LeadsTo.Count > minimum)
+                    while (l.LeadsTo.Contains(mapNode)  && Mathf.Abs(leftOrRight) < step.Length)
                     {
                         desiredNodePos += leftOrRight;
-                        leftOrRight++;
+                        if (leftOrRight > 0)
+                            leftOrRight++;
+                        else
+                            leftOrRight--;
                         leftOrRight *= -1;
 
                         //wrapping. could also limit
-                        if (desiredNodePos > step.Length - 1) desiredNodePos = 0;
-                        if (desiredNodePos < 0) desiredNodePos = step.Length - 1;
+                        if (desiredNodePos > step.Length - 1) desiredNodePos -= step.Length;
+
+                        if (desiredNodePos < 0) desiredNodePos += step.Length;
 
                         mapNode = step[desiredNodePos];
 
                     }
+
+                    if (l.LeadsTo.Contains(mapNode)) //overflow
+                        Debug.LogError("creating path That is already created");
 
                     //establish connection
                     l.LeadsTo.Add(mapNode);
@@ -110,6 +132,13 @@ namespace MapLogic
                 lastStep = step;
             }
 
+        }
+
+
+        public void StartCombat(Deck enemyDeck)
+        {
+
+            Event.OnCombatSetup.Invoke(PlayerDeck, enemyDeck);
         }
 
         private MapNode GenerateNode(MapLocation locationObject, List<MapLocation> locations)

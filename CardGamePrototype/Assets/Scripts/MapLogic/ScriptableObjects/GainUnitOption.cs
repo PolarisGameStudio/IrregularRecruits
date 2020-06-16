@@ -6,9 +6,9 @@ namespace MapLogic
 {
 
     [CreateAssetMenu(menuName = "Create Map Objects/Gain Unit Option")]
-    class GainUnitOption : MapOption
+    public class GainUnitOption : MapOption
     {
-        public List<Creature> Creatures;
+        public List<Creature> Units;
 
         public override void ExecuteOption(MapLocation owner)
         {

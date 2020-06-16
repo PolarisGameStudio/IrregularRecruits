@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MapLogic
 {
-    abstract class MapOption : ScriptableObject
+    public abstract class MapOption : ScriptableObject
     {
         public abstract void ExecuteOption(MapLocation owner);
 
@@ -13,6 +13,7 @@ namespace MapLogic
         public List<Race> OnlyForHeroRaces;
         //E.g. I use my fire magic to kill the ...
         public List<Ability> OnlyForAbility;
+        public string OptionDescription;
       
     }
 }
