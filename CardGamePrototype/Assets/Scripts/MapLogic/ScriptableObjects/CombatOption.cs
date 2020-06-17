@@ -15,7 +15,7 @@ namespace MapLogic
         public List<Race> PossibleRaces;
         public int CRValue;
 
-        public override void ExecuteOption(MapLocation owner)
+        public override void ExecuteOption(MapNode owner)
         {
             var deck =  DeckGeneration.GenerateDeck(CRValue, PossibleRaces, SpawnCreatures);
 

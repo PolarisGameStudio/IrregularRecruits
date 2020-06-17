@@ -10,9 +10,13 @@ namespace MapLogic
     {
         public List<Creature> Units;
 
-        public override void ExecuteOption(MapLocation owner)
+        public override void ExecuteOption(MapNode owner)
         {
-            throw new System.NotImplementedException();
+            foreach (var item in Units)
+            {
+                BattleManager.Instance.PlayerDeck.AddCard(new Card(item));
+
+            }
         }
     }
 }

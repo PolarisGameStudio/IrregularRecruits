@@ -4,66 +4,76 @@ using UnityEngine;
 
 namespace GameLogic
 {
+    [CreateAssetMenu]
+    public class CreatureLibrary : SingletonScriptableObject<CreatureLibrary>
+    {
+        public Race[] AllRaces;
+        public Creature[] EnemyCreatures;
+    }
+
     public abstract class DeckGeneration
     {
-
-        public Race[] SpawnableRaces;
-        public Creature[] EnemyCreatures;
-
-        public static Deck GenerateDeck(int CR, List<Race> races)
+        public static Deck GenerateDeck(int CR, List<Race> races = null, List<Creature> creatures = null)
         {
-            return new Deck(new DeckObject());
-        }
-        
-        public static Deck GenerateDeck(int CR, List<Race> races, List<Creature> creatures)
-        {
-            return new Deck(new DeckObject());
-        }
+            var possibleRaces = races ?? CreatureLibrary.Instance.AllRaces.OrderBy(c=>Random.value).ToList();
+            var race = possibleRaces.First();
 
-        protected Deck GenerateDeck(int CR, bool player = false, Creature testCreature = null, HeroObject testHero = null)
-        {
-            List<Creature> creatures;
+            //TODO: possible for more races together
 
-            //Generate a deck full of the test creature
-            if (testCreature && player)
-            {
-                creatures = new List<Creature>() { testCreature };
-            }
-            else
-            {
-                Race[] possibleRaces = player ? SpawnableRaces.Where(r => r.PlayerRace).ToArray() : SpawnableRaces;
-                var race = possibleRaces[Random.Range(0, possibleRaces.Length)];
-
-                creatures = EnemyCreatures.Where(c => c.Race == race).ToList();
-            }
+            if(creatures == null)
+                creatures = CreatureLibrary.Instance.EnemyCreatures.Where(c => c.Race == race).ToList();
 
             var library = new List<Card>();
 
 
             var difficultyLeft = CR;
 
-            if (!creatures.Any(c => c.CR <= difficultyLeft) & !(player && testCreature))
+            if (!creatures.Any(c => c.CR <= difficultyLeft) )
                 throw new System.Exception("Creatures of type " + creatures.First().Race + " has no creature with CR below " + difficultyLeft);
 
-            int v = (GameSettings.DeckSize(player));
+            int v = (GameSettings.DeckSize());
             for (int i = 0; i < v; i++)
             {
                 Creature selected;
 
-                if (player && testCreature)
-                {
-                    selected = creatures[Random.Range(0, creatures.Count())];
-                }
-                else
-                {
-                    if (!creatures.Any(c => c.CR <= difficultyLeft) || player)
-                        break;
+                if (!creatures.Any(c => c.CR <= difficultyLeft))
+                    break;
 
-                    var below = creatures.Where(c => c.CR <= difficultyLeft).ToList();
+                var below = creatures.Where(c => c.CR <= difficultyLeft).ToList();
 
-                    selected = below.OrderByDescending(b => b.CR * Random.value).First();
+                selected = below.OrderByDescending(b => b.CR * Random.value).First();
 
-                }
+                var card = new Card(selected);
+
+                difficultyLeft -= selected.CR;
+
+                library.Add(card);
+            }
+
+            var deck = new Deck(library);
+
+            return deck;
+        }
+
+        //TODO: seperate the testcreature generation and general generation
+        protected static Deck GenerateDeck(int CR, Creature testCreature , HeroObject testHero = null)
+        {
+            List<Creature> creatures;
+
+            //Generate a deck full of the test creature
+                creatures = new List<Creature>() { testCreature };
+
+            var library = new List<Card>();
+
+
+            var difficultyLeft = CR;
+
+            int v = (GameSettings.DeckSize());
+            for (int i = 0; i < v; i++)
+            {
+                Creature selected;
+
+                selected = creatures[Random.Range(0, creatures.Count())];
 
                 var card = new Card(selected);
 

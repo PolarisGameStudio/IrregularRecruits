@@ -156,7 +156,7 @@ namespace GameLogic
             else return null;
         }
 
-        internal void Remove(Card card)
+        public void Remove(Card card)
         {
             Creatures[card.Location].Remove(card);
             card.InDeck = null;

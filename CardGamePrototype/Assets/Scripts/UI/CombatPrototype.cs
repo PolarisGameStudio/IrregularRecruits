@@ -21,7 +21,7 @@ public class CombatPrototype : Singleton<CombatPrototype>
 
     void Start()
     {
-        GC = new PrototypeGameControl(TestCreature, AllRaces, AllCreatures,TestHero);
+        GC = new PrototypeGameControl(TestCreature,TestHero);
 
         NextCombatButton.onClick.AddListener(GC.NextCombat);
         NextCombatButton.onClick.AddListener(() => NextCombatButton.gameObject.SetActive(false));

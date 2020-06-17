@@ -8,12 +8,17 @@ namespace MapLogic
     {
         public List<MapOption> Options;
 
-        public override void ExecuteOption(MapLocation owner)
+        public override void ExecuteOption(MapNode owner)
         {
             foreach (var item in Options)
             {
                 item.ExecuteOption(owner);
             }
+        }
+
+        public override bool IsApplicable()
+        {
+            return Options.TrueForAll(o => o.IsApplicable());
         }
     }
 }

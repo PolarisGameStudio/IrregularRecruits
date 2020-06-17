@@ -12,7 +12,8 @@ namespace MapLogic
         private static MapController instance;
 
         public List<MapNode> Nodes = new List<MapNode>();
-        public Deck PlayerDeck;
+        //TODO. either use this or battleManager.PlayerDeck
+        //public Deck PlayerDeck;
         public int PlayerGold;
 
         public static MapController Instance { get {
@@ -138,7 +139,7 @@ namespace MapLogic
         public void StartCombat(Deck enemyDeck)
         {
 
-            Event.OnCombatSetup.Invoke(PlayerDeck, enemyDeck);
+            Event.OnCombatSetup.Invoke(BattleManager.Instance. PlayerDeck, enemyDeck);
         }
 
         private MapNode GenerateNode(MapLocation locationObject, List<MapLocation> locations)

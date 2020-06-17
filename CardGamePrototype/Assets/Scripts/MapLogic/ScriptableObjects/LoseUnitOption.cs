@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameLogic;
+using UnityEngine;
 
 namespace MapLogic
 {
@@ -6,9 +7,10 @@ namespace MapLogic
     public class LoseUnitOption : MapOption
     {
 
-        public override void ExecuteOption(MapLocation owner)
+        public override void ExecuteOption(MapNode owner)
         {
-            throw new System.NotImplementedException();
+            if (owner.SelectedCards.ContainsKey(this))
+                BattleManager.Instance.PlayerDeck.Remove(owner.SelectedCards[this]);
         }
     }
 }

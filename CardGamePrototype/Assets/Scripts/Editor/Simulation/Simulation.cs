@@ -126,7 +126,7 @@ public class Simulation : Singleton<Simulation>
     {
         //Event.ResetEvents();
 
-        var gc = new PrototypeGameControl(null, AllRaces, Creatures);
+        var gc = new PrototypeGameControl(null);
         gc.PlayerDeck = new Deck(playerDeck);
 
         var wins = -1;

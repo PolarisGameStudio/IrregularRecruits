@@ -13,7 +13,8 @@ namespace Tests
         [SetUp]
         public void BattleManage()
         {
-            BattleManager.Instance = new BattleManager();
+            var xx = BattleManager.Instance;
+
             GameSettings.Instance.AiControlledPlayer = true;
 
         }
@@ -46,7 +47,7 @@ namespace Tests
             return testCard;
         }
 
-        private Deck GenerateTestDeck(int creatures, bool playerDeck, bool onlyAbilityDamage = false)
+        private Deck GenerateTestDeck(int creatures, bool onlyAbilityDamage = false)
         {
             var testDeckObject = new DeckObject()
             {
@@ -68,14 +69,15 @@ namespace Tests
                 testDeck.AddCard(c);
             }
 
+
             return testDeck;
         }
 
         [Test]
         public void CombatStartsResolving()
         {
-            var pDeck = GenerateTestDeck(2, true);
-            var enmDeck = GenerateTestDeck(1, false);
+            var pDeck = GenerateTestDeck(2);
+            var enmDeck = GenerateTestDeck(1);
 
             var resolveStarted = false;
 
@@ -88,8 +90,8 @@ namespace Tests
         [Test]
         public void EqualCreaturesBothDie()
         {
-            var pDeck = GenerateTestDeck(1, true);
-            var enmDeck = GenerateTestDeck(1, false);
+            var pDeck = GenerateTestDeck(1);
+            var enmDeck = GenerateTestDeck(1);
 
             List<Card> deads = new List<Card>();
 
@@ -104,8 +106,8 @@ namespace Tests
         [Test]
         public void CombatResolveFinishes()
         {
-            var pDeck = GenerateTestDeck(2, true);
-            var enmDeck = GenerateTestDeck(1, false);
+            var pDeck = GenerateTestDeck(2);
+            var enmDeck = GenerateTestDeck(1);
 
             var resolveFinish = false;
 
@@ -118,8 +120,8 @@ namespace Tests
         [Test]
         public void BattleResolvesAutomatically()
         {
-            var pDeck = GenerateTestDeck(2, true);
-            var enmDeck = GenerateTestDeck(1, false);
+            var pDeck = GenerateTestDeck(2);
+            var enmDeck = GenerateTestDeck(1);
 
             var battleFinished = false;
 
@@ -127,15 +129,13 @@ namespace Tests
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
-
-
             Assert.IsTrue(battleFinished);
         }
         [Test]
         public void BattleRewardsCorrectXp()
         {
-            var pDeck = GenerateTestDeck(6, true);
-            var enmDeck = GenerateTestDeck(2, false);
+            var pDeck = GenerateTestDeck(6);
+            var enmDeck = GenerateTestDeck(2);
 
             enmDeck.AddCard(new Card(new Creature()
             {
@@ -166,8 +166,8 @@ namespace Tests
         [Test]
         public void BattleResolvesAutomaticallyBigDeck()
         {
-            var pDeck = GenerateTestDeck(50, true);
-            var enmDeck = GenerateTestDeck(50, false);
+            var pDeck = GenerateTestDeck(50);
+            var enmDeck = GenerateTestDeck(50);
 
             var battleFinished = false;
 
@@ -183,8 +183,8 @@ namespace Tests
         {
             const int creatures = 5;
 
-            var pDeck = GenerateTestDeck(creatures, true);
-            var enmDeck = GenerateTestDeck(creatures, false);
+            var pDeck = GenerateTestDeck(creatures);
+            var enmDeck = GenerateTestDeck(creatures);
 
             var battleFinished = false;
 
@@ -200,8 +200,8 @@ namespace Tests
         [Test]
         public void BattleResolvesWithOnlyAbilityDamage()
         {
-            var pDeck = GenerateTestDeck(3, true, true);
-            var enmDeck = GenerateTestDeck(3, false, true);
+            var pDeck = GenerateTestDeck(3, true);
+            var enmDeck = GenerateTestDeck(3, true);
 
             var battleFinished = false;
 
@@ -216,8 +216,8 @@ namespace Tests
         [Test]
         public void EachUnitGetsToAttack()
         {
-            var pDeck = GenerateTestDeck(2, true);
-            var enmDeck = GenerateTestDeck(3, false);
+            var pDeck = GenerateTestDeck(2);
+            var enmDeck = GenerateTestDeck(3);
 
             var creatures = new List<Card>();
 
@@ -238,8 +238,8 @@ namespace Tests
         [Test]
         public void AttackingDamagesBoth()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             var creature1 = GenerateTestCreature(null);
             var creature2 = GenerateTestCreature(null);
@@ -265,8 +265,8 @@ namespace Tests
         [Test]
         public void AttackingInHandDamagesOnlyTarget()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             var creature1 = GenerateTestCreature(null);
             var creature2 = GenerateTestCreature(null);
@@ -290,8 +290,8 @@ namespace Tests
         [Test]
         public void AttackingInDeckDamagesOnlyTarget()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             var creature1 = GenerateTestCreature(null);
             var creature2 = GenerateTestCreature(null);
@@ -316,8 +316,8 @@ namespace Tests
         [Test]
         public void AttackingAndKillingDamagesBoth()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             var creature1 = GenerateTestCreature(null);
             var creature2 = GenerateTestCreature(null);

@@ -9,9 +9,9 @@ namespace MapLogic
     {
         public int Amount;
 
-        public override void ExecuteOption(MapLocation owner)
+        public override void ExecuteOption(MapNode owner)
         {
-            throw new System.NotImplementedException();
+            MapController.Instance.PlayerGold -= Amount;
         }
     }
 }

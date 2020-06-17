@@ -42,6 +42,6 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 
 
 
-    public static int DeckSize(bool player) => player ? Instance.PlayerDeckSize : Instance.EnemyDeckSize;
+    public static int DeckSize() =>  Instance.EnemyDeckSize;
 
 }

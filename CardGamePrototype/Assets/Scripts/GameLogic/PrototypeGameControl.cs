@@ -14,20 +14,13 @@ namespace GameLogic
         public Deck PlayerDeck;
         public Deck EnemyDeck;
 
-        public PrototypeGameControl(Creature testCreature, Race[] races, Creature[] enmCreatures,HeroObject testHero = null)
+        public PrototypeGameControl(Creature testCreature, HeroObject testHero = null)
         {
             TestCreature = testCreature;
             TestHero = testHero;
-            SpawnableRaces = races; 
-            EnemyCreatures = enmCreatures;
-            
-            if (EnemyCreatures == null|| EnemyCreatures.Length == 0 )
-                EnemyCreatures= Resources.FindObjectsOfTypeAll<Creature>();
-            if (SpawnableRaces == null || SpawnableRaces.Length == 0)
-                SpawnableRaces = Resources.FindObjectsOfTypeAll<Race>();
 
             if(TestCreature)
-                PlayerDeck = GenerateDeck(0,true,testCreature,testHero);
+                PlayerDeck = GenerateDeck(0,testCreature,testHero);
 
         }
 

@@ -24,7 +24,7 @@ namespace GameLogic
             set => instance = value; 
         }
 
-        public BattleManager()
+        private BattleManager()
         {
             //Event.ResetEvents();
 
@@ -44,13 +44,12 @@ namespace GameLogic
 
         public void PackUp(Deck d)
         {
-            if(EnemyDeck!=null)
+            if(EnemyDeck!=null && d == PlayerDeck)
                 PlayerDeck?.Hero?.AwardXp(EnemyDeck.GetXpValue());
 
             PlayerDeck?.PackUp();
             EnemyDeck?.PackUp(true);
-
-            PlayerDeck = null;
+            
             EnemyDeck = null;
         }
 
