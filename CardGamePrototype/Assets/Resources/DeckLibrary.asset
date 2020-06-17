@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e379f9500dbe954dab1ff68507077c8, type: 3}
+  m_Name: DeckLibrary
+  m_EditorClassIdentifier: 
+  Decks:
+  - {fileID: 11400000, guid: f965b2a83c7badf41ae67fb2186437f1, type: 2}
+  - {fileID: 11400000, guid: ac957de51484b374f877b1f4ee357d26, type: 2}
+  - {fileID: 11400000, guid: e58503075e30e0d488f79796dd1d528f, type: 2}
+  Heroes:
+  - {fileID: 11400000, guid: 486a1fef6d2673f418f27d5a153ad9a8, type: 2}
+  - {fileID: 11400000, guid: 858903198a0319143989fa1810931cde, type: 2}
+  - {fileID: 11400000, guid: 7f190f1584d90ea4f8dd1490bc170f40, type: 2}

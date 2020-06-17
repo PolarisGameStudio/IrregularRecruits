@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace MapLogic
@@ -11,13 +12,15 @@ namespace MapLogic
     {
         public List<MapNode> LeadsTo = new List<MapNode>();
         public bool Visited;
-        private readonly MapLocation Location;
+        public bool Active;
+        public readonly MapLocation Location;
         public string name;
         public Dictionary<MapOption, Card> SelectedCards = new Dictionary<MapOption, Card>();
 
         public class LocationEvent : UnityEvent<MapNode> { }
         public static LocationEvent OpenLocationEvent = new LocationEvent();
         public static LocationEvent CloseLocationEvent = new LocationEvent();
+
         //public List<MapOption> SelectedOptions = new List<MapOption>();
 
 
@@ -39,7 +42,7 @@ namespace MapLogic
 
         public void Open()
         {
-            Visited = true;
+            Visited = Active =true;
 
             foreach (var option in Location.LocationOptions)
             {
@@ -90,7 +93,10 @@ namespace MapLogic
             mapOption.ExecuteOption(this);
 
             if (mapOption.ClosesLocationOnSelection)
-                CloseLocationEvent.Invoke(this);
+            {
+                Active = false;
+                CloseLocationEvent.Invoke(this); 
+            }
         }
 
 

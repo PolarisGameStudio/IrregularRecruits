@@ -1,0 +1,16 @@
+{
+    "name": "MapUI",
+    "references": [
+        "GUID:84dc99f7c753f7d4ba5f6de8e1b75599",
+        "GUID:31088b6c98fc2bf4c9f94225c8a5ff7a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

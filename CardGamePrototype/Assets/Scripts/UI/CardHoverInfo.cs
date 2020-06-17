@@ -104,7 +104,7 @@ namespace UI
             if (Creature.SpecialAbility)
             {
                 AbilityIcon.Text.text = Creature.SpecialAbility?.Description(Creature);
-                AbilityIcon.Image.sprite = IconManager.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
+                AbilityIcon.Image.sprite = IconLibrary.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
             }
 
             //public ImageTextEntry TraitPrefab;

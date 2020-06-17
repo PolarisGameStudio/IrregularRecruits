@@ -12,6 +12,7 @@ namespace MapLogic
         private static MapController instance;
 
         public List<MapNode> Nodes = new List<MapNode>();
+        public MapNode CurrentNode;
         //TODO. either use this or battleManager.PlayerDeck
         //public Deck PlayerDeck;
         public int PlayerGold;
@@ -64,7 +65,7 @@ namespace MapLogic
 
             locations = locations.OrderBy(d => d.Difficulty + settings.RandomnessToDifficulty * Random.value).ToList();
 
-            MapNode[] lastStep = { GenerateNode(locations.First(l => l.StartNode), locations) };
+            MapNode[] lastStep = { GenerateNode(locations.Single(l => l.StartNode), locations) };
 
             for (int i = 1; i < settings.MapLength ; i++)
             {
@@ -76,7 +77,7 @@ namespace MapLogic
                 for (int j = 0; j < nodesAtStep[i]; j++)
                 {
                     if (i == settings.MapLength - 1)
-                        step[j] = GenerateNode(locations.First(l => l.WinNode), locations);
+                        step[j] = GenerateNode(locations.Single(l => l.WinNode), locations);
                     else
                         step[j] = GenerateNode(locations.First(l => !l.WinNode), locations);
                 }
@@ -133,8 +134,20 @@ namespace MapLogic
                 lastStep = step;
             }
 
+            CurrentNode = Nodes.Single(n => n.IsStartNode());
+
         }
 
+        public void MoveToNode(MapNode node)
+        {
+            if (!CurrentNode.LeadsTo.Contains(node))
+                return;
+            if (CurrentNode.Active)
+                return;
+
+            CurrentNode = node;
+            node.Open();
+        }
 
         public void StartCombat(Deck enemyDeck)
         {

@@ -102,7 +102,7 @@ namespace UI
 
                     var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
                     instance.gameObject.SetActive(true);
-                    instance.sprite = IconManager.GetAbilityIconSprite(creature.SpecialAbility.ResultingAction.ActionType);
+                    instance.sprite = IconLibrary.GetAbilityIconSprite(creature.SpecialAbility.ResultingAction.ActionType);
 
                     InstantiatedObjects.Add(instance.gameObject);
 

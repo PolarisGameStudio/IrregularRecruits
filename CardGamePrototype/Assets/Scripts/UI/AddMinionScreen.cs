@@ -22,7 +22,7 @@ namespace UI
 
         private void SetupDeckChoice(Deck deck)
         {
-            var cs = CombatPrototype.Instance.AllCreatures.ToList();
+            var cs = CreatureLibrary.Instance.EnemyCreatures;
 
             if (deck  == null|| !deck.DeckObject)
                 return;
@@ -35,7 +35,7 @@ namespace UI
 
             if (!possibles.Any())
             {
-                possibles = cs;
+                possibles = cs.ToList() ;
             }
             if (!friends.Any())
             {

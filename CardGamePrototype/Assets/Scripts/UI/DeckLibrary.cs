@@ -1,19 +1,16 @@
 ﻿using GameLogic;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class DeckLibrary : Singleton<DeckLibrary>
+[CreateAssetMenu]
+public class DeckLibrary : SingletonScriptableObject<DeckLibrary>
 {
     public List<DeckObject> Decks;
     public List<HeroObject> Heroes;
 
     public static List<DeckObject> GetDecks()
     {
-//#if UNITY_EDITOR
-//        if (Instance.Decks == null || Instance.Decks.Count == 0)
-//            Instance.Decks = AssetManager.GetAssetsOfType<DeckObject>();
-//#endif
-
         return Instance.Decks;
 
     }

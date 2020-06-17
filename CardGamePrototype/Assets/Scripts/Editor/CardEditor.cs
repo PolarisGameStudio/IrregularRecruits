@@ -212,7 +212,7 @@ namespace UI
             AbilityEditor.Image.enabled = Creature.SpecialAbility;
             if (Creature.SpecialAbility)
             {
-                AbilityEditor.Image.sprite = IconManager.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
+                AbilityEditor.Image.sprite = IconLibrary.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
                 AbilityEditor.Text.text = Creature.SpecialAbility.Description(Creature);
             }
             else

@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace UI
 {
-    public class IconManager : Singleton<IconManager>
+    [CreateAssetMenu]
+    public class IconLibrary : SingletonScriptableObject<IconLibrary>
     {
         [System.Serializable]
         public struct AbilityActionIcon { public PassiveAbility.ActionType ActionType; public Sprite Sprite; }

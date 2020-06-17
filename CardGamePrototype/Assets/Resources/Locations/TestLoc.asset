@@ -20,6 +20,6 @@ MonoBehaviour:
   UniqueNode: 0
   NumberOfApplicableOptionsSelected: 0
   LocationDescription: 
-  LocationIcon: {fileID: 0}
+  LocationIcon: {fileID: 21300000, guid: 16e13c9f0f81b6b4ea3648f9a582f698, type: 3}
   LocationImage: {fileID: 0}
   LocationOptions: []
