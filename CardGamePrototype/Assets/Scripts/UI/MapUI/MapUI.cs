@@ -43,18 +43,17 @@ namespace UI
 
         private void DrawStepRecursive(List<MapNode> nodes,int degree)
         {
-            var r = degree;
+            var r = degree * 1.4f;
 
-            var angleDiff = 360 / nodes.Count;
+            var angleDiff = 2 * Mathf.PI/ nodes.Count;
 
-            var angle = 0;
+            var angle = 0f;
+            var rnd = 0.3f;
 
             foreach (var node in nodes)
             {
-                //add Random elements
-
-                var x = r * Mathf.Cos(angle);
-                var y = r * Mathf.Sin(angle);
+                var x = r * Mathf.Cos(angle + Random.Range(-rnd,rnd));
+                var y = r * Mathf.Sin(angle + Random.Range(-rnd, rnd));
                 var pos = new Vector3(x, y);
 
                 CreateNode(node, transform.position + pos);
@@ -64,7 +63,8 @@ namespace UI
 
             var combinedLeadsTo = nodes.SelectMany(n => n.LeadsTo).Distinct().ToList();
 
-            DrawStepRecursive(combinedLeadsTo, degree + 1);
+            if(combinedLeadsTo.Any())
+                DrawStepRecursive(combinedLeadsTo, degree + 1);
         }
 
         private void CreateNode(MapNode node, Vector3 position)
@@ -76,6 +76,16 @@ namespace UI
             instance.Icon.image.sprite = node.Location.LocationIcon;
 
             instance.Node = node;
+
+            foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
+                DrawLine(parent, instance);
+
+            Nodes.Add(instance);
+        }
+
+        private void DrawLine(MapNodeIcon start,MapNodeIcon finish)
+        {
+            Debug.DrawLine(start.transform.position, finish.transform.position, Color.black,100000);
         }
     }
 

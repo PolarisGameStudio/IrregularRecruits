@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 0fb23a0494d606546a73bbe5e1716e32, type: 3}
   m_Name: CreatureLibrary
-  m_EditorClassIdentifier: GameLogic:GameLogic:CreatureLibrary
+  m_EditorClassIdentifier: 
   AllRaces:
   - {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
   - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
