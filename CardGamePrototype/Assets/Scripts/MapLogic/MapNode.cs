@@ -11,6 +11,7 @@ namespace MapLogic
     public class MapNode
     {
         public List<MapNode> LeadsTo = new List<MapNode>();
+        public int Id;
         public bool Visited;
         public bool Active;
         public readonly MapLocation Location;

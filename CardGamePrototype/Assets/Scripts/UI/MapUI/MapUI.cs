@@ -45,10 +45,13 @@ namespace UI
         {
             var r = degree * 1.4f;
 
-            var angleDiff = 2 * Mathf.PI/ nodes.Count;
+            var angleDiff =  Mathf.PI/ nodes.Count;
 
             var angle = 0f;
-            var rnd = 0.3f;
+            var rnd = 0.25f;
+
+            if (nodes.Count == 1)
+                angle += angleDiff / 2;
 
             foreach (var node in nodes)
             {
@@ -61,7 +64,7 @@ namespace UI
                 angle += angleDiff;
             }
 
-            var combinedLeadsTo = nodes.SelectMany(n => n.LeadsTo).Distinct().ToList();
+            var combinedLeadsTo = nodes.SelectMany(n => n.LeadsTo).Distinct().OrderBy(n=>n.Id).ToList();
 
             if(combinedLeadsTo.Any())
                 DrawStepRecursive(combinedLeadsTo, degree + 1);

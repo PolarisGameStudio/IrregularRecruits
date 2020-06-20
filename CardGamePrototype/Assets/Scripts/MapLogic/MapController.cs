@@ -88,12 +88,13 @@ namespace MapLogic
                 {
                     //Select a node to create the edge from
                     var l =
-                        Random.value > 0.5f ?
+                        Random.value > 0.7f ?
                         lastStep[Random.Range(0, lastStep.Length)] :
                         lastStep.First(pro => pro.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
 
-                    if(l.LeadsTo.Count == step.Length)
-                        l = lastStep.First(pro => pro.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
+                    //if the randomly selected node already leads to all
+                    if (l.LeadsTo.Count == step.Length)
+                        continue;
 
                     //find the corresponding position of the next step
                     var pos = lastStep.ToList().IndexOf(l);
@@ -116,9 +117,16 @@ namespace MapLogic
                         leftOrRight *= -1;
 
                         //wrapping. could also limit
-                        if (desiredNodePos > step.Length - 1) desiredNodePos -= step.Length;
-
-                        if (desiredNodePos < 0) desiredNodePos += step.Length;
+                        if (desiredNodePos > step.Length - 1)
+                        {
+                            mapNode = step.Last(n => !l.LeadsTo.Contains(n));
+                            break;
+                        }
+                        if (desiredNodePos < 0)
+                        {
+                            mapNode = step.First(n => !l.LeadsTo.Contains(n));
+                            break;
+                        }
 
                         mapNode = step[desiredNodePos];
 
@@ -161,6 +169,8 @@ namespace MapLogic
 
             var node = new MapNode(locationObject);
             Nodes.Add(node);
+
+            node.Id = Nodes.Count;
 
             return node;
         }
