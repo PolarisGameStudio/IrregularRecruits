@@ -14,7 +14,7 @@ namespace GameLogic
 
             //TODO: possible for more races together
 
-            if(creatures == null)
+            if(creatures == null || creatures.Count == 0)
                 creatures = CreatureLibrary.Instance.EnemyCreatures.Where(c => c.Race == race).ToList();
 
             var library = new List<Card>();

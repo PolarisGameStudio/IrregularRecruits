@@ -90,16 +90,19 @@ namespace MapLogic
                 return;
 
             MapOption mapOption = Location.LocationOptions[i];
+            SelectOption(mapOption);
+        }
 
+        public void SelectOption(MapOption mapOption)
+        {
             mapOption.ExecuteOption(this);
 
             if (mapOption.ClosesLocationOnSelection)
             {
                 Active = false;
-                CloseLocationEvent.Invoke(this); 
+                CloseLocationEvent.Invoke(this);
             }
         }
-
 
         public bool IsFinalNode() => Location.WinNode;
         public bool IsStartNode() => Location.StartNode;

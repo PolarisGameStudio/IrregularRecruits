@@ -23,12 +23,6 @@ namespace MapLogic
         [SerializeField]
         public MapOption[] LocationOptions;
 
-
         public string[] GetOptionDescriptions() => LocationOptions.Select(lo => lo.OptionDescription).ToArray();
-
-        public void SelectOption()
-        {
-
-        }
     }
 }

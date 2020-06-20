@@ -19,6 +19,6 @@ MonoBehaviour:
   MapLength: 10
   MaxRoadsFromNode: 4
   MaxNodesAtStep: 8
-  VisibleSteps: 0
+  VisibleSteps: 3
   HiddenNodesPct: 0
   RandomnessToDifficulty: 0

@@ -40,8 +40,6 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
         AnyDamageKillsTopCard
     }
 
-
-
     public static int DeckSize() =>  Instance.EnemyDeckSize;
 
 }

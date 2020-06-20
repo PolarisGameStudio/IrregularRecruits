@@ -19,7 +19,9 @@ MonoBehaviour:
   StartNode: 0
   UniqueNode: 0
   NumberOfApplicableOptionsSelected: 0
-  LocationDescription: 
+  LocationDescription: You meet some beast people that wants to fight
   LocationIcon: {fileID: 21300000, guid: 16e13c9f0f81b6b4ea3648f9a582f698, type: 3}
-  LocationImage: {fileID: 0}
-  LocationOptions: []
+  LocationImage: {fileID: 21300000, guid: e63addbf5712a61499e9937e456c659c, type: 3}
+  LocationOptions:
+  - {fileID: 11400000, guid: bd4f58a51119fd94db494edefc35cb7c, type: 2}
+  - {fileID: 11400000, guid: 5b2ff3203c0e6254682127f70ca552d6, type: 2}

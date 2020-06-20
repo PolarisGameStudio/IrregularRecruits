@@ -10,7 +10,7 @@ namespace MapLogic
     {
         public abstract void ExecuteOption(MapNode owner);
 
-        public bool ClosesLocationOnSelection;
+        public bool ClosesLocationOnSelection = true;
         public List<Race> OnlyForHeroRaces = new List<Race>();
         //E.g. I use my fire magic to kill the ...
         public List<Ability> OnlyForAbility = new List<Ability>();
@@ -25,10 +25,6 @@ namespace MapLogic
                 (OnlyForHeroRaces.Count == 0 || OnlyForHeroRaces.Contains(BattleManager.Instance.PlayerDeck?.Hero?.GetRace()))
                 &&
                 (OnlyForAbility.Count == 0 ||BattleManager.Instance.PlayerDeck?.Hero != null && BattleManager.Instance.PlayerDeck.Hero.Abilities.Any(a=> OnlyForAbility.Contains(a)));
-
-
-
         }
-
     }
 }
