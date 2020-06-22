@@ -262,6 +262,70 @@ namespace Tests
                 AreEqual(xp - amount, BattleManager.Instance.PlayerDeck.Hero.Xp);
         }
 
+
+        [Test]
+        public void LoseGoldNotApplicableWithTooLittleGold()
+        {
+
+            var amount = 1001;
+
+            var option = new LoseGoldOption()
+            {
+                Amount = amount
+            };
+
+            var location = new MapLocation()
+            {
+                LocationOptions = new MapOption[] { option }
+            };
+
+            var node = new MapNode(location);
+
+            int playerGold = 1000;
+
+            MapController.Instance.PlayerGold = playerGold;
+
+            Assert.IsFalse(node.GetOptions().Contains(option));
+
+            node.Open();
+            node.SelectOption(option);
+
+            Assert.
+                AreEqual(playerGold , MapController.Instance.PlayerGold);
+
+
+        }
+        [Test]
+        public void LoseXPNotApplicableWithTooLittleXp()
+        {
+            var amount = 69;
+
+            var option = new LoseXPOption()
+            {
+                Amount = amount
+            };
+
+            var location = new MapLocation()
+            {
+                LocationOptions = new MapOption[] { option }
+            };
+
+            var node = new MapNode(location);
+
+            int xp = 68;
+
+            BattleManager.Instance.PlayerDeck.Hero.AwardXp(xp);
+
+            Assert.IsFalse(node.GetOptions().Contains(option));
+
+            node.Open();
+            node.SelectOption(option);
+
+            Assert.
+                AreEqual(xp , BattleManager.Instance.PlayerDeck.Hero.Xp);
+
+        }
+
         [Test]
         public void GainUnitAddsUnit()
         {
@@ -366,12 +430,6 @@ namespace Tests
 
         }
 
-        [Test]
-        public void LoseGoldNotPossibleWithTooLittleGold()
-        {
-            Assert.IsTrue(false);
-
-        }
         [Test]
         public void OptionsDoesNotContainIncorrectHeroRaceOptions()
         {

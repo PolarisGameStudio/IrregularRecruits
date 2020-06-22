@@ -95,6 +95,9 @@ namespace MapLogic
 
         public void SelectOption(MapOption mapOption)
         {
+            if (!Location.LocationOptions.Contains(mapOption) || !mapOption.IsApplicable())
+                return;
+
             mapOption.ExecuteOption(this);
 
             if (mapOption.ClosesLocationOnSelection)
