@@ -16,7 +16,6 @@ namespace MapLogic
         //only once pr. game
         public bool UniqueNode;
         //0 = all options. 
-        public int NumberOfApplicableOptionsSelected;
         public string LocationDescription;
         public Sprite LocationIcon;
         public Sprite LocationImage;
