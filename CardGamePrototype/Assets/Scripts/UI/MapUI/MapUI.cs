@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using GameLogic;
+using Event = GameLogic.Event;
 
 namespace UI
 {
@@ -20,6 +22,10 @@ namespace UI
 
             MapNode.OpenLocationEvent.AddListener(UpdateNodes);
 
+            Event.OnGameBegin.AddListener(Open);
+            Event.OnCombatSetup.AddListener((e, v) => Close());
+            Event.OnBattleFinished.AddListener((winner) => Open());
+
             UpdateNodes(MapController.Instance.CurrentNode);
         }
 
@@ -34,6 +40,15 @@ namespace UI
                 if (n.Node == current) n.HighlightParticles.Play();
                 else n.HighlightParticles.Stop();
             }
+        }
+
+        public void Open()
+        {
+            Holder.SetActive(true);
+        }
+        public void Close()
+        {
+            Holder.SetActive(false);
         }
 
         private void DrawMap(MapNode startNode, int shownSteps = 1000)
