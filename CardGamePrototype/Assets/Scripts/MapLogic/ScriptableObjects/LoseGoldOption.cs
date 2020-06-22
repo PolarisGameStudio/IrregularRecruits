@@ -1,5 +1,4 @@
-﻿using GameLogic;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapLogic
@@ -12,6 +11,11 @@ namespace MapLogic
         public override void ExecuteOption(MapNode owner)
         {
             MapController.Instance.PlayerGold -= Amount;
+        }
+
+        public override bool IsApplicable()
+        {
+            return base.IsApplicable() && MapController.Instance.PlayerGold >= Amount;
         }
     }
 }

@@ -69,9 +69,14 @@ namespace GameLogic
             HeroObject = h;
         }
 
-        public void AwardXp(int xp)
+        public void AwardXp(int amount)
         {
-            Xp += xp;
+            Xp += amount;
+        }
+
+        public void RemoveXp(int amount)
+        {
+            Xp -= amount;
         }
 
         public void SelectLevelUpAbility(Ability ability)

@@ -178,6 +178,33 @@ namespace Tests
                 AreEqual(amount + playerGold, MapController.Instance.PlayerGold);
 
         }
+        
+        [Test]
+        public void GainXpAddsXp()
+        {
+            var amount = 69;
+
+            var option = new GainXpOption()
+            {
+                Amount = amount
+            };
+
+            var location = new MapLocation()
+            {
+                LocationOptions = new MapOption[] { option }
+            };
+
+            var node = new MapNode(location);
+
+            int xp = BattleManager.Instance.PlayerDeck.Hero.Xp;
+                       
+            node.Open();
+            node.SelectOption(0);
+
+            Assert.
+                AreEqual(amount + xp, BattleManager.Instance.PlayerDeck.Hero.Xp);
+
+        }
 
         [Test]
         public void LoseGoldRemovesGold()
@@ -205,6 +232,34 @@ namespace Tests
 
             Assert.
                 AreEqual(playerGold - amount, MapController.Instance.PlayerGold);
+        }
+
+        [Test]
+        public void LoseXpRemovesXp()
+        {
+            var amount = 69;
+
+            var option = new LoseXPOption()
+            {
+                Amount = amount
+            };
+
+            var location = new MapLocation()
+            {
+                LocationOptions = new MapOption[] { option }
+            };
+
+            var node = new MapNode(location);
+
+            int xp = 1000;
+
+            BattleManager.Instance.PlayerDeck.Hero.AwardXp(xp);
+            
+            node.Open();
+            node.SelectOption(0);
+
+            Assert.
+                AreEqual(xp - amount, BattleManager.Instance.PlayerDeck.Hero.Xp);
         }
 
         [Test]
