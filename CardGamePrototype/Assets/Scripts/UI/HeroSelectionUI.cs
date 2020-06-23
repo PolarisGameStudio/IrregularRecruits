@@ -32,7 +32,7 @@ namespace UI
         {
             Chosen++;
 
-            if (Chosen > AllHeroes.Count) Chosen = 0;
+            if (Chosen >= AllHeroes.Count) Chosen = 0;
 
             ChooseHero(Chosen);
         }
@@ -40,7 +40,7 @@ namespace UI
         {
             Chosen--;
 
-            if (Chosen < 0) Chosen = AllHeroes.Count;
+            if (Chosen < 0) Chosen = AllHeroes.Count-1;
 
             ChooseHero(Chosen);
         }
