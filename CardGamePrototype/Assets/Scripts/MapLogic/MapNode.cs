@@ -16,7 +16,7 @@ namespace MapLogic
         public bool Active;
         public readonly MapLocation Location;
         public string name;
-        public Dictionary<MapOption, Card> SelectedCards = new Dictionary<MapOption, Card>();
+        public Dictionary<MapOption, List<Card>> SelectedCards = new Dictionary<MapOption, List<Card>>();
 
         public class LocationEvent : UnityEvent<MapNode> { }
         public static LocationEvent OpenLocationEvent = new LocationEvent();
@@ -38,12 +38,12 @@ namespace MapLogic
 
         public MapOption[] GetOptions()
         {
-            return Location.LocationOptions.Where(o=>o.IsApplicable()).ToArray();
+            return Location.LocationOptions.Where(o => o.IsApplicable()).ToArray();
         }
 
         public void Open()
         {
-            Visited = Active =true;
+            Visited = Active = true;
 
             foreach (var option in Location.LocationOptions)
             {
@@ -68,7 +68,7 @@ namespace MapLogic
                 case MapOption.UnitCandidate.NonFriendlyRace:
                 default:
                     {
-                        predicate = d => !SelectedCards.Values.Contains(d);
+                        predicate = d => !SelectedCards.Values.Any(v => v.Contains(d));
 
                         break;
                     }
@@ -79,9 +79,15 @@ namespace MapLogic
             if (unit == null)
                 unit = BattleManager.Instance.PlayerDeck.AllCreatures().FirstOrDefault();
 
-            if (unit != null)
-                SelectedCards.Add(option, unit);
+            if (unit != null) Add(option, unit);
 
+        }
+
+        private void Add(MapOption option, Card unit)
+        {
+            if (!SelectedCards.ContainsKey(option))
+                SelectedCards.Add(option, new List<Card>() );
+            SelectedCards[option].Add(unit);
         }
 
         public void SelectOption(int i)

@@ -41,7 +41,7 @@ namespace UI
 
             foreach (var opt in node.GetOptions())
             {
-                CreateButton(opt);
+                CreateButton(opt,node);
             }
         }
 
@@ -50,13 +50,13 @@ namespace UI
             Holder.SetActive(false);
         }
 
-        private void CreateButton(MapOption option)
+        private void CreateButton(MapOption option,MapNode owner)
         {
             var instance = Instantiate(OptionInstance, OptionInstance.transform.parent);
 
             instance.onClick.AddListener(() => CurrentNode.SelectOption(option));
 
-            instance.GetComponent<TextMeshProUGUI>().text = option.OptionDescription;
+            instance.GetComponent<TextMeshProUGUI>().text = option.GetOptionDescription(owner);
 
             instance.gameObject.SetActive(true);
 

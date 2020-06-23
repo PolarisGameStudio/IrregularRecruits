@@ -21,7 +21,5 @@ namespace MapLogic
         public Sprite LocationImage;
         [SerializeField]
         public MapOption[] LocationOptions;
-
-        public string[] GetOptionDescriptions() => LocationOptions.Select(lo => lo.OptionDescription).ToArray();
     }
 }
