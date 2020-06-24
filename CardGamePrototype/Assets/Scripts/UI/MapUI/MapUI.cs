@@ -13,6 +13,7 @@ namespace UI
         public MapNodeIcon NodeIconPrefab;
         public Image LinePrefab;
         public List<MapNodeIcon> Nodes = new List<MapNodeIcon>();
+        private List<MapNodeIcon> OldUnusedNodes = new List<MapNodeIcon>();
         public GameObject Holder;
         [Range(0.5f, 5)]
         public float MapSize;
@@ -55,15 +56,21 @@ namespace UI
 
         private void DrawMap(MapNode startNode, int shownSteps = 1000)
         {
-            foreach (var node in Nodes)
-            {
-                Destroy(node.gameObject);
-            }
+            OldUnusedNodes = Nodes.ToList();
+
             Nodes.Clear();
 
             CreateNode(startNode, transform.position);
 
             DrawStepRecursive(startNode.LeadsTo, 1, shownSteps);
+
+            foreach (var n in OldUnusedNodes)
+                DestroyNode(n);
+        }
+
+        private static void DestroyNode(MapNodeIcon n)
+        {
+            Destroy(n.gameObject);
         }
 
         private void DrawStepRecursive(List<MapNode> nodes, int degree, int shownSteps)
@@ -99,16 +106,29 @@ namespace UI
 
         private void CreateNode(MapNode node, Vector3 position)
         {
-            var instance = Instantiate(NodeIconPrefab, Holder.transform);
+            MapNodeIcon instance;
 
-            instance.transform.position = position;
+            if (OldUnusedNodes.Any(n => n.Node == node))
+            {
+                var n = OldUnusedNodes.Single(old => old.Node == node);
 
-            instance.Icon.image.sprite = node.Location.LocationIcon;
+                instance = n;
 
-            instance.Node = node;
+                OldUnusedNodes.Remove(n);
+            }
+            else
+            {
+                instance = Instantiate(NodeIconPrefab, Holder.transform);
 
-            foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
-                DrawLine(parent, instance);
+                instance.transform.position = position;
+
+                instance.Icon.image.sprite = node.Location.LocationIcon;
+
+                instance.Node = node;
+
+                foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
+                    DrawLine(parent, instance);
+            }
 
             Nodes.Add(instance);
         }
