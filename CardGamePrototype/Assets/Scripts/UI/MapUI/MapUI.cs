@@ -4,12 +4,14 @@ using System.Linq;
 using UnityEngine;
 using GameLogic;
 using Event = GameLogic.Event;
+using UnityEngine.UI;
 
 namespace UI
 {
     public class MapUI : Singleton<MapUI>
     {
         public MapNodeIcon NodeIconPrefab;
+        public Image LinePrefab;
         public List<MapNodeIcon> Nodes = new List<MapNodeIcon>();
         public GameObject Holder;
         [Range(0.5f, 5)]
@@ -113,7 +115,24 @@ namespace UI
 
         private void DrawLine(MapNodeIcon start, MapNodeIcon finish)
         {
-            Debug.DrawLine(start.transform.position, finish.transform.position, Color.black, 100000);
+            //Debug.DrawLine(start.transform.position, finish.transform.position, Color.black, 100000);
+
+            var line = Instantiate(LinePrefab, start.transform);
+
+            var targetDir = finish.transform.position - start.transform.position;
+
+            line.rectTransform.localScale = new Vector3(targetDir.magnitude*0.8f, 1);
+
+            targetDir = targetDir.normalized;
+
+            float dot = Vector3.Dot(targetDir, new Vector3(1,0));
+
+            float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+
+            if (targetDir.y < 0) angle *= -1;
+
+            line.rectTransform.Rotate(new Vector3(0, 0, angle));
+
         }
     }
 

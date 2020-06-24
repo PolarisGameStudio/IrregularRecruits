@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: DemonSacrifice
   m_EditorClassIdentifier: 
   Name: Demon Sacrifice
-  Difficulty: 100
+  Difficulty: 5
   ExecuteRandomCombatOptionAutomatically: 0
   WinNode: 0
   StartNode: 0
   UniqueNode: 1
   LocationDescription: A demon will give you power in exchange for sacrifice
   LocationIcon: {fileID: 21300000, guid: 8d22f8e0ca24ab741aefca5d6fee21db, type: 3}
-  LocationImage: {fileID: 21300000, guid: a1aaffc1d7371744c86877be7b00918b, type: 3}
+  LocationImage: {fileID: 21300000, guid: 98566e8a12b9e574699ecbb8d10c0ac2, type: 3}
   LocationOptions:
   - {fileID: 11400000, guid: 699004c367ab546498760afc367a0434, type: 2}
   - {fileID: 11400000, guid: 9e00cdf7a99c04e45909e5b0435ddd77, type: 2}

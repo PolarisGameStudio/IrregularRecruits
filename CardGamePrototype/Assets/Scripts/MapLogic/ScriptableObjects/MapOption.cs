@@ -14,7 +14,7 @@ namespace MapLogic
         public List<Race> OnlyForHeroRaces = new List<Race>();
         //E.g. I use my fire magic to kill the ...
         public List<Ability> OnlyForAbility = new List<Ability>();
-        private string OptionDescription;
+        internal string OptionDescription;
         public UnitCandidate AssociatedUnit;
 
         private readonly string FirstUnitEscapeString = "U0";
@@ -31,24 +31,55 @@ namespace MapLogic
                 (OnlyForAbility.Count == 0 ||BattleManager.Instance.PlayerDeck?.Hero != null && BattleManager.Instance.PlayerDeck.Hero.Abilities.Any(a=> OnlyForAbility.Contains(a)));
         }
 
-        public string GetOptionDescription(MapNode owner)
+        public virtual string GetOptionDescription(MapNode owner, string overrideDescription = "")
         {
-            var str = OptionDescription;
+            var str = overrideDescription != "" ? overrideDescription : OptionDescription;
 
             //if we have not associated any units
             if (!owner.SelectedCards.ContainsKey(this))
-                return OptionDescription;
+                return str;
 
-            if (OptionDescription.Contains(FirstUnitEscapeString) && owner.SelectedCards[this].Count > 0)
+            if (str.Contains(FirstUnitEscapeString) && owner.SelectedCards[this].Count > 0)
                 str = str.Replace(FirstUnitEscapeString, owner.SelectedCards[this][0].GetName());
 
-            if (OptionDescription.Contains(SecondUnitEscapeString) && owner.SelectedCards[this].Count > 1)
+            if (str.Contains(SecondUnitEscapeString) && owner.SelectedCards[this].Count > 1)
                 str = str.Replace(SecondUnitEscapeString, owner.SelectedCards[this][1].GetName());
 
-            if (OptionDescription.Contains(ThirdUnitEscapeString) && owner.SelectedCards[this].Count > 2)
+            if (str.Contains(ThirdUnitEscapeString) && owner.SelectedCards[this].Count > 2)
                 str = str.Replace(ThirdUnitEscapeString, owner.SelectedCards[this][2].GetName());
 
             return str;
+        }
+
+        internal virtual void FindCandidate(MapNode mapNode)
+        {
+                Func<Card, bool> predicate;
+
+
+
+                switch (AssociatedUnit)
+                {
+                    case MapOption.UnitCandidate.NoUnit:
+                        return;
+                    case MapOption.UnitCandidate.Strong:
+                    case MapOption.UnitCandidate.Weak:
+                    case MapOption.UnitCandidate.Random:
+                    case MapOption.UnitCandidate.FriendlyRace:
+                    case MapOption.UnitCandidate.NonFriendlyRace:
+                    default:
+                        {
+                            predicate = d => !mapNode. SelectedCards.Values.Any(v => v.Contains(d));
+
+                            break;
+                        }
+                }
+
+                var unit = BattleManager.Instance.PlayerDeck.AllCreatures().FirstOrDefault(predicate);
+
+                if (unit == null)
+                    unit = BattleManager.Instance.PlayerDeck.AllCreatures().FirstOrDefault();
+
+                if (unit != null) mapNode.AddAssociation(this, unit);
         }
     }
 }

@@ -47,43 +47,13 @@ namespace MapLogic
 
             foreach (var option in Location.LocationOptions)
             {
-                FindCandidate(option);
+                option.FindCandidate(this);
             }
 
             OpenLocationEvent.Invoke(this);
         }
 
-        private void FindCandidate(MapOption option)
-        {
-            Func<Card, bool> predicate;
-
-            switch (option.AssociatedUnit)
-            {
-                case MapOption.UnitCandidate.NoUnit:
-                    return;
-                case MapOption.UnitCandidate.Strong:
-                case MapOption.UnitCandidate.Weak:
-                case MapOption.UnitCandidate.Random:
-                case MapOption.UnitCandidate.FriendlyRace:
-                case MapOption.UnitCandidate.NonFriendlyRace:
-                default:
-                    {
-                        predicate = d => !SelectedCards.Values.Any(v => v.Contains(d));
-
-                        break;
-                    }
-            }
-
-            var unit = BattleManager.Instance.PlayerDeck.AllCreatures().FirstOrDefault(predicate);
-
-            if (unit == null)
-                unit = BattleManager.Instance.PlayerDeck.AllCreatures().FirstOrDefault();
-
-            if (unit != null) Add(option, unit);
-
-        }
-
-        private void Add(MapOption option, Card unit)
+        public void AddAssociation(MapOption option, Card unit)
         {
             if (!SelectedCards.ContainsKey(option))
                 SelectedCards.Add(option, new List<Card>() );
