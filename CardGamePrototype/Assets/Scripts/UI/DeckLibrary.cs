@@ -6,8 +6,10 @@ using UnityEngine;
 [CreateAssetMenu]
 public class DeckLibrary : SingletonScriptableObject<DeckLibrary>
 {
-    public List<DeckObject> Decks;
-    public List<HeroObject> Heroes;
+    [SerializeField]
+    private List<DeckObject> Decks;
+    [SerializeField]
+    private List<HeroObject> Heroes;
 
     public static List<DeckObject> GetDecks()
     {

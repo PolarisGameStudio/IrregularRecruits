@@ -14,6 +14,7 @@ namespace MapLogic
         public List<Race> OnlyForHeroRaces = new List<Race>();
         //E.g. I use my fire magic to kill the ...
         public List<Ability> OnlyForAbility = new List<Ability>();
+        [SerializeField]
         internal string OptionDescription;
         public UnitCandidate AssociatedUnit;
 

@@ -67,7 +67,7 @@ namespace UI
         public void SubmitHero()
         {
             if (Chosen < AllHeroes.Count)
-                CombatPrototype.SetPlayerHero(AllHeroes[Chosen]);
+                BattleManager.SetPlayerHero(AllHeroes[Chosen]);
         }
     }
 }

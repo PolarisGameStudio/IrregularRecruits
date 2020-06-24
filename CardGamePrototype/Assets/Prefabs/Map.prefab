@@ -56,6 +56,12 @@ MonoBehaviour:
   Nodes: []
   Holder: {fileID: 8082983244512182284}
   MapSize: 2.5
+  Linetypes:
+  - {fileID: 21300000, guid: 8cef6f9079abc1e4d8906c2edcadc11e, type: 3}
+  - {fileID: 21300000, guid: 4ff621daec31901459fd360a42c46410, type: 3}
+  - {fileID: 21300000, guid: 634d1469f04788441b44ed410f896a52, type: 3}
+  - {fileID: 21300000, guid: e4242aedd4b70b24eb796bc1a853f6f6, type: 3}
+  - {fileID: 21300000, guid: e478837c1985e12438eedfb12e698c9e, type: 3}
 --- !u!1 &8082983244512182284
 GameObject:
   m_ObjectHideFlags: 0

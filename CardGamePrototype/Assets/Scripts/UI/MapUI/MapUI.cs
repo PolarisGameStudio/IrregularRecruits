@@ -5,6 +5,7 @@ using UnityEngine;
 using GameLogic;
 using Event = GameLogic.Event;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace UI
 {
@@ -18,63 +19,77 @@ namespace UI
         public GameObject Holder;
         [Range(0.5f, 5)]
         public float MapSize;
-
+        public Sprite[] Linetypes;
+        public MapNode CurrentNode;
+ 
         private void Start()
         {
             if (MapController.Instance.Nodes.Count == 0)
                 MapController.Instance.CreateMap();
 
-            MapNode.OpenLocationEvent.AddListener(UpdateNodes);
 
+            //TODO: make sure that this is called
             Event.OnGameBegin.AddListener(Open);
             Event.OnCombatSetup.AddListener((e, v) => Close());
             Event.OnBattleFinished.AddListener((winner) => Open());
+            LocationUI.Instance.OnClose.AddListener(Open);
+            LocationUI.Instance.OnOpen.AddListener(Close);
 
-            UpdateNodes(MapController.Instance.CurrentNode);
+            UpdateNodes();
         }
 
-        private void UpdateNodes(MapNode current)
+        private void UpdateNodes()
         {
-            DrawMap(current,MapSettings.Instance.VisibleSteps);
-
-            foreach (var n in Nodes)
-            {
-                n.Icon.interactable = (current.LeadsTo.Contains(n.Node));
-
-                if (n.Node == current) n.HighlightParticles.Play();
-                else n.HighlightParticles.Stop();
-            }
+            StartCoroutine(DrawMap(MapController.Instance.CurrentNode, MapSettings.Instance.VisibleSteps));
         }
 
         public void Open()
         {
             Holder.SetActive(true);
+            UpdateNodes();
         }
         public void Close()
         {
             Holder.SetActive(false);
+            foreach (var item in Nodes)
+            {
+                item.HighlightParticles.Stop();
+            }
         }
 
-        private void DrawMap(MapNode startNode, int shownSteps = 1000)
+        private IEnumerator DrawMap(MapNode startNode, int shownSteps = 1000)
         {
             OldUnusedNodes = Nodes.ToList();
 
+            foreach (var n in Nodes)
+            {
+                n.Icon.interactable = false;
+                n.HighlightParticles.Stop();
+            }
+            
             Nodes.Clear();
 
-            CreateNode(startNode, transform.position);
+            yield return CreateNode(startNode, transform.position);
 
-            DrawStepRecursive(startNode.LeadsTo, 1, shownSteps);
+            yield return DrawStepRecursive(startNode.LeadsTo, 1, shownSteps,Nodes.Single());
 
             foreach (var n in OldUnusedNodes)
-                DestroyNode(n);
+                yield return DestroyNode(n);
+
         }
 
-        private static void DestroyNode(MapNodeIcon n)
+        private static IEnumerator DestroyNode(MapNodeIcon n)
         {
+            const float fadeTime = 0.7f;
+
+            n.CanvasGroup.LeanAlpha(0f, fadeTime);
+
+            yield return new WaitForSeconds(fadeTime);
+
             Destroy(n.gameObject);
         }
 
-        private void DrawStepRecursive(List<MapNode> nodes, int degree, int shownSteps)
+        private IEnumerator DrawStepRecursive(List<MapNode> nodes, int degree, int shownSteps,MapNodeIcon startNode)
         {
             var r = degree * MapSize;
 
@@ -92,7 +107,7 @@ namespace UI
                 var y = r * Mathf.Sin(angle + Random.Range(-rnd, rnd));
                 var pos = new Vector3(x, y);
 
-                CreateNode(node, transform.position + pos);
+                yield return CreateNode(node, startNode.transform.position + pos,degree == 1);
 
                 angle += angleDiff;
             }
@@ -101,11 +116,11 @@ namespace UI
 
             if (combinedLeadsTo.Any() && shownSteps > degree)
             {
-                DrawStepRecursive(combinedLeadsTo, degree + 1, shownSteps);
+                yield return DrawStepRecursive(combinedLeadsTo, degree + 1, shownSteps,startNode);
             }
         }
 
-        private void CreateNode(MapNode node, Vector3 position)
+        private IEnumerator CreateNode(MapNode node, Vector3 position,bool interactable = false)
         {
             MapNodeIcon instance;
 
@@ -116,6 +131,7 @@ namespace UI
                 instance = n;
 
                 OldUnusedNodes.Remove(n);
+
             }
             else
             {
@@ -127,14 +143,23 @@ namespace UI
 
                 instance.Node = node;
 
+                instance.transform.localScale = Vector3.zero;
+
+                instance.transform.LeanScale(Vector3.one, 1f).setEaseInCubic();
+
+
                 foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
-                    DrawLine(parent, instance);
+                    yield return DrawLine(parent, instance);
             }
+
+            instance.Icon.interactable = interactable;
+
+            if (interactable) instance.HighlightParticles.Play();
 
             Nodes.Add(instance);
         }
 
-        private void DrawLine(MapNodeIcon start, MapNodeIcon finish)
+        private IEnumerator DrawLine(MapNodeIcon start, MapNodeIcon finish)
         {
             //Debug.DrawLine(start.transform.position, finish.transform.position, Color.black, 100000);
 
@@ -154,6 +179,15 @@ namespace UI
 
             line.transform.Rotate(new Vector3(0, 0, angle));
 
+            yield return line.DrawLine();
+
+        }
+
+        public static Sprite GetRandomLineSprite()
+        {
+            var lines = Instance.Linetypes;
+
+            return lines[Random.Range(0, lines.Length)];
         }
     }
 

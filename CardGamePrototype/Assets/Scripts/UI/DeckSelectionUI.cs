@@ -66,7 +66,7 @@ namespace UI
 
         public void Submit()
         {
-            CombatPrototype.SetPlayerDeck(Decks[SelectedDeck]);
+            BattleManager.Instance.PlayerDeck =(Decks[SelectedDeck]);
 
             HeroSelectionUI.Instance.SubmitHero();
 

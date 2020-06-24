@@ -1,12 +1,7 @@
 ﻿using GameLogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UI;
-using UnityEngine;
 using UnityEngine.UI;
 using Event = GameLogic.Event;
-using Random = UnityEngine.Random;
 
 public class CombatPrototype : Singleton<CombatPrototype>
 {
@@ -28,11 +23,6 @@ public class CombatPrototype : Singleton<CombatPrototype>
         BattleUI.OnBattleFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
     }
 
-
-    public static void SetPlayerDeck(Deck deck)
-    {
-        Instance.GC.PlayerDeck = deck;
-    }
 
     public void GetNewMinions()
     {

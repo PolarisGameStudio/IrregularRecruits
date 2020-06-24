@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace UI
@@ -14,6 +15,8 @@ namespace UI
         private List<Button> InstantiatedButtons = new List<Button>();
         private MapNode CurrentNode;
         public GameObject Holder;
+        public UnityEvent OnClose = new UnityEvent();
+        public UnityEvent OnOpen = new UnityEvent();
 
         private void Start()
         {
@@ -25,6 +28,8 @@ namespace UI
         public void Open(MapNode node)
         {
             Holder.SetActive(true);
+
+            OnOpen.Invoke();
 
             LocationImage.sprite = node.Location.LocationImage;
 
@@ -48,6 +53,7 @@ namespace UI
         private void Close ()
         {
             Holder.SetActive(false);
+            OnClose.Invoke();
         }
 
         private void CreateButton(MapOption option,MapNode owner)

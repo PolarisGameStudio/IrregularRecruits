@@ -9,6 +9,7 @@ namespace UI
         public Button Icon;
         public MapNode Node;
         public ParticleSystem HighlightParticles;
+        public CanvasGroup CanvasGroup;
 
         private void Start()
         {

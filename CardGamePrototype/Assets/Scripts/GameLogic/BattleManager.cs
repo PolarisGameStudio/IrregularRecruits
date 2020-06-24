@@ -42,6 +42,13 @@ namespace GameLogic
 
         }
 
+        public static void SetPlayerHero(HeroObject heroObject)
+        {
+            Hero hero = new Hero(heroObject);
+            Instance.PlayerDeck.Hero = hero;
+            hero.InDeck = Instance.PlayerDeck;
+        }
+
         public void PackUp(Deck d)
         {
             if(EnemyDeck!=null && d == PlayerDeck)

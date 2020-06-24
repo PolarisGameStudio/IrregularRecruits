@@ -11,18 +11,20 @@ namespace UI
 
         private void Start()
         {
-            StartCoroutine(DrawLine());
+            Line.sprite = MapUI.GetRandomLineSprite();
+
+            //StartCoroutine(DrawLine());
         }
 
-        private IEnumerator DrawLine()
+        public IEnumerator DrawLine()
         {
             var start = Time.time;
             float endtime = start + DrawTime;
 
             while (Time.time < endtime)
             {
-                yield return new WaitForFixedUpdate();
                 Line.fillAmount = Mathf.Lerp(1, 0, (endtime - Time.time)/DrawTime);
+                yield return new WaitForFixedUpdate();
             }
 
             Line.fillAmount = 1f;
