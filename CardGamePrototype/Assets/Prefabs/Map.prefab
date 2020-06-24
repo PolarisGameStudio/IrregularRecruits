@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NodeIconPrefab: {fileID: 4268561729690534303, guid: cce5798a7f62f5d4193423748bb83cfb,
     type: 3}
-  LinePrefab: {fileID: 6325142181278093834, guid: a16c41c3ab25ed34b9801c7fa8a62b52,
+  LinePrefab: {fileID: -644115061392954524, guid: a16c41c3ab25ed34b9801c7fa8a62b52,
     type: 3}
   Nodes: []
   Holder: {fileID: 8082983244512182284}

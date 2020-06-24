@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7290971114494081691}
   - component: {fileID: 6031546386981523833}
   - component: {fileID: 6325142181278093834}
+  - component: {fileID: -644115061392954524}
   m_Layer: 5
-  m_Name: Line
+  m_Name: MapEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,3 +75,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-644115061392954524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2170584094177728634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef8fe20e75c28046b2139a52c3ded9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Line: {fileID: 6325142181278093834}
+  DrawTime: 1

@@ -8,10 +8,11 @@ using UnityEngine.UI;
 
 namespace UI
 {
+
     public class MapUI : Singleton<MapUI>
     {
         public MapNodeIcon NodeIconPrefab;
-        public Image LinePrefab;
+        public MapEdge LinePrefab;
         public List<MapNodeIcon> Nodes = new List<MapNodeIcon>();
         private List<MapNodeIcon> OldUnusedNodes = new List<MapNodeIcon>();
         public GameObject Holder;
@@ -141,7 +142,7 @@ namespace UI
 
             var targetDir = finish.transform.position - start.transform.position;
 
-            line.rectTransform.localScale = new Vector3(targetDir.magnitude*0.8f, 1);
+            line.transform.localScale = new Vector3(targetDir.magnitude*0.8f, 1);
 
             targetDir = targetDir.normalized;
 
@@ -151,7 +152,7 @@ namespace UI
 
             if (targetDir.y < 0) angle *= -1;
 
-            line.rectTransform.Rotate(new Vector3(0, 0, angle));
+            line.transform.Rotate(new Vector3(0, 0, angle));
 
         }
     }
