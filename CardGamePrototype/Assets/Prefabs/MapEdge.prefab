@@ -88,4 +88,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 6325142181278093834}
-  DrawTime: 1
+  DrawTime: 0.5

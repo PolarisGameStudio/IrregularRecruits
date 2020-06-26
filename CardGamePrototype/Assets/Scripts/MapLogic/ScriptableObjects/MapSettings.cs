@@ -11,7 +11,7 @@ namespace MapLogic
         [Range(1, 100)]
         public int MapLength;
         [Range(2, 4)]
-        public int MaxRoadsFromNode = 4;
+        public int MinNodesAtStep = 4;
         //Has to be bigger than max roads from node
         [Range(4, 16)]
         public int MaxNodesAtStep = 8;

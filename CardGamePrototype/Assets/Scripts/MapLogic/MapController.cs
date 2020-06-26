@@ -1,9 +1,11 @@
 ﻿using GameLogic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Event = GameLogic.Event;
+using Random = UnityEngine.Random;
 
 namespace MapLogic
 {
@@ -31,11 +33,11 @@ namespace MapLogic
             int[] nodesAtStep = new int[settings.MapLength];
 
             nodesAtStep[0] = nodesAtStep[settings.MapLength - 1] = 1;
-            nodesAtStep[settings.MapLength - 2] = settings.MaxRoadsFromNode;
+            nodesAtStep[settings.MapLength - 2] = settings.MinNodesAtStep;
 
             for (int i = 1; i < settings.MapLength - 2; i++)
             {
-                nodesAtStep[i] = Mathf.Min(nodesAtStep[i - 1] * settings.MaxRoadsFromNode, Random.Range(settings.MaxRoadsFromNode, settings.MaxNodesAtStep));
+                nodesAtStep[i] = Mathf.Min(nodesAtStep[i - 1] * settings.MinNodesAtStep, Random.Range(settings.MinNodesAtStep, settings.MaxNodesAtStep));
             }
 
             var noOfNodes = nodesAtStep.Sum();
@@ -67,7 +69,7 @@ namespace MapLogic
 
             MapNode[] lastStep = { GenerateNode(locations.Single(l => l.StartNode), locations) };
 
-            for (int i = 1; i < settings.MapLength ; i++)
+            for (int i = 1; i < settings.MapLength; i++)
             {
                 if (nodesAtStep[i] < 1)
                     Debug.LogError("Generated pathless map");
@@ -84,53 +86,16 @@ namespace MapLogic
 
                 var edgesPrNode = step.Length / (float)lastStep.Length;
 
-                while (lastStep.Any(c => c.LeadsTo.Count == 0) || step.Any(s => !Nodes.Any(n => n.LeadsTo.Contains(s))))
+                //create one road from each
+                while (lastStep.Any(c => c.LeadsTo.Count == 0))
                 {
                     //Select a node to create the edge from
-                    var l =
-                        Random.value > 0.7f ?
-                        lastStep[Random.Range(0, lastStep.Length)] :
-                        lastStep.First(pro => pro.LeadsTo.Count == lastStep.Min(s => s.LeadsTo.Count));
+                    var l = lastStep.First(c => c.LeadsTo.Count == 0);
 
-                    //if the randomly selected node already leads to all
-                    if (l.LeadsTo.Count == step.Length)
-                        continue;
-
-                    //find the corresponding position of the next step
-                    var pos = lastStep.ToList().IndexOf(l);
-                    var desiredNodePos = Mathf.Clamp(Mathf.RoundToInt(pos * edgesPrNode), 0, step.Length - 1);
+                    var idx = lastStep.ToList().IndexOf(l);
+                    var desiredNodePos = Mathf.Clamp(Mathf.RoundToInt(idx * edgesPrNode), 0, step.Length - 1);
 
                     var mapNode = step[desiredNodePos];
-
-                    int minimum = step.Min(s => Nodes.Count(n => n.LeadsTo.Contains(s)));
-
-                    var leftOrRight = Random.value > 0.5f ? 1 : -1;
-
-                    //select the closest minimum
-                    while (l.LeadsTo.Contains(mapNode)  && Mathf.Abs(leftOrRight) < step.Length)
-                    {
-                        desiredNodePos += leftOrRight;
-                        if (leftOrRight > 0)
-                            leftOrRight++;
-                        else
-                            leftOrRight--;
-                        leftOrRight *= -1;
-
-                        //wrapping. could also limit
-                        if (desiredNodePos > step.Length - 1)
-                        {
-                            mapNode = step.Last(n => !l.LeadsTo.Contains(n));
-                            break;
-                        }
-                        if (desiredNodePos < 0)
-                        {
-                            mapNode = step.First(n => !l.LeadsTo.Contains(n));
-                            break;
-                        }
-
-                        mapNode = step[desiredNodePos];
-
-                    }
 
                     if (l.LeadsTo.Contains(mapNode)) //overflow
                         Debug.LogError("creating path That is already created");
@@ -139,11 +104,43 @@ namespace MapLogic
                     l.LeadsTo.Add(mapNode);
                 }
 
+                var parentIdx = 0;
+                var nodeIdx = 0;
+                var noRoadExtraChance = 0.5f;
+
+                //Creating road connections
+                do
+                {
+                    //Debug.Log($"parent: {parentIdx} leads to node: {nodeIdx}");
+                    lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
+
+                    if(noRoadExtraChance > Random.value)
+                    {
+                        parentIdx++;
+                        nodeIdx++;
+
+                        if (nodeIdx == step.Length) nodeIdx--;
+                        if (parentIdx == lastStep.Length) parentIdx--;
+                        continue;
+                    }
+
+                    var parentChance = Random.value * (lastStep.Length - parentIdx - 1);
+                    var nodeChance = Random.value * (step.Length - nodeIdx - 1);
+
+                    if (parentChance > nodeChance) parentIdx++;
+                    else nodeIdx++;
+
+                }
+                while (nodeIdx < step.Length-1  || parentIdx < lastStep.Length-1 );
+
+
+                lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
+
+
                 lastStep = step;
             }
 
             CurrentNode = Nodes.Single(n => n.IsStartNode());
-
         }
 
         public void MoveToNode(MapNode node)

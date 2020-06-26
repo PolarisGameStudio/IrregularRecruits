@@ -74,7 +74,7 @@ namespace UI
             yield return DrawStepRecursive(startNode.LeadsTo, 1, shownSteps,Nodes.Single());
 
             foreach (var n in OldUnusedNodes)
-                yield return DestroyNode(n);
+                StartCoroutine(DestroyNode(n));
 
         }
 
