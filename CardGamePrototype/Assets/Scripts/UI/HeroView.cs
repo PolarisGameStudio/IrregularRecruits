@@ -52,6 +52,12 @@ namespace UI
         {
             Instance.ShowHero(hero);
         }
+        
+        public static void Open()
+        {
+            if(BattleManager.Instance.PlayerDeck.Hero !=null)  
+                Instance.ShowHero(BattleManager.Instance.PlayerDeck.Hero);
+        }
 
         private void ShowHero(Hero hero)
         {

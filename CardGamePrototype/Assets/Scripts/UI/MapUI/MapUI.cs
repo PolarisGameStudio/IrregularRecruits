@@ -46,7 +46,7 @@ namespace UI
 
         public void Open()
         {
-            HeroIcon.Image.sprite = BattleManager.Instance.PlayerDeck.Hero.HeroObject.Portrait;
+            HeroIcon.Portrait.image.sprite = BattleManager.Instance.PlayerDeck.Hero.HeroObject.Portrait;
 
             Holder.SetActive(true);
             UpdateNodes();
@@ -78,7 +78,8 @@ namespace UI
             yield return CreateNode(startNode, transform.position);
             
             LeanTween.move(HeroIcon.gameObject, Nodes.First().transform.position, 2f);
-            
+            LeanTween.move(gameObject, transform.position-Nodes.First().transform.position, 3f).setEaseInExpo();
+
             yield return DrawStepRecursive(startNode.LeadsTo, 1, shownSteps,Nodes.Single());
         }
 

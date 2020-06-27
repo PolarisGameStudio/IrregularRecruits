@@ -4,7 +4,12 @@ using UnityEngine.UI;
 namespace UI
 {
     public class HeroMapIcon :MonoBehaviour {
-        public Image Image;
+        public Button Portrait;
+
+        private void Start()
+        {
+            Portrait.onClick.AddListener(HeroView.Open);
+        }
     }
 
 }
