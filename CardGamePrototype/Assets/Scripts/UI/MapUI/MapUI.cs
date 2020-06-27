@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using GameLogic;
 using Event = GameLogic.Event;
-using UnityEngine.UI;
 using System.Collections;
 
 namespace UI
@@ -14,14 +13,15 @@ namespace UI
     {
         public MapNodeIcon NodeIconPrefab;
         public MapEdge LinePrefab;
+        public HeroMapIcon HeroIcon; 
         public List<MapNodeIcon> Nodes = new List<MapNodeIcon>();
-        private List<MapNodeIcon> OldUnusedNodes = new List<MapNodeIcon>();
+        private List<MapNodeIcon> OldNodes = new List<MapNodeIcon>();
         public GameObject Holder;
         [Range(0.5f, 5)]
         public float MapSize;
         public Sprite[] Linetypes;
-        public MapNode CurrentNode;
- 
+        public Color MapDrawColor;
+
         private void Start()
         {
             if (MapController.Instance.Nodes.Count == 0)
@@ -35,16 +35,19 @@ namespace UI
             LocationUI.Instance.OnClose.AddListener(Open);
             LocationUI.Instance.OnOpen.AddListener(Close);
 
-            UpdateNodes();
+            Open();
         }
 
         private void UpdateNodes()
         {
             StartCoroutine(DrawMap(MapController.Instance.CurrentNode, MapSettings.Instance.VisibleSteps));
+
         }
 
         public void Open()
         {
+            HeroIcon.Image.sprite = BattleManager.Instance.PlayerDeck.Hero.HeroObject.Portrait;
+
             Holder.SetActive(true);
             UpdateNodes();
         }
@@ -53,34 +56,35 @@ namespace UI
             Holder.SetActive(false);
             foreach (var item in Nodes)
             {
-                item.HighlightParticles.Stop();
+                item.HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
         }
 
         private IEnumerator DrawMap(MapNode startNode, int shownSteps = 1000)
         {
-            OldUnusedNodes = Nodes.ToList();
+            OldNodes = Nodes.ToList();
 
             foreach (var n in Nodes)
             {
                 n.Icon.interactable = false;
-                n.HighlightParticles.Stop();
+                n.HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
-            
-            Nodes.Clear();
 
-            yield return CreateNode(startNode, transform.position);
-
-            yield return DrawStepRecursive(startNode.LeadsTo, 1, shownSteps,Nodes.Single());
-
-            foreach (var n in OldUnusedNodes)
+            foreach (var n in Nodes.Where(nod => !nod.Reachable()))
                 StartCoroutine(DestroyNode(n));
 
+            Nodes.Clear();
+            
+            yield return CreateNode(startNode, transform.position);
+            
+            LeanTween.move(HeroIcon.gameObject, Nodes.First().transform.position, 2f);
+            
+            yield return DrawStepRecursive(startNode.LeadsTo, 1, shownSteps,Nodes.Single());
         }
 
         private static IEnumerator DestroyNode(MapNodeIcon n)
         {
-            const float fadeTime = 0.7f;
+            const float fadeTime = 2f;
 
             n.CanvasGroup.LeanAlpha(0f, fadeTime);
 
@@ -93,7 +97,7 @@ namespace UI
         {
             var r = degree * MapSize;
 
-            var angleDiff = 0.5f * Mathf.PI / nodes.Count;
+            var angleDiff = 0.7f * Mathf.PI / nodes.Count;
 
             var angle = 0f;
             var rnd = 0.1f;
@@ -124,13 +128,13 @@ namespace UI
         {
             MapNodeIcon instance;
 
-            if (OldUnusedNodes.Any(n => n.Node == node))
+            if (OldNodes.Any(n => n.Node == node))
             {
-                var n = OldUnusedNodes.Single(old => old.Node == node);
+                var n = OldNodes.Single(old => old.Node == node);
 
                 instance = n;
 
-                OldUnusedNodes.Remove(n);
+                OldNodes.Remove(n);
 
             }
             else
@@ -147,6 +151,7 @@ namespace UI
 
                 instance.transform.LeanScale(Vector3.one, 1f).setEaseInCubic();
 
+                instance.HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
                 foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
                     yield return DrawLine(parent, instance);
@@ -154,7 +159,12 @@ namespace UI
 
             instance.Icon.interactable = interactable;
 
-            if (interactable) instance.HighlightParticles.Play();
+            if (interactable)
+            {
+                instance.HighlightParticles.Play();
+            }
+            else instance.HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
 
             Nodes.Add(instance);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapTest : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         var deckObject = DeckLibrary.GetDecks().First();
 

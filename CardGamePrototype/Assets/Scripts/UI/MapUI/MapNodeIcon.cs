@@ -1,4 +1,5 @@
 ﻿using MapLogic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,11 @@ namespace UI
         {
             Icon.onClick.AddListener(() => MapController.Instance.MoveToNode(Node));
 
+        }
+
+        internal bool Reachable()
+        {
+            return MapController.Instance.CurrentNode == Node  || MapController.Instance.CurrentNode.CanReach(Node);
         }
     }
 

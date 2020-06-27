@@ -86,56 +86,36 @@ namespace MapLogic
 
                 var edgesPrNode = step.Length / (float)lastStep.Length;
 
-                //create one road from each
-                while (lastStep.Any(c => c.LeadsTo.Count == 0))
-                {
-                    //Select a node to create the edge from
-                    var l = lastStep.First(c => c.LeadsTo.Count == 0);
-
-                    var idx = lastStep.ToList().IndexOf(l);
-                    var desiredNodePos = Mathf.Clamp(Mathf.RoundToInt(idx * edgesPrNode), 0, step.Length - 1);
-
-                    var mapNode = step[desiredNodePos];
-
-                    if (l.LeadsTo.Contains(mapNode)) //overflow
-                        Debug.LogError("creating path That is already created");
-
-                    //establish connection
-                    l.LeadsTo.Add(mapNode);
-                }
-
                 var parentIdx = 0;
                 var nodeIdx = 0;
-                var noRoadExtraChance = 0.5f;
+                var extraRoadChance = 0.6f;
+
+                lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
 
                 //Creating road connections
                 do
                 {
                     //Debug.Log($"parent: {parentIdx} leads to node: {nodeIdx}");
-                    lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
-
-                    if(noRoadExtraChance > Random.value)
+                    if (extraRoadChance < Random.value)
                     {
                         parentIdx++;
                         nodeIdx++;
 
                         if (nodeIdx == step.Length) nodeIdx--;
                         if (parentIdx == lastStep.Length) parentIdx--;
-                        continue;
+                    }
+                    else
+                    {
+                        var parentChance = Random.value * (lastStep.Length - parentIdx - 1);
+                        var nodeChance = Random.value * (step.Length - nodeIdx - 1);
+
+                        if (parentChance > nodeChance) parentIdx++;
+                        else nodeIdx++;
                     }
 
-                    var parentChance = Random.value * (lastStep.Length - parentIdx - 1);
-                    var nodeChance = Random.value * (step.Length - nodeIdx - 1);
-
-                    if (parentChance > nodeChance) parentIdx++;
-                    else nodeIdx++;
-
+                    lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
                 }
                 while (nodeIdx < step.Length-1  || parentIdx < lastStep.Length-1 );
-
-
-                lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
-
 
                 lastStep = step;
             }
@@ -156,7 +136,6 @@ namespace MapLogic
 
         public void StartCombat(Deck enemyDeck)
         {
-
             Event.OnCombatSetup.Invoke(BattleManager.Instance. PlayerDeck, enemyDeck);
         }
 

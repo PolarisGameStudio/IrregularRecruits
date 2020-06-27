@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25687110417007740a0808a9b344c3ae, type: 2}
   - {fileID: 11400000, guid: ee006cb0f3484294291a9256727081bf, type: 2}
   MapLength: 5
-  MaxRoadsFromNode: 4
-  MaxNodesAtStep: 8
-  VisibleSteps: 3
+  MinNodesAtStep: 4
+  MaxNodesAtStep: 4
+  VisibleSteps: 2
   HiddenNodesPct: 0
   RandomnessToDifficulty: 0

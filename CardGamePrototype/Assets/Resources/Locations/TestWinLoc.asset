@@ -19,6 +19,6 @@ MonoBehaviour:
   StartNode: 0
   UniqueNode: 1
   LocationDescription: This is the end. You have won!!
-  LocationIcon: {fileID: 21300000, guid: b6a0608f1d42b544ba7a4784d403b960, type: 3}
-  LocationImage: {fileID: 0}
+  LocationIcon: {fileID: 21300000, guid: d08808bbbecdafd4da3ea706c51f5de7, type: 3}
+  LocationImage: {fileID: 21300000, guid: f958f59cadf81f34db79c7f2fa156337, type: 3}
   LocationOptions: []
