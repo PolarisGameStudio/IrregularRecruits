@@ -133,7 +133,7 @@ namespace UI
 
             CardUIs[card.Guid] = ui;
 
-            StartCoroutine(ui.Flip(card.Location == Deck.Zone.Library, 0f));
+            StartCoroutine(ui.Flip(CardUI.CardState.FaceDown, 0f));
 
             //Should we just move it to library nomatter what?
             StartCoroutine(MoveCard(ui, card.Location, playerDeck));
@@ -360,8 +360,8 @@ namespace UI
         {
             if (!card) yield break;
 
-            if (zone == Deck.Zone.Graveyard) 
-                yield return card.Flip(false);
+            if(zone == Deck.Zone.Graveyard)
+                yield return card.Flip(CardUI.CardState.Battle);
 
             var rect = card.GetComponent<RectTransform>();
             Vector2 startPos = rect.position;
@@ -397,7 +397,25 @@ namespace UI
 
             zoneHolder.AddChild(card);
 
-            yield return card.Flip(zone == Deck.Zone.Library || (!player && zone == Deck.Zone.Hand));
+
+            switch (zone)
+            {
+                case Deck.Zone.Library:
+                    yield return card.Flip(CardUI.CardState.FaceDown);
+                    break;
+                case Deck.Zone.Battlefield:
+                    yield return card.Flip(CardUI.CardState.Battle);
+                    break;
+                case Deck.Zone.Hand:
+                    if(!player)
+                        yield return card.Flip(CardUI.CardState.FaceDown);
+                    else
+                        yield return card.Flip(CardUI.CardState.FaceUp);
+                    break;
+                default:
+                    yield return card.Flip(CardUI.CardState.FaceUp);
+                    break;
+            }
 
             card.Interactable = true;
         }

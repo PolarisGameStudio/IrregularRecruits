@@ -13,20 +13,19 @@ namespace UI
 {
 
     [RequireComponent(typeof(RectTransform))]
-    public class CardUI : AbilityHolderUI,  IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
+    public class CardUI : AbilityHolderUI, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
     {
         public Creature Creature;
 
         [Header("UI Refs")]
-        public GameObject FrontHolder, CardBackHolder;
-        public Image CardImage;
-        public Image IconImage;
+        public GameObject FrontHolder, CardBackHolder, CardBattleUI;
+        public Image[] CardImage;
         public Image RaceInstance;
         //TODO: replace with clickable
-        public Image AttributeInstance;
+        public Image[] AttributeInstances;
         public CardAnimation CardAnimation;
-        public TextMeshProUGUI AttackText;
-        public TextMeshProUGUI HealthText;
+        public TextMeshProUGUI[] AttackText;
+        public TextMeshProUGUI[] HealthText;
         public TextMeshProUGUI NameText;
         public TextMeshProUGUI DescriptionText;
         public List<GameObject> InstantiatedObjects = new List<GameObject>();
@@ -41,6 +40,7 @@ namespace UI
 
         //being dragged? maybe change name
         public bool Moving { get; internal set; }
+        public enum CardState { FaceUp, FaceDown, Battle }
 
         public void SetCard(Card c)
         {
@@ -57,10 +57,8 @@ namespace UI
 
             if (String.IsNullOrEmpty(creature.name)) creature.name = creature.ToString();
 
-            if (IconImage)
-                IconImage.sprite = creature.IconImage ? creature.IconImage : creature.Image;
-            if (CardImage)
-                CardImage.sprite = creature.Image;
+            foreach (var cardImage in CardImage)
+                cardImage.sprite = creature.Image;
             if (NameText)
                 NameText.text = creature.name;
 
@@ -83,7 +81,8 @@ namespace UI
                 }
 
 
-            if (AttributeInstance)
+            foreach (var AttributeInstance in AttributeInstances)
+            {
                 foreach (var a in creature.Traits)
                 {
                     var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
@@ -94,8 +93,10 @@ namespace UI
 
                     InstantiatedObjects.Add(instance.gameObject);
                 }
+            }
 
-            if (AttributeInstance)
+            foreach (var AttributeInstance in AttributeInstances)
+            {
                 if (creature.SpecialAbility)
                 {
                     DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
@@ -108,6 +109,7 @@ namespace UI
 
                     SpecialAbilityIcon = instance;
                 }
+            }
         }
 
         public void StatModifier(int amount)
@@ -128,24 +130,38 @@ namespace UI
 
         public void UpdateAttack(int attack)
         {
-            AttackText.text = attack.ToString("N0");
+            foreach (var a in AttackText)
+            {
+                a.text = attack.ToString("N0");
 
-            AttackText.color = Creature.Attack < attack ? Color.green :
-                attack < Creature.Attack ? ReducedStatsColor :
-                Color.white;
+                a.color = Creature.Attack < attack ? Color.green :
+                    attack < Creature.Attack ? ReducedStatsColor :
+                    Color.white;
+            }
         }
 
         public void UpdateHealth(int health, bool damaged)
         {
-            HealthText.text = health.ToString("N0");
+            foreach (var h in HealthText)
+            {
+                h.text = health.ToString("N0");
 
-            HealthText.color = damaged ? Color.red :
-                health > Creature.Health ? Color.green :
-                health < Creature.Health ? Color.gray :
-                Color.white;
+                h.color = damaged ? Color.red :
+                    health > Creature.Health ? Color.green :
+                    health < Creature.Health ? Color.gray :
+                    Color.white;
+            }
         }
 
-        public bool FaceUp() => FrontHolder && FrontHolder.activeInHierarchy;
+        public CardState GetCardState()
+        {
+            if (FrontHolder && FrontHolder.activeInHierarchy)
+                return CardState.FaceUp;
+            else if (CardBattleUI && CardBattleUI.activeInHierarchy)
+                return CardState.Battle;
+
+            return CardState.FaceDown;
+        }
 
 
 
@@ -154,10 +170,15 @@ namespace UI
         public void OnPointerClick(PointerEventData eventData)
         {
 #if UNITY_ANDROID
-        if (CardHoverInfo.IsActive()) return;
+            if (CardHoverInfo.IsActive()) return;
 #endif
-            if (FaceUp() && Interactable && UIFlowController.Instance.EmptyQueue())
+            if (IsClickable() && Interactable && UIFlowController.Instance.EmptyQueue())
                 OnClick.Invoke();
+        }
+
+        private bool IsClickable()
+        {
+            return GetCardState() == CardState.FaceUp || GetCardState() == CardState.Battle;
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -169,8 +190,8 @@ namespace UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (AlwaysFaceUp || (FaceUp()))
-            { 
+            if (AlwaysFaceUp || (IsClickable()))
+            {
                 CardHoverInfo.Show(this);
                 CardAnimation?.Highlight();
             }
@@ -181,23 +202,68 @@ namespace UI
         {
         }
 
-        internal IEnumerator Flip(bool faceDown, float flipTime = 0.2f)
+
+        internal IEnumerator Flip(CardState state, float flipTime = 0.2f)
         {
             //already correct face up
-            if (faceDown != FaceUp()) yield break;
+            if (state == GetCardState()) yield break;
 
             if (AlwaysFaceUp) yield break;
 
-            gameObject.LeanScaleX(0, flipTime);
+            bool flipping = GetCardState() == CardState.FaceDown || state == CardState.FaceDown;
 
-            yield return new WaitForSeconds(flipTime);
+            if (flipping)
+            {
+                gameObject.LeanScaleX(0, flipTime);
 
-            CardBackHolder.SetActive(faceDown);
-            FrontHolder.SetActive(!faceDown);
+                yield return new WaitForSeconds(flipTime);
 
-            gameObject.LeanScaleX(1, flipTime);
+                CardBackHolder.SetActive(state == CardState.FaceDown);
+                CardBattleUI.SetActive(state == CardState.Battle);
+                FrontHolder.SetActive(state == CardState.FaceUp);
 
-            yield return new WaitForSeconds(flipTime);
+                gameObject.LeanScaleX(1, flipTime);
+
+                yield return new WaitForSeconds(flipTime);
+            }
+            else
+            {
+                Debug.Log("fading battle");
+                var from = GetCardState() == CardState.Battle ? CardBattleUI : FrontHolder;
+                var to = state == CardState.FaceUp ? FrontHolder : CardBattleUI;
+
+                to.SetActive(true);
+
+                StartCoroutine(Fade(to.GetComponent<CanvasGroup>(), true, flipTime));
+                StartCoroutine(Fade(from.GetComponent<CanvasGroup>(), false, flipTime));
+
+                yield return new WaitForSeconds(flipTime);
+
+                from.SetActive(false);
+
+            }
+        }
+
+        private IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn, float duration)
+        {
+            var endTime = Time.time + duration;
+
+            if (fadeIn)
+            {
+                while (Time.time < endTime)
+                {
+                    canvasGroup.alpha = 1f - (endTime - Time.time) / duration;
+                    yield return null;
+                }
+            }
+            else
+            {
+                while (Time.time < endTime)
+                {
+                    canvasGroup.alpha = (endTime - Time.time) / duration; 
+                    yield return null;
+                }
+            }
         }
 #endif
 #if false
