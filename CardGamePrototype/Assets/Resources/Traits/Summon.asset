@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Summon
   m_EditorClassIdentifier: 
   name: Summoned
-  Icon: {fileID: 21300000, guid: 157149f7692f0ec46a2d58ad12e10660, type: 3}
+  Icon: {fileID: 21300000, guid: 4338096430f8c9a48818545f929a3412, type: 3}
   Description: disappears when it is removed from the battlefield.
+  CR: 0

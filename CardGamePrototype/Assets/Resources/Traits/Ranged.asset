@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ranged
   m_EditorClassIdentifier: 
   name: Ranged
-  Icon: {fileID: 21300000, guid: 5ad5fc27700888a43a944cf4b7b416c3, type: 3}
+  Icon: {fileID: 21300000, guid: 86947d538a2567f47bd42461a186d32c, type: 3}
   Description: does not receive damage when attacking
   CR: 5
