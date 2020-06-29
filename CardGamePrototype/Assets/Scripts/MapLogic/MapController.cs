@@ -88,7 +88,7 @@ namespace MapLogic
 
                 var parentIdx = 0;
                 var nodeIdx = 0;
-                var extraRoadChance = 0.6f;
+                var extraRoadChance = MapSettings.Instance.ExtraRoadChance;
 
                 lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
 

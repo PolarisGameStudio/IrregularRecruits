@@ -21,9 +21,10 @@ namespace MapLogic
         public float HiddenNodesPct;
         //[Range(0f,1f)]
         //public float ChanceForReconnectingPaths;
-        [Range(0f,20f)]
+        [Range(0f,200f)]
         public float RandomnessToDifficulty;
 
-
+        [Range(0f,1f)]
+        public float ExtraRoadChance;
     }
 }

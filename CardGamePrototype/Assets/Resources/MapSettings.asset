@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: MapSettings
   m_EditorClassIdentifier: 
   LocationObjects:
-  - {fileID: 11400000, guid: b19e3af758abffa4b98e84ff7f97d66d, type: 2}
   - {fileID: 11400000, guid: 424e245fa5fbaf24fa3d45ce51592609, type: 2}
   - {fileID: 11400000, guid: 25687110417007740a0808a9b344c3ae, type: 2}
-  - {fileID: 11400000, guid: ee006cb0f3484294291a9256727081bf, type: 2}
-  MapLength: 5
+  - {fileID: 11400000, guid: 09eebb1bf43c35a4789c0626f993f455, type: 2}
+  - {fileID: 11400000, guid: 136b6382658b4624c9abdbe05e7a8d8a, type: 2}
+  - {fileID: 11400000, guid: 575cacf9d5f4e4d46bc833cd366f16fc, type: 2}
+  - {fileID: 11400000, guid: 4ab4875a34d023f45b03337e1125ae6d, type: 2}
+  - {fileID: 11400000, guid: f5e8b4dd1fabaec4ea9272cbc237a22c, type: 2}
+  MapLength: 15
   MinNodesAtStep: 4
   MaxNodesAtStep: 4
-  VisibleSteps: 2
+  VisibleSteps: 3
   HiddenNodesPct: 0
   RandomnessToDifficulty: 0

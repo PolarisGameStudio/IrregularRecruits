@@ -1,4 +1,4 @@
-﻿using MapLogic;
+using MapLogic;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -21,12 +21,17 @@ namespace UI
         public float MapSize;
         public Sprite[] Linetypes;
         public Color MapDrawColor;
+        public RectTransform MapStartPosition;
+        private Vector3 PositionToCenterDifferience;
+        public float NodeFadeTime = 2f;
+
 
         private void Start()
         {
             if (MapController.Instance.Nodes.Count == 0)
                 MapController.Instance.CreateMap();
 
+            PositionToCenterDifferience = transform.position - MapStartPosition.position;
 
             //TODO: make sure that this is called
             Event.OnGameBegin.AddListener(Open);
@@ -41,7 +46,6 @@ namespace UI
         private void UpdateNodes()
         {
             StartCoroutine(DrawMap(MapController.Instance.CurrentNode, MapSettings.Instance.VisibleSteps));
-
         }
 
         public void Open()
@@ -56,7 +60,7 @@ namespace UI
             Holder.SetActive(false);
             foreach (var item in Nodes)
             {
-                item.HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                item.SetInteractable(false);
             }
         }
 
@@ -66,8 +70,7 @@ namespace UI
 
             foreach (var n in Nodes)
             {
-                n.Icon.interactable = false;
-                n.HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                n.SetInteractable(false);
             }
 
             foreach (var n in Nodes.Where(nod => !nod.Reachable()))
@@ -75,21 +78,25 @@ namespace UI
 
             Nodes.Clear();
             
-            yield return CreateNode(startNode, transform.position);
+            //create from node
+            yield return CreateNode(startNode, MapStartPosition.position);
             
-            LeanTween.move(HeroIcon.gameObject, Nodes.First().transform.position, 2f);
-            LeanTween.move(gameObject, transform.position-Nodes.First().transform.position, 3f).setEaseInExpo();
+            LeanTween.move(HeroIcon.gameObject, Nodes.First().transform.position, 1.5f);
+            LeanTween.move(Holder.gameObject, Holder.transform.position-Nodes.First().transform.position - PositionToCenterDifferience, 3f).setEaseInExpo();
 
             yield return DrawStepRecursive(startNode.LeadsTo, 1, shownSteps,Nodes.Single());
+
+            foreach(var n in Nodes.Where(nod => startNode.LeadsTo.Contains(nod.Node)))
+            {
+                n.SetInteractable(true);
+            }
         }
 
-        private static IEnumerator DestroyNode(MapNodeIcon n)
+        private  IEnumerator DestroyNode(MapNodeIcon n)
         {
-            const float fadeTime = 2f;
+            n.CanvasGroup.LeanAlpha(0f, NodeFadeTime);
 
-            n.CanvasGroup.LeanAlpha(0f, fadeTime);
-
-            yield return new WaitForSeconds(fadeTime);
+            yield return new WaitForSeconds(NodeFadeTime);
 
             Destroy(n.gameObject);
         }
@@ -98,7 +105,10 @@ namespace UI
         {
             var r = degree * MapSize;
 
-            var angleDiff = 0.7f * Mathf.PI / nodes.Count;
+
+
+
+            var angleDiff = 0.5f * Mathf.PI / nodes.Count;
 
             var angle = 0f;
             var rnd = 0.1f;
@@ -152,19 +162,15 @@ namespace UI
 
                 instance.transform.LeanScale(Vector3.one, 1f).setEaseInCubic();
 
-                instance.HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            instance.SetInteractable(false);
 
                 foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
                     yield return DrawLine(parent, instance);
             }
 
             instance.Icon.interactable = interactable;
-
-            if (interactable)
-            {
-                instance.HighlightParticles.Play();
-            }
-            else instance.HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            
+            instance.SetInteractable(interactable);
 
 
             Nodes.Add(instance);

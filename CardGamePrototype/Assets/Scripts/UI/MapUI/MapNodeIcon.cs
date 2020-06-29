@@ -1,5 +1,6 @@
 ﻿using MapLogic;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,10 @@ namespace UI
     {
         public Button Icon;
         public MapNode Node;
-        public ParticleSystem HighlightParticles;
+        [SerializeField]
+        private ParticleSystem HighlightParticles;
         public CanvasGroup CanvasGroup;
+        public bool Revealed;
 
         private void Start()
         {
@@ -20,8 +23,22 @@ namespace UI
 
         internal bool Reachable()
         {
-            return MapController.Instance.CurrentNode == Node  || MapController.Instance.CurrentNode.CanReach(Node);
+            return MapController.Instance.CurrentNode == Node || MapController.Instance.CurrentNode.CanReach(Node);
         }
-    }
 
+        internal void SetInteractable(bool interactable)
+        {
+            Icon.interactable = interactable;
+
+            if (interactable)
+            {
+                HighlightParticles.Play();
+            }
+            else HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        }
+
+           
+
+    }
 }

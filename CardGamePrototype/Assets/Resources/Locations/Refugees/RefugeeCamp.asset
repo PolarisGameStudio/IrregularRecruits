@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16fc3d16bded274cb27555e6462ed38, type: 3}
+  m_Name: RefugeeCamp
+  m_EditorClassIdentifier: 
+  Name: Refugee Camp
+  Difficulty: 50
+  ExecuteRandomCombatOptionAutomatically: 0
+  WinNode: 0
+  StartNode: 0
+  UniqueNode: 0
+  LocationDescription: you can hire a refugee
+  LocationIcon: {fileID: 21300000, guid: f12f1cc0e056079429578a981f0073e7, type: 3}
+  LocationImage: {fileID: 21300000, guid: b6a0608f1d42b544ba7a4784d403b960, type: 3}
+  LocationOptions:
+  - {fileID: 11400000, guid: 5b2ff3203c0e6254682127f70ca552d6, type: 2}
