@@ -21,8 +21,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4ab4875a34d023f45b03337e1125ae6d, type: 2}
   - {fileID: 11400000, guid: f5e8b4dd1fabaec4ea9272cbc237a22c, type: 2}
   MapLength: 15
-  MinNodesAtStep: 4
-  MaxNodesAtStep: 4
-  VisibleSteps: 3
+  MinNodesAtStep: 2
+  MaxNodesAtStep: 8
+  VisibleSteps: 4
   HiddenNodesPct: 0
-  RandomnessToDifficulty: 0
+  RandomnessToDifficulty: 200
+  ExtraRoadChance: 0.7

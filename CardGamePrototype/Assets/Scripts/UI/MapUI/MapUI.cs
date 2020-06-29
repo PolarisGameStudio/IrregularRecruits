@@ -105,7 +105,9 @@ namespace UI
         {
             var r = degree * MapSize;
 
+            var direction = PositionToCenterDifferience.normalized;
 
+            //position should be all current node position + mapsize * direction
 
 
             var angleDiff = 0.5f * Mathf.PI / nodes.Count;

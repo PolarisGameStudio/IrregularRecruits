@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GrayScaleSprite
+  m_Name: GrayScaleSpriteMaskable
   m_Shader: {fileID: -6465566751694194690, guid: 6f1dd3b6f1b490c4eb78297dfd76b696,
     type: 3}
   m_ShaderKeywords: 
