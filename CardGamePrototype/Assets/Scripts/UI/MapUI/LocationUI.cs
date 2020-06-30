@@ -20,22 +20,31 @@ namespace UI
 
         private void Start()
         {
-            MapNode.OpenLocationEvent.AddListener(Open);
-            MapNode.CloseLocationEvent.AddListener(n=>Close());
+            MapNode.OpenEvent.AddListener(Open);
+            MapNode.CloseLocation.AddListener(n => Close());
             OptionInstance.gameObject.SetActive(false);
         }
 
         public void Open(MapNode node)
         {
+            if (!(node.Location is MapLocation))
+            {
+                Debug.Log("opening option as location");
+                return;
+            }
+
+            var location = node.Location as MapLocation;
+
+
             Holder.SetActive(true);
 
             OnOpen.Invoke();
 
-            LocationImage.sprite = node.Location.LocationImage;
+            LocationImage.sprite = location.LocationImage;
 
-            Description.text = node.Location.LocationDescription;
+            Description.text = location.LocationDescription;
 
-            foreach(var oldBut in InstantiatedButtons)
+            foreach (var oldBut in InstantiatedButtons)
             {
                 Destroy(oldBut.gameObject);
             }
@@ -46,17 +55,17 @@ namespace UI
 
             foreach (var opt in node.GetOptions())
             {
-                CreateButton(opt,node);
+                CreateButton(opt, node);
             }
         }
 
-        private void Close ()
+        private void Close()
         {
             Holder.SetActive(false);
             OnClose.Invoke();
         }
 
-        private void CreateButton(MapOption option,MapNode owner)
+        private void CreateButton(MapOption option, MapNode owner)
         {
             var instance = Instantiate(OptionInstance, OptionInstance.transform.parent);
 

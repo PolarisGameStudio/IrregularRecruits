@@ -5,6 +5,7 @@ using UnityEngine;
 namespace MapLogic
 {
 
+
     [CreateAssetMenu(menuName = "Create Map Objects/Gain Unit Option")]
     public class GainUnitOption : MapOption
     {

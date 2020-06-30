@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ namespace UI
         {
             var cs = CreatureLibrary.Instance.EnemyCreatures;
 
-            if (deck  == null|| !deck.DeckObject)
+            if (deck == null || !deck.DeckObject)
                 return;
 
             var friends = cs.Where(c => !c.IsSummon() && deck.DeckObject.FriendRaces.Contains(c.Race)).ToList();
@@ -35,7 +36,7 @@ namespace UI
 
             if (!possibles.Any())
             {
-                possibles = cs.ToList() ;
+                possibles = cs.ToList();
             }
             if (!friends.Any())
             {
@@ -43,25 +44,38 @@ namespace UI
             }
 
             Creature selected = friends[Random.Range(0, friends.Count())];
-            SetupChoice(FirstCreatureChoice, AddFirstCreature, selected);
 
-            if(friends.Count() > 1)
+            if (friends.Count() > 1)
                 friends.Remove(selected);
+
             Creature selected2 = friends[Random.Range(0, friends.Count())];
-            SetupChoice(SecondCreatureChoice, AddSecondCreature, selected2);
 
             if (possibles.Count() > 2)
             {
                 possibles.Remove(selected);
                 possibles.Remove(selected2);
             }
-            SetupChoice(ThirdCreatureChoice, AddThirdCreature, possibles[Random.Range(0, possibles.Count())]);
+            var selected3 = possibles[Random.Range(0, possibles.Count())];
+
+            SetupChoice(selected,selected2, selected3);
+        }
+
+        //should be a list instead of three specific
+        public  void SetupChoice(Creature first, Creature second, Creature third)
+        {
+            SetupChoice(FirstCreatureChoice, AddFirstCreature, first);
+
+            SetupChoice(SecondCreatureChoice, AddSecondCreature, second);
+
+            SetupChoice(ThirdCreatureChoice, AddThirdCreature, third);
 
             Holder.SetActive(true);
         }
 
         private void SetupChoice(CardUI ui, Button addButton, Creature creature)
         {
+            if (Deck == null) Deck = BattleManager.Instance.PlayerDeck;
+
             ui.UpdateCreature(creature);
             addButton.onClick.RemoveAllListeners();
 

@@ -85,7 +85,7 @@ namespace Tests
 
             var option = new CombatOption()
             {
-                PossibleRaces = new List<Race>() { race },
+                MainRace =race ,
                 CRValue = 100
             };
 
@@ -634,7 +634,7 @@ namespace Tests
             MapNode closed = null;
 
 
-            MapNode.CloseLocationEvent.AddListener(m => closed = m);
+            MapNode.CloseLocation.AddListener(m => closed = m);
 
             node.Open();
             node.SelectOption(0);
@@ -664,7 +664,7 @@ namespace Tests
             var node = new MapNode(location);
             MapNode closed = null;
 
-            MapNode.CloseLocationEvent.AddListener(m => closed = m);
+            MapNode.CloseLocation.AddListener(m => closed = m);
 
             node.Open();
             node.SelectOption(0);

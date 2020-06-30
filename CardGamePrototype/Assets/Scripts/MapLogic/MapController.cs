@@ -42,7 +42,7 @@ namespace MapLogic
 
             var noOfNodes = nodesAtStep.Sum();
 
-            var locations = settings.LocationObjects.OrderBy(c => Random.value).ToList();
+            var locations = settings.EventLocations.OrderBy(c => Random.value).ToList();
 
             //only one startnode
             while (locations.Count(l => l.StartNode) > 1)

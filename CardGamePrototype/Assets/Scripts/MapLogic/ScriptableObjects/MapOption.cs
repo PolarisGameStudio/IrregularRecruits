@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MapLogic
 {
-    public abstract class MapOption : ScriptableObject
+    public abstract class MapOption : ScriptableObject, IMapLocation
     {
         public abstract void ExecuteOption(MapNode owner);
 
@@ -81,6 +81,19 @@ namespace MapLogic
                     unit = BattleManager.Instance.PlayerDeck.AllCreatures().FirstOrDefault();
 
                 if (unit != null) mapNode.AddAssociation(this, unit);
+        }
+
+        public MapOption[] GetLocationOptions()
+        {
+            return new MapOption[]{ this};
+        }
+
+        public void Open(MapNode node)
+        {
+            var executed = node.SelectOption(this);
+
+            if (!executed)
+                MapNode.CloseLocation.Invoke(node);
         }
     }
 }

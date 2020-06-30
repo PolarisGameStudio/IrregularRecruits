@@ -156,7 +156,7 @@ namespace UI
 
                 instance.transform.position = position;
 
-                instance.Icon.image.sprite = node.Location.LocationIcon;
+                instance.Icon.image.sprite = MapSettings.GetLocationIcon(node.Location);
 
                 instance.Node = node;
 

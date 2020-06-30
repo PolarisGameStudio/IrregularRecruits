@@ -12,12 +12,31 @@ namespace MapLogic
         [Header("Creatures always spawned")]
         public List<Creature> SpawnCreatures;
         [Header("Random Spawns")]
-        public List<Race> PossibleRaces;
-        public int CRValue;
+        public Race MainRace;
+        public List<Race> AdditionalRaces;
+        public int MinCr = 10;
+        public int MaxCr = 100;
+        private int cRValue;
+
+        public int CRValue
+        {
+            get
+            {
+                if (cRValue <= 0)
+                    cRValue = Random.Range(MinCr, MaxCr);
+
+                return cRValue;
+            }
+            set => cRValue = value;
+        }
 
         public override void ExecuteOption(MapNode owner)
         {
-            var deck =  DeckGeneration.GenerateDeck(CRValue, PossibleRaces, SpawnCreatures);
+            var possibleRaces = new List<Race>() { MainRace };
+
+            possibleRaces.AddRange(AdditionalRaces);
+
+            var deck = DeckGeneration.GenerateDeck(CRValue, possibleRaces, SpawnCreatures);
 
             MapController.Instance.StartCombat(deck);
 

@@ -14,7 +14,7 @@ namespace MapLogic
         public int Id;
         public bool Visited;
         public bool Active;
-        public readonly MapLocation Location;
+        public readonly IMapLocation Location;
         public string name;
         public Dictionary<MapOption, List<Card>> SelectedCards = new Dictionary<MapOption, List<Card>>();
 
@@ -28,8 +28,8 @@ namespace MapLogic
         }
 
         public class LocationEvent : UnityEvent<MapNode> { }
-        public static LocationEvent OpenLocationEvent = new LocationEvent();
-        public static LocationEvent CloseLocationEvent = new LocationEvent();
+        public static LocationEvent OpenEvent = new LocationEvent();
+        public static LocationEvent CloseLocation = new LocationEvent();
 
         //public List<MapOption> SelectedOptions = new List<MapOption>();
 
@@ -47,19 +47,19 @@ namespace MapLogic
 
         public MapOption[] GetOptions()
         {
-            return Location.LocationOptions.Where(o => o.IsApplicable()).ToArray();
+            return Location.GetLocationOptions().Where(o => o.IsApplicable()).ToArray();
         }
 
         public void Open()
         {
             Visited = Active = true;
 
-            foreach (var option in Location.LocationOptions)
+            foreach (var option in Location.GetLocationOptions())
             {
                 option.FindCandidate(this);
             }
 
-            OpenLocationEvent.Invoke(this);
+            Location.Open(this);
         }
 
         public void AddAssociation(MapOption option, Card unit)
@@ -71,36 +71,31 @@ namespace MapLogic
 
         public void SelectOption(int i)
         {
-            if (i >= Location.LocationOptions.Length)
+            if (i >= Location.GetLocationOptions().Length)
                 return;
 
-            MapOption mapOption = Location.LocationOptions[i];
+            MapOption mapOption = Location.GetLocationOptions()[i];
             SelectOption(mapOption);
         }
 
-        public void SelectOption(MapOption mapOption)
+        public bool SelectOption(MapOption mapOption)
         {
-            if (!Location.LocationOptions.Contains(mapOption) || !mapOption.IsApplicable())
-                return;
+            if (!Location.GetLocationOptions().Contains(mapOption) || !mapOption.IsApplicable())
+                return false;
 
             mapOption.ExecuteOption(this);
 
             if (mapOption.ClosesLocationOnSelection)
             {
                 Active = false;
-                CloseLocationEvent.Invoke(this);
+                CloseLocation.Invoke(this);
             }
+
+            return true;
         }
 
-        public bool IsFinalNode() => Location.WinNode;
-        public bool IsStartNode() => Location.StartNode;
+        public bool IsFinalNode() => Location is MapLocation && (Location as MapLocation).WinNode;
+        public bool IsStartNode() => Location is MapLocation && (Location as MapLocation).StartNode;
 
-        private bool OptionApplicable(MapOption mapOption)
-        {
-            return mapOption.OnlyForHeroRaces.Count == 0 //|| mapOption.OnlyForHeroRaces.Contains(GameManager.)
-                &&
-                mapOption.OnlyForAbility.Count == 0 //|| mapOption.OnlyForAbility.Contains
-                ;
-        }
     }
 }
