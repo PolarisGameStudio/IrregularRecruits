@@ -34,13 +34,13 @@ namespace MapLogic
         public float ExtraRoadChance;
 
         [Header("Map Icons")]
-        public Sprite QuestionIcon;
         public Sprite MoneyIcon;
         public Sprite XpIcon;
         public Sprite UnknownNodeIcon;
-        public RaceIcon[] VillageIcons;
+        public Sprite VillageIcon;
         public RaceIcon[] CombatIcons;
-
+        
+        [Serializable]
         public struct RaceIcon { public Race Race; public Sprite Icon; }
 
         public static Sprite GetLocationIcon(IMapLocation location)
@@ -59,14 +59,14 @@ namespace MapLogic
                 var combat = location as CombatOption;
 
                 if (Instance.CombatIcons.Any(c => c.Race == combat.MainRace))
-                    return Instance.CombatIcons.Single(c => c.Race == combat.MainRace).Icon;                              
-            }
-            if(location is CombatOption)
-            {
-                var combat = location as CombatOption;
+                    return Instance.CombatIcons.Single(c => c.Race == combat.MainRace).Icon;     
+                else
 
-                if (Instance.CombatIcons.Any(c => c.Race == combat.MainRace))
-                    return Instance.CombatIcons.Single(c => c.Race == combat.MainRace).Icon;                              
+                    return Instance.CombatIcons.First().Icon;
+            }
+            if(location is HireUnitOption)
+            {
+                return Instance.VillageIcon;
             }
 
             return Instance.UnknownNodeIcon;

@@ -12,14 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1343291f6945a94e873712c5649952b, type: 3}
   m_Name: MapSettings
   m_EditorClassIdentifier: 
-  LocationObjects:
-  - {fileID: 11400000, guid: 424e245fa5fbaf24fa3d45ce51592609, type: 2}
-  - {fileID: 11400000, guid: 25687110417007740a0808a9b344c3ae, type: 2}
-  - {fileID: 11400000, guid: 09eebb1bf43c35a4789c0626f993f455, type: 2}
-  - {fileID: 11400000, guid: 136b6382658b4624c9abdbe05e7a8d8a, type: 2}
-  - {fileID: 11400000, guid: 575cacf9d5f4e4d46bc833cd366f16fc, type: 2}
-  - {fileID: 11400000, guid: 4ab4875a34d023f45b03337e1125ae6d, type: 2}
-  - {fileID: 11400000, guid: f5e8b4dd1fabaec4ea9272cbc237a22c, type: 2}
+  EventLocations: []
+  BasicLocations: []
   MapLength: 15
   MinNodesAtStep: 2
   MaxNodesAtStep: 8
@@ -27,3 +21,20 @@ MonoBehaviour:
   HiddenNodesPct: 0
   RandomnessToDifficulty: 200
   ExtraRoadChance: 0.7
+  MoneyIcon: {fileID: 21300000, guid: 72450c8078d595948a2f9824282f69d0, type: 3}
+  XpIcon: {fileID: 21300000, guid: e3b88bc90f450aa4baaf2a377c5a541c, type: 3}
+  UnknownNodeIcon: {fileID: 21300000, guid: 07807b509859236489ea2fe030b08fcb, type: 3}
+  VillageIcon: {fileID: 21300000, guid: f721032d8c523764c90634c64d12632d, type: 3}
+  CombatIcons:
+  - Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+    Icon: {fileID: 21300000, guid: aedca54c310dbfd47b3edc3802eb34ae, type: 3}
+  - Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
+    Icon: {fileID: 21300000, guid: 108adb15ac994394ba79a9541b31ed02, type: 3}
+  - Race: {fileID: 11400000, guid: bffb2ec3e89bdaf4080ba28acbc87ea2, type: 2}
+    Icon: {fileID: 21300000, guid: 7f8cdc3a82e6d694faa3733308d59aad, type: 3}
+  - Race: {fileID: 11400000, guid: bf94ab8ac254e7440ac870342e55d19a, type: 2}
+    Icon: {fileID: 21300000, guid: f4815ac42831a5549a21d47fd0478306, type: 3}
+  - Race: {fileID: 11400000, guid: 13c15678981d7d6448215a1dab454c59, type: 2}
+    Icon: {fileID: 21300000, guid: d96832f986401af4f8e0c4ba389a1923, type: 3}
+  - Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
+    Icon: {fileID: 21300000, guid: 8891e8f78dfd41548b8d8557affd09e7, type: 3}

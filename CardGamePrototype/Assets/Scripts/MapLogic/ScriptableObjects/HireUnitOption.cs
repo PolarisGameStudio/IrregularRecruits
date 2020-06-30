@@ -9,6 +9,7 @@ namespace MapLogic
     public class HireUnitOption : MapOption
     {
         public List<Creature> Units;
+        
 
         public override void ExecuteOption(MapNode owner)
         {
