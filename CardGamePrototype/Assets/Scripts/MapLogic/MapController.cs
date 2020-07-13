@@ -18,7 +18,7 @@ namespace MapLogic
         //TODO. either use this or battleManager.PlayerDeck
         //public Deck PlayerDeck;
         public int PlayerGold;
-
+        
         public static MapController Instance { get {
                 if (instance == null)
                     instance = new MapController();
@@ -29,6 +29,9 @@ namespace MapLogic
         public void CreateMap()
         {
             var settings = MapSettings.Instance;
+
+            int CurrentDifficulty = settings.StepDifficultyIncrease *4 ;
+
 
             int[] nodesAtStep = new int[settings.MapLength];
 
@@ -71,6 +74,8 @@ namespace MapLogic
 
             for (int i = 1; i < settings.MapLength; i++)
             {
+                CurrentDifficulty += settings.StepDifficultyIncrease;
+
                 if (nodesAtStep[i] < 1)
                     Debug.LogError("Generated pathless map");
 
@@ -81,7 +86,7 @@ namespace MapLogic
                     if (i == settings.MapLength - 1)
                         step[j] = GenerateNode(locations.Single(l => l.IsWinNode()), locations);
                     else
-                        step[j] = GenerateNode(locations.First(l => !l.IsWinNode()), locations);
+                        step[j] = GenerateNode(Random.value < settings.TreasureChance,CurrentDifficulty);
                 }
 
                 var edgesPrNode = step.Length / (float)lastStep.Length;
@@ -137,6 +142,65 @@ namespace MapLogic
         public void StartCombat(Deck enemyDeck)
         {
             Event.OnCombatSetup.Invoke(BattleManager.Instance. PlayerDeck, enemyDeck);
+        }
+
+
+        private MapNode GenerateNode(bool goodNode,int CR)
+        {
+            MapNode node;
+
+            var adjust = Mathf.Min(CR, MapSettings.Instance.RandomnessToDifficulty);
+
+            CR += Random.Range(-adjust, adjust);
+                
+
+            if(goodNode)
+            {
+                var v = Random.value;
+
+                if(v > 0.66f)
+                {
+                    //village
+                    var races = MapSettings.Instance.CivilizedRaces;
+
+                    node = new MapNode( new HireUnitOption(races[Random.Range(0,races.Length)],CR));
+                }
+                else if(v >0.33f )
+                {
+                    //gold
+                    node = new MapNode(new GainGoldOption(CR));
+                }
+                else
+                {
+                    //xp
+                    node = new MapNode(new GainXpOption(CR));
+                }
+                    
+            }
+            else
+            {
+
+                var races = MapSettings.Instance.EnemyRaces;
+                var race = races[Random.Range(0, races.Length)];
+
+                float hardCombatChance = 0.25f;
+
+                if (hardCombatChance > Random.value)
+                {
+                    node = new MapNode(new CombatOption(race,CR * 3,true));
+                }
+                else
+                {
+                    node = new MapNode(new CombatOption(race, CR,false));
+
+                }
+            }
+
+            Nodes.Add(node);
+
+            node.Id = Nodes.Count;
+
+            return node;
         }
 
         private MapNode GenerateNode(IMapLocation locationObject, List<IMapLocation> locations)

@@ -50,6 +50,9 @@ namespace UI
 
         public void Open()
         {
+            Debug.Log("opening map");
+
+
             HeroIcon.Portrait.image.sprite = BattleManager.Instance.PlayerDeck.Hero.HeroObject.Portrait;
 
             Holder.SetActive(true);
@@ -57,6 +60,8 @@ namespace UI
         }
         public void Close()
         {
+            Debug.Log("closing map");
+
             Holder.SetActive(false);
             foreach (var item in Nodes)
             {

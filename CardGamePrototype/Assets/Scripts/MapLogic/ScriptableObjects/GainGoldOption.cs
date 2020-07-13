@@ -8,6 +8,15 @@ namespace MapLogic
     {
         public int Amount;
 
+        public GainGoldOption()
+        {
+        }
+
+        public GainGoldOption(int amount)
+        {
+            Amount = amount;
+        }
+
         public override float Difficulty()
         {
             return Amount;

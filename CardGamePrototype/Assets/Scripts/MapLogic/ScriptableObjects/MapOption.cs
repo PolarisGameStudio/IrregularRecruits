@@ -90,10 +90,12 @@ namespace MapLogic
 
         public void Open(MapNode node)
         {
-            var executed = node.SelectOption(this);
+            ExecuteOption(node);
 
-            if (!executed)
-                MapNode.CloseLocation.Invoke(node);
+            //var executed = node.SelectOption(this);
+
+            //if (!executed)
+            //    MapNode.CloseLocation.Invoke(node);
         }
 
         public bool IsStartNode()

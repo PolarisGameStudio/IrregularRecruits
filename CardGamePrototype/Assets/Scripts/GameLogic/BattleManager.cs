@@ -69,7 +69,7 @@ namespace GameLogic
         private void SetupCombat(Deck playerDeck, Deck enemyDeck)
         {
             if (playerDeck.DeckController == null )
-                playerDeck.DeckController = GameSettings.Instance.AiControlledPlayer ?(DeckController) new AI(playerDeck): (DeckController)new PlayerController(playerDeck);
+                playerDeck.DeckController = GameSettings.Instance.AiControlledPlayer ?new AI(playerDeck): (DeckController)new PlayerController(playerDeck);
             if (enemyDeck.DeckController == null)
                 enemyDeck.DeckController = new AI(enemyDeck);
 

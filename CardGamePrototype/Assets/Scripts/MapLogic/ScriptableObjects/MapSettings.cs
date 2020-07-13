@@ -36,7 +36,7 @@ namespace MapLogic
         }
 
 
-
+        [Header("Generation")]
         [Range(1, 100)]
         public int MapLength;
         [Range(2, 4)]
@@ -50,8 +50,24 @@ namespace MapLogic
         public float HiddenNodesPct;
         //[Range(0f,1f)]
         //public float ChanceForReconnectingPaths;
-        [Range(0f,200f)]
-        public float RandomnessToDifficulty;
+        [Range(0,200)]
+        public int RandomnessToDifficulty;
+
+        [Range(0.0f,0.95f)]
+        public float TreasureChance = 0.25f;
+        public int StepDifficultyIncrease = 20;
+
+        public Race[] CivilizedRaces;
+        public Race[] EnemyRaces;
+
+        //public enum LocationType { Event, Village, StandardCombat, HardCombat, Xp, Gold }
+        //public struct LocationTypeChance
+        //{
+        //    public LocationType Type;
+        //    [Range(0,10)]
+        //    public int Chance;
+        //}
+
 
         [Range(0f,1f)]
         public float ExtraRoadChance;

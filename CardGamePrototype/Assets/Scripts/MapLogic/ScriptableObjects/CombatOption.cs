@@ -1,5 +1,6 @@
 ﻿using GameLogic;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Event = GameLogic.Event;
 
@@ -10,13 +11,31 @@ namespace MapLogic
     public class CombatOption : MapOption
     {
         [Header("Creatures always spawned")]
-        public List<Creature> SpawnCreatures;
+        public List<Creature> SpawnCreatures = new List<Creature>();
         [Header("Random Spawns")]
         public Race MainRace;
-        public List<Race> AdditionalRaces;
+        public List<Race> AdditionalRaces = new List<Race>();
         public int MinCr = 10;
         public int MaxCr = 100;
         private int cRValue;
+        public bool UniquesAllowed;
+
+        public CombatOption(Race race, int combatRating, bool allowUniques)
+        {
+            cRValue = combatRating;
+            MainRace = race;
+
+            var friendChance = 0.3f;
+
+            if (friendChance > Random.value && race.FriendRaces.Any()) 
+                AdditionalRaces.Add(race.FriendRaces[Random.Range(0, race.FriendRaces.Length)]);
+
+            UniquesAllowed = allowUniques;
+        }
+
+        public CombatOption()
+        {
+        }
 
         public int CRValue
         {
