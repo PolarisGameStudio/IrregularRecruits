@@ -42,17 +42,17 @@ namespace MapLogic
 
             var noOfNodes = nodesAtStep.Sum();
 
-            var locations = settings.EventLocations.OrderBy(c => Random.value).ToList();
+            var locations = settings.Locations.OrderBy(c => Random.value).ToList();
 
             //only one startnode
-            while (locations.Count(l => l.StartNode) > 1)
-                locations.Remove(locations.First(l => l.StartNode));
+            while (locations.Count(l => l.IsStartNode()) > 1)
+                locations.Remove(locations.First(l => l.IsStartNode()));
 
             //only one winnode
-            while (locations.Count(l => l.WinNode) > 1)
-                locations.Remove(locations.First(l => l.WinNode));
+            while (locations.Count(l => l.IsWinNode()) > 1)
+                locations.Remove(locations.First(l => l.IsWinNode()));
 
-            var nonUniques = locations.Where(l => !l.UniqueNode).ToArray();
+            var nonUniques = locations.Where(l => !l.IsUniqueNode()).ToArray();
 
             //correct number of locations
             while (locations.Count < noOfNodes)
@@ -62,12 +62,12 @@ namespace MapLogic
 
             while (locations.Count > noOfNodes)
             {
-                locations.Remove(locations.First(l => !l.StartNode && !l.WinNode));
+                locations.Remove(locations.First(l => !l.IsStartNode() && !l.IsWinNode()));
             }
 
-            locations = locations.OrderBy(d => d.Difficulty + settings.RandomnessToDifficulty * Random.value).ToList();
+            locations = locations.OrderBy(d => d.Difficulty() + settings.RandomnessToDifficulty * Random.value).ToList();
 
-            MapNode[] lastStep = { GenerateNode(locations.Single(l => l.StartNode), locations) };
+            MapNode[] lastStep = { GenerateNode(locations.Single(l => l.IsStartNode()), locations) };
 
             for (int i = 1; i < settings.MapLength; i++)
             {
@@ -79,9 +79,9 @@ namespace MapLogic
                 for (int j = 0; j < nodesAtStep[i]; j++)
                 {
                     if (i == settings.MapLength - 1)
-                        step[j] = GenerateNode(locations.Single(l => l.WinNode), locations);
+                        step[j] = GenerateNode(locations.Single(l => l.IsWinNode()), locations);
                     else
-                        step[j] = GenerateNode(locations.First(l => !l.WinNode), locations);
+                        step[j] = GenerateNode(locations.First(l => !l.IsWinNode()), locations);
                 }
 
                 var edgesPrNode = step.Length / (float)lastStep.Length;
@@ -139,7 +139,7 @@ namespace MapLogic
             Event.OnCombatSetup.Invoke(BattleManager.Instance. PlayerDeck, enemyDeck);
         }
 
-        private MapNode GenerateNode(MapLocation locationObject, List<MapLocation> locations)
+        private MapNode GenerateNode(IMapLocation locationObject, List<IMapLocation> locations)
         {
             locations.Remove(locationObject);
 

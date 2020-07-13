@@ -1,5 +1,6 @@
 ﻿using GameLogic;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MapLogic
@@ -10,6 +11,11 @@ namespace MapLogic
     public class GainUnitOption : MapOption
     {
         public List<Creature> Units;
+
+        public override float Difficulty()
+        {
+            return Units.Sum(u => u.CR);
+        }
 
         public override void ExecuteOption(MapNode owner)
         {

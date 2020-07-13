@@ -95,5 +95,22 @@ namespace MapLogic
             if (!executed)
                 MapNode.CloseLocation.Invoke(node);
         }
+
+        public bool IsStartNode()
+        {
+            return false;
+        }
+
+        public bool IsWinNode()
+        {
+            return false;
+        }
+
+        public bool IsUniqueNode()
+        {
+            return false;
+        }
+
+        public abstract float Difficulty();
     }
 }

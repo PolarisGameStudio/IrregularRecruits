@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 
 namespace MapLogic
 {
-
     [CreateAssetMenu(menuName = "Create Map Objects/Location", order = 0)]
     public class MapLocation : ScriptableObject,IMapLocation
     {
@@ -28,9 +28,29 @@ namespace MapLogic
             return LocationOptions;
         }
 
+        public bool IsStartNode()
+        {
+            return StartNode;
+        }
+
+        public bool IsUniqueNode()
+        {
+            return true;
+        }
+
+        public bool IsWinNode()
+        {
+            return WinNode;
+        }
+
         public void Open(MapNode node)
         {
             MapNode.OpenEvent.Invoke(node);
+        }
+
+        float IMapLocation.Difficulty()
+        {
+            return Difficulty;
         }
     }
 }

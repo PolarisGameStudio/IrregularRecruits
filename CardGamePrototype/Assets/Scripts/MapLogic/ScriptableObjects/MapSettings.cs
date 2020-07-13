@@ -10,8 +10,31 @@ namespace MapLogic
     [CreateAssetMenu]
     public class MapSettings : SingletonScriptableObject<MapSettings>
     {
-        public List<MapLocation> EventLocations;
-        public List<MapOption> BasicLocations;
+        [SerializeField]
+        private List<MapLocation> EventLocations;
+        [SerializeField]
+        private List<MapOption> BasicLocations;
+
+        private List<IMapLocation> locations;
+
+        public List<IMapLocation> Locations
+        {
+            get
+            {
+                if(locations == null)
+                {
+                    locations = new List<IMapLocation>();
+                    locations.AddRange(EventLocations);
+                    locations.AddRange(BasicLocations);
+                }
+
+                return locations;
+            }
+
+            set =>
+               locations = value;
+        }
+
 
 
         [Range(1, 100)]
@@ -39,7 +62,7 @@ namespace MapLogic
         public Sprite UnknownNodeIcon;
         public Sprite VillageIcon;
         public RaceIcon[] CombatIcons;
-        
+
         [Serializable]
         public struct RaceIcon { public Race Race; public Sprite Icon; }
 
@@ -75,5 +98,6 @@ namespace MapLogic
         {
             return "someplace nice, maybe?";
         }
+
     }
 }

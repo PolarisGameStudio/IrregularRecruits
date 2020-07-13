@@ -30,6 +30,11 @@ namespace MapLogic
             set => cRValue = value;
         }
 
+        public override float Difficulty()
+        {
+            return cRValue;
+        }
+
         public override void ExecuteOption(MapNode owner)
         {
             var possibleRaces = new List<Race>() { MainRace };

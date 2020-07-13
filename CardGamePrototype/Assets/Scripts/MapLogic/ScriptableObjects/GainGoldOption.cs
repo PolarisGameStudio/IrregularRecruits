@@ -8,6 +8,11 @@ namespace MapLogic
     {
         public int Amount;
 
+        public override float Difficulty()
+        {
+            return Amount;
+        }
+
         public override void ExecuteOption(MapNode owner)
         {
             MapController.Instance.PlayerGold += Amount;

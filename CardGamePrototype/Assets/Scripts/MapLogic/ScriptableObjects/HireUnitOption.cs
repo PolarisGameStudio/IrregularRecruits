@@ -9,7 +9,14 @@ namespace MapLogic
     public class HireUnitOption : MapOption
     {
         public List<Creature> Units;
-        
+
+        public override float Difficulty()
+        {
+            if (!Units.Any())
+                return 0;
+
+            return Units.Max(u => u.CR);
+        }
 
         public override void ExecuteOption(MapNode owner)
         {
@@ -25,5 +32,7 @@ namespace MapLogic
 
             //AddMinionScreen.Instance.SetupChoice(selected[0], selected[1], selected[2]);
         }
+
+
     }
 }

@@ -43,5 +43,10 @@ namespace MapLogic
                 item.FindCandidate(owner);
             }
         }
+
+        public override float Difficulty()
+        {
+            return Options.Sum(o => o.Difficulty());
+        }
     }
 }

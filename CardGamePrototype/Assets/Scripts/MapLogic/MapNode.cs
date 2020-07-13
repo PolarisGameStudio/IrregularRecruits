@@ -34,10 +34,10 @@ namespace MapLogic
         //public List<MapOption> SelectedOptions = new List<MapOption>();
 
 
-        public MapNode(MapLocation mapLocation)
+        public MapNode(IMapLocation mapLocation)
         {
             this.Location = mapLocation;
-            name = mapLocation.name + " " + Guid.NewGuid();
+            name = "Location: " + Guid.NewGuid();
         }
 
         public void Visit()
