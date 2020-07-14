@@ -15,8 +15,6 @@ namespace UI
         private List<Button> InstantiatedButtons = new List<Button>();
         private MapNode CurrentNode;
         public GameObject Holder;
-        public UnityEvent OnClose = new UnityEvent();
-        public UnityEvent OnOpen = new UnityEvent();
 
         private void Start()
         {
@@ -37,8 +35,6 @@ namespace UI
 
 
             Holder.SetActive(true);
-
-            OnOpen.Invoke();
 
             LocationImage.sprite = location.LocationImage;
 
@@ -62,7 +58,6 @@ namespace UI
         private void Close()
         {
             Holder.SetActive(false);
-            OnClose.Invoke();
         }
 
         private void CreateButton(MapOption option, MapNode owner)

@@ -36,9 +36,9 @@ namespace UI
             //TODO: make sure that this is called
             Event.OnGameBegin.AddListener(Open);
             Event.OnCombatSetup.AddListener((e, v) => Close());
-            Event.OnBattleFinished.AddListener((winner) => Open());
-            LocationUI.Instance.OnClose.AddListener(Open);
-            LocationUI.Instance.OnOpen.AddListener(Close);
+            //Event.OnBattleFinished.AddListener((winner) => Open());
+            //LocationUI.Instance.OnClose.AddListener(Open);
+            //LocationUI.Instance.OnOpen.AddListener(Close);
 
             Open();
         }
