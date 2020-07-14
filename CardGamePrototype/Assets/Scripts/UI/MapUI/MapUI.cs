@@ -17,6 +17,7 @@ namespace UI
         public List<MapNodeIcon> Nodes = new List<MapNodeIcon>();
         private List<MapNodeIcon> OldNodes = new List<MapNodeIcon>();
         public GameObject Holder;
+        public GameObject NodeHolder;
         [Range(0.5f, 5)]
         public float MapSize;
         public Sprite[] Linetypes;
@@ -69,6 +70,11 @@ namespace UI
             }
         }
 
+        public void MoveHero(MapNodeIcon node)
+        {
+            LeanTween.move(HeroIcon.gameObject, node.transform.position, 1.5f);
+        }
+
         private IEnumerator DrawMap(MapNode startNode, int shownSteps = 1000)
         {
             OldNodes = Nodes.ToList();
@@ -86,8 +92,7 @@ namespace UI
             //create from node
             yield return CreateNode(startNode, MapStartPosition.position);
             
-            LeanTween.move(HeroIcon.gameObject, Nodes.First().transform.position, 1.5f);
-            LeanTween.move(Holder.gameObject, Holder.transform.position-Nodes.First().transform.position - PositionToCenterDifferience, 3f).setEaseInExpo();
+            LeanTween.move(NodeHolder.gameObject, NodeHolder.transform.position-Nodes.First().transform.position - PositionToCenterDifferience, 3f).setEaseInExpo();
 
             yield return DrawStepRecursive(startNode.LeadsTo, 1, shownSteps,Nodes.Single());
 
@@ -157,7 +162,7 @@ namespace UI
             }
             else
             {
-                instance = Instantiate(NodeIconPrefab, Holder.transform);
+                instance = Instantiate(NodeIconPrefab, NodeHolder.transform);
 
                 instance.transform.position = position;
 

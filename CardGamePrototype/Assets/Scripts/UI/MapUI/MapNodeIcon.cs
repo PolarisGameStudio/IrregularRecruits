@@ -17,8 +17,17 @@ namespace UI
 
         private void Start()
         {
-            Icon.onClick.AddListener(() => MapController.Instance.MoveToNode(Node));
+            Icon.onClick.AddListener(() =>StartCoroutine( MoveToRoutine()));
 
+        }
+
+        private IEnumerator MoveToRoutine()
+        {
+            MapUI.Instance.MoveHero(this);
+
+            yield return new WaitForSeconds(1.8f);
+
+            MapController.Instance.MoveToNode(Node);
         }
 
         internal bool Reachable()
