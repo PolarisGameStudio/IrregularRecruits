@@ -23,9 +23,9 @@ namespace UI
             PreviousButton.onClick.AddListener(Previous);
             NextButton.onClick.AddListener(Next);
 
-            //HeroImage.onClick.AddListener(()=>HeroView.Open(SelectedHero));
-
             Chosen = AllHeroes.Count;
+
+            Next();
         }
 
         private void Next()
