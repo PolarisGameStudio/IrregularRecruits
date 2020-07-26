@@ -18,6 +18,8 @@ public class CombatPrototype : Singleton<CombatPrototype>
         NextCombatButton.onClick.AddListener(GC.NextCombat);
         NextCombatButton.onClick.AddListener(() => NextCombatButton.gameObject.SetActive(false));
 
+        NextCombatButton.gameObject.SetActive(true);
+
         Event.OnGameBegin.AddListener(NextCombatButton.onClick.Invoke);
 
         BattleUI.OnBattleFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
