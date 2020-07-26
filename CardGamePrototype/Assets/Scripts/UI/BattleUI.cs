@@ -13,7 +13,9 @@ using Random = UnityEngine.Random;
 
 namespace UI
 {
-
+    /// <summary>
+    /// Responsible for handling all ui during combat
+    /// </summary>
     public class BattleUI : Singleton<BattleUI>
     {
 
@@ -63,12 +65,6 @@ namespace UI
 
         void Awake()
         {
-            //should be handle by calls to move instead
-            //AnimationSystem.OnDraw.AddListener(UpdateLibrary);
-            //AnimationSystem.OnWithdraw.AddListener(UpdateLibrary);
-
-            //MoveDuration = GameSettings.Instance.CombatSpeed;
-
             ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
 
             Event.OnCombatSetup.AddListener(SetupDecks);
@@ -85,8 +81,6 @@ namespace UI
 
         private void SetupDecks(Deck playerDeck, Deck opponentDeck)
         {
-            Debug.Log("setting up ui");
-
             MoveDuration = GameSettings.Instance.CombatSpeed / 2;
 
             SetupUI(playerDeck,true);
@@ -121,8 +115,6 @@ namespace UI
             }
             else
                 HeroUI.Instance?.Disable();
-
-
         }
 
         private void CreateCardUI(Card card, bool playerDeck)
@@ -171,8 +163,6 @@ namespace UI
 
         private void EndBattle()
         {
-            Debug.Log("Destroying all card uis");
-
             foreach (var kp in CardUIs)
             {
                 if (kp.Value is HeroUI || !kp.Value)
@@ -187,6 +177,7 @@ namespace UI
             var endXp = PlayerDeck.Hero != null ? PlayerDeck.Hero. Xp : 0;
 
             BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp,PlayerDeck.Hero);
+            
         }
 
         private CardLayoutGroup GetZoneHolder(Deck.Zone zone, bool enm)

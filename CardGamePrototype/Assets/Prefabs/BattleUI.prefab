@@ -3971,13 +3971,16 @@ MonoBehaviour:
   Creature: {fileID: 0}
   FrontHolder: {fileID: 6470869236693608588}
   CardBackHolder: {fileID: 8320158118134860738}
-  CardImage: {fileID: 7231165377426957688}
-  IconImage: {fileID: 0}
+  CardBattleUI: {fileID: 0}
+  CardImage:
+  - {fileID: 0}
   RaceInstance: {fileID: 6873252561075905124}
-  AttributeInstance: {fileID: 6738529387259406983}
+  AttributeInstances: []
   CardAnimation: {fileID: 7259511442388854746}
-  AttackText: {fileID: 1730005115744970691}
-  HealthText: {fileID: 6832895468308263433}
+  AttackText:
+  - {fileID: 0}
+  HealthText:
+  - {fileID: 0}
   NameText: {fileID: 1075336527516230087}
   DescriptionText: {fileID: 3670891283176329350}
   InstantiatedObjects: []
@@ -5668,13 +5671,16 @@ MonoBehaviour:
   Creature: {fileID: 0}
   FrontHolder: {fileID: 3924481553411071271}
   CardBackHolder: {fileID: 6002559439759799138}
-  CardImage: {fileID: 2067966608226502622}
-  IconImage: {fileID: 0}
+  CardBattleUI: {fileID: 0}
+  CardImage:
+  - {fileID: 0}
   RaceInstance: {fileID: 5564238680817017288}
-  AttributeInstance: {fileID: 2647116547773107711}
+  AttributeInstances: []
   CardAnimation: {fileID: 6303506673866094537}
-  AttackText: {fileID: 4649829648816763665}
-  HealthText: {fileID: 6284467712896530383}
+  AttackText:
+  - {fileID: 0}
+  HealthText:
+  - {fileID: 0}
   NameText: {fileID: 1468521699478334720}
   DescriptionText: {fileID: 1293727652408564034}
   InstantiatedObjects: []
@@ -24702,13 +24708,16 @@ MonoBehaviour:
   Creature: {fileID: 0}
   FrontHolder: {fileID: 0}
   CardBackHolder: {fileID: 0}
-  CardImage: {fileID: 0}
-  IconImage: {fileID: 3660017128775663860}
+  CardBattleUI: {fileID: 0}
+  CardImage:
+  - {fileID: 0}
   RaceInstance: {fileID: 0}
-  AttributeInstance: {fileID: 0}
+  AttributeInstances: []
   CardAnimation: {fileID: 0}
-  AttackText: {fileID: 0}
-  HealthText: {fileID: 0}
+  AttackText:
+  - {fileID: 0}
+  HealthText:
+  - {fileID: 0}
   NameText: {fileID: 3660017127464675537}
   DescriptionText: {fileID: 0}
   InstantiatedObjects: []
@@ -26472,13 +26481,16 @@ MonoBehaviour:
   Creature: {fileID: 0}
   FrontHolder: {fileID: 0}
   CardBackHolder: {fileID: 0}
-  CardImage: {fileID: 0}
-  IconImage: {fileID: 3660017129006542142}
+  CardBattleUI: {fileID: 0}
+  CardImage:
+  - {fileID: 0}
   RaceInstance: {fileID: 0}
-  AttributeInstance: {fileID: 0}
+  AttributeInstances: []
   CardAnimation: {fileID: 0}
-  AttackText: {fileID: 0}
-  HealthText: {fileID: 0}
+  AttackText:
+  - {fileID: 0}
+  HealthText:
+  - {fileID: 0}
   NameText: {fileID: 3660017128177278781}
   DescriptionText: {fileID: 0}
   InstantiatedObjects: []
@@ -28312,6 +28324,7 @@ MonoBehaviour:
   BattleSummaryKilledIcon: {fileID: 3660017127696074749}
   BattleSummaryGainedIcon: {fileID: 3660017129064465501}
   HeroPortrait: {fileID: 2055879523714234212}
+  CloseButton: {fileID: 1319256789945424268}
   XpBar: {fileID: 1542755693117479028}
 --- !u!1 &3660017128594239150
 GameObject:
@@ -29920,13 +29933,16 @@ MonoBehaviour:
   Creature: {fileID: 0}
   FrontHolder: {fileID: 0}
   CardBackHolder: {fileID: 0}
-  CardImage: {fileID: 0}
-  IconImage: {fileID: 3660017128077076605}
+  CardBattleUI: {fileID: 0}
+  CardImage:
+  - {fileID: 0}
   RaceInstance: {fileID: 0}
-  AttributeInstance: {fileID: 0}
+  AttributeInstances: []
   CardAnimation: {fileID: 0}
-  AttackText: {fileID: 0}
-  HealthText: {fileID: 0}
+  AttackText:
+  - {fileID: 0}
+  HealthText:
+  - {fileID: 0}
   NameText: {fileID: 3660017127394285236}
   DescriptionText: {fileID: 0}
   InstantiatedObjects: []
@@ -57585,12 +57601,12 @@ PrefabInstance:
     - target: {fileID: 8082983243561677795, guid: a7cfc4f81d4d80f48bd9ee1426f02563,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0.15
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8082983243561677795, guid: a7cfc4f81d4d80f48bd9ee1426f02563,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0.15
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8082983244512182284, guid: a7cfc4f81d4d80f48bd9ee1426f02563,
         type: 3}

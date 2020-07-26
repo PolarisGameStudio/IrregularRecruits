@@ -18,6 +18,17 @@ namespace MapLogic
         public int MinCr = 10;
         public int MaxCr = 100;
         private int cRValue;
+        public int CRValue
+        {
+            get
+            {
+                if (cRValue <= 0)
+                    cRValue = Random.Range(MinCr, MaxCr);
+
+                return cRValue;
+            }
+            set => cRValue = value;
+        }
         public bool UniquesAllowed;
 
         public CombatOption(Race race, int combatRating, bool allowUniques)
@@ -35,18 +46,6 @@ namespace MapLogic
 
         public CombatOption()
         {
-        }
-
-        public int CRValue
-        {
-            get
-            {
-                if (cRValue <= 0)
-                    cRValue = Random.Range(MinCr, MaxCr);
-
-                return cRValue;
-            }
-            set => cRValue = value;
         }
 
         public override float Difficulty()

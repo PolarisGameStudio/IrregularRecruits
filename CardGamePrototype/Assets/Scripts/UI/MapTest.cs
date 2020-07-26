@@ -1,6 +1,7 @@
 ﻿using GameLogic;
 using System.Linq;
 using UnityEngine;
+using Event = GameLogic.Event;
 
 public class MapTest : MonoBehaviour
 {
@@ -17,5 +18,11 @@ public class MapTest : MonoBehaviour
         hero.InDeck = deck;
 
         BattleManager.Instance.PlayerDeck = deck;
+
+    }
+
+    private void Start()
+    {
+        Event.OnGameBegin.Invoke();
     }
 }

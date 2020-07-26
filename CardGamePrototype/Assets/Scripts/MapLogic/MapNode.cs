@@ -24,15 +24,11 @@ namespace MapLogic
             if (LeadsTo.Contains(node)) return true;
 
             return LeadsTo.Any(n => n.CanReach(node));
-
         }
 
         public class LocationEvent : UnityEvent<MapNode> { }
         public static LocationEvent OpenEvent = new LocationEvent();
         public static LocationEvent CloseLocation = new LocationEvent();
-
-        //public List<MapOption> SelectedOptions = new List<MapOption>();
-
 
         public MapNode(IMapLocation mapLocation)
         {
@@ -87,11 +83,16 @@ namespace MapLogic
 
             if (mapOption.ClosesLocationOnSelection)
             {
-                Active = false;
-                CloseLocation.Invoke(this);
+                Close();
             }
 
             return true;
+        }
+
+        public void Close()
+        {
+            Active = false;
+            CloseLocation.Invoke(this);
         }
 
         public bool IsFinalNode() => Location is MapLocation && (Location as MapLocation).WinNode;

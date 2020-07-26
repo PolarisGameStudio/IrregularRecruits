@@ -228,7 +228,6 @@ namespace UI
             }
             else
             {
-                Debug.Log("fading battle");
                 var from = GetCardState() == CardState.Battle ? CardBattleUI : FrontHolder;
                 var to = state == CardState.FaceUp ? FrontHolder : CardBattleUI;
 

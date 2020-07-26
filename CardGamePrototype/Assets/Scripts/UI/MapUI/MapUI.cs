@@ -8,7 +8,6 @@ using System.Collections;
 
 namespace UI
 {
-
     public class MapUI : Singleton<MapUI>
     {
         public MapNodeIcon NodeIconPrefab;
@@ -23,9 +22,8 @@ namespace UI
         public Sprite[] Linetypes;
         public Color MapDrawColor;
         public RectTransform MapStartPosition;
-        private Vector3 PositionToCenterDifferience;
+        public Vector3 PositionToCenterDifferience;
         public float NodeFadeTime = 2f;
-
 
         private void Start()
         {
@@ -34,14 +32,10 @@ namespace UI
 
             PositionToCenterDifferience = transform.position - MapStartPosition.position;
 
-            //TODO: make sure that this is called
             Event.OnGameBegin.AddListener(Open);
+            BattleSummary.Instance.OnClose.AddListener(Open);
             Event.OnCombatSetup.AddListener((e, v) => Close());
-            //Event.OnBattleFinished.AddListener((winner) => Open());
-            //LocationUI.Instance.OnClose.AddListener(Open);
-            //LocationUI.Instance.OnOpen.AddListener(Close);
 
-            Open();
         }
 
         private void UpdateNodes()
@@ -51,9 +45,6 @@ namespace UI
 
         public void Open()
         {
-            Debug.Log("opening map");
-
-
             HeroIcon.Portrait.image.sprite = BattleManager.Instance.PlayerDeck.Hero.HeroObject.Portrait;
 
             Holder.SetActive(true);
@@ -61,8 +52,6 @@ namespace UI
         }
         public void Close()
         {
-            Debug.Log("closing map");
-
             Holder.SetActive(false);
             foreach (var item in Nodes)
             {

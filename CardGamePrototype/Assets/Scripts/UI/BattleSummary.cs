@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace UI
 {
-
-
+    /// <summary>
+    /// Responsible for showing the player the result of a combat
+    /// </summary>
     public class BattleSummary : Singleton<BattleSummary>
     {
         [Header("Battle summary")]
@@ -18,6 +20,8 @@ namespace UI
         public UnitIcon BattleSummaryGainedIcon;
         public Button HeroPortrait;
         public Hero Hero;
+        public Button CloseButton;
+        public UnityEvent OnClose = new UnityEvent();
 
         public XpBar XpBar;
         private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
@@ -27,6 +31,8 @@ namespace UI
             BattleSummaryHolder.SetActive(false);
 
             HeroPortrait.onClick.AddListener(HeroClick);
+
+            CloseButton.onClick.AddListener(OnClose.Invoke);
         }
 
         private void HeroClick()

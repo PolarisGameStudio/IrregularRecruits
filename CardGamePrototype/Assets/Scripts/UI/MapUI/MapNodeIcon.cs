@@ -18,7 +18,6 @@ namespace UI
         private void Start()
         {
             Icon.onClick.AddListener(() =>StartCoroutine( MoveToRoutine()));
-
         }
 
         private IEnumerator MoveToRoutine()
@@ -28,6 +27,10 @@ namespace UI
             yield return new WaitForSeconds(1.8f);
 
             MapController.Instance.MoveToNode(Node);
+
+            //this is just a hack untill the other options are implemented
+            if (!(Node.Location is CombatOption))
+                MapUI.Instance.Open();
         }
 
         internal bool Reachable()

@@ -15,8 +15,6 @@ namespace MapLogic
 
         public List<MapNode> Nodes = new List<MapNode>();
         public MapNode CurrentNode;
-        //TODO. either use this or battleManager.PlayerDeck
-        //public Deck PlayerDeck;
         public int PlayerGold;
         
         public static MapController Instance { get {
@@ -152,6 +150,8 @@ namespace MapLogic
             var adjust = Mathf.Min(CR, MapSettings.Instance.RandomnessToDifficulty);
 
             CR += Random.Range(-adjust, adjust);
+
+            if (CR < MapSettings.Instance.StepDifficultyIncrease) CR = MapSettings.Instance.StepDifficultyIncrease;
                 
 
             if(goodNode)

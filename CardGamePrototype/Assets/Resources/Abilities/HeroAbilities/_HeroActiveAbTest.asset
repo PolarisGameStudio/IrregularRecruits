@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: _HeroActiveAbTest
   m_EditorClassIdentifier: 
   Name: Kill everyithing
-  Icon: {fileID: 21300000, guid: 91abd134c3b0f9b4f98e4fed14d7d74a, type: 3}
+  Icon: {fileID: 21300000, guid: 990b332caf21af84794c29040ba8df8c, type: 3}
   ResultingAction:
     ActionType: 0
     TargetCount: 0
     Target:
       Character: 0
       Location: 1
-      Relationship: 0
+      Relationship: 2
       DamageState: 0
       Race: 0
     Amount: 0
