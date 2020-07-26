@@ -37,6 +37,10 @@ namespace GameLogic
         public static CombatEvent OnCombatSetup = new CombatEvent();
         public static DeckEvent OnBattleFinished = new DeckEvent();
 
+        public class AddMinionEvent : UnityEvent<Creature[]> { }
+        public static AddMinionEvent OnHireMinions = new AddMinionEvent();
+
+
         //TODO: replace with deck/card action and parse the relevant Controller/deck/card
         public class DeckEvent : UnityEvent<Deck> { }
 

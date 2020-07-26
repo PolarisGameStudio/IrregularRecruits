@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using Event = GameLogic.Event;
 
 namespace MapLogic
 {
+
     [CreateAssetMenu(menuName = "Create Map Objects/Hire Units Option")]
     public class HireUnitOption : MapOption
     {
         public List<Creature> Units = new List<Creature>();
+
 
         public HireUnitOption(Race race, int cR)
         {
@@ -48,17 +52,22 @@ namespace MapLogic
         {
             var selected = new Creature[3];
 
-            for (int i = 0; i < 3; i++)
+            if (Units.Count < 3) 
+                selected = Units.ToArray();
+            else
             {
-                var possible = Units.Where(u=> !selected.Contains(u)).ToList();
+                for (int i = 0; i < 3; i++)
+                {
+                    var possible = Units.Where(u => !selected.Contains(u)).ToList();
 
-                if (possible.Any())
-                    selected[i] = possible[Random.Range(0, possible.Count())];
+                    if (possible.Any())
+                        selected[i] = possible[Random.Range(0, possible.Count())];
+                }
             }
 
             Debug.Log(Units.Select(c=>c.name).Aggregate("Choose between ",(res,next) => res + "; "+ next));
 
-            //AddMinionScreen.Instance.SetupChoice(selected[0], selected[1], selected[2]);
+            Event.OnHireMinions.Invoke(selected);
         }
 
 

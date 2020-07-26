@@ -7,6 +7,8 @@ using UnityEngine;
 using Event = GameLogic.Event;
 using Random = UnityEngine.Random;
 
+
+
 namespace MapLogic
 {
     public class MapController 
@@ -158,14 +160,14 @@ namespace MapLogic
             {
                 var v = Random.value;
 
-                if(v > 0.66f)
+                if(v > 0.4f)
                 {
                     //village
                     var races = MapSettings.Instance.CivilizedRaces;
 
                     node = new MapNode( new HireUnitOption(races[Random.Range(0,races.Length)],CR));
                 }
-                else if(v >0.33f )
+                else if(v >0.2f )
                 {
                     //gold
                     node = new MapNode(new GainGoldOption(CR));
@@ -187,13 +189,14 @@ namespace MapLogic
 
                 if (hardCombatChance > Random.value)
                 {
-                    node = new MapNode(new CombatOption(race,CR * 3,true));
+                    node = new MapNode( new CombatOption(race,CR * 3,true));
+
                 }
                 else
                 {
                     node = new MapNode(new CombatOption(race, CR,false));
-
                 }
+
             }
 
             Nodes.Add(node);

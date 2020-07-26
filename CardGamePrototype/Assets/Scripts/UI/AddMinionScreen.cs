@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Event = GameLogic.Event;
 
 namespace UI
 {
@@ -15,6 +15,11 @@ namespace UI
         public CardUI FirstCreatureChoice, SecondCreatureChoice, ThirdCreatureChoice;
         public Button AddFirstCreature, AddSecondCreature, AddThirdCreature;
         private Deck Deck;
+
+        private void Start()
+        {
+            Event.OnHireMinions.AddListener(SetupChoice);
+        }
 
         public static void SetupMinionScreen(Deck deck)
         {
@@ -60,8 +65,8 @@ namespace UI
             SetupChoice(selected,selected2, selected3);
         }
 
-        //should be a list instead of three specific
-        public  void SetupChoice(Creature first, Creature second, Creature third)
+        //should be a list instead of three specific. Remove this and only use the array args method
+        public void SetupChoice(Creature first, Creature second, Creature third)
         {
             SetupChoice(FirstCreatureChoice, AddFirstCreature, first);
 
@@ -70,6 +75,15 @@ namespace UI
             SetupChoice(ThirdCreatureChoice, AddThirdCreature, third);
 
             Holder.SetActive(true);
+        }
+
+        private void SetupChoice(Creature[] creatures)
+        {
+            if (creatures.Length < 3)
+                SetupChoice(creatures[0], creatures[0], creatures[0]);
+            else
+                SetupChoice(creatures[0], creatures[1], creatures[2]);
+
         }
 
         private void SetupChoice(CardUI ui, Button addButton, Creature creature)
