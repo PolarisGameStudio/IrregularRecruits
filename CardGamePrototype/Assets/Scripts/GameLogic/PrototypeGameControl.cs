@@ -31,6 +31,8 @@ namespace GameLogic
             //if (EnemyDeck == null || EnemyDeck.Alive() == 0)
             EnemyDeck = GenerateDeck(CurrentCombatDifficulty);
 
+            if (PlayerDeck == null) PlayerDeck = BattleManager.Instance.PlayerDeck;
+
             if(GameSettings.Instance.EnemyDeckSize < MaxEnemyDeckSize)
                 GameSettings.Instance.EnemyDeckSize ++;
 

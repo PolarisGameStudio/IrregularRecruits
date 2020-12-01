@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9df2439aac0ff24cb3bad7bd563a2c5, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  EnemyDeckSize: 3
+  EnemyDeckSize: 10
   PlayerDeckSize: 5
   StartingHandSize: 3
   PlaysPrTurn: 2

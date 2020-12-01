@@ -20,6 +20,7 @@ namespace UI
         {
             var bm = BattleManager.Instance;
 
+
             //SETUP listeners
             //    Move->deckmanager(Card, Zone) Handles death/ etb / withdraw / resurrection / draw animation
             // if an action moves a card a zone from different locations, the cards current location is used

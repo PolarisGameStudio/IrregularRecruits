@@ -248,6 +248,7 @@ namespace Tests
             testAbility.ActivateAbility(TestHero);
 
             Assert.AreEqual(1, triggeredAblity);
+
         }
 
         [Test]
