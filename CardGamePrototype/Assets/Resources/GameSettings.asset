@@ -20,5 +20,5 @@ MonoBehaviour:
   MaxCreaturesOnBattlefield: 0
   AttackOrderParadigm: 0
   DeckDamageParadigm: 0
-  CombatSpeed: 1
-  AiControlledPlayer: 0
+  CombatSpeed: 0.35
+  AiControlledPlayer: 1

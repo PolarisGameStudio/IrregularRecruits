@@ -23,6 +23,8 @@ public class CombatPrototype : Singleton<CombatPrototype>
         Event.OnGameBegin.AddListener(NextCombatButton.onClick.Invoke);
 
         BattleUI.OnBattleFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
+
+        BattleSummary.Instance.CloseButton.onClick.AddListener(GetNewMinions);
     }
 
 
