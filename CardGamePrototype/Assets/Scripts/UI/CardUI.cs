@@ -28,7 +28,11 @@ namespace UI
         public TextMeshProUGUI[] HealthText;
         public TextMeshProUGUI NameText;
         public TextMeshProUGUI DescriptionText;
+        public TextMeshProUGUI PriceText;
+        
         public List<GameObject> InstantiatedObjects = new List<GameObject>();
+
+
         //For deck view and the like
         public bool AlwaysFaceUp;
         public bool Interactable = true;
@@ -47,6 +51,12 @@ namespace UI
             UpdateCreature(c.Creature);
             UpdateStats(c.Attack, c.CurrentHealth, c.Damaged());
             OnClick.AddListener(c.Click);
+        }
+        public void SetCreature(Creature c)
+        {
+            UpdateCreature(c);
+            UpdateStats(c.Attack, c.Health);
+
         }
 
         public void UpdateCreature(Creature creature)
@@ -89,7 +99,8 @@ namespace UI
                     instance.gameObject.SetActive(true);
                     instance.sprite = a.Icon;
 
-                    DescriptionText.text += $"<b>{a.name}</b>\n";
+                    if(DescriptionText)
+                        DescriptionText.text += $"<b>{a.name}</b>\n";
 
                     InstantiatedObjects.Add(instance.gameObject);
                 }
@@ -99,7 +110,9 @@ namespace UI
             {
                 if (creature.SpecialAbility)
                 {
-                    DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
+
+                    if (DescriptionText)
+                        DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
 
                     var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
                     instance.gameObject.SetActive(true);

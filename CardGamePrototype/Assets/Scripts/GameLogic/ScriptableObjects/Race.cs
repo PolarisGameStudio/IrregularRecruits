@@ -9,7 +9,7 @@ namespace GameLogic
         public new string name;
         public Sprite Icon;
         public string Description;
-        public PassiveAbility.ActionType[] FavoriteActions;
+        public Ability.ActionType[] FavoriteActions;
         public PassiveAbility.Verb[] FavoriteTriggers;
 
         public Race[] FriendRaces;

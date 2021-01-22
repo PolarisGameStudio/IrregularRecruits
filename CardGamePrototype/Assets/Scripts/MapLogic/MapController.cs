@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Event = GameLogic.Event;
 using Random = UnityEngine.Random;
 
@@ -17,12 +18,30 @@ namespace MapLogic
 
         public List<MapNode> Nodes = new List<MapNode>();
         public MapNode CurrentNode;
-        public int PlayerGold;
-        
+
+        public class AmountEvent : UnityEvent<int> { }
+        public AmountEvent OnPlayerGoldUpdate = new AmountEvent();
+
+        private int playerGold;
+
         public static MapController Instance { get {
                 if (instance == null)
                     instance = new MapController();
                 return instance;
+            }
+        }
+
+        public int PlayerGold
+        {
+            get => playerGold; 
+            set
+            {
+                if (value == playerGold)
+                    return;
+
+                playerGold = value;
+
+                OnPlayerGoldUpdate.Invoke(value);
             }
         }
 

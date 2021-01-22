@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 2623353852003327700}
   - component: {fileID: 7720108146888559861}
   - component: {fileID: 1070560018114966171}
+  - component: {fileID: 5898795551422017098}
   m_Layer: 5
   m_Name: DeckSize
   m_TagString: Untagged
@@ -332,6 +333,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5898795551422017098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569063728367528631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4d8fa246a5f1a4f83e684d8395b927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5194697414691900968
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +559,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e478837c1985e12438eedfb12e698c9e, type: 3}
   MapDrawColor: {r: 0.3254902, g: 0.19215688, b: 0.19215688, a: 1}
   MapStartPosition: {fileID: 8864691495912928279}
+  PositionToCenterDifferience: {x: 0, y: 0, z: 0}
   NodeFadeTime: 2
 --- !u!1 &8082983244512182284
 GameObject:
@@ -826,6 +840,7 @@ GameObject:
   - component: {fileID: 8288473476288749356}
   - component: {fileID: 6424805559566664999}
   - component: {fileID: 8342343068135439838}
+  - component: {fileID: 8210623864089446917}
   m_Layer: 5
   m_Name: GoldAmount
   m_TagString: Untagged
@@ -971,6 +986,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8210623864089446917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957657370619012986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5614ff6e7d5dfa44894c36cbc20822ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7612579926255981399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1090,6 +1117,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6557626408950414d9ed5e8b723559dc, type: 3}
+--- !u!224 &3704186576688416216 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6539995272423495311, guid: 6557626408950414d9ed5e8b723559dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 7612579926255981399}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4257702827291930991 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5959167436390965816, guid: 6557626408950414d9ed5e8b723559dc,
@@ -1102,9 +1135,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1c062a678f7794982ce1b2d200ab42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &3704186576688416216 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6539995272423495311, guid: 6557626408950414d9ed5e8b723559dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 7612579926255981399}
-  m_PrefabAsset: {fileID: 0}

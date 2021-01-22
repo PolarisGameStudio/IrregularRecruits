@@ -63,6 +63,8 @@ namespace GameLogic
         public static LocationChangeEvent OnChangeLocation = new LocationChangeEvent();
 
 
+
+        //Hero events
         public class HeroEvent : UnityEvent<Hero> { }
 
         public static HeroEvent OnLevelUpSelection = new HeroEvent();

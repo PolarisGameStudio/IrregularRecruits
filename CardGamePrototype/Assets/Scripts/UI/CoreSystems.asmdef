@@ -2,7 +2,8 @@
     "name": "CoreSystems",
     "references": [
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:fae440856bfa60e4cbfb319ac9418689"
+        "GUID:fae440856bfa60e4cbfb319ac9418689",
+        "GUID:31088b6c98fc2bf4c9f94225c8a5ff7a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace UI
 {
+    
     public class AbilityHoverInfo: Singleton<AbilityHoverInfo>
     {
         public TextMeshProUGUI Title;
