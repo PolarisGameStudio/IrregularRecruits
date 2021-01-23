@@ -120,7 +120,7 @@ namespace UI
 
                     InstantiatedObjects.Add(instance.gameObject);
 
-                    SpecialAbilityIcon = instance;
+                    SpecialAbilityIcon.Add(instance);
                 }
             }
         }

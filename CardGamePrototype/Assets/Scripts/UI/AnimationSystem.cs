@@ -47,7 +47,7 @@ namespace UI
         [Serializable]
         public struct AbilityAnimationFX
         {
-            public PassiveAbility.ActionType ActionType;
+            public Ability.ActionType ActionType;
             public ParticleSystem[] AbilityIconFX;
             public ParticleSystem[] TargetFX;
             public ParticleSystem[] OwnerFX;
