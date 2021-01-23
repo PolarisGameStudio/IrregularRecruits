@@ -55,6 +55,24 @@ namespace GameLogic
             }
 
             Creatures[Zone.Library].Add(card);
+
+            Event.OnDeckSizeChange.Invoke(this);
+        }
+        public void Remove(Card card)
+        {
+            Creatures[card.Location].Remove(card);
+            card.InDeck = null;
+            card.CleanListeners();
+
+            Event.OnDeckSizeChange.Invoke(this);
+        }
+
+        internal void Add(Card card)
+        {
+            Creatures[card.Location].Add(card);
+
+            if (card.Creature.SpecialAbility & !card.ListenersInitialized)
+                card.Creature.SpecialAbility.SetupListeners(card);
         }
 
         public int GetXpValue()
@@ -157,19 +175,5 @@ namespace GameLogic
             else return null;
         }
 
-        public void Remove(Card card)
-        {
-            Creatures[card.Location].Remove(card);
-            card.InDeck = null;
-            card.CleanListeners();
-        }
-
-        internal void Add(Card card)
-        {
-            Creatures[card.Location].Add(card);
-
-            if (card.Creature.SpecialAbility & !card.ListenersInitialized)
-                card.Creature.SpecialAbility.SetupListeners(card);
-        }
     }
 }

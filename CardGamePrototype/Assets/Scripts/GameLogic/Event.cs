@@ -45,6 +45,7 @@ namespace GameLogic
         public class DeckEvent : UnityEvent<Deck> { }
 
         public static DeckEvent OnPlayerAction = new DeckEvent();
+        public static DeckEvent OnDeckSizeChange = new DeckEvent();
 
         //TODO: should be handled by combat Resolver ;
         public static UnityEvent OnCombatResolveStart = new UnityEvent();

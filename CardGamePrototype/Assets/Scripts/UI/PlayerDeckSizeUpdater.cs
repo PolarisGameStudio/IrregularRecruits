@@ -14,16 +14,23 @@ namespace UI
         private void Start()
         {
             Text = GetComponent<TextMeshProUGUI>();
-            UpdateText();
 
-            Event.OnHireMinions.AddListener(m=> UpdateText());
-            Event.OnBattleFinished.AddListener(m=> UpdateText());
+            UpdateText(BattleManager.Instance.PlayerDeck);
+
+            Event.OnDeckSizeChange.AddListener(UpdateText);
 
         }
 
-        private void UpdateText()
+        private void UpdateText(Deck deck)
         {
-            Text.text = BattleManager.Instance.PlayerDeck?.AllCreatures().Count.ToString();
+            if (deck != BattleManager.Instance.PlayerDeck)
+                return;
+
+            string count = BattleManager.Instance.PlayerDeck?.AllCreatures().Count.ToString();
+
+            Debug.Log("updating text to " + count);
+
+            Text.text = count;
         }
 
     }

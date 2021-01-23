@@ -58,6 +58,8 @@ namespace UI
                 if(inst.PriceText)
                     inst.PriceText.text = card.Item2.ToString();
 
+                inst.OnClick.AddListener(() => BuyCard(card.Item1));
+
                 OnReload.AddListener(() => Destroy(inst.gameObject));
             }
 
@@ -70,7 +72,7 @@ namespace UI
 
             if(result)
             {
-
+                //show result
             }
 
             Debug.Log($"buygin {card}, success: {result}");

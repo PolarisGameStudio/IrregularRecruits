@@ -36,7 +36,7 @@ namespace UI
         //For deck view and the like
         public bool AlwaysFaceUp;
         public bool Interactable = true;
-        private readonly UnityEvent OnClick = new UnityEvent();
+        public readonly UnityEvent OnClick = new UnityEvent();
 
         //Not equal to Card.health, since UI may be behind
         public int HealthValueDisplayed;

@@ -29,7 +29,7 @@ namespace Tests
                 Creatures = new List<Creature>(),
             };
 
-            BattleManager.Instance.PlayerDeck = new Deck(TestDeckObject);
+            BattleManager.SetPlayerDeck(TestDeckObject);
 
             var ai = new AI(BattleManager.Instance.PlayerDeck);
 

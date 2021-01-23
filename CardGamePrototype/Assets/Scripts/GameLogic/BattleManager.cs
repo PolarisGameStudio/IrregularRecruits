@@ -8,7 +8,7 @@ namespace GameLogic
 
     public class BattleManager 
     {
-        public Deck PlayerDeck;
+        public Deck PlayerDeck { get; private set; }
         public Deck EnemyDeck;
         public int Turn = 0;
 
@@ -47,6 +47,13 @@ namespace GameLogic
             Hero hero = new Hero(heroObject);
             Instance.PlayerDeck.Hero = hero;
             hero.InDeck = Instance.PlayerDeck;
+        }
+
+        public static void SetPlayerDeck(DeckObject deckObject)
+        {
+            Instance.PlayerDeck = new Deck(deckObject);
+
+            Event.OnDeckSizeChange.Invoke(Instance.PlayerDeck);
         }
 
         public void PackUp(Deck d)
