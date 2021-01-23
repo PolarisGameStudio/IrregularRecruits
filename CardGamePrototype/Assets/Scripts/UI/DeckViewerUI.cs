@@ -23,6 +23,11 @@ namespace UI
             Instance.ViewDeck(deck);
         }
 
+        public static void ViewPlayerDeck()
+        {
+            View(BattleManager.Instance.PlayerDeck);
+        }
+
         public void ViewDeck(Deck deck)
         {
             InstatiatedObjects.ForEach(Destroy);

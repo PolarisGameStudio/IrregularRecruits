@@ -103,8 +103,10 @@ namespace MapLogic
 
                     return Instance.CombatIcons.First().Icon;
             }
-            if(location is HireUnitOption)
+            if(location is HireUnitOption || location is VillageShop)
             {
+                //TODO: different icons for different villages?
+
                 return Instance.VillageIcon;
             }
 

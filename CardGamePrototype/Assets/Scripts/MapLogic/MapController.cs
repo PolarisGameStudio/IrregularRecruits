@@ -22,13 +22,19 @@ namespace MapLogic
         public class AmountEvent : UnityEvent<int> { }
         public AmountEvent OnPlayerGoldUpdate = new AmountEvent();
 
-        private int playerGold;
-
         public static MapController Instance { get {
                 if (instance == null)
                     instance = new MapController();
                 return instance;
             }
+        }
+
+        private int playerGold;
+
+        public MapController()
+        {
+            Event.OnPlayerGoldAdd.AddListener(i => PlayerGold += i);
+
         }
 
         public int PlayerGold
@@ -179,12 +185,13 @@ namespace MapLogic
             {
                 var v = Random.value;
 
-                if(v > 0.4f)
+                //TODO: allow for other types
+                if(v > 0.0f)
                 {
                     //village
                     var races = MapSettings.Instance.CivilizedRaces;
 
-                    node = new MapNode( new HireUnitOption(races[Random.Range(0,races.Length)],CR));
+                    node = new MapNode( new VillageShop(CR, races[Random.Range(0,races.Length)]));
                 }
                 else if(v >0.2f )
                 {

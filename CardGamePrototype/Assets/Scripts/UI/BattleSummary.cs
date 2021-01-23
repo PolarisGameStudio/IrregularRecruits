@@ -24,6 +24,7 @@ namespace UI
         public UnityEvent OnClose = new UnityEvent();
 
         public XpBar XpBar;
+
         private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
 
         private void Start()

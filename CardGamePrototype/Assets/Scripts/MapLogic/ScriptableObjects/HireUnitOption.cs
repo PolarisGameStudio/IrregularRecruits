@@ -8,14 +8,20 @@ using Event = GameLogic.Event;
 namespace MapLogic
 {
 
+
     [CreateAssetMenu(menuName = "Create Map Objects/Hire Units Option")]
     public class HireUnitOption : MapOption
     {
         public List<Creature> Units = new List<Creature>();
-
+        public readonly Race OptionRace;
+        public readonly int CR;
 
         public HireUnitOption(Race race, int cR)
         {
+            CR = cR;
+
+            OptionRace = race;
+
             var maxCr = cR / 3;
 
             var potential = CreatureLibrary.Instance.EnemyCreatures.Where(c => c.Race == race).OrderBy(c=> Random.value).ToList();

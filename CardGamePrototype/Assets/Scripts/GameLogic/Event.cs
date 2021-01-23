@@ -22,6 +22,9 @@ namespace GameLogic
 
         public static CardEvent OnDamaged = new CardEvent();
 
+        public class IntEvent : UnityEvent<int> { }
+        public static IntEvent OnPlayerGoldAdd = new IntEvent();
+
         public class CardValueEvent : UnityEvent<Card,int> { }
         public static CardValueEvent OnHealthChange = new CardValueEvent();
         public static CardValueEvent OnHealed = new CardValueEvent();
@@ -68,6 +71,7 @@ namespace GameLogic
         //Hero events
         public class HeroEvent : UnityEvent<Hero> { }
 
+        public static HeroEvent OnHeroSelect = new HeroEvent();
         public static HeroEvent OnLevelUpSelection = new HeroEvent();
         public static HeroEvent OnLevelUp = new HeroEvent();
 

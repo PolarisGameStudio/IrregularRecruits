@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GameLogic
 {
@@ -47,6 +48,8 @@ namespace GameLogic
             Hero hero = new Hero(heroObject);
             Instance.PlayerDeck.Hero = hero;
             hero.InDeck = Instance.PlayerDeck;
+
+            Event.OnHeroSelect.Invoke(hero);
         }
 
         public static void SetPlayerDeck(DeckObject deckObject)
@@ -58,8 +61,11 @@ namespace GameLogic
 
         public void PackUp(Deck d)
         {
-            if(EnemyDeck!=null && d == PlayerDeck)
+            if (EnemyDeck != null && d == PlayerDeck)
+            {
                 PlayerDeck?.Hero?.AwardXp(EnemyDeck.GetXpValue());
+                Event.OnPlayerGoldAdd.Invoke((int) (EnemyDeck.GetXpValue() * Random.Range(1f, 2f)));
+            }
 
             PlayerDeck?.PackUp();
             EnemyDeck?.PackUp(true);
@@ -87,6 +93,8 @@ namespace GameLogic
 
             EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayerDeck.DeckController.YourTurn);
             PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, Event.OnCombatResolveStart.Invoke);
+
+            Debug.Log("starting battle. Enemies: " + enemyDeck.AllCreatures().Count + ", CR: " + enemyDeck.CR);
 
             Event.OnTurnBegin.Invoke();
         }
