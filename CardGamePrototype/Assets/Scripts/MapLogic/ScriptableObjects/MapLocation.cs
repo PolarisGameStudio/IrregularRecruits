@@ -9,7 +9,7 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Location", order = 0)]
     public class MapLocation : ScriptableObject,IMapLocation
     {
-        public string Name;
+        public string Name { get; }
         public int Difficulty;
         public bool ExecuteRandomCombatOptionAutomatically;
         public bool WinNode;
@@ -22,6 +22,7 @@ namespace MapLogic
         public Sprite LocationImage;
         [SerializeField]
         public MapOption[] LocationOptions;
+
 
         public MapOption[] GetLocationOptions()
         {

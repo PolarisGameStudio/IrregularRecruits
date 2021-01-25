@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Golem
   m_EditorClassIdentifier: 
   name: Golem
-  Icon: {fileID: 21300000, guid: 171b346651bbd6b41941257474beec6e, type: 3}
+  Icon: {fileID: 21300000, guid: 4e961950e7d30e641afb0be88136c3d8, type: 3}
   Description: 
-  PlayerRace: 0
-  GroupSize: 1
   FavoriteActions: 0200000005000000
   FavoriteTriggers: 0500000004000000
+  FriendRaces: []

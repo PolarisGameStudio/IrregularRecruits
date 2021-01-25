@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Machinefolk
   m_EditorClassIdentifier: 
   name: Machinefolk
-  Icon: {fileID: 21300000, guid: 83ed9dd37548b784b8808023d2a33731, type: 3}
+  Icon: {fileID: 21300000, guid: f68003992dacf9c4badec05d8e4a57a4, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 1
   FavoriteActions: 03000000
   FavoriteTriggers: 01000000
+  FriendRaces: []

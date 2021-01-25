@@ -6,6 +6,7 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Lose Unity Option")]
     public class LoseUnitOption : MapOption
     {
+        public override string Name { get; } = "unit loss";
         public override float Difficulty()
         {
             return 0;

@@ -21,7 +21,9 @@ namespace MapLogic
         private readonly string FirstUnitEscapeString = "U0";
         private readonly string SecondUnitEscapeString = "U1";
         private readonly string ThirdUnitEscapeString = "U2";
-        
+
+        public abstract string Name { get; }
+
         public enum UnitCandidate { NoUnit, Strong,Weak,Random, FriendlyRace,NonFriendlyRace}
 
         public virtual bool IsApplicable()

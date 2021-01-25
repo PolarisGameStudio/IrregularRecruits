@@ -7,6 +7,9 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Option Composite")]
     public class MapOptionComposite : MapOption
     {
+        public override string Name { get {
+                return Options.Select(s => s.Name).Aggregate((s, n) => s + ", " + n);
+            } }
         public List<MapOption> Options;
 
         public override void ExecuteOption(MapNode owner)

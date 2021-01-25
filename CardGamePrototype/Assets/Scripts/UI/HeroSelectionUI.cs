@@ -12,9 +12,10 @@ namespace UI
         public TextMeshProUGUI HeroName;
         public Button PreviousButton, NextButton;
         public Button HeroImage;
-        private HeroObject SelectedHero;
+        private Hero SelectedHero;
         private List<HeroObject> AllHeroes;
         private int Chosen;
+        private Dictionary<HeroObject, Hero> InstantiatedHeroes = new Dictionary<HeroObject, Hero>(); 
 
         private void Start()
         {
@@ -24,6 +25,8 @@ namespace UI
             NextButton.onClick.AddListener(Next);
 
             Chosen = AllHeroes.Count;
+
+            HeroImage.onClick.AddListener(()=> HeroView.Open(SelectedHero));
 
             Next();
         }
@@ -56,18 +59,26 @@ namespace UI
             {
                 var chosen = AllHeroes[i];
 
+                if (!InstantiatedHeroes.ContainsKey(chosen))
+                    InstantiatedHeroes[chosen] = new Hero(chosen);
+
+                SelectedHero = InstantiatedHeroes[chosen];
+
                 HeroImage.gameObject.SetActive(true);
 
                 HeroImage.image.sprite = chosen.Portrait;
                 HeroName.text = chosen.name;
+                if (chosen.Deck)
+                    DeckSelectionUI.Instance.SelectDeck(chosen.Deck);
+
             }
 
         }
 
         public void SubmitHero()
         {
-            if (Chosen < AllHeroes.Count)
-                BattleManager.SetPlayerHero(AllHeroes[Chosen]);
+            if (SelectedHero!= null)
+                BattleManager.SetPlayerHero(SelectedHero);
         }
     }
 }

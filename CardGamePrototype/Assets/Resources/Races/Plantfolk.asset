@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Plantfolk
   m_EditorClassIdentifier: 
   name: Plant
-  Icon: {fileID: 21300000, guid: bd9cb8954ec136844bd32bcfe7bf2ff7, type: 3}
+  Icon: {fileID: 21300000, guid: d96832f986401af4f8e0c4ba389a1923, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 5
   FavoriteActions: 020000000600000005000000
   FavoriteTriggers: 090000000500000006000000
+  FriendRaces: []

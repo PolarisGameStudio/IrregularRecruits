@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Reptile
   m_EditorClassIdentifier: 
   name: Reptile
-  Icon: {fileID: 21300000, guid: df396c542109abc478ebc990e6b9851b, type: 3}
+  Icon: {fileID: 21300000, guid: f4815ac42831a5549a21d47fd0478306, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 8
   FavoriteActions: 020000000300000007000000
   FavoriteTriggers: 010000000000000006000000
+  FriendRaces: []

@@ -108,10 +108,15 @@ namespace MapLogic
 
                 for (int j = 0; j < nodesAtStep[i]; j++)
                 {
+
                     if (i == settings.MapLength - 1)
                         step[j] = GenerateNode(locations.Single(l => l.IsWinNode()), locations);
-                    else
-                        step[j] = GenerateNode(Random.value < settings.TreasureChance,CurrentDifficulty);
+                    else {
+                        var hardNodeChance = (i - 2f) / settings.MapLength;
+
+                        var goodNodeChance = i >= 2 ? settings.TreasureChance : 0f;
+                        step[j] = GenerateNode(Random.value < goodNodeChance, CurrentDifficulty,hardNodeChance);
+                    } 
                 }
 
                 var edgesPrNode = step.Length / (float)lastStep.Length;
@@ -170,7 +175,7 @@ namespace MapLogic
         }
 
 
-        private MapNode GenerateNode(bool goodNode,int CR)
+        private MapNode GenerateNode(bool goodNode,int CR,float hardCombatChance = 0f)
         {
             MapNode node;
 
@@ -211,11 +216,10 @@ namespace MapLogic
                 var races = MapSettings.Instance.EnemyRaces;
                 var race = races[Random.Range(0, races.Length)];
 
-                float hardCombatChance = 0.25f;
 
                 if (hardCombatChance > Random.value)
                 {
-                    node = new MapNode( new CombatOption(race,CR * 3,true));
+                    node = new MapNode( new CombatOption(race,CR * 2,true));
 
                 }
                 else

@@ -12,6 +12,7 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Hire Units Option")]
     public class HireUnitOption : MapOption
     {
+        public override string Name { get; }
         public List<Creature> Units = new List<Creature>();
         public readonly Race OptionRace;
         public readonly int CR;
@@ -29,6 +30,8 @@ namespace MapLogic
             //Allow uniques check?
 
             var forHire = Mathf.Min(potential.Count, 3);
+
+            Name = "Volunteers";
 
             while(Units.Count < forHire)
             {

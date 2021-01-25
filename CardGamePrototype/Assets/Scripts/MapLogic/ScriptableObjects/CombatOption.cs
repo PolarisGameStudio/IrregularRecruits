@@ -10,6 +10,7 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Combat Option")]
     public class CombatOption : MapOption
     {
+        public override string Name { get; }
         [Header("Creatures always spawned")]
         public List<Creature> SpawnCreatures = new List<Creature>();
         [Header("Random Spawns")]
@@ -42,6 +43,8 @@ namespace MapLogic
                 AdditionalRaces.Add(race.FriendRaces[Random.Range(0, race.FriendRaces.Length)]);
 
             UniquesAllowed = allowUniques;
+
+            Name = $"{race.name} battle! ({combatRating})";
         }
 
         public CombatOption()

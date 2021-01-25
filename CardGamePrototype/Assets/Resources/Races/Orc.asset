@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Orc
   m_EditorClassIdentifier: 
   name: Orc
-  Icon: {fileID: 21300000, guid: 1b7f9b24fa946f6478cd364ca2c9ae74, type: 3}
+  Icon: {fileID: 21300000, guid: 536602a24a14d40418ea1f58bf903a5b, type: 3}
   Description: 
-  PlayerRace: 0
-  GroupSize: 8
   FavoriteActions: 020000000300000001000000
   FavoriteTriggers: 020000000500000000000000
+  FriendRaces: []

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Bug
   m_EditorClassIdentifier: 
   name: Bug
-  Icon: {fileID: 21300000, guid: 67a57513195558645b9c4f1170e3cc0f, type: 3}
+  Icon: {fileID: 21300000, guid: 7f8cdc3a82e6d694faa3733308d59aad, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 8
   FavoriteActions: 0200000000000000
   FavoriteTriggers: 040000000000000002000000
+  FriendRaces: []

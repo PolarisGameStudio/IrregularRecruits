@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Beastfolk
   m_EditorClassIdentifier: 
   name: Beastfolk
-  Icon: {fileID: 21300000, guid: fd009bc2708664948a7a90bda372dc0b, type: 3}
+  Icon: {fileID: 21300000, guid: 731af4e3827420f47a2bf68f947ddbe0, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 8
   FavoriteActions: 030000000200000005000000
   FavoriteTriggers: 030000000000000002000000
+  FriendRaces: []

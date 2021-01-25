@@ -33,7 +33,7 @@ namespace MapLogic
         public MapNode(IMapLocation mapLocation)
         {
             this.Location = mapLocation;
-            name = "Location: " + Guid.NewGuid();
+            name = mapLocation.Name;
         }
 
         public void Visit()
@@ -97,6 +97,11 @@ namespace MapLogic
 
         public bool IsFinalNode() => Location is MapLocation && (Location as MapLocation).WinNode;
         public bool IsStartNode() => Location is MapLocation && (Location as MapLocation).StartNode;
+
+        public override string ToString()
+        {
+            return name;
+        }
 
     }
 }

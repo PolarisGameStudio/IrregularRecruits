@@ -11,6 +11,7 @@ namespace GameLogic
     {
         public new string name;
         public Race Race;
+        public DeckObject Deck;
 
         public Sprite Portrait;
         public Ability StartingAbility;

@@ -10,6 +10,7 @@ namespace UI
     {
         public Button Icon;
         public MapNode Node;
+        public Text DebugText;
         [SerializeField]
         private ParticleSystem HighlightParticles;
         public CanvasGroup CanvasGroup;
@@ -28,7 +29,7 @@ namespace UI
 
             MapController.Instance.MoveToNode(Node);
 
-            //this is just a hack untill the other options are implemented
+            //TODO: this is just a hack untill the other options are implemented
             if (!(Node.Location is CombatOption))
                 MapUI.Instance.Open();
         }

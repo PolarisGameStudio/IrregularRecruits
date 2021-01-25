@@ -45,7 +45,10 @@ namespace GameLogic
 
         public static void SetPlayerHero(HeroObject heroObject)
         {
-            Hero hero = new Hero(heroObject);
+            SetPlayerHero(new Hero(heroObject));
+        }
+        public static void SetPlayerHero(Hero hero)
+        {
             Instance.PlayerDeck.Hero = hero;
             hero.InDeck = Instance.PlayerDeck;
 
@@ -64,7 +67,7 @@ namespace GameLogic
             if (EnemyDeck != null && d == PlayerDeck)
             {
                 PlayerDeck?.Hero?.AwardXp(EnemyDeck.GetXpValue());
-                Event.OnPlayerGoldAdd.Invoke((int) (EnemyDeck.GetXpValue() * Random.Range(1f, 2f)));
+                Event.OnPlayerGoldAdd.Invoke((int) (EnemyDeck.GetXpValue() * Random.Range(2.5f, 4f)));
             }
 
             PlayerDeck?.PackUp();

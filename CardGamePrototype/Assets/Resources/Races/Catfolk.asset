@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Catfolk
   m_EditorClassIdentifier: 
   name: Catfolk
-  Icon: {fileID: 21300000, guid: 6248e253f57888d4e88c024cac62d275, type: 3}
+  Icon: {fileID: 21300000, guid: 8bdf9d5228035bd46be60ee06fcf610c, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 8
   FavoriteActions: 0400000008000000
   FavoriteTriggers: 040000000800000005000000
+  FriendRaces: []

@@ -54,7 +54,8 @@ namespace GameLogic
             if(deck.Hero!= null)
             {
                 //TODO: test that it was the correct hero
-                Event.OnLevelUp.AddListener(h=> SelectAbility());
+                //AI does not level up. Could be an option in the settings
+                //Event.OnLevelUp.AddListener(h=> SelectAbility());
             }
 
             deck.DrawInitialHand(true);

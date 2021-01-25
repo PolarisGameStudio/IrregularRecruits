@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
     public class DeckViewerUI : Singleton<DeckViewerUI>
     {
         public GameObject Holder;
+        public Image WaterMark;
         public CardUI CardUIInstance;
         private List<GameObject> InstatiatedObjects = new List<GameObject>();
 
@@ -32,6 +34,8 @@ namespace UI
         {
             InstatiatedObjects.ForEach(Destroy);
             InstatiatedObjects.Clear();
+
+            WaterMark.sprite = deck.Races.First().Icon;
 
             foreach (var c in deck.AllCreatures().OrderBy(c=> c.GetName()))
             {

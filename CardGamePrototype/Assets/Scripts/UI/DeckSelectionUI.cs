@@ -8,7 +8,7 @@ using Event = GameLogic.Event;
 namespace UI
 {
 
-    public class DeckSelectionUI : MonoBehaviour
+    public class DeckSelectionUI : Singleton<DeckSelectionUI>
     {
         public Icon DeckIconInstance;
         public Image DeckImage;
@@ -18,6 +18,7 @@ namespace UI
         private List<Icon> InstantiatedIcons = new List<Icon>();
         private DeckObject SelectedDeck;
         private Dictionary<DeckObject, Deck> Decks = new Dictionary<DeckObject, Deck>();
+        private Dictionary<DeckObject, Icon> DeckIcons = new Dictionary<DeckObject, Icon>();
 
         private void Awake()
         {
@@ -27,11 +28,12 @@ namespace UI
 
                 icon.Image.sprite = deck.DeckIcon;
 
-                icon.Button.onClick.AddListener(() => SelectDeck(icon, deck));
+                icon.Button.onClick.AddListener(() => SelectDeck( deck));
 
                 InstantiatedIcons.Add(icon);
 
                 Decks.Add(deck, new Deck(deck));
+                DeckIcons[deck] = icon;
             }
 
             Destroy(DeckIconInstance.gameObject);
@@ -44,14 +46,21 @@ namespace UI
             Event.OnGameOpen.Invoke();
         }
 
-        private void SelectDeck(Icon i, DeckObject d)
+        public void SelectDeck( DeckObject d)
         {
-            SelectedDeck = d;
-
-            foreach (var ic in InstantiatedIcons)
+            //TODO: have a dictionary and only pass the deckobject
+            if (DeckIcons.ContainsKey(d))
             {
-                ic.ParticleSystem.gameObject.SetActive(ic == i);
+                var icon = DeckIcons[d];
+
+                foreach (var ic in InstantiatedIcons)
+                {
+                    ic.ParticleSystem.gameObject.SetActive(ic == icon);
+                }
             }
+
+
+            SelectedDeck = d;
 
             DeckTitle.text = d.name;
             DeckDescription.text = d.Description;

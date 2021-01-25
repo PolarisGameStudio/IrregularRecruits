@@ -6,15 +6,18 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Gain Gold Option")]
     public class GainGoldOption : MapOption
     {
+        public override string Name { get; }
         public int Amount;
 
         public GainGoldOption()
         {
+            Name = $"Gain {Amount} gold";
         }
 
         public GainGoldOption(int amount)
         {
             Amount = amount;
+            Name = $"Gain {Amount} gold";
         }
 
         public override float Difficulty()

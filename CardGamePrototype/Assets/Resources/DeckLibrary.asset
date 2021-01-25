@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DeckLibrary
   m_EditorClassIdentifier: 
   Decks:
-  - {fileID: 11400000, guid: f965b2a83c7badf41ae67fb2186437f1, type: 2}
-  - {fileID: 11400000, guid: ac957de51484b374f877b1f4ee357d26, type: 2}
-  - {fileID: 11400000, guid: e58503075e30e0d488f79796dd1d528f, type: 2}
+  - {fileID: 11400000, guid: 1be4a3a4206b3ea4dbcf51280e02e315, type: 2}
+  - {fileID: 11400000, guid: fba9fffeff43e994187e725c52de51e3, type: 2}
+  - {fileID: 11400000, guid: 3f9efa06ebc991f4ab2cdf8d9143fb48, type: 2}
   Heroes:
   - {fileID: 11400000, guid: 486a1fef6d2673f418f27d5a153ad9a8, type: 2}
   - {fileID: 11400000, guid: 858903198a0319143989fa1810931cde, type: 2}

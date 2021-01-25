@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Bird
   m_EditorClassIdentifier: 
   name: Bird
-  Icon: {fileID: 21300000, guid: 695fd45535f5d2d478cab1f44724a230, type: 3}
+  Icon: {fileID: 21300000, guid: 2c620047a712e8c4b9dab6baa2006b6c, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 8
   FavoriteActions: 070000000800000001000000
   FavoriteTriggers: 040000000600000007000000
+  FriendRaces: []

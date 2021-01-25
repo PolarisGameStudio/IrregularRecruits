@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Animal
   m_EditorClassIdentifier: 
   name: Animal
-  Icon: {fileID: 21300000, guid: df396c542109abc478ebc990e6b9851b, type: 3}
+  Icon: {fileID: 21300000, guid: a4b9aff17be18024d8fae1165415f596, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 8
   FavoriteActions: 040000000200000001000000
   FavoriteTriggers: 030000000500000009000000
+  FriendRaces: []

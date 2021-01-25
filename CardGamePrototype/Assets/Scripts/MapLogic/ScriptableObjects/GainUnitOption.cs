@@ -10,6 +10,7 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Gain Unit Option")]
     public class GainUnitOption : MapOption
     {
+        public override string Name { get; } = "gain units";
         public List<Creature> Units;
 
         public override float Difficulty()

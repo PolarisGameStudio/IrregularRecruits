@@ -6,6 +6,7 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Lose Gold Option")]
     public class LoseGoldOption : MapOption
     {
+        public override string Name { get; } = "gold loss";
         public int Amount;
 
         public override float Difficulty()

@@ -25,6 +25,7 @@ namespace UI
         private UnityEvent OnReload = new UnityEvent();
         private Shop ShowingShop;
         public Button CloseButton;
+        public Image RaceWatermark;
 
         [Header("Buying Movement")]
         public float MoveDuration = 0.5f;
@@ -64,6 +65,8 @@ namespace UI
         public void SetupShop(Shop shop )
         {
             Holder.SetActive(true);
+
+            RaceWatermark.sprite = shop.VillageType.Icon;
 
             ShowingShop = shop;
 

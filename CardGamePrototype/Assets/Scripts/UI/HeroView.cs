@@ -44,7 +44,7 @@ namespace UI
 
         private void Start()
         {
-            Event.OnLevelUpSelection.AddListener(Open);
+            Event.OnLevelUpSelection.AddListener(UpdateIcons);
             Event.OnLevelUp.AddListener(UpdateIcons);
         }
 

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Dwarf
   m_EditorClassIdentifier: 
   name: Dwarf
-  Icon: {fileID: 21300000, guid: 75ef61897cff34b48914aeb9e8de0f30, type: 3}
+  Icon: {fileID: 21300000, guid: c56395529b13b744099e4aca702d9c8b, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 5
   FavoriteActions: 0200000005000000
   FavoriteTriggers: 05000000
+  FriendRaces: []

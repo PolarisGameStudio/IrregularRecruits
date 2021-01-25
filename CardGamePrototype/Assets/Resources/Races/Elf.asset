@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Elf
   m_EditorClassIdentifier: 
   name: Elf
-  Icon: {fileID: 21300000, guid: 335666c775f6ede4a9ae9b1533885913, type: 3}
+  Icon: {fileID: 21300000, guid: d39fe95fd99292048becb2b365fb0ff4, type: 3}
   Description: 
-  PlayerRace: 0
-  GroupSize: 3
   FavoriteActions: 010000000500000008000000
   FavoriteTriggers: 0600000005000000
+  FriendRaces: []

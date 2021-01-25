@@ -89,6 +89,7 @@ namespace GameLogic
 
             LevelUpPoints--;
             AddAbility(ability);
+
             Event.OnLevelUpSelection.Invoke(this);
         }
 

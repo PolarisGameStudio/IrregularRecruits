@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   name: Goblin
-  Icon: {fileID: 21300000, guid: cd0333fbc8e46e64e80baf991b99a699, type: 3}
+  Icon: {fileID: 21300000, guid: a390cf1b93918824fb32dc7c6668dc9e, type: 3}
   Description: 
-  PlayerRace: 0
-  GroupSize: 4
   FavoriteActions: 01000000
   FavoriteTriggers: 0300000004000000
+  FriendRaces: []

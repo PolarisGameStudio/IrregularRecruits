@@ -1340,6 +1340,7 @@ MonoBehaviour:
   PrizeText: {fileID: 8490356369559511262}
   RerollButton: {fileID: 7696554783898304307}
   CloseButton: {fileID: 7101066474909487679}
+  RaceWatermark: {fileID: 2635046545516340375}
   MoveDuration: 1
   MoveAnimationCurve:
     serializedVersion: 2
@@ -1433,7 +1434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0.5882353}
+  m_Color: {r: 0.3019608, g: 0.17254902, b: 0.08627451, a: 0.5882353}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

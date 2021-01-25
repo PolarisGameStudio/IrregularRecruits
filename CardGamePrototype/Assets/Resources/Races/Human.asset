@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Human
   m_EditorClassIdentifier: 
   name: Human
-  Icon: {fileID: 21300000, guid: cfb58f334715ed842a2892f48683a77c, type: 3}
+  Icon: {fileID: 21300000, guid: 8891e8f78dfd41548b8d8557affd09e7, type: 3}
   Description: 
-  PlayerRace: 1
-  GroupSize: 10
   FavoriteActions: 070000000100000005000000
   FavoriteTriggers: 0400000009000000
+  FriendRaces: []
