@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16fc3d16bded274cb27555e6462ed38, type: 3}
   m_Name: TestLoc
   m_EditorClassIdentifier: 
-  Name: Easy Location
   Difficulty: 20
   ExecuteRandomCombatOptionAutomatically: 0
   WinNode: 0
   StartNode: 0
   UniqueNode: 0
   LocationDescription: You meet some beast people that wants to fight
-  LocationIcon: {fileID: 21300000, guid: aedca54c310dbfd47b3edc3802eb34ae, type: 3}
+  LocationIcon: {fileID: 21300000, guid: 886a70a8fd701b84491859c303b62a5c, type: 3}
   LocationImage: {fileID: 21300000, guid: e63addbf5712a61499e9937e456c659c, type: 3}
   LocationOptions:
   - {fileID: 11400000, guid: bd4f58a51119fd94db494edefc35cb7c, type: 2}

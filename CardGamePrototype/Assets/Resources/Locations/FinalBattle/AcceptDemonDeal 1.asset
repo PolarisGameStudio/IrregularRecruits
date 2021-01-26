@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f6d655fbe44a0489bb24101b20c6e6, type: 3}
+  m_Name: AcceptDemonDeal 1
+  m_EditorClassIdentifier: 
+  ClosesLocationOnSelection: 1
+  OnlyForHeroRaces:
+  - {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}
+  OnlyForAbility: []
+  OptionDescription: '- ''You can take the soul of my kitten, if you make me Queen
+    of the Cats!'''
+  AssociatedUnit: 0
+  Amount: 0

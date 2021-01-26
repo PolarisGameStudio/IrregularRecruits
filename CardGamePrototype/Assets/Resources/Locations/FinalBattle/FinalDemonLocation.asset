@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16fc3d16bded274cb27555e6462ed38, type: 3}
+  m_Name: FinalDemonLocation
+  m_EditorClassIdentifier: 
+  Difficulty: 100
+  ExecuteRandomCombatOptionAutomatically: 0
+  WinNode: 1
+  StartNode: 0
+  UniqueNode: 1
+  LocationDescription: '''So we meet again''
+
+
+    The Demon Konallath stands before
+    you, vaguely familiar.
+
+
+    ''I will now devour your soul, as promised to me.
+    Unless of course, you will give the soul of your child.'''
+  LocationIcon: {fileID: 21300000, guid: d08808bbbecdafd4da3ea706c51f5de7, type: 3}
+  LocationImage: {fileID: 21300000, guid: 06b9cc33ed5437f448810d2680a53613, type: 3}
+  LocationOptions:
+  - {fileID: 11400000, guid: b4faa84efbfcd2d4e936d230fe3dc487, type: 2}
+  - {fileID: 11400000, guid: 5fc787b9ce2b66a44bcb147ec7c9dcd6, type: 2}
+  - {fileID: 11400000, guid: 091a2d7d337b5d946a645c482fbab12a, type: 2}
+  - {fileID: 11400000, guid: 533dd7f178a4cd941856faf260dd2b7c, type: 2}

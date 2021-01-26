@@ -19,3 +19,10 @@ MonoBehaviour:
   StartingAbility: {fileID: 11400000, guid: dcc6922316029d845be74e7c8c4847e9, type: 2}
   Class: {fileID: 11400000, guid: 18c56e1dd5d3eb44180bbc9a1ffddfd9, type: 2}
   RaceOption: {fileID: 11400000, guid: 7976b580d7050a843b0e0229250de297, type: 2}
+  BackgroundText: 'Your father, the King of the Dwarves, has ordered you to track
+    down and kill the Legendary Demon Konallath.
+
+
+    Konallath is rumoured to have
+    surfaced somewhere in the Cinder Lands. A unchartered nation filled with monsters,
+    madmen and other dangers.'

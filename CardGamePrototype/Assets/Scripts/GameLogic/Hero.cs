@@ -63,7 +63,8 @@ namespace GameLogic
                 }
             }
         }
-        
+
+
         public Hero(HeroObject h)
         {
             HeroObject = h;

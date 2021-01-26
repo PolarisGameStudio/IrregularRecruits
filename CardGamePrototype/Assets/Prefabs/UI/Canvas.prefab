@@ -7301,26 +7301,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4813993072221776157, guid: a9beb042fe4360c43953653df95de2d0,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813993072221776157, guid: a9beb042fe4360c43953653df95de2d0,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813993072221776157, guid: a9beb042fe4360c43953653df95de2d0,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813993072221776157, guid: a9beb042fe4360c43953653df95de2d0,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813993072221776157, guid: a9beb042fe4360c43953653df95de2d0,
-        type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}

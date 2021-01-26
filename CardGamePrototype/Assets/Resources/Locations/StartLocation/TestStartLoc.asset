@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16fc3d16bded274cb27555e6462ed38, type: 3}
   m_Name: TestStartLoc
   m_EditorClassIdentifier: 
-  Name: Start Location
   Difficulty: 10
   ExecuteRandomCombatOptionAutomatically: 0
   WinNode: 0
   StartNode: 1
   UniqueNode: 1
-  LocationDescription: 
+  LocationDescription: 'Your father, the King of the Dwarves, has ordered you to
+    track down and kill the Legendary Demon Konallath.
+
+
+    Konallath is rumoured
+    to have surfaced somewhere in the Cinder Lands. A unchartered nation filled with
+    monsters, madmen and other dangers.'
   LocationIcon: {fileID: 21300000, guid: 8df002a01a1e1664a92cac2e735b1e51, type: 3}
-  LocationImage: {fileID: 0}
-  LocationOptions: []
+  LocationImage: {fileID: 21300000, guid: 23541c18016276845be208d92ab6df81, type: 3}
+  LocationOptions:
+  - {fileID: 11400000, guid: f02debfa81d99e94599abd69f3cf2013, type: 2}

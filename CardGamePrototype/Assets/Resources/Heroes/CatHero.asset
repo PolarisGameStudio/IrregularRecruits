@@ -19,3 +19,10 @@ MonoBehaviour:
   StartingAbility: {fileID: 11400000, guid: dba7728b02843b243aa0c135d9546f9f, type: 2}
   Class: {fileID: 11400000, guid: 3e70c4b5694fc094a83fe17be7a0f441, type: 2}
   RaceOption: {fileID: 11400000, guid: 04e919212fa4e3d449f0b86039f48e30, type: 2}
+  BackgroundText: 'Your mother, the Queen of Cats, has ordered you to hunt down the
+    Legendary Demon Konallath.
+
+
+    Konallath is rumoured to have surfaced somewhere
+    in the Cinder Lands. A unchartered nation filled with monsters, madmen and other
+    dangers.'

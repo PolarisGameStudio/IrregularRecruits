@@ -1,9 +1,11 @@
-﻿using MapLogic;
+﻿using GameLogic;
+using MapLogic;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Event = GameLogic.Event;
 
 namespace UI
 {
@@ -16,11 +18,48 @@ namespace UI
         private MapNode CurrentNode;
         public GameObject Holder;
 
-        private void Start()
+        //non-effect story events
+        public MapLocation StartEvent;
+        public MapLocation WinEvent;
+        public MapLocation GameOverEvent;
+
+
+
+        private void Awake()
         {
             MapNode.OpenEvent.AddListener(Open);
             MapNode.CloseLocation.AddListener(n => Close());
             OptionInstance.gameObject.SetActive(false);
+
+            Event.OnGameBegin.AddListener(OpenStartEvent);
+            Event.OnGameOver.AddListener(OpenGameOverEvent);
+            Event.OnGameWin.AddListener(OpenWinEvent);
+        }
+
+        public void OpenWinEvent()
+        {
+            Debug.Log("opening Win screen");
+
+            Open(new MapNode(WinEvent));
+        }
+
+        public void OpenGameOverEvent()
+        {
+            Debug.Log("opening Game Over screen");
+
+            Open(new MapNode(GameOverEvent));
+
+        }
+        
+        public void OpenStartEvent()
+        {
+            Debug.Log("opening start event");
+
+            Hero hero = BattleManager.Instance.PlayerDeck.Hero;
+
+            StartEvent.LocationDescription = hero.HeroObject.BackgroundText;
+
+            Open(new MapNode(StartEvent));
         }
 
         public void Open(MapNode node)

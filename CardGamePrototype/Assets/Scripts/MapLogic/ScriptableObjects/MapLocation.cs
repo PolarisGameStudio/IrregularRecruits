@@ -17,6 +17,7 @@ namespace MapLogic
         //only once pr. game
         public bool UniqueNode;
         //0 = all options. 
+        [TextArea]
         public string LocationDescription;
         public Sprite LocationIcon;
         public Sprite LocationImage;

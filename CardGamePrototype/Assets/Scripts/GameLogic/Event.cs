@@ -59,6 +59,7 @@ namespace GameLogic
         //GAME EVENTS
         public static UnityEvent OnGameOver = new UnityEvent();
         public static UnityEvent OnGameOpen = new UnityEvent();
+        public static UnityEvent OnGameWin = new UnityEvent();
         public static UnityEvent OnGameBegin = new UnityEvent();
 
         //moved Card. From. To
@@ -127,6 +128,7 @@ namespace GameLogic
 
             //public static UnityEvent OnGameOver = new UnityEvent();
             OnGameOver.RemoveAllListeners();
+            OnGameWin.RemoveAllListeners();
             //public static UnityEvent OnGameOpen = new UnityEvent();
             OnGameOpen.RemoveAllListeners();
             //public static UnityEvent OnGameBegin = new UnityEvent();

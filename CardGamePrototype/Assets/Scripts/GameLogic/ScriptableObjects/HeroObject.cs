@@ -19,6 +19,9 @@ namespace GameLogic
         public LevelOption Class;
         public LevelOption RaceOption;
 
+        [TextArea]
+        public string BackgroundText;
+
 
         //first level is 0
         //TODO: remove

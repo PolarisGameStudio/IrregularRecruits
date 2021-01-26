@@ -19,3 +19,8 @@ MonoBehaviour:
   StartingAbility: {fileID: 11400000, guid: 53f6f9de8388d6443a4d1d35fb2dde68, type: 2}
   Class: {fileID: 11400000, guid: 18c56e1dd5d3eb44180bbc9a1ffddfd9, type: 2}
   RaceOption: {fileID: 11400000, guid: 4902f0fe36509294a9c82fbb7dbadf96, type: 2}
+  BackgroundText: "\rYou mind has started to falter. Falling apart like your flesh
+    did centuries ago. As a powerful lich, the thought of the final death is unacceptable.
+    \n\nA whisper in your empty skull tells you the mighty Demon Konallath holds
+    the key to your immortality. You must hunt him down and squeeze his secrets out
+    of him, before you perish."
