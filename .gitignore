@@ -15,3 +15,5 @@ CardGamePrototype/Build/
 CardGamePrototype/Assets/Sounds/Music/
 
 WebBuild/
+
+*.zip
