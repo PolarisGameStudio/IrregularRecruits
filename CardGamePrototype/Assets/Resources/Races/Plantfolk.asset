@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Plant
   Icon: {fileID: 21300000, guid: d96832f986401af4f8e0c4ba389a1923, type: 3}
+  Shield: {fileID: 21300000, guid: bd9cb8954ec136844bd32bcfe7bf2ff7, type: 3}
   Description: 
   FavoriteActions: 020000000600000005000000
   FavoriteTriggers: 090000000500000006000000

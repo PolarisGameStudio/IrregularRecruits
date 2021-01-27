@@ -15,7 +15,7 @@ namespace MapLogic
 
             //TODO:
             //race.VillageName();
-            Name = race + " village";
+            Name = race.name + " village";
         }
 
         public override float Difficulty()

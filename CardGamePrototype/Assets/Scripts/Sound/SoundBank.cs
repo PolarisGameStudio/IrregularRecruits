@@ -66,6 +66,14 @@ public class SoundBank : Singleton<SoundBank>
         public AudioClip[] Audio;
     }
 
+
+    [System.Serializable]
+    public struct RaceSpecificSound
+    {
+        public CardSound Type;
+        public AudioClip[] Audio;
+    }
+
     [System.Serializable]
     public struct AbilitySound
     {
@@ -105,6 +113,7 @@ public class SoundBank : Singleton<SoundBank>
     public BackgroundSoundref[] Backgrounds;
     public MusicRef[] Musics;
     public AbilitySound[] AbilitySounds;
+    public RaceSpecificSound[] VillageSounds;
 
 
     internal static AudioClip GetSound(CardSound type)

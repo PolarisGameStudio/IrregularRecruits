@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Event = GameLogic.Event;
 
 
 namespace UI
@@ -45,6 +46,14 @@ namespace UI
         //being dragged? maybe change name
         public bool Moving { get; internal set; }
         public enum CardState { FaceUp, FaceDown, Battle }
+
+        public class CardUIEvent : UnityEvent<CardUI> { }
+        public static CardUIEvent OnUIDestroyed = new CardUIEvent();
+
+        public void OnDestroy()
+        {
+            OnUIDestroyed.Invoke(this);
+        }
 
         public void SetCard(Card c)
         {
@@ -85,7 +94,7 @@ namespace UI
                 {
                     var instance = Instantiate(RaceInstance, RaceInstance.transform.parent);
                     instance.gameObject.SetActive(true);
-                    instance.sprite = creature.Race.Icon;
+                    instance.sprite = creature.Race.Shield;
 
                     InstantiatedObjects.Add(instance.gameObject);
                 }
@@ -231,9 +240,13 @@ namespace UI
 
                 yield return new WaitForSeconds(flipTime);
 
+
                 CardBackHolder.SetActive(state == CardState.FaceDown);
                 CardBattleUI.SetActive(state == CardState.Battle);
                 FrontHolder.SetActive(state == CardState.FaceUp);
+
+
+                FrontHolder.GetComponent<CanvasGroup>().alpha = 1;
 
                 gameObject.LeanScaleX(1, flipTime);
 

@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,6 +28,18 @@ namespace UI
         private void Start()
         {
             Hide();
+
+            CardUI.OnUIDestroyed.AddListener(CardDestroyed);
+        }
+
+        private void CardDestroyed(CardUI arg0)
+        {
+            if (arg0.Creature == Creature)
+            {
+                Debug.Log("Card destroyed, hiding hover info");
+                Hide();
+            }
+            //todo should also check if it is the same ui instance.. since different uis can have the same creature
         }
 
         public static bool IsActive()

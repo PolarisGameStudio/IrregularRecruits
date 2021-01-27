@@ -33,7 +33,7 @@ namespace GameLogic
             if (opposingBattlefield.Count < myBattlefield.Count && myBattlefield.Count > 2 && opposingBattlefield.Any())
             {
                 //TODO: should account for ranged.  Maybe by a potential damage method?
-                var scaredCat = myBattlefield.FirstOrDefault(c => c.Damaged() && opposingBattlefield.Any(opp => opp.Attack * 2 > c.CurrentHealth));
+                var scaredCat = myBattlefield.FirstOrDefault(c => c.Damaged() && !c.IsSummon() && opposingBattlefield.Any(opp => opp.Attack * 2 > c.CurrentHealth));
                 if (scaredCat != null)
                 {
                     scaredCat.Withdraw();

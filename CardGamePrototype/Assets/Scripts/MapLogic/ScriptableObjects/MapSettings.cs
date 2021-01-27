@@ -77,10 +77,7 @@ namespace MapLogic
         public Sprite XpIcon;
         public Sprite UnknownNodeIcon;
         public Sprite VillageIcon;
-        public RaceIcon[] CombatIcons;
-
-        [Serializable]
-        public struct RaceIcon { public Race Race; public Sprite Icon; }
+        public Sprite GraveYardIcon;
 
         public static Sprite GetLocationIcon(IMapLocation location)
         {
@@ -97,17 +94,18 @@ namespace MapLogic
             {
                 var combat = location as CombatOption;
 
-                if (Instance.CombatIcons.Any(c => c.Race == combat.MainRace))
-                    return Instance.CombatIcons.Single(c => c.Race == combat.MainRace).Icon;     
-                else
+                return combat.MainRace.Icon;
 
-                    return Instance.CombatIcons.First().Icon;
             }
-            if(location is HireUnitOption || location is VillageShop)
+            else if(location is HireUnitOption || location is VillageShop)
             {
                 //TODO: different icons for different villages?
 
+                if (location is VillageShop shop && shop.Race.name == "Undead")
+                    return Instance.GraveYardIcon;
+
                 return Instance.VillageIcon;
+
             }
 
             return Instance.UnknownNodeIcon;

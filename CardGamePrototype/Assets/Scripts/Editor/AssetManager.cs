@@ -98,9 +98,9 @@ public class AssetManager
 
         //Debug.Log("Checking abilities: " + creatures.Count);
 
-        foreach (var item in creatures)
+        foreach (var creature in creatures)
         {
-            item.CR = CalculateCR(item);
+            creature.CR = CalculateCR(creature);
         }
 
         AssetDatabase.Refresh();

@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c74c0de1df1bf9d40a6030fc43ddfec1, type: 2}
   - {fileID: 11400000, guid: 182ab94bccaafb148be23e697c3e0de1, type: 2}
   - {fileID: 11400000, guid: 182ab94bccaafb148be23e697c3e0de1, type: 2}
-  - {fileID: 11400000, guid: c74c0de1df1bf9d40a6030fc43ddfec1, type: 2}
+  - {fileID: 11400000, guid: dd833d36a8448314bb678b82bd8a172f, type: 2}
   - {fileID: 11400000, guid: 894efb8e0b485ce4dbc007686f0fe677, type: 2}
   DeckIcon: {fileID: 21300000, guid: 3198276306970d6448e277bac3455afb, type: 3}
   DeckImage: {fileID: 21300000, guid: 9da9aff593f061844a16d4f398a6b17d, type: 3}

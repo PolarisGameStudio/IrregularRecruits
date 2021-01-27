@@ -64,6 +64,9 @@ namespace GameLogic
         public float GetValue()
         {
             Value = TriggerCondition.GetValue() * ResultingAction.GetValue();
+
+            if (Value < 0) Value *= -0.5f;
+
             return Value;
         }
 

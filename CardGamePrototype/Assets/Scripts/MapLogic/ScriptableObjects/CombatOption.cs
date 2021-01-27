@@ -44,7 +44,9 @@ namespace MapLogic
 
             UniquesAllowed = allowUniques;
 
-            Name = $"{race.name} battle! ({combatRating})";
+            var hard = UniquesAllowed ? "Hard " : "";
+
+            Name = $"{hard}{race.name} battle! ";//({combatRating})";
         }
 
         public CombatOption()
@@ -62,7 +64,7 @@ namespace MapLogic
 
             possibleRaces.AddRange(AdditionalRaces);
 
-            var deck = DeckGeneration.GenerateDeck(CRValue, possibleRaces, SpawnCreatures);
+            var deck = DeckGeneration.GenerateDeck(CRValue, possibleRaces, SpawnCreatures,UniquesAllowed);
 
             MapController.Instance.StartCombat(deck);
 

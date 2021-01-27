@@ -115,7 +115,7 @@ namespace MapLogic
                         var hardNodeChance = (i - 2f) / settings.MapLength;
 
                         var goodNodeChance = i >= 2 ? settings.TreasureChance : 0f;
-                        step[j] = GenerateNode(Random.value < goodNodeChance, CurrentDifficulty,hardNodeChance);
+                        step[j] = GenerateNode(i % 2 == 0, CurrentDifficulty,hardNodeChance);
                     } 
                 }
 
@@ -184,19 +184,28 @@ namespace MapLogic
             CR += Random.Range(-adjust, adjust);
 
             if (CR < MapSettings.Instance.StepDifficultyIncrease) CR = MapSettings.Instance.StepDifficultyIncrease;
-                
 
-            if(goodNode)
+            //village
+            var civilizedRaces = MapSettings.Instance.CivilizedRaces;
+
+            var enemyRaces = MapSettings.Instance.EnemyRaces;
+
+            if (BattleManager.Instance.PlayerDeck?.Hero != null && enemyRaces.Contains(BattleManager.Instance.PlayerDeck.Hero.GetRace()))
+            {
+                enemyRaces = MapSettings.Instance.CivilizedRaces;
+                civilizedRaces = new Race[] { BattleManager.Instance.PlayerDeck.Hero.GetRace() };
+            }
+
+
+
+            if (goodNode)
             {
                 var v = Random.value;
 
                 //TODO: allow for other types
                 if(v > 0.0f)
                 {
-                    //village
-                    var races = MapSettings.Instance.CivilizedRaces;
-
-                    node = new MapNode( new VillageShop(CR, races[Random.Range(0,races.Length)]));
+                    node = new MapNode( new VillageShop(CR, civilizedRaces[Random.Range(0,civilizedRaces.Length)]));
                 }
                 else if(v >0.2f )
                 {
@@ -212,9 +221,7 @@ namespace MapLogic
             }
             else
             {
-
-                var races = MapSettings.Instance.EnemyRaces;
-                var race = races[Random.Range(0, races.Length)];
+                var race = enemyRaces[Random.Range(0, enemyRaces.Length)];
 
 
                 if (hardCombatChance > Random.value)

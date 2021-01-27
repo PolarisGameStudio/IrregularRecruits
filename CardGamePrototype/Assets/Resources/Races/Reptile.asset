@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Reptile
   Icon: {fileID: 21300000, guid: f4815ac42831a5549a21d47fd0478306, type: 3}
+  Shield: {fileID: 21300000, guid: ae96d41254699b741abfd83e383e2adb, type: 3}
   Description: 
   FavoriteActions: 020000000300000007000000
   FavoriteTriggers: 010000000000000006000000

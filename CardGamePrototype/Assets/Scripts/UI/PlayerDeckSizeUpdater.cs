@@ -28,8 +28,6 @@ namespace UI
 
             string count = BattleManager.Instance.PlayerDeck?.AllCreatures().Count.ToString();
 
-            Debug.Log("updating text to " + count);
-
             Text.text = count;
         }
 

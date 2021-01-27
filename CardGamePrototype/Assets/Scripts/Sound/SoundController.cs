@@ -1,5 +1,6 @@
 ﻿using UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Event = GameLogic.Event;
 
 public class SoundController : Singleton<SoundController>
@@ -12,6 +13,11 @@ public class SoundController : Singleton<SoundController>
 
     private void Awake()
     {
+        var buttons = Resources.FindObjectsOfTypeAll<Button>();
+
+        foreach (var b in buttons)
+            b.onClick.AddListener(PlayButtonClick);
+
         Event.OnGameBegin.AddListener(() => ChangeMusic(SoundBank.Music.Explore));
         Event.OnGameBegin.AddListener(() => PlayStinger(SoundBank.Stinger.GameStart));
 

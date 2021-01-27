@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using MapLogic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -62,6 +63,7 @@ namespace UI
 
 
         private int XpAtStartOfBattle;
+        private int GoldAtStartOfBattle;
 
         void Awake()
         {
@@ -97,8 +99,11 @@ namespace UI
             InitialPlayerDeck = playerDeck.AllCreatures();
             InitialEnemyDeck = opponentDeck.AllCreatures();
 
-            if (playerDeck.Hero != null) XpAtStartOfBattle = playerDeck.Hero.Xp;
-
+            if (playerDeck.Hero != null)
+            {
+                XpAtStartOfBattle = playerDeck.Hero.Xp;
+                GoldAtStartOfBattle = MapController.Instance.PlayerGold;
+            }
             OnBattleBegin.Invoke();
         }
 
@@ -131,10 +136,10 @@ namespace UI
             StartCoroutine(MoveCard(ui, card.Location, playerDeck));
         }
 
-        public static IEnumerator CleanUpUI()
+        public static IEnumerator CleanUpUI(Deck winner)
         {
             yield return null;
-            Instance.EndBattle();
+            Instance.EndBattle(winner);
         }
 
         public static IEnumerator Summon(Card summon,bool playerdekc)
@@ -161,7 +166,7 @@ namespace UI
 
 
 
-        private void EndBattle()
+        private void EndBattle(Deck winner)
         {
             foreach (var kp in CardUIs)
             {
@@ -170,13 +175,21 @@ namespace UI
 
                 Destroy(kp.Value.gameObject);
             }
+
             CardUIs.Clear();
 
             OnBattleFinished.Invoke();
 
             var endXp = PlayerDeck.Hero != null ? PlayerDeck.Hero. Xp : 0;
 
-            BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp,PlayerDeck.Hero);
+
+            if (winner != PlayerDeck)
+            {
+                Event.OnGameOver.Invoke();
+                return;
+            }
+            else
+                BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp,PlayerDeck.Hero,GoldAtStartOfBattle,MapController.Instance.PlayerGold);
             
         }
 

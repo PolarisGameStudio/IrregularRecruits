@@ -1,6 +1,7 @@
 ﻿using GameLogic;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -25,9 +26,11 @@ namespace UI
 
         public XpBar XpBar;
 
+        public TextMeshProUGUI GoldGainedText;
+
         private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
 
-        private void Start()
+        private void Awake()
         {
             BattleSummaryHolder.SetActive(false);
 
@@ -42,9 +45,13 @@ namespace UI
                 HeroView.Open(Hero);
         }
 
-        public static void ShowSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck,int startXp, int endXp,Hero hero)
+        public static void ShowSummary(List<Card> initialPlayerDeck, List<Card> initialEnemyDeck, List<Card> finalPlayerDeck, List<Card> finalEnemyDeck,int startXp, int endXp,Hero hero, int goldAtStartOfBattle,int endGold)
         {
             Instance.ShowBattleSummary(initialPlayerDeck, initialEnemyDeck, finalPlayerDeck, finalEnemyDeck,hero);
+
+            var gained = endGold - goldAtStartOfBattle;
+
+            Instance.GoldGainedText.text = gained + " gold looted";
 
             Instance.XpBar.ShowXpGain(startXp, endXp);
         }

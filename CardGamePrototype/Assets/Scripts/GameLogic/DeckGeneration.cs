@@ -7,10 +7,12 @@ namespace GameLogic
 
     public abstract class DeckGeneration
     {
-        public static Deck GenerateDeck(int CR, List<Race> races = null, List<Creature> creatures = null)
+        public static Deck GenerateDeck(int CR, List<Race> races = null, List<Creature> creatures = null, bool uniquesAllowed = false)
         {
             var possibleRaces = races ?? CreatureLibrary.Instance.AllRaces.OrderBy(c=>Random.value).ToList();
             var race = possibleRaces.First();
+
+            var origCreatures = creatures.ToList();
 
             //TODO: possible for more races together
 
@@ -19,6 +21,8 @@ namespace GameLogic
 
             var library = new List<Card>();
 
+            if (!uniquesAllowed)
+                creatures = creatures.Where(c => c.Rarity != Creature.RarityType.Unique || origCreatures.Contains(c)).ToList();
 
             var difficultyLeft = CR;
 

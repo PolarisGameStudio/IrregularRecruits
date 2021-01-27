@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Catfolk
   Icon: {fileID: 21300000, guid: 8bdf9d5228035bd46be60ee06fcf610c, type: 3}
+  Shield: {fileID: 21300000, guid: 6248e253f57888d4e88c024cac62d275, type: 3}
   Description: 
   FavoriteActions: 0400000008000000
   FavoriteTriggers: 040000000800000005000000

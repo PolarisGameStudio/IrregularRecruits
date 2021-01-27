@@ -28,15 +28,20 @@ namespace UI
 
         private void Start()
         {
-            if (MapController.Instance.Nodes.Count == 0)
-                MapController.Instance.CreateMap();
-
-            PositionToCenterDifferience = transform.position - MapStartPosition.position;
+            Event.OnGameBegin.AddListener(CreateMap);
 
             Event.OnGameBegin.AddListener(Open);
             BattleSummary.Instance.OnClose.AddListener(Open);
             Event.OnCombatSetup.AddListener((e, v) => Close());
 
+        }
+
+        private void CreateMap()
+        {
+            if (MapController.Instance.Nodes.Count == 0)
+                MapController.Instance.CreateMap();
+
+            PositionToCenterDifferience = transform.position - MapStartPosition.position;
         }
 
         private void UpdateNodes()
@@ -49,6 +54,10 @@ namespace UI
             HeroIcon.Portrait.image.sprite = BattleManager.Instance.PlayerDeck.Hero.HeroObject.Portrait;
 
             Holder.SetActive(true);
+
+            //if (MapController.Instance.CurrentNode.Visited && MapController.Instance.CurrentNode.LeadsTo.Count == 0)
+            //    LocationUI.Instance.OpenWinEvent();
+
             UpdateNodes();
         }
         public void Close()
@@ -96,11 +105,11 @@ namespace UI
 
         private  IEnumerator DestroyNode(MapNodeIcon n)
         {
-            n.CanvasGroup.LeanAlpha(0f, NodeFadeTime);
+            n.CanvasGroup.LeanAlpha(0.4f, NodeFadeTime);
 
             yield return new WaitForSeconds(NodeFadeTime);
 
-            Destroy(n.gameObject);
+            //Destroy(n.gameObject);
         }
 
         private IEnumerator DrawStepRecursive(List<MapNode> nodes, int degree, int shownSteps,MapNodeIcon startNode)
@@ -156,7 +165,7 @@ namespace UI
             {
                 instance = Instantiate(NodeIconPrefab, NodeHolder.transform);
 
-                instance.DebugText.text = node.ToString();
+                instance.NameText.text = node.ToString();
 
                 instance.transform.position = position;
 

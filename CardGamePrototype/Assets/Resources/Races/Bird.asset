@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bird
   Icon: {fileID: 21300000, guid: 2c620047a712e8c4b9dab6baa2006b6c, type: 3}
+  Shield: {fileID: 21300000, guid: 695fd45535f5d2d478cab1f44724a230, type: 3}
   Description: 
   FavoriteActions: 070000000800000001000000
   FavoriteTriggers: 040000000600000007000000

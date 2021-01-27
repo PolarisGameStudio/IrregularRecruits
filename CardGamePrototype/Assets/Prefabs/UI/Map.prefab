@@ -119,12 +119,12 @@ GameObject:
   - component: {fileID: 3911428340667935783}
   - component: {fileID: 5596873531188217470}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: MapName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3622548941395261674
 RectTransform:
   m_ObjectHideFlags: 0

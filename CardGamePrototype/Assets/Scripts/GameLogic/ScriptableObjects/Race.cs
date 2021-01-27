@@ -8,6 +8,7 @@ namespace GameLogic
     {
         public new string name;
         public Sprite Icon;
+        public Sprite Shield;
         public string Description;
 
         public Ability.ActionType[] FavoriteActions;

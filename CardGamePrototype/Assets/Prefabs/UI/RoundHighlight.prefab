@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7934631027743645266}
   - component: {fileID: 6590751194442551900}
   - component: {fileID: 4881641733285938861}
+  - component: {fileID: 479036277630842974}
   m_Layer: 0
   m_Name: RoundHighlight
   m_TagString: Untagged
@@ -4704,3 +4705,15 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!225 &479036277630842974
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128903965920102285}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

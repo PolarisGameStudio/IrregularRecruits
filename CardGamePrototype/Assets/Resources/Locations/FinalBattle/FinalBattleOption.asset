@@ -21,6 +21,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 02a3b05ab288a0446ab3b3959fba49f3, type: 2}
   MainRace: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
   AdditionalRaces: []
-  MinCr: 300
-  MaxCr: 300
+  MinCr: 100
+  MaxCr: 100
   UniquesAllowed: 1

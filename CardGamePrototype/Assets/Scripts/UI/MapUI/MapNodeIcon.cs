@@ -1,6 +1,7 @@
 ﻿using MapLogic;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ namespace UI
         public Button Icon;
         public MapNode Node;
         public Text DebugText;
+        public TextMeshProUGUI NameText;
         [SerializeField]
         private ParticleSystem HighlightParticles;
         public CanvasGroup CanvasGroup;
