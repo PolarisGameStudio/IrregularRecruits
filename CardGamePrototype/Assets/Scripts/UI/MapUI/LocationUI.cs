@@ -2,14 +2,15 @@
 using MapLogic;
 using System.Collections.Generic;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Event = GameLogic.Event;
 
-namespace UI
+namespace MapUI
 {
-    public class LocationUI : Singleton<LocationUI>
+    public class LocationUI : Singleton<LocationUI>, IUIWindow
     {
         public Image LocationImage;
         public TextMeshProUGUI Description;
@@ -17,6 +18,7 @@ namespace UI
         private List<Button> InstantiatedButtons = new List<Button>();
         private MapNode CurrentNode;
         public GameObject Holder;
+        public CanvasGroup FocusGroup;
 
         //non-effect story events
         public MapLocation StartEvent;
@@ -28,7 +30,7 @@ namespace UI
         private void Awake()
         {
             MapNode.OpenEvent.AddListener(Open);
-            MapNode.CloseLocation.AddListener(n => Close());
+            MapNode.CloseLocation.AddListener(n => UIController.Instance.Close(this));
             OptionInstance.gameObject.SetActive(false);
 
             Event.OnGameBegin.AddListener(OpenStartEvent);
@@ -72,8 +74,7 @@ namespace UI
 
             var location = node.Location as MapLocation;
 
-
-            Holder.SetActive(true);
+            UIController.Instance.Open(this);
 
             LocationImage.sprite = location.LocationImage;
 
@@ -94,11 +95,6 @@ namespace UI
             }
         }
 
-        private void Close()
-        {
-            Holder.SetActive(false);
-        }
-
         private void CreateButton(MapOption option, MapNode owner)
         {
             var instance = Instantiate(OptionInstance, OptionInstance.transform.parent);
@@ -110,6 +106,16 @@ namespace UI
             instance.gameObject.SetActive(true);
 
             InstantiatedButtons.Add(instance);
+        }
+
+        public CanvasGroup GetCanvasGroup()
+        {
+            return FocusGroup;
+        }
+
+        public GameObject GetHolder()
+        {
+            return Holder;
         }
     }
 }

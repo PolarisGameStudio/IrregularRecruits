@@ -2,7 +2,8 @@
     "name": "Sound",
     "references": [
         "GUID:84dc99f7c753f7d4ba5f6de8e1b75599",
-        "GUID:fae440856bfa60e4cbfb319ac9418689"
+        "GUID:fae440856bfa60e4cbfb319ac9418689",
+        "GUID:31088b6c98fc2bf4c9f94225c8a5ff7a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

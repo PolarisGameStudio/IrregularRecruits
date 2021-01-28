@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-namespace UI
+namespace MapUI
 {
     public class MapEdge : MonoBehaviour
     {

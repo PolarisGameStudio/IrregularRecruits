@@ -3,11 +3,10 @@ using UnityEngine.UI;
 using GameLogic;
 using Event = GameLogic.Event;
 using System;
+using UI;
 
-namespace UI
+namespace MapUI
 {
-
-
     public class HeroMapIcon :MonoBehaviour {
         public Button Portrait;
 

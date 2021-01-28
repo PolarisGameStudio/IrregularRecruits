@@ -13,10 +13,11 @@ using Random = UnityEngine.Random;
 
 namespace UI
 {
-    public class ShopUI : Singleton<ShopUI>
+    public class ShopUI : Singleton<ShopUI>, IUIWindow
     {
         public CardUI CardPrefab;
         public GameObject Holder;
+        public CanvasGroup FocusGroup;
         public List<GameObject> CardHolders;
         private List<Tuple<CardUI, int>> CurrentOffers ;
         public GameObject CardSelectionHolder;
@@ -24,7 +25,6 @@ namespace UI
         public Button RerollButton;
         private UnityEvent OnReload = new UnityEvent();
         private Shop ShowingShop;
-        public Button CloseButton;
         public Image RaceWatermark;
 
         [Header("Buying Movement")]
@@ -38,7 +38,6 @@ namespace UI
             Shop.OnShopReroll.AddListener(ShowNewCards);
             MapController.Instance.OnPlayerGoldUpdate.AddListener(i => UpdatePurchasability());
 
-            CloseButton.onClick.AddListener(Close);
 
             RerollButton.onClick.AddListener(RerollPush);
 
@@ -48,13 +47,15 @@ namespace UI
 
                 CardHolders.Add(instan);
             }
-            Close();
-        }
-
-        private void Close()
-        {
             Holder.SetActive(false);
         }
+
+        public CanvasGroup GetCanvasGroup()
+        {
+            return FocusGroup;
+        }
+
+        public GameObject GetHolder() => Holder;
 
         private void RerollPush()
         {
@@ -64,7 +65,7 @@ namespace UI
 
         public void SetupShop(Shop shop )
         {
-            Holder.SetActive(true);
+            UIController.Instance.Open(this);
 
             RaceWatermark.sprite = shop.VillageType.Icon;
 

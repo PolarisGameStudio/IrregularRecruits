@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class GameSettingsUI : MonoBehaviour
+    public class GameSettingsUI : Singleton<GameSettingsUI>, IUIWindow
     {
         private GameSettings GS;
 
@@ -13,6 +13,8 @@ namespace UI
         public Slider DrawSlider;
         public Slider ActionsPrTurnSlider;
         public Slider RareEnemySlider;
+        public GameObject Holder;
+        public CanvasGroup FocusGroup;
 
         private void Start()
         {
@@ -37,6 +39,14 @@ namespace UI
             GS.AiControlledPlayer = ai;
         }
 
+        public CanvasGroup GetCanvasGroup()
+        {
+            return FocusGroup;
+        }
 
+        public GameObject GetHolder()
+        {
+            return Holder;
+        }
     }
 }

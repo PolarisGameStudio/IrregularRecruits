@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace MapUI
 {
     public class MapNodeIcon : MonoBehaviour
     {

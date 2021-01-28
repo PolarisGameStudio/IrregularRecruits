@@ -5,10 +5,12 @@ using UnityEngine;
 using GameLogic;
 using Event = GameLogic.Event;
 using System.Collections;
+using UnityEngine.Events;
+using UI;
 
-namespace UI
+namespace MapUI
 {
-    public class MapUI : Singleton<MapUI>
+    public class MapUI : Singleton<MapUI>, IUIWindow
     {
         public MapNodeIcon NodeIconPrefab;
         public MapEdge LinePrefab;
@@ -16,6 +18,7 @@ namespace UI
         public List<MapNodeIcon> Nodes = new List<MapNodeIcon>();
         private List<MapNodeIcon> OldNodes = new List<MapNodeIcon>();
         public GameObject Holder;
+        public CanvasGroup FocusGroup;
         public GameObject NodeHolder;
         public GameObject MapHolder;
         [Range(0.5f, 5)]
@@ -25,6 +28,7 @@ namespace UI
         public RectTransform MapStartPosition;
         public Vector3 PositionToCenterDifferience;
         public float NodeFadeTime = 2f;
+        public static UnityEvent OnMapOpen = new UnityEvent();
 
         private void Start()
         {
@@ -53,7 +57,10 @@ namespace UI
         {
             HeroIcon.Portrait.image.sprite = BattleManager.Instance.PlayerDeck.Hero.HeroObject.Portrait;
 
-            Holder.SetActive(true);
+            OnMapOpen.Invoke();
+
+            UIController.Instance.Open(this);
+
 
             //if (MapController.Instance.CurrentNode.Visited && MapController.Instance.CurrentNode.LeadsTo.Count == 0)
             //    LocationUI.Instance.OpenWinEvent();
@@ -62,11 +69,13 @@ namespace UI
         }
         public void Close()
         {
-            Holder.SetActive(false);
-            foreach (var item in Nodes)
-            {
-                item.SetInteractable(false);
-            }
+
+            UIController.Instance.Close(this);
+
+            //foreach (var item in Nodes)
+            //{
+            //    item.SetInteractable(false);
+            //}
         }
 
         public void MoveHero(MapNodeIcon node)
@@ -220,6 +229,16 @@ namespace UI
             var lines = Instance.Linetypes;
 
             return lines[Random.Range(0, lines.Length)];
+        }
+
+        public CanvasGroup GetCanvasGroup()
+        {
+            return FocusGroup;
+        }
+
+        public GameObject GetHolder()
+        {
+            return Holder;
         }
     }
 

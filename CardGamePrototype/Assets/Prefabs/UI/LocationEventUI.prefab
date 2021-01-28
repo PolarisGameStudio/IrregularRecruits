@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 445011736943452247}
   - component: {fileID: 445011736943452241}
   - component: {fileID: 6332397256895777155}
+  - component: {fileID: 3763028673882866273}
   m_Layer: 5
   m_Name: LocationEventUI
   m_TagString: Untagged
@@ -62,9 +63,22 @@ MonoBehaviour:
   Description: {fileID: 3054856816374911500}
   OptionInstance: {fileID: 8970824620091642530}
   Holder: {fileID: 1690739795864112470}
+  FocusGroup: {fileID: 3763028673882866273}
   StartEvent: {fileID: 11400000, guid: 424e245fa5fbaf24fa3d45ce51592609, type: 2}
   WinEvent: {fileID: 11400000, guid: 6db82ceb27a17554284cb6027437d10d, type: 2}
   GameOverEvent: {fileID: 11400000, guid: 6db82ceb27a17554284cb6027437d10d, type: 2}
+--- !u!225 &3763028673882866273
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445011736943452244}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &445011738024596067
 GameObject:
   m_ObjectHideFlags: 0

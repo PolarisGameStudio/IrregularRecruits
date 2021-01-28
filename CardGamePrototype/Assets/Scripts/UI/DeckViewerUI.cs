@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class DeckViewerUI : Singleton<DeckViewerUI>
+    public class DeckViewerUI : Singleton<DeckViewerUI>, IUIWindow
     {
         public GameObject Holder;
+        public CanvasGroup FocusGroup;
         public Image WaterMark;
         public CardUI CardUIInstance;
         private List<GameObject> InstatiatedObjects = new List<GameObject>();
@@ -16,6 +17,7 @@ namespace UI
         private void Start()
         {
             Holder.SetActive(false);
+
         }
 
         public static void View(Deck deck)
@@ -49,13 +51,20 @@ namespace UI
                 InstatiatedObjects.Add(inst.gameObject);
             }
 
-            Holder.SetActive(true);
+            UIController.Instance.Open(this);
+
         }
 
 
-        public void Close()
+        public CanvasGroup GetCanvasGroup()
         {
-            Holder.SetActive(false);
+            return FocusGroup;
+        }
+
+
+        public GameObject GetHolder()
+        {
+            return Holder;
         }
     }
 }

@@ -250,7 +250,6 @@ MonoBehaviour:
   - Type: 6
     Audio:
     - {fileID: 8300000, guid: 297d669d21de80f43ad98cdcfbebd5db, type: 3}
-  Backgrounds: []
   Musics:
   - Type: 1
     Audio:
@@ -263,6 +262,9 @@ MonoBehaviour:
   - Type: 3
     Audio:
     - {fileID: 8300000, guid: 79c7ef39285c99f4fadc220bc67d12ec, type: 3}
+  - Type: 4
+    Audio:
+    - {fileID: 8300000, guid: 4b2bade7633d4864aab239a8553f7cfe, type: 3}
   AbilitySounds:
   - Type: 0
     TriggerAudio:
@@ -400,6 +402,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 56802a5bf5bd6ec47b46fa5d8ac090a9, type: 3}
     - {fileID: 8300000, guid: ff61f907387c1344993eb65a00f31f0a, type: 3}
     - {fileID: 8300000, guid: e3ff862324fd1934c8f66400349d78e5, type: 3}
+  VillageSounds: []
 --- !u!114 &1613703174290310515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,7 +416,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiAudioSource: {fileID: 1613703173360249445}
-  BackgroundAudioSource: {fileID: 0}
   StingerAudioSource: {fileID: 1613703174850849179}
   MusicAudioSource: {fileID: 1613703174878189640}
   SfxAudioSource: {fileID: 1613703174548964511}

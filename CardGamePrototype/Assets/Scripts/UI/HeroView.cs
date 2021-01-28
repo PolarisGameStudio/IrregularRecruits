@@ -9,7 +9,7 @@ using Event = GameLogic.Event;
 
 namespace UI
 {
-    public class HeroView : Singleton<HeroView>
+    public class HeroView : Singleton<HeroView>, IUIWindow
     {
         public Image HeroImage;
         public TextMeshProUGUI HeroName;
@@ -21,6 +21,7 @@ namespace UI
         public TextMeshProUGUI SelectLevelUpText;
 
         public GameObject Holder;
+        public CanvasGroup FocusGroup;
 
         public LevelAbility[] LevelAbilities;
 
@@ -37,9 +38,11 @@ namespace UI
             public AbilityUI Class;
         }
 
-        internal static void Close()
+        internal void Close()
         {
-            Instance.Holder.SetActive(false);
+
+            UIController.Instance.Close(this);
+
         }
 
         private void Start()
@@ -63,7 +66,7 @@ namespace UI
 
         private void ShowHero(Hero hero)
         {
-            Holder.SetActive(true);
+            UIController.Instance.Open(this);
 
             var raceopt = hero.HeroObject.RaceOption;
             var classopt = hero.HeroObject.Class;
@@ -103,6 +106,17 @@ namespace UI
                 if (classopt && classopt.Options.Count > i)
                     opt.Class?.SetAbility(classopt.Options[i], hero);
             }
+        }
+
+        public CanvasGroup GetCanvasGroup()
+        {
+            return FocusGroup;
+        }
+
+
+        public GameObject GetHolder()
+        {
+            return Holder;
         }
     }
 }

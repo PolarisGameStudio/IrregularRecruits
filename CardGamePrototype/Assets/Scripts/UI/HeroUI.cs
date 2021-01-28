@@ -27,7 +27,7 @@ namespace UI
             if (!HeroView.Instance.Holder.activeSelf)
                 HeroView.Open(CurrentHero);
             else
-                HeroView.Close();
+                HeroView.Instance.Close();
         }
 
         private void Update()

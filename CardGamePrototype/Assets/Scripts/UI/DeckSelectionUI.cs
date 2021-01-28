@@ -8,17 +8,21 @@ using Event = GameLogic.Event;
 namespace UI
 {
 
-    public class DeckSelectionUI : Singleton<DeckSelectionUI>
+    public class DeckSelectionUI : Singleton<DeckSelectionUI>, IUIWindow
     {
         public Icon DeckIconInstance;
         public Image DeckImage;
         public TextMeshProUGUI DeckTitle, DeckDescription;
         public Button ViewDeckButton;
+        public GameObject Holder;
+        public Button SettingsButton;
 
         private List<Icon> InstantiatedIcons = new List<Icon>();
         private DeckObject SelectedDeck;
         private Dictionary<DeckObject, Deck> Decks = new Dictionary<DeckObject, Deck>();
         private Dictionary<DeckObject, Icon> DeckIcons = new Dictionary<DeckObject, Icon>();
+
+        public CanvasGroup FocusGroup;
 
         private void Awake()
         {
@@ -39,6 +43,8 @@ namespace UI
             Destroy(DeckIconInstance.gameObject);
 
             InstantiatedIcons[0].Button.onClick.Invoke();
+
+            SettingsButton.onClick.AddListener(() => UIController.Instance.Open(GameSettingsUI.Instance));
         }
 
         private void Start()
@@ -83,6 +89,16 @@ namespace UI
 
             Destroy(gameObject);
             //LeanTween.alpha(gameObject, 0, 2f).setOnComplete(() => Destroy(gameObject));
+        }
+
+        public CanvasGroup GetCanvasGroup()
+        {
+            return FocusGroup;
+        }
+
+        public GameObject GetHolder()
+        {
+            return Holder;
         }
     }
 }

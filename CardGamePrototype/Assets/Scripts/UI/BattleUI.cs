@@ -14,10 +14,12 @@ using Random = UnityEngine.Random;
 
 namespace UI
 {
+
+
     /// <summary>
     /// Responsible for handling all ui during combat
     /// </summary>
-    public class BattleUI : Singleton<BattleUI>
+    public class BattleUI : Singleton<BattleUI>, IUIWindow
     {
 
         public CardUI CardPrefab;
@@ -64,6 +66,8 @@ namespace UI
 
         private int XpAtStartOfBattle;
         private int GoldAtStartOfBattle;
+
+        public CanvasGroup FocusCanvas;
 
         void Awake()
         {
@@ -202,7 +206,7 @@ namespace UI
 
         private float GetZoneAdjust(Deck.Zone zone, bool enm)
         {
-            var z = enm ? Instance.EnemyUIZones : Instance.PlayerUIZones;
+            var z = enm ? EnemyUIZones : PlayerUIZones;
 
             return z.FirstOrDefault(u => u.Zone == zone).CardPosAdjust;
         }
@@ -424,7 +428,12 @@ namespace UI
             card.Interactable = true;
         }
 
+        public CanvasGroup GetCanvasGroup()
+        {
+            return FocusCanvas;
+        }
 
+        public GameObject GetHolder() => null;
     }
 
 }

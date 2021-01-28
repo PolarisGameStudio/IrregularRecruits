@@ -349,6 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8082983243561677795}
   - component: {fileID: 8082983243561677820}
+  - component: {fileID: 6617330883203426100}
   m_Layer: 5
   m_Name: Map
   m_TagString: Untagged
@@ -395,6 +396,7 @@ MonoBehaviour:
   HeroIcon: {fileID: 4257702827291930991}
   Nodes: []
   Holder: {fileID: 144759970862014761}
+  FocusGroup: {fileID: 6617330883203426100}
   NodeHolder: {fileID: 3149165763572885771}
   MapHolder: {fileID: 8082983244512182284}
   MapSize: 2
@@ -408,6 +410,18 @@ MonoBehaviour:
   MapStartPosition: {fileID: 8864691495912928279}
   PositionToCenterDifferience: {x: 0, y: 0, z: 0}
   NodeFadeTime: 2
+--- !u!225 &6617330883203426100
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8082983243561677794}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8082983244512182284
 GameObject:
   m_ObjectHideFlags: 0

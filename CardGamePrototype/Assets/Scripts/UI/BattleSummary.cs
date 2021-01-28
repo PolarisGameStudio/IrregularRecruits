@@ -11,7 +11,7 @@ namespace UI
     /// <summary>
     /// Responsible for showing the player the result of a combat
     /// </summary>
-    public class BattleSummary : Singleton<BattleSummary>
+    public class BattleSummary : Singleton<BattleSummary>, IUIWindow
     {
         [Header("Battle summary")]
         //TODO: move to battlesummary class
@@ -30,9 +30,12 @@ namespace UI
 
         private List<UnitIcon> InstantiatedObjects = new List<UnitIcon>();
 
+        public CanvasGroup FocusGroup;
+
         private void Awake()
         {
             BattleSummaryHolder.SetActive(false);
+
 
             HeroPortrait.onClick.AddListener(HeroClick);
 
@@ -75,7 +78,8 @@ namespace UI
             SetupIcons(gained, BattleSummaryGainedIcon);
 
 
-            BattleSummaryHolder.SetActive(true);
+            UIController.Instance.Open(this);
+
         }
 
         private void SetupIcons(IEnumerable<Card> killed, UnitIcon iconPrefab)
@@ -89,6 +93,16 @@ namespace UI
 
                 InstantiatedObjects.Add(icon);
             }
+        }
+
+        public CanvasGroup GetCanvasGroup()
+        {
+            return FocusGroup;
+        }
+
+        public GameObject GetHolder()
+        {
+            return BattleSummaryHolder;
         }
     }
 }
