@@ -18,6 +18,8 @@ namespace UI
         public int MinimumPositions = 4;
         public int MaximumPositions = 8;
 
+        public CardLayoutGroup TransitionsTo;
+
         private List<CardUI> ChildCards = new List<CardUI>();
 
         private Vector2[] ChildDesiredPositions;
@@ -60,11 +62,9 @@ namespace UI
             UpdateChildrenPositions();
         }
 
-        //Should ensure that each card has a 
         private void UpdateChildrenPositions()
         {
-            ChildCards.RemoveAll((c) => !c );
-
+            ChildCards.RemoveAll((c) => !c);
 
             int count = ChildCards.Count;
 
@@ -77,20 +77,26 @@ namespace UI
 
             for (int i = 0; i < count; i++)
             {
-                ChildDesiredPositions[i] = EvaluatePosition( i);
+                ChildDesiredPositions[i] = EvaluatePosition(i);
             }
 
+            MoveCardsToUpdatedPositions();
 
+            // update child as movingToPosition, to only check those cards
+        }
+
+        private void MoveCardsToUpdatedPositions()
+        {
             for (int i = 0; i < ChildCards.Count; i++)
             {
                 var card = ChildCards[i];
                 var desiredPos = ChildDesiredPositions[i];
 
-                if(!PointOnly)
+                if (card.BeingDragged) continue;
+
+                if (!PointOnly)
                     card.transform.LeanMove(desiredPos, UnityEngine.Random.Range(0.1f, 0.3f));
             }
-
-            // update child as movingToPosition, to only check those cards
         }
 
         private Vector2 EvaluatePosition(int index)
@@ -128,37 +134,56 @@ namespace UI
         }
 
 
-        //Should ensure that each card has a 
-        private void UpdateChildOrder()
+        //TODO: maybe should just take the dragged card as parameter
+        public void UpdateDraggedCardPos()
         {
-            var moving = ChildCards.First(c => c.Moving);
+            var draggedCard = ChildCards.First(c => c.BeingDragged);
 
-            if (!moving) return;
+            if (!draggedCard) return;
 
-            int index = ChildCards.IndexOf(moving);
+            int index = ChildCards.IndexOf(draggedCard);
             var currentDesiredPos = ChildDesiredPositions[index];
 
-            Vector2 position = moving.transform.position;
+            Vector2 cardPos = draggedCard.transform.position;
+            Vector2 thisPos = transform.position;
 
-            //closer to the before position
-            if (index > 0 && (currentDesiredPos - position).sqrMagnitude > (ChildDesiredPositions[index - 1] - position).sqrMagnitude)
+            var transitionTo = draggedCard.CanTransitionTo;
+
+            //Debug.Log($"Moving {moving} pos: {position}, idx: {index}, layoutpos: {currentDesiredPos}");
+
+            if(transitionTo != null && ((Vector2)transform.position - cardPos).sqrMagnitude > ((Vector2)transitionTo.transform.position- cardPos).sqrMagnitude)
             {
+                draggedCard.CurrentZoneLayout = transitionTo;
+                draggedCard.CanTransitionTo = this;
+                transitionTo.AddChild(draggedCard);
+                RemoveChild(draggedCard);
+
+                TransitionsTo.UpdateDraggedCardPos();
+            }
+            //closer to the before position
+            else if (index > 0 && (currentDesiredPos - cardPos).sqrMagnitude > (ChildDesiredPositions[index - 1] - cardPos).sqrMagnitude)
+            {
+                Debug.Log($"Changeing position down");
+
                 //switch positions
                 var ca = ChildCards[index - 1];
-                ChildCards[index - 1] = moving;
+                ChildCards[index - 1] = draggedCard;
                 ChildCards[index] = ca;
 
-                //TODO: should also update order in unity hierachy
-
+                MoveCardsToUpdatedPositions();
             }
             //closer to the after position
-            else if (index < ChildCards.Count - 1 && (currentDesiredPos - position).sqrMagnitude > (ChildDesiredPositions[index + 1] - position).sqrMagnitude)
+            else if (index < ChildCards.Count - 1 && (currentDesiredPos - cardPos).sqrMagnitude > (ChildDesiredPositions[index + 1] - cardPos).sqrMagnitude)
             {
+                Debug.Log($"Changeing position up");
+
                 //switch positions
                 var ca = ChildCards[index + 1];
-                ChildCards[index + 1] = moving;
+                ChildCards[index + 1] = draggedCard;
                 ChildCards[index] = ca;
 
+
+                MoveCardsToUpdatedPositions();
             }
 
         }

@@ -24,7 +24,8 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
         HighestHealthFirst,
         LowestHealthFirst,
         HighestAttackFirst,
-        LowestAttackFirst
+        LowestAttackFirst,
+        OrderedInTurns
     }
     //DamageToDeckSystem
     public DeckDamage DeckDamageParadigm = DeckDamage.DamageToTopCard;

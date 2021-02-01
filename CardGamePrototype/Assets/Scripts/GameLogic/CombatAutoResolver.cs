@@ -36,12 +36,36 @@ namespace GameLogic
 
             attackOrder = new List<Card>();
 
-            attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
             attackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
+            attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
 
             //Differentiate between player and enemy creatures?
             switch (GameSettings.Instance.AttackOrderParadigm)
             {
+                case GameSettings.AttackParadigm.OrderedInTurns:
+                    var order = new List<Card>();
+
+                    bool enm = EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Count >= PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Count;
+
+                    while (attackOrder.Any())
+                    {
+                        Card select;
+
+                        if (attackOrder.Any(o => (o.InDeck == EnemyDeck) == enm))
+                            select = attackOrder.First(o => (o.InDeck == EnemyDeck) == enm);
+                        else
+                            select = attackOrder.First();
+
+                        order.Add(select);
+
+                        attackOrder.Remove(select);
+
+                        enm = !enm;
+                    }
+
+                    attackOrder = order;                    
+                    break;
+
                 case GameSettings.AttackParadigm.Random:
                     attackOrder = attackOrder.OrderBy(x => UnityEngine.Random.value).ToList();
                     break;

@@ -377,11 +377,11 @@ namespace UI
 
             if (!zoneHolder) yield break;
 
+
             var startTime = Time.time;
             float posAdjust = GetZoneAdjust(zone, !player);
             var rot = GetZoneRotation(zone, !player);
             Vector2 endPosition =  zoneHolder.GetLastPosition();
-
 
             endPosition += new Vector2(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
 

@@ -7,14 +7,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Event = GameLogic.Event;
-
 
 namespace UI
 {
 
     [RequireComponent(typeof(RectTransform))]
-    public class CardUI : AbilityHolderUI, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler
+    public class CardUI : AbilityHolderUI, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler,IEndDragHandler,IBeginDragHandler
     {
         public Creature Creature;
 
@@ -44,7 +42,14 @@ namespace UI
         private Color ReducedStatsColor = new Color(0.75f, 0.75f, 0.75f);
 
         //being dragged? maybe change name
-        public bool Moving { get; internal set; }
+        public bool BeingDragged { get; internal set; }
+        
+        [HideInInspector]
+        public CardLayoutGroup CurrentZoneLayout;
+
+        [HideInInspector]
+        public CardLayoutGroup CanTransitionTo;
+
         public enum CardState { FaceUp, FaceDown, Battle }
 
         public class CardUIEvent : UnityEvent<CardUI> { }
@@ -222,8 +227,28 @@ namespace UI
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (GetCardState() == CardState.FaceDown)
+                return;
+
+            transform.position = eventData.pointerCurrentRaycast.worldPosition;
+
+            CurrentZoneLayout.UpdateDraggedCardPos();
         }
 
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            CurrentZoneLayout =  GetComponentInParent<CardLayoutGroup>();
+
+            CanTransitionTo = CurrentZoneLayout?.TransitionsTo;
+
+            BeingDragged = true;
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+
+            BeingDragged = false;
+        }
 
         internal IEnumerator Flip(CardState state, float flipTime = 0.2f)
         {
@@ -290,6 +315,7 @@ namespace UI
                 }
             }
         }
+
 #endif
 #if false
     public void Update()

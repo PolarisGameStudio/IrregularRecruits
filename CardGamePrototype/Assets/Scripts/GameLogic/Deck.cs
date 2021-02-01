@@ -100,6 +100,37 @@ namespace GameLogic
             Draw(amountToDraw);
         }
 
+        internal void SetPosition(Card card, Zone zone, int position)
+        {
+            //right now only battlefield position matters
+            if (zone != Zone.Battlefield)
+                return;
+            
+            var creaturesInZone = CreaturesInZone(zone);
+
+            if(position >= creaturesInZone.Count)
+                throw new System.ArgumentException($"positionning: cannot put {card} in {zone} at pos {position}");
+
+            if (!creaturesInZone.Contains(card))
+                throw new System.ArgumentException($"positionning card: {card} not in {zone}");
+
+            //rearranging the cards in same order, with the selected Card at selected position
+            var newOrder = new List<Card>();
+            for (int i = 0; i < creaturesInZone.Count; i++)
+            {
+                if (i == position)
+                    newOrder.Add(card);
+
+                var other = creaturesInZone[i];
+
+                if (other == card) continue;
+
+                newOrder.Add(other);
+            }
+
+            Creatures[zone] = newOrder;
+
+        }
 
         public void PackUp(bool removeAll = false)
         {

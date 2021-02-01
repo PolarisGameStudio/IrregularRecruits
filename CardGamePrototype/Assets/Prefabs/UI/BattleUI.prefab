@@ -2837,6 +2837,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MinimumPositions: 5
   MaximumPositions: 8
+  TransitionsTo: {fileID: 0}
 --- !u!1 &3660017127510660989
 GameObject:
   m_ObjectHideFlags: 0
@@ -13013,6 +13014,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MinimumPositions: 4
   MaximumPositions: 5
+  TransitionsTo: {fileID: 3716480691181722876}
 --- !u!1 &3660017128170685124
 GameObject:
   m_ObjectHideFlags: 0
@@ -13112,6 +13114,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MinimumPositions: 5
   MaximumPositions: 8
+  TransitionsTo: {fileID: 0}
 --- !u!1 &3660017128315052623
 GameObject:
   m_ObjectHideFlags: 0
@@ -13220,6 +13223,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MinimumPositions: 5
   MaximumPositions: 8
+  TransitionsTo: {fileID: 9019354100244692800}
 --- !u!1 &3660017128358087259
 GameObject:
   m_ObjectHideFlags: 0
@@ -13320,6 +13324,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MinimumPositions: 5
   MaximumPositions: 8
+  TransitionsTo: {fileID: 0}
 --- !u!1 &3660017128465148508
 GameObject:
   m_ObjectHideFlags: 0
@@ -14015,6 +14020,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MinimumPositions: 5
   MaximumPositions: 8
+  TransitionsTo: {fileID: 0}
 --- !u!1 &3660017128962117137
 GameObject:
   m_ObjectHideFlags: 0
@@ -14296,6 +14302,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MinimumPositions: 4
   MaximumPositions: 5
+  TransitionsTo: {fileID: 0}
 --- !u!1 &3660017129027377919
 GameObject:
   m_ObjectHideFlags: 0
@@ -14471,6 +14478,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MinimumPositions: 5
   MaximumPositions: 8
+  TransitionsTo: {fileID: 0}
 --- !u!1 &3924481553411071271
 GameObject:
   m_ObjectHideFlags: 0

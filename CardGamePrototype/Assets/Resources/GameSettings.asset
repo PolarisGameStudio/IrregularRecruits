@@ -18,7 +18,7 @@ MonoBehaviour:
   PlaysPrTurn: 2
   DrawPrTurn: 1
   MaxCreaturesOnBattlefield: 0
-  AttackOrderParadigm: 0
+  AttackOrderParadigm: 5
   DeckDamageParadigm: 0
   CombatSpeed: 1
   AiControlledPlayer: 0

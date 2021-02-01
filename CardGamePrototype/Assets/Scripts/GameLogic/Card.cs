@@ -97,9 +97,9 @@ namespace GameLogic
             ChangeLocation(Location, to);
         }
 
-        public void ChangeLocation(Deck.Zone from, Deck.Zone to, bool noAbilityTrigger = false)
+        public void ChangeLocation(Deck.Zone from, Deck.Zone to, bool noAbilityTrigger = false, int position = 0)
         {
-            //Debug.Log($"Moving {this.Name} from {from} to {to}. PLAYER: {InDeck.PlayerDeck}");
+            //Debug.Log($"Moving {this.Name} from {from} to {to}. indeck: {InDeck}");
 
             if (InDeck == null)
             {
@@ -120,6 +120,9 @@ namespace GameLogic
 
             if (IsSummon() && to != Deck.Zone.Battlefield)
                 Unsummon();
+
+            //TODO: this null prop should not be nessecary!!? but some nullrefs occured
+            InDeck?.SetPosition(this, to, position);
 
             if (noAbilityTrigger)
                 return;
@@ -234,9 +237,10 @@ namespace GameLogic
 
         }
 
-        public void PlayCard()
+        public void PlayCard(int position = 0)
         {
             ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
+
 
         }
 

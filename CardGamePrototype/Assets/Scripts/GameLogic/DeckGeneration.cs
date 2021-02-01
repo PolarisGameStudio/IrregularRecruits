@@ -12,7 +12,9 @@ namespace GameLogic
             var possibleRaces = races ?? CreatureLibrary.Instance.AllRaces.OrderBy(c=>Random.value).ToList();
             var race = possibleRaces.First();
 
-            var origCreatures = creatures.ToList();
+            if (creatures == null) creatures = new List<Creature>();
+
+            var origCreatures = creatures;
 
             //TODO: possible for more races together
 

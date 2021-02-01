@@ -36,7 +36,7 @@ namespace UI
         {
             if (arg0.Creature == Creature)
             {
-                Debug.Log("Card destroyed, hiding hover info");
+                //Debug.Log("Card destroyed, hiding hover info");
                 Hide();
             }
             //todo should also check if it is the same ui instance.. since different uis can have the same creature
