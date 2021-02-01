@@ -104,5 +104,6 @@ namespace UI
         {
             return BattleSummaryHolder;
         }
+        public int GetPriority() => 1;
     }
 }

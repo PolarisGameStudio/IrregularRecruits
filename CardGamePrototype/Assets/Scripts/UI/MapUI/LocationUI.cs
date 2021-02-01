@@ -117,5 +117,7 @@ namespace MapUI
         {
             return Holder;
         }
+
+        public int GetPriority() => 3;
     }
 }

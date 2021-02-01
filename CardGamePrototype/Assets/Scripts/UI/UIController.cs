@@ -9,7 +9,7 @@ namespace UI
     //todo: should also handle focus, so non-top windows are not interactable
     public class UIController : Singleton<UIController>
     {
-        public Stack<IUIWindow> UIWindows = new Stack<IUIWindow>();
+        public List<IUIWindow> UIWindows = new List<IUIWindow>();
 
         [Header("Objects should be of type IUIWindow, Last Object will be on top")]
         public List<MonoBehaviour> OpenUIWindowsInSceneStart;
@@ -20,7 +20,7 @@ namespace UI
             {
                 if (!(window is IUIWindow win))
                 {
-                    Debug.LogError($"{window.name} does not inherit ui window");
+                    Debug.LogWarning($"{window.name} does not inherit ui window");
                     continue;
                 }
                 Open(win);
@@ -31,12 +31,7 @@ namespace UI
         //should this handle all ui open events?
         public void Close(IUIWindow window)
         {
-
-            if (!UIWindows.Any() ||UIWindows.Peek() != window)
-                Debug.LogWarning("closing non-top window: " + window);
-            else
-                UIWindows.Pop();
-
+            UIWindows.Remove(window);
 
             window.GetHolder()?.SetActive(false);
 
@@ -49,21 +44,31 @@ namespace UI
         public void Open(IUIWindow window)
         {
             if (UIWindows.Contains(window))
-                Debug.LogWarning("opening window already open in window stack");
-
-            //disables the current top window
-            if(UIWindows.Any())
-            UIWindows.Peek().GetCanvasGroup().interactable = false;
+            {
+                Debug.LogWarning("opening window already open in window stack: " + window);
+                return;
+            }
+            else
+                UIWindows.Add(window);
 
             Debug.Log("opening " + window);
 
-            UIWindows.Push(window);
+            UIWindows = UIWindows.OrderBy(ui => ui.GetPriority()).ToList();
+
+            //disables the current top window
+            foreach (var ui in UIWindows)
+            {
+                ui.GetCanvasGroup().interactable = ui == UIWindows.Last();
+            }
+
+            Debug.Log("opening " + UIWindows.Last());
+
             OpenTopWindow();
         }
 
         private void OpenTopWindow()
         {
-            IUIWindow newTopWindow = UIWindows.Peek();
+            IUIWindow newTopWindow = UIWindows.Last();
             newTopWindow.GetHolder()?.SetActive(true);
             newTopWindow.GetCanvasGroup().interactable = true;
         }

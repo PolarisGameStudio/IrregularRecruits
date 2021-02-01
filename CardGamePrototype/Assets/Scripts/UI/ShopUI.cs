@@ -57,6 +57,8 @@ namespace UI
 
         public GameObject GetHolder() => Holder;
 
+        public int GetPriority() => 4;
+
         private void RerollPush()
         {
             Debug.Log("clicked reroll");

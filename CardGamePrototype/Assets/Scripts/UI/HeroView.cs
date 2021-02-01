@@ -118,5 +118,7 @@ namespace UI
         {
             return Holder;
         }
+
+        public int GetPriority() => 9;
     }
 }

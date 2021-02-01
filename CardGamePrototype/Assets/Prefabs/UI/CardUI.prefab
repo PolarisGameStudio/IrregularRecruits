@@ -1090,6 +1090,7 @@ GameObject:
   - component: {fileID: 6328246388895847416}
   - component: {fileID: 6978953058678933244}
   - component: {fileID: 4991445251926434332}
+  - component: {fileID: 7981517690690653867}
   m_Layer: 5
   m_Name: CardUI
   m_TagString: Untagged
@@ -1199,6 +1200,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &7981517690690653867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647378737500881845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f37e8ed475c62b45a4665ec167e253d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3647378737615735764
 GameObject:
   m_ObjectHideFlags: 0

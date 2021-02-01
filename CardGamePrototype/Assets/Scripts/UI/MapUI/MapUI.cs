@@ -30,7 +30,7 @@ namespace MapUI
         public float NodeFadeTime = 2f;
         public static UnityEvent OnMapOpen = new UnityEvent();
 
-        private void Start()
+        private void Awake()
         {
             Event.OnGameBegin.AddListener(CreateMap);
 
@@ -240,6 +240,8 @@ namespace MapUI
         {
             return Holder;
         }
+
+        public int GetPriority() => 2;
     }
 
 }

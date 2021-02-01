@@ -11,6 +11,8 @@ namespace UI
 
         CanvasGroup GetCanvasGroup();
         GameObject GetHolder();
+        //higher means in front of other
+        int GetPriority();
 
         //These should only be called by UIController
         //void Open();

@@ -87,6 +87,8 @@ namespace UI
 
             Event.OnGameBegin.Invoke();
 
+            UIController.Instance.Close(this);
+
             Destroy(gameObject);
             //LeanTween.alpha(gameObject, 0, 2f).setOnComplete(() => Destroy(gameObject));
         }
@@ -100,5 +102,7 @@ namespace UI
         {
             return Holder;
         }
+
+        public int GetPriority() => 5;
     }
 }

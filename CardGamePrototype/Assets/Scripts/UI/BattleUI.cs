@@ -434,6 +434,7 @@ namespace UI
         }
 
         public GameObject GetHolder() => null;
+        public int GetPriority() => 0;
     }
 
 }
