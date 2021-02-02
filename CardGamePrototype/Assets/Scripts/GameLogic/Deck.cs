@@ -83,6 +83,11 @@ namespace GameLogic
         public List<Card> CreaturesInZone(Zone z)
             => Creatures[z];
 
+        public Zone GetZone(Card card)
+        {
+            return Creatures.Single(z => z.Value.Contains(card)).Key;
+        }
+
         internal void DrawInitialHand(bool enemy = false)
         {
             ShuffleLibrary();
@@ -115,6 +120,7 @@ namespace GameLogic
                 throw new System.ArgumentException($"positionning card: {card} not in {zone}");
 
             //rearranging the cards in same order, with the selected Card at selected position
+            //todo: just use list.insert
             var newOrder = new List<Card>();
             for (int i = 0; i < creaturesInZone.Count; i++)
             {

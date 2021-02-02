@@ -35,7 +35,10 @@ namespace UI
         //For deck view and the like
         public bool AlwaysFaceUp;
         public bool Interactable = true;
-        public readonly UnityEvent OnClick = new UnityEvent();
+        public class IntEvent : UnityEvent<int> { }
+        public readonly IntEvent OnClick = new IntEvent();
+
+        private IntEvent OnPositionChanged = new IntEvent();
 
         //Not equal to Card.health, since UI may be behind
         public int HealthValueDisplayed;
@@ -46,14 +49,20 @@ namespace UI
         
         [HideInInspector]
         public CardLayoutGroup CurrentZoneLayout;
+        [HideInInspector]
+        public CardLayoutGroup CameFromGroup { get; private set; }
 
         [HideInInspector]
         public CardLayoutGroup CanTransitionTo;
+        //which position those the card have in the ui
+        [HideInInspector]
+        public int LayoutIndex;
 
         public enum CardState { FaceUp, FaceDown, Battle }
 
         public class CardUIEvent : UnityEvent<CardUI> { }
         public static CardUIEvent OnUIDestroyed = new CardUIEvent();
+
 
         public void OnDestroy()
         {
@@ -65,6 +74,7 @@ namespace UI
             UpdateCreature(c.Creature);
             UpdateStats(c.Attack, c.CurrentHealth, c.Damaged());
             OnClick.AddListener(c.Click);
+            OnPositionChanged.AddListener(c.PositionChanged);
         }
         public void SetCreature(Creature c)
         {
@@ -199,8 +209,8 @@ namespace UI
 #if UNITY_ANDROID
             if (CardHoverInfo.IsActive()) return;
 #endif
-            if (IsClickable() && Interactable && UIFlowController.Instance.EmptyQueue())
-                OnClick.Invoke();
+            if (!BeingDragged && IsClickable() && Interactable && UIFlowController.Instance.EmptyQueue())
+                OnClick.Invoke(0);
         }
 
         private bool IsClickable()
@@ -227,31 +237,53 @@ namespace UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (GetCardState() == CardState.FaceDown)
+            if (!BeingDragged) //if the card is not allowed to be dragged
                 return;
 
             transform.position = eventData.pointerCurrentRaycast.worldPosition;
 
             CurrentZoneLayout.UpdateDraggedCardPos();
+
+            if (CurrentZoneLayout.HiddenZone)
+                transform.SetAsFirstSibling();
+            else
+                transform.SetAsLastSibling();
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             CurrentZoneLayout =  GetComponentInParent<CardLayoutGroup>();
+            CameFromGroup = CurrentZoneLayout;
 
             CanTransitionTo = CurrentZoneLayout?.TransitionsTo;
 
-            BeingDragged = true;
+            if (CurrentZoneLayout && CurrentZoneLayout.CardsAreDraggable && !BattleUI.Instance.BattleRunning)
+            {
+                BeingDragged = true;
+            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
 
             BeingDragged = false;
+
+            //if we have moved to the other layout group
+            if (CameFromGroup != CurrentZoneLayout)
+            {
+                //Debug.Log($"{name} dragged to {CurrentZoneLayout.CardZone} at pos {LayoutIndex}");
+                OnClick.Invoke(LayoutIndex);
+            }
+            else
+                OnPositionChanged.Invoke(LayoutIndex);
+            
+            //move it into place
+            CurrentZoneLayout.MoveCardsToDesiredPositions();
         }
 
         internal IEnumerator Flip(CardState state, float flipTime = 0.2f)
         {
+            
             //already correct face up
             if (state == GetCardState()) yield break;
 
@@ -269,7 +301,6 @@ namespace UI
                 CardBackHolder.SetActive(state == CardState.FaceDown);
                 CardBattleUI.SetActive(state == CardState.Battle);
                 FrontHolder.SetActive(state == CardState.FaceUp);
-
 
                 FrontHolder.GetComponent<CanvasGroup>().alpha = 1;
 

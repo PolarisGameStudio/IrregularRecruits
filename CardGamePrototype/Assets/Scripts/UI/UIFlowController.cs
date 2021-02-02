@@ -50,7 +50,8 @@ namespace UI
             Event.OnAbilityExecution.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.Guid,ts.Select(t=>t.Guid))));
 
             Event.OnPlayerAction.AddListener(d => AddCardEvent(ActionUsed(d)));
-            Event.OnTurnBegin.AddListener(() => AddCardEvent(RefreshActions()));
+            Event.OnTurnBegin.AddListener(() => AddCardEvent(PlayerTurnStart()));
+            Event.OnCombatResolveStart.AddListener(PlayerTurnDone);
         }
 
         private void AddMoveEvent(Card card, Deck.Zone from, Deck.Zone to)
@@ -60,14 +61,26 @@ namespace UI
             AddCardEvent( BattleUI.Move(card.Guid, to, from, playerdeck));
         }
 
-        private IEnumerator RefreshActions()
+        private IEnumerator PlayerTurnStart()
         {
             yield return null;
+
+            BattleUI.Instance.BattleRunning = false;
 
             HeroUI.Instance?.UnlockAbilities();
 
             ActionsLeftUI.ActionsRefreshed.Invoke();
         }
+
+        private void PlayerTurnDone()
+        {
+            Debug.Log("Combat started. Locking ui");
+
+            BattleUI.Instance.BattleRunning = true;
+            HeroUI.Instance?.LockAbilities();
+
+        }
+
         private IEnumerator ActionUsed(Deck deck)
         {
             if (deck != BattleUI.Instance.PlayerDeck)

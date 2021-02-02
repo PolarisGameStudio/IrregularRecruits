@@ -63,11 +63,14 @@ namespace UI
 
         public Button EndTurnButton;
 
-
+        //todo: move ´this into seperate class
         private int XpAtStartOfBattle;
         private int GoldAtStartOfBattle;
 
         public CanvasGroup FocusCanvas;
+
+        [HideInInspector]
+        public bool BattleRunning;
 
         void Awake()
         {
@@ -76,6 +79,12 @@ namespace UI
             Event.OnCombatSetup.AddListener(SetupDecks);
 
             EndTurnButton.onClick.AddListener(EndPlayerTurn);
+
+            //todo could probably be done nicer. use getzoneholder maybe? and remove .CardZone
+            foreach (var c in PlayerUIZones)
+                c.CardLayout.CardZone = c.Zone;
+            foreach (var c in EnemyUIZones)
+                c.CardLayout.CardZone = c.Zone;
 
         }
 
@@ -108,6 +117,7 @@ namespace UI
                 XpAtStartOfBattle = playerDeck.Hero.Xp;
                 GoldAtStartOfBattle = MapController.Instance.PlayerGold;
             }
+
             OnBattleBegin.Invoke();
         }
 
@@ -228,7 +238,8 @@ namespace UI
             //TODO: should the effect be bfore or after
             yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
 
-            yield return MoveCard(ui, to, playerDeck);
+
+                yield return MoveCard(ui, to, playerDeck);
 
             ui.CardAnimation.TurnOffHighlight();
         }
@@ -371,40 +382,45 @@ namespace UI
             if(zone == Deck.Zone.Graveyard)
                 yield return card.Flip(CardUI.CardState.Battle);
 
-            var rect = card.GetComponent<RectTransform>();
-            Vector2 startPos = rect.position;
             var zoneHolder = GetZoneHolder(zone, !player);
 
-            if (!zoneHolder) yield break;
-
-
-            var startTime = Time.time;
-            float posAdjust = GetZoneAdjust(zone, !player);
-            var rot = GetZoneRotation(zone, !player);
-            Vector2 endPosition =  zoneHolder.GetLastPosition();
-
-            endPosition += new Vector2(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
-
-            rect.Rotate(new Vector3(0, 0, Random.Range(-rot, rot)));
-
-            var adjustDirection = (startPos - endPosition);
-
-            adjustDirection = new Vector2(adjustDirection.y, -adjustDirection.x).normalized;
-
-            while (Time.time < startTime + MoveDuration)
+            //if not already dragged there
+            if (!zoneHolder.HasChild(card))
             {
-                yield return null;
 
-                float t = (Time.time - startTime) / MoveDuration;
+                var rect = card.GetComponent<RectTransform>();
+                Vector2 startPos = rect.position;
 
-                rect.position = Vector3.LerpUnclamped(startPos, endPosition, t);
+                if (!zoneHolder) yield break;
 
-                rect.position += (Vector3) (MoveAnimationCurve.Evaluate(t) * adjustDirection);
 
+                var startTime = Time.time;
+                float posAdjust = GetZoneAdjust(zone, !player);
+                var rot = GetZoneRotation(zone, !player);
+                Vector2 endPosition = zoneHolder.GetFirstPosition();
+
+                endPosition += new Vector2(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
+
+                rect.Rotate(new Vector3(0, 0, Random.Range(-rot, rot)));
+
+                var adjustDirection = (startPos - endPosition);
+
+                adjustDirection = new Vector2(adjustDirection.y, -adjustDirection.x).normalized;
+
+                while (Time.time < startTime + MoveDuration)
+                {
+                    yield return null;
+
+                    float t = (Time.time - startTime) / MoveDuration;
+
+                    rect.position = Vector3.LerpUnclamped(startPos, endPosition, t);
+
+                    rect.position += (Vector3)(MoveAnimationCurve.Evaluate(t) * adjustDirection);
+
+                }
+
+                zoneHolder.AddChild(card,0);
             }
-
-            zoneHolder.AddChild(card);
-
 
             switch (zone)
             {

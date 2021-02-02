@@ -1,21 +1,29 @@
-﻿using System;
+﻿using GameLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 
 namespace UI
 {
     [RequireComponent(typeof(RectTransform))]
     public class CardLayoutGroup : MonoBehaviour
     {
+        public Deck.Zone CardZone;
+        public bool CardsAreDraggable;
+        //whether cards are flipped. TODO: this should be used to decide all flipping in ui and be set from game logic ensure consistency
+        public bool HiddenZone;
+
         [Header("If the layout should stick to one point")]
         public bool PointOnly;
         public AnimationCurve XPosition;
         public AnimationCurve YPosition;
         private RectTransform RectTransform;
 
+        [Header("The layout is divided into this minimum of position")]
         public int MinimumPositions = 4;
+        [Header("If more children than max, the layout will overflow")]
         public int MaximumPositions = 8;
 
         public CardLayoutGroup TransitionsTo;
@@ -39,14 +47,15 @@ namespace UI
         }
 
 
-        public void AddChild(CardUI cardUI)
+
+        public void AddChild(CardUI cardUI, int pos)
         {
             var parent = cardUI.GetComponentInParent<CardLayoutGroup>();
 
             if(parent)
                 parent.RemoveChild(cardUI);
 
-            ChildCards.Add(cardUI);
+            ChildCards.Insert(pos,cardUI);
 
             cardUI.transform.SetParent(this.RectTransform,true);
 
@@ -80,28 +89,31 @@ namespace UI
                 ChildDesiredPositions[i] = EvaluatePosition(i);
             }
 
-            MoveCardsToUpdatedPositions();
+            MoveCardsToDesiredPositions();
 
             // update child as movingToPosition, to only check those cards
         }
 
-        private void MoveCardsToUpdatedPositions()
+        public void MoveCardsToDesiredPositions()
         {
             for (int i = 0; i < ChildCards.Count; i++)
             {
                 var card = ChildCards[i];
+
+                card.LayoutIndex = i;
+
                 var desiredPos = ChildDesiredPositions[i];
 
                 if (card.BeingDragged) continue;
 
-                if (!PointOnly)
+                //if (!PointOnly)
                     card.transform.LeanMove(desiredPos, UnityEngine.Random.Range(0.1f, 0.3f));
             }
         }
 
         private Vector2 EvaluatePosition(int index)
         {
-            if (PointOnly) return RectTransform.position;
+            if (PointOnly) return (Vector2)RectTransform.position + Random.insideUnitCircle *0.1f;
 
             if (index < 0) index = 0;
 
@@ -151,31 +163,35 @@ namespace UI
 
             //Debug.Log($"Moving {moving} pos: {position}, idx: {index}, layoutpos: {currentDesiredPos}");
 
+            //closer to the transistions to layout
             if(transitionTo != null && ((Vector2)transform.position - cardPos).sqrMagnitude > ((Vector2)transitionTo.transform.position- cardPos).sqrMagnitude)
             {
                 draggedCard.CurrentZoneLayout = transitionTo;
                 draggedCard.CanTransitionTo = this;
-                transitionTo.AddChild(draggedCard);
+                transitionTo.AddChild(draggedCard,0);
                 RemoveChild(draggedCard);
 
-                TransitionsTo.UpdateDraggedCardPos();
+                if(transitionTo.HiddenZone != HiddenZone)
+                {
+                    var state = transitionTo.HiddenZone ? CardUI.CardState.FaceDown : CardUI.CardState.Battle;
+
+                    StartCoroutine(draggedCard.Flip(state, 0.1f));
+                }
             }
             //closer to the before position
             else if (index > 0 && (currentDesiredPos - cardPos).sqrMagnitude > (ChildDesiredPositions[index - 1] - cardPos).sqrMagnitude)
             {
-                Debug.Log($"Changeing position down");
 
                 //switch positions
                 var ca = ChildCards[index - 1];
                 ChildCards[index - 1] = draggedCard;
                 ChildCards[index] = ca;
 
-                MoveCardsToUpdatedPositions();
+                MoveCardsToDesiredPositions();
             }
             //closer to the after position
             else if (index < ChildCards.Count - 1 && (currentDesiredPos - cardPos).sqrMagnitude > (ChildDesiredPositions[index + 1] - cardPos).sqrMagnitude)
             {
-                Debug.Log($"Changeing position up");
 
                 //switch positions
                 var ca = ChildCards[index + 1];
@@ -183,14 +199,19 @@ namespace UI
                 ChildCards[index] = ca;
 
 
-                MoveCardsToUpdatedPositions();
+                MoveCardsToDesiredPositions();
             }
 
         }
 
-        internal Vector2 GetLastPosition()
+        internal Vector2 GetFirstPosition()
         {
-            return EvaluatePosition(ChildCards.Count-1);
+            return EvaluatePosition(0);
+        }
+
+        internal bool HasChild(CardUI card)
+        {
+            return ChildCards.Contains(card);
         }
     }
 

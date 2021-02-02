@@ -152,6 +152,11 @@ namespace GameLogic
             //BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
         }
 
+        public void PositionChanged(int position)
+        {
+            InDeck.SetPosition(this, InDeck.GetZone(this), position);
+        }
+
         public void AttackCard(Card target)
         {
             if (!Alive() || !target.Alive())
@@ -239,8 +244,8 @@ namespace GameLogic
 
         public void PlayCard(int position = 0)
         {
-            ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield);
-
+            ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield,false,position);
+            
 
         }
 
@@ -325,7 +330,7 @@ namespace GameLogic
             CurrentHealth = MaxHealth;
         }
 
-        public void Click()
+        public void Click(int position = 0)
         {
             if (InDeck == null || InDeck.DeckController == null)
             {
@@ -339,7 +344,7 @@ namespace GameLogic
 
             if (Location == Deck.Zone.Hand)
             {
-                PlayCard();
+                PlayCard(position);
             }
             else if (Location == Deck.Zone.Battlefield)
             {

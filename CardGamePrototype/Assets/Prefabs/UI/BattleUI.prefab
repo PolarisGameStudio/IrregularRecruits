@@ -1395,6 +1395,9 @@ MonoBehaviour:
   AlwaysFaceUp: 0
   Interactable: 1
   HealthValueDisplayed: 0
+  CurrentZoneLayout: {fileID: 0}
+  CanTransitionTo: {fileID: 0}
+  LayoutIndex: 0
 --- !u!114 &5663514920183259310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1856,6 +1859,9 @@ MonoBehaviour:
   AlwaysFaceUp: 0
   Interactable: 1
   HealthValueDisplayed: 0
+  CurrentZoneLayout: {fileID: 0}
+  CanTransitionTo: {fileID: 0}
+  LayoutIndex: 0
 --- !u!114 &6298411520445071155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2701,6 +2707,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   EndTurnButton: {fileID: 2132162799118742221}
   FocusCanvas: {fileID: 8451570703991737027}
+  BattleRunning: 0
 --- !u!225 &8451570703991737027
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2786,6 +2793,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b281ce5511f94389012b8822977bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardZone: 0
+  CardsAreDraggable: 0
+  HiddenZone: 1
   PointOnly: 0
   XPosition:
     serializedVersion: 2
@@ -2835,8 +2845,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MinimumPositions: 5
-  MaximumPositions: 8
+  MinimumPositions: 10
+  MaximumPositions: 15
   TransitionsTo: {fileID: 0}
 --- !u!1 &3660017127510660989
 GameObject:
@@ -12963,6 +12973,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b281ce5511f94389012b8822977bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardZone: 0
+  CardsAreDraggable: 1
+  HiddenZone: 0
   PointOnly: 0
   XPosition:
     serializedVersion: 2
@@ -13063,6 +13076,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b281ce5511f94389012b8822977bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardZone: 0
+  CardsAreDraggable: 0
+  HiddenZone: 1
   PointOnly: 1
   XPosition:
     serializedVersion: 2
@@ -13163,6 +13179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b281ce5511f94389012b8822977bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardZone: 0
+  CardsAreDraggable: 1
+  HiddenZone: 0
   PointOnly: 0
   XPosition:
     serializedVersion: 2
@@ -13221,8 +13240,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MinimumPositions: 5
-  MaximumPositions: 8
+  MinimumPositions: 8
+  MaximumPositions: 12
   TransitionsTo: {fileID: 9019354100244692800}
 --- !u!1 &3660017128358087259
 GameObject:
@@ -13273,6 +13292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b281ce5511f94389012b8822977bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardZone: 0
+  CardsAreDraggable: 0
+  HiddenZone: 0
   PointOnly: 1
   XPosition:
     serializedVersion: 2
@@ -13969,6 +13991,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b281ce5511f94389012b8822977bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardZone: 0
+  CardsAreDraggable: 0
+  HiddenZone: 1
   PointOnly: 1
   XPosition:
     serializedVersion: 2
@@ -14251,6 +14276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b281ce5511f94389012b8822977bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardZone: 0
+  CardsAreDraggable: 0
+  HiddenZone: 0
   PointOnly: 0
   XPosition:
     serializedVersion: 2
@@ -14427,6 +14455,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b281ce5511f94389012b8822977bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardZone: 0
+  CardsAreDraggable: 0
+  HiddenZone: 0
   PointOnly: 1
   XPosition:
     serializedVersion: 2
@@ -27160,7 +27191,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: End Turn
+  m_text: Start Combat
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98f9108a4306c8542989800e9d595d2a, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9cdc02962f94fca488687100cbbd37b1, type: 2}
@@ -27188,7 +27219,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34.65
+  m_fontSize: 32.55
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -27229,7 +27260,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1597070166727517233}
-    characterCount: 8
+    characterCount: 12
     spriteCount: 0
     spaceCount: 1
     wordCount: 2
