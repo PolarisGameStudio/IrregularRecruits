@@ -71,6 +71,12 @@ namespace UI
 
         private void ShowCard(CardUI cardUI)
         {
+            if(cardUI.BeingDragged)
+            {
+                Hide();
+                return;
+            }
+
             ShowAfterDelayRoutine = null;
 
             Creature =  cardUI.Creature;

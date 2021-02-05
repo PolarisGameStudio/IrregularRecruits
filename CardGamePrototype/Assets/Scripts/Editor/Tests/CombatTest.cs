@@ -19,6 +19,12 @@ namespace Tests
 
         }
 
+        [TearDown]
+        public void Reset()
+        {
+            BattleManager.Reset();
+        }
+
         private Card GenerateTestCreature(PassiveAbility ability, Race race = null, int attack = 2)
         {
             Trait trait = new Trait()

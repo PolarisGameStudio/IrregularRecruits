@@ -17,10 +17,10 @@ MonoBehaviour:
   Locked: 0
   Image: {fileID: 21300000, guid: e81d029f68237e447934c6f1fedb8c05, type: 3}
   IconImage: {fileID: 21300000, guid: 80a958875d7e85d4db6a37cdd5124e7c, type: 3}
-  Attack: 2
+  Attack: 4
   Health: 8
   Traits:
   - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
-  SpecialAbility: {fileID: 0}
+  SpecialAbility: {fileID: 11400000, guid: 02e70badbe154154a911c540f763d11e, type: 2}
   CR: 15
   Race: {fileID: 11400000, guid: b6ecfead65fb55047bcb9fb895dad079, type: 2}

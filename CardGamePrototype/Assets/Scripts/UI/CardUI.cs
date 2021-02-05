@@ -257,7 +257,7 @@ namespace UI
 
             CanTransitionTo = CurrentZoneLayout?.TransitionsTo;
 
-            if (CurrentZoneLayout && CurrentZoneLayout.CardsAreDraggable && !BattleUI.Instance.BattleRunning)
+            if (CurrentZoneLayout && CurrentZoneLayout.CardsAreDraggable && !BattleUI.Instance.UILocked)
             {
                 BeingDragged = true;
             }

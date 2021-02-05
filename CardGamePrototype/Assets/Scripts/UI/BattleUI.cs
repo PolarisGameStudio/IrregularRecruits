@@ -70,7 +70,7 @@ namespace UI
         public CanvasGroup FocusCanvas;
 
         [HideInInspector]
-        public bool BattleRunning;
+        public bool UILocked;
 
         void Awake()
         {

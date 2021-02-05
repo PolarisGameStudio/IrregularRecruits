@@ -32,8 +32,6 @@ namespace GameLogic
             }
         }
 
-        private int attack;
-
         internal int XpValue()
         {
             return Mathf.RoundToInt(creature.CR / 4f);
@@ -50,14 +48,7 @@ namespace GameLogic
             //}
         }
 
-        public int Attack
-        {
-            get => attack;
-            private set
-            {
-                attack = value;
-            }
-        }
+        public int Attack { get; private set; }
 
         public Deck.Zone Location;
 
@@ -247,6 +238,11 @@ namespace GameLogic
             ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield,false,position);
             
 
+        }
+
+        internal void Rally()
+        {
+            ChangeLocation(Deck.Zone.Library, Deck.Zone.Battlefield);
         }
 
         public void CleanListeners()

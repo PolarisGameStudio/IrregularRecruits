@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: Hardun
   m_EditorClassIdentifier: 
-  name: Hardun
+  name: Hardun Enraged
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: 24a16ceab87024a43b99f1f24078ab7e, type: 3}

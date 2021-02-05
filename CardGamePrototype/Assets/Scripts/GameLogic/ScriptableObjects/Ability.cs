@@ -32,7 +32,10 @@ namespace GameLogic
             Summon,
             Clone,
             Copy,
-            COUNT
+            GainEnergy,
+            Rally,
+
+            COUNT,
         }
 
         public enum Count

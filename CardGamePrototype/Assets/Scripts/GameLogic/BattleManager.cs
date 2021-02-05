@@ -15,14 +15,13 @@ namespace GameLogic
 
         private CombatAutoResolver CombatAutoResolver;
 
-        private static BattleManager instance;
+        private static BattleManager instance = null;
         
         public static BattleManager Instance { get {
                 if (instance == null)
                     instance = new BattleManager();
                 return instance; 
             } 
-            set => instance = value; 
         }
 
         private BattleManager()
@@ -41,6 +40,11 @@ namespace GameLogic
 
             CombatAutoResolver = new CombatAutoResolver();
 
+        }
+
+        public static void Reset()
+        {
+            instance = null;
         }
 
         public static void SetPlayerHero(HeroObject heroObject)
@@ -74,6 +78,7 @@ namespace GameLogic
             EnemyDeck?.PackUp(true);
             
             EnemyDeck = null;
+
         }
 
         public Deck GetEnemyDeck(Deck myDeck)
@@ -97,7 +102,7 @@ namespace GameLogic
             EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayerDeck.DeckController.YourTurn);
             PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, Event.OnCombatResolveStart.Invoke);
 
-            Debug.Log("starting battle. Enemies: " + enemyDeck.AllCreatures().Count + ", CR: " + enemyDeck.CR);
+            //Debug.Log("starting battle. Enemies: " + enemyDeck.AllCreatures().Count + ", CR: " + enemyDeck.CR);
 
             Event.OnTurnBegin.Invoke();
         }

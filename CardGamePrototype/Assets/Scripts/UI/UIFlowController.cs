@@ -50,6 +50,10 @@ namespace UI
             Event.OnAbilityExecution.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.Guid,ts.Select(t=>t.Guid))));
 
             Event.OnPlayerAction.AddListener(d => AddCardEvent(ActionUsed(d)));
+            
+            //TODO: is this actually used in a timely order
+            Event.OnCombatSetup.AddListener((e, c) => PlayerTurnStart());
+            
             Event.OnTurnBegin.AddListener(() => AddCardEvent(PlayerTurnStart()));
             Event.OnCombatResolveStart.AddListener(PlayerTurnDone);
         }
@@ -65,9 +69,14 @@ namespace UI
         {
             yield return null;
 
-            BattleUI.Instance.BattleRunning = false;
+            if (BattleManager.Instance.PlayerDeck.DeckController is PlayerController)
+            {
+                BattleUI.Instance.UILocked = false;
 
-            HeroUI.Instance?.UnlockAbilities();
+                HeroUI.Instance?.UnlockAbilities();
+            }
+            else
+                BattleUI.Instance.UILocked = true;
 
             ActionsLeftUI.ActionsRefreshed.Invoke();
         }
@@ -76,7 +85,7 @@ namespace UI
         {
             Debug.Log("Combat started. Locking ui");
 
-            BattleUI.Instance.BattleRunning = true;
+            BattleUI.Instance.UILocked = true;
             HeroUI.Instance?.LockAbilities();
 
         }

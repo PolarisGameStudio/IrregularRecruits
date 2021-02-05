@@ -95,6 +95,28 @@ public class AssetManager
     {
         List<Creature> creatures = new List<Creature>();
         creatures = GetAssetsOfType<Creature>();
+        
+        var races = new List<Race>();
+        races = GetAssetsOfType<Race>();
+
+        //Debug.Log("Checking abilities: " + creatures.Count);
+
+        foreach (var race in races)
+        {
+            Debug.Log($"{race.name}: {creatures.Count(c => c.Race == race)}");
+        }
+
+        //AssetDatabase.Refresh();
+        //creatures.ForEach(a => EditorUtility.SetDirty(a));
+        //AssetDatabase.SaveAssets();
+
+    }
+
+    [MenuItem("Content/Recalculate CR")]
+    public static void CalculateCR()
+    {
+        List<Creature> creatures = new List<Creature>();
+        creatures = GetAssetsOfType<Creature>();
 
         //Debug.Log("Checking abilities: " + creatures.Count);
 

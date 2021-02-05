@@ -34,7 +34,7 @@ namespace GameLogic
 
             ActionsLeft--;
 
-            if ((ActionsLeft <= 0 ))
+            if (!ActionAvailable())
             {
                 FinishTurn();
             }

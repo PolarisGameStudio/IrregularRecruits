@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: Crab
   m_EditorClassIdentifier: 
-  name: Crab
+  name: Wandering Crab
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: bb8a8e53cd00f3449870517bfc379c24, type: 3}
@@ -21,6 +21,6 @@ MonoBehaviour:
   Health: 8
   Traits:
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 853943d660fbec54083218d33b890af7, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 187a6f7b7022dd6488d7d7e422206f84, type: 2}
   CR: 22
   Race: {fileID: 11400000, guid: bffb2ec3e89bdaf4080ba28acbc87ea2, type: 2}

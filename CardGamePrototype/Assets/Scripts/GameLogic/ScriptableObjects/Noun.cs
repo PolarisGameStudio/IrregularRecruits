@@ -10,19 +10,21 @@ namespace GameLogic
         public Allegiance Relationship;
         public DamageType DamageState;
         public RaceType Race;
+        public Trait Trait;
         public enum CharacterTyp { Any, This, Other, It }
         public enum Allegiance { Any, Friend, Enemy };
         public enum DamageType { Any, Damaged, Undamaged };
         public enum RaceType { Any, Same, Different };
 
 
-        public Noun(CharacterTyp character = CharacterTyp.Any, Allegiance relationship = Allegiance.Any, DamageType damageState = DamageType.Any, RaceType race = RaceType.Any, Deck.Zone location = Deck.Zone.Battlefield)
+        public Noun(CharacterTyp character = CharacterTyp.Any, Allegiance relationship = Allegiance.Any, DamageType damageState = DamageType.Any, RaceType race = RaceType.Any, Deck.Zone location = Deck.Zone.Battlefield,Trait trait = null)
         {
             Character = character;
             Location = location;
             Relationship = relationship;
             DamageState = damageState;
             Race = race;
+            Trait = trait;
         }
 
         public bool CorrectNoun(Card instigator, AbilityHolder abilityOwner)
@@ -39,9 +41,15 @@ namespace GameLogic
                 CorrectCharacter(instigator, abilityOwner) &&
                 CorrectRace(instigator, abilityOwner) &&
                 CorrectAllegiance(instigator, abilityOwner) &&
-                CorrectDamageState(instigator)
+                CorrectDamageState(instigator) && 
+                CorrectTrait(instigator)
                 && instigator.Location == this.Location
                 ;
+        }
+
+        private bool CorrectTrait(Card instigator)
+        {
+            return !Trait ||  instigator.GetTraits().Contains(Trait);
         }
 
         private bool CorrectOwnerLocation(AbilityHolder abilityOwner)
@@ -176,6 +184,9 @@ namespace GameLogic
                     str += "non-" + _owner.GetRace()?.name + (count == PassiveAbility.Count.One ? "" : "s");
                     break;
             }
+
+            if (Trait != null)
+                str += " with " + Trait.name;
 
             switch (Location)
             {

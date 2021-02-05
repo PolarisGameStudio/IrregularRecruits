@@ -26,7 +26,7 @@ namespace UI
         {
             yield return new WaitForSeconds(0.3f);
 
-            ShowCard(ability);
+            ShowAbility(ability);
         }
 
         internal static bool IsActive()
@@ -34,7 +34,7 @@ namespace UI
             return Instance.Holder.activeSelf;
         }
 
-        private void ShowCard(AbilityUI abilityUI)
+        private void ShowAbility(AbilityUI abilityUI)
         {
             ShowAfterDelayRoutine = null;
 

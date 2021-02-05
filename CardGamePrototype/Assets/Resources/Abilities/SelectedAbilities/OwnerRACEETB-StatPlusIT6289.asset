@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: OwnerRACEETB-StatPlusIT6289
   m_EditorClassIdentifier: 
+  Name: 
+  Icon: {fileID: 0}
   ResultingAction:
     ActionType: 2
     TargetCount: 1
@@ -30,5 +32,5 @@ MonoBehaviour:
       Location: 1
       Relationship: 1
       DamageState: 0
-      Race: 1
+      Race: 0
     TriggerAction: 4

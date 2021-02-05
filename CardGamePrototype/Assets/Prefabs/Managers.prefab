@@ -189,6 +189,17 @@ MonoBehaviour:
     TargetFX:
     - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
     OwnerFX: []
+  - ActionType: 12
+    AbilityIconFX:
+    - {fileID: 19800006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
+    TargetFX: []
+    OwnerFX: []
+  - ActionType: 13
+    AbilityIconFX:
+    - {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+    TargetFX:
+    - {fileID: 198755127273645396, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
+    OwnerFX: []
 --- !u!1 &6037112472356722118
 GameObject:
   m_ObjectHideFlags: 0

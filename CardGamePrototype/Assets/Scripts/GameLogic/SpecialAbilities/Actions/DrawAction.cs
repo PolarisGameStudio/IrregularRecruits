@@ -2,6 +2,7 @@
 
 namespace GameLogic
 {
+
     public class DrawAction : AbilityAction
     {
         public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.Draw;

@@ -2,9 +2,10 @@
 
 namespace GameLogic
 {
+
     public class ResurrectAction : AbilityAction
     {
-        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.Resurrect;
+        public override Ability.ActionType ActionType => Ability.ActionType.Resurrect;
 
         public override string Description(string target, int amount, Creature summon)
         {
