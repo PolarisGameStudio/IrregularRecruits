@@ -36,7 +36,7 @@ namespace UI
 
                 InstantiatedIcons.Add(icon);
 
-                Decks.Add(deck, new Deck(deck));
+                Decks.Add(deck, new Deck(deck,true));
                 DeckIcons[deck] = icon;
             }
 
@@ -88,6 +88,13 @@ namespace UI
             Event.OnGameBegin.Invoke();
 
             UIController.Instance.Close(this);
+
+            foreach(var d in Decks)
+            {
+                d.Value.Reset();
+            }
+
+            Decks.Clear();
 
             Destroy(gameObject);
             //LeanTween.alpha(gameObject, 0, 2f).setOnComplete(() => Destroy(gameObject));

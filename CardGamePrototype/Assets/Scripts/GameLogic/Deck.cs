@@ -18,8 +18,8 @@ namespace GameLogic
 
         public Hero Hero;
 
-        public Deck(DeckObject deckObject)
-            : this(deckObject.Creatures.Select(c => new Card(c)).ToList())
+        public Deck(DeckObject deckObject,bool temporary = false)
+            : this(deckObject.Creatures.Select(c => new Card(c,temporary)).ToList())
         {
             DeckObject = deckObject;
         }
@@ -103,6 +103,14 @@ namespace GameLogic
 
 
             Draw(amountToDraw);
+        }
+
+        public void Reset()
+        {
+            foreach (var c in AllCreatures())
+                c.CleanListeners();
+
+            Creatures.Clear();
         }
 
         internal void SetPosition(Card card, Zone zone, int position)

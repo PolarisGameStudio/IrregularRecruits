@@ -52,12 +52,17 @@ namespace GameLogic
 
         public Deck.Zone Location;
 
+        //no listeners created for only ui cards
+        private bool TempCard = false;
+
 
 
         #endregion
 
-        public Card(Creature c)
+        //temporary if the card is only meant to display in deck selection or similar and not in deck to battle
+        public Card(Creature c,bool temporary = false)
         {
+            TempCard = temporary;
             Creature = c;
 
         }
@@ -197,7 +202,7 @@ namespace GameLogic
             if (creature && creature.SpecialAbility)
                 creature.SpecialAbility.RemoveListeners(this);
 
-            if (newCreature.SpecialAbility)
+            if (newCreature.SpecialAbility && !TempCard)
             {
                 newCreature.SpecialAbility.SetupListeners(this);
             }
@@ -247,7 +252,7 @@ namespace GameLogic
 
         public void CleanListeners()
         {
-            if (Creature && Creature.SpecialAbility)
+            if (Creature && Creature.SpecialAbility && !TempCard)
                 Creature.SpecialAbility.RemoveListeners(this);
         }
 
