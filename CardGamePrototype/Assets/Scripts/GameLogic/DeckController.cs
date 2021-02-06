@@ -7,7 +7,19 @@ namespace GameLogic
         protected Deck ControlledDeck;
         protected Action OnFinish;
 
-        public int ActionsLeft;
+        private int actionsLeft;
+
+        public int ActionsLeft
+        {
+            get => actionsLeft; 
+            set
+            {
+                if (value > actionsLeft)
+                    Event.OnActionGained.Invoke(value - actionsLeft);
+
+                actionsLeft = value;
+            }
+        }
 
         public DeckController(Deck controlledDeck)
         {

@@ -40,7 +40,9 @@ namespace UI
             //On Damage-> (Card, amount) & new health?
             //On healed
             Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val,card.CurrentHealth,card.MaxHealth)));
-            
+
+            Event.OnActionGained.AddListener(i => AddCardEvent(ActionsGained(i)));
+
             //On Stat Change-> (Card, amount)
             Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack,card.Damaged())));
 
@@ -63,6 +65,18 @@ namespace UI
             var playerdeck = BattleUI.Instance.PlayerDeck == card.InDeck;
 
             AddCardEvent( BattleUI.Move(card.Guid, to, from, playerdeck));
+        }
+
+        private IEnumerator ActionsGained(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                ActionsLeftUI.ActionGained.Invoke();
+
+                yield return new WaitForSeconds(0.1f);
+
+            }
+
         }
 
         private IEnumerator PlayerTurnStart()

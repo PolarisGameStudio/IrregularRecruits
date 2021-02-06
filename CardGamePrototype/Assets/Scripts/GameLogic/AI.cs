@@ -64,7 +64,10 @@ namespace GameLogic
 
         public override void UsedAction(Deck deck)
         {
-            if (deck == ControlledDeck) ActionsLeft--;
+            if (deck != ControlledDeck)
+                return;
+            
+            ActionsLeft--;
         }
 
         private void SelectAbility()

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine.Events;
 
 namespace GameLogic
@@ -24,6 +24,7 @@ namespace GameLogic
 
         public class IntEvent : UnityEvent<int> { }
         public static IntEvent OnPlayerGoldAdd = new IntEvent();
+        public static IntEvent OnActionGained = new IntEvent();
 
         public class CardValueEvent : UnityEvent<Card,int> { }
         public static CardValueEvent OnHealthChange = new CardValueEvent();
@@ -141,6 +142,10 @@ namespace GameLogic
             OnLevelUpSelection.RemoveAllListeners();
             //public static HeroEvent OnLevelUp = new HeroEvent();
             OnLevelUp.RemoveAllListeners();
+
+            OnPlayerGoldAdd.RemoveAllListeners();
+
+            OnActionGained.RemoveAllListeners();
         }
     }
 }

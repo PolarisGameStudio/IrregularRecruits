@@ -16,6 +16,7 @@ namespace UI
 
         public static UnityEvent ActionUsed = new UnityEvent() ;
         public static UnityEvent ActionsRefreshed = new UnityEvent();
+        public static UnityEvent ActionGained = new UnityEvent();
 
         private void Start()
         {
@@ -30,16 +31,26 @@ namespace UI
 
             ActionUsed.RemoveAllListeners();
             ActionsRefreshed.RemoveAllListeners();
+            ActionGained.RemoveAllListeners();
+            ActionGained.AddListener(OnActionGained);
             ActionUsed.AddListener(OnActionUsed);
-            ActionsRefreshed.AddListener(RefreshActions);
+            //ActionsRefreshed.AddListener(RefreshActions);
 
             //TODO: does not take into account if amount of actions are changed. Move to on next turn and check there
             for (int i = 0; i < GameSettings.Instance.PlaysPrTurn; i++)
             {
-                ActionIcons.Add(Instantiate(ActionIconExample, ActionIconExample.transform.parent));
+                CreateActionIcon();
             }
-            Destroy(ActionIconExample.gameObject);
+            ActionIconExample.gameObject.SetActive(false);
 
+        }
+
+        private void CreateActionIcon()
+        {
+            ActionIcon item = Instantiate(ActionIconExample, ActionIconExample.transform.parent);
+            item.gameObject.SetActive(true);
+            
+            ActionIcons.Add(item);
         }
 
         private void OnActionUsed()
@@ -48,11 +59,19 @@ namespace UI
                 ActionIcons.First(a => a.Active).Active = false;
 
         }
-
-        private void RefreshActions()
+        private void OnActionGained()
         {
-            ActionIcons.ForEach(a => a.Active = true);
+            if (!ActionIcons.Any(a => !a.Active))
+                CreateActionIcon();
+            
+            ActionIcons.Last(a => !a.Active).Active = true;
+
         }
+
+        //private void RefreshActions()
+        //{
+        //    ActionIcons.ForEach(a => a.Active = true);
+        //}
 
     }
 }
