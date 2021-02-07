@@ -13,7 +13,7 @@ namespace MapLogic
         public bool ClosesLocationOnSelection = true;
         public List<Race> OnlyForHeroRaces = new List<Race>();
         //E.g. I use my fire magic to kill the ...
-        public List<Ability> OnlyForAbility = new List<Ability>();
+        public List<AbilityWithEffect> OnlyForAbility = new List<AbilityWithEffect>();
         [SerializeField]
         internal string OptionDescription;
         public UnitCandidate AssociatedUnit;

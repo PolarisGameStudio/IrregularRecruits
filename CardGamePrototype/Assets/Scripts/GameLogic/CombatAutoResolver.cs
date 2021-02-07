@@ -87,7 +87,7 @@ namespace GameLogic
 
             while (attackOrder.Any(c => c.Alive()))
             {
-                Ability.AbilityStackCount = 0;
+                AbilityWithEffect.AbilityStackCount = 0;
 
                 var attacker = attackOrder.First(c => c.Alive());
 
@@ -106,7 +106,7 @@ namespace GameLogic
                 attackOrder.Remove(attacker);
             }
 
-            Ability.AbilityStackCount = 0;
+            AbilityWithEffect.AbilityStackCount = 0;
 
             FinishCombatRound();
         }

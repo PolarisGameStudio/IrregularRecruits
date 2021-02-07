@@ -16,7 +16,7 @@ namespace UI
         public Image BorderImage;
         public ParticleSystem OutlineParticles;
 
-        public Ability Ability;
+        public AbilityWithEffect Ability;
         public Hero Owner;
         public Button Button;
 
@@ -86,7 +86,7 @@ namespace UI
             AbilityHoverInfo.Hide();
         }
 
-        public void SetAbility(Ability ability,Hero owner)
+        public void SetAbility(AbilityWithEffect ability,Hero owner)
         {
             Ability = ability;
 

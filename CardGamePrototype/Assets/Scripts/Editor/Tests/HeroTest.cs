@@ -89,7 +89,7 @@ namespace Tests
             return testCard;
         }
 
-        private Hero GenerateHero(Ability ability, Race race = null,List<Ability> heroRaceAbilities = null)
+        private Hero GenerateHero(AbilityWithEffect ability, Race race = null,List<AbilityWithEffect> heroRaceAbilities = null)
         {
             var hero = new Hero(new HeroObject()
             {
@@ -142,8 +142,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(PassiveAbility.ActionType.DealDamage, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.ETB),
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.ETB),
             };
 
             TestHero = GenerateHero(testAbility);
@@ -152,7 +152,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            Ability triggeredAblity = null;
+            AbilityWithEffect triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -168,13 +168,13 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(PassiveAbility.ActionType.DealDamage, PassiveAbility.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.ETB),
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.ETB),
             };
             var testAbility2 = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any), PassiveAbility.Verb.ETB),
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.ETB),
             };
 
             TestHero = GenerateHero(testAbility);
@@ -200,7 +200,7 @@ namespace Tests
         {
             var testAbility = new ActiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any))
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
             };
 
             TestHero = GenerateHero(testAbility);
@@ -209,7 +209,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            Ability triggeredAblity = null;
+            AbilityWithEffect triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -227,7 +227,7 @@ namespace Tests
         {
             var testAbility = new ActiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any))
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
             };
 
             TestHero = GenerateHero(testAbility);
@@ -256,8 +256,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same), PassiveAbility.Verb.ETB),
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same), Verb.ETB),
             };
 
             var testRace = new Race()
@@ -271,7 +271,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            Ability triggeredAblity = null;
+            AbilityWithEffect triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -286,8 +286,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same), PassiveAbility.Verb.ETB),
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same), Verb.ETB),
             };
 
             var testRace = new Race()
@@ -305,7 +305,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            Ability triggeredAblity = null;
+            AbilityWithEffect triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -320,8 +320,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Enemy), PassiveAbility.Verb.ETB),
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Enemy), Verb.ETB),
             };
 
             TestHero = GenerateHero(testAbility);
@@ -330,7 +330,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            Ability triggeredAblity = null;
+            AbilityWithEffect triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -346,8 +346,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new PassiveAbility.Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Enemy), PassiveAbility.Verb.ETB),
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Enemy), Verb.ETB),
             };
 
             TestHero = GenerateHero(testAbility);
@@ -357,7 +357,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            Ability triggeredAblity = null;
+            AbilityWithEffect triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -372,7 +372,7 @@ namespace Tests
         {
             var testAbility = new ActiveAbility()
             {
-                ResultingAction = new Ability.Action(Ability.ActionType.DealDamage, Ability.Count.One, 1, new Noun(Noun.CharacterTyp.Any))
+                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
             };
 
             TestHero = GenerateHero(testAbility);
@@ -381,7 +381,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            Ability triggeredAblity = null;
+            AbilityWithEffect triggeredAblity = null;
 
             TestHero.InDeck.DeckController.ResetActions();
 
@@ -465,7 +465,7 @@ namespace Tests
         [Test]
         public void AbilitySelectWhenLevelUpPoints()
         {
-            var levelOptions = new List<Ability> { 
+            var levelOptions = new List<AbilityWithEffect> { 
                 new PassiveAbility() { Name = "passive0" }, 
                 new ActiveAbility() { Name = "active1" }, 
                 new ActiveAbility() { Name = "active2" },
@@ -491,7 +491,7 @@ namespace Tests
         public void AbilitySelectNotTooHighLevel()
         {
 
-            var levelOptions = new List<Ability> {
+            var levelOptions = new List<AbilityWithEffect> {
                 new PassiveAbility() { Name = "passive0" },
                 new ActiveAbility() { Name = "active1" },
                 new ActiveAbility() { Name = "active2" },
@@ -516,7 +516,7 @@ namespace Tests
         [Test]
         public void AbilitySelectNotPossibleWhenNoPoints()
         {
-            var levelOptions = new List<Ability> {
+            var levelOptions = new List<AbilityWithEffect> {
                 new PassiveAbility() { Name = "passive0" },
                 new ActiveAbility() { Name = "active1" },
                 new ActiveAbility() { Name = "active2" },
@@ -538,7 +538,7 @@ namespace Tests
         [Test]
         public void AbilitySelectNotPossibleWhenAlreadyHas()
         {
-            var levelOptions = new List<Ability> {
+            var levelOptions = new List<AbilityWithEffect> {
                 new PassiveAbility() { Name = "passive0" },
                 new ActiveAbility() { Name = "active1" },
                 new ActiveAbility() { Name = "active2" },

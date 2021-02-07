@@ -6,7 +6,12 @@ using Random = UnityEngine.Random;
 
 namespace GameLogic
 {
-    public abstract class Ability : ScriptableObject
+    public class SpecialAbility : ScriptableObject
+    {
+
+    }
+
+    public abstract class AbilityWithEffect : SpecialAbility
     {
         protected static Dictionary<ActionType, Deck.Zone> ForcedActionTargetLocations = new Dictionary<ActionType, Deck.Zone>()
         {
@@ -16,33 +21,6 @@ namespace GameLogic
 
         public static int AbilityStackCount;
         private static readonly int MaxAbilityStack = 12;
-
-        public enum ActionType
-        {
-            Kill,
-            DealDamage,
-            StatPlus,
-            StatMinus,
-            Withdraw,
-            //Discard, use kill in hand instead
-            Heal,
-            Resurrect,
-            Draw,
-            Charm,
-            Summon,
-            Clone,
-            Copy,
-            GainEnergy,
-            Rally,
-
-            COUNT,
-        }
-
-        public enum Count
-        {
-            All, One, Two, Three,
-            COUNT
-        }
 
         public string Name;
         public Sprite Icon;

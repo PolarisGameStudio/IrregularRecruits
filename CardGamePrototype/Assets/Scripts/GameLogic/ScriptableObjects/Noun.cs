@@ -125,7 +125,7 @@ namespace GameLogic
             }
         }
 
-        public string NounAsString(ICharacter _owner, Ability.Count count = Ability.Count.One, PassiveAbility.Verb triggerAction = PassiveAbility.Verb.COUNT)
+        public string NounAsString(ICharacter _owner, Count count = Count.One, Verb triggerAction = Verb.COUNT)
         {
             var str = "";
 
@@ -136,13 +136,13 @@ namespace GameLogic
                 case CharacterTyp.It:
                     return "it";
                 case CharacterTyp.Any:
-                    if (count == PassiveAbility.Count.One)
+                    if (count == Count.One)
                         str += "a ";
                     else
                         str += count.ToString() + " ";
                     break;
                 case CharacterTyp.Other:
-                    if (count == PassiveAbility.Count.One)
+                    if (count == Count.One)
                         str += "another ";
                     else
                         str += count.ToString() + " other ";
@@ -175,13 +175,13 @@ namespace GameLogic
             switch (Race)
             {
                 case RaceType.Any:
-                    str += "minion" + (count == PassiveAbility.Count.One ? "" : "s");
+                    str += "minion" + (count == Count.One ? "" : "s");
                     break;
                 case RaceType.Same:
-                    str += _owner.GetRace()?.name + (count == PassiveAbility.Count.One ? "" : "s");
+                    str += _owner.GetRace()?.name + (count == Count.One ? "" : "s");
                     break;
                 case RaceType.Different:
-                    str += "non-" + _owner.GetRace()?.name + (count == PassiveAbility.Count.One ? "" : "s");
+                    str += "non-" + _owner.GetRace()?.name + (count == Count.One ? "" : "s");
                     break;
             }
 
@@ -192,7 +192,7 @@ namespace GameLogic
             {
                 case Deck.Zone.Library:
                     //redundant to describe withdraw to library
-                    if (triggerAction == PassiveAbility.Verb.Withdraw)
+                    if (triggerAction == Verb.Withdraw)
                         return str;
                     switch (Relationship)
                     {
@@ -208,11 +208,11 @@ namespace GameLogic
                     return str;
                 case Deck.Zone.Graveyard:
 
-                    if (triggerAction == PassiveAbility.Verb.DIES)
+                    if (triggerAction == Verb.DIES)
                         return str;
                     return str + ", that is dead"; //TODO: remove. just for debugging now
                 case Deck.Zone.Hand:
-                    if (triggerAction == PassiveAbility.Verb.Draw)
+                    if (triggerAction == Verb.Draw)
                         return str;
 
                     switch (Relationship)

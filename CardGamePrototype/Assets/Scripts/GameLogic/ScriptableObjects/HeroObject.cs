@@ -14,7 +14,7 @@ namespace GameLogic
         public DeckObject Deck;
 
         public Sprite Portrait;
-        public Ability StartingAbility;
+        public AbilityWithEffect StartingAbility;
 
         public LevelOption Class;
         public LevelOption RaceOption;
@@ -25,9 +25,9 @@ namespace GameLogic
 
         //first level is 0
         //TODO: remove
-        public List<Ability> GetLevelChoices(int level)
+        public List<AbilityWithEffect> GetLevelChoices(int level)
         {
-            var choices = new List<Ability>();
+            var choices = new List<AbilityWithEffect>();
 
             if (Class && Class.Options.Count > level)
             {

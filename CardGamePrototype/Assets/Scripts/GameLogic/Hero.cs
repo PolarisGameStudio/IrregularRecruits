@@ -18,9 +18,9 @@ namespace GameLogic
 
         //public CardUI BattleRepresentation;
 
-        public List<Ability> Abilities = new List<Ability>();
+        public List<AbilityWithEffect> Abilities = new List<AbilityWithEffect>();
 
-        public bool CanActivateAbility(Ability ability)
+        public bool CanActivateAbility(AbilityWithEffect ability)
         {
             return InDeck.DeckController.ActionAvailable();
         }
@@ -80,7 +80,7 @@ namespace GameLogic
             Xp -= amount;
         }
 
-        public void SelectLevelUpAbility(Ability ability)
+        public void SelectLevelUpAbility(AbilityWithEffect ability)
         {
             if (LevelUpPoints <= 0)
                 return;
@@ -94,9 +94,9 @@ namespace GameLogic
             Event.OnLevelUpSelection.Invoke(this);
         }
 
-        public List<Ability> GetLevelUpOptions()
+        public List<AbilityWithEffect> GetLevelUpOptions()
         {
-            List<Ability> abilities = new List<Ability>();
+            List<AbilityWithEffect> abilities = new List<AbilityWithEffect>();
 
             if(heroObject.RaceOption)
                 abilities.AddRange(heroObject.RaceOption.Options.Take(GetLevel(Xp)));
@@ -120,7 +120,7 @@ namespace GameLogic
             this.heroObject = hero;
         }
 
-        public void AddAbility(Ability ability)
+        public void AddAbility(AbilityWithEffect ability)
         {
             if (ability as PassiveAbility)
                 (ability as PassiveAbility).SetupListeners(this);

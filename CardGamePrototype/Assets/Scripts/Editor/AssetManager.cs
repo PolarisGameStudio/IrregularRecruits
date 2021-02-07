@@ -162,11 +162,11 @@ public class AssetManager
                 Random.value > 0.15f ? Noun.RaceType.Any : (Random.value > 0.4f ? Noun.RaceType.Same : Noun.RaceType.Different)
                 );
 
-            PassiveAbility.Verb triggerAction = (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ?
+            Verb triggerAction = (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteTriggers.Any() ?
                 c.Race.FavoriteTriggers[Random.Range(0, c.Race.FavoriteTriggers.Length)]
-                : (PassiveAbility.Verb)Random.Range(0, (int)PassiveAbility.Verb.COUNT);
+                : (Verb)Random.Range(0, (int)Verb.COUNT);
 
-            ability.TriggerCondition = new PassiveAbility.Trigger(
+            ability.TriggerCondition = new Trigger(
                 triggerCondition,
                 triggerAction);
 
@@ -181,8 +181,8 @@ public class AssetManager
 
 
             ability.ResultingAction = new PassiveAbility.Action(
-                (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (PassiveAbility.ActionType)Random.Range(0, (int)PassiveAbility.ActionType.Summon),
-                (PassiveAbility.Count)Random.Range(0, (int)PassiveAbility.Count.COUNT),
+                (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (ActionType)Random.Range(0, (int)ActionType.Summon),
+                (Count)Random.Range(0, (int)Count.COUNT),
                 Random.Range(amountMin, amountMax),
                 abilityTarget
                 );

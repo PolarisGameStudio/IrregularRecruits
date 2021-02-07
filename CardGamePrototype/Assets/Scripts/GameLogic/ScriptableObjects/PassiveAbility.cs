@@ -8,24 +8,19 @@ using Random = UnityEngine.Random;
 namespace GameLogic
 {
     [CreateAssetMenu(menuName = "Create Game Objects/Passive Ability")]
-    public partial class PassiveAbility : Ability
+    public class PassiveAbility : AbilityWithEffect
     {
         [SerializeField]
         private float Value;
-        public enum Verb
+
+
+        public static Dictionary<Verb, Deck.Zone> CorrectInstigatorLocations = new Dictionary<Verb, Deck.Zone>()
         {
-            ATTACKS,
-            IsATTACKED,
-            KILLS,
-            DIES,
-            ETB,
-            IsDAMAGED,
-            IsHealed,
-            Draw,
-            Withdraw,
-            RoundEnd,
-            COUNT
-        }
+                { Verb.ATTACKS,Deck.Zone.Battlefield },
+                { Verb.DIES, Deck.Zone.Graveyard },
+                { Verb.ETB, Deck.Zone.Battlefield},
+                 { Verb.Withdraw,Deck.Zone.Battlefield},
+        };
 
 
         public Trigger TriggerCondition;
@@ -77,6 +72,19 @@ namespace GameLogic
         {
             if (subject.CorrectNoun(instigator, abilityOwner))
                 ExecuteAction(abilityOwner, instigator);
+        }
+
+
+        //TODO: move to Trigger instead
+        public void FixTriggerInconsistencies()
+        {
+            //TODO: fix inconsistencies
+            if (CorrectInstigatorLocations.ContainsKey(TriggerCondition.TriggerAction) && CorrectInstigatorLocations[TriggerCondition.TriggerAction] != TriggerCondition.Subjekt.Location)
+            {
+                Debug.Log($"Fixed ability trigger {name}. '{TriggerCondition.TriggerAction}' instigator location should be {CorrectInstigatorLocations[TriggerCondition.TriggerAction]}, not {TriggerCondition.Subjekt.Location} ");
+
+                TriggerCondition.Subjekt.Location = CorrectInstigatorLocations[TriggerCondition.TriggerAction];
+            }
         }
 
     }

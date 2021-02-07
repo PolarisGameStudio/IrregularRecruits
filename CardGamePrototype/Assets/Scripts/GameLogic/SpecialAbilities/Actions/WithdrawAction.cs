@@ -4,14 +4,14 @@ namespace GameLogic
 {
     public class WithdrawAction : AbilityAction
     {
-        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.Withdraw;
+        public override ActionType ActionType => ActionType.Withdraw;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return "withdraw " + target;
         }
 
-        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
             targets.ForEach(c => c.Withdraw());

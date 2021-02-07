@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class RoundEndTrigger : AbilityTrigger
     {
-        public override PassiveAbility.Verb TriggerType => PassiveAbility.Verb.RoundEnd;
+        public override Verb TriggerType => Verb.RoundEnd;
 
         internal override string Description(string instigatorString)
         {

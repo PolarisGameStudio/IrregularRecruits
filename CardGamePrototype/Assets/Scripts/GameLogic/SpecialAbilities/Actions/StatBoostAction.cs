@@ -3,14 +3,14 @@ namespace GameLogic
 {
     public class StatBoostAction : AbilityAction
     {
-        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.StatPlus;
+        public override ActionType ActionType => ActionType.StatPlus;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return $"{target} gain {amount} Attack and Health";
         }
 
-        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
             targets.ForEach(c => c.StatModifier(ability.ResultingAction.Amount));

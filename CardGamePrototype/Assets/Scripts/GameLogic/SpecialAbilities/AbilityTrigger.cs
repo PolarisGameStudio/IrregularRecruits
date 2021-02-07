@@ -6,7 +6,7 @@ namespace GameLogic
     public abstract class AbilityTrigger
     {
 
-        public abstract PassiveAbility.Verb TriggerType { get; }
+        public abstract Verb TriggerType { get; }
 
         internal abstract UnityAction SetupListener(AbilityHolder owner, Noun subjekt, UnityAction<Card, AbilityHolder, Noun> executeIfTrue);
 

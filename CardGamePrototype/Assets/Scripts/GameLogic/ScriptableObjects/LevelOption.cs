@@ -8,6 +8,6 @@ namespace GameLogic
     [Serializable]
         public class LevelOption : ScriptableObject
         {
-            public List<Ability> Options = new List<Ability>();
+            public List<AbilityWithEffect> Options = new List<AbilityWithEffect>();
         }
 }

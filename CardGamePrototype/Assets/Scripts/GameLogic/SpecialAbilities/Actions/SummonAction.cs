@@ -4,14 +4,14 @@ namespace GameLogic
 {
     public class SummonAction : AbilityAction
     {
-        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.Summon;
+        public override ActionType ActionType => ActionType.Summon;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return $"summon a {summon.Attack}/{summon.Health} {summon.name}" ;
         }
 
-        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
             var summon = ability.ResultingAction.Summons;
 

@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class DamageTrigger : AbilityTrigger
     {
-        public override PassiveAbility.Verb TriggerType => PassiveAbility.Verb.IsDAMAGED;
+        public override Verb TriggerType => Verb.IsDAMAGED;
 
         internal override string Description(string instigatorString)
         {

@@ -495,7 +495,7 @@ namespace Tests
             var option1 = new GainGoldOption()
             {
                 Amount = 1000,
-                OnlyForAbility = new List<Ability>() { new PassiveAbility()
+                OnlyForAbility = new List<AbilityWithEffect>() { new PassiveAbility()
                 {
                     name = "ability"
                 } }
@@ -526,7 +526,7 @@ namespace Tests
             var option1 = new GainGoldOption()
             {
                 Amount = 1000,
-                OnlyForAbility = new List<Ability>() { BattleManager.Instance.PlayerDeck.Hero.Abilities.FirstOrDefault() }
+                OnlyForAbility = new List<AbilityWithEffect>() { BattleManager.Instance.PlayerDeck.Hero.Abilities.FirstOrDefault() }
             };
             var option3 = new LoseGoldOption()
             {

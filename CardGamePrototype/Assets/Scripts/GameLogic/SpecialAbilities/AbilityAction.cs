@@ -6,9 +6,9 @@ namespace GameLogic
     {
         public AbilityAction() { }
 
-        public abstract Ability.ActionType ActionType { get; }
+        public abstract ActionType ActionType { get; }
         public abstract string Description(string v, int amount,Creature summon);
-        public abstract void ExecuteAction(Ability ability, AbilityHolder _owner, List<Card> targets);
+        public abstract void ExecuteAction(AbilityWithEffect ability, AbilityHolder _owner, List<Card> targets);
         public abstract float GetValue(float targetvalue, int amount);
 
 

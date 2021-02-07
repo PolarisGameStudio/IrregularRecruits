@@ -11,9 +11,9 @@ namespace UI
     public abstract partial class AbilityHolderUI : MonoBehaviour
     {
         protected List<Image> SpecialAbilityIcon = new List<Image>();
-        public Dictionary<Ability, AbilityUI> AbilityIcons = new Dictionary<Ability, AbilityUI>();
+        public Dictionary<AbilityWithEffect, AbilityUI> AbilityIcons = new Dictionary<AbilityWithEffect, AbilityUI>();
 
-        internal Image GetAbilityImage(Ability ability = null)
+        internal Image GetAbilityImage(AbilityWithEffect ability = null)
         {
             if (!ability || !AbilityIcons.ContainsKey(ability)) return SpecialAbilityIcon.FirstOrDefault(a => a.isActiveAndEnabled);
 

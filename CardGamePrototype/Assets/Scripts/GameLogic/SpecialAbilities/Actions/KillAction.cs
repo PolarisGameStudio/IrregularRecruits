@@ -4,14 +4,14 @@ namespace GameLogic
 {
     public class KillAction : AbilityAction
     {
-        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.Kill;
+        public override ActionType ActionType => ActionType.Kill;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return "kill " + target;
         }
 
-        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, targets);

@@ -4,14 +4,14 @@ namespace GameLogic
 {
     public class CharmAction : AbilityAction
     {
-        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.Charm;
+        public override ActionType ActionType => ActionType.Charm;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return "take control of " + target;
         }
 
-        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, targets);

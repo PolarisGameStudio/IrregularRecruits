@@ -30,7 +30,7 @@ namespace UI
         public static UnityEvent OnHeal = new UnityEvent();
         public static UnityEvent OnDeath = new UnityEvent();
         public static UnityEvent OnResurrect = new UnityEvent();
-        public class AbilityEvent : UnityEvent<Ability.ActionType> { }
+        public class AbilityEvent : UnityEvent<ActionType> { }
         public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
         public static AbilityEvent OnAbilityTargetHit = new AbilityEvent();
 
@@ -47,7 +47,7 @@ namespace UI
         [Serializable]
         public struct AbilityAnimationFX
         {
-            public Ability.ActionType ActionType;
+            public ActionType ActionType;
             public ParticleSystem[] AbilityIconFX;
             public ParticleSystem[] TargetFX;
             public ParticleSystem[] OwnerFX;
@@ -142,7 +142,7 @@ namespace UI
             }
         }
 
-        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs,Ability ability, float delay = 0)
+        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs,AbilityWithEffect ability, float delay = 0)
         {
             if (!abilityOwner ) yield break;
 
@@ -175,7 +175,7 @@ namespace UI
             }
         }
 
-        public IEnumerator PlayAbilityFx(Ability ability, AbilityHolderUI owner, List<CardUI> targets, float delay = 0)
+        public IEnumerator PlayAbilityFx(AbilityWithEffect ability, AbilityHolderUI owner, List<CardUI> targets, float delay = 0)
         {
             var abilityFx = AbilityFx.First(a => a.ActionType == ability.ResultingAction.ActionType);
 

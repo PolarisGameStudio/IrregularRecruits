@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GameLogic
 {
     [CreateAssetMenu(menuName = "Create Game Objects/Active Ability")]
-    public class ActiveAbility : Ability
+    public class ActiveAbility : AbilityWithEffect
     {
         public bool OncePrCombat;
         private bool ActivatedThisTurn;

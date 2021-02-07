@@ -34,9 +34,9 @@ namespace GameLogic
 
             Event.OnBattleFinished.AddListener(PackUp);
 
-            Event.OnPlayerAction.AddListener(d => Ability.AbilityStackCount = 0);
+            Event.OnPlayerAction.AddListener(d => AbilityWithEffect.AbilityStackCount = 0);
 
-            Ability.AbilityStackCount = 0;
+            AbilityWithEffect.AbilityStackCount = 0;
 
             CombatAutoResolver = new CombatAutoResolver();
 

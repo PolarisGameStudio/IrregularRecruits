@@ -8,8 +8,8 @@ namespace GameLogic
 {
     public class AbilityProcessor
     {
-        private static Dictionary<Ability.ActionType, AbilityAction> actionStates = new Dictionary<Ability.ActionType, AbilityAction>();
-        private static Dictionary<PassiveAbility.Verb, AbilityTrigger> triggers = new Dictionary<PassiveAbility.Verb, AbilityTrigger>();
+        private static Dictionary<ActionType, AbilityAction> actionStates = new Dictionary<ActionType, AbilityAction>();
+        private static Dictionary<Verb, AbilityTrigger> triggers = new Dictionary<Verb, AbilityTrigger>();
         private static bool initialized;
 
         private static void Initialize()
@@ -53,7 +53,7 @@ namespace GameLogic
         }
 
         /// //TODO: replace duplicate code with method with generics
-        public static AbilityAction GetAction(PassiveAbility.ActionType state)
+        public static AbilityAction GetAction(ActionType state)
         {
             if (!initialized) Initialize();
 
@@ -64,7 +64,7 @@ namespace GameLogic
             }
             return actionStates[state];
         }
-        public static AbilityTrigger GetTrigger(PassiveAbility.Verb state)
+        public static AbilityTrigger GetTrigger(Verb state)
         {
             if (!initialized) Initialize();
 

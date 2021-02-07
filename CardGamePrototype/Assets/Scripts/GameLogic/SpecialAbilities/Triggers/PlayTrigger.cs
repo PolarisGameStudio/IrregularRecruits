@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class PlayTrigger : AbilityTrigger
     {
-        public override PassiveAbility.Verb TriggerType => PassiveAbility.Verb.ETB;
+        public override Verb TriggerType => Verb.ETB;
 
         internal override string Description(string instigatorString)
         {

@@ -5,14 +5,14 @@ namespace GameLogic
 
     public class DrawAction : AbilityAction
     {
-        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.Draw;
+        public override ActionType ActionType => ActionType.Draw;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return $"draw {amount} cards";
         }
 
-        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, new List<Card>());

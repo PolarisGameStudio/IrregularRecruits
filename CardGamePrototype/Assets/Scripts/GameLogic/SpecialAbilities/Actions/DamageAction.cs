@@ -4,14 +4,14 @@ namespace GameLogic
 {
     public class DamageAction : AbilityAction
     {
-        public override PassiveAbility.ActionType ActionType => PassiveAbility.ActionType.DealDamage;
+        public override ActionType ActionType => ActionType.DealDamage;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return $"Deal {amount} damage to {target}";
         }
 
-        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> targets)
+        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, targets);

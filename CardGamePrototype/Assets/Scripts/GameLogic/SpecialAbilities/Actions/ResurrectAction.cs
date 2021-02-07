@@ -5,14 +5,14 @@ namespace GameLogic
 
     public class ResurrectAction : AbilityAction
     {
-        public override Ability.ActionType ActionType => Ability.ActionType.Resurrect;
+        public override ActionType ActionType => ActionType.Resurrect;
 
         public override string Description(string target, int amount, Creature summon)
         {
             return $"resurrect {target} with {amount} health";
         }
 
-        public override void ExecuteAction(Ability ability, AbilityHolder owner, List<Card> graveTargets)
+        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> graveTargets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, graveTargets);
             graveTargets.ForEach(c => c.Resurrect(ability.ResultingAction.Amount));
