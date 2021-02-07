@@ -23,9 +23,9 @@ namespace GameLogic
     {
 
         public Noun Subjekt;
-        public Verb TriggerAction;
+        public TriggerType TriggerAction;
 
-        public Trigger(Noun subj, Verb triggerAction)
+        public Trigger(Noun subj, TriggerType triggerAction)
         {
             Subjekt = subj;
             TriggerAction = triggerAction;

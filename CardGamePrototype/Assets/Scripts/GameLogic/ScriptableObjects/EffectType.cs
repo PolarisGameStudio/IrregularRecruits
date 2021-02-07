@@ -1,6 +1,6 @@
 ﻿namespace GameLogic
 {
-    public enum ActionType
+    public enum EffectType
     {
         Kill,
         DealDamage,

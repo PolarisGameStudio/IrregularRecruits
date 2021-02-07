@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class DiesTrigger : AbilityTrigger
     {
-        public override Verb TriggerType => Verb.DIES;
+        public override TriggerType TriggerType => TriggerType.DIES;
 
         internal override string Description(string instigatorString)
         {

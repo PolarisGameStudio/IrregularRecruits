@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class WithdrawAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.Withdraw;
+        public override EffectType ActionType => EffectType.Withdraw;
 
         public override string Description(string target, int amount, Creature summon)
         {

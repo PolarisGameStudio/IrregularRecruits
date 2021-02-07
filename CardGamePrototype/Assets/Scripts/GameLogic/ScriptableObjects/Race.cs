@@ -11,8 +11,8 @@ namespace GameLogic
         public Sprite Shield;
         public string Description;
 
-        public ActionType[] FavoriteActions;
-        public Verb[] FavoriteTriggers;
+        public EffectType[] FavoriteActions;
+        public TriggerType[] FavoriteTriggers;
 
         public Race[] FriendRaces;
     }

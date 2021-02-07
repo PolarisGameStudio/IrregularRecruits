@@ -30,7 +30,7 @@ namespace UI
         public static UnityEvent OnHeal = new UnityEvent();
         public static UnityEvent OnDeath = new UnityEvent();
         public static UnityEvent OnResurrect = new UnityEvent();
-        public class AbilityEvent : UnityEvent<ActionType> { }
+        public class AbilityEvent : UnityEvent<EffectType> { }
         public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
         public static AbilityEvent OnAbilityTargetHit = new AbilityEvent();
 
@@ -47,7 +47,7 @@ namespace UI
         [Serializable]
         public struct AbilityAnimationFX
         {
-            public ActionType ActionType;
+            public EffectType ActionType;
             public ParticleSystem[] AbilityIconFX;
             public ParticleSystem[] TargetFX;
             public ParticleSystem[] OwnerFX;

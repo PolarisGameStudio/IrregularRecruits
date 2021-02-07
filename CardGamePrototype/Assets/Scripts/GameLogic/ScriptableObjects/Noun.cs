@@ -125,7 +125,7 @@ namespace GameLogic
             }
         }
 
-        public string NounAsString(ICharacter _owner, Count count = Count.One, Verb triggerAction = Verb.COUNT)
+        public string NounAsString(ICharacter _owner, Count count = Count.One, TriggerType triggerAction = TriggerType.COUNT)
         {
             var str = "";
 
@@ -192,7 +192,7 @@ namespace GameLogic
             {
                 case Deck.Zone.Library:
                     //redundant to describe withdraw to library
-                    if (triggerAction == Verb.Withdraw)
+                    if (triggerAction == TriggerType.Withdraw)
                         return str;
                     switch (Relationship)
                     {
@@ -208,11 +208,11 @@ namespace GameLogic
                     return str;
                 case Deck.Zone.Graveyard:
 
-                    if (triggerAction == Verb.DIES)
+                    if (triggerAction == TriggerType.DIES)
                         return str;
                     return str + ", that is dead"; //TODO: remove. just for debugging now
                 case Deck.Zone.Hand:
-                    if (triggerAction == Verb.Draw)
+                    if (triggerAction == TriggerType.Draw)
                         return str;
 
                     switch (Relationship)

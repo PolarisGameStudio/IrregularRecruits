@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class HealTrigger : AbilityTrigger
     {
-        public override Verb TriggerType => Verb.IsHealed;
+        public override TriggerType TriggerType => TriggerType.IsHealed;
 
         internal override string Description(string instigatorString)
         {

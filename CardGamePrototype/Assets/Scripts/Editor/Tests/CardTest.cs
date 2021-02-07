@@ -23,8 +23,8 @@ namespace Tests
 
             TestAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.DealDamage, Count.One, 1, new Noun()),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun()),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.ETB),
             };
 
             TestCreature.SpecialAbility = TestAbility;

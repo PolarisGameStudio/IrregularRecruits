@@ -14,12 +14,12 @@ namespace GameLogic
         private float Value;
 
 
-        public static Dictionary<Verb, Deck.Zone> CorrectInstigatorLocations = new Dictionary<Verb, Deck.Zone>()
+        public static Dictionary<TriggerType, Deck.Zone> CorrectInstigatorLocations = new Dictionary<TriggerType, Deck.Zone>()
         {
-                { Verb.ATTACKS,Deck.Zone.Battlefield },
-                { Verb.DIES, Deck.Zone.Graveyard },
-                { Verb.ETB, Deck.Zone.Battlefield},
-                 { Verb.Withdraw,Deck.Zone.Battlefield},
+                { TriggerType.ATTACKS,Deck.Zone.Battlefield },
+                { TriggerType.DIES, Deck.Zone.Graveyard },
+                { TriggerType.ETB, Deck.Zone.Battlefield},
+                 { TriggerType.Withdraw,Deck.Zone.Battlefield},
         };
 
 

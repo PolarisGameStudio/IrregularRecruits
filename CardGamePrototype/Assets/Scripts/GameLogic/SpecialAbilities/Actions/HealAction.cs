@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class HealAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.Heal;
+        public override EffectType ActionType => EffectType.Heal;
 
         public override string Description(string target, int amount, Creature summon)
         {

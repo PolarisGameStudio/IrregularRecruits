@@ -142,8 +142,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.ETB),
             };
 
             TestHero = GenerateHero(testAbility);
@@ -168,13 +168,13 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.ETB),
             };
             var testAbility2 = new PassiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.ETB),
             };
 
             TestHero = GenerateHero(testAbility);
@@ -200,7 +200,7 @@ namespace Tests
         {
             var testAbility = new ActiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
             };
 
             TestHero = GenerateHero(testAbility);
@@ -227,7 +227,7 @@ namespace Tests
         {
             var testAbility = new ActiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
             };
 
             TestHero = GenerateHero(testAbility);
@@ -256,8 +256,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same), TriggerType.ETB),
             };
 
             var testRace = new Race()
@@ -286,8 +286,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Same), TriggerType.ETB),
             };
 
             var testRace = new Race()
@@ -320,8 +320,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Enemy), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Enemy), TriggerType.ETB),
             };
 
             TestHero = GenerateHero(testAbility);
@@ -346,8 +346,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Enemy), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Enemy), TriggerType.ETB),
             };
 
             TestHero = GenerateHero(testAbility);
@@ -372,7 +372,7 @@ namespace Tests
         {
             var testAbility = new ActiveAbility()
             {
-                ResultingAction = new AbilityWithEffect.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any))
             };
 
             TestHero = GenerateHero(testAbility);

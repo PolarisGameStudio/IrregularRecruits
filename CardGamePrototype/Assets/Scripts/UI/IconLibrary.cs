@@ -9,11 +9,11 @@ namespace UI
     public class IconLibrary : SingletonScriptableObject<IconLibrary>
     {
         [System.Serializable]
-        public struct AbilityActionIcon { public ActionType ActionType; public Sprite Sprite; }
+        public struct AbilityActionIcon { public EffectType ActionType; public Sprite Sprite; }
 
         public AbilityActionIcon[] AbilityActionIcons;
 
-        public static Sprite GetAbilityIconSprite(ActionType actionType)
+        public static Sprite GetAbilityIconSprite(EffectType actionType)
         {
             if (!Instance.AbilityActionIcons.Any(ai => ai.ActionType == actionType)) return null;
 

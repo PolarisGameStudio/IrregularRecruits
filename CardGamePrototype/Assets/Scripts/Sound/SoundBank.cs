@@ -74,7 +74,7 @@ namespace Sound
         [System.Serializable]
         public struct AbilitySound
         {
-            public ActionType Type;
+            public EffectType Type;
             public AudioClip[] TriggerAudio;
             public AudioClip[] TargetAudio;
         }
@@ -150,7 +150,7 @@ namespace Sound
             return Rnd(Instance.Musics.First(s => s.Type == sound).Audio);
         }
 
-        public static AudioClip GetAbilityTrigger(ActionType sound)
+        public static AudioClip GetAbilityTrigger(EffectType sound)
         {
             if (!Instance.AbilitySounds.Any(s => s.Type == sound))
             {
@@ -160,7 +160,7 @@ namespace Sound
 
             return Rnd(Instance.AbilitySounds.First(s => s.Type == sound).TriggerAudio);
         }
-        public static AudioClip GetAbilityHit(ActionType sound)
+        public static AudioClip GetAbilityHit(EffectType sound)
         {
             if (!Instance.AbilitySounds.Any(s => s.Type == sound))
             {

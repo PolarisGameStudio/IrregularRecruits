@@ -123,8 +123,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.ETB),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -145,8 +145,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.ETB),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -170,8 +170,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), Verb.KILLS),
+                ResultingAction = new AbilityEffect(EffectType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.KILLS),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -199,8 +199,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), Verb.KILLS),
+                ResultingAction = new AbilityEffect(EffectType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.KILLS),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -229,8 +229,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard), Verb.DIES),
+                ResultingAction = new AbilityEffect(EffectType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard), TriggerType.DIES),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -256,8 +256,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), Verb.ETB),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.ETB),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -281,8 +281,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Heal, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Heal, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -303,8 +303,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -330,8 +330,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Heal, Count.One, 1, new Noun(Noun.CharacterTyp.Other)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Heal, Count.One, 1, new Noun(Noun.CharacterTyp.Other)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -357,8 +357,8 @@ namespace Tests
 
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.Two, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.Two, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -386,8 +386,8 @@ namespace Tests
 
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -413,8 +413,8 @@ namespace Tests
 
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -440,8 +440,8 @@ namespace Tests
 
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -465,8 +465,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -493,8 +493,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -523,8 +523,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             var race = new Race()
@@ -560,8 +560,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Other, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Other, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             var race = new Race()
@@ -601,8 +601,8 @@ namespace Tests
 
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Other, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Different)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Other, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Different)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             var race = new Race()
@@ -640,8 +640,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -663,8 +663,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -686,8 +686,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -709,8 +709,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -733,8 +733,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -757,8 +757,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.It), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.It), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -782,8 +782,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same), TriggerType.IsDAMAGED),
             };
 
             var race = new Race()
@@ -814,8 +814,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Different), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Different), TriggerType.IsDAMAGED),
             };
 
             var race = new Race()
@@ -846,8 +846,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Same), TriggerType.IsDAMAGED),
             };
 
             var race = new Race()
@@ -878,8 +878,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Different), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Different), TriggerType.IsDAMAGED),
             };
 
             var race = new Race()
@@ -910,8 +910,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Withdraw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -936,8 +936,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Charm, Count.All, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Charm, Count.All, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -964,8 +964,8 @@ namespace Tests
             int dmg = 1;
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.DealDamage, Count.All, dmg, new Noun(Noun.CharacterTyp.This)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Library), Verb.Withdraw),
+                ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.All, dmg, new Noun(Noun.CharacterTyp.This)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Library), TriggerType.Withdraw),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -993,8 +993,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Draw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Draw, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -1021,8 +1021,8 @@ namespace Tests
             int amount = 1;
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Heal, Count.All, amount, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Heal, Count.All, amount, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -1048,8 +1048,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Kill, Count.All, 1, new Noun(Noun.CharacterTyp.Other)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Kill, Count.All, 1, new Noun(Noun.CharacterTyp.Other)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -1075,8 +1075,8 @@ namespace Tests
         {
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard), Verb.DIES),
+                ResultingAction = new AbilityEffect(EffectType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard), TriggerType.DIES),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -1103,8 +1103,8 @@ namespace Tests
 
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Any, Deck.Zone.Graveyard), Verb.DIES),
+                ResultingAction = new AbilityEffect(EffectType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.It)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Any, Deck.Zone.Graveyard), TriggerType.DIES),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -1129,8 +1129,8 @@ namespace Tests
             const int amount = 2;
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.StatMinus, Count.One, amount, new Noun(Noun.CharacterTyp.Other)),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.StatMinus, Count.One, amount, new Noun(Noun.CharacterTyp.Other)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);
@@ -1164,8 +1164,8 @@ namespace Tests
 
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new PassiveAbility.Action(ActionType.Summon, Count.All, 1, new Noun(Noun.CharacterTyp.Any),summon),
-                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), Verb.IsDAMAGED),
+                ResultingAction = new AbilityEffect(EffectType.Summon, Count.All, 1, new Noun(Noun.CharacterTyp.Any),summon),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
             };
 
             TestCard = GenerateTestCreature(testAbility);

@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class GainEnergyAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.GainEnergy;
+        public override EffectType ActionType => EffectType.GainEnergy;
 
         public override string Description(string v, int amount, Creature summon)
         {

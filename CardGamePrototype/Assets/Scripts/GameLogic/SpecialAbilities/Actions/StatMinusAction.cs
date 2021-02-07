@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class StatMinusAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.StatMinus;
+        public override EffectType ActionType => EffectType.StatMinus;
 
         public override string Description(string target, int amount, Creature summon)
         {

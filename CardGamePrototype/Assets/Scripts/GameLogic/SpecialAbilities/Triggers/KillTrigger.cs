@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class KillTrigger : AbilityTrigger
     {
-        public override Verb TriggerType => Verb.KILLS;
+        public override TriggerType TriggerType => TriggerType.KILLS;
 
         internal override string Description(string instigatorString)
         {

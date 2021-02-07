@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class KillAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.Kill;
+        public override EffectType ActionType => EffectType.Kill;
 
         public override string Description(string target, int amount, Creature summon)
         {

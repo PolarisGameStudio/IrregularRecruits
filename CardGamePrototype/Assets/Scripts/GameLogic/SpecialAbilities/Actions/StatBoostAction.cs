@@ -3,7 +3,7 @@ namespace GameLogic
 {
     public class StatBoostAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.StatPlus;
+        public override EffectType ActionType => EffectType.StatPlus;
 
         public override string Description(string target, int amount, Creature summon)
         {

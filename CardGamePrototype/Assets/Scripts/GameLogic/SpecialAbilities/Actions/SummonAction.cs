@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class SummonAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.Summon;
+        public override EffectType ActionType => EffectType.Summon;
 
         public override string Description(string target, int amount, Creature summon)
         {

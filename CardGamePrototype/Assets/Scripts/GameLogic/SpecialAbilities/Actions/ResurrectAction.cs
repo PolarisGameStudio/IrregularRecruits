@@ -5,7 +5,7 @@ namespace GameLogic
 
     public class ResurrectAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.Resurrect;
+        public override EffectType ActionType => EffectType.Resurrect;
 
         public override string Description(string target, int amount, Creature summon)
         {

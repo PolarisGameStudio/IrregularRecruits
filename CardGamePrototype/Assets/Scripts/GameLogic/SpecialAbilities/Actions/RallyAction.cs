@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class RallyAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.Rally;
+        public override EffectType ActionType => EffectType.Rally;
 
         public override string Description(string v, int amount, Creature summon)
         {

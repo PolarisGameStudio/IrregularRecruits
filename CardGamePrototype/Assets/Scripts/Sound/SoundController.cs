@@ -58,12 +58,12 @@ namespace Sound
 
         }
 
-        public static void PlayAbilityTrigger(GameLogic.ActionType type)
+        public static void PlayAbilityTrigger(GameLogic.EffectType type)
         {
             Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityTrigger(type));
         }
 
-        public static void PlayAbilityHit(GameLogic.ActionType type)
+        public static void PlayAbilityHit(GameLogic.EffectType type)
         {
             Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityHit(type));
         }

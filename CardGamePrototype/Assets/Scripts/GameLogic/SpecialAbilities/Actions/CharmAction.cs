@@ -4,7 +4,7 @@ namespace GameLogic
 {
     public class CharmAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.Charm;
+        public override EffectType ActionType => EffectType.Charm;
 
         public override string Description(string target, int amount, Creature summon)
         {

@@ -5,7 +5,7 @@ namespace GameLogic
 
     public class DrawAction : AbilityAction
     {
-        public override ActionType ActionType => ActionType.Draw;
+        public override EffectType ActionType => EffectType.Draw;
 
         public override string Description(string target, int amount, Creature summon)
         {

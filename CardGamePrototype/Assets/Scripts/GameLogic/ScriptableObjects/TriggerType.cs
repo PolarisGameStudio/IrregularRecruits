@@ -1,6 +1,6 @@
 ﻿namespace GameLogic
 {
-    public enum Verb
+    public enum TriggerType
     {
         ATTACKS,
         IsATTACKED,
