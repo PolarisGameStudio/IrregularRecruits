@@ -2796,6 +2796,7 @@ GameObject:
   - component: {fileID: 3691825649050827865}
   - component: {fileID: 3475250304154711476}
   - component: {fileID: 5824754500184142050}
+  - component: {fileID: 9183658311504397747}
   m_Layer: 5
   m_Name: Portrait
   m_TagString: Untagged
@@ -2902,6 +2903,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9183658311504397747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6504599849572734164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 15, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7701924989259748744
 GameObject:
   m_ObjectHideFlags: 0

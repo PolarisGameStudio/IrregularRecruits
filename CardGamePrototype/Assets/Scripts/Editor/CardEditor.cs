@@ -96,9 +96,9 @@ namespace UI
 
         private void MoveAbilityToOtherCreature()
         {
-            if (!Creature.SpecialAbility) return;
+            if (!(Creature.SpecialAbility is PassiveAbility ability)) return;
 
-            AssetManager.MoveAbilityToOtherCreature(Creature.SpecialAbility);
+            AssetManager.MoveAbilityToOtherCreature(ability);
             Creature.SpecialAbility = null;
 
             UpdateCreature(Creature);
@@ -210,9 +210,9 @@ namespace UI
         private void UpdateAbility()
         {
             AbilityEditor.Image.enabled = Creature.SpecialAbility;
-            if (Creature.SpecialAbility)
+            if (Creature.SpecialAbility is PassiveAbility ability)
             {
-                AbilityEditor.Image.sprite = IconLibrary.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
+                AbilityEditor.Image.sprite = IconLibrary.GetAbilityIconSprite(ability.ResultingAction.ActionType);
                 AbilityEditor.Text.text = Creature.SpecialAbility.Description(Creature);
             }
             else

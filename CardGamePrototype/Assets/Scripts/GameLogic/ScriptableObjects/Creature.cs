@@ -16,7 +16,7 @@ namespace GameLogic
         public int Attack = 1;
         public int Health = 1;
         public List<Trait> Traits = new List<Trait>();
-        public PassiveAbility SpecialAbility;
+        public SpecialAbility SpecialAbility;
         public int CR;
 
         public Race Race;

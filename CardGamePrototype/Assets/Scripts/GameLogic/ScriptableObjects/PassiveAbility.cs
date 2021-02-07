@@ -44,20 +44,7 @@ namespace GameLogic
             _owner.RemoveListenerAction = AbilityProcessor.GetTrigger(TriggerCondition.TriggerAction).SetupListener(_owner, TriggerCondition.Subjekt, ExecuteIfTrue);
         }
 
-        public void RemoveListeners(AbilityHolder _owner)
-        {
-            if (!_owner.ListenersInitialized)
-                Debug.LogWarning("removing non-initialized listeners ");
-
-            Debug.Log($"Remove listener for {name}: {_owner}");
-
-            _owner.RemoveListenerAction?.Invoke();
-
-            _owner.ListenersInitialized = false;
-            _owner.RemoveListenerAction = null;
-        }
-
-        public float GetValue()
+        public override float GetValue()
         {
             Value = TriggerCondition.GetValue() * ResultingAction.GetValue();
 

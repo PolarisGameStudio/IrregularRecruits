@@ -132,7 +132,7 @@ namespace UI
 
             foreach (var AttributeInstance in AttributeInstances)
             {
-                if (creature.SpecialAbility)
+                if (creature.SpecialAbility is PassiveAbility ability)
                 {
 
                     if (DescriptionText)
@@ -140,7 +140,7 @@ namespace UI
 
                     var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
                     instance.gameObject.SetActive(true);
-                    instance.sprite = IconLibrary.GetAbilityIconSprite(creature.SpecialAbility.ResultingAction.ActionType);
+                    instance.sprite = IconLibrary.GetAbilityIconSprite(ability.ResultingAction.ActionType);
 
                     InstantiatedObjects.Add(instance.gameObject);
 

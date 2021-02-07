@@ -332,22 +332,22 @@ PrefabInstance:
     - target: {fileID: 327205529066908325, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 327205529066908325, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 327205529066908325, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 259.5
       objectReference: {fileID: 0}
     - target: {fileID: 327205529066908325, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 597613914704546477, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
@@ -427,22 +427,22 @@ PrefabInstance:
     - target: {fileID: 1176560413346297174, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1176560413346297174, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1176560413346297174, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1159.5
       objectReference: {fileID: 0}
     - target: {fileID: 1176560413346297174, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 1239032927768018363, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
@@ -512,6 +512,11 @@ PrefabInstance:
     - target: {fileID: 1701230887946786024, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813368612790112786, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1813368613143365789, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
@@ -867,22 +872,22 @@ PrefabInstance:
     - target: {fileID: 3737279985622066710, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3737279985622066710, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3737279985622066710, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 709.5
       objectReference: {fileID: 0}
     - target: {fileID: 3737279985622066710, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 3818628520286871267, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
@@ -927,13 +932,13 @@ PrefabInstance:
     - target: {fileID: 4197703754467786954, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: OpenUIWindowsInSceneStart.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197703754467786954, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: OpenUIWindowsInSceneStart.Array.data[1]
       value: 
-      objectReference: {fileID: 575627812}
+      objectReference: {fileID: 0}
     - target: {fileID: 4197703754467786954, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
       propertyPath: OpenUIWindowsInSceneStart.Array.data[2]
@@ -1178,6 +1183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179957116367650794, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7388574454964340092, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
         type: 3}
@@ -1796,18 +1806,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55d4b87b5d04ea34ab74c2f552a487f5, type: 3}
---- !u!114 &575627812 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1813368612790112784, guid: 55d4b87b5d04ea34ab74c2f552a487f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 575627811}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d5fcb3ee0b9714bbca172d493279c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1988347007 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3609424269027025608, guid: 55d4b87b5d04ea34ab74c2f552a487f5,

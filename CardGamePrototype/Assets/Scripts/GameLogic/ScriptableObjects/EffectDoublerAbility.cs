@@ -40,5 +40,10 @@ namespace GameLogic
                 a.Invoke();
 
         }
+
+        public override float GetValue()
+        {
+            return 15f;
+        }
     }
 }

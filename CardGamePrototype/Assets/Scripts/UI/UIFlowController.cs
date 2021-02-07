@@ -41,7 +41,7 @@ namespace UI
             //On healed
             Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val,card.CurrentHealth,card.MaxHealth)));
 
-            Event.OnActionGained.AddListener(i => AddCardEvent(ActionsGained(i)));
+            Event.OnActionPointsChange.AddListener(i => AddCardEvent(ActionsChanged(i)));
 
             //On Stat Change-> (Card, amount)
             Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack,card.Damaged())));
@@ -50,9 +50,7 @@ namespace UI
 
             //On Ability trigger->All the current Ability animation param
             Event.OnAbilityExecution.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.Guid,ts.Select(t=>t.Guid))));
-
-            Event.OnPlayerAction.AddListener(d => AddCardEvent(ActionUsed(d)));
-            
+                        
             //TODO: is this actually used in a timely order
             Event.OnCombatSetup.AddListener((e, c) => PlayerTurnStart());
             
@@ -67,15 +65,11 @@ namespace UI
             AddCardEvent( BattleUI.Move(card.Guid, to, from, playerdeck));
         }
 
-        private IEnumerator ActionsGained(int amount)
+        private IEnumerator ActionsChanged(int amount)
         {
-            for (int i = 0; i < amount; i++)
-            {
-                ActionsLeftUI.ActionGained.Invoke();
+                ActionsLeftUI.ActionGained.Invoke(amount);
 
                 yield return new WaitForSeconds(0.1f);
-
-            }
 
         }
 
@@ -92,7 +86,6 @@ namespace UI
             else
                 BattleUI.Instance.UILocked = true;
 
-            ActionsLeftUI.ActionsRefreshed.Invoke();
         }
 
         private void PlayerTurnDone()
@@ -104,13 +97,6 @@ namespace UI
 
         }
 
-        private IEnumerator ActionUsed(Deck deck)
-        {
-            if (deck != BattleUI.Instance.PlayerDeck)
-                yield break;
-
-            ActionsLeftUI.ActionUsed.Invoke();
-        }
 
 
         private void AddCardEvent(IEnumerator uIEvent)

@@ -120,10 +120,12 @@ namespace UI
 
             AbilityIcon.gameObject.SetActive(Creature.SpecialAbility);
 
-            if (Creature.SpecialAbility)
+            if (Creature.SpecialAbility )
             {
                 AbilityIcon.Text.text = Creature.SpecialAbility?.Description(Creature);
-                AbilityIcon.Image.sprite = IconLibrary.GetAbilityIconSprite(Creature.SpecialAbility.ResultingAction.ActionType);
+
+                if (Creature.SpecialAbility is PassiveAbility ability)
+                    AbilityIcon.Image.sprite = IconLibrary.GetAbilityIconSprite(ability.ResultingAction.ActionType);
             }
 
             //public ImageTextEntry TraitPrefab;

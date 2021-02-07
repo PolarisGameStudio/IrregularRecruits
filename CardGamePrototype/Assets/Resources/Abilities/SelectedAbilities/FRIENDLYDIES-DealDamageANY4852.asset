@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: FRIENDLYDIES-DealDamageANY4852
   m_EditorClassIdentifier: 
+  Name: 
+  Icon: {fileID: 0}
   ResultingAction:
     ActionType: 1
     TargetCount: 1
     Target:
       Character: 0
       Location: 1
-      Relationship: 0
+      Relationship: 2
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     Amount: 3
     Summons: {fileID: 0}
   Value: 0.69
@@ -31,4 +34,5 @@ MonoBehaviour:
       Relationship: 1
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     TriggerAction: 3

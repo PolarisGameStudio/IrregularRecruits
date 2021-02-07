@@ -14,8 +14,8 @@ namespace GameLogic
             get => actionsLeft; 
             set
             {
-                if (value > actionsLeft)
-                    Event.OnActionGained.Invoke(value - actionsLeft);
+                if (value != actionsLeft)
+                    Event.OnActionPointsChange.Invoke(value);
 
                 actionsLeft = value;
             }
