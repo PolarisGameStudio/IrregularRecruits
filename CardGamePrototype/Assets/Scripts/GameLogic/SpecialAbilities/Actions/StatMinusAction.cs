@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class StatMinusAction : AbilityAction
+    public class StatMinusAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.StatMinus;
 

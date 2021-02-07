@@ -5,7 +5,7 @@ namespace GameLogic
 {
 
     [Serializable]
-    public struct AbilityEffect
+    public struct AbilityEffectObject
     {
         private static Dictionary<EffectType, Deck.Zone> ForcedEffectTargetLocations = new Dictionary<EffectType, Deck.Zone>()
         {
@@ -20,7 +20,7 @@ namespace GameLogic
         public int Amount;
         public Creature Summons;
 
-        public AbilityEffect(EffectType actionType, Count targetCount, int amount, Noun target, Creature summon = null)
+        public AbilityEffectObject(EffectType actionType, Count targetCount, int amount, Noun target, Creature summon = null)
         {
             ActionType = actionType;
             TargetCount = targetCount;

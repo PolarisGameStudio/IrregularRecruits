@@ -3,7 +3,7 @@
 namespace GameLogic
 {
 
-    public class DrawAction : AbilityAction
+    public class DrawAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.Draw;
 

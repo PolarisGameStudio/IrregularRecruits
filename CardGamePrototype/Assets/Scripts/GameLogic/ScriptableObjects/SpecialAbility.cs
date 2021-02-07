@@ -10,5 +10,11 @@ namespace GameLogic
 
         public abstract string Description(ICharacter owner);
 
+        public virtual void SetupListeners(AbilityHolder _owner)
+        {
+
+        }
+
+
     }
 }

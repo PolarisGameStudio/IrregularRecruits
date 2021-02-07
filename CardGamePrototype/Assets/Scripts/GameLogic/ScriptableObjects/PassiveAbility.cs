@@ -34,10 +34,8 @@ namespace GameLogic
             return $"{TriggerCondition.Description(owner)}, {ResultingAction.Description(owner)}.";
         }
 
-        public void SetupListeners(AbilityHolder _owner)
+        public override void SetupListeners(AbilityHolder _owner)
         {
-            Debug.Log($"Setup listener for {name}: {_owner}");
-
             if (_owner.ListenersInitialized)
                 Debug.LogWarning("Initializating listeners already done");
 
@@ -71,7 +69,14 @@ namespace GameLogic
         private void ExecuteIfTrue(Card instigator, AbilityHolder abilityOwner, Noun subject)
         {
             if (subject.CorrectNoun(instigator, abilityOwner))
-                ExecuteAction(abilityOwner, instigator);
+            {
+                UnityAction action = ()=> ExecuteAction(abilityOwner, instigator);
+
+                AbilityProcessor.OnAbilityTriggered.Invoke(TriggerCondition.TriggerAction,abilityOwner, action);
+
+                action.Invoke();
+
+            }
         }
 
 

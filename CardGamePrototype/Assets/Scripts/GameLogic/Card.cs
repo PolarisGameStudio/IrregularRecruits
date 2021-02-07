@@ -359,5 +359,10 @@ namespace GameLogic
         {
             return Creature.Race;
         }
+
+        internal override bool IsActive()
+        {
+            return Location == Deck.Zone.Battlefield;
+        }
     }
 }

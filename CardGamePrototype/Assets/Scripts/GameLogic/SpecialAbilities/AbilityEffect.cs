@@ -2,9 +2,9 @@
 
 namespace GameLogic
 {
-    public abstract class AbilityAction
+    public abstract class AbilityEffect
     {
-        public AbilityAction() { }
+        public AbilityEffect() { }
 
         public abstract EffectType ActionType { get; }
         public abstract string Description(string v, int amount,Creature summon);

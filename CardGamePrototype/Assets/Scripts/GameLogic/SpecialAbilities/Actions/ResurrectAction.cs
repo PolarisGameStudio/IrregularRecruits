@@ -3,7 +3,7 @@
 namespace GameLogic
 {
 
-    public class ResurrectAction : AbilityAction
+    public class ResurrectAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.Resurrect;
 

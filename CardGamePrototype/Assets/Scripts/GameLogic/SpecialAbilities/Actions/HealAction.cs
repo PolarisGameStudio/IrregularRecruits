@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class HealAction : AbilityAction
+    public class HealAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.Heal;
 

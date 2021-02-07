@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class RallyAction : AbilityAction
+    public class RallyAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.Rally;
 

@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class CharmAction : AbilityAction
+    public class CharmAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.Charm;
 

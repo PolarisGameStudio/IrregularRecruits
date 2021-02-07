@@ -67,7 +67,7 @@ namespace Tests
                 var c = onlyAbilityDamage ? GenerateTestCreature(
                     new PassiveAbility()
                     {
-                        ResultingAction = new AbilityEffect(EffectType.DealDamage, Count.One, 5, new Noun(Noun.CharacterTyp.Any)),
+                        ResultingAction = new AbilityEffectObject(EffectType.DealDamage, Count.One, 5, new Noun(Noun.CharacterTyp.Any)),
                         TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.RoundEnd),
                     }, null, 0
                     ) : GenerateTestCreature(null);

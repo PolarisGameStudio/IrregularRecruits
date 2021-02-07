@@ -180,7 +180,7 @@ public class AssetManager
                 );
 
 
-            ability.ResultingAction = new AbilityEffect(
+            ability.ResultingAction = new AbilityEffectObject(
                 (Random.value < FavoredAbilityUseRate) && c.Race.FavoriteActions.Any() ? c.Race.FavoriteActions[Random.Range(0, c.Race.FavoriteActions.Length)] : (EffectType)Random.Range(0, (int)EffectType.Summon),
                 (Count)Random.Range(0, (int)Count.COUNT),
                 Random.Range(amountMin, amountMax),

@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class KillAction : AbilityAction
+    public class KillAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.Kill;
 

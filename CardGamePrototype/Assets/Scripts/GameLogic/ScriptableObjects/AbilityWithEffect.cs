@@ -5,13 +5,13 @@ using Random = UnityEngine.Random;
 
 namespace GameLogic
 {
-    public abstract  class AbilityWithEffect : SpecialAbility
+    public abstract class AbilityWithEffect : SpecialAbility
     {
 
         public static int AbilityStackCount;
         private static readonly int MaxAbilityStack = 12;
 
-        public AbilityEffect ResultingAction;
+        public AbilityEffectObject ResultingAction;
 
         protected void ExecuteAction(AbilityHolder owner, Card triggerExecuter)
         {

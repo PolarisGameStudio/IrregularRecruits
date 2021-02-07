@@ -134,5 +134,10 @@ namespace GameLogic
             return heroObject.Race;
         }
 
+        internal override bool IsActive()
+        {
+            return BattleManager.Instance.PlayerDeck?.Hero == this
+                || BattleManager.Instance.EnemyDeck?.Hero == this;
+        }
     }
 }

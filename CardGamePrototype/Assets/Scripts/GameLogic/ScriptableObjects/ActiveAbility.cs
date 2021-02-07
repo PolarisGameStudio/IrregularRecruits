@@ -38,6 +38,8 @@ namespace GameLogic
             //owner.InDeck.DeckController.UsedAction(owner.InDeck);
         }
 
+
+
         public override string Description(ICharacter owner)
         {
             return $"Activate: {ResultingAction.Description(owner)}.";

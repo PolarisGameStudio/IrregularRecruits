@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class GainEnergyAction : AbilityAction
+    public class GainEnergyAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.GainEnergy;
 

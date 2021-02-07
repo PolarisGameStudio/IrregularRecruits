@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class DamageAction : AbilityAction
+    public class DamageAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.DealDamage;
 

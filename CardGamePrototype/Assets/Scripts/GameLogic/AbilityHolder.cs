@@ -3,14 +3,6 @@ using UnityEngine.Events;
 
 namespace GameLogic
 {
-    public interface ICharacter
-    {
-        string GetName();
-         Race GetRace();
-        //Deck GetDeck();
-        //Guid GetGuid();
-
-    }
 
     public abstract class AbilityHolder : ICharacter
     {
@@ -23,10 +15,14 @@ namespace GameLogic
 
         public abstract Race GetRace();
 
+
+
         public string GetName()
         {
             return Name;
         }
 
+        //whether the ability can trigger, e.g. the owner if minion, is on the battlefield
+        internal abstract bool IsActive();
     }
 }

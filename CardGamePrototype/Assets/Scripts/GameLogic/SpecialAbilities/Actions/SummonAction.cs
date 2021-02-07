@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class SummonAction : AbilityAction
+    public class SummonAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.Summon;
 

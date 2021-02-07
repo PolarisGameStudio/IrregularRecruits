@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-    public class WithdrawAction : AbilityAction
+    public class WithdrawAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.Withdraw;
 

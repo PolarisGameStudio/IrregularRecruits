@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 namespace GameLogic
 {
-    public class StatBoostAction : AbilityAction
+    public class StatBoostAction : AbilityEffect
     {
         public override EffectType ActionType => EffectType.StatPlus;
 

@@ -3,33 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameLogic
 {
     public class AbilityProcessor
     {
-        private static Dictionary<EffectType, AbilityAction> actionStates = new Dictionary<EffectType, AbilityAction>();
+        private static Dictionary<EffectType, AbilityEffect> abilityEffects = new Dictionary<EffectType, AbilityEffect>();
         private static Dictionary<TriggerType, AbilityTrigger> triggers = new Dictionary<TriggerType, AbilityTrigger>();
         private static bool initialized;
+
+        //takes the trigger type, the ability owner and the result action to allow doublers to double the effect
+        public class AbilityTriggerEvent : UnityEvent<TriggerType,AbilityHolder,UnityAction> { }
+        public static AbilityTriggerEvent OnAbilityTriggered = new AbilityTriggerEvent();
 
         private static void Initialize()
         {
             /// ACTIONS
             /// //TODO: replace duplicate code with method with generics
-            actionStates.Clear();
+            abilityEffects.Clear();
 
-            var assembly = Assembly.GetAssembly(typeof(AbilityAction));
+            var assembly = Assembly.GetAssembly(typeof(AbilityEffect));
 
             var allStates = assembly.GetTypes()
-                .Where(t => typeof(AbilityAction).IsAssignableFrom(t) && !t.IsAbstract);
+                .Where(t => typeof(AbilityEffect).IsAssignableFrom(t) && !t.IsAbstract);
 
             foreach (var state in allStates)
             {
-                var action = Activator.CreateInstance(state) as AbilityAction;
+                var action = Activator.CreateInstance(state) as AbilityEffect;
 
-                if (actionStates.ContainsKey(action.ActionType)) Debug.LogError($"Multiple instances of action: {action.ActionType}");
+                if (abilityEffects.ContainsKey(action.ActionType)) Debug.LogError($"Multiple instances of action: {action.ActionType}");
 
-                actionStates.Add(action.ActionType, action);
+                abilityEffects.Add(action.ActionType, action);
             }
 
             /// TRIGGERS
@@ -53,16 +58,16 @@ namespace GameLogic
         }
 
         /// //TODO: replace duplicate code with method with generics
-        public static AbilityAction GetAction(EffectType state)
+        public static AbilityEffect GetAction(EffectType state)
         {
             if (!initialized) Initialize();
 
-            if (!actionStates.ContainsKey(state))
+            if (!abilityEffects.ContainsKey(state))
             {
                 Debug.Log($"No  avaiable for : {state}");
                 return null;
             }
-            return actionStates[state];
+            return abilityEffects[state];
         }
         public static AbilityTrigger GetTrigger(TriggerType state)
         {
