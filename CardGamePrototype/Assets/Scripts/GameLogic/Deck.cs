@@ -193,12 +193,23 @@ namespace GameLogic
         //returns count of all creatures not in Graveyard
         public int Alive() => Creatures.Sum(a => a.Key == Zone.Graveyard ? 0 : a.Value.Count);
 
-        internal Card GetAttackTarget()
+        internal Card GetAttackTarget(bool assassin = false)
         {
             //empty list check?
             if (CreaturesInZone(Zone.Battlefield).Count > 0)
             {
                 List<Card> battlefield = CreaturesInZone(Zone.Battlefield).Where(c => !c.Ethereal()).ToList();
+
+                //assassins don't care..
+                if(assassin)
+                {
+                    var min = battlefield.Min(c => c.CurrentHealth);
+                    var minCards = battlefield.Where(c => c.CurrentHealth == min).ToList();
+
+                    return minCards[Random.Range(0, minCards.Count())];
+
+                }
+
                 var defenders = battlefield.Where(c => c.Defender()).ToList();
 
                 if (defenders.Any())

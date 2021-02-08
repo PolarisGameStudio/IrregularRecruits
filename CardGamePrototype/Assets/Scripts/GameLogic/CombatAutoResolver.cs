@@ -39,6 +39,11 @@ namespace GameLogic
             attackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
             attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
 
+            foreach (var c in EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.Ward()))
+                c.Warded = true;
+            foreach (var c in PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.Ward()))
+                c.Warded = true;
+
             //Differentiate between player and enemy creatures?
             switch (GameSettings.Instance.AttackOrderParadigm)
             {
@@ -85,6 +90,15 @@ namespace GameLogic
                     break;
             };
 
+
+            foreach (var ferocioues in attackOrder.Where(c => c.Ferocity()).ToArray())
+            {
+                var idx = attackOrder.IndexOf(ferocioues);
+
+                //inserts a copy in the order
+                attackOrder.Insert(idx, ferocioues);
+            }
+
             while (attackOrder.Any(c => c.Alive()))
             {
                 AbilityWithEffect.AbilityStackCount = 0;
@@ -93,7 +107,7 @@ namespace GameLogic
 
                 var otherDeck = attacker.InDeck == PlayerDeck ? EnemyDeck : PlayerDeck;
 
-                var target = otherDeck.GetAttackTarget();
+                var target = otherDeck.GetAttackTarget(attacker.Assassin());
 
                 if (target == null || attacker.Location != Deck.Zone.Battlefield)
                 {

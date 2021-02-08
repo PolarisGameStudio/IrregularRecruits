@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: Summon3
   m_EditorClassIdentifier: 
-  Name: Bloody Bastards
+  Name: Vengeful Summons
   Icon: {fileID: 21300000, guid: dbdd3cd00529e3643b74f2a0a6376abc, type: 3}
   ResultingAction:
     ActionType: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
       Relationship: 2
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     Amount: 1
     Summons: {fileID: 0}
   Value: 0
@@ -32,5 +33,6 @@ MonoBehaviour:
       Location: 2
       Relationship: 0
       DamageState: 0
-      Race: 1
+      Race: 0
+      Trait: {fileID: 11400000, guid: 53672cc22daa8f246a59ad64a6f3a0fc, type: 2}
     TriggerAction: 3

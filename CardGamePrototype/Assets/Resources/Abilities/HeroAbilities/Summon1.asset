@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: Summon1
   m_EditorClassIdentifier: 
-  Name: Small and Violent
+  Name: Aggressive Conjurations
   Icon: {fileID: 21300000, guid: 53c8d8e5a692cc042bd84812a15602ec, type: 3}
   ResultingAction:
     ActionType: 2
@@ -23,6 +23,7 @@ MonoBehaviour:
       Relationship: 0
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     Amount: 1
     Summons: {fileID: 0}
   Value: 0
@@ -32,5 +33,6 @@ MonoBehaviour:
       Location: 1
       Relationship: 1
       DamageState: 0
-      Race: 1
+      Race: 0
+      Trait: {fileID: 11400000, guid: 53672cc22daa8f246a59ad64a6f3a0fc, type: 2}
     TriggerAction: 4

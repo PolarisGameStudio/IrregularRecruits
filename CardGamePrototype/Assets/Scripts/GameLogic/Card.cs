@@ -13,7 +13,8 @@ namespace GameLogic
         private Creature creature;
         public Creature Creature
         {
-            get => creature; set
+            get => creature;             
+            private set
             {
                 SetCreature(value);
             }
@@ -51,6 +52,8 @@ namespace GameLogic
         public int Attack { get; private set; }
 
         public Deck.Zone Location;
+
+        public bool Warded = false;
 
         //no listeners created for only ui cards
         private bool TempCard = false;
@@ -167,14 +170,55 @@ namespace GameLogic
             if (Location != Deck.Zone.Battlefield || !target.Alive())
                 return;
 
-            target.HealthChange(- Mathf.Max(0, Attack));
+            int damageGiven = Mathf.Max(0, Attack);
 
-            if (returnDamage)
-                this.HealthChange(-Mathf.Max(0, target.Attack));
+            var nextTo = target.Neighbours();
+
+            target.HealthChange(-damageGiven);
+            
+            if(Carnage())
+            {
+                foreach (var neighbour in nextTo)
+                    neighbour.HealthChange(-damageGiven);
+            }
+
+             
+            if ( Lifedrain())
+            {
+                HealthChange(damageGiven);
+            }
+
+            if (returnDamage )
+            {
+                int damageTaken = Mathf.Max(0, target.Attack);
+                this.HealthChange(-damageTaken);
+
+                if (target.Lifedrain())
+                    target.HealthChange(damageTaken);
+            }
 
             if (!Alive() && target.Alive()) Event.OnKill.Invoke(target);
             else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this);
 
+        }
+
+        private List<Card> Neighbours()
+        {
+            var neighbours = new List<Card>();
+
+            if (InDeck ==null) return neighbours;
+
+            var zone = InDeck.CreaturesInZone(Location);
+
+            var pos = zone.IndexOf(this);
+
+            if (pos > 0)
+                neighbours.Add(zone[pos - 1]);            
+            
+            if (pos < zone.Count-1)
+                neighbours.Add(zone[pos + 1]);
+
+            return neighbours;
         }
 
         private void Unsummon()
@@ -220,6 +264,18 @@ namespace GameLogic
             Creature.Traits.Any(a => a.name == "Ethereal");
         internal bool Deathless() =>
             Creature.Traits.Any(a => a.name == "Deathless");
+        internal bool Assassin() =>
+            Creature.Traits.Any(a => a.name == "Assassin");
+        internal bool Carnage() =>
+            Creature.Traits.Any(a => a.name == "Carnage");
+        internal bool Ferocity() =>
+            Creature.Traits.Any(a => a.name == "Ferocity");
+        internal bool Lifedrain() =>
+            Alive () && Creature.Traits.Any(a => a.name == "Lifedrain");
+        internal bool Shapeshifter() =>
+            Creature.Traits.Any(a => a.name == "Shapeshifter");
+        internal bool Ward() =>
+            Creature.Traits.Any(a => a.name == "Ward");
         internal bool IsSummon() =>
             Creature.IsSummon();
 
@@ -305,6 +361,12 @@ namespace GameLogic
         {
             if (change == 0 || !Alive()) return;
 
+            if(change < 0  && Warded)
+            {
+                Warded = false;
+                return;
+            }
+
             CurrentHealth += change;
 
             Event.OnHealthChange.Invoke(this, change);
@@ -359,6 +421,8 @@ namespace GameLogic
         {
             return Creature.Race;
         }
+
+        public bool IsRace(Race race) => Shapeshifter() || Creature.Race == race;
 
         internal override bool IsActive()
         {

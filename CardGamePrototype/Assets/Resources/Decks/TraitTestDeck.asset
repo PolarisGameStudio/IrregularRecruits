@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
+  m_Name: TraitTestDeck
+  m_EditorClassIdentifier: 
+  name: Beastfolk Party
+  Description: Beastmen and women
+  Creatures:
+  - {fileID: 11400000, guid: ce7df19d452e3de42bf7bdce0c3a1f61, type: 2}
+  - {fileID: 11400000, guid: 9661defb99ce43248b955e92a961007b, type: 2}
+  - {fileID: 11400000, guid: 77b3450bbc04bf048a4fbd32f67b7384, type: 2}
+  - {fileID: 11400000, guid: 933f738cf9c0c6a41848fb20684d7475, type: 2}
+  - {fileID: 11400000, guid: 17f9a173e4ea2c048aa1e1b0ebd0b908, type: 2}
+  - {fileID: 11400000, guid: be1e0f28cbff72843a238383be74a6e3, type: 2}
+  DeckIcon: {fileID: 21300000, guid: ae96d41254699b741abfd83e383e2adb, type: 3}
+  DeckImage: {fileID: 21300000, guid: c97d2c4598be91a49b3e2ef154dbf26d, type: 3}
+  FriendRaces:
+  - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  - {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
+  - {fileID: 11400000, guid: bffb2ec3e89bdaf4080ba28acbc87ea2, type: 2}
+  EnemyRaces:
+  - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+  - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
+  - {fileID: 11400000, guid: 5635c48887d99084a9876306e16e608b, type: 2}
+  - {fileID: 11400000, guid: 619f5f8e2b0cad94a8f23de94017640a, type: 2}

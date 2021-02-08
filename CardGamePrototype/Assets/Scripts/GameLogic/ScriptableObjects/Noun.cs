@@ -100,9 +100,9 @@ namespace GameLogic
                 case RaceType.Any:
                     return true;
                 case RaceType.Same:
-                    return instigator.Creature.Race == abilityOwner.GetRace();
+                    return instigator.IsRace( abilityOwner.GetRace());
                 case RaceType.Different:
-                    return instigator.Creature.Race != abilityOwner.GetRace();
+                    return !instigator.IsRace(abilityOwner.GetRace());
                 default:
                     return true;
             }
