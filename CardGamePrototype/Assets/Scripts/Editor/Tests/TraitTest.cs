@@ -10,13 +10,20 @@ namespace Tests
     public class TraitTest
     {
 
-        [OneTimeSetUp]
+        [SetUp]
         public void BattleManage()
         {
-            var neededForBM = BattleManager.Instance;
+            BattleManager.Init();
 
             GameSettings.Instance.AiControlledPlayer = true;
         }
+
+        [TearDown]
+        public void Reset()
+        {
+            Event.ResetEvents();
+        }
+
 
         private Card GenerateTestCreature(string traitName,int attack = 2,int health = 10)
         {

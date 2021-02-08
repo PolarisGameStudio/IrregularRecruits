@@ -8,9 +8,11 @@ namespace Tests
 {
     public class MapTest
     {
-        [OneTimeSetUp]
+        [SetUp]
         public void PlayerDeckSetup()
         {
+            BattleManager.Init();
+
             var hero = new Hero(new HeroObject()
             {
                 name = "Testeron",
@@ -43,6 +45,11 @@ namespace Tests
 
         }
 
+        [TearDown]
+        public void Reset()
+        {
+            Event.ResetEvents();
+        }
 
         [Test]
         public void CombatOptionStartCombat()

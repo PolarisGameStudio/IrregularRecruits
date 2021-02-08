@@ -15,6 +15,7 @@ namespace GameLogic
 
         private CombatAutoResolver CombatAutoResolver;
 
+
         private static BattleManager instance = null;
         
         public static BattleManager Instance { get {
@@ -42,9 +43,9 @@ namespace GameLogic
 
         }
 
-        public static void Reset()
+        public static void Init()
         {
-            instance = null;
+            instance = new BattleManager();
         }
 
         public static void SetPlayerHero(HeroObject heroObject)

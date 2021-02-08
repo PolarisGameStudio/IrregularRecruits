@@ -13,7 +13,7 @@ namespace Tests
         [SetUp]
         public void BattleManage()
         {
-            var xx = BattleManager.Instance;
+            BattleManager.Init();
 
             GameSettings.Instance.AiControlledPlayer = true;
 
@@ -22,7 +22,7 @@ namespace Tests
         [TearDown]
         public void Reset()
         {
-            BattleManager.Reset();
+            Event.ResetEvents();
         }
 
         private Card GenerateTestCreature(PassiveAbility ability, Race race = null, int attack = 2)

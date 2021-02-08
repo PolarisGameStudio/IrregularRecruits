@@ -14,7 +14,7 @@ namespace GameLogic
         private static bool initialized;
 
         //takes the trigger type, the ability owner and the result action to allow doublers to double the effect
-        public class AbilityTriggerEvent : UnityEvent<TriggerType,AbilityHolder,UnityAction> { }
+        public class AbilityTriggerEvent : UnityEvent<TriggerType,EffectType, AbilityHolder,UnityAction> { }
         public static AbilityTriggerEvent OnAbilityTriggered = new AbilityTriggerEvent();
 
         private static void Initialize()
