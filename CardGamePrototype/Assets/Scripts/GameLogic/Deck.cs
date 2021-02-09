@@ -44,7 +44,7 @@ namespace GameLogic
         public void AddCard(Card card)
         {
             card.InDeck = this;
-            card.Location = Zone.Library;
+            card.ChangeLocation(Deck.Zone.Library);
 
             //TODO: test that this correctly reflects CR?
             if (!card.IsSummon())
@@ -198,17 +198,22 @@ namespace GameLogic
             //empty list check?
             if (CreaturesInZone(Zone.Battlefield).Count > 0)
             {
-                List<Card> battlefield = CreaturesInZone(Zone.Battlefield).Where(c => !c.Ethereal()).ToList();
-
                 //assassins don't care..
-                if(assassin)
+                if (assassin)
                 {
-                    var min = battlefield.Min(c => c.CurrentHealth);
-                    var minCards = battlefield.Where(c => c.CurrentHealth == min).ToList();
+                    List<Card> bf = CreaturesInZone(Zone.Battlefield);
+
+                    if (bf.Any(e=> e.Ethereal()) && !bf.All(e => e.Ethereal()))
+                        bf = CreaturesInZone(Zone.Battlefield).Where(c => !c.Ethereal()).ToList();
+
+                    var min = bf.Min(c => c.CurrentHealth);
+                    var minCards = bf.Where(c => c.CurrentHealth == min).ToList();
 
                     return minCards[Random.Range(0, minCards.Count())];
 
                 }
+
+                List<Card> battlefield = CreaturesInZone(Zone.Battlefield).Where(c => !c.Ethereal()).ToList();
 
                 var defenders = battlefield.Where(c => c.Defender()).ToList();
 

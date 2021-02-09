@@ -25,7 +25,7 @@ namespace Tests
         }
 
 
-        private Card GenerateTestCreature(string traitName,int attack = 2,int health = 10)
+        private Card GenerateTestCreature(string traitName, int attack = 2, int health = 10)
         {
             Trait trait = new Trait()
             {
@@ -76,21 +76,21 @@ namespace Tests
             var enmDeck = GenerateTestDeck(0, false);
 
             Card defPlayer = GenerateTestCreature("Defender");
-            Card nonDefPlayer = GenerateTestCreature("");            
+            Card nonDefPlayer = GenerateTestCreature("");
             Card defEnm = GenerateTestCreature("Defender");
             Card nonDefEnm = GenerateTestCreature("");
 
 
             pDeck.AddCard(defPlayer);
             pDeck.AddCard(nonDefPlayer);
-            
+
             enmDeck.AddCard(defEnm);
             enmDeck.AddCard(nonDefEnm);
 
             var attacked = new List<Card>();
             var attackedInFirstRound = new List<Card>();
 
-            Event.OnBeingAttacked.AddListener(c =>  attacked.Add(c));
+            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
             Event.OnCombatResolveFinished.AddListener(() => DoIfTrue(() => attackedInFirstRound.AddRange(attacked), attackedInFirstRound.Count == 0));
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
@@ -124,7 +124,7 @@ namespace Tests
 
             var finished = false;
 
-            Event.OnBattleFinished.AddListener(d=> finished = true);
+            Event.OnBattleFinished.AddListener(d => finished = true);
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
@@ -145,7 +145,7 @@ namespace Tests
 
             var finished = false;
 
-            Event.OnBattleFinished.AddListener(d=> finished = true);
+            Event.OnBattleFinished.AddListener(d => finished = true);
 
             Event.OnCombatSetup.Invoke(pDeck, enmDeck);
 
@@ -170,7 +170,7 @@ namespace Tests
 
             enmDeck.AddCard(enm);
 
-            List<Card> attacked = new List<Card>(); 
+            List<Card> attacked = new List<Card>();
             List<Card> attackers = new List<Card>();
 
             Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
@@ -230,5 +230,357 @@ namespace Tests
             Assert.IsTrue(attacked.Contains(etherereal1));
             Assert.IsFalse(attackers.Contains(etherereal1));
         }
+
+
+        //        test shapeshifter
+        [Test]
+        public void ShapeshifterIsAllTypes()
+        {
+            var shifter = GenerateTestCreature("Shapeshifter");
+
+            var gobbo = new Race()
+            {
+                name = "Goblin"
+            };
+            var terran = new Race()
+            {
+                name = "Terran"
+            };
+
+            Assert.IsTrue(shifter.Shapeshifter());
+
+            Assert.IsTrue(shifter.IsRace(gobbo));
+            Assert.IsTrue(shifter.IsRace(terran));
+        }
+
+        //test lifedrain
+        [Test]
+        public void LifedrainDrainsTest()
+        {
+            const int Attack = 2;
+            var vampire = GenerateTestCreature("Lifedrain", Attack, 10);
+
+            const int enmattack = 3;
+            var enm = GenerateTestCreature("", enmattack, 10);
+
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            pDeck.AddCard(vampire);
+            enmDeck.AddCard(enm);
+
+            vampire.ChangeLocation( Deck.Zone.Battlefield);
+            enm.ChangeLocation( Deck.Zone.Battlefield);
+
+
+            Assert.IsTrue(vampire.Lifedrain());
+
+            vampire.AttackCard(enm);
+
+            Assert.AreEqual(enm.MaxHealth - Attack, enm.CurrentHealth);
+            Assert.AreEqual(vampire.MaxHealth + Attack - enmattack, vampire.CurrentHealth);
+        }
+
+        //test lifedrain
+        [Test]
+        public void LifedrainDoesNotSafeFromLethalDamage()
+        {
+            const int Attack = 2;
+
+            const int enmattack = 2;
+
+            var vampire = GenerateTestCreature("Lifedrain", Attack, enmattack);
+
+            var enm = GenerateTestCreature("", enmattack, 10);
+
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            pDeck.AddCard(vampire);
+            enmDeck.AddCard(enm);
+
+            vampire.ChangeLocation( Deck.Zone.Battlefield);
+            enm.ChangeLocation( Deck.Zone.Battlefield);
+
+            Assert.IsTrue(vampire.Lifedrain());
+
+            vampire.AttackCard(enm);
+
+            Assert.AreEqual(enm.MaxHealth - Attack, enm.CurrentHealth);
+            Assert.IsFalse(vampire.Alive());
+        }
+
+        //test assassin
+        [Test]
+        public void AssassinTest()
+        {
+            const int Attack = 2;
+
+            const int enmattack = 2;
+
+            var assassin = GenerateTestCreature("Assassin", Attack, 1000);
+
+            var enm = GenerateTestCreature("", enmattack, 10);
+            var enm2 = GenerateTestCreature("", enmattack,4);
+            var enm3 = GenerateTestCreature("", enmattack, 20);
+            var lowHealthEnm = GenerateTestCreature("", enmattack, 3);
+
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            pDeck.AddCard(assassin);
+            enmDeck.AddCard(enm);
+            enmDeck.AddCard(enm2);
+            enmDeck.AddCard(enm3);
+            enmDeck.AddCard(lowHealthEnm);
+
+            assassin.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+            enm2.ChangeLocation(Deck.Zone.Battlefield);
+            enm3.ChangeLocation(Deck.Zone.Battlefield);
+            lowHealthEnm.ChangeLocation(Deck.Zone.Battlefield);
+
+            Assert.IsTrue(assassin.Assassin());
+
+            List<Card> attacked = new List<Card>();
+
+            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+
+            var finished = false;
+
+            Event.OnBattleFinished.AddListener(d => finished = true);
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.IsTrue(finished);
+
+            Assert.Contains(lowHealthEnm, attacked);
+        }
+
+        //test assassin
+        [Test]
+        public void AssassinIgnoresDefenderTest()
+        {
+            const int Attack = 2;
+
+            const int enmattack = 2;
+
+            var assassin = GenerateTestCreature("Assassin", Attack, 1000);
+
+            var defenderEnm = GenerateTestCreature("Defender", enmattack, 10);
+            var enm2 = GenerateTestCreature("", enmattack, 4);
+            var enm3 = GenerateTestCreature("", enmattack, 20);
+            var lowHealthEnm = GenerateTestCreature("", enmattack, 3);
+
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            pDeck.AddCard(assassin);
+            enmDeck.AddCard(defenderEnm);
+            enmDeck.AddCard(enm2);
+            enmDeck.AddCard(enm3);
+            enmDeck.AddCard(lowHealthEnm);
+
+            assassin.ChangeLocation(Deck.Zone.Battlefield);
+            defenderEnm.ChangeLocation(Deck.Zone.Battlefield);
+            enm2.ChangeLocation(Deck.Zone.Battlefield);
+            enm3.ChangeLocation(Deck.Zone.Battlefield);
+            lowHealthEnm.ChangeLocation(Deck.Zone.Battlefield);
+
+            Assert.IsTrue(assassin.Assassin());
+            Assert.IsTrue(defenderEnm.Defender());
+
+            List<Card> attacked = new List<Card>();
+
+            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+
+            var finished = false;
+
+            Event.OnBattleFinished.AddListener(d => finished = true);
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.IsTrue(finished);
+
+            var firstTwoAttacked = attacked.GetRange(0, 2);
+
+            Assert.Contains(lowHealthEnm, firstTwoAttacked);
+            Assert.False(firstTwoAttacked.Contains(defenderEnm));
+        }
+
+        //test assassin
+        [Test]
+        public void AssassinRespectsEtherealTest()
+        {
+            const int Attack = 2;
+
+            const int enmattack = 2;
+
+            var assassin = GenerateTestCreature("Assassin", Attack, 1000);
+
+            var enm = GenerateTestCreature("", enmattack, 10);
+            var enm2 = GenerateTestCreature("", enmattack, 4);
+            var enm3 = GenerateTestCreature("", enmattack, 20);
+            var ethereal = GenerateTestCreature("Ethereal", enmattack, 3);
+
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            pDeck.AddCard(assassin);
+            enmDeck.AddCard(enm);
+            enmDeck.AddCard(enm2);
+            enmDeck.AddCard(enm3);
+            enmDeck.AddCard(ethereal);
+
+            assassin.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+            enm2.ChangeLocation(Deck.Zone.Battlefield);
+            enm3.ChangeLocation(Deck.Zone.Battlefield);
+            ethereal.ChangeLocation(Deck.Zone.Battlefield);
+
+            Assert.IsTrue(assassin.Assassin());
+            Assert.IsTrue(ethereal.Ethereal());
+
+            List<Card> attacked = new List<Card>();
+
+            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+
+            var finished = false;
+
+            Event.OnBattleFinished.AddListener(d => finished = true);
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.IsTrue(finished);
+
+            var firstTwoAttacked = attacked.GetRange(0, 2);
+
+            Assert.Contains(enm2, firstTwoAttacked);
+            Assert.False(firstTwoAttacked.Contains(ethereal));
+        }
+
+        //test ferocity
+        [Test]
+        public void CarnageMiddleAttackTest()
+        {
+
+            const int Attack = 2;
+
+            const int enmattack = 2;
+
+            var angryDude = GenerateTestCreature("Carnage", Attack, enmattack);
+
+            var enm = GenerateTestCreature("", enmattack, 10);
+            var enm2 = GenerateTestCreature("", enmattack, 10);
+            var enm3 = GenerateTestCreature("", enmattack, 10);
+
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            pDeck.AddCard(angryDude);
+            enmDeck.AddCard(enm);
+            enmDeck.AddCard(enm2);
+            enmDeck.AddCard(enm3);
+
+            angryDude.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+            enm2.ChangeLocation(Deck.Zone.Battlefield);
+            enm3.ChangeLocation(Deck.Zone.Battlefield);
+
+            var target = enmDeck.CreaturesInZone(Deck.Zone.Battlefield)[1];
+
+            Assert.IsTrue(angryDude.Carnage());
+
+            angryDude.AttackCard(target);
+
+            Assert.AreEqual(enm.MaxHealth - Attack, enm.CurrentHealth);
+            Assert.AreEqual(enm2.MaxHealth - Attack, enm2.CurrentHealth);
+            Assert.AreEqual(enm3.MaxHealth - Attack, enm3.CurrentHealth);
+            Assert.AreEqual(angryDude.MaxHealth - enmattack, angryDude.CurrentHealth);
+            
+        }
+
+        [Test]
+        public void CarnageLastAttackTest()
+        {
+
+            const int Attack = 2;
+
+            const int enmattack = 2;
+
+            var angryDude = GenerateTestCreature("Carnage", Attack, enmattack);
+
+            var enm = GenerateTestCreature("", enmattack, 10);
+            var enm2 = GenerateTestCreature("", enmattack, 10);
+            var enm3 = GenerateTestCreature("", enmattack, 10);
+
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            pDeck.AddCard(angryDude);
+            enmDeck.AddCard(enm);
+            enmDeck.AddCard(enm2);
+            enmDeck.AddCard(enm3);
+
+            angryDude.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+            enm2.ChangeLocation(Deck.Zone.Battlefield);
+            enm3.ChangeLocation(Deck.Zone.Battlefield);
+
+            var target = enmDeck.CreaturesInZone(Deck.Zone.Battlefield)[2];
+
+            Assert.IsTrue(angryDude.Carnage());
+
+            angryDude.AttackCard(target);
+
+            Assert.AreEqual(enm.MaxHealth -Attack, enm.CurrentHealth);
+            Assert.AreEqual(enm2.MaxHealth - Attack, enm2.CurrentHealth);
+            Assert.AreEqual(enm3.MaxHealth , enm3.CurrentHealth);
+            Assert.AreEqual(angryDude.MaxHealth - enmattack, angryDude.CurrentHealth);
+            
+        }
+
+        [Test]
+        public void CarnageFirstAttackTest()
+        {
+
+            const int Attack = 2;
+
+            const int enmattack = 2;
+
+            var angryDude = GenerateTestCreature("Carnage", Attack, enmattack);
+
+            var enm = GenerateTestCreature("", enmattack, 10);
+            var enm2 = GenerateTestCreature("", enmattack, 10);
+            var enm3 = GenerateTestCreature("", enmattack, 10);
+
+            var pDeck = GenerateTestDeck(0, true);
+            var enmDeck = GenerateTestDeck(0, false);
+
+            pDeck.AddCard(angryDude);
+            enmDeck.AddCard(enm);
+            enmDeck.AddCard(enm2);
+            enmDeck.AddCard(enm3);
+
+            angryDude.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+            enm2.ChangeLocation(Deck.Zone.Battlefield);
+            enm3.ChangeLocation(Deck.Zone.Battlefield);
+
+            var target = enmDeck.CreaturesInZone(Deck.Zone.Battlefield)[0];
+
+            Assert.IsTrue(angryDude.Carnage());
+
+            angryDude.AttackCard(target);
+
+            Assert.AreEqual(enm.MaxHealth , enm.CurrentHealth);
+            Assert.AreEqual(enm2.MaxHealth - Attack, enm2.CurrentHealth);
+            Assert.AreEqual(enm3.MaxHealth -Attack, enm3.CurrentHealth);
+            Assert.AreEqual(angryDude.MaxHealth - enmattack, angryDude.CurrentHealth);
+            
+        }
+
+        //test ward
+        //test carnage
     }
 }

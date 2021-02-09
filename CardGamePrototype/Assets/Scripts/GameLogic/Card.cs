@@ -51,7 +51,7 @@ namespace GameLogic
 
         public int Attack { get; private set; }
 
-        public Deck.Zone Location;
+        public Deck.Zone Location { get; private set; }
 
         public bool Warded = false;
 
@@ -182,12 +182,6 @@ namespace GameLogic
                     neighbour.HealthChange(-damageGiven);
             }
 
-             
-            if ( Lifedrain())
-            {
-                HealthChange(damageGiven);
-            }
-
             if (returnDamage )
             {
                 int damageTaken = Mathf.Max(0, target.Attack);
@@ -196,6 +190,12 @@ namespace GameLogic
                 if (target.Lifedrain())
                     target.HealthChange(damageTaken);
             }
+
+            if (Lifedrain())
+            {
+                HealthChange(damageGiven);
+            }
+
 
             if (!Alive() && target.Alive()) Event.OnKill.Invoke(target);
             else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this);
@@ -254,29 +254,29 @@ namespace GameLogic
             this.creature = newCreature;
         }
 
-        internal bool Defender() =>
+        public bool Defender() =>
             Creature.Traits.Any(a => a.name == "Defender");
-        internal bool Ranged() =>
+        public bool Ranged() =>
             Creature.Traits.Any(a => a.name == "Ranged");
-        internal bool Avantgarde() =>
+        public bool Avantgarde() =>
             Creature.Traits.Any(a => a.name == "Avantgarde");
-        internal bool Ethereal() =>
+        public bool Ethereal() =>
             Creature.Traits.Any(a => a.name == "Ethereal");
-        internal bool Deathless() =>
+        public bool Deathless() =>
             Creature.Traits.Any(a => a.name == "Deathless");
-        internal bool Assassin() =>
+        public bool Assassin() =>
             Creature.Traits.Any(a => a.name == "Assassin");
-        internal bool Carnage() =>
+        public bool Carnage() =>
             Creature.Traits.Any(a => a.name == "Carnage");
-        internal bool Ferocity() =>
+        public bool Ferocity() =>
             Creature.Traits.Any(a => a.name == "Ferocity");
-        internal bool Lifedrain() =>
+        public bool Lifedrain() =>
             Alive () && Creature.Traits.Any(a => a.name == "Lifedrain");
-        internal bool Shapeshifter() =>
+        public bool Shapeshifter() =>
             Creature.Traits.Any(a => a.name == "Shapeshifter");
-        internal bool Ward() =>
+        public bool Ward() =>
             Creature.Traits.Any(a => a.name == "Ward");
-        internal bool IsSummon() =>
+        public bool IsSummon() =>
             Creature.IsSummon();
 
         public bool Alive() => Location != Deck.Zone.Graveyard;
