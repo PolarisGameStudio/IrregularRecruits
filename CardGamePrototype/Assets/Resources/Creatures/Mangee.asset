@@ -20,7 +20,6 @@ MonoBehaviour:
   Attack: 2
   Health: 8
   Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
   - {fileID: 11400000, guid: 2e79b84878312aa47bc4ccbb282c0d44, type: 2}
   SpecialAbility: {fileID: 11400000, guid: 288be5150160f764e9d69cd63497fc83, type: 2}
   CR: 17

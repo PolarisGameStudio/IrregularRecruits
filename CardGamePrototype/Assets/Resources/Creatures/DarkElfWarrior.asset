@@ -22,4 +22,4 @@ MonoBehaviour:
   Traits: []
   SpecialAbility: {fileID: 0}
   CR: 12
-  Race: {fileID: 11400000, guid: 9f6e06efdee3ac74aa5bd71d7896ddda, type: 2}
+  Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
