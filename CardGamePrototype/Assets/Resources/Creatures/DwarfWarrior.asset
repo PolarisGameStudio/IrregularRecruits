@@ -23,4 +23,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
   SpecialAbility: {fileID: 11400000, guid: 3e802a7908c4d9640bb659ce16c11172, type: 2}
   CR: 36
-  Race: {fileID: 11400000, guid: 4728fa16fe828ca41a23864bdfa561af, type: 2}
+  Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
