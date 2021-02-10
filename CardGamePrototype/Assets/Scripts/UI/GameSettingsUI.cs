@@ -13,6 +13,7 @@ namespace UI
         public Slider DrawSlider;
         public Slider ActionsPrTurnSlider;
         public Slider RareEnemySlider;
+        public Toggle AiToggle;
         public GameObject Holder;
         public CanvasGroup FocusGroup;
 
@@ -20,6 +21,8 @@ namespace UI
         {
             GS = GameSettings.Instance;
 
+            AiToggle.isOn = GS.AiControlledPlayer;
+            AiToggle.onValueChanged.AddListener(GS.AiControlsPlayer);
             CombatSpeedSlider.value = GS.CombatSpeed; 
             CombatSpeedSlider.onValueChanged.AddListener(i => GS.CombatSpeed = i);
             StartingHandSlider.value = GS.StartingHandSize;
@@ -31,13 +34,6 @@ namespace UI
             
         }
 
-
-
-        //TODO: move the settings to a gamesettings Behaviour
-        public void AiControlsPlayer(bool ai)
-        {
-            GS.AiControlledPlayer = ai;
-        }
 
         public CanvasGroup GetCanvasGroup()
         {

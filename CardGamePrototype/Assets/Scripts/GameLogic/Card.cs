@@ -136,13 +136,15 @@ namespace GameLogic
             switch (to)
             {
                 case Deck.Zone.Library:
+                    //if(from == Deck.Zone.Battlefield)
                     Event.OnWithdraw.Invoke(this);
                     break;
                 case Deck.Zone.Battlefield:
                     Event.OnEtb.Invoke(this);
                     break;
                 case Deck.Zone.Graveyard:
-                    Event.OnDeath.Invoke(this);
+                    if(from == Deck.Zone.Battlefield)
+                        Event.OnDeath.Invoke(this);
                     break;
                 case Deck.Zone.Hand:
                     Event.OnDraw.Invoke(this);

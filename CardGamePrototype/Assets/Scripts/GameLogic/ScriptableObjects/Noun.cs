@@ -31,7 +31,7 @@ namespace GameLogic
         {
             //TODO: THIs should be a more complex check depending on the ability. Now this + etb won't trigger for instance
             // maybe all abilities should have a locations allowed for onwer
-            if (!CorrectOwnerLocation(abilityOwner))
+            if (!CorrectOwnerLocation(abilityOwner,instigator))
                 return false;
 
             //Trigger Actions without instigators always has correct noun
@@ -52,15 +52,15 @@ namespace GameLogic
             return !Trait ||  instigator.GetTraits().Contains(Trait);
         }
 
-        private bool CorrectOwnerLocation(AbilityHolder abilityOwner)
+        private bool CorrectOwnerLocation(AbilityHolder abilityOwner, Card instigator)
         {
             if (!(abilityOwner is Card card)) return true;
 
-            //if (Character == CharacterTyp.This)
-            //    return Location == card.Location;
-            //else
+            if (abilityOwner == instigator)
+                return Location == card.Location;
 
-            //TODO: create a triggers from location field.
+
+                //TODO: create a triggers from location field.
             return card.Location == Deck.Zone.Battlefield;
         }
 

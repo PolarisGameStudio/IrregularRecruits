@@ -10,6 +10,7 @@ namespace Tests
         protected Card TestCard;
         protected Card OtherCard;
         protected Hero TestHero;
+        private bool AiControlledPlayerValue;
 
         [TearDown]
         public void CleanAbility()
@@ -17,6 +18,8 @@ namespace Tests
             AbilityWithEffect.AbilityStackCount = 0;
 
             Event.ResetEvents();
+
+            GameSettings.Instance.AiControlledPlayer = AiControlledPlayerValue;
         }
         [SetUp]
         public void Setup()
@@ -24,6 +27,7 @@ namespace Tests
 
             BattleManager.Init();
 
+            AiControlledPlayerValue = GameSettings.Instance.AiControlledPlayer;
             GameSettings.Instance.AiControlledPlayer = true;
         }
 
@@ -49,7 +53,7 @@ namespace Tests
             return testCreature;
         }
 
-        protected Card GenerateTestCreatureWithAbility(PassiveAbility ability, Race race = null,bool playerdeck = true, Trait trait = null)
+        protected Card GenerateTestCreatureWithAbility(SpecialAbility ability, Race race = null,bool playerdeck = true, Trait trait = null)
         {
             if(trait == null)
                  trait = new Trait()

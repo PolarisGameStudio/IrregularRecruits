@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72d62f73445185b4baa2b3262a4d1ed5, type: 3}
-  m_Name: Wildfolk
+  m_Name: Elemental
   m_EditorClassIdentifier: 
-  name: Wildfolk
-  Icon: {fileID: 21300000, guid: 536602a24a14d40418ea1f58bf903a5b, type: 3}
-  Shield: {fileID: 21300000, guid: 1b7f9b24fa946f6478cd364ca2c9ae74, type: 3}
+  name: Elemental
+  Icon: {fileID: 21300000, guid: f5d6152da3f47d64a8be65a734f8001c, type: 3}
+  Shield: {fileID: 21300000, guid: bd9cb8954ec136844bd32bcfe7bf2ff7, type: 3}
   Description: 
-  FavoriteActions: 0d0000000000000001000000
-  FavoriteTriggers: 020000000500000000000000
+  FavoriteActions: 0c0000000200000006000000
+  FavoriteTriggers: 050000000900000003000000
   FriendRaces: []

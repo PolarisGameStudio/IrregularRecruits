@@ -43,4 +43,9 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 
     public static int DeckSize() =>  Instance.EnemyDeckSize;
 
+    public void AiControlsPlayer(bool ai)
+    {
+        AiControlledPlayer = ai;
+    }
+
 }

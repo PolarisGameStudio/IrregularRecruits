@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: StoneElemental
+  m_Name: AspectOfMalice
   m_EditorClassIdentifier: 
-  name: Stone Elemental
-  Rarity: 0
+  name: Aspect of Malice
+  Rarity: 1
   Locked: 0
-  Image: {fileID: 21300000, guid: 55473f1ae40a3e94b834ef8771943b90, type: 3}
+  Image: {fileID: 21300000, guid: b7bf916458132d149b77b7de91e3dfc2, type: 3}
   IconImage: {fileID: 0}
-  Attack: 2
-  Health: 20
+  Attack: 8
+  Health: 18
   Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 0}
-  CR: 24
-  Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  - {fileID: 11400000, guid: b2c3f1899a4bbdf499638d01ff53e368, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 3f21e86a97c822e4fa6740be4700b8d5, type: 2}
+  CR: 34
+  Race: {fileID: 11400000, guid: aa96f320044c3a248b7ab3ea6872f26f, type: 2}

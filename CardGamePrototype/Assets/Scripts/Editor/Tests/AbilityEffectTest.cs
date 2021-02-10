@@ -1,10 +1,77 @@
 ﻿using GameLogic;
 using NUnit.Framework;
+using System.Collections.Generic;
+
 namespace Tests
 {
 
     public  class AbilityEffectTest : TestFixture
     {
+        [Test]
+        public void DoublerTriggerAbilityTest()
+        {
+
+            var doublerAbility = new TriggerDoublerAbility();
+            doublerAbility.EffectTrigger = TriggerType.IsDAMAGED;
+
+            var statboostAbility = new PassiveAbility()
+            {
+                ResultingAction = new AbilityEffectObject(EffectType.StatPlus, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
+            };
+
+            var doublerCreature = GenerateTestCreatureWithAbility(doublerAbility);
+            var abilityCreature = GenerateTestCreatureWithAbility(statboostAbility);
+
+            doublerCreature.ChangeLocation(Deck.Zone.Battlefield);
+            abilityCreature.ChangeLocation(Deck.Zone.Battlefield);
+
+            var executedEffects = new List<AbilityWithEffect>();
+
+            var currentStrength = doublerCreature.Attack;
+
+            Event.OnAbilityExecution.AddListener((a, o, cs) => executedEffects.Add(a));
+
+            doublerCreature.HealthChange(-1);
+
+            Assert.AreEqual(2, executedEffects.Count);
+            Assert.Contains(statboostAbility, executedEffects);
+
+            Assert.AreEqual(currentStrength + 2, doublerCreature.Attack);
+        }        
+        
+        [Test]
+        public void DoublerAbilityEffectTest()
+        {
+            var doublerAbility = new EffectDoublerAbility();
+            doublerAbility.Effect = EffectType.StatPlus;
+
+            var statboostAbility = new PassiveAbility()
+            {
+                ResultingAction = new AbilityEffectObject(EffectType.StatPlus, Count.All, 1, new Noun(Noun.CharacterTyp.Any)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.IsDAMAGED),
+            };
+
+            var doublerCreature = GenerateTestCreatureWithAbility(doublerAbility);
+            var abilityCreature = GenerateTestCreatureWithAbility(statboostAbility);
+
+            doublerCreature.ChangeLocation(Deck.Zone.Battlefield);
+            abilityCreature.ChangeLocation(Deck.Zone.Battlefield);
+
+            var executedEffects = new List<AbilityWithEffect>();
+
+            var currentStrength = doublerCreature.Attack;
+
+            Event.OnAbilityExecution.AddListener((a, o, cs) => executedEffects.Add(a));
+
+            doublerCreature.HealthChange(-1);
+
+            Assert.AreEqual(2, executedEffects.Count);
+            Assert.Contains(statboostAbility, executedEffects);
+
+            Assert.AreEqual(currentStrength + 2, doublerCreature.Attack);
+        }
+
         [Test]
         public void ActionWithdrawExecutes()
         {

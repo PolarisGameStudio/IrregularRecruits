@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: ManyEyes
+  m_Name: SpiritMountain
   m_EditorClassIdentifier: 
-  name: ManyEyes
-  Rarity: 1
+  name: Spirit of the Mountain
+  Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 985761341358ea14fbcf1ba5172d04ae, type: 3}
-  IconImage: {fileID: 21300000, guid: 6998fc41d5c973e4dab7edd29288ac23, type: 3}
-  Attack: 4
-  Health: 10
+  Image: {fileID: 21300000, guid: a82bc50100ef6294fae7cc882ee6a853, type: 3}
+  IconImage: {fileID: 21300000, guid: bd39220116cb52042b9959388859d73d, type: 3}
+  Attack: 2
+  Health: 18
   Traits:
-  - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 6819c74105e55ce4e859cec80350dc0e, type: 2}
-  CR: 31
+  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
+  SpecialAbility: {fileID: 0}
+  CR: 22
   Race: {fileID: 11400000, guid: aa96f320044c3a248b7ab3ea6872f26f, type: 2}
