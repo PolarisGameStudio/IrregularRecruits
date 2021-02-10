@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Testoman
   Race: {fileID: 11400000, guid: 5635c48887d99084a9876306e16e608b, type: 2}
-  Deck: {fileID: 11400000, guid: 8b1756275e2b5b441abf5729e5af5d2f, type: 2}
+  Deck: {fileID: 11400000, guid: 9f2137316b3a16644b81450a79c0edb8, type: 2}
   Portrait: {fileID: 21300000, guid: 670025c3474fec048a80346209a2b43d, type: 3}
   StartingAbility: {fileID: 11400000, guid: 4ba6096981e5a0f4fb96f0e1b16bcc44, type: 2}
   Class: {fileID: 11400000, guid: 3e70c4b5694fc094a83fe17be7a0f441, type: 2}
