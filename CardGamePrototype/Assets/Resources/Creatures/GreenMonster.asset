@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: GreenMonster
   m_EditorClassIdentifier: 
-  name: Green Monster
+  name: Clawing Menace
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: b7bf916458132d149b77b7de91e3dfc2, type: 3}
   IconImage: {fileID: 0}
   Attack: 8
   Health: 18
-  Traits: []
+  Traits:
+  - {fileID: 11400000, guid: b2c3f1899a4bbdf499638d01ff53e368, type: 2}
   SpecialAbility: {fileID: 11400000, guid: 3f21e86a97c822e4fa6740be4700b8d5, type: 2}
   CR: 0
-  Race: {fileID: 11400000, guid: 13c15678981d7d6448215a1dab454c59, type: 2}
+  Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}

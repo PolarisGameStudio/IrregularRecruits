@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Greenmouth
+  m_Name: Tywgr
   m_EditorClassIdentifier: 
   name: Tywgr the Decaying Hope
   Rarity: 2
@@ -22,4 +22,4 @@ MonoBehaviour:
   Traits: []
   SpecialAbility: {fileID: 11400000, guid: 46d6e9d40e756aa42b8d2c98f89377a2, type: 2}
   CR: 18
-  Race: {fileID: 11400000, guid: 13c15678981d7d6448215a1dab454c59, type: 2}
+  Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}

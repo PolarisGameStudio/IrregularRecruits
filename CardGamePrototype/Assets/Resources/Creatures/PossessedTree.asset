@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: WalkingTree
+  m_Name: PossessedTree
   m_EditorClassIdentifier: 
-  name: Walking Tree
+  name: Possessed Tree
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: c3027ddae51b1004290cd0d573d85dcd, type: 3}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Health: 24
   Traits:
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
+  - {fileID: 11400000, guid: 1ab98939c40df894491caa5d89b806c2, type: 2}
   SpecialAbility: {fileID: 0}
   CR: 29
-  Race: {fileID: 11400000, guid: 13c15678981d7d6448215a1dab454c59, type: 2}
+  Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
