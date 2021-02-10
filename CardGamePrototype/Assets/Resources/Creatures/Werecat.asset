@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Wererat
+  m_Name: Werecat
   m_EditorClassIdentifier: 
-  name: Wererat
+  name: Werecat
   Rarity: 0
-  Locked: 0
-  Image: {fileID: 21300000, guid: 2d177b168ba1c17419f601eb3fc987e4, type: 3}
+  Locked: 1
+  Image: {fileID: 21300000, guid: 2e96fff8c88c9c3439d070634a17f254, type: 3}
   IconImage: {fileID: 0}
-  Attack: 5
-  Health: 10
+  Attack: 2
+  Health: 8
   Traits:
-  - {fileID: 11400000, guid: 1ab98939c40df894491caa5d89b806c2, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: fecc2c30a846c7048a07b90a269c9f6e, type: 2}
-  CR: 16
+  - {fileID: 11400000, guid: 53672cc22daa8f246a59ad64a6f3a0fc, type: 2}
+  SpecialAbility: {fileID: 0}
+  CR: 10
   Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}

@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Wererat
+  m_Name: Rahlk the Brood Mother
   m_EditorClassIdentifier: 
-  name: Wererat
-  Rarity: 0
+  name: Rahlk the Brood Mother
+  Rarity: 2
   Locked: 0
-  Image: {fileID: 21300000, guid: 2d177b168ba1c17419f601eb3fc987e4, type: 3}
+  Image: {fileID: 21300000, guid: 0e496ae734feb5048bd50a2eff317f8b, type: 3}
   IconImage: {fileID: 0}
-  Attack: 5
-  Health: 10
+  Attack: 6
+  Health: 24
   Traits:
-  - {fileID: 11400000, guid: 1ab98939c40df894491caa5d89b806c2, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: fecc2c30a846c7048a07b90a269c9f6e, type: 2}
-  CR: 16
-  Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  - {fileID: 11400000, guid: 29981a7f06d8de94d9408f8bee84825d, type: 2}
+  SpecialAbility: {fileID: 0}
+  CR: 30
+  Race: {fileID: 0}
