@@ -100,15 +100,26 @@ public class AssetManager
         races = GetAssetsOfType<Race>();
 
         //Debug.Log("Checking abilities: " + creatures.Count);
+        var switchFrom = races.First(r => r.name == "Catfolk");
+        var switchto = races.First(r => r.name == "Beastfolk");
+
+        foreach(var creature in creatures)
+        {
+            if (creature.Race == switchFrom)
+            {
+                creature.Race = switchto;
+                EditorUtility.SetDirty(creature);
+            }
+        }
 
         foreach (var race in races)
         {
             Debug.Log($"{race.name}: {creatures.Count(c => c.Race == race)}");
         }
 
-        //AssetDatabase.Refresh();
+        AssetDatabase.Refresh();
         //creatures.ForEach(a => EditorUtility.SetDirty(a));
-        //AssetDatabase.SaveAssets();
+        AssetDatabase.SaveAssets();
 
     }
 
