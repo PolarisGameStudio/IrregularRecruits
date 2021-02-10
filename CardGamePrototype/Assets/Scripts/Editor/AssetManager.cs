@@ -100,8 +100,8 @@ public class AssetManager
         races = GetAssetsOfType<Race>();
 
         //Debug.Log("Checking abilities: " + creatures.Count);
-        var switchFrom = races.First(r => r.name == "Dark Elf");
-        var switchto = races.First(r => r.name == "Wildfolk");
+        var switchFrom = races.First(r => r.name == "Bird");
+        var switchto = races.First(r => r.name == "Animal");
 
         foreach(var creature in creatures)
         {
