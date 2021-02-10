@@ -47,19 +47,21 @@ namespace GameLogic
                 ;
         }
 
-        private bool CorrectTrait(Card instigator)
+        public bool CorrectTrait(Card instigator)
         {
             return !Trait ||  instigator.GetTraits().Contains(Trait);
         }
 
         private bool CorrectOwnerLocation(AbilityHolder abilityOwner)
         {
-            if (!(abilityOwner is Card)) return true;
+            if (!(abilityOwner is Card card)) return true;
 
-            if (Character == CharacterTyp.This)
-                return Location == (abilityOwner as Card).Location;
-            else
-                return (abilityOwner as Card).Location == Deck.Zone.Battlefield;
+            //if (Character == CharacterTyp.This)
+            //    return Location == card.Location;
+            //else
+
+            //TODO: create a triggers from location field.
+            return card.Location == Deck.Zone.Battlefield;
         }
 
         public bool CorrectCharacter(Card instigator, AbilityHolder abilityOwner, Card triggerExecuter = null)

@@ -3,128 +3,8 @@ using NUnit.Framework;
 using System.Collections.Generic;
 namespace Tests
 {
-    public class HeroTest
+    public class HeroTest : TestFixture
     {
-
-        private Creature TestCreature;
-        private Card TestCard;
-        private Hero TestHero;
-
-        [TearDown]
-        public void CleanListeners()
-        {
-            if (TestCard != null && TestCard.Creature?.SpecialAbility)
-            {
-                TestCard.Creature.SpecialAbility.RemoveListeners(TestCard);
-            }
-            if (TestHero != null)
-            {
-                foreach (var a in TestHero.Abilities)
-                    (a as PassiveAbility)?.RemoveListeners(TestHero);
-            }
-
-
-            BattleManager.Instance.PackUp(null);
-        }
-
-        private Card GenerateTestCreature(PassiveAbility ability, Race race = null, bool playerdeck = true)
-        {
-            Trait trait = new Trait()
-            {
-                Description = "Testing a trait",
-                name = "TestTrait"
-            };
-
-            TestCreature = new Creature()
-            {
-                name = "TesterOne",
-                Attack = 2,
-                Race = race,
-                Health = 30,
-                Traits = new List<Trait>()
-                {
-                    trait
-                }
-
-            };
-
-            Deck testDeck = null;
-
-            if (playerdeck)
-            {
-                if (BattleManager.Instance.PlayerDeck == null)
-                {
-                    var TestDeckObject = new DeckObject()
-                    {
-                        Creatures = new List<Creature>(),
-                    };
-
-                    BattleManager.SetPlayerDeck( TestDeckObject);
-                }
-
-                testDeck = BattleManager.Instance.PlayerDeck;
-            }
-            else
-            {
-                if (BattleManager.Instance.EnemyDeck == null)
-                {
-                    var TestDeckObject = new DeckObject()
-                    {
-                        Creatures = new List<Creature>(),
-                    };
-
-                    BattleManager.Instance.EnemyDeck = new Deck(TestDeckObject);
-                }
-
-                testDeck = BattleManager.Instance.EnemyDeck;
-            }
-
-            if (ability)
-                TestCreature.SpecialAbility = ability;
-
-            var testCard = new Card(TestCreature);
-
-            testDeck.AddCard(testCard);
-
-            return testCard;
-        }
-
-        private Hero GenerateHero(AbilityWithEffect ability, Race race = null,List<AbilityWithEffect> heroRaceAbilities = null)
-        {
-            var hero = new Hero(new HeroObject()
-            {
-                StartingAbility = ability,
-                name = "Testeron",
-                Race = race,
-                RaceOption = new LevelOption() { Options = heroRaceAbilities}
-            });
-
-            Deck testDeck = null;
-
-            if (BattleManager.Instance.PlayerDeck == null)
-            {
-                var TestDeckObject = new DeckObject()
-                {
-                    Creatures = new List<Creature>(),
-                };
-
-                BattleManager.SetPlayerDeck(TestDeckObject);
-
-                var ai = new AI(BattleManager.Instance.PlayerDeck);
-
-                BattleManager.Instance.PlayerDeck.DeckController = ai;
-            }
-
-            testDeck = BattleManager.Instance.PlayerDeck;
-
-            testDeck.Hero = hero;
-
-            hero.InDeck = testDeck;
-
-            return hero;
-        }
-
-
         [Test]
         public void HeroHasAbility()
         {
@@ -148,7 +28,7 @@ namespace Tests
 
             TestHero = GenerateHero(testAbility);
 
-            TestCard = GenerateTestCreature(null);
+            TestCard = GenerateTestCreatureWithAbility(null);
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
@@ -181,7 +61,7 @@ namespace Tests
 
             TestHero.AddAbility(testAbility2);
 
-            TestCard = GenerateTestCreature(null);
+            TestCard = GenerateTestCreatureWithAbility(null);
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
@@ -205,7 +85,7 @@ namespace Tests
 
             TestHero = GenerateHero(testAbility);
 
-            TestCard = GenerateTestCreature(null);
+            TestCard = GenerateTestCreatureWithAbility(null);
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
@@ -232,7 +112,7 @@ namespace Tests
 
             TestHero = GenerateHero(testAbility);
 
-            TestCard = GenerateTestCreature(null);
+            TestCard = GenerateTestCreatureWithAbility(null);
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
@@ -267,7 +147,7 @@ namespace Tests
 
             TestHero = GenerateHero(testAbility,testRace);
 
-            TestCard = GenerateTestCreature(null, testRace);
+            TestCard = GenerateTestCreatureWithAbility(null, testRace);
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
@@ -301,7 +181,7 @@ namespace Tests
 
             TestHero = GenerateHero(testAbility, testRace);
 
-            TestCard = GenerateTestCreature(null, otherRace);
+            TestCard = GenerateTestCreatureWithAbility(null, otherRace);
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
@@ -326,7 +206,7 @@ namespace Tests
 
             TestHero = GenerateHero(testAbility);
 
-            TestCard = GenerateTestCreature(null,null,false);
+            TestCard = GenerateTestCreatureWithAbility(null,null,false);
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
@@ -352,7 +232,7 @@ namespace Tests
 
             TestHero = GenerateHero(testAbility);
 
-            TestCard = GenerateTestCreature(null, null, true);
+            TestCard = GenerateTestCreatureWithAbility(null, null, true);
 
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
@@ -377,7 +257,7 @@ namespace Tests
 
             TestHero = GenerateHero(testAbility);
 
-            TestCard = GenerateTestCreature(null);
+            TestCard = GenerateTestCreatureWithAbility(null);
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 

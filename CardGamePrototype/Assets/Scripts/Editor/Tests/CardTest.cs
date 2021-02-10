@@ -4,16 +4,14 @@ using System.Collections.Generic;
 
 namespace Tests
 {
-    public class CardTest
+    public class CardTest : TestFixture
     {
-        private BattleManager BattleManager;
-        private Card TestCard;
-        private Creature TestCreature;
         private Deck TestDeck;
         private DeckObject TestDeckObject;
         private PlayerController TestDeckController;
         private PassiveAbility TestAbility;
 
+        //TODO: move these up to testFixture
         [SetUp]
         public void CardSetup()
         {

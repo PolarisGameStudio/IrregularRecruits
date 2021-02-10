@@ -39,7 +39,7 @@ namespace UI
 
             WaterMark.sprite = deck.Races.First().Icon;
 
-            foreach (var c in deck.AllCreatures().OrderBy(c=> c.GetName()))
+            foreach (var c in deck.AllCreatures().OrderBy(c=> c.GetRace()? c.GetRace().name : "00"))
             {
                 var inst = Instantiate(CardUIInstance, CardUIInstance.transform.parent);
 

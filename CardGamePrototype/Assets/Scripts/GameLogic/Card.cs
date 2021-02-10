@@ -68,6 +68,8 @@ namespace GameLogic
             TempCard = temporary;
             Creature = c;
 
+            //this means that they are warded outisde of combat as well? intentional
+            Warded = Ward();
         }
 
         public List<Trait> GetTraits()
@@ -274,7 +276,7 @@ namespace GameLogic
             Alive () && Creature.Traits.Any(a => a.name == "Lifedrain");
         public bool Shapeshifter() =>
             Creature.Traits.Any(a => a.name == "Shapeshifter");
-        public bool Ward() =>
+        public bool Ward() => Creature && Creature.Traits != null &&
             Creature.Traits.Any(a => a.name == "Ward");
         public bool IsSummon() =>
             Creature.IsSummon();

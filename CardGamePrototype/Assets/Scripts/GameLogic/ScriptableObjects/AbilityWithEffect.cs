@@ -41,7 +41,9 @@ namespace GameLogic
                 targetType.CorrectCharacter(c, _owner, triggerExecuter) &&
                 targetType.CorrectAllegiance(c, _owner) &&
                 targetType.CorrectDamageState(c) &&
-                targetType.CorrectRace(c, _owner)).ToList();
+                targetType.CorrectRace(c, _owner) &&
+                targetType.CorrectTrait(c )
+                ).ToList();
 
             return TakeCount(cs, ResultingAction.TargetCount);
         }

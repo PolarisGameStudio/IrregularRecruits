@@ -2,83 +2,24 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Event = GameLogic.Event;
 
 namespace Tests
 {
-    public class TraitTest
+    public class TraitTest : TestFixture
     {
-
-        [SetUp]
-        public void BattleManage()
-        {
-            BattleManager.Init();
-
-            GameSettings.Instance.AiControlledPlayer = true;
-        }
-
-        [TearDown]
-        public void Reset()
-        {
-            Event.ResetEvents();
-        }
-
-
-        private Card GenerateTestCreature(string traitName, int attack = 2, int health = 10)
-        {
-            Trait trait = new Trait()
-            {
-                Description = "Testing a trait",
-                name = traitName
-            };
-
-            var TestCreature = new Creature()
-            {
-                name = "Tester" + UnityEngine.Random.Range(0, 1000),
-                Attack = attack,
-                Health = health,
-                Traits = string.IsNullOrEmpty(traitName) ? new List<Trait>() : new List<Trait>()
-                {
-                    trait
-                }
-            };
-
-            var testCard = new Card(TestCreature);
-
-            return testCard;
-        }
-
-        private Deck GenerateTestDeck(int creatures, bool playerDeck)
-        {
-            var testDeckObject = new DeckObject()
-            {
-                Creatures = new List<Creature>(),
-            };
-
-            var testDeck = new Deck(testDeckObject);
-
-            for (int i = 0; i < creatures; i++)
-            {
-                var c = GenerateTestCreature("");
-
-                testDeck.AddCard(c);
-            }
-
-
-            return testDeck;
-        }
-
         [Test]
         public void DefenderIsAttackedFirst()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
-            Card defPlayer = GenerateTestCreature("Defender");
-            Card nonDefPlayer = GenerateTestCreature("");
-            Card defEnm = GenerateTestCreature("Defender");
-            Card nonDefEnm = GenerateTestCreature("");
+            Card defPlayer = GenerateTestCreatureWithTrait("Defender");
+            Card nonDefPlayer = GenerateTestCreatureWithTrait("");
+            Card defEnm = GenerateTestCreatureWithTrait("Defender");
+            Card nonDefEnm = GenerateTestCreatureWithTrait("");
 
 
             pDeck.AddCard(defPlayer);
@@ -110,12 +51,12 @@ namespace Tests
         [Test]
         public void RangedDoesNotTakeDamageAttacking()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
-            Card defPlayer = GenerateTestCreature("Defender");
-            Card rangedCharacter = GenerateTestCreature("Ranged");
-            Card defEnm = GenerateTestCreature("Defender");
+            Card defPlayer = GenerateTestCreatureWithTrait("Defender");
+            Card rangedCharacter = GenerateTestCreatureWithTrait("Ranged");
+            Card defEnm = GenerateTestCreatureWithTrait("Defender");
 
             pDeck.AddCard(defPlayer);
             pDeck.AddCard(rangedCharacter);
@@ -134,11 +75,11 @@ namespace Tests
         [Test]
         public void PlayersDeathlessNotRemovedAfterDeath()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
-            Card defPlayer = GenerateTestCreature("Deathless");
-            Card defEnm = GenerateTestCreature("Deathless");
+            Card defPlayer = GenerateTestCreatureWithTrait("Deathless");
+            Card defEnm = GenerateTestCreatureWithTrait("Deathless");
 
             pDeck.AddCard(defPlayer);
             enmDeck.AddCard(defEnm);
@@ -156,13 +97,13 @@ namespace Tests
         [Test]
         public void EtherealIsNotAttackedWhileOtherNonEthereals()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
-            Card ethereal = GenerateTestCreature("Ethereal");
-            Card nonEthereal = GenerateTestCreature("");
-            Card nonEthereal2 = GenerateTestCreature("");
-            Card enm = GenerateTestCreature("");
+            Card ethereal = GenerateTestCreatureWithTrait("Ethereal");
+            Card nonEthereal = GenerateTestCreatureWithTrait("");
+            Card nonEthereal2 = GenerateTestCreatureWithTrait("");
+            Card enm = GenerateTestCreatureWithTrait("");
 
             pDeck.AddCard(ethereal);
             pDeck.AddCard(nonEthereal);
@@ -191,14 +132,14 @@ namespace Tests
         [Test]
         public void EtherealIsAttackedWhileOtherEtherealsOnly()
         {
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
-            Card ethereal = GenerateTestCreature("Ethereal");
-            Card etherereal1 = GenerateTestCreature("Ethereal");
-            Card ethereal2 = GenerateTestCreature("Ethereal");
+            Card ethereal = GenerateTestCreatureWithTrait("Ethereal");
+            Card etherereal1 = GenerateTestCreatureWithTrait("Ethereal");
+            Card ethereal2 = GenerateTestCreatureWithTrait("Ethereal");
 
-            Card enm = GenerateTestCreature("");
+            Card enm = GenerateTestCreatureWithTrait("");
 
             pDeck.AddCard(ethereal);
             pDeck.AddCard(etherereal1);
@@ -236,7 +177,7 @@ namespace Tests
         [Test]
         public void ShapeshifterIsAllTypes()
         {
-            var shifter = GenerateTestCreature("Shapeshifter");
+            var shifter = GenerateTestCreatureWithTrait("Shapeshifter");
 
             var gobbo = new Race()
             {
@@ -258,13 +199,13 @@ namespace Tests
         public void LifedrainDrainsTest()
         {
             const int Attack = 2;
-            var vampire = GenerateTestCreature("Lifedrain", Attack, 10);
+            var vampire = GenerateTestCreatureWithTrait("Lifedrain", Attack, 10);
 
             const int enmattack = 3;
-            var enm = GenerateTestCreature("", enmattack, 10);
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
 
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             pDeck.AddCard(vampire);
             enmDeck.AddCard(enm);
@@ -289,12 +230,12 @@ namespace Tests
 
             const int enmattack = 2;
 
-            var vampire = GenerateTestCreature("Lifedrain", Attack, enmattack);
+            var vampire = GenerateTestCreatureWithTrait("Lifedrain", Attack, enmattack);
 
-            var enm = GenerateTestCreature("", enmattack, 10);
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
 
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             pDeck.AddCard(vampire);
             enmDeck.AddCard(enm);
@@ -318,15 +259,15 @@ namespace Tests
 
             const int enmattack = 2;
 
-            var assassin = GenerateTestCreature("Assassin", Attack, 1000);
+            var assassin = GenerateTestCreatureWithTrait("Assassin", Attack, 1000);
 
-            var enm = GenerateTestCreature("", enmattack, 10);
-            var enm2 = GenerateTestCreature("", enmattack,4);
-            var enm3 = GenerateTestCreature("", enmattack, 20);
-            var lowHealthEnm = GenerateTestCreature("", enmattack, 3);
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
+            var enm2 = GenerateTestCreatureWithTrait("", enmattack,4);
+            var enm3 = GenerateTestCreatureWithTrait("", enmattack, 20);
+            var lowHealthEnm = GenerateTestCreatureWithTrait("", enmattack, 3);
 
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             pDeck.AddCard(assassin);
             enmDeck.AddCard(enm);
@@ -365,15 +306,15 @@ namespace Tests
 
             const int enmattack = 2;
 
-            var assassin = GenerateTestCreature("Assassin", Attack, 1000);
+            var assassin = GenerateTestCreatureWithTrait("Assassin", Attack, 1000);
 
-            var defenderEnm = GenerateTestCreature("Defender", enmattack, 10);
-            var enm2 = GenerateTestCreature("", enmattack, 4);
-            var enm3 = GenerateTestCreature("", enmattack, 20);
-            var lowHealthEnm = GenerateTestCreature("", enmattack, 3);
+            var defenderEnm = GenerateTestCreatureWithTrait("Defender", enmattack, 10);
+            var enm2 = GenerateTestCreatureWithTrait("", enmattack, 4);
+            var enm3 = GenerateTestCreatureWithTrait("", enmattack, 20);
+            var lowHealthEnm = GenerateTestCreatureWithTrait("", enmattack, 3);
 
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             pDeck.AddCard(assassin);
             enmDeck.AddCard(defenderEnm);
@@ -408,7 +349,6 @@ namespace Tests
             Assert.False(firstTwoAttacked.Contains(defenderEnm));
         }
 
-        //test assassin
         [Test]
         public void AssassinRespectsEtherealTest()
         {
@@ -416,15 +356,15 @@ namespace Tests
 
             const int enmattack = 2;
 
-            var assassin = GenerateTestCreature("Assassin", Attack, 1000);
+            var assassin = GenerateTestCreatureWithTrait("Assassin", Attack, 1000);
 
-            var enm = GenerateTestCreature("", enmattack, 10);
-            var enm2 = GenerateTestCreature("", enmattack, 4);
-            var enm3 = GenerateTestCreature("", enmattack, 20);
-            var ethereal = GenerateTestCreature("Ethereal", enmattack, 3);
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
+            var enm2 = GenerateTestCreatureWithTrait("", enmattack, 4);
+            var enm3 = GenerateTestCreatureWithTrait("", enmattack, 20);
+            var ethereal = GenerateTestCreatureWithTrait("Ethereal", enmattack, 3);
 
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             pDeck.AddCard(assassin);
             enmDeck.AddCard(enm);
@@ -459,7 +399,7 @@ namespace Tests
             Assert.False(firstTwoAttacked.Contains(ethereal));
         }
 
-        //test ferocity
+        //test Carnage
         [Test]
         public void CarnageMiddleAttackTest()
         {
@@ -468,14 +408,14 @@ namespace Tests
 
             const int enmattack = 2;
 
-            var angryDude = GenerateTestCreature("Carnage", Attack, enmattack);
+            var angryDude = GenerateTestCreatureWithTrait("Carnage", Attack, enmattack);
 
-            var enm = GenerateTestCreature("", enmattack, 10);
-            var enm2 = GenerateTestCreature("", enmattack, 10);
-            var enm3 = GenerateTestCreature("", enmattack, 10);
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
+            var enm2 = GenerateTestCreatureWithTrait("", enmattack, 10);
+            var enm3 = GenerateTestCreatureWithTrait("", enmattack, 10);
 
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             pDeck.AddCard(angryDude);
             enmDeck.AddCard(enm);
@@ -508,14 +448,14 @@ namespace Tests
 
             const int enmattack = 2;
 
-            var angryDude = GenerateTestCreature("Carnage", Attack, enmattack);
+            var angryDude = GenerateTestCreatureWithTrait("Carnage", Attack, enmattack);
 
-            var enm = GenerateTestCreature("", enmattack, 10);
-            var enm2 = GenerateTestCreature("", enmattack, 10);
-            var enm3 = GenerateTestCreature("", enmattack, 10);
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
+            var enm2 = GenerateTestCreatureWithTrait("", enmattack, 10);
+            var enm3 = GenerateTestCreatureWithTrait("", enmattack, 10);
 
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             pDeck.AddCard(angryDude);
             enmDeck.AddCard(enm);
@@ -548,14 +488,14 @@ namespace Tests
 
             const int enmattack = 2;
 
-            var angryDude = GenerateTestCreature("Carnage", Attack, enmattack);
+            var angryDude = GenerateTestCreatureWithTrait("Carnage", Attack, enmattack);
 
-            var enm = GenerateTestCreature("", enmattack, 10);
-            var enm2 = GenerateTestCreature("", enmattack, 10);
-            var enm3 = GenerateTestCreature("", enmattack, 10);
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
+            var enm2 = GenerateTestCreatureWithTrait("", enmattack, 10);
+            var enm3 = GenerateTestCreatureWithTrait("", enmattack, 10);
 
-            var pDeck = GenerateTestDeck(0, true);
-            var enmDeck = GenerateTestDeck(0, false);
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
 
             pDeck.AddCard(angryDude);
             enmDeck.AddCard(enm);
@@ -581,6 +521,134 @@ namespace Tests
         }
 
         //test ward
-        //test carnage
+        [Test]
+        public void WardProtectsAnyDamage()
+        {
+            var warded = GenerateTestCreatureWithTrait("Ward");
+
+            Assert.IsTrue(warded.Ward());
+            Assert.IsTrue(warded.Warded);
+
+            warded.HealthChange(-2);
+
+            Assert.AreEqual(warded.MaxHealth , warded.CurrentHealth);
+
+            Assert.IsFalse(warded.Warded);
+
+        }
+        
+        //test ward
+        [Test]
+        public void WardProtectsOnlyFirstDamage()
+        {
+            var warded = GenerateTestCreatureWithTrait("Ward");
+
+            Assert.IsTrue(warded.Ward());
+            Assert.IsTrue(warded.Warded);
+
+            warded.HealthChange(-2);
+
+            Assert.AreEqual(warded.MaxHealth , warded.CurrentHealth);
+
+            Assert.IsFalse(warded.Warded);
+
+            warded.HealthChange(-2);
+
+            Assert.AreEqual(warded.MaxHealth-2, warded.CurrentHealth);
+                      
+
+        }
+
+        [Test]
+        public void WardProtectsCombatDamage()
+        {
+            const int Attack = 2;
+            var warded = GenerateTestCreatureWithTrait("Ward", Attack, 10);
+
+            const int enmattack = 3;
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
+
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
+
+            pDeck.AddCard(warded);
+            enmDeck.AddCard(enm);
+
+            warded.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+
+
+            Assert.IsTrue(warded.Ward());
+            Assert.IsTrue(warded.Warded);
+
+            warded.AttackCard(enm);
+
+            Assert.AreEqual(enm.MaxHealth - Attack, enm.CurrentHealth);
+            Assert.AreEqual(warded.MaxHealth , warded.CurrentHealth);
+
+            Assert.IsFalse(warded.Warded);
+
+        }
+
+        [Test]
+        public void WardProtectsEachCombatRound()
+        {
+            var warded = GenerateTestCreatureWithTrait("Ward", 1, 10);
+
+            const int enmattack = 2;
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 8);
+
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
+
+            pDeck.AddCard(warded);
+            enmDeck.AddCard(enm);
+
+            warded.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+
+            Assert.IsTrue(warded.Ward());
+            Assert.IsTrue(warded.Warded);
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.IsFalse(enm.Alive());
+        }
+        
+
+        [Test]
+        public void FerocityAttacksTwice() 
+        {
+
+            var ferious = GenerateTestCreatureWithTrait("Ferocity", 5, 10);
+            var frind = GenerateTestCreatureWithTrait("", 5, 10);
+
+            var enm = GenerateTestCreatureWithTrait("", 2, 19);
+
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
+
+            pDeck.AddCard(ferious);
+            pDeck.AddCard(frind);
+            enmDeck.AddCard(enm);
+
+            ferious.ChangeLocation(Deck.Zone.Battlefield);
+            frind.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+
+            Assert.IsTrue(ferious.Ferocity());
+
+            var attackers = new List<Card>();
+
+            Event.OnAttack.AddListener(c => attackers.Add(c));
+
+            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+
+            Assert.AreEqual(2, attackers.Count(a => a == ferious));
+            Assert.AreEqual(1, attackers.Count(a => a == frind));
+
+            Assert.IsFalse(enm.Alive());
+
+        }
     }
 }

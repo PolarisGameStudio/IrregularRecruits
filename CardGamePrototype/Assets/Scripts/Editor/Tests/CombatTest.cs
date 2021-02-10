@@ -8,76 +8,8 @@ using Event = GameLogic.Event;
 namespace Tests
 {
 
-    public class CombatTest
+    public class CombatTest : TestFixture
     { 
-        [SetUp]
-        public void BattleManage()
-        {
-            BattleManager.Init();
-
-            GameSettings.Instance.AiControlledPlayer = true;
-
-        }
-
-        [TearDown]
-        public void Reset()
-        {
-            Event.ResetEvents();
-        }
-
-        private Card GenerateTestCreature(PassiveAbility ability, Race race = null, int attack = 2)
-        {
-            Trait trait = new Trait()
-            {
-                Description = "Testing a trait",
-                name = "TestTrait"
-            };
-
-            var TestCreature = new Creature()
-            {
-                name = "Tester"+ Random.Range(0,1000),
-                Attack = attack,
-                Race = race,
-                Health = 7,
-                Traits = new List<Trait>()
-                {
-                    trait
-                }
-            };
-
-            if (ability)
-                TestCreature.SpecialAbility = ability;
-
-            var testCard = new Card(TestCreature);
-
-            return testCard;
-        }
-
-        private Deck GenerateTestDeck(int creatures, bool onlyAbilityDamage = false)
-        {
-            var testDeckObject = new DeckObject()
-            {
-                Creatures = new List<Creature>(),
-            };
-
-            var testDeck = new Deck(testDeckObject);
-
-            for (int i = 0; i < creatures; i++)
-            {
-                var c = onlyAbilityDamage ? GenerateTestCreature(
-                    new PassiveAbility()
-                    {
-                        ResultingAction = new AbilityEffectObject(EffectType.DealDamage, Count.One, 5, new Noun(Noun.CharacterTyp.Any)),
-                        TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Any), TriggerType.RoundEnd),
-                    }, null, 0
-                    ) : GenerateTestCreature(null);
-
-                testDeck.AddCard(c);
-            }
-
-
-            return testDeck;
-        }
 
         [Test]
         public void CombatStartsResolving()
@@ -206,8 +138,8 @@ namespace Tests
         [Test]
         public void BattleResolvesWithOnlyAbilityDamage()
         {
-            var pDeck = GenerateTestDeck(3, true);
-            var enmDeck = GenerateTestDeck(3, true);
+            var pDeck = GenerateTestDeck(3);
+            var enmDeck = GenerateTestDeck(3);
 
             var battleFinished = false;
 
@@ -247,8 +179,8 @@ namespace Tests
             var pDeck = GenerateTestDeck(0);
             var enmDeck = GenerateTestDeck(0);
 
-            var creature1 = GenerateTestCreature(null);
-            var creature2 = GenerateTestCreature(null);
+            var creature1 = GenerateTestCreatureWithAbility(null);
+            var creature2 = GenerateTestCreatureWithAbility(null);
 
             pDeck.AddCard(creature1);
             enmDeck.AddCard(creature2);
@@ -274,8 +206,8 @@ namespace Tests
             var pDeck = GenerateTestDeck(0);
             var enmDeck = GenerateTestDeck(0);
 
-            var creature1 = GenerateTestCreature(null);
-            var creature2 = GenerateTestCreature(null);
+            var creature1 = GenerateTestCreatureWithAbility(null);
+            var creature2 = GenerateTestCreatureWithAbility(null);
 
             pDeck.AddCard(creature1);
             enmDeck.AddCard(creature2);
@@ -299,8 +231,8 @@ namespace Tests
             var pDeck = GenerateTestDeck(0);
             var enmDeck = GenerateTestDeck(0);
 
-            var creature1 = GenerateTestCreature(null);
-            var creature2 = GenerateTestCreature(null);
+            var creature1 = GenerateTestCreatureWithAbility(null);
+            var creature2 = GenerateTestCreatureWithAbility(null);
 
             pDeck.AddCard(creature1);
             enmDeck.AddCard(creature2);
@@ -325,8 +257,8 @@ namespace Tests
             var pDeck = GenerateTestDeck(0);
             var enmDeck = GenerateTestDeck(0);
 
-            var creature1 = GenerateTestCreature(null);
-            var creature2 = GenerateTestCreature(null);
+            var creature1 = GenerateTestCreatureWithAbility(null);
+            var creature2 = GenerateTestCreatureWithAbility(null);
 
             pDeck.AddCard(creature1);
             enmDeck.AddCard(creature2);

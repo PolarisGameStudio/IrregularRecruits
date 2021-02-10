@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Tests
 {
-    public class MapTest
+    public class MapTest : TestFixture
     {
         [SetUp]
         public void PlayerDeckSetup()
@@ -43,12 +43,6 @@ namespace Tests
 
             hero.InDeck = deck;
 
-        }
-
-        [TearDown]
-        public void Reset()
-        {
-            Event.ResetEvents();
         }
 
         [Test]
@@ -115,13 +109,6 @@ namespace Tests
         }
 
 
-        [Test]
-        public void CombatOptionSpawnsCorrectRandomCREnemies()
-        {
-
-            Assert.IsTrue(false);
-
-        }
         [Test]
         public void CombatOptionSpawnsCorrectSpecifiedEnemies()
         {
