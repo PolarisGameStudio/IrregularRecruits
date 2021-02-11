@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5075d7bc0f246934e900a42dc541a5b8, type: 3}
+  m_Name: Wildfolk
+  m_EditorClassIdentifier: 
+  Options:
+  - {fileID: 11400000, guid: ac892c125e7cec04cbf3cc9ec184aec3, type: 2}
+  - {fileID: 11400000, guid: 66a5cf854bc4e7a42ad395aa0df8f0f5, type: 2}
+  - {fileID: 11400000, guid: f763eb5855a2f8a43803de7a80bd592b, type: 2}
+  - {fileID: 11400000, guid: f86cc208236b20841a8865ebc25ab95d, type: 2}
+  - {fileID: 11400000, guid: 2aba72493d686a747abcea0efc0c9e88, type: 2}

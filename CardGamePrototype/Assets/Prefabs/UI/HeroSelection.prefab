@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 4059132165298402270}
   - component: {fileID: 6337251973827548313}
   m_Layer: 5
-  m_Name: Portrait (1)
+  m_Name: CircleFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: -15, y: 5}
+  m_EffectDistance: {x: 15, y: 5}
   m_UseGraphicAlpha: 1
 --- !u!1 &3777665096710602070
 GameObject:
@@ -2739,7 +2739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: -15, y: 5}
+  m_EffectDistance: {x: 15, y: 5}
   m_UseGraphicAlpha: 1
 --- !u!114 &4363050761890104451
 MonoBehaviour:
@@ -2821,7 +2821,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3691825649050827865
 CanvasRenderer:
@@ -2850,7 +2850,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cff1d696a386bfd4ba93d63a60572ec1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: afd3172fab69b394892740d5320e7703, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2915,8 +2915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 15, y: 10}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.3529412}
+  m_EffectDistance: {x: 35, y: 20}
   m_UseGraphicAlpha: 1
 --- !u!1 &7701924989259748744
 GameObject:
@@ -3007,7 +3007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: -15, y: 5}
+  m_EffectDistance: {x: 15, y: 5}
   m_UseGraphicAlpha: 1
 --- !u!114 &3489359423599582875
 MonoBehaviour:

@@ -28,7 +28,7 @@ namespace UI
 
         private void SetupDeckChoice(Deck deck)
         {
-            var cs = CreatureLibrary.Instance.EnemyCreatures;
+            var cs = CreatureLibrary.Instance.AllCreatures;
 
             if (deck == null || !deck.DeckObject)
                 return;

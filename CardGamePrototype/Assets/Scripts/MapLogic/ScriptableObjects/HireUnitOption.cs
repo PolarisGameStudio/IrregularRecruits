@@ -25,7 +25,7 @@ namespace MapLogic
 
             var maxCr = cR / 3;
 
-            var potential = CreatureLibrary.Instance.EnemyCreatures.Where(c => c.Race == race).OrderBy(c=> Random.value).ToList();
+            var potential = CreatureLibrary.Instance.AllCreatures.Where(c => c.Race == race).OrderBy(c=> Random.value).ToList();
 
             //Allow uniques check?
 

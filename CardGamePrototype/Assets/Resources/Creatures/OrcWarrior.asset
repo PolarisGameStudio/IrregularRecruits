@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: OrcWarrior
   m_EditorClassIdentifier: 
   name: Orc Warrior
-  Rarity: 1
+  Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: fe350a7a73793794db5ace60b3bce004, type: 3}
   IconImage: {fileID: 0}
   Attack: 3
   Health: 16
-  Traits: []
-  SpecialAbility: {fileID: 11400000, guid: e6ac7be20e6b7de44a1402c0d19e87eb, type: 2}
+  Traits:
+  - {fileID: 11400000, guid: 29981a7f06d8de94d9408f8bee84825d, type: 2}
+  SpecialAbility: {fileID: 0}
   CR: 28
   Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}

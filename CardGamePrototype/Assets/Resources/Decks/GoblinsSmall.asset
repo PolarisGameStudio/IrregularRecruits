@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
+  m_Name: GoblinsSmall
+  m_EditorClassIdentifier: 
+  name: 
+  Description: 
+  Creatures:
+  - {fileID: 11400000, guid: 8fb03b9bbfbd685408bd7f67fa4ac4a0, type: 2}
+  - {fileID: 11400000, guid: 8fb03b9bbfbd685408bd7f67fa4ac4a0, type: 2}
+  - {fileID: 11400000, guid: 568d1966b242d6947a216d2ca879dc3d, type: 2}
+  - {fileID: 11400000, guid: 568d1966b242d6947a216d2ca879dc3d, type: 2}
+  - {fileID: 11400000, guid: 6239fdedfad930944b315ce8c3489afa, type: 2}
+  - {fileID: 11400000, guid: 6239fdedfad930944b315ce8c3489afa, type: 2}
+  DeckIcon: {fileID: 0}
+  DeckImage: {fileID: 0}
+  FriendRaces:
+  - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+  - {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
+  EnemyRaces:
+  - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}

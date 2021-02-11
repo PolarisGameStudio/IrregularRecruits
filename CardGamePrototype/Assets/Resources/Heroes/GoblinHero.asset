@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3693894c8fcfe5b4faad90f60259a824, type: 3}
+  m_Name: GoblinHero
+  m_EditorClassIdentifier: 
+  name: Tok Knee-Smasher
+  Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
+  Deck: {fileID: 11400000, guid: d307be469491e9e41980277bd40bcd30, type: 2}
+  Portrait: {fileID: 21300000, guid: ddd9ab868a7952e4c97adb1e8b48521f, type: 3}
+  StartingAbility: {fileID: 11400000, guid: acb80cc6c704c60498d2d86be7fc7912, type: 2}
+  Class: {fileID: 11400000, guid: 8e9d03a3a17f7da4fa30823f9ac28a5d, type: 2}
+  RaceOption: {fileID: 11400000, guid: 9814349e70fcc0a468143b592a805495, type: 2}
+  BackgroundText: "Chief say Tok go smash Demon Knee. \n\nBig Demon Konala in Sinder
+    Lands.  Smash smash. Smash good! Tok Knee Smasher new Chief!"

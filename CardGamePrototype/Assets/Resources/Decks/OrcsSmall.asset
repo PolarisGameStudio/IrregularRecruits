@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
+  m_Name: OrcsSmall
+  m_EditorClassIdentifier: 
+  name: 
+  Description: 
+  Creatures:
+  - {fileID: 11400000, guid: 3d22132945200974697f8c2fac041437, type: 2}
+  - {fileID: 11400000, guid: 3d22132945200974697f8c2fac041437, type: 2}
+  - {fileID: 11400000, guid: 34fd9ac41cebe444fad39de131e96caf, type: 2}
+  - {fileID: 11400000, guid: fe8a24af4650c324da03fdcfc0adaa5d, type: 2}
+  - {fileID: 11400000, guid: d93889cdff1801f449148d0c7a577feb, type: 2}
+  - {fileID: 11400000, guid: fe8a24af4650c324da03fdcfc0adaa5d, type: 2}
+  DeckIcon: {fileID: 0}
+  DeckImage: {fileID: 0}
+  FriendRaces:
+  - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+  EnemyRaces:
+  - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}

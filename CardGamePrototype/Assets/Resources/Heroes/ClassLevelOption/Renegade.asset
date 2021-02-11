@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5075d7bc0f246934e900a42dc541a5b8, type: 3}
+  m_Name: Renegade
+  m_EditorClassIdentifier: 
+  Options:
+  - {fileID: 11400000, guid: e556e64caa71c604ebb5596db1ebb1d7, type: 2}
+  - {fileID: 11400000, guid: d3636ea30838e1340848c8536ee3eb0e, type: 2}
+  - {fileID: 11400000, guid: d0c63649349a93b4ab9bc12be202a1b2, type: 2}
+  - {fileID: 11400000, guid: 7062cdc23e0ab224098e878c0b324f82, type: 2}
+  - {fileID: 11400000, guid: ed02300359d05f94fa63777da84ec09e, type: 2}

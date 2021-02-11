@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5075d7bc0f246934e900a42dc541a5b8, type: 3}
-  m_Name: Dwarf
+  m_Name: Tactician
   m_EditorClassIdentifier: 
   Options:
-  - {fileID: 11400000, guid: 4370690a5382c8a4788179d2a01a59a6, type: 2}
-  - {fileID: 11400000, guid: 584b9e930c25af345aa8c7813c82f7df, type: 2}
-  - {fileID: 11400000, guid: b50a99597f99a804ea85bd2e999cba6b, type: 2}
-  - {fileID: 11400000, guid: 4b52c4e88d7a6c747837b75b6b29242e, type: 2}
-  - {fileID: 11400000, guid: 46e281fa1ba1bc148aa49eb7bda541b9, type: 2}
+  - {fileID: 11400000, guid: 854ed55d7c8dbc04c8d81d919842c38b, type: 2}
+  - {fileID: 11400000, guid: 538cc5ff903caec4f9323f0b4835ce38, type: 2}
+  - {fileID: 11400000, guid: f76bc0d43d2c9b94d880d95bc468533f, type: 2}
+  - {fileID: 11400000, guid: 8c7a365b88da434429b113c07d70caaa, type: 2}
+  - {fileID: 11400000, guid: 090c116410294db4b99293e2e534327e, type: 2}
