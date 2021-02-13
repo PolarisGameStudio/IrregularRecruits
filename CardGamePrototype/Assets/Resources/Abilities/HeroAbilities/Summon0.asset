@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Summon0
   m_EditorClassIdentifier: 
   Name: Summon Imp
-  Icon: {fileID: 21300000, guid: 0dfc175948284fe45916b8980b3fa220, type: 3}
+  Icon: {fileID: 21300000, guid: da4ccb1172a7d064b94697bdf89e0d27, type: 3}
   ResultingAction:
     ActionType: 9
     TargetCount: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
       Relationship: 0
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     Amount: 1
-    Summons: {fileID: 11400000, guid: f83133d28a126da4a8eefc2971b58ba3, type: 2}
+    Summons: {fileID: 11400000, guid: 26eda7ce4b960684db0a10236fef921b, type: 2}
   OncePrCombat: 1

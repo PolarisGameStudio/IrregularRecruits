@@ -70,7 +70,9 @@ namespace Sound
 
         public static void PlayStinger(SoundBank.Stinger type)
         {
-            Instance.StingerAudioSource.PlayOneShot(SoundBank.GetSound(type));
+            Instance.StingerAudioSource.clip = SoundBank.GetSound(type);
+
+            Instance.StingerAudioSource.Play();
 
         }
         public static void PlayCardSound(SoundBank.CardSound type)

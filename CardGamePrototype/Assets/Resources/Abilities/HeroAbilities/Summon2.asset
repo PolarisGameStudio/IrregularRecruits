@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11dc8372b41758d429c1eb3ac0a9ce31, type: 3}
   m_Name: Summon2
   m_EditorClassIdentifier: 
-  Name: Twin Cowards
-  Icon: {fileID: 21300000, guid: a02dc014bf667c64092aad6125258f73, type: 3}
+  Name: Summon Demon
+  Icon: {fileID: 21300000, guid: e093016ad0a137341a285b4dd415946c, type: 3}
   ResultingAction:
     ActionType: 9
     TargetCount: 1
@@ -23,6 +23,7 @@ MonoBehaviour:
       Relationship: 0
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     Amount: 2
-    Summons: {fileID: 11400000, guid: 58f7f319b92a0ed42b57069e47d5f543, type: 2}
+    Summons: {fileID: 11400000, guid: e660b887da1250a42ba7428059db2e86, type: 2}
   OncePrCombat: 1
