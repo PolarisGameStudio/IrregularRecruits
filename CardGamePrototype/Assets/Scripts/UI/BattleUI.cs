@@ -21,7 +21,6 @@ namespace UI
     /// </summary>
     public class BattleUI : Singleton<BattleUI>, IUIWindow
     {
-
         public CardUI CardPrefab;
 
         private static Dictionary<Guid, AbilityHolderUI> CardUIs = new Dictionary<Guid, AbilityHolderUI>();
@@ -88,10 +87,16 @@ namespace UI
 
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Return) &! UILocked)
+                EndPlayerTurn();
+        }
+
         private void EndPlayerTurn()
         {
-            if (PlayerDeck.DeckController is PlayerController)
-                (PlayerDeck.DeckController as PlayerController).FinishTurn();
+            if (PlayerDeck.DeckController is PlayerController controller)
+                controller.FinishTurn();
         }
 
         private void SetupDecks(Deck playerDeck, Deck opponentDeck)
