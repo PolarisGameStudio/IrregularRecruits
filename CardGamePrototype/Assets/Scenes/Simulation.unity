@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -231,10 +231,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DecksToSimulate:
-  - {fileID: 11400000, guid: e58503075e30e0d488f79796dd1d528f, type: 2}
-  - {fileID: 11400000, guid: f965b2a83c7badf41ae67fb2186437f1, type: 2}
-  - {fileID: 11400000, guid: ac957de51484b374f877b1f4ee357d26, type: 2}
-  BattlesToSimulate: 10
+  - {fileID: 11400000, guid: 3f9efa06ebc991f4ab2cdf8d9143fb48, type: 2}
+  - {fileID: 11400000, guid: 1be4a3a4206b3ea4dbcf51280e02e315, type: 2}
+  - {fileID: 11400000, guid: fba9fffeff43e994187e725c52de51e3, type: 2}
+  - {fileID: 11400000, guid: b2955fcc41d272b439eeeba764dbdfe3, type: 2}
+  - {fileID: 11400000, guid: 328d64730d0415a46901e475f2f64dc0, type: 2}
+  BattlesToSimulate: 50
   MatchUpResults:
   - FirstDeck: Dwarven Army
     SecondDeck: Legion
@@ -248,22 +250,7 @@ MonoBehaviour:
     SecondDeck: Cat Nation
     FirstDeckWins: 16
     SecondDeckWins: 34
-  GameWins:
-  - Deck: The Dead Legion
-    Runs: 03000000060000000d0000000300000003000000
-    AverageRun: 5.6
-    HighestRun: 13
-    LowestRun: 3
-  - Deck: Cat Nation
-    Runs: 0300000005000000020000000300000006000000
-    AverageRun: 3.8
-    HighestRun: 6
-    LowestRun: 2
-  - Deck: Company of Dwarves
-    Runs: 060000000700000002000000070000000a000000
-    AverageRun: 6.4
-    HighestRun: 10
-    LowestRun: 2
+  GameWins: []
   Creatures:
   - {fileID: 11400000, guid: 75db06fe635810f44ab7e0e4e2902161, type: 2}
   - {fileID: 11400000, guid: 6a65715886a552a4a80ef503db4a44a7, type: 2}
@@ -423,19 +410,19 @@ MonoBehaviour:
   AllRaces:
   - {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
   - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
-  - {fileID: 11400000, guid: 697f610bb1b35d743a9ce5d06c66ce80, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: bffb2ec3e89bdaf4080ba28acbc87ea2, type: 2}
-  - {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}
-  - {fileID: 11400000, guid: 9f6e06efdee3ac74aa5bd71d7896ddda, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
-  - {fileID: 11400000, guid: 4728fa16fe828ca41a23864bdfa561af, type: 2}
-  - {fileID: 11400000, guid: b6ecfead65fb55047bcb9fb895dad079, type: 2}
-  - {fileID: 11400000, guid: a0fd7d7d4b97a0f4e8fb5f84f32aa6ba, type: 2}
-  - {fileID: 11400000, guid: f3ba4c90989bf5c44aa3097152bea1a6, type: 2}
-  - {fileID: 11400000, guid: 619f5f8e2b0cad94a8f23de94017640a, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
-  - {fileID: 11400000, guid: 5635c48887d99084a9876306e16e608b, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
-  - {fileID: 11400000, guid: 13c15678981d7d6448215a1dab454c59, type: 2}
-  - {fileID: 11400000, guid: bf94ab8ac254e7440ac870342e55d19a, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}

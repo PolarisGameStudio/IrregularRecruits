@@ -3,10 +3,9 @@ using UnityEngine.Events;
 
 namespace GameLogic
 {
-    public partial class PrototypeGameControl : DeckGeneration
+
+    public class PrototypeGameControl 
     {
-        public Creature TestCreature;
-        public HeroObject TestHero;
         public int CombatDifficultyIncrease = 50;
         public int CurrentCombatDifficulty;
         public int MaxEnemyDeckSize = 10;
@@ -14,14 +13,13 @@ namespace GameLogic
         public Deck PlayerDeck;
         public Deck EnemyDeck;
 
-        public PrototypeGameControl(Creature testCreature, HeroObject testHero = null)
+        public PrototypeGameControl(Creature testCreature = null, HeroObject testHero = null, int combatDifficultyIncrease = 10, int startingDiffulty = 50)
         {
-            TestCreature = testCreature;
-            TestHero = testHero;
+            if (testCreature)
+                PlayerDeck = DeckGeneration.GenerateDeck(0, testCreature, testHero);
 
-            if(TestCreature)
-                PlayerDeck = GenerateDeck(0,testCreature,testHero);
-
+            CombatDifficultyIncrease = combatDifficultyIncrease;
+            CurrentCombatDifficulty = startingDiffulty;
         }
 
         public void NextCombat()
@@ -29,7 +27,7 @@ namespace GameLogic
             CurrentCombatDifficulty += CombatDifficultyIncrease;
 
             //if (EnemyDeck == null || EnemyDeck.Alive() == 0)
-            EnemyDeck = GenerateDeck(CurrentCombatDifficulty);
+            EnemyDeck = DeckGeneration.GenerateDeck(CurrentCombatDifficulty);
 
             if (PlayerDeck == null) PlayerDeck = BattleManager.Instance.PlayerDeck;
 

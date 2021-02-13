@@ -1,10 +1,12 @@
 ﻿using GameLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AssetManager
 {
@@ -119,6 +121,37 @@ public class AssetManager
 
         AssetDatabase.Refresh();
         //creatures.ForEach(a => EditorUtility.SetDirty(a));
+        AssetDatabase.SaveAssets();
+
+    }
+
+    [MenuItem("Content/Assign Deck Strategy To Creatures")]
+    public static void StrategyAssignment()
+    {
+        List<Creature> creatures = GetAssetsOfType<Creature>();
+
+        foreach (var creature in creatures)
+        {
+            DeckStrategy strat;
+
+            if (Enum.TryParse(creature.Race?.name,true, out strat) &! creature.Enabling.Contains(strat))
+            {
+                creature.Enabling.Add(strat);
+                EditorUtility.SetDirty(creature);
+            }
+
+            foreach(var trait in creature.Traits )
+                if (Enum.TryParse(trait.name,true,out strat) & !creature.Enabling.Contains(strat))
+                {
+                    creature.Enabling.Add(strat);
+                    EditorUtility.SetDirty(creature);
+                }
+
+
+        }
+
+
+        AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();
 
     }

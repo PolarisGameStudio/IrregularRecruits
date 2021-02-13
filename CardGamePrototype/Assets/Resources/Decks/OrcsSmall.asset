@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
   m_Name: OrcsSmall
   m_EditorClassIdentifier: 
-  name: 
+  name: Orc City
   Description: 
   Creatures:
   - {fileID: 11400000, guid: 3d22132945200974697f8c2fac041437, type: 2}

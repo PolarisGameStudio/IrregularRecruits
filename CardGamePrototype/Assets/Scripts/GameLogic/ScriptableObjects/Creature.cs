@@ -19,6 +19,10 @@ namespace GameLogic
         public SpecialAbility SpecialAbility;
         public int CR;
 
+        public List<DeckStrategy> Enabling;
+        public List<DeckStrategy> Payoff;
+
+
         public Race Race;
 
 

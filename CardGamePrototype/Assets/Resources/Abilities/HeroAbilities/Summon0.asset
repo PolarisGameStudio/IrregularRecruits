@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Summon0
   m_EditorClassIdentifier: 
   Name: Summon Imp
-  Icon: {fileID: 21300000, guid: da4ccb1172a7d064b94697bdf89e0d27, type: 3}
+  Icon: {fileID: 21300000, guid: 906938bcf398d6348be993e6d1011265, type: 3}
   ResultingAction:
     ActionType: 9
     TargetCount: 1

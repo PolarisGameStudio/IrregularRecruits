@@ -70,9 +70,9 @@ namespace MapLogic
 
             while ( (forSale == null || OnOffer.Any(a=> a.Item1 ==  forSale)) && stop-- > 0)
             {
-                if (choice == ShopOptionType.OwnerRace)
+                if (choice == ShopOptionType.OwnerRace && VillageType)
                     forSale = CreatureLibrary.Instance.GetCreature(VillageType);
-                else if (choice == ShopOptionType.FriendRace && VillageType.FriendRaces.Length > 0)
+                else if (choice == ShopOptionType.FriendRace && VillageType && VillageType.FriendRaces.Length > 0)
                     forSale = CreatureLibrary.Instance.GetCreature(VillageType.FriendRaces[Random.Range(0, VillageType.FriendRaces.Length)]);
                 else
                     forSale = CreatureLibrary.Instance.GetCreature();
@@ -97,6 +97,8 @@ namespace MapLogic
             {
                 MapController.Instance.PlayerGold -= sale.Item2;
                 BattleManager.Instance.PlayerDeck.AddCard(new Card(sale.Item1));
+
+                OnOffer.Remove(sale);
 
                 return true;
             }

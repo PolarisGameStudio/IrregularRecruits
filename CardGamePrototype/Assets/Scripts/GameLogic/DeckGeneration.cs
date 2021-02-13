@@ -56,7 +56,7 @@ namespace GameLogic
         }
 
         //TODO: seperate the testcreature generation and general generation
-        protected static Deck GenerateDeck(int CR, Creature testCreature , HeroObject testHero = null)
+        public static Deck GenerateDeck(int CR, Creature testCreature , HeroObject testHero = null)
         {
             List<Creature> creatures;
 

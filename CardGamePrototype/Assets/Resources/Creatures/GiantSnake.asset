@@ -22,5 +22,7 @@ MonoBehaviour:
   Traits:
   - {fileID: 11400000, guid: 1ab98939c40df894491caa5d89b806c2, type: 2}
   SpecialAbility: {fileID: 0}
-  CR: 26
+  CR: 16
+  Enabling: 08000000
+  Payoff: 
   Race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
