@@ -20,4 +20,4 @@ MonoBehaviour:
   - Options: 02000000
   Rerolls: -1
   RerollInitialCost: 5
-  RerollCostIncrease: 5
+  RerollCostIncrease: 0

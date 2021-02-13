@@ -1,5 +1,7 @@
 ﻿using GameLogic;
+using MapLogic;
 using UI;
+using UnityEngine;
 using UnityEngine.UI;
 using Event = GameLogic.Event;
 
@@ -8,12 +10,14 @@ public class CombatPrototype : Singleton<CombatPrototype>
     public Button NextCombatButton;
     private PrototypeGameControl GC;
 
+    public bool ShopBetweenBattles;
+
     public Creature TestCreature;
     public HeroObject TestHero;
 
     void Start()
     {
-        GC = new PrototypeGameControl(TestCreature,TestHero);
+        GC = new PrototypeGameControl(TestCreature, TestHero);
 
         NextCombatButton.onClick.AddListener(GC.NextCombat);
         NextCombatButton.onClick.AddListener(() => NextCombatButton.gameObject.SetActive(false));
@@ -22,15 +26,25 @@ public class CombatPrototype : Singleton<CombatPrototype>
 
         Event.OnGameBegin.AddListener(NextCombatButton.onClick.Invoke);
 
-        BattleUI.OnBattleFinished.AddListener(() => NextCombatButton.gameObject.SetActive(true));
+        BattleUI.OnBattleFinished.AddListener(AfterBattle);
 
-        BattleSummary.Instance.CloseButton.onClick.AddListener(GetNewMinions);
+        BattleSummary.Instance.CloseButton.onClick.AddListener(SetupShop);
+
     }
 
-
-    public void GetNewMinions()
+    private void AfterBattle()
     {
-        AddMinionScreen.SetupMinionScreen(GC.PlayerDeck);
+
+        NextCombatButton.gameObject.SetActive(true);
+    }
+
+    private void SetupShop()
+    {
+        if (ShopBetweenBattles)
+        {
+            var races = CreatureLibrary.Instance.AllRaces;
+            new Shop(races[Random.Range(0, races.Length)]);
+        }
     }
 
     internal float GetCombatDifficultyIncrease()

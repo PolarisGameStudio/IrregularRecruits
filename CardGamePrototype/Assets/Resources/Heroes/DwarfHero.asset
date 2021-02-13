@@ -17,7 +17,7 @@ MonoBehaviour:
   Deck: {fileID: 11400000, guid: fba9fffeff43e994187e725c52de51e3, type: 2}
   Portrait: {fileID: 21300000, guid: e0343f44bd3c49348b9f17de3a4705ec, type: 3}
   StartingAbility: {fileID: 11400000, guid: dcc6922316029d845be74e7c8c4847e9, type: 2}
-  Class: {fileID: 11400000, guid: 5cc3564f0f122e04ba5c746893a237e3, type: 2}
+  Class: {fileID: 11400000, guid: a478ea569415d70439ac25b16d7755d4, type: 2}
   RaceOption: {fileID: 11400000, guid: 7976b580d7050a843b0e0229250de297, type: 2}
   BackgroundText: 'Your father, the King of the Dwarves, has ordered you to track
     down and kill the Legendary Demon Konallath.
