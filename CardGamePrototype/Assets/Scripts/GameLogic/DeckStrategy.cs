@@ -7,6 +7,7 @@
         Commonfolk,
         Beastfolk,
         Undead,
+        Wildfolk,
         Withdraw,
         Summon,
         Ferocity,

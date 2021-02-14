@@ -132,6 +132,8 @@ public class AssetManager
 
         foreach (var creature in creatures)
         {
+
+            //enablers
             DeckStrategy strat;
 
             if (Enum.TryParse(creature.Race?.name,true, out strat) &! creature.Enabling.Contains(strat))
@@ -140,12 +142,54 @@ public class AssetManager
                 EditorUtility.SetDirty(creature);
             }
 
-            foreach(var trait in creature.Traits )
-                if (Enum.TryParse(trait.name,true,out strat) & !creature.Enabling.Contains(strat))
+            foreach (var trait in creature.Traits)
+            {
+                if (Enum.TryParse(trait.name, true, out strat) & !creature.Enabling.Contains(strat))
                 {
                     creature.Enabling.Add(strat);
                     EditorUtility.SetDirty(creature);
                 }
+            }
+
+            //payoffs
+            if(creature.SpecialAbility is PassiveAbility passive)
+            {
+                if(passive.TriggerCondition.Subjekt.Trait )
+                {
+                    if (Enum.TryParse(passive.TriggerCondition.Subjekt.Trait.name, true, out strat) & !creature.Payoff.Contains(strat))
+                    {
+                        creature.Payoff.Add(strat);
+                        EditorUtility.SetDirty(creature);
+                    }
+                }
+
+                if(passive.TriggerCondition.Subjekt.Race == Noun.RaceType.Same)
+                {
+                    if (Enum.TryParse(creature.Race.name, true, out strat) & !creature.Payoff.Contains(strat))
+                    {
+                        creature.Payoff.Add(strat);
+                        EditorUtility.SetDirty(creature);
+                    }
+                }
+
+                if (passive.TriggerCondition.TriggerAction == TriggerType.ATTACKS && passive.TriggerCondition.Subjekt.Trait && passive.TriggerCondition.Subjekt.Relationship != Noun.Allegiance.Enemy)
+                {
+                    if ( !creature.Payoff.Contains(DeckStrategy.Ferocity))
+                    {
+                        creature.Payoff.Add(DeckStrategy.Ferocity);
+                        EditorUtility.SetDirty(creature);
+                    }
+                }
+
+                if (passive.TriggerCondition.TriggerAction == TriggerType.Withdraw)
+                {
+                    if ( !creature.Payoff.Contains(DeckStrategy.Withdraw))
+                    {
+                        creature.Payoff.Add(DeckStrategy.Withdraw);
+                        EditorUtility.SetDirty(creature);
+                    }
+                }
+            }
 
 
         }
