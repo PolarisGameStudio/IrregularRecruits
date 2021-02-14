@@ -20,6 +20,8 @@ MonoBehaviour:
   Attack: 2
   Health: 12
   Traits: []
-  SpecialAbility: {fileID: 11400000, guid: 63cd36329dccb8247b6f3e7bd9eafbb7, type: 2}
+  SpecialAbility: {fileID: 0}
   CR: 30
+  Enabling: 
+  Payoff: 
   Race: {fileID: 11400000, guid: aa96f320044c3a248b7ab3ea6872f26f, type: 2}

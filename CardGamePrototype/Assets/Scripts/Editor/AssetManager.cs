@@ -172,9 +172,9 @@ public class AssetManager
                     }
                 }
 
-                if (passive.TriggerCondition.TriggerAction == TriggerType.ATTACKS && passive.TriggerCondition.Subjekt.Trait && passive.TriggerCondition.Subjekt.Relationship != Noun.Allegiance.Enemy)
+                if (passive.TriggerCondition.TriggerAction == TriggerType.ATTACKS && passive.TriggerCondition.Subjekt.Trait && passive.TriggerCondition.Subjekt.Relationship != Noun.Allegiance.Enemy && passive.TriggerCondition.Subjekt.Character != Noun.CharacterTyp.This)
                 {
-                    if ( !creature.Payoff.Contains(DeckStrategy.Ferocity))
+                    if (!creature.Payoff.Contains(DeckStrategy.Ferocity))
                     {
                         creature.Payoff.Add(DeckStrategy.Ferocity);
                         EditorUtility.SetDirty(creature);
