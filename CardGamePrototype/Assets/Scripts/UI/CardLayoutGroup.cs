@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace UI
@@ -32,6 +33,9 @@ namespace UI
 
         private Vector2[] ChildDesiredPositions;
         private Vector2 StartPos, EndPos;
+
+        public static UnityEvent OnSwitchingPlace = new UnityEvent();
+
 
 
         private void OnEnable()
@@ -171,6 +175,8 @@ namespace UI
                 transitionTo.AddChild(draggedCard,0);
                 RemoveChild(draggedCard);
 
+                OnSwitchingPlace.Invoke();
+
                 if(transitionTo.HiddenZone != HiddenZone)
                 {
                     var state = transitionTo.HiddenZone ? CardUI.CardState.FaceDown : CardUI.CardState.Battle;
@@ -181,6 +187,7 @@ namespace UI
             //closer to the before position
             else if (index > 0 && (currentDesiredPos - cardPos).sqrMagnitude > (ChildDesiredPositions[index - 1] - cardPos).sqrMagnitude)
             {
+                OnSwitchingPlace.Invoke();
 
                 //switch positions
                 var ca = ChildCards[index - 1];
@@ -192,6 +199,7 @@ namespace UI
             //closer to the after position
             else if (index < ChildCards.Count - 1 && (currentDesiredPos - cardPos).sqrMagnitude > (ChildDesiredPositions[index + 1] - cardPos).sqrMagnitude)
             {
+                OnSwitchingPlace.Invoke();
 
                 //switch positions
                 var ca = ChildCards[index + 1];

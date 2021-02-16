@@ -1,4 +1,5 @@
 ﻿using MapLogic;
+using MapUI;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,10 @@ namespace Sound
             foreach (var b in buttons)
                 b.onClick.AddListener(PlayButtonClick);
 
+            MapNodeIcon.OnMapButtonClick.AddListener(PlayButtonClick);
+
+            MapNodeIcon.OnMapButtonClick.AddListener(() => PlayUISound(SoundBank.UiSound.HeroWalking));
+
             Event.OnGameBegin.AddListener(() => ChangeMusic(SoundBank.Music.Explore));
             Event.OnGameBegin.AddListener(() => PlayStinger(SoundBank.Stinger.GameStart));
 
@@ -39,8 +44,12 @@ namespace Sound
             BattleUI.OnLevelUp.AddListener(() => PlayCardSound(SoundBank.CardSound.LevelUp));
             BattleSummary.Instance.OnClose.AddListener(() => ChangeMusic(SoundBank.Music.Explore));
 
-            PlayerGoldUpdater.Instance.OnGoldGained.AddListener(() => PlayCardSound(SoundBank.CardSound.GoldCoin));
+            PlayerGoldUpdater.Instance.OnGoldGained.AddListener(() => PlayUISound(SoundBank.UiSound.GoldCoin));
 
+            CardUI.OnDragStarted.AddListener(() => PlayUISound(SoundBank.UiSound.CardPickUp));
+            CardUI.OnDragEnd.AddListener(() => PlayUISound(SoundBank.UiSound.CardLetGo));
+            CardLayoutGroup.OnSwitchingPlace.AddListener(() => PlayUISound(SoundBank.UiSound.CardSwitchPlace));
+            CardHoverInfo.Instance.OnCardHighlight.AddListener(() => PlayUISound(SoundBank.UiSound.CardHighlight));
 
             AnimationSystem.OnDraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Draw));
             AnimationSystem.OnWithdraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Withdraw));

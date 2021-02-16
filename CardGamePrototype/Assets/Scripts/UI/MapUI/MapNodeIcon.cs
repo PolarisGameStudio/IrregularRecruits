@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MapUI
@@ -17,6 +18,8 @@ namespace MapUI
         private ParticleSystem HighlightParticles;
         public CanvasGroup CanvasGroup;
         public bool Revealed;
+        public static UnityEvent OnMapButtonClick = new UnityEvent();
+        //public static UnityEvent OnHeroWalking = new UnityEvent();
 
         private void Start()
         {
@@ -25,6 +28,8 @@ namespace MapUI
 
         private IEnumerator MoveToRoutine()
         {
+            OnMapButtonClick.Invoke();
+
             MapUI.Instance.MoveHero(this);
 
             yield return new WaitForSeconds(1.8f);

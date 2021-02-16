@@ -63,6 +63,10 @@ namespace UI
         public class CardUIEvent : UnityEvent<CardUI> { }
         public static CardUIEvent OnUIDestroyed = new CardUIEvent();
 
+        public static UnityEvent OnDragStarted = new UnityEvent();
+        public static UnityEvent OnDragEnd = new UnityEvent();
+        
+
 
         public void OnDestroy()
         {
@@ -259,12 +263,14 @@ namespace UI
 
             if (CurrentZoneLayout && CurrentZoneLayout.CardsAreDraggable && !BattleUI.Instance.UILocked)
             {
+                OnDragStarted.Invoke();
                 BeingDragged = true;
             }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            OnDragEnd.Invoke();
 
             BeingDragged = false;
 
@@ -276,7 +282,9 @@ namespace UI
             }
             else
                 OnPositionChanged.Invoke(LayoutIndex);
-            
+
+            CanTransitionTo = null;
+
             //move it into place
             CurrentZoneLayout.MoveCardsToDesiredPositions();
         }

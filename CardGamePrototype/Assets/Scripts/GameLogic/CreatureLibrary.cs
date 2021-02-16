@@ -11,6 +11,7 @@ namespace GameLogic
         public Race[] AllRaces;
         public Race[] EnemyRaces;
         public Creature[] AllCreatures;
+        public Creature[] ShopRaces;
 
         public Creature GetCreature(Race race, bool includeUniques = true)
         {

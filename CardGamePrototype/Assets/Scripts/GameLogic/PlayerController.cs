@@ -34,10 +34,10 @@ namespace GameLogic
 
             ActionsLeft--;
 
-            //if (!ActionAvailable())
-            //{
-            //    FinishTurn();
-            //}
+            if (!ActionAvailable())
+            {
+                FinishTurn();
+            }
         }
 
         public void FinishTurn()

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace UI
@@ -20,6 +21,7 @@ namespace UI
         public Image ImageMask, Image;
         public static Coroutine ShowAfterDelayRoutine;
         private Creature Creature;
+        public UnityEvent OnCardHighlight = new UnityEvent();
 
         private readonly List<ImageTextEntry> InstantiatedObjects = new List<ImageTextEntry>();
 
@@ -76,6 +78,8 @@ namespace UI
                 Hide();
                 return;
             }
+
+            OnCardHighlight.Invoke();
 
             ShowAfterDelayRoutine = null;
 

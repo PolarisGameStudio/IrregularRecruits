@@ -16,7 +16,13 @@ namespace Sound
             PopUp,
             Event,
             LevelUp,
-            NextRound
+            NextRound,
+            GoldCoin,
+            CardPickUp,
+            CardSwitchPlace,
+            CardHighlight,
+            CardLetGo,
+            HeroWalking
         }
 
         public enum Stinger
@@ -52,7 +58,6 @@ namespace Sound
             Heal,
             AbilitySelection,
             LevelUp,
-            GoldCoin
         }
 
 

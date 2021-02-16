@@ -89,8 +89,8 @@ namespace UI
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return) &! UILocked)
-                EndPlayerTurn();
+            if (Input.GetKeyDown(KeyCode.Return) & !UILocked)
+                EndTurnButton.onClick.Invoke();
         }
 
         private void EndPlayerTurn()
