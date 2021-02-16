@@ -56,6 +56,7 @@ namespace MapLogic
         [Range(0.0f,0.95f)]
         public float TreasureChance = 0.25f;
         public int StepDifficultyIncrease = 20;
+        public int StartDifficulty = 30;
 
         public Race[] CivilizedRaces;
         public Race[] EnemyRaces;

@@ -149,12 +149,45 @@ public class AssetManager
                     creature.Enabling.Add(strat);
                     EditorUtility.SetDirty(creature);
                 }
+
+
+                if (trait.name == "Avantgarde" &! creature.Enabling.Contains(DeckStrategy.GoWide))
+                {
+                    creature.Enabling.Add(DeckStrategy.GoWide);
+                    EditorUtility.SetDirty(creature);
+                }
             }
 
-            //payoffs
-            if(creature.SpecialAbility is PassiveAbility passive)
+
+
+            if (creature.SpecialAbility is PassiveAbility passive)
             {
-                if(passive.TriggerCondition.Subjekt.Trait )
+                //ability enablers
+                if (Enum.TryParse(passive.ResultingAction.ActionType.ToString(),true,out strat) & !creature.Enabling.Contains(strat))
+                {
+                    creature.Enabling.Add(strat);
+                    EditorUtility.SetDirty(creature);
+
+                }
+
+                if (passive.ResultingAction.ActionType == EffectType.Summon & !creature.Enabling.Contains(DeckStrategy.GoWide))
+                {
+                    creature.Enabling.Add(DeckStrategy.GoWide);
+                    EditorUtility.SetDirty(creature);
+
+                }
+
+                if (passive.ResultingAction.ActionType == EffectType.Rally && passive.ResultingAction.Target.Relationship != Noun.Allegiance.Enemy & !creature.Enabling.Contains(DeckStrategy.GoWide))
+                {
+                    creature.Enabling.Add(DeckStrategy.GoWide);
+                    EditorUtility.SetDirty(creature);
+
+                }
+
+
+                //ability payoffs
+
+                if (passive.TriggerCondition.Subjekt.Trait )
                 {
                     if (Enum.TryParse(passive.TriggerCondition.Subjekt.Trait.name, true, out strat) & !creature.Payoff.Contains(strat))
                     {

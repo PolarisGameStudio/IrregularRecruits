@@ -185,7 +185,7 @@ namespace Simulation
 
             var settings = MapSettings.Instance;
 
-            int CurrentDifficulty = settings.StepDifficultyIncrease * 4;
+            int CurrentDifficulty = settings.StartDifficulty;
 
 
             var gc = new PrototypeGameControl(null,null,settings.StepDifficultyIncrease,CurrentDifficulty);

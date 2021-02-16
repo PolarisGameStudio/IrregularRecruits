@@ -55,7 +55,7 @@ namespace MapLogic
         {
             var settings = MapSettings.Instance;
 
-            int CurrentDifficulty = settings.StepDifficultyIncrease *4 ;
+            int CurrentDifficulty = settings.StartDifficulty;
 
 
             int[] nodesAtStep = new int[settings.MapLength];

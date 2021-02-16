@@ -39,6 +39,8 @@ namespace Sound
             BattleUI.OnLevelUp.AddListener(() => PlayCardSound(SoundBank.CardSound.LevelUp));
             BattleSummary.Instance.OnClose.AddListener(() => ChangeMusic(SoundBank.Music.Explore));
 
+            PlayerGoldUpdater.Instance.OnGoldGained.AddListener(() => PlayCardSound(SoundBank.CardSound.GoldCoin));
+
 
             AnimationSystem.OnDraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Draw));
             AnimationSystem.OnWithdraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Withdraw));

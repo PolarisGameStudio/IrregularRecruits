@@ -11,6 +11,7 @@
         Withdraw,
         Summon,
         Ferocity,
-        Lifedrain
+        Lifedrain,
+        GoWide
     }
 }

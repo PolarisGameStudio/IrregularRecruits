@@ -97,8 +97,8 @@ namespace GameLogic
             //Move AVANTGARDE cards to the front and shuffle the rest
             while (CreaturesInZone(Zone.Library).Any(c => c.Avantgarde()))
             {
-                Draw(CreaturesInZone(Zone.Library).First(c => c.Avantgarde()));
-                amountToDraw--;
+                CreaturesInZone(Zone.Library).First(c => c.Avantgarde()).ChangeLocation(Zone.Library, Zone.Battlefield);
+
             }
 
 

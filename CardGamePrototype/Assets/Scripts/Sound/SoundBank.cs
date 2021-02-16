@@ -51,7 +51,8 @@ namespace Sound
             Resurrect,
             Heal,
             AbilitySelection,
-            LevelUp
+            LevelUp,
+            GoldCoin
         }
 
 

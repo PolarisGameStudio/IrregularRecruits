@@ -354,6 +354,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5614ff6e7d5dfa44894c36cbc20822ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MinGoldCoinWait: 0.05
+  MaxGoldCoinWait: 0.15
+  AnimationFactor: 1
+  OnGoldGained:
+    m_PersistentCalls:
+      m_Calls: []
+  CoinParticlePrefab: {fileID: 198405478074982118, guid: 98a720539cb4a6845bfb85b4ffd48041,
+    type: 3}
+  GoldIconTransform: {fileID: 6509079275503804565}
 --- !u!1 &4874139230091149406
 GameObject:
   m_ObjectHideFlags: 0
