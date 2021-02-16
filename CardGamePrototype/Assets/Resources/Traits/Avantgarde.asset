@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Avantgarde
   Icon: {fileID: 21300000, guid: f61c84a597782aa418a18e7961190eef, type: 3}
-  Description: always starts in hand
+  Description: always starts on the battlefield
   CR: 0

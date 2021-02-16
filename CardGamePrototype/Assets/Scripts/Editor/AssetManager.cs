@@ -187,40 +187,42 @@ public class AssetManager
 
                 //ability payoffs
 
+                //boost others is a gowide payoff
+                if (passive.ResultingAction.ActionType == EffectType.StatPlus && 
+                    passive.ResultingAction.Target.Race != Noun.RaceType.Same &&  
+                    passive.ResultingAction.TargetCount == Count.All && 
+                    passive.ResultingAction.Target.Relationship != Noun.Allegiance.Enemy )
+                {
+                    AddPayoff(creature, DeckStrategy.GoWide);
+
+                }
+
                 if (passive.TriggerCondition.Subjekt.Trait )
                 {
-                    if (Enum.TryParse(passive.TriggerCondition.Subjekt.Trait.name, true, out strat) & !creature.Payoff.Contains(strat))
+                    if (Enum.TryParse(passive.TriggerCondition.Subjekt.Trait.name, true, out strat) )
                     {
-                        creature.Payoff.Add(strat);
-                        EditorUtility.SetDirty(creature);
+
+                        AddPayoff(creature, strat);
                     }
                 }
 
                 if(passive.TriggerCondition.Subjekt.Race == Noun.RaceType.Same)
                 {
-                    if (Enum.TryParse(creature.Race.name, true, out strat) & !creature.Payoff.Contains(strat))
+                    if (Enum.TryParse(creature.Race.name, true, out strat))
                     {
-                        creature.Payoff.Add(strat);
-                        EditorUtility.SetDirty(creature);
+                        AddPayoff(creature, strat);
                     }
                 }
 
                 if (passive.TriggerCondition.TriggerAction == TriggerType.ATTACKS && passive.TriggerCondition.Subjekt.Trait && passive.TriggerCondition.Subjekt.Relationship != Noun.Allegiance.Enemy && passive.TriggerCondition.Subjekt.Character != Noun.CharacterTyp.This)
                 {
-                    if (!creature.Payoff.Contains(DeckStrategy.Ferocity))
-                    {
-                        creature.Payoff.Add(DeckStrategy.Ferocity);
-                        EditorUtility.SetDirty(creature);
-                    }
+                    DeckStrategy strategy = DeckStrategy.Ferocity;
+                    AddPayoff(creature, strategy);
                 }
 
                 if (passive.TriggerCondition.TriggerAction == TriggerType.Withdraw)
                 {
-                    if ( !creature.Payoff.Contains(DeckStrategy.Withdraw))
-                    {
-                        creature.Payoff.Add(DeckStrategy.Withdraw);
-                        EditorUtility.SetDirty(creature);
-                    }
+                    AddPayoff(creature, DeckStrategy.Withdraw);
                 }
             }
 
@@ -231,6 +233,15 @@ public class AssetManager
         AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();
 
+    }
+
+    private static void AddPayoff(Creature creature, DeckStrategy strategy)
+    {
+        if (!creature.Payoff.Contains(strategy))
+        {
+            creature.Payoff.Add(strategy);
+            EditorUtility.SetDirty(creature);
+        }
     }
 
     [MenuItem("Content/Recalculate CR")]
