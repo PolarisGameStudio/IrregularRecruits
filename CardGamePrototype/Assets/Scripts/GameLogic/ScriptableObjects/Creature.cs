@@ -25,6 +25,7 @@ namespace GameLogic
 
         public Race Race;
 
+        public float Performance;
 
         public enum RarityType { Common, Rare, Unique }
 

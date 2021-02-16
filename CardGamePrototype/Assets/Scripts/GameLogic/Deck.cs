@@ -49,7 +49,7 @@ namespace GameLogic
             //TODO: test that this correctly reflects CR?
             if (!card.IsSummon())
             {
-                CR += card.Creature.CR;
+                UpdateCR();
 
                 Races.Add(card.Creature.Race);
             }
@@ -65,6 +65,13 @@ namespace GameLogic
             card.CleanListeners();
 
             Event.OnDeckSizeChange.Invoke(this);
+
+            UpdateCR();
+        }
+
+        private void UpdateCR()
+        {
+            CR = AllCreatures().Sum(c => c.Creature.CR);
         }
 
         internal void Add(Card card)

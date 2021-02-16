@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: Gigantess
   m_EditorClassIdentifier: 
-  name: Gigantess
+  name: Gentle Gigantess
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: 11845ac495371b74282f15321b3dc444, type: 3}
   IconImage: {fileID: 0}
-  Attack: 6
-  Health: 28
+  Attack: 8
+  Health: 30
   Traits:
-  - {fileID: 11400000, guid: b2c3f1899a4bbdf499638d01ff53e368, type: 2}
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 0}
+  SpecialAbility: {fileID: 11400000, guid: 79cc2d604a53a4e439743bf11d7db5bc, type: 2}
   CR: 36
   Enabling: 0000000005000000
   Payoff: 
   Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
+  Performance: 0

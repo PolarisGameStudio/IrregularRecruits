@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: OrcWithSword
+  m_Name: OrcFirstBlood
   m_EditorClassIdentifier: 
-  name: Orc with a big Sword
+  name: First-Blooded Orc
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: d016aa23038981f418799814459d02ef, type: 3}
   IconImage: {fileID: 0}
   Attack: 4
-  Health: 16
-  Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
+  Health: 18
+  Traits: []
   SpecialAbility: {fileID: 11400000, guid: e162666a4a32e8d46b532abbd2829f1d, type: 2}
   CR: 35
-  Enabling: 0000000005000000
+  Enabling: 05000000
   Payoff: 0a000000
   Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
+  Performance: 0

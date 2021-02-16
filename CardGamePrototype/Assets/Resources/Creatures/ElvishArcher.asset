@@ -24,5 +24,6 @@ MonoBehaviour:
   SpecialAbility: {fileID: 11400000, guid: 02e70badbe154154a911c540f763d11e, type: 2}
   CR: 34
   Enabling: 0200000001000000
-  Payoff: 0100000008000000
+  Payoff: 01000000
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
+  Performance: 0

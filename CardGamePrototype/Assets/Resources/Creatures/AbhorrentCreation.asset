@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Monty
+  m_Name: AbhorrentCreation
   m_EditorClassIdentifier: 
-  name: Monty
+  name: Abhorrent Creation
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: 42d8a3a0b43f5f244bd6bb8a725f3d72, type: 3}
@@ -21,8 +21,9 @@ MonoBehaviour:
   Health: 20
   Traits:
   - {fileID: 11400000, guid: b2c3f1899a4bbdf499638d01ff53e368, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: fe2c0226092928f41a74d49d5b10069f, type: 2}
+  SpecialAbility: {fileID: 0}
   CR: 26
   Enabling: 04000000
   Payoff: 
   Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
+  Performance: 0

@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: HumanWizard
+  m_Name: Necromancer
   m_EditorClassIdentifier: 
-  name: Human Wizard
+  name: Necromancer
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: 362ba867a76fff649afe0c4560e7d5b4, type: 3}
   IconImage: {fileID: 21300000, guid: 3ff32a10a9291c147aa35e49f99deb31, type: 3}
-  Attack: 3
-  Health: 6
+  Attack: 1
+  Health: 10
   Traits: []
-  SpecialAbility: {fileID: 0}
+  SpecialAbility: {fileID: 11400000, guid: 5cbbd7efa5fc8784cbf3b3ea60468b0e, type: 2}
   CR: 9
   Enabling: 02000000
   Payoff: 
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
+  Performance: 0

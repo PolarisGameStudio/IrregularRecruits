@@ -7,22 +7,28 @@ namespace GameLogic
 {
 
 
-    public class BattleManager 
+    public class BattleManager
     {
         public Deck PlayerDeck { get; private set; }
         public Deck EnemyDeck;
         public int Turn = 0;
+        private int PlayerCr, EnemyCr;
+        private List<Card> PlayerStartingDeck, EnmStartDeck;
+
 
         private CombatAutoResolver CombatAutoResolver;
 
 
         private static BattleManager instance = null;
-        
-        public static BattleManager Instance { get {
+
+        public static BattleManager Instance
+        {
+            get
+            {
                 if (instance == null)
                     instance = new BattleManager();
-                return instance; 
-            } 
+                return instance;
+            }
         }
 
         private BattleManager()
@@ -69,15 +75,26 @@ namespace GameLogic
 
         public void PackUp(Deck d)
         {
-            if (EnemyDeck != null && d == PlayerDeck)
+            bool playerWon = d == PlayerDeck;
+
+
+#if UNITY_EDITOR
+            if (PlayerCr != 0 && EnemyCr != 0)
+            {
+                ReevaluateCardPerformance(PlayerStartingDeck, PlayerCr, EnemyCr, playerWon);
+                ReevaluateCardPerformance(EnmStartDeck, EnemyCr, PlayerCr, !playerWon);
+            }
+#endif
+
+            if (EnemyDeck != null && playerWon)
             {
                 PlayerDeck?.Hero?.AwardXp(EnemyDeck.GetXpValue());
-                Event.OnPlayerGoldAdd.Invoke((int) (EnemyDeck.GetXpValue() * Random.Range(2.5f, 4f)));
+                Event.OnPlayerGoldAdd.Invoke((int)(EnemyDeck.GetXpValue() * Random.Range(2.5f, 4f)));
             }
 
             PlayerDeck?.PackUp();
             EnemyDeck?.PackUp(true);
-            
+
             EnemyDeck = null;
 
         }
@@ -90,10 +107,15 @@ namespace GameLogic
 
         private void SetupCombat(Deck playerDeck, Deck enemyDeck)
         {
-            if (playerDeck.DeckController == null )
-                playerDeck.DeckController = GameSettings.Instance.AiControlledPlayer ?new AI(playerDeck): (DeckController)new PlayerController(playerDeck);
+            if (playerDeck.DeckController == null)
+                playerDeck.DeckController = GameSettings.Instance.AiControlledPlayer ? new AI(playerDeck) : (DeckController)new PlayerController(playerDeck);
             if (enemyDeck.DeckController == null)
                 enemyDeck.DeckController = new AI(enemyDeck);
+
+            PlayerStartingDeck = playerDeck.AllCreatures();
+            EnmStartDeck = enemyDeck.AllCreatures();
+            PlayerCr = playerDeck.CR;
+            EnemyCr = enemyDeck.CR;
 
             CombatAutoResolver.StartCombat(playerDeck, enemyDeck);
 
@@ -128,5 +150,35 @@ namespace GameLogic
 
             return cardsInZone;
         }
+
+#if UNITY_EDITOR
+        private void ReevaluateCardPerformance(List<Card> cards, float deckCR, float enmCr,bool won)
+        {
+            float value = 0f;
+
+            if(won)
+            {
+                var relation = enmCr / deckCR;
+
+                if (relation < 0.75f)
+                    return;
+
+                value = relation;
+            }
+            else
+            {
+                var relation = deckCR / enmCr;
+
+
+                if (relation < 0.75f)
+                    return;
+
+                value = -relation;
+            }
+            foreach (var c in cards)
+                c.Creature.Performance += value;
+
+        }
+#endif
     }
 }

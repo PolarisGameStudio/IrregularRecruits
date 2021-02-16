@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Lenny
+  m_Name: CarnivorousScareCrow
   m_EditorClassIdentifier: 
-  name: Lenny
+  name: Carnivorous Scarecrow
   Rarity: 1
-  Locked: 0
-  Image: {fileID: 21300000, guid: e8f89a02c9a7b234fac4eeb729f2cd3d, type: 3}
+  Locked: 1
+  Image: {fileID: 21300000, guid: 63e103f9d57986640a2388076582466a, type: 3}
   IconImage: {fileID: 0}
   Attack: 2
-  Health: 20
-  Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 37e0ff5f9a234fa4693f02fcb7e5fe8e, type: 2}
-  CR: 44
-  Enabling: 0000000005000000
+  Health: 18
+  Traits: []
+  SpecialAbility: {fileID: 11400000, guid: 974a584834358394390e8b1ada7ac4d3, type: 2}
+  CR: 30
+  Enabling: 04000000
   Payoff: 
-  Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
+  Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
+  Performance: 0

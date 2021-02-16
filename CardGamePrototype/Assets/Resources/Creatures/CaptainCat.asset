@@ -25,3 +25,4 @@ MonoBehaviour:
   Enabling: 0300000006000000
   Payoff: 0300000006000000
   Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  Performance: 0

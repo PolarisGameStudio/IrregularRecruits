@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: ScareCrow
+  m_Name: FleshGolem
   m_EditorClassIdentifier: 
-  name: Scarecrow
+  name: Flesh Golem
   Rarity: 1
-  Locked: 1
-  Image: {fileID: 21300000, guid: 63e103f9d57986640a2388076582466a, type: 3}
-  IconImage: {fileID: 0}
-  Attack: 2
+  Locked: 0
+  Image: {fileID: 21300000, guid: 7d833ef2a90604b40b29d5bf30260c1c, type: 3}
+  IconImage: {fileID: 21300000, guid: 6c6cc97c6c6df8f449c6c651f0371ddd, type: 3}
+  Attack: 4
   Health: 18
-  Traits: []
-  SpecialAbility: {fileID: 11400000, guid: 974a584834358394390e8b1ada7ac4d3, type: 2}
-  CR: 30
-  Enabling: 04000000
+  Traits:
+  - {fileID: 11400000, guid: 29981a7f06d8de94d9408f8bee84825d, type: 2}
+  - {fileID: 11400000, guid: b2c3f1899a4bbdf499638d01ff53e368, type: 2}
+  SpecialAbility: {fileID: 0}
+  CR: 22
+  Enabling: 040000000700000008000000
   Payoff: 
   Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
+  Performance: 0
