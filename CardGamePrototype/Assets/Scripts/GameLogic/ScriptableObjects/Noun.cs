@@ -209,8 +209,7 @@ namespace GameLogic
                 case Deck.Zone.Battlefield:
                     return str;
                 case Deck.Zone.Graveyard:
-
-                    if (triggerAction == TriggerType.DIES)
+                    if (triggerAction == TriggerType.DIES )
                         return str;
                     return str + ", that is dead"; //TODO: remove. just for debugging now
                 case Deck.Zone.Hand:

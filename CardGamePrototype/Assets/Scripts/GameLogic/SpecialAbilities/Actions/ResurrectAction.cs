@@ -9,6 +9,8 @@ namespace GameLogic
 
         public override string Description(string target, int amount, Creature summon)
         {
+            target = target.Replace(", that is dead", "");
+
             return $"resurrect {target} with {amount} health";
         }
 

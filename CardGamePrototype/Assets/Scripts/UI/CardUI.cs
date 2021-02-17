@@ -270,6 +270,9 @@ namespace UI
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (!BeingDragged)
+                return;
+
             OnDragEnd.Invoke();
 
             BeingDragged = false;

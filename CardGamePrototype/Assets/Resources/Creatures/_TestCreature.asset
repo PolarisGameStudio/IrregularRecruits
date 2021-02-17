@@ -20,7 +20,7 @@ MonoBehaviour:
   Attack: 0
   Health: 5
   Traits: []
-  SpecialAbility: {fileID: 11400000, guid: 90d8579e713561b40a9973649eda49e7, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: a5997b1fb222fdd4d817331e560eb79a, type: 2}
   CR: 35
   Enabling: 02000000
   Payoff: 

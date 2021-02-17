@@ -8,7 +8,7 @@ namespace GameLogic
 
         internal override string Description(string instigatorString)
         {
-            return $"When {instigatorString } kills a minion";
+            return $"When {instigatorString } kills";
         }
 
         internal override float GetValue()

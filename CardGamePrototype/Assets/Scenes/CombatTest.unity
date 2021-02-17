@@ -1862,6 +1862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextCombatButton: {fileID: 867765511}
+  ShopBetweenBattles: 0
   TestCreature: {fileID: 11400000, guid: d7196563ce6a9594cabb1ead488bd9a4, type: 2}
   TestHero: {fileID: 0}
 --- !u!1001 &1613703174279177226
