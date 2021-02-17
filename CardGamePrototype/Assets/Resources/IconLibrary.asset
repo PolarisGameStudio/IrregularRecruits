@@ -41,3 +41,5 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: f831f09221abff24da62d8db1f395b41, type: 3}
   - ActionType: 13
     Sprite: {fileID: 21300000, guid: d08808bbbecdafd4da3ea706c51f5de7, type: 3}
+  - ActionType: 14
+    Sprite: {fileID: 21300000, guid: 72450c8078d595948a2f9824282f69d0, type: 3}

@@ -17,6 +17,7 @@
         Copy,
         GainEnergy,
         Rally,
+        GainGold,
 
         COUNT,
     }

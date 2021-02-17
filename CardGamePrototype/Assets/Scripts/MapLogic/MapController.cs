@@ -19,6 +19,7 @@ namespace MapLogic
         public List<MapNode> Nodes = new List<MapNode>();
         public MapNode CurrentNode;
 
+        //TODO: only use event.OnPlayerGoldAdd
         public class AmountEvent : UnityEvent<int> { }
         public AmountEvent OnPlayerGoldUpdate = new AmountEvent();
 
