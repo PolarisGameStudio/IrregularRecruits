@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: 
   Icon: {fileID: 0}
   ResultingAction:
-    ActionType: 0
+    ActionType: 14
     TargetCount: 0
     Target:
       Character: 0
@@ -24,15 +24,15 @@ MonoBehaviour:
       DamageState: 0
       Race: 0
       Trait: {fileID: 0}
-    Amount: 0
+    Amount: 5
     Summons: {fileID: 0}
   Value: 0
   TriggerCondition:
     Subjekt:
       Character: 0
-      Location: 0
+      Location: 1
       Relationship: 0
       DamageState: 0
       Race: 0
       Trait: {fileID: 0}
-    TriggerAction: 0
+    TriggerAction: 4
