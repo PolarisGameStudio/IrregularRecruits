@@ -5,9 +5,12 @@ using UnityEngine;
 using GameLogic;
 using Event = GameLogic.Event;
 using UnityEngine.Events;
+using System;
+using Random = UnityEngine.Random;
 
 namespace MapLogic
 {
+
     public class Shop 
     {
         public Race VillageType;
@@ -95,10 +98,11 @@ namespace MapLogic
 
             if(MapController.Instance.PlayerGold >= sale.Item2)
             {
-                MapController.Instance.PlayerGold -= sale.Item2;
+                OnOffer.Remove(sale);
+
                 BattleManager.Instance.PlayerDeck.AddCard(new Card(sale.Item1));
 
-                OnOffer.Remove(sale);
+                MapController.Instance.PlayerGold -= sale.Item2;
 
                 return true;
             }

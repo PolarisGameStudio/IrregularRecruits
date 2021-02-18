@@ -78,7 +78,6 @@ namespace UI
 
         public void ShowNewCards(Shop shop)
         {
-            Debug.Log("Showing new cards");
             
             OnReload.Invoke();
             OnReload.RemoveAllListeners();
@@ -126,6 +125,19 @@ namespace UI
                 card.Interactable = able;
                 card.PriceText.color = able ? Color.white : Color.red;
             }
+
+
+            var strategies = ShopRecommendation.GetTopStrategies(BattleManager.Instance.PlayerDeck);
+
+            var recommendation = ShopRecommendation.GetRecommendation(ShowingShop, BattleManager.Instance.PlayerDeck, MapController.Instance.PlayerGold);
+
+            var str = "Current LEading strategies: ";
+
+            foreach (var strat in strategies)
+                str += strat.Key +"(" + strat.Value + ")";
+
+            Debug.Log(str); 
+            Debug.Log("AI recommending: " +recommendation.Item1 + ": "+recommendation.Item2);
         }
 
         public void BuyCard(CardUI card)

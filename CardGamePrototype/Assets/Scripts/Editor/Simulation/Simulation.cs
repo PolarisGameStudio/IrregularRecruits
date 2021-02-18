@@ -201,7 +201,7 @@ namespace Simulation
             {
                 wins++;
 
-                GoShopping(new Shop(null));
+                GoShopping(new Shop(null),gc.PlayerDeck);
 
                 gc.NextCombat();
             }
@@ -237,14 +237,19 @@ namespace Simulation
             return result;
         }
 
-        private static void GoShopping(Shop shop)
+        private static void GoShopping(Shop shop,Deck deck)
         {
-            System.Func<System.Tuple<Creature, int>, bool> canAffordCreature = opts => opts.Item2 <= MapController.Instance.PlayerGold;
 
-            while (shop.OnOffer.Any(canAffordCreature))
+            System.Tuple<ShopChoice, Creature> recommendation = ShopRecommendation.GetRecommendation(shop, deck, MapController.Instance.PlayerGold);
+
+            while ( recommendation.Item1 != ShopChoice.NoAction)
             {
-                Creature purchase = shop.OnOffer.First(canAffordCreature).Item1;
-                shop.Buy(purchase);
+                if (recommendation.Item1 == ShopChoice.Reroll)
+                    shop.Reroll();
+                else 
+                    shop.Buy(recommendation.Item2);
+
+                recommendation = ShopRecommendation.GetRecommendation(shop, deck, MapController.Instance.PlayerGold);
             }
         }
 

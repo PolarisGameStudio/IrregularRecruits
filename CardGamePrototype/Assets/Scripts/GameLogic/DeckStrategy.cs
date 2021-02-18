@@ -12,6 +12,7 @@
         Summon,
         Ferocity,
         Lifedrain,
-        GoWide
+        GoWide,
+        COUNT
     }
 }
