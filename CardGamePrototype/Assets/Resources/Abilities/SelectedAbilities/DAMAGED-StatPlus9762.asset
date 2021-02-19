@@ -12,18 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: DAMAGED-StatPlus9762
   m_EditorClassIdentifier: 
+  Name: 
+  Icon: {fileID: 0}
   ResultingAction:
     ActionType: 2
     TargetCount: 1
     Target:
-      Character: 0
+      Character: 3
       Location: 1
       Relationship: 0
       DamageState: 0
-      Race: 1
+      Race: 0
+      Trait: {fileID: 0}
     Amount: 1
     Summons: {fileID: 0}
-  Value: 5.4
+  Value: 8
   TriggerCondition:
     Subjekt:
       Character: 0
@@ -31,4 +34,5 @@ MonoBehaviour:
       Relationship: 1
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     TriggerAction: 5

@@ -50,7 +50,7 @@ namespace MapLogic
                 //reroll if you got enough money and a solid strategy
                 var minmoneyToReroll = 40 + shop.RerollPrice;
 
-                if (money >= minmoneyToReroll && topStrategies.Any(s =>s.Value > 10))
+                if (money >= minmoneyToReroll && topStrategies.Any(s =>s.Value >= 20))
                     return new Tuple<ShopChoice, Creature>(ShopChoice.Reroll, null);
 
                 //otherwise buy the best you can afford

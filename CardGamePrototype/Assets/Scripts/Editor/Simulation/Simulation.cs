@@ -52,14 +52,16 @@ namespace Simulation
         public struct GameRunResult
         {
             public string Deck;
+            public string StartingDeckStrategies; 
             public List<int> Runs;
             public float AverageRun;
             public int HighestRun;
             public int LowestRun;
 
-            public GameRunResult(string deck) : this()
+            public GameRunResult(Deck deck) : this()
             {
-                Deck = deck;
+                Deck = deck.DeckObject. name;
+                StartingDeckStrategies = ShopRecommendation.GetTopStrategies(deck).Select(d=> $"{d}").Aggregate("",(s,s2)=> s+s2);
                 Runs = new List<int>();
                 AverageRun = 0;
                 HighestRun = int.MinValue;
@@ -114,7 +116,7 @@ namespace Simulation
             {
                 var d = Instance.DecksToSimulate[i];
 
-                var result = new GameRunResult(d.name);
+                var result = new GameRunResult(new Deck(d));
 
                 for (int j = 0; j < Instance.BattlesToSimulate; j++)
                 {
@@ -130,7 +132,11 @@ namespace Simulation
             if (Instance.DecksToSimulate.Count < 1)
                 Debug.LogError("no decks to simulate. Are you using the correct scene?");
 
-            var x = BattleManager.Instance;
+            //var x = BattleManager.Instance;
+            Event.ResetEvents();
+            Shop.ResetEvents();
+
+            BattleManager.Init();
 
             GameSettings.Instance.AiControlledPlayer = true;
 
@@ -138,7 +144,7 @@ namespace Simulation
             {
                 var d = Instance.DecksToSimulate[i];
 
-                var result = new GameRunResult(d.name);
+                var result = new GameRunResult(new Deck(d));
 
                 for (int j = 0; j < Instance.BattlesToSimulate; j++)
                 {

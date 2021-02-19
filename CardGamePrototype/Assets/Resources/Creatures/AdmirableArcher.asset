@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: HumanArcher
+  m_Name: AdmirableArcher
   m_EditorClassIdentifier: 
-  name: Human Archer
+  name: Admirable Archer
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: b150e8222c0d4aa40b914e29eab4fcc9, type: 3}
@@ -21,9 +21,9 @@ MonoBehaviour:
   Health: 12
   Traits:
   - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
-  SpecialAbility: {fileID: 0}
+  SpecialAbility: {fileID: 11400000, guid: 550a456a659028e4fb4d2b49e045aba5, type: 2}
   CR: 19
   Enabling: 0200000001000000
-  Payoff: 
+  Payoff: 01000000
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
-  Performance: 0
+  Performance: -150.01248

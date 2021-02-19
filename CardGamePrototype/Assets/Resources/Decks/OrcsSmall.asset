@@ -17,10 +17,10 @@ MonoBehaviour:
   Creatures:
   - {fileID: 11400000, guid: 3d22132945200974697f8c2fac041437, type: 2}
   - {fileID: 11400000, guid: 3d22132945200974697f8c2fac041437, type: 2}
-  - {fileID: 11400000, guid: 34fd9ac41cebe444fad39de131e96caf, type: 2}
+  - {fileID: 11400000, guid: 0f1d9e6f27e6d224b866717b16ca74e3, type: 2}
   - {fileID: 11400000, guid: fe8a24af4650c324da03fdcfc0adaa5d, type: 2}
-  - {fileID: 11400000, guid: d93889cdff1801f449148d0c7a577feb, type: 2}
-  - {fileID: 11400000, guid: fe8a24af4650c324da03fdcfc0adaa5d, type: 2}
+  - {fileID: 11400000, guid: 6239fdedfad930944b315ce8c3489afa, type: 2}
+  - {fileID: 11400000, guid: 6239fdedfad930944b315ce8c3489afa, type: 2}
   DeckIcon: {fileID: 0}
   DeckImage: {fileID: 0}
   FriendRaces:

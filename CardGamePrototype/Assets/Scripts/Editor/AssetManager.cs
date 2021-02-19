@@ -114,9 +114,25 @@ public class AssetManager
         //    }
         //}
 
-        foreach (var race in races)
+        //foreach (var race in races)
+        //{
+        //    Debug.Log($"{race.name}: {creatures.Count(c => c.Race == race)}");
+        //}
+
+        foreach(var creature in CreatureLibrary.Instance.AllCreatures)
         {
-            Debug.Log($"{race.name}: {creatures.Count(c => c.Race == race)}");
+            if (creature.Enabling.Contains(DeckStrategy.Ferocity) & !CreatureLibrary.Instance.ShopCreatures.Contains(creature))
+                CreatureLibrary.Instance.ShopCreatures.Add(creature);
+        }
+
+        for (int i = 0; i < (int) DeckStrategy.COUNT; i++)
+        {
+            var strat = (DeckStrategy) i;
+
+            Debug.Log($"{strat} Enablers: {CreatureLibrary.Instance.ShopCreatures.Count(c => c.Enabling.Contains(strat))}");
+            Debug.Log($"{strat} PayOffs: {CreatureLibrary.Instance.ShopCreatures.Count(c => c.Payoff.Contains(strat))}");
+
+
         }
 
         AssetDatabase.Refresh();

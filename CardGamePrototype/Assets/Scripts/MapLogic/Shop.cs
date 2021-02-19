@@ -38,7 +38,11 @@ namespace MapLogic
             OnShopOpen.Invoke(this);
         }
 
-
+        public static void ResetEvents()
+        {
+            OnShopOpen.RemoveAllListeners();
+            OnShopReroll.RemoveAllListeners();
+        }
 
         public void Reroll()
         {
@@ -78,7 +82,7 @@ namespace MapLogic
                 else if (choice == ShopOptionType.FriendRace && VillageType && VillageType.FriendRaces.Length > 0)
                     forSale = CreatureLibrary.Instance.GetCreature(VillageType.FriendRaces[Random.Range(0, VillageType.FriendRaces.Length)]);
                 else
-                    forSale = CreatureLibrary.Instance.GetCreature();
+                    forSale = CreatureLibrary.Instance.GetShopCreature();
 
                 price = (int)( forSale.CR * Random.Range(0.5f, 1.2f));
 

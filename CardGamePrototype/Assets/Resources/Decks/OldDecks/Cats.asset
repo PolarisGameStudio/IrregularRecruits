@@ -32,8 +32,8 @@ MonoBehaviour:
   DeckIcon: {fileID: 21300000, guid: 829193eec1da30748b2ac27ef8cfe0ad, type: 3}
   DeckImage: {fileID: 21300000, guid: 0f3a61879da8b23469c0b394b46e80f0, type: 3}
   FriendRaces:
-  - {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
   EnemyRaces:
-  - {fileID: 11400000, guid: 4728fa16fe828ca41a23864bdfa561af, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}

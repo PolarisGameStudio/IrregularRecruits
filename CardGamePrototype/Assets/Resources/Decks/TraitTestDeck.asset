@@ -30,5 +30,3 @@ MonoBehaviour:
   EnemyRaces:
   - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
   - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
-  - {fileID: 11400000, guid: 5635c48887d99084a9876306e16e608b, type: 2}
-  - {fileID: 11400000, guid: 619f5f8e2b0cad94a8f23de94017640a, type: 2}

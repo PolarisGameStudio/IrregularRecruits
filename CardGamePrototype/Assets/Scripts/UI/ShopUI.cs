@@ -69,7 +69,7 @@ namespace UI
         {
             UIController.Instance.Open(this);
 
-            RaceWatermark.sprite = shop.VillageType.Icon;
+            RaceWatermark.sprite = shop.VillageType?.Icon;
 
             ShowingShop = shop;
 

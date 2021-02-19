@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208fe8f5a71c99046bf91a49e99c3049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShopRace: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  ShopRace: {fileID: 0}
   ShopRaces: []
   PlayerDeck: {fileID: 11400000, guid: fba9fffeff43e994187e725c52de51e3, type: 2}
   PlayerHero: {fileID: 11400000, guid: 858903198a0319143989fa1810931cde, type: 2}

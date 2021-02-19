@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,7 +12,7 @@ namespace GameLogic
         public Race[] AllRaces;
         public Race[] EnemyRaces;
         public Creature[] AllCreatures;
-        public Creature[] ShopRaces;
+        public List<Creature> ShopCreatures;
 
         public Creature GetCreature(Race race, bool includeUniques = true)
         {
@@ -19,9 +20,14 @@ namespace GameLogic
 
             if (!includeUniques)
                 selectables = selectables.Where(c => c.Rarity != Creature.RarityType.Unique).ToList();
+            
+            return TakeRandom(selectables);
 
+        }
+
+        private static Creature TakeRandom(List<Creature> selectables)
+        {
             return selectables[Random.Range(0, selectables.Count())];
-
         }
 
         public Creature GetCreature(bool includeEnemies = false)
@@ -32,6 +38,11 @@ namespace GameLogic
 
             return GetCreature(races[Random.Range(0, races.Length)]);
 
+        }
+
+        public Creature GetShopCreature()
+        {
+            return TakeRandom(ShopCreatures);
         }
     }
 
