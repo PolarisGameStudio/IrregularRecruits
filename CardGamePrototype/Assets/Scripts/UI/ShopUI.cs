@@ -150,8 +150,6 @@ namespace UI
                 
                 StartCoroutine(BuyAnimation(card));
             }
-
-            Debug.Log($"buygin {card}, success: {result}");
         }
 
         private IEnumerator BuyAnimation(CardUI card)
