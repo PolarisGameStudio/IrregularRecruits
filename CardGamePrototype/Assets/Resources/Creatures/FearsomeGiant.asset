@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: FearsomeGiant
   m_EditorClassIdentifier: 
-  name: FearsomeGiant
+  name: Fearsome Giant
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: e8f89a02c9a7b234fac4eeb729f2cd3d, type: 3}

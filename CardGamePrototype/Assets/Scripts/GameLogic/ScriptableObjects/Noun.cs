@@ -140,13 +140,13 @@ namespace GameLogic
                 case CharacterTyp.Any:
                     if (count == Count.One)
                         str += "a ";
-                    else
+                    else if(count != Count.All)
                         str += count.ToString() + " ";
                     break;
                 case CharacterTyp.Other:
                     if (count == Count.One)
                         str += "another ";
-                    else
+                    else if (count != Count.All)
                         str += count.ToString() + " other ";
                     break;
             }

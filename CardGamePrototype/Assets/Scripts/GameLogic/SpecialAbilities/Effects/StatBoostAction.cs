@@ -7,7 +7,7 @@ namespace GameLogic
 
         public override string Description(string target, int amount, Creature summon)
         {
-            return $"{target} gain {amount} Attack and Health";
+            return $"{target} gain {amount}/{amount}";
         }
 
         public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)

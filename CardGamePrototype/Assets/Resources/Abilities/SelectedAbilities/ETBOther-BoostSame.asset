@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
-  m_Name: ETB-Heal2473
+  m_Name: ETBOther-BoostSame
   m_EditorClassIdentifier: 
+  Name: 
+  Icon: {fileID: 0}
   ResultingAction:
-    ActionType: 5
+    ActionType: 2
     TargetCount: 1
     Target:
-      Character: 0
+      Character: 2
       Location: 1
       Relationship: 1
-      DamageState: 1
+      DamageState: 0
       Race: 1
-    Amount: 2
+      Trait: {fileID: 0}
+    Amount: 1
     Summons: {fileID: 0}
   Value: 0.55
   TriggerCondition:
@@ -31,4 +34,5 @@ MonoBehaviour:
       Relationship: 0
       DamageState: 0
       Race: 2
+      Trait: {fileID: 0}
     TriggerAction: 4

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: PowerDemon
+  m_Name: DemonRepressedCowardice
   m_EditorClassIdentifier: 
-  name: Power Demon
+  name: Demon of Reined Fear
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: 8d113f5f8f925dd46a90826a80d98baf, type: 3}
   IconImage: {fileID: 0}
   Attack: 5
-  Health: 10
+  Health: 17
   Traits: []
-  SpecialAbility: {fileID: 11400000, guid: 72112356ddd968f40b3a9a3242d4d5ac, type: 2}
-  CR: 21
+  SpecialAbility: {fileID: 11400000, guid: 329260c2634c24f43bd7d83ca25749d4, type: 2}
+  CR: 50
   Enabling: 
-  Payoff: 
+  Payoff: 08000000
   Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
-  Performance: 34.859993
+  Performance: 0
