@@ -140,7 +140,7 @@ namespace GameLogic
                 case CharacterTyp.Any:
                     if (count == Count.One)
                         str += "a ";
-                    else if(count != Count.All)
+                    else 
                         str += count.ToString() + " ";
                     break;
                 case CharacterTyp.Other:
@@ -174,6 +174,10 @@ namespace GameLogic
                     break;
             }
 
+            if (Trait != null)
+                str +=  Trait.name + " ";
+
+
             switch (Race)
             {
                 case RaceType.Any:
@@ -187,8 +191,6 @@ namespace GameLogic
                     break;
             }
 
-            if (Trait != null)
-                str += " with " + Trait.name;
 
             switch (Location)
             {
