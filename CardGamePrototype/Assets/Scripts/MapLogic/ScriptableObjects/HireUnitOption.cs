@@ -76,7 +76,7 @@ namespace MapLogic
 
             Debug.Log(Units.Select(c=>c.name).Aggregate("Choose between ",(res,next) => res + "; "+ next));
 
-            Event.OnHireMinions.Invoke(selected);
+            Event.OnHireUnits.Invoke(selected);
         }
 
 

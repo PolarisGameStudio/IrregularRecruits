@@ -7,7 +7,7 @@ using Event = GameLogic.Event;
 
 namespace UI
 {
-    public class AddMinionScreen : Singleton<AddMinionScreen>
+    public class AddUnitScreen : Singleton<AddUnitScreen>
     {
         public GameObject Holder;
         public Image DeckIcon;
@@ -18,10 +18,10 @@ namespace UI
 
         private void Start()
         {
-            Event.OnHireMinions.AddListener(SetupChoice);
+            Event.OnHireUnits.AddListener(SetupChoice);
         }
 
-        public static void SetupMinionScreen(Deck deck)
+        public static void SetupUnitScreen(Deck deck)
         {
             Instance.SetupDeckChoice(deck);
         }

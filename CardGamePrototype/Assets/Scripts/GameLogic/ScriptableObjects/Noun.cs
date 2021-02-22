@@ -177,7 +177,7 @@ namespace GameLogic
             switch (Race)
             {
                 case RaceType.Any:
-                    str += "minion" + (count == Count.One ? "" : "s");
+                    str += "Unit" + (count == Count.One ? "" : "s");
                     break;
                 case RaceType.Same:
                     str += _owner.GetRace()?.name + (count == Count.One ? "" : "s");

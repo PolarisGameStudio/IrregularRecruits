@@ -22,7 +22,7 @@ namespace GameLogic
             return Name;
         }
 
-        //whether the ability can trigger, e.g. the owner if minion, is on the battlefield
+        //whether the ability can trigger, e.g. the owner if Unit, is on the battlefield
         internal abstract bool IsActive();
     }
 }
