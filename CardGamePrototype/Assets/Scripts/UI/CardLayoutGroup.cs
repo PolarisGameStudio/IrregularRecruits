@@ -20,6 +20,9 @@ namespace UI
         public bool PointOnly;
         public AnimationCurve XPosition;
         public AnimationCurve YPosition;
+
+        public int FirstCardRotation;
+        public int LastCardRotation;
         private RectTransform RectTransform;
 
         [Header("The layout is divided into this minimum of position")]
@@ -31,7 +34,19 @@ namespace UI
 
         private List<CardUI> ChildCards = new List<CardUI>();
 
-        private Vector2[] ChildDesiredPositions;
+        struct PosAndRotation
+        {
+            public Vector2 Position;
+            public float ZRotation;
+
+            public PosAndRotation(Vector2 pos,float rot = 0f) 
+            {
+                Position = pos;
+                ZRotation = rot;
+            }
+        }
+
+        private PosAndRotation[] ChildDesiredPositions;
         private Vector2 StartPos, EndPos;
 
         public static UnityEvent OnSwitchingPlace = new UnityEvent();
@@ -72,6 +87,7 @@ namespace UI
         {
             ChildCards.Remove(cardUI);
 
+
             UpdateChildrenPositions();
         }
 
@@ -82,7 +98,7 @@ namespace UI
             int count = ChildCards.Count;
 
             //should the movements be set in 
-            ChildDesiredPositions = new Vector2[count];
+            ChildDesiredPositions = new PosAndRotation[count];
 
             Vector2 middle = RectTransform.position;
             //var bottomLeft = middle - RectTransform.sizeDelta / 2;
@@ -111,13 +127,14 @@ namespace UI
                 if (card.BeingDragged) continue;
 
                 //if (!PointOnly)
-                    card.transform.LeanMove(desiredPos, UnityEngine.Random.Range(0.1f, 0.3f));
+                    card.transform.LeanMove(desiredPos.Position, UnityEngine.Random.Range(0.1f, 0.3f));
+                card.transform.LeanRotateZ(desiredPos.ZRotation, UnityEngine.Random.Range(0.1f, 0.3f));
             }
         }
 
-        private Vector2 EvaluatePosition(int index)
+        private PosAndRotation EvaluatePosition(int index)
         {
-            if (PointOnly) return (Vector2)RectTransform.position + Random.insideUnitCircle *0.1f;
+            if (PointOnly) return new PosAndRotation( (Vector2)RectTransform.position + Random.insideUnitCircle *0.1f);
 
             if (index < 0) index = 0;
 
@@ -146,7 +163,9 @@ namespace UI
                 Mathf.LerpUnclamped(StartPos.x, EndPos.x, XPosition.Evaluate(relativePos)),
                 Mathf.LerpUnclamped(StartPos.y, EndPos.y, YPosition.Evaluate(relativePos)));
 
-            return vector2;
+            var rot = Mathf.LerpUnclamped(FirstCardRotation, LastCardRotation, relativePos);
+
+            return new PosAndRotation(vector2,rot);
         }
 
 
@@ -185,7 +204,7 @@ namespace UI
                 }
             }
             //closer to the before position
-            else if (index > 0 && (currentDesiredPos - cardPos).sqrMagnitude > (ChildDesiredPositions[index - 1] - cardPos).sqrMagnitude)
+            else if (index > 0 && (currentDesiredPos.Position - cardPos).sqrMagnitude > (ChildDesiredPositions[index - 1].Position - cardPos).sqrMagnitude)
             {
                 OnSwitchingPlace.Invoke();
 
@@ -197,7 +216,7 @@ namespace UI
                 MoveCardsToDesiredPositions();
             }
             //closer to the after position
-            else if (index < ChildCards.Count - 1 && (currentDesiredPos - cardPos).sqrMagnitude > (ChildDesiredPositions[index + 1] - cardPos).sqrMagnitude)
+            else if (index < ChildCards.Count - 1 && (currentDesiredPos.Position - cardPos).sqrMagnitude > (ChildDesiredPositions[index + 1].Position - cardPos).sqrMagnitude)
             {
                 OnSwitchingPlace.Invoke();
 
@@ -214,7 +233,7 @@ namespace UI
 
         internal Vector2 GetFirstPosition()
         {
-            return EvaluatePosition(0);
+            return EvaluatePosition(0).Position;
         }
 
         internal bool HasChild(CardUI card)

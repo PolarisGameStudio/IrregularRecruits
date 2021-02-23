@@ -679,7 +679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4636187848018254339
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1176,10 +1176,14 @@ MonoBehaviour:
   NameText: {fileID: 3647378737615735766}
   DescriptionText: {fileID: 8750236915218075657}
   PriceText: {fileID: 0}
+  DragRotator: {fileID: 7981517690690653867}
   InstantiatedObjects: []
   AlwaysFaceUp: 0
   Interactable: 1
   HealthValueDisplayed: 0
+  CurrentZoneLayout: {fileID: 0}
+  CanTransitionTo: {fileID: 0}
+  LayoutIndex: 0
 --- !u!114 &4991445251926434332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,6 +1216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f37e8ed475c62b45a4665ec167e253d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RotationLocked: 0
 --- !u!1 &3647378737615735764
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,7 +2103,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -5, y: -2.5}
+  m_AnchoredPosition: {x: -15, y: -2.5}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1491640176180842947
@@ -3251,7 +3256,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: 15, y: 0}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4335141596764076605

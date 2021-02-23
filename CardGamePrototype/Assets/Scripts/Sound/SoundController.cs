@@ -35,6 +35,8 @@ namespace Sound
             Event.OnGameOver.AddListener(() => PlayStinger(SoundBank.Stinger.GameLoss));
             Event.OnGameWin.AddListener(() => PlayStinger(SoundBank.Stinger.GameWin));
             Shop.OnShopOpen.AddListener(s => ChangeMusic(SoundBank.Music.Shop));
+            Shop.OnShopReroll.AddListener(i => PlayUISound(SoundBank.UiSound.ShopReroll));
+            Shop.OnShopPurchase.AddListener(i => PlayUISound(SoundBank.UiSound.PurchaseUnit));
 
             BattleUI.OnBattleBegin.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
 

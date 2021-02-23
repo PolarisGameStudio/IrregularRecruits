@@ -24,6 +24,7 @@ namespace MapLogic
         public class ShopEvent : UnityEvent<Shop> { }
         public static ShopEvent OnShopOpen = new ShopEvent();
         public static ShopEvent OnShopReroll = new ShopEvent();
+        public static ShopEvent OnShopPurchase = new ShopEvent();
 
         public Shop(Race villageType)
         {
@@ -42,6 +43,7 @@ namespace MapLogic
         {
             OnShopOpen.RemoveAllListeners();
             OnShopReroll.RemoveAllListeners();
+            OnShopPurchase.RemoveAllListeners();
         }
 
         public void Reroll()
@@ -102,6 +104,8 @@ namespace MapLogic
 
             if(MapController.Instance.PlayerGold >= sale.Item2)
             {
+                OnShopPurchase.Invoke(this);
+
                 OnOffer.Remove(sale);
 
                 BattleManager.Instance.PlayerDeck.AddCard(new Card(sale.Item1));

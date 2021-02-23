@@ -22,7 +22,9 @@ namespace Sound
             CardSwitchPlace,
             CardHighlight,
             CardLetGo,
-            HeroWalking
+            HeroWalking,
+            ShopReroll,
+            PurchaseUnit
         }
 
         public enum Stinger

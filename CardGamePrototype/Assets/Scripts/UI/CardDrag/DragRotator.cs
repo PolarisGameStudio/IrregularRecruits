@@ -14,7 +14,7 @@ public class DragRotator : MonoBehaviour
     private Vector3 m_prevPos;
     private Vector3 m_originalAngles;
 
-    private void Awake()
+    private void OnEnable()
     {
         Reset();
         SetInfo(new DragRotatorInfo());
@@ -27,6 +27,7 @@ public class DragRotator : MonoBehaviour
     {
         Vector3 position = this.transform.position;
         Vector3 vector3 = position - this.m_prevPos;
+
         if ((double)vector3.sqrMagnitude > 9.99999974737875E-05)
         {
             this.m_pitchDeg += vector3.y * this.m_info.m_PitchInfo.m_ForceMultiplier;

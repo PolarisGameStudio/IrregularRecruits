@@ -2845,6 +2845,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  FirstCardRotation: -10
+  LastCardRotation: 10
   MinimumPositions: 10
   MaximumPositions: 15
   TransitionsTo: {fileID: 0}
@@ -13025,6 +13027,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  FirstCardRotation: 0
+  LastCardRotation: 0
   MinimumPositions: 4
   MaximumPositions: 5
   TransitionsTo: {fileID: 3716480691181722876}
@@ -13128,6 +13132,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  FirstCardRotation: 0
+  LastCardRotation: 0
   MinimumPositions: 5
   MaximumPositions: 8
   TransitionsTo: {fileID: 0}
@@ -13240,6 +13246,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  FirstCardRotation: 12
+  LastCardRotation: -12
   MinimumPositions: 8
   MaximumPositions: 12
   TransitionsTo: {fileID: 9019354100244692800}
@@ -13344,6 +13352,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  FirstCardRotation: 0
+  LastCardRotation: 0
   MinimumPositions: 5
   MaximumPositions: 8
   TransitionsTo: {fileID: 0}
@@ -14043,6 +14053,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  FirstCardRotation: 0
+  LastCardRotation: 0
   MinimumPositions: 5
   MaximumPositions: 8
   TransitionsTo: {fileID: 0}
@@ -14328,6 +14340,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  FirstCardRotation: 0
+  LastCardRotation: 0
   MinimumPositions: 4
   MaximumPositions: 5
   TransitionsTo: {fileID: 0}
@@ -14507,6 +14521,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  FirstCardRotation: 0
+  LastCardRotation: 0
   MinimumPositions: 5
   MaximumPositions: 8
   TransitionsTo: {fileID: 0}
