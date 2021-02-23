@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Wraith
+  m_Name: RelentlessUnlife
   m_EditorClassIdentifier: 
-  name: Wraith
+  name: Relentless Unlife
   Rarity: 1
   Locked: 0
-  Image: {fileID: 21300000, guid: 7b80b96e5cedd154e9d983e197746dc0, type: 3}
-  IconImage: {fileID: 21300000, guid: 7e0b783698cf71c44b35abe6213436c1, type: 3}
-  Attack: 1
-  Health: 18
+  Image: {fileID: 21300000, guid: f3454c0784bae0549b36d1e2edcf416d, type: 3}
+  IconImage: {fileID: 0}
+  Attack: 4
+  Health: 15
   Traits:
-  - {fileID: 11400000, guid: 2075b1581c3413a4c8d1ac53c8aef4de, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: dbe4da5c075a26c4eb0436c4d10911ac, type: 2}
-  CR: 29
-  Enabling: 04000000
-  Payoff: 04000000
+  - {fileID: 11400000, guid: c9b29c97bdfe17e46b7515b6c49d6943, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 9b87a660655f9c148a2a92ab25e95beb, type: 2}
+  CR: 38
+  Enabling: 040000000a000000
+  Payoff: 
   Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
-  Performance: 35.844505
+  Performance: -251.97447

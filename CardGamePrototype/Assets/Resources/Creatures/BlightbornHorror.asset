@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: SlimeFace
+  m_Name: BlightbornHorror
   m_EditorClassIdentifier: 
-  name: Slime Face
+  name: Blightborn Horror
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: e1fbf1f7fda4b5c4dbe03b6093108ca3, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c9b29c97bdfe17e46b7515b6c49d6943, type: 2}
   SpecialAbility: {fileID: 0}
   CR: 17
-  Enabling: 040000000800000009000000
+  Enabling: 0400000009000000
   Payoff: 
   Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
   Performance: 34.675625

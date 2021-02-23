@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: ThievingRaptor
+  m_Name: RashidaStalkingNight
   m_EditorClassIdentifier: 
-  name: Thieving Raptor
-  Rarity: 0
+  name: Rashida Stalking Night
+  Rarity: 2
   Locked: 0
-  Image: {fileID: 21300000, guid: c84bcd839d0619d4686122971618c427, type: 3}
-  IconImage: {fileID: 21300000, guid: 02143b984a72af04b841120b131df1de, type: 3}
-  Attack: 2
-  Health: 12
+  Image: {fileID: 21300000, guid: 45aa43718b3d8974788b60693217ecff, type: 3}
+  IconImage: {fileID: 0}
+  Attack: 7
+  Health: 17
   Traits:
   - {fileID: 11400000, guid: 208dc40d35af6f54681a3f49242540d1, type: 2}
-  SpecialAbility: {fileID: 0}
-  CR: 14
-  Enabling: 
+  SpecialAbility: {fileID: 11400000, guid: 8d3c03a3886ee9a4eafa992687dac68c, type: 2}
+  CR: 50
+  Enabling: 0300000000000000
   Payoff: 
-  Race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
-  Performance: -129.91327
+  Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  Performance: -159.69527

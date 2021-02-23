@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: WerewolfStalker
+  m_Name: LuckyRam
   m_EditorClassIdentifier: 
-  name: Werewolf Hunter
+  name: Lucky Ram
   Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 45aa43718b3d8974788b60693217ecff, type: 3}
+  Image: {fileID: 21300000, guid: 782a7cabab6799c4c902150f49c59fe5, type: 3}
   IconImage: {fileID: 0}
-  Attack: 5
-  Health: 15
+  Attack: 2
+  Health: 8
   Traits:
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 8d3c03a3886ee9a4eafa992687dac68c, type: 2}
-  CR: 25
-  Enabling: 0300000000000000
-  Payoff: 
-  Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
-  Performance: -159.69527
+  SpecialAbility: {fileID: 11400000, guid: 2c569861e56acab4ca517d32243fb3b9, type: 2}
+  CR: 26
+  Enabling: 00000000
+  Payoff: 0a000000
+  Race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
+  Performance: -175.83163

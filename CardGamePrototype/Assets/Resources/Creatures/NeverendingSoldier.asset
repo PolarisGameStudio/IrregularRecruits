@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: FriendRam
+  m_Name: NeverendingSoldier
   m_EditorClassIdentifier: 
-  name: Friend Ram
+  name: Neverending Soldier
   Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 782a7cabab6799c4c902150f49c59fe5, type: 3}
-  IconImage: {fileID: 0}
+  Image: {fileID: 21300000, guid: 18cacec8b82a0f54f950498280c5b3a6, type: 3}
+  IconImage: {fileID: 21300000, guid: 9da9aff593f061844a16d4f398a6b17d, type: 3}
   Attack: 2
-  Health: 8
+  Health: 7
   Traits:
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 2c569861e56acab4ca517d32243fb3b9, type: 2}
-  CR: 26
-  Enabling: 00000000
-  Payoff: 0a000000
-  Race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
-  Performance: -175.83163
+  - {fileID: 11400000, guid: c9b29c97bdfe17e46b7515b6c49d6943, type: 2}
+  SpecialAbility: {fileID: 0}
+  CR: 11
+  Enabling: 0400000000000000
+  Payoff: 
+  Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
+  Performance: -642.6865

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: Flurryfluff
   m_EditorClassIdentifier: 
-  name: Flurryfluff
+  name: Flurryfluff the Forgotten
   Rarity: 2
   Locked: 0
   Image: {fileID: 21300000, guid: 4306c9a88d5223f4f9433e9aec3fdf8b, type: 3}

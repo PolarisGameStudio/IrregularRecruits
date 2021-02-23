@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: BlueWolf
+  m_Name: BluemaneWolf
   m_EditorClassIdentifier: 
-  name: Blue Wolf
+  name: Bluemane Wolf
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: 62b55471c9c827544947592dc40a744a, type: 3}
   IconImage: {fileID: 0}
   Attack: 3
   Health: 14
-  Traits: []
+  Traits:
+  - {fileID: 11400000, guid: 1ab98939c40df894491caa5d89b806c2, type: 2}
   SpecialAbility: {fileID: 11400000, guid: 6fb6ff52ffc740a4786949f211a7827d, type: 2}
   CR: 56
   Enabling: 

@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Troll
+  m_Name: DuskthornDarkElf
   m_EditorClassIdentifier: 
-  name: Troll
-  Rarity: 1
+  name: Duskthorn Dark Elf
+  Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: a209f9cadbf3d3e43ab015e2561eadc4, type: 3}
-  IconImage: {fileID: 21300000, guid: f0a89524eace038438f7a36391f7523b, type: 3}
+  Image: {fileID: 21300000, guid: 81419acd712b5b34f9a7a448363344d3, type: 3}
+  IconImage: {fileID: 21300000, guid: 713822c4afc11e743b0d5cbd7bf9966d, type: 3}
   Attack: 4
-  Health: 18
+  Health: 15
   Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
+  - {fileID: 11400000, guid: 208dc40d35af6f54681a3f49242540d1, type: 2}
   SpecialAbility: {fileID: 0}
-  CR: 24
-  Enabling: 0000000005000000
+  CR: 12
+  Enabling: 05000000
   Payoff: 
   Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
-  Performance: -321.27902
+  Performance: -117.37635

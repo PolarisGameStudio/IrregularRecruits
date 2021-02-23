@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: OrcWarrior
+  m_Name: GoblinBeetlegnasher
   m_EditorClassIdentifier: 
-  name: Orc Warrior
+  name: Goblin Beetlebasher
   Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: fe350a7a73793794db5ace60b3bce004, type: 3}
-  IconImage: {fileID: 0}
-  Attack: 4
-  Health: 16
+  Image: {fileID: 21300000, guid: 2d4b80157f42fd04fa2e9396eb0a697a, type: 3}
+  IconImage: {fileID: 21300000, guid: 05163ee552e716c4db1d5a3bc548dd7f, type: 3}
+  Attack: 2
+  Health: 12
   Traits:
-  - {fileID: 11400000, guid: 29981a7f06d8de94d9408f8bee84825d, type: 2}
-  SpecialAbility: {fileID: 0}
-  CR: 20
-  Enabling: 0800000005000000
+  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 429d0233ee144874e82baf4869ce3cf5, type: 2}
+  CR: 18
+  Enabling: 0000000005000000
   Payoff: 
   Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
-  Performance: -500.70636
+  Performance: -257.06018

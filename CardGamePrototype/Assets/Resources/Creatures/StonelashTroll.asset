@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: SkeletonSoldier
+  m_Name: StonelashTroll
   m_EditorClassIdentifier: 
-  name: Skeleton Soldier
-  Rarity: 0
+  name: Stonelash Troll
+  Rarity: 1
   Locked: 0
-  Image: {fileID: 21300000, guid: 18cacec8b82a0f54f950498280c5b3a6, type: 3}
-  IconImage: {fileID: 21300000, guid: 9da9aff593f061844a16d4f398a6b17d, type: 3}
-  Attack: 2
-  Health: 7
+  Image: {fileID: 21300000, guid: a209f9cadbf3d3e43ab015e2561eadc4, type: 3}
+  IconImage: {fileID: 21300000, guid: f0a89524eace038438f7a36391f7523b, type: 3}
+  Attack: 4
+  Health: 18
   Traits:
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  - {fileID: 11400000, guid: c9b29c97bdfe17e46b7515b6c49d6943, type: 2}
   SpecialAbility: {fileID: 0}
-  CR: 11
-  Enabling: 0400000000000000
+  CR: 24
+  Enabling: 0000000005000000
   Payoff: 
-  Race: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
-  Performance: -642.6865
+  Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
+  Performance: -321.27902
