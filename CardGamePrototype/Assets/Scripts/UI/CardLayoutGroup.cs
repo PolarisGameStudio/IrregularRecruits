@@ -124,11 +124,12 @@ namespace UI
 
                 var desiredPos = ChildDesiredPositions[i];
 
+                card.FrontHolder.transform.LeanRotateZ(desiredPos.ZRotation, UnityEngine.Random.Range(0.1f, 0.3f));
+
                 if (card.BeingDragged) continue;
 
                 //if (!PointOnly)
-                    card.transform.LeanMove(desiredPos.Position, UnityEngine.Random.Range(0.1f, 0.3f));
-                card.transform.LeanRotateZ(desiredPos.ZRotation, UnityEngine.Random.Range(0.1f, 0.3f));
+                card.transform.LeanMove(desiredPos.Position, UnityEngine.Random.Range(0.1f, 0.3f));
             }
         }
 
