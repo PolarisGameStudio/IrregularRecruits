@@ -18,10 +18,12 @@ namespace UI
         public ImageTextEntry RaceIcon;
         public ImageTextEntry AbilityIcon;
         public ImageTextEntry TraitPrefab;
-        public Image ImageMask, Image;
+        public Image ImageMask, ImageTopCrop, ImageBottomCrop;
         public static Coroutine ShowAfterDelayRoutine;
         private Creature Creature;
+        [HideInInspector]
         public UnityEvent OnCardHighlight = new UnityEvent();
+        public RectTransform RaceTransform;
 
         private readonly List<ImageTextEntry> InstantiatedObjects = new List<ImageTextEntry>();
 
@@ -91,16 +93,20 @@ namespace UI
 
             CardTitleText.text = Creature.name;
 
-            if (Creature.IconImage)
-            {
-                Image.sprite = Creature.IconImage;
-                ImageMask.enabled = false;
-            }
-            else
-            {
-                Image.sprite = Creature.Image;
-                ImageMask.enabled = true;
-            }
+            //if (Creature.IconImage)
+            //{
+            //    Image.sprite = Creature.IconImage;
+            //    ImageMask.enabled = false;
+            //}
+            //else
+            //{
+                ImageTopCrop.sprite = ImageBottomCrop.sprite =  Creature.Image;
+
+            ImageBottomCrop.enabled = Creature.TopFocused;
+            ImageTopCrop.enabled = !Creature.TopFocused; 
+
+                //ImageMask.enabled = true;
+            //}
 
             //public TextMeshProUGUI AttackText;
             AttackText.text = //(cardUI.Card != null ? cardUI.Card.Attack.ToString("N0") :
@@ -143,6 +149,8 @@ namespace UI
                 InstantiatedObjects.Add(trait);
             }
 
+            RaceTransform?.SetAsLastSibling();
+
             var rect = GetComponent<RectTransform>();
             rect.position = cardUI.GetComponent<RectTransform>().position;
 
@@ -151,6 +159,8 @@ namespace UI
             LeanTween.scale(Instance.Holder, Vector3.one, 0.15f);
 
             Holder.SetActive(true);
+
+            Canvas.ForceUpdateCanvases();
         }
 
         public static void Hide()

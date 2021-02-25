@@ -27,3 +27,4 @@ MonoBehaviour:
   Payoff: 000000000a000000
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
   Performance: -145.91711
+  TopFocused: 1

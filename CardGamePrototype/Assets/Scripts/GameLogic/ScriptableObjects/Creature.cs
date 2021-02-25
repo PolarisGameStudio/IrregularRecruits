@@ -27,6 +27,8 @@ namespace GameLogic
 
         public float Performance;
 
+        public bool TopFocused;
+
         public enum RarityType { Common, Rare, Unique }
 
         public bool IsSummon()
