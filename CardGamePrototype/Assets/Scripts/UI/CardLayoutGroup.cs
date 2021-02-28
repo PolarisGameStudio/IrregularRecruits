@@ -129,7 +129,7 @@ namespace UI
                 if (card.BeingDragged) continue;
 
                 //if (!PointOnly)
-                card.transform.LeanMove(desiredPos.Position, UnityEngine.Random.Range(0.1f, 0.3f));
+                card.transform.LeanMove(desiredPos.Position, UnityEngine.Random.Range(0.2f, 0.5f)).setEaseOutExpo();
             }
         }
 

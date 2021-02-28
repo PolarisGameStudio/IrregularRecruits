@@ -158,6 +158,16 @@ namespace UI
 
             LeanTween.scale(Instance.Holder, Vector3.one, 0.15f);
 
+            var left = transform.position.x > 0;
+            var top = transform.position.y < 0;
+
+            var rectHolder =
+                Holder.GetComponent<RectTransform>();
+
+            rectHolder.pivot = new Vector2(left ? 1 : 0, top ? 0 : 1);
+            rectHolder.anchorMin = rectHolder.anchorMax = new Vector2(left ? 0 : 1, top ? 0 : 1);
+
+
             Holder.SetActive(true);
 
             Canvas.ForceUpdateCanvases();
