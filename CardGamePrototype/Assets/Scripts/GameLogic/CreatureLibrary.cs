@@ -10,13 +10,18 @@ namespace GameLogic
     public class CreatureLibrary : SingletonScriptableObject<CreatureLibrary>
     {
         public Race[] AllRaces;
-        public Race[] EnemyRaces;
         public Creature[] AllCreatures;
         public List<Creature> ShopCreatures;
+        public HashSet<Creature> SpawnedUniques = new HashSet<Creature>();
+
+        public void OnEnable()
+        {
+            Event.OnGameBegin.AddListener(Reset);
+        }
 
         public Creature GetCreature(Race race, bool includeUniques = true)
         {
-            var selectables = AllCreatures.Where(c => c.Race == race).ToList();
+            var selectables = AllCreatures.Where(c => c.Race == race && !c.IsSummon()).ToList();
 
             if (!includeUniques)
                 selectables = selectables.Where(c => c.Rarity != Creature.RarityType.Unique).ToList();
@@ -25,24 +30,29 @@ namespace GameLogic
 
         }
 
-        private static Creature TakeRandom(List<Creature> selectables)
+        private Creature TakeRandom(List<Creature> selectables)
         {
-            return selectables[Random.Range(0, selectables.Count())];
+            selectables = selectables.Except(SpawnedUniques).ToList();
+
+            Creature selected = selectables[Random.Range(0, selectables.Count())];
+
+            if (selected.Rarity == Creature.RarityType.Unique)
+                SpawnedUniques.Add(selected);
+            
+            return selected;
         }
 
-        public Creature GetCreature(bool includeEnemies = false)
-        {
-            var races = AllRaces;
-            if (!includeEnemies)
-                races = races.Where(r => !EnemyRaces.Contains(r)).ToArray();
-
-            return GetCreature(races[Random.Range(0, races.Length)]);
-
-        }
 
         public Creature GetShopCreature()
         {
             return TakeRandom(ShopCreatures);
+        }
+
+        public void Reset()
+        {
+            Debug.Log("resetting uniques");
+
+            SpawnedUniques.Clear();
         }
     }
 

@@ -256,7 +256,6 @@ MonoBehaviour:
   - Type: 10
     Audio:
     - {fileID: 8300000, guid: 6c209b9438944d64db78f615fc5ca53d, type: 3}
-    - {fileID: 8300000, guid: 0e743e30e2f378c46b98781b03840f31, type: 3}
   - Type: 11
     Audio:
     - {fileID: 8300000, guid: 2d338228ee1d71545962d3ca8c00ede7, type: 3}

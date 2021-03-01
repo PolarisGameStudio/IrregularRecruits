@@ -35,7 +35,7 @@ namespace GameLogic
 
         internal int XpValue()
         {
-            return Mathf.RoundToInt(creature.CR / 4f);
+            return Mathf.RoundToInt(creature.CR / 6f);
             //switch (creature.Rarity)
             //{
             //    case Creature.RarityType.Common:

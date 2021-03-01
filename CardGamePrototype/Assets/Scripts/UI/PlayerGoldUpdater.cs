@@ -60,6 +60,8 @@ namespace UI
 
         private IEnumerator IncreaseMoneyRoutine(int moneyValue, int newamount)
         {
+            yield return new WaitUntil(() => !BattleUI.Instance.BattleRunning);
+
             while(MoneyValue < newamount)
             {
                 yield return new WaitForSeconds(Random.Range(MinGoldCoinWait, MaxGoldCoinWait));

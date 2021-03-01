@@ -71,6 +71,8 @@ namespace UI
         [HideInInspector]
         public bool UILocked;
 
+        public bool BattleRunning { get; private set; }
+
         void Awake()
         {
             ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
@@ -123,6 +125,7 @@ namespace UI
                 GoldAtStartOfBattle = MapController.Instance.PlayerGold;
             }
 
+            BattleRunning = true;
             OnBattleBegin.Invoke();
         }
 
@@ -196,6 +199,7 @@ namespace UI
             }
 
             CardUIs.Clear();
+            BattleRunning = false;
 
             OnBattleFinished.Invoke();
 

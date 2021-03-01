@@ -43,6 +43,11 @@ namespace GameLogic
 
         public void AddCard(Card card)
         {
+            //unique control 
+            Creature creature = card.Creature;
+            if (creature.Rarity == Creature.RarityType.Unique && !CreatureLibrary.Instance.SpawnedUniques.Contains(creature))
+                CreatureLibrary.Instance.SpawnedUniques.Add(creature);
+
             card.InDeck = this;
             card.ChangeLocation(Deck.Zone.Library);
 
