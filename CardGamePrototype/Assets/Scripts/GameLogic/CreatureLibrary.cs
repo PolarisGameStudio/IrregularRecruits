@@ -30,9 +30,13 @@ namespace GameLogic
 
         }
 
-        private Creature TakeRandom(List<Creature> selectables)
+        public Creature TakeRandom(List<Creature> selectables,int belowCr = int.MaxValue)
         {
-            selectables = selectables.Except(SpawnedUniques).ToList();
+            var exceptUniques = selectables.Except(SpawnedUniques).ToList();
+
+            if (exceptUniques.Any()) selectables = exceptUniques;
+
+            if (selectables.Any(c => c.CR <= belowCr)) selectables = selectables.Where(c => c.CR <= belowCr).ToList();
 
             Creature selected = selectables[Random.Range(0, selectables.Count())];
 

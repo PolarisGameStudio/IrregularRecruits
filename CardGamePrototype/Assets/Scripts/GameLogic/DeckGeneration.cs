@@ -39,9 +39,7 @@ namespace GameLogic
                 if (!creatures.Any(c => c.CR <= difficultyLeft))
                     break;
 
-                var below = creatures.Where(c => c.CR <= difficultyLeft).ToList();
-
-                selected = below.OrderByDescending(b => b.CR * Random.value).First();
+                selected = CreatureLibrary.Instance.TakeRandom(creatures,CR);
 
                 var card = new Card(selected);
 

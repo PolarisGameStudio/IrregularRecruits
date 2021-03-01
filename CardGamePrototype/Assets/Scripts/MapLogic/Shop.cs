@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 
 namespace MapLogic
 {
-
     public class Shop 
     {
         public Race VillageType;
@@ -18,6 +17,7 @@ namespace MapLogic
         public List<System.Tuple<Creature,int>> OnOffer = new List<System.Tuple<Creature, int>>();
         public int RerollsLeft;
         public int RerollPrice;
+        public static Shop StandardShop;
 
 
         //shop Events
@@ -118,5 +118,6 @@ namespace MapLogic
             return false;
 
         }
+
     }
 }

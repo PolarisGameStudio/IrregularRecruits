@@ -202,5 +202,12 @@ namespace UI
             card.transform.SetParent(deckIcon.transform, true);
 
         }
+
+        internal static void OpenStandardShop()
+        {
+            if (Shop.StandardShop == null) Shop.StandardShop = new Shop(null);
+
+            Instance.SetupShop(Shop.StandardShop);
+        }
     }
 }
