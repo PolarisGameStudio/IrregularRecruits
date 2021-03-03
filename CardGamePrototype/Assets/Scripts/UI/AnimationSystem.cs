@@ -86,6 +86,8 @@ namespace UI
         //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
         public void DeathParticles(CardUI cardUI)
         {
+
+
             StartCoroutine(PlayCardFX(cardUI, DeathParticlesPrefab, 0.1f));
             OnDeath.Invoke();
         }

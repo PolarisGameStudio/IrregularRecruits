@@ -46,7 +46,7 @@ namespace UI
             Event.PlayerActionPointsChanged.AddListener(i => AddCardEvent(ActionsChanged(i)));
 
             //On Stat Change-> (Card, amount)
-            Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack, card.Damaged())));
+            Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack, card.MaxHealth)));
 
             Event.OnBattleFinished.AddListener(d => AddCardEvent(BattleUI.CleanUpUI(d)));
 

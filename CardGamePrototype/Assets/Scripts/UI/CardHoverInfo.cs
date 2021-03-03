@@ -103,23 +103,23 @@ namespace UI
                 ImageTopCrop.sprite = ImageBottomCrop.sprite =  Creature.Image;
 
             ImageBottomCrop.enabled = Creature.TopFocused;
-            ImageTopCrop.enabled = !Creature.TopFocused; 
+            ImageTopCrop.enabled = !Creature.TopFocused;
 
-                //ImageMask.enabled = true;
+            //ImageMask.enabled = true;
             //}
 
             //public TextMeshProUGUI AttackText;
-            AttackText.text = //(cardUI.Card != null ? cardUI.Card.Attack.ToString("N0") :
-                Creature.Attack.ToString("N0");
-            AttackText.color = //(cardUI.Card != null ? cardUI.AttackText.color : 
-                Color.white;
+            AttackText.text = cardUI.AttackValueDisplayed.ToString();
+            AttackText.color = cardUI.AttackValueDisplayed > Creature.Attack ? Color.green :
+                cardUI.AttackValueDisplayed < Creature.Attack ? Color.gray : Color.white;
 
             //public TextMeshProUGUI HealthText;
-            HealthText.text =
-                //(cardUI.Card != null ? cardUI.Card.CurrentHealth.ToString("N0") + "/" + cardUI.Card.MaxHealth.ToString("N0") :
-                Creature.Health.ToString("N0");
-            HealthText.color = //(cardUI.Card != null ? cardUI.HealthText.color : 
+            HealthText.text = $"{ cardUI.HealthValueDisplayed}/{cardUI.MaxHealthValueDisplayed}";
+            HealthText.color = cardUI.HealthValueDisplayed < cardUI.MaxHealthValueDisplayed ? Color.red :
+                cardUI.MaxHealthValueDisplayed > Creature.Health ? Color.green :  
+                cardUI.MaxHealthValueDisplayed < Creature.Health ? Color.gray :  
                 Color.white;
+
 
             //public ImageTextEntry RaceIcon;
             RaceIcon.Text.text = Creature.Race.name;

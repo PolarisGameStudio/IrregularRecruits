@@ -40,8 +40,11 @@ namespace UI
 
         private IntEvent OnPositionChanged = new IntEvent();
 
+        public int AttackValueDisplayed { get; private set; }
         //Not equal to Card.health, since UI may be behind
-        public int HealthValueDisplayed;
+        public int HealthValueDisplayed { get; private set; }
+        public int MaxHealthValueDisplayed { get; private set; }
+
         private Color ReducedStatsColor = new Color(0.75f, 0.75f, 0.75f);
 
         //being dragged? maybe change name
@@ -76,14 +79,14 @@ namespace UI
         public void SetCard(Card c)
         {
             UpdateCreature(c.Creature);
-            UpdateStats(c.Attack, c.CurrentHealth, c.Damaged());
+            UpdateStats(c.Attack, c.CurrentHealth, c.MaxHealth);
             OnClick.AddListener(c.Click);
             OnPositionChanged.AddListener(c.PositionChanged);
         }
         public void SetCreature(Creature c)
         {
             UpdateCreature(c);
-            UpdateStats(c.Attack, c.Health);
+            UpdateStats(c.Attack, c.Health,c.Health);
 
         }
 
@@ -161,16 +164,18 @@ namespace UI
                 CardAnimation.StatMinusAnimation.Show(amount);
         }
 
-        private void UpdateStats(int attack, int health, bool damaged = false)
+        private void UpdateStats(int attack, int health, int maxHealth)
         {
             if (!Creature) return;
 
-            UpdateHealth(health, damaged);
+            UpdateHealth(health,  maxHealth);
             UpdateAttack(attack);
         }
 
         public void UpdateAttack(int attack)
         {
+            AttackValueDisplayed = attack;
+
             foreach (var a in AttackText)
             {
                 a.text = attack.ToString("N0");
@@ -181,8 +186,13 @@ namespace UI
             }
         }
 
-        public void UpdateHealth(int health, bool damaged)
+        public void UpdateHealth(int health, int maxHealth)
         {
+            HealthValueDisplayed = health;
+            MaxHealthValueDisplayed = maxHealth;
+
+            var damaged = maxHealth > health;
+
             foreach (var h in HealthText)
             {
                 h.text = health.ToString("N0");

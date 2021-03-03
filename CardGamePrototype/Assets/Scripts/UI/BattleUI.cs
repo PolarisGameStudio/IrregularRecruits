@@ -351,12 +351,12 @@ namespace UI
             else
                 Debug.LogError("health change of 0");
 
-            ui.UpdateHealth(currentHealth, currentHealth < maxHealth);
+            ui.UpdateHealth(currentHealth,  maxHealth);
 
             yield return null;
         }
 
-        internal static IEnumerator CardStatsModified(Guid card, int val, int currentHealth, int currentAttack, bool damaged)
+        internal static IEnumerator CardStatsModified(Guid card, int val, int currentHealth, int currentAttack, int maxHealth)
         {
             CardUI ui = GetCardUI(card);
 
@@ -364,7 +364,7 @@ namespace UI
 
             ui.StatModifier(val);
 
-            ui.UpdateHealth(currentHealth, damaged);
+            ui.UpdateHealth(currentHealth, maxHealth);
             ui.UpdateAttack(currentAttack);
             yield return null;
         }
