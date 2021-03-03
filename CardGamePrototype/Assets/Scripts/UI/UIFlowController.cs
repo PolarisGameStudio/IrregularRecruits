@@ -43,7 +43,7 @@ namespace UI
             //On healed
             Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
 
-            Event.OnActionPointsChange.AddListener(i => AddCardEvent(ActionsChanged(i)));
+            Event.PlayerActionPointsChanged.AddListener(i => AddCardEvent(ActionsChanged(i)));
 
             //On Stat Change-> (Card, amount)
             Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack, card.Damaged())));

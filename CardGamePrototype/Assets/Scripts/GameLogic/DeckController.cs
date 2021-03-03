@@ -14,8 +14,8 @@ namespace GameLogic
             get => actionsLeft; 
             set
             {
-                if (value != actionsLeft)
-                    Event.OnActionPointsChange.Invoke(value);
+                if (value != actionsLeft && this is PlayerController)
+                    Event.PlayerActionPointsChanged.Invoke(value);
 
                 actionsLeft = value;
             }

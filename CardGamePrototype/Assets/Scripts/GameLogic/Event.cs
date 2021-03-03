@@ -24,7 +24,7 @@ namespace GameLogic
 
         public class IntEvent : UnityEvent<int> { }
         public static IntEvent OnPlayerGoldAdd = new IntEvent();
-        public static IntEvent OnActionPointsChange = new IntEvent();
+        public static IntEvent PlayerActionPointsChanged = new IntEvent();
 
         public class CardValueEvent : UnityEvent<Card,int> { }
         public static CardValueEvent OnHealthChange = new CardValueEvent();
@@ -145,7 +145,7 @@ namespace GameLogic
 
             OnPlayerGoldAdd.RemoveAllListeners();
 
-            OnActionPointsChange.RemoveAllListeners();
+            PlayerActionPointsChanged.RemoveAllListeners();
         }
     }
 }

@@ -8,9 +8,8 @@ using Event = GameLogic.Event;
 namespace UI
 {
 
-    public partial class ActionsLeftUI : MonoBehaviour
+    public class ActionsLeftUI : MonoBehaviour
     {
-
         public ActionIcon ActionIconExample;
         private List<ActionIcon> ActionIcons = new List<ActionIcon>();
         private bool Initialized;
@@ -43,6 +42,8 @@ namespace UI
 
         private void ActionsChanged(int arg0)
         {
+            Debug.Log("actions now: " + arg0 + ", before: " + ActionIcons.Count(a => a.Active));
+
             while(ActionIcons.Count(a => a.Active) != arg0)
             {
                 if (ActionIcons.Count(a => a.Active) > arg0)

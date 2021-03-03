@@ -7,8 +7,6 @@ namespace UI
 {
     public class ShopTestScene : MonoBehaviour
     {
-        public Race ShopRace;
-        public Race[] ShopRaces;
         public DeckObject PlayerDeck;
         public HeroObject PlayerHero;
         public int StartingGold = 100;
@@ -19,7 +17,8 @@ namespace UI
             BattleManager.SetPlayerHero(PlayerHero);
 
             MapController.Instance.PlayerGold = StartingGold;
-            var shop = new Shop(ShopRace);
+
+            ShopUI.OpenStandardShop();
         }
     }
 }
