@@ -23,43 +23,43 @@ namespace Sound
 
             MapNodeIcon.OnMapButtonClick.AddListener(PlayButtonClick);
 
-            MapNodeIcon.OnMapButtonClick.AddListener(() => PlayUISound(SoundBank.UiSound.HeroWalking));
+            MapNodeIcon.OnMapButtonClick.AddListener(() => PlayUISound(SoundLibrary.UiSound.HeroWalking));
 
-            Event.OnGameBegin.AddListener(() => ChangeMusic(SoundBank.Music.Explore));
-            Event.OnGameBegin.AddListener(() => PlayStinger(SoundBank.Stinger.GameStart));
+            Event.OnGameBegin.AddListener(() => ChangeMusic(SoundLibrary.Music.Explore));
+            Event.OnGameBegin.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameStart));
 
-            Event.OnGameOpen.AddListener(() => ChangeMusic(SoundBank.Music.Menu));
-            Event.OnGameOpen.AddListener(() => PlayStinger(SoundBank.Stinger.MenuOpen));
+            Event.OnGameOpen.AddListener(() => ChangeMusic(SoundLibrary.Music.Menu));
+            Event.OnGameOpen.AddListener(() => PlayStinger(SoundLibrary.Stinger.MenuOpen));
 
-            Event.OnGameOver.AddListener(() => ChangeMusic(SoundBank.Music.NoMusic));
-            Event.OnGameOver.AddListener(() => PlayStinger(SoundBank.Stinger.GameLoss));
-            Event.OnGameWin.AddListener(() => PlayStinger(SoundBank.Stinger.GameWin));
-            Shop.OnShopOpen.AddListener(s => ChangeMusic(SoundBank.Music.Shop));
-            Shop.OnShopReroll.AddListener(i => PlayUISound(SoundBank.UiSound.ShopReroll));
-            Shop.OnShopPurchase.AddListener(i => PlayUISound(SoundBank.UiSound.PurchaseUnit));
+            Event.OnGameOver.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
+            Event.OnGameOver.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameLoss));
+            Event.OnGameWin.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameWin));
+            Shop.OnShopOpen.AddListener(s => ChangeMusic(SoundLibrary.Music.Shop));
+            Shop.OnShopReroll.AddListener(i => PlayUISound(SoundLibrary.UiSound.ShopReroll));
+            Shop.OnShopPurchase.AddListener(i => PlayUISound(SoundLibrary.UiSound.PurchaseUnit));
 
-            BattleUI.OnBattleBegin.AddListener(() => ChangeMusic(SoundBank.Music.Battle));
+            BattleUI.OnBattleBegin.AddListener(() => ChangeMusic(SoundLibrary.Music.Battle));
 
-            BattleUI.OnBattleFinished.AddListener(() => ChangeMusic(SoundBank.Music.NoMusic));
-            BattleUI.OnBattleFinished.AddListener(() => PlayStinger(SoundBank.Stinger.BattleWon));
-            BattleUI.OnAbilitySelect.AddListener(() => PlayCardSound(SoundBank.CardSound.AbilitySelection));
-            BattleUI.OnLevelUp.AddListener(() => PlayCardSound(SoundBank.CardSound.LevelUp));
-            BattleSummary.Instance.OnClose.AddListener(() => ChangeMusic(SoundBank.Music.Explore));
+            BattleUI.OnBattleFinished.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
+            BattleUI.OnBattleFinished.AddListener(() => PlayStinger(SoundLibrary.Stinger.BattleWon));
+            BattleUI.OnAbilitySelect.AddListener(() => PlayCardSound(SoundLibrary.CardSound.AbilitySelection));
+            BattleUI.OnLevelUp.AddListener(() => PlayCardSound(SoundLibrary.CardSound.LevelUp));
+            BattleSummary.Instance.OnClose.AddListener(() => ChangeMusic(SoundLibrary.Music.Explore));
 
-            PlayerGoldUpdater.Instance.OnGoldGained.AddListener(() => PlayUISound(SoundBank.UiSound.GoldCoin));
+            PlayerGoldUpdater.Instance.OnGoldGained.AddListener(() => PlayUISound(SoundLibrary.UiSound.GoldCoin));
 
-            CardUI.OnDragStarted.AddListener(() => PlayUISound(SoundBank.UiSound.CardPickUp));
-            CardUI.OnDragEnd.AddListener(() => PlayUISound(SoundBank.UiSound.CardLetGo));
-            CardLayoutGroup.OnSwitchingPlace.AddListener(() => PlayUISound(SoundBank.UiSound.CardSwitchPlace));
-            CardHoverInfo.Instance.OnCardHighlight.AddListener(() => PlayUISound(SoundBank.UiSound.CardHighlight));
+            CardUI.OnDragStarted.AddListener(() => PlayUISound(SoundLibrary.UiSound.CardPickUp));
+            CardUI.OnDragEnd.AddListener(() => PlayUISound(SoundLibrary.UiSound.CardLetGo));
+            CardLayoutGroup.OnSwitchingPlace.AddListener(() => PlayUISound(SoundLibrary.UiSound.CardSwitchPlace));
+            CardHoverInfo.Instance.OnCardHighlight.AddListener(() => PlayUISound(SoundLibrary.UiSound.CardHighlight));
 
-            AnimationSystem.OnDraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Draw));
-            AnimationSystem.OnWithdraw.AddListener(() => PlayCardSound(SoundBank.CardSound.Withdraw));
-            AnimationSystem.OnEtb.AddListener(() => PlayCardSound(SoundBank.CardSound.ETB));
-            AnimationSystem.OnDamaged.AddListener(() => PlayCardSound(SoundBank.CardSound.Hit));
-            AnimationSystem.OnHeal.AddListener(() => PlayCardSound(SoundBank.CardSound.Heal));
-            AnimationSystem.OnDeath.AddListener(() => PlayCardSound(SoundBank.CardSound.Death));
-            AnimationSystem.OnResurrect.AddListener(() => PlayCardSound(SoundBank.CardSound.Resurrect));
+            AnimationSystem.OnDraw.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Draw));
+            AnimationSystem.OnWithdraw.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Withdraw));
+            AnimationSystem.OnEtb.AddListener(() => PlayCardSound(SoundLibrary.CardSound.ETB));
+            AnimationSystem.OnDamaged.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Hit));
+            AnimationSystem.OnHeal.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Heal));
+            AnimationSystem.OnDeath.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Death));
+            AnimationSystem.OnResurrect.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Resurrect));
 
             AnimationSystem.OnAbilityTrigger.AddListener(PlayAbilityTrigger);
             AnimationSystem.OnAbilityTargetHit.AddListener(PlayAbilityHit);
@@ -67,49 +67,49 @@ namespace Sound
 
         public void PlayButtonClick()
         {
-            UiAudioSource.PlayOneShot(SoundBank.GetSound(SoundBank.UiSound.ButtonClick));
+            UiAudioSource.PlayOneShot(SoundLibrary.GetSound(SoundLibrary.UiSound.ButtonClick));
 
         }
 
         public static void PlayAbilityTrigger(GameLogic.EffectType type)
         {
-            Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityTrigger(type));
+            Instance.StingerAudioSource.PlayOneShot(SoundLibrary.GetAbilityTrigger(type));
         }
 
         public static void PlayAbilityHit(GameLogic.EffectType type)
         {
-            Instance.StingerAudioSource.PlayOneShot(SoundBank.GetAbilityHit(type));
+            Instance.StingerAudioSource.PlayOneShot(SoundLibrary.GetAbilityHit(type));
         }
 
-        public static void PlayStinger(SoundBank.Stinger type)
+        public static void PlayStinger(SoundLibrary.Stinger type)
         {
-            Instance.StingerAudioSource.clip = SoundBank.GetSound(type);
+            Instance.StingerAudioSource.clip = SoundLibrary.GetSound(type);
 
             Instance.StingerAudioSource.Play();
 
         }
-        public static void PlayCardSound(SoundBank.CardSound type)
+        public static void PlayCardSound(SoundLibrary.CardSound type)
         {
-            Instance.SfxAudioSource.PlayOneShot(SoundBank.GetSound(type));
+            Instance.SfxAudioSource.PlayOneShot(SoundLibrary.GetSound(type));
 
         }
-        public static void PlayUISound(SoundBank.UiSound type)
+        public static void PlayUISound(SoundLibrary.UiSound type)
         {
-            Instance.UiAudioSource.PlayOneShot(SoundBank.GetSound(type));
+            Instance.UiAudioSource.PlayOneShot(SoundLibrary.GetSound(type));
 
         }
 
 
         //TODO: create fade
-        public static void ChangeMusic(SoundBank.Music type)
+        public static void ChangeMusic(SoundLibrary.Music type)
         {
-            if (type == SoundBank.Music.NoMusic)
+            if (type == SoundLibrary.Music.NoMusic)
             {
                 Instance.MusicAudioSource.clip = null;
                 Instance.MusicAudioSource.Stop();
             }
 
-            var f = SoundBank.GetSound(type);
+            var f = SoundLibrary.GetSound(type);
 
             if (Instance.MusicAudioSource.clip != f)
             {

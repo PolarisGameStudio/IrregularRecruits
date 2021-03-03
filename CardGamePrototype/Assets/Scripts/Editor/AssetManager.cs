@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using Sound;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,21 +116,22 @@ public class AssetManager
         //}
 
 
-        foreach (var creature in CreatureLibrary.Instance.AllCreatures)
-        {
-            if (creature.Enabling.Contains(DeckStrategy.Withdraw) & !CreatureLibrary.Instance.ShopCreatures.Contains(creature))
-                CreatureLibrary.Instance.ShopCreatures.Add(creature);
-        }
 
-        for (int i = 0; i < (int) DeckStrategy.COUNT; i++)
-        {
-            var strat = (DeckStrategy) i;
+        //foreach (var creature in CreatureLibrary.Instance.AllCreatures)
+        //{
+        //    if (creature.Enabling.Contains(DeckStrategy.Withdraw) & !CreatureLibrary.Instance.ShopCreatures.Contains(creature))
+        //        CreatureLibrary.Instance.ShopCreatures.Add(creature);
+        //}
 
-            Debug.Log($"{strat} Enablers: {CreatureLibrary.Instance.ShopCreatures.Count(c => c.Enabling.Contains(strat))}");
-            Debug.Log($"{strat} PayOffs: {CreatureLibrary.Instance.ShopCreatures.Count(c => c.Payoff.Contains(strat))}");
+        //for (int i = 0; i < (int) DeckStrategy.COUNT; i++)
+        //{
+        //    var strat = (DeckStrategy) i;
+
+        //    Debug.Log($"{strat} Enablers: {CreatureLibrary.Instance.ShopCreatures.Count(c => c.Enabling.Contains(strat))}");
+        //    Debug.Log($"{strat} PayOffs: {CreatureLibrary.Instance.ShopCreatures.Count(c => c.Payoff.Contains(strat))}");
 
 
-        }
+        //}
 
         AssetDatabase.Refresh();
         //creatures.ForEach(a => EditorUtility.SetDirty(a));

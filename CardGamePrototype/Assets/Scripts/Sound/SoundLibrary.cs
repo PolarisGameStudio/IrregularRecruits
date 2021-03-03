@@ -5,9 +5,9 @@ using Random = UnityEngine.Random;
 
 namespace Sound
 {
-    public class SoundBank : Singleton<SoundBank>
+    [CreateAssetMenu]
+    public class SoundLibrary : SingletonScriptableObject<SoundLibrary>
     {
-
         public enum UiSound
         {
             TapClick,
@@ -106,13 +106,13 @@ namespace Sound
             public AudioClip[] Audio;
         }
 
+
         public FXReference[] FXReferences;
         public UiSoundReference[] UiSounds;
         public StingerSoundReference[] Stingers;
         public MusicRef[] Musics;
         public AbilitySound[] AbilitySounds;
         public RaceSpecificSound[] VillageSounds;
-
 
         internal static AudioClip GetSound(CardSound type)
         {
@@ -189,4 +189,5 @@ namespace Sound
         }
 
     }
+
 }

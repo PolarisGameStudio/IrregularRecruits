@@ -42,7 +42,7 @@ namespace UI
 
         private void ActionsChanged(int arg0)
         {
-            Debug.Log("actions now: " + arg0 + ", before: " + ActionIcons.Count(a => a.Active));
+
 
             while(ActionIcons.Count(a => a.Active) != arg0)
             {
