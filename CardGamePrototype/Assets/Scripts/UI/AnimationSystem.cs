@@ -26,7 +26,7 @@ namespace UI
         public static UnityEvent OnDraw = new UnityEvent();
         public static UnityEvent OnWithdraw = new UnityEvent();
         public static UnityEvent OnEtb = new UnityEvent();
-        public  static UnityEvent OnDamaged = new UnityEvent();
+        public static UnityEvent OnDamaged = new UnityEvent();
         public static UnityEvent OnHeal = new UnityEvent();
         public static UnityEvent OnDeath = new UnityEvent();
         public static UnityEvent OnResurrect = new UnityEvent();
@@ -52,7 +52,7 @@ namespace UI
             public ParticleSystem[] TargetFX;
             public ParticleSystem[] OwnerFX;
         }
-        
+
         public static IEnumerator AttackAnimation(CardUI owner, CardUI target, float duration)
         {
             var rect = owner.GetComponent<RectTransform>();
@@ -60,7 +60,7 @@ namespace UI
             var endPos = target.GetComponent<RectTransform>();
 
             duration *= GameSettings.Instance.CombatSpeed;
-            
+
             var startTime = Time.time;
 
             while (Time.time < startTime + duration)
@@ -103,11 +103,11 @@ namespace UI
 
         public static void PlayLevelupFX(Vector2 postion)
         {
-            PlayFx( new [] { Instance.LevelUpParticles}, postion, null);
+            PlayFx(new[] { Instance.LevelUpParticles }, postion, null);
         }
         public static void PlayAbilitySelection(Vector2 postion)
         {
-            PlayFx( new [] { Instance.AbilitySelectParticles}, postion, null);
+            PlayFx(new[] { Instance.AbilitySelectParticles }, postion, null);
         }
 
         private IEnumerator PlayCardFX(AbilityHolderUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
@@ -128,12 +128,16 @@ namespace UI
                     Instance.WithdrawParticles(card);
                     break;
                 case Deck.Zone.Battlefield:
-                    if(from == Deck.Zone.Graveyard)
+                    if (from == Deck.Zone.Graveyard)
                         yield return card.CardAnimation.UnDissolve();
                     Instance.PlayParticles(card);
                     break;
                 case Deck.Zone.Graveyard:
                     Instance.DeathParticles(card);
+
+                    if (card.GetCardState() == CardUI.CardState.FaceDown)
+                        yield return card.Flip(CardUI.CardState.FaceUp, 0.3f);
+
                     yield return card.CardAnimation.Dissolve();
                     break;
                 case Deck.Zone.Hand:
@@ -142,9 +146,9 @@ namespace UI
             }
         }
 
-        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs,AbilityWithEffect ability, float delay = 0)
+        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs, AbilityWithEffect ability, float delay = 0)
         {
-            if (!abilityOwner ) yield break;
+            if (!abilityOwner) yield break;
 
             var image = abilityOwner.GetAbilityImage(ability);
 
@@ -181,13 +185,13 @@ namespace UI
 
             OnAbilityTrigger.Invoke(ability.ResultingAction.ActionType);
 
-            yield return PlayCardFX(owner, abilityFx.OwnerFX, delay );
-            yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX,ability, delay );
+            yield return PlayCardFX(owner, abilityFx.OwnerFX, delay);
+            yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, ability, delay);
 
             foreach (var t in targets)
-            { 
+            {
                 OnAbilityTargetHit.Invoke(ability.ResultingAction.ActionType);
-                yield return PlayCardFX(t, abilityFx.TargetFX, delay / targets.Count()); 
+                yield return PlayCardFX(t, abilityFx.TargetFX, delay / targets.Count());
             }
         }
     }
