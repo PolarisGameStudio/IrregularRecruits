@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GameLogic
 {
@@ -11,7 +12,13 @@ namespace GameLogic
             return "withdraw " + target;
         }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> potentialTargets)
+        {
+            return potentialTargets.Any(c => c.Location == Deck.Zone.Battlefield);
+        }
+
+
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
             targets.ForEach(c => c.Withdraw());

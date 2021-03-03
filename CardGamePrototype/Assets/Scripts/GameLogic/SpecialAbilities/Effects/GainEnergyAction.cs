@@ -11,7 +11,14 @@ namespace GameLogic
             return $"gain {amount} energy";
         }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder _owner, List<Card> targets)
+
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        {
+            return true;
+        }
+
+
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder _owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, _owner, new List<Card>());

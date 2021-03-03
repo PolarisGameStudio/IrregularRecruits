@@ -17,10 +17,12 @@ namespace UI
     {
         private Queue<IEnumerator> ActionQueue = new Queue<IEnumerator>();
         private Coroutine ControlRoutine;
+        public UnityEvent OnEmptyQueue = new UnityEvent();
 
         public void Start()
         {
-            var bm = BattleManager.Instance;
+            //todo: do we need this
+            //var bm = BattleManager.Instance;
 
 
             //SETUP listeners
@@ -39,21 +41,21 @@ namespace UI
 
             //On Damage-> (Card, amount) & new health?
             //On healed
-            Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val,card.CurrentHealth,card.MaxHealth)));
+            Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
 
             Event.OnActionPointsChange.AddListener(i => AddCardEvent(ActionsChanged(i)));
 
             //On Stat Change-> (Card, amount)
-            Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack,card.Damaged())));
+            Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack, card.Damaged())));
 
             Event.OnBattleFinished.AddListener(d => AddCardEvent(BattleUI.CleanUpUI(d)));
 
             //On Ability trigger->All the current Ability animation param
-            Event.OnAbilityExecution.AddListener((a,c,ts) => AddCardEvent(BattleUI.AbilityTriggered(a,c.Guid,ts.Select(t=>t.Guid))));
-                        
+            Event.OnAbilityExecution.AddListener((a, c, ts) => AddCardEvent(BattleUI.AbilityTriggered(a, c.Guid, ts.Select(t => t.Guid))));
+
             //TODO: is this actually used in a timely order
             Event.OnCombatSetup.AddListener((e, c) => PlayerTurnStart());
-            
+
             Event.OnTurnBegin.AddListener(() => AddCardEvent(PlayerTurnStart()));
             Event.OnCombatResolveStart.AddListener(PlayerTurnDone);
         }
@@ -62,14 +64,15 @@ namespace UI
         {
             var playerdeck = BattleUI.Instance.PlayerDeck == card.InDeck;
 
-            AddCardEvent( BattleUI.Move(card.Guid, to, from, playerdeck));
+            AddCardEvent(BattleUI.Move(card.Guid, to, from, playerdeck));
         }
 
         private IEnumerator ActionsChanged(int amount)
         {
-                ActionsLeftUI.ActionGained.Invoke(amount);
+            ActionsLeftUI.ActionGained.Invoke(amount);
 
-                yield return new WaitForSeconds(0.1f);
+
+            yield return new WaitForSeconds(0.1f);
 
         }
 
@@ -109,12 +112,13 @@ namespace UI
 
         private IEnumerator UIRoutine()
         {
-            while(!EmptyQueue())
+            while (!EmptyQueue())
             {
                 yield return ActionQueue.Dequeue();
             }
 
             ControlRoutine = null;
+            OnEmptyQueue.Invoke();
         }
 
         public bool EmptyQueue() => ActionQueue.Count == 0;

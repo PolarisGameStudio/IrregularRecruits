@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GameLogic
 {
@@ -12,7 +13,12 @@ namespace GameLogic
             return $"draw {amount} cards";
         }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        {
+            return owner.InDeck.CreaturesInZone(Deck.Zone.Library).Any();
+        }
+
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, new List<Card>());

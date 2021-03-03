@@ -29,11 +29,11 @@ namespace GameLogic
 
             List<Card> targets = GetTargets(ResultingAction.Target, owner, triggerExecuter);
 
-            AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteAction(this, owner, targets);
+            AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteEffect(this, owner, targets);
             
         }
 
-        public List<Card> GetTargets(Noun targetType, AbilityHolder _owner, Card triggerExecuter)
+        public List<Card> GetTargets(Noun targetType, AbilityHolder _owner, Card triggerExecuter,bool includeAllPossible = false)
         {
             List<Card> cardsInZone = BattleManager.Instance.GetCardsInZone(targetType.Location);
 
@@ -45,7 +45,7 @@ namespace GameLogic
                 targetType.CorrectTrait(c )
                 ).ToList();
 
-            return TakeCount(cs, ResultingAction.TargetCount);
+            return TakeCount(cs, includeAllPossible ? Count.All : ResultingAction.TargetCount);
         }
 
         private List<Card> TakeCount(List<Card> cards, Count count)
@@ -68,6 +68,13 @@ namespace GameLogic
                     return cards;
             }
 
+        }
+
+        public virtual bool CanExecute(AbilityHolder owner, Card triggerExecuter)
+        {
+            List<Card> targets = GetTargets(ResultingAction.Target, owner, triggerExecuter,true);
+
+            return AbilityProcessor.GetAction(ResultingAction.ActionType).CanExecute(this, owner, targets);
         }
 
     }

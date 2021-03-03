@@ -11,7 +11,12 @@ namespace GameLogic
             return $"summon a {summon.Attack}/{summon.Health} {summon.name}" ;
         }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> potentialTargets)
+        {
+            return true;
+        }
+
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
             var summon = ability.ResultingAction.Summons;
 

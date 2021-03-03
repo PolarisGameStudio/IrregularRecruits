@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GameLogic
 {
@@ -11,7 +12,13 @@ namespace GameLogic
             return $"Heal {target} for {amount}";
         }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        {
+            return targets.Any(c => c.Damaged());
+        }
+
+
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
             targets.ForEach(c => c.HealthChange(ability.ResultingAction.Amount));

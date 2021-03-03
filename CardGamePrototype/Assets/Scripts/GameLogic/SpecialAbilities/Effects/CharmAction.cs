@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GameLogic
 {
@@ -11,12 +12,17 @@ namespace GameLogic
             return "take control of " + target;
         }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
 
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
 
             targets.ForEach(c => c.Charm(owner.InDeck));
+        }
+        
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        {
+            return targets.Any(c => c.InDeck != owner.InDeck);
         }
 
         public override float GetValue(float targetValue, int amount)

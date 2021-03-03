@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class AbilityUI : MonoBehaviour,IPointerClickHandler,  IPointerExitHandler, IPointerEnterHandler
+    public class AbilityUI : MonoBehaviour,  IPointerExitHandler, IPointerEnterHandler
     {
         //false == passive
         public bool HeroViewAbility;
@@ -24,17 +24,22 @@ namespace UI
         {
             Button.onClick.AddListener(Click);
 
+
+            UIFlowController.Instance.OnEmptyQueue.AddListener(SetExecutability);
+        }
+
+        public void SetExecutability()
+        {
+            if (!Ability) return;
+
+            if (Ability.CanExecute(Owner, null) )
+                SetAbilityAsActivable();
+            else
+                LockAbility();
         }
 
         private void Click()
         {
-            //TODO: write nicer
-            if (AbilityHoverInfo.IsActive())
-            {
-                AbilityHoverInfo.Hide();
-                return;
-            }
-
             AbilityHoverInfo.Hide();
 
 
@@ -44,7 +49,7 @@ namespace UI
                 Activate();
         }
 
-        public void SetAbilityAsActivable()
+        private void SetAbilityAsActivable()
         {
             if (!ActiveAbility) return;
 
@@ -134,10 +139,8 @@ namespace UI
 
                 }
             }
-            else if (ActiveAbility)
-            {
-                SetAbilityAsActivable();
-            }
+            else
+                SetExecutability();
         }
 
         private void SelectLevelUp()
@@ -152,10 +155,6 @@ namespace UI
             BattleUI.OnAbilitySelect.Invoke();
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            AbilityHoverInfo.Hide();
-        }
     }
 
 }

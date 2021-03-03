@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+
 namespace GameLogic
 {
     public class StatBoostAction : AbilityEffect
@@ -10,7 +12,12 @@ namespace GameLogic
             return $"{target} gain {amount}/{amount}";
         }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> potentialTargets)
+        {
+            return potentialTargets.Any(c => c.Alive());
+        }
+
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
             targets.ForEach(c => c.StatModifier(ability.ResultingAction.Amount));

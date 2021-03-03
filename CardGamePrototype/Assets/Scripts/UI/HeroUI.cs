@@ -84,7 +84,7 @@ namespace UI
         {
             foreach (var item in AbilityImages)
             {
-                item.SetAbilityAsActivable();
+                item.SetExecutability();
             }
         }
 

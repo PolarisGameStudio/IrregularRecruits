@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GameLogic
 {
@@ -13,8 +14,13 @@ namespace GameLogic
 
             return $"resurrect {target} with {amount} health";
         }
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> potentialTargets)
+        {
+            return potentialTargets.Any(c => !c.Alive());
+        }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder owner, List<Card> graveTargets)
+
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder owner, List<Card> graveTargets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, graveTargets);
             graveTargets.ForEach(c => c.Resurrect(ability.ResultingAction.Amount));

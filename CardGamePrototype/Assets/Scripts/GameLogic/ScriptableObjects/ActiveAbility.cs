@@ -27,7 +27,7 @@ namespace GameLogic
         public void ActivateAbility(AbilityHolder owner)
         {
             //TODO: should have different costs?
-            if (!owner.InDeck.DeckController.ActionAvailable() || ActivatedThisTurn)
+            if (!CanExecute(owner,null))
                 return;
 
             ActivatedThisTurn = true;
@@ -38,7 +38,10 @@ namespace GameLogic
             //owner.InDeck.DeckController.UsedAction(owner.InDeck);
         }
 
-
+        public override bool CanExecute(AbilityHolder owner, Card triggerExecuter)
+        {
+            return base.CanExecute(owner, triggerExecuter) &! ActivatedThisTurn && owner.InDeck.DeckController.ActionAvailable();
+        }
 
         public override string Description(ICharacter owner)
         {

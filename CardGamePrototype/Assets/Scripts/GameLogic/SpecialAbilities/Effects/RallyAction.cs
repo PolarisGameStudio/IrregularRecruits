@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GameLogic
 {
@@ -12,7 +13,13 @@ namespace GameLogic
             return $"rally {v}";
         }
 
-        public override void ExecuteAction(AbilityWithEffect ability, AbilityHolder _owner, List<Card> targets)
+        public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> potentialTargets)
+        {
+            return potentialTargets.Any(c => c.Location == Deck.Zone.Library || c.Location != Deck.Zone.Hand);
+        }
+
+
+        public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder _owner, List<Card> targets)
         {
             Event.OnAbilityExecution.Invoke(ability, _owner, targets);
             foreach(var target in targets)
