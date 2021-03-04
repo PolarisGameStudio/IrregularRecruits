@@ -3,13 +3,15 @@
     public enum SoundSetType
     {
         Standard,
-        HumanMale,
-        HumanFemale,
-        DwarfMale,
         Goblin,
         Orc,
-        Monster,
-        Spider,
+        Ghost,
+        Insect,
+        DemonicMonster,
+        Wolf,
+        MaleFunnyDwarf,
+        FemaleQuirky,
+        FemaleBrute,
 
     }
 

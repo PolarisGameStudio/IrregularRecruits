@@ -27,4 +27,6 @@ MonoBehaviour:
   Enabling: 09000000
   Payoff: 
   Race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
+  SoundSetType: 5
   Performance: 0
+  TopFocused: 0

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
+  m_Name: KonallathRealityDevourer
+  m_EditorClassIdentifier: 
+  name: Konallath, Reality Devourer
+  Rarity: 2
+  Locked: 1
+  Image: {fileID: 21300000, guid: 06b9cc33ed5437f448810d2680a53613, type: 3}
+  IconImage: {fileID: 0}
+  Attack: 10
+  Health: 80
+  Traits: []
+  SpecialAbility: {fileID: 11400000, guid: f70e62b013fe6eb48a9b4a6f8f8bb934, type: 2}
+  CR: 97
+  Enabling: 
+  Payoff: 
+  Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+  SoundSetType: 0
+  Performance: 0
+  TopFocused: 0

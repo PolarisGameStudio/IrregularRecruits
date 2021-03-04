@@ -74,7 +74,7 @@ namespace UI
                 yield return null;
             }
 
-            AnimationSystem.OnResurrect.Invoke();
+            AnimationSystem.OnCreatureExclamation.Invoke(GetComponentInParent<CardUI>(),CreatureBark.Resurrection);
         }        
     }
 }

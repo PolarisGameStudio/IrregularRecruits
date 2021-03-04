@@ -180,7 +180,7 @@ namespace Sound
             return Rnd(Instance.AbilitySounds.First(s => s.Type == sound).TargetAudio);
         }
 
-        internal static AudioClip GetSound(CreatureSound soundType, SoundSetType soundSetType)
+        internal static AudioClip GetSound(CreatureBark soundType, SoundSetType soundSetType)
         {
             SoundSet set = Instance.GetSoundSetOrStandard(soundSetType);
 
@@ -211,13 +211,13 @@ namespace Sound
         {
             System.Func<SoundSet, bool> anySoundSetOfType = s => s.Type == soundSet;
 
-            SoundSet set;
-
             if (CreatureSoundSets.Any(anySoundSetOfType))
-                set = CreatureSoundSets.First(anySoundSetOfType);
+                return CreatureSoundSets.First(anySoundSetOfType);
             else
-                set = GetStandardSoundSet();
-            return set;
+            {
+                Debug.LogWarning("No sound set of type: " + soundSet);
+                return GetStandardSoundSet();
+            }
         }
 
 

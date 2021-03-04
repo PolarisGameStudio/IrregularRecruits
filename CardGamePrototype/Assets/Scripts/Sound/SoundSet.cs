@@ -9,21 +9,10 @@ namespace Sound
     [System.Serializable]
     public struct SetSound
     {
-        public CreatureSound SoundType;
+        public CreatureBark SoundType;
         public AudioClip[] Sounds;
     }
 
-    public enum CreatureSound
-    {
-        Grunt,
-        Attack,
-        Death,
-        Hitting,
-        Hurt,
-        Resurrection,
-        Withdraw
-            
-    }
 
     [System.Serializable]
     public struct SoundSet
@@ -31,7 +20,7 @@ namespace Sound
         public SoundSetType Type;
         public List<SetSound> SoundSetSounds;
 
-        internal AudioClip[] GetSoundType(CreatureSound soundType)
+        internal AudioClip[] GetSoundType(CreatureBark soundType)
         {
             if (!SoundSetSounds.Any(s => s.SoundType == soundType))
                 return null;

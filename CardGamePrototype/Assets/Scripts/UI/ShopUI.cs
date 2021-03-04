@@ -157,6 +157,8 @@ namespace UI
 
             if (!card) yield break;
 
+            AnimationSystem.OnCreatureExclamation.Invoke(card, CreatureBark.Grunt);
+
             StartCoroutine(card.Flip(CardUI.CardState.FaceDown));
             card.Interactable = false;
 

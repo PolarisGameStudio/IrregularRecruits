@@ -23,15 +23,15 @@ namespace UI
         public ParticleSystem LevelUpParticles;
         public AbilityAnimationFX[] AbilityFx;
 
-        public class CardUIEvent : UnityEvent<CardUI> { }
+        public class CardUIEvent : UnityEvent<CardUI,CreatureBark> { }
+
+        public static CardUIEvent OnCreatureExclamation = new CardUIEvent();
 
         public static UnityEvent OnDraw = new UnityEvent();
         public static UnityEvent OnWithdraw = new UnityEvent();
         public static UnityEvent OnEtb = new UnityEvent();
         public static UnityEvent OnDamaged = new UnityEvent();
         public static UnityEvent OnHeal = new UnityEvent();
-        public static CardUIEvent OnDeath = new CardUIEvent();
-        public static UnityEvent OnResurrect = new UnityEvent();
         public class AbilityEvent : UnityEvent<EffectType> { }
         public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
         public static AbilityEvent OnAbilityTargetHit = new AbilityEvent();
@@ -65,6 +65,8 @@ namespace UI
 
             var startTime = Time.time;
 
+            OnCreatureExclamation.Invoke(owner, CreatureBark.Attack);
+
             while (Time.time < startTime + duration)
             {
                 yield return null;
@@ -89,7 +91,7 @@ namespace UI
         public void DeathParticles(CardUI cardUI)
         {
             StartCoroutine(PlayCardFX(cardUI, DeathParticlesPrefab, 0.1f));
-            OnDeath.Invoke(cardUI);
+            OnCreatureExclamation.Invoke(cardUI,CreatureBark.Death);
         }
         //Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
         public void DamageParticles(CardUI c)
