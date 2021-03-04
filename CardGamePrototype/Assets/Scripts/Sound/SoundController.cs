@@ -58,11 +58,16 @@ namespace Sound
             AnimationSystem.OnEtb.AddListener(() => PlayCardSound(SoundLibrary.CardSound.ETB));
             AnimationSystem.OnDamaged.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Hit));
             AnimationSystem.OnHeal.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Heal));
-            AnimationSystem.OnDeath.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Death));
+            AnimationSystem.OnDeath.AddListener(c => PlayCardSound(CreatureSound.Death,c.Creature.SoundSetType));
             AnimationSystem.OnResurrect.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Resurrect));
 
             AnimationSystem.OnAbilityTrigger.AddListener(PlayAbilityTrigger);
             AnimationSystem.OnAbilityTargetHit.AddListener(PlayAbilityHit);
+        }
+
+        private void PlayCardSound(CreatureSound soundType, GameLogic.SoundSetType soundSetType)
+        {
+            SfxAudioSource.PlayOneShot(SoundLibrary.GetSound(soundType, soundSetType));
         }
 
         public void PlayButtonClick()

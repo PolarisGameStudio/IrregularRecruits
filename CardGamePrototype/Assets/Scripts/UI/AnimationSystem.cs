@@ -23,12 +23,14 @@ namespace UI
         public ParticleSystem LevelUpParticles;
         public AbilityAnimationFX[] AbilityFx;
 
+        public class CardUIEvent : UnityEvent<CardUI> { }
+
         public static UnityEvent OnDraw = new UnityEvent();
         public static UnityEvent OnWithdraw = new UnityEvent();
         public static UnityEvent OnEtb = new UnityEvent();
         public static UnityEvent OnDamaged = new UnityEvent();
         public static UnityEvent OnHeal = new UnityEvent();
-        public static UnityEvent OnDeath = new UnityEvent();
+        public static CardUIEvent OnDeath = new CardUIEvent();
         public static UnityEvent OnResurrect = new UnityEvent();
         public class AbilityEvent : UnityEvent<EffectType> { }
         public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
@@ -86,10 +88,8 @@ namespace UI
         //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
         public void DeathParticles(CardUI cardUI)
         {
-
-
             StartCoroutine(PlayCardFX(cardUI, DeathParticlesPrefab, 0.1f));
-            OnDeath.Invoke();
+            OnDeath.Invoke(cardUI);
         }
         //Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
         public void DamageParticles(CardUI c)

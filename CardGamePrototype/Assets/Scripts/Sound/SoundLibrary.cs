@@ -49,17 +49,17 @@ namespace Sound
 
         public enum CardSound
         {
-            Hit,
-            BigHit,
-            ETB,
-            Death,
-            Withdraw,
-            Draw,
-            NoAbilityTarget,
-            Resurrect,
-            Heal,
-            AbilitySelection,
-            LevelUp,
+            Hit = 0,
+            BigHit = 1,
+            ETB = 2,
+            //Death = 3,
+            Withdraw = 4,
+            Draw = 5,
+            NoAbilityTarget = 6,
+            Resurrect = 7,
+            Heal = 8,
+            AbilitySelection = 9,
+            LevelUp = 10,
         }
 
 
@@ -106,13 +106,13 @@ namespace Sound
             public AudioClip[] Audio;
         }
 
-
         public FXReference[] FXReferences;
         public UiSoundReference[] UiSounds;
         public StingerSoundReference[] Stingers;
         public MusicRef[] Musics;
         public AbilitySound[] AbilitySounds;
         public RaceSpecificSound[] VillageSounds;
+        public SoundSet[] CreatureSoundSets;
 
         internal static AudioClip GetSound(CardSound type)
         {
@@ -158,6 +158,7 @@ namespace Sound
             return Rnd(Instance.Musics.First(s => s.Type == sound).Audio);
         }
 
+
         public static AudioClip GetAbilityTrigger(EffectType sound)
         {
             if (!Instance.AbilitySounds.Any(s => s.Type == sound))
@@ -179,6 +180,19 @@ namespace Sound
             return Rnd(Instance.AbilitySounds.First(s => s.Type == sound).TargetAudio);
         }
 
+        internal static AudioClip GetSound(CreatureSound soundType, SoundSetType soundSetType)
+        {
+            SoundSet set = Instance.GetSoundSetOrStandard(soundSetType);
+
+            AudioClip[] audioClips = set.GetSoundType(soundType);
+
+            if (audioClips != null && audioClips.Any())
+                return Rnd(audioClips);
+
+            return null;
+        }
+
+
 
         private static AudioClip Rnd(AudioClip[] arr)
         {
@@ -187,6 +201,25 @@ namespace Sound
 
             return arr[Random.Range(0, arr.Length)];
         }
+
+        private SoundSet GetStandardSoundSet()
+        {
+            return CreatureSoundSets.First(s => s.Type == SoundSetType.Standard);
+        }
+
+        private SoundSet GetSoundSetOrStandard(SoundSetType soundSet)
+        {
+            System.Func<SoundSet, bool> anySoundSetOfType = s => s.Type == soundSet;
+
+            SoundSet set;
+
+            if (CreatureSoundSets.Any(anySoundSetOfType))
+                set = CreatureSoundSets.First(anySoundSetOfType);
+            else
+                set = GetStandardSoundSet();
+            return set;
+        }
+
 
     }
 

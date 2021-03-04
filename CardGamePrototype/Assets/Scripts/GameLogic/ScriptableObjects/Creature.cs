@@ -25,6 +25,8 @@ namespace GameLogic
 
         public Race Race;
 
+        public SoundSetType SoundSetType;
+
         public float Performance;
 
         public bool TopFocused;
