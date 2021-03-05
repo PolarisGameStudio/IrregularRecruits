@@ -16,8 +16,8 @@ namespace MapLogic
 
         public GainXpOption(int amount)
         {
-            Amount = amount;
-            Name = $"Gain {amount} Xp";
+            Amount = amount / 10;
+            Name = $"Gain {Amount} Xp";
         }
 
         public override float Difficulty()

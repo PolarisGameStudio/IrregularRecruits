@@ -13,17 +13,19 @@ MonoBehaviour:
   m_Name: Metalman
   m_EditorClassIdentifier: 
   name: Metal Man
-  Rarity: 1
+  Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: 03a0fcfade6621040a9a436d5502b781, type: 3}
   IconImage: {fileID: 21300000, guid: 38e9dc949287cac49975a0a95b1e7f50, type: 3}
-  Attack: 3
+  Attack: 5
   Health: 20
-  Traits: []
-  SpecialAbility: {fileID: 11400000, guid: 87cd45386130ff146891c6af07c7de44, type: 2}
+  Traits:
+  - {fileID: 11400000, guid: c9b29c97bdfe17e46b7515b6c49d6943, type: 2}
+  SpecialAbility: {fileID: 0}
   CR: 29
   Enabling: 
   Payoff: 
   Race: {fileID: 11400000, guid: aa96f320044c3a248b7ab3ea6872f26f, type: 2}
+  SoundSetType: 0
   Performance: 0
   TopFocused: 1

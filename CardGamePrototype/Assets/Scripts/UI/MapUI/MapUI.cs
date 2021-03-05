@@ -22,14 +22,16 @@ namespace MapUI
         public GameObject NodeHolder;
         public GameObject MapHolder;
         [Range(0.5f, 5)]
-        public float MapSize;
+        public float MapSizeX;
+        [Range(0.5f, 20)]
+        public float MapSizeY;
+
         public Sprite[] Linetypes;
         public Color MapDrawColor;
         public RectTransform MapStartPosition;
         public Vector3 PositionToCenterDifferience;
         public float NodeFadeTime = 2f;
         public static UnityEvent OnMapOpen = new UnityEvent();
-
         private void Awake()
         {
             Event.OnGameBegin.AddListener(CreateMap);
@@ -102,7 +104,7 @@ namespace MapUI
             //create from node
             yield return CreateNode(startNode, MapStartPosition.position);
             
-            LeanTween.move(MapHolder.gameObject, MapHolder.transform.position-Nodes.First().transform.position - PositionToCenterDifferience, 3f).setEaseInExpo();
+            LeanTween.moveX(MapHolder.gameObject, MapHolder.transform.position.x-Nodes.First().transform.position.x - PositionToCenterDifferience.x, 3f).setEaseInExpo();
 
             yield return DrawStepRecursive(startNode.LeadsTo, 1, shownSteps,Nodes.Single());
 
@@ -123,30 +125,29 @@ namespace MapUI
 
         private IEnumerator DrawStepRecursive(List<MapNode> nodes, int degree, int shownSteps,MapNodeIcon startNode)
         {
-            var r = degree * MapSize;
+            var r = degree * MapSizeX;
 
             var direction = PositionToCenterDifferience.normalized;
 
             //position should be all current node position + mapsize * direction
             
+            var yDiff =  MapSizeY/ nodes.Count;
 
-            var angleDiff = 0.5f * Mathf.PI / nodes.Count;
-
-            var angle = 0f;
-            var rnd = 0.1f;
+            var yPos = -0.5f * MapSizeY ;
+            var rnd = 0.2f;
 
             if (nodes.Count == 1)
-                angle += angleDiff / 2;
+                yPos += yDiff / 2;
 
             foreach (var node in nodes)
             {
-                var x = r * Mathf.Cos(angle + Random.Range(-rnd, rnd));
-                var y = r * Mathf.Sin(angle + Random.Range(-rnd, rnd));
+                var x = r + Random.Range(-rnd, rnd);
+                var y = yPos + Random.Range(-rnd, rnd);
                 var pos = new Vector3(x, y);
 
                 yield return CreateNode(node, startNode.transform.position + pos,degree == 1);
 
-                angle += angleDiff;
+                yPos += yDiff;
             }
 
             var combinedLeadsTo = nodes.SelectMany(n => n.LeadsTo).Distinct().OrderBy(n => n.Id).ToList();

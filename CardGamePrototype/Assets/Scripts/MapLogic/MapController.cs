@@ -115,15 +115,26 @@ namespace MapLogic
                     else {
                         var hardNodeChance = (i - 2f) / settings.MapLength;
 
-                        var goodNodeChance = i >= 2 ? settings.TreasureChance : 0f;
-                        step[j] = GenerateNode(i % 2 == 0, CurrentDifficulty,hardNodeChance);
+                        var goodNodeChance = i >= 2 ? settings.NonCombatNodeChance : 0f;
+                        step[j] = GenerateNode(goodNodeChance > Random.value, CurrentDifficulty,hardNodeChance);
                     } 
                 }
+
+                var extraStepsAtEachPathMin = 1;
+                var extraStepsAtEachPathMax = 4;
+
+                var minRoads = Mathf.Max(lastStep.Length, step.Length);
+                var maxRoads = minRoads* 2 - 1;
+
+                var roadsToCreate = Mathf.Min(maxRoads, minRoads + Random.Range(extraStepsAtEachPathMin, extraStepsAtEachPathMax));
 
                 var edgesPrNode = step.Length / (float)lastStep.Length;
 
                 var parentIdx = 0;
                 var nodeIdx = 0;
+
+                var maxRoadsFrom = 3;
+
                 var extraRoadChance = MapSettings.Instance.ExtraRoadChance;
 
                 lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
@@ -140,18 +151,23 @@ namespace MapLogic
                         if (nodeIdx == step.Length) nodeIdx--;
                         if (parentIdx == lastStep.Length) parentIdx--;
                     }
+                    //TODO: we can still get too many roads from the last one
+                    else if(parentIdx < lastStep.Length-1 && lastStep[parentIdx].LeadsTo.Count >= maxRoads )
+                    {
+                        nodeIdx++;
+                    }
                     else
                     {
                         var parentChance = Random.value * (lastStep.Length - parentIdx - 1);
                         var nodeChance = Random.value * (step.Length - nodeIdx - 1);
 
-                        if (parentChance > nodeChance) parentIdx++;
+                        if (parentChance >= nodeChance) parentIdx++;
                         else nodeIdx++;
                     }
 
                     lastStep[parentIdx].LeadsTo.Add(step[nodeIdx]);
                 }
-                while (nodeIdx < step.Length-1  || parentIdx < lastStep.Length-1 );
+                while (nodeIdx < step.Length - 1 || parentIdx < lastStep.Length - 1);
 
                 lastStep = step;
             }
@@ -191,11 +207,11 @@ namespace MapLogic
 
             var enemyRaces = MapSettings.Instance.EnemyRaces;
 
-            if (BattleManager.Instance.PlayerDeck?.Hero != null && enemyRaces.Contains(BattleManager.Instance.PlayerDeck.Hero.GetRace()))
-            {
-                enemyRaces = MapSettings.Instance.CivilizedRaces;
-                civilizedRaces = new Race[] { BattleManager.Instance.PlayerDeck.Hero.GetRace() };
-            }
+            //if (BattleManager.Instance.PlayerDeck?.Hero != null && enemyRaces.Contains(BattleManager.Instance.PlayerDeck.Hero.GetRace()))
+            //{
+            //    enemyRaces = MapSettings.Instance.CivilizedRaces;
+            //    civilizedRaces = new Race[] { BattleManager.Instance.PlayerDeck.Hero.GetRace() };
+            //}
 
 
 
@@ -203,12 +219,15 @@ namespace MapLogic
             {
                 var v = Random.value;
 
+                float totalFrequency = MapSettings.Instance.VillageFrequency + MapSettings.Instance.GoldFrequency + MapSettings.Instance.XpFrequency;
+
                 //TODO: allow for other types
-                if(v > 0.0f)
+                if (v < MapSettings.Instance.VillageFrequency / totalFrequency )
                 {
-                    node = new MapNode( new VillageShop(CR, civilizedRaces[Random.Range(0,civilizedRaces.Length)]));
+                    node = new MapNode(new VillageShop(CR, civilizedRaces[Random.Range(0, civilizedRaces.Length)]));
                 }
-                else if(v >0.2f )
+                else
+                if (v < (MapSettings.Instance.VillageFrequency+ MapSettings.Instance.GoldFrequency)/ totalFrequency)
                 {
                     //gold
                     node = new MapNode(new GainGoldOption(CR));

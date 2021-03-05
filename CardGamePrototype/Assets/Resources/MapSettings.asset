@@ -20,27 +20,33 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 604fac54e3d24d4499135b06857a66f6, type: 2}
   - {fileID: 11400000, guid: 877d62f9ded80a942bb20bac874c64d1, type: 2}
   - {fileID: 11400000, guid: 1e98dbdbeb42bd844ac1219036d0fad7, type: 2}
-  MapLength: 10
+  MapLength: 20
   MinNodesAtStep: 2
   MaxNodesAtStep: 8
-  VisibleSteps: 3
-  HiddenNodesPct: 0
+  VisibleSteps: 4
+  VillageFrequency: 5
+  GoldFrequency: 3
+  XpFrequency: 2
   RandomnessToDifficulty: 5
-  TreasureChance: 0.3
-  StepDifficultyIncrease: 10
+  NonCombatNodeChance: 0.5
+  StepDifficultyIncrease: 20
+  StartDifficulty: 30
   CivilizedRaces:
   - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
   - {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
   - {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
-  - {fileID: 11400000, guid: aa96f320044c3a248b7ab3ea6872f26f, type: 2}
+  - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
   EnemyRaces:
   - {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
   - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
   - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
   - {fileID: 11400000, guid: bffb2ec3e89bdaf4080ba28acbc87ea2, type: 2}
-  ExtraRoadChance: 0.7
+  - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  - {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
+  - {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
+  ExtraRoadChance: 0.9
   MoneyIcon: {fileID: 21300000, guid: 72450c8078d595948a2f9824282f69d0, type: 3}
-  XpIcon: {fileID: 21300000, guid: e3b88bc90f450aa4baaf2a377c5a541c, type: 3}
+  XpIcon: {fileID: 21300000, guid: f12f1cc0e056079429578a981f0073e7, type: 3}
   UnknownNodeIcon: {fileID: 21300000, guid: 07807b509859236489ea2fe030b08fcb, type: 3}
   VillageIcon: {fileID: 21300000, guid: f721032d8c523764c90634c64d12632d, type: 3}
   GraveYardIcon: {fileID: 21300000, guid: 2ba10e7d1594699448c1924d776a486e, type: 3}

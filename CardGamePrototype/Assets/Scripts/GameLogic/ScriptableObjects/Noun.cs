@@ -147,7 +147,7 @@ namespace GameLogic
                     if (count == Count.One)
                         str += "another ";
                     else if (count != Count.All)
-                        str += count.ToString() + " other ";
+                        str += count.ToString() + "all other ";
                     break;
             }
 

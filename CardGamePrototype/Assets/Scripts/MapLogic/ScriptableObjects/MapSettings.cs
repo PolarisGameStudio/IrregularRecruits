@@ -41,20 +41,24 @@ namespace MapLogic
         public int MapLength;
         [Range(2, 4)]
         public int MinNodesAtStep = 4;
-        //Has to be bigger than max roads from node
         [Range(4, 16)]
         public int MaxNodesAtStep = 8;
-        [Range(-1,4)]
+
+        [Range(-1,6)]
         public int VisibleSteps;//-1 = all visible
-        [Range(0f,1f)]
-        public float HiddenNodesPct;
+        [Range(1, 100)]
+        public int VillageFrequency;
+        [Range(1, 100)]
+        public int GoldFrequency;
+        [Range(1, 100)]
+        public int XpFrequency;
         //[Range(0f,1f)]
         //public float ChanceForReconnectingPaths;
         [Range(0,200)]
         public int RandomnessToDifficulty;
 
         [Range(0.0f,0.95f)]
-        public float TreasureChance = 0.25f;
+        public float NonCombatNodeChance = 0.25f;
         public int StepDifficultyIncrease = 20;
         public int StartDifficulty = 30;
 
