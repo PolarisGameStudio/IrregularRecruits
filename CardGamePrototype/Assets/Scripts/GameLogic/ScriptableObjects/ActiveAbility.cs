@@ -40,7 +40,7 @@ namespace GameLogic
 
         public override bool CanExecute(AbilityHolder owner, Card triggerExecuter)
         {
-            return base.CanExecute(owner, triggerExecuter) &! ActivatedThisTurn && owner.InDeck.DeckController.ActionAvailable();
+            return base.CanExecute(owner, triggerExecuter) && !ActivatedThisTurn && owner.InDeck!=null && owner.InDeck.DeckController.ActionAvailable();
         }
 
         public override string Description(ICharacter owner)

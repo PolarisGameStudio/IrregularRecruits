@@ -463,3 +463,109 @@ MonoBehaviour:
       Sounds:
       - {fileID: 8300000, guid: 1f957a588011efb4892beefe7fd891bd, type: 3}
       - {fileID: 8300000, guid: 95f66393295156e43ba2714146f85181, type: 3}
+  - Type: 7
+    SoundSetSounds:
+    - SoundType: 5
+      Sounds:
+      - {fileID: 8300000, guid: 65d429b2a31fb86448f183dee0db0afa, type: 3}
+    - SoundType: 0
+      Sounds:
+      - {fileID: 8300000, guid: 6f2a729e6b4115b43b28153dfd522c68, type: 3}
+      - {fileID: 8300000, guid: 25ca705a77f57424fb9e9724b0a21233, type: 3}
+      - {fileID: 8300000, guid: 573568108ba5a1348a9755c32fa1627c, type: 3}
+      - {fileID: 8300000, guid: b5e1fa4aa326b0c44af33a0921bac922, type: 3}
+      - {fileID: 8300000, guid: 19d8daa1ad4e8d84bb90b76df0d08d54, type: 3}
+    - SoundType: 1
+      Sounds:
+      - {fileID: 8300000, guid: cfdd945d63b361540af67786ec3cf843, type: 3}
+      - {fileID: 8300000, guid: 1e70d57777bd1ce4280bb2359a893e6a, type: 3}
+      - {fileID: 8300000, guid: d062c593398c08246aa2a5cee0ad81ef, type: 3}
+    - SoundType: 2
+      Sounds:
+      - {fileID: 8300000, guid: aad78ae5b0e8f4a49901e46700382de8, type: 3}
+      - {fileID: 8300000, guid: eaa8ee87c533ae14f8512d040dbae2a2, type: 3}
+      - {fileID: 8300000, guid: a845a320370b88d44ba3fafade84ba06, type: 3}
+      - {fileID: 8300000, guid: d388bae4addfa384e93de1daa341a9d5, type: 3}
+      - {fileID: 8300000, guid: 22fc2fe09cd7c1c4ca03873575c43d1c, type: 3}
+    - SoundType: 4
+      Sounds:
+      - {fileID: 8300000, guid: 22f9f522006252244b71d372f2c3cff0, type: 3}
+      - {fileID: 8300000, guid: b10c88061dec22d40ba6d93be713688c, type: 3}
+      - {fileID: 8300000, guid: ece286de318b7fc4483d28db224398f1, type: 3}
+      - {fileID: 8300000, guid: dd088b1737387f24ba72c7f484fa5847, type: 3}
+      - {fileID: 8300000, guid: 9535013e36ab55b4a8a0fed830e868b4, type: 3}
+    - SoundType: 8
+      Sounds:
+      - {fileID: 8300000, guid: 8ca6ba84f82bde84680427707bc45211, type: 3}
+      - {fileID: 8300000, guid: 27337afb05458934dbcbe87b0b2891c9, type: 3}
+      - {fileID: 8300000, guid: 39fc4fd1f7d299c41a84e104c1e3b11a, type: 3}
+  - Type: 8
+    SoundSetSounds:
+    - SoundType: 5
+      Sounds:
+      - {fileID: 8300000, guid: cfefeaf043894e544963e2207f6927cb, type: 3}
+    - SoundType: 0
+      Sounds:
+      - {fileID: 8300000, guid: 3b9bb29c5650fb140a065fbc0b7c06cd, type: 3}
+      - {fileID: 8300000, guid: d6885b1b766efa14ab420a536b06cafd, type: 3}
+      - {fileID: 8300000, guid: 896957de2338ca14f8cf85409819faf4, type: 3}
+      - {fileID: 8300000, guid: 3e835a28464a3344888a93d0424e377a, type: 3}
+      - {fileID: 8300000, guid: ea5972cdadde73f43a349373f619197b, type: 3}
+    - SoundType: 1
+      Sounds:
+      - {fileID: 8300000, guid: 4cdf6e261e34a6d4c8bd39415b953e0c, type: 3}
+      - {fileID: 8300000, guid: 1572c9e0372bad64dbc50f229ac1a7ee, type: 3}
+      - {fileID: 8300000, guid: 127f92155df47ef45b74ffa23db26c9a, type: 3}
+      - {fileID: 8300000, guid: 69221471d3488944d9344f086bee50f9, type: 3}
+      - {fileID: 8300000, guid: 31d69ce62b0c352408d02ccb4c6e0e9b, type: 3}
+    - SoundType: 2
+      Sounds:
+      - {fileID: 8300000, guid: ec14c515a39d02446a165cecfb90c0f0, type: 3}
+      - {fileID: 8300000, guid: 06046a958b8479b45b9342515b39d036, type: 3}
+      - {fileID: 8300000, guid: b44ba763d934c834087b69e05d246c7a, type: 3}
+      - {fileID: 8300000, guid: b8d8838d2aafa5241be3a9056513211a, type: 3}
+    - SoundType: 4
+      Sounds:
+      - {fileID: 8300000, guid: 21f269a7afaa16e44ac7a9984e809846, type: 3}
+      - {fileID: 8300000, guid: 1b587d6e3b340cc49ba9c3a0f222019c, type: 3}
+      - {fileID: 8300000, guid: a89aa003e0986cc48a94c29d9c9c6497, type: 3}
+    - SoundType: 8
+      Sounds:
+      - {fileID: 8300000, guid: 962ff60359a0ecd4dbb45831055b259d, type: 3}
+      - {fileID: 8300000, guid: 7c5f5a89dd73a4248bba5d1b61fed337, type: 3}
+  - Type: 9
+    SoundSetSounds:
+    - SoundType: 5
+      Sounds:
+      - {fileID: 8300000, guid: 52988ba9d1b847f45a8e44847f4a276f, type: 3}
+      - {fileID: 8300000, guid: 9cd2a0217e4647b45a0c2516c7740483, type: 3}
+      - {fileID: 8300000, guid: 7be7c98af5ea435468ed0b0bfd89aeee, type: 3}
+    - SoundType: 0
+      Sounds:
+      - {fileID: 8300000, guid: 4c0e3f4f12e65164dba02550a6c9e75c, type: 3}
+      - {fileID: 8300000, guid: 56bab86dc7561e941b581142370e89f9, type: 3}
+      - {fileID: 8300000, guid: 93a5e63f4f719634fb678726c7dac277, type: 3}
+      - {fileID: 8300000, guid: b61bf2fe8678353419f9539eb3fefb9e, type: 3}
+      - {fileID: 8300000, guid: 544fb64ecb3fabc4ab98386aaf9a6fa1, type: 3}
+      - {fileID: 8300000, guid: 399b39693e8d91e49ad977c860d337a5, type: 3}
+      - {fileID: 8300000, guid: 7be7c98af5ea435468ed0b0bfd89aeee, type: 3}
+      - {fileID: 8300000, guid: 6ec5d30a4db277f4ba78ae9699c7da8b, type: 3}
+    - SoundType: 1
+      Sounds:
+      - {fileID: 8300000, guid: 3d6209b82cd08034cb0b936102a73b9d, type: 3}
+      - {fileID: 8300000, guid: 682cc2d8972c26e4386b32dd30a17479, type: 3}
+      - {fileID: 8300000, guid: b2c87436b5276d94fbebfd9965e9f4ab, type: 3}
+    - SoundType: 2
+      Sounds:
+      - {fileID: 8300000, guid: adfa6dbb6b93575488087d0689f3f878, type: 3}
+      - {fileID: 8300000, guid: 61898636b45468f48a30199af954a423, type: 3}
+      - {fileID: 8300000, guid: 3624ba5f0526f1e47996a90eabe3c0e3, type: 3}
+    - SoundType: 4
+      Sounds:
+      - {fileID: 8300000, guid: 3bd65526e63f1f14c9a54af82229f814, type: 3}
+      - {fileID: 8300000, guid: 4c745b760ab37e24696bb9b695663515, type: 3}
+      - {fileID: 8300000, guid: 23e2e87eca4ba3744acc420bf957ec51, type: 3}
+    - SoundType: 8
+      Sounds:
+      - {fileID: 8300000, guid: b35245e50ec726946a6ead2c3c39a01f, type: 3}
+      - {fileID: 8300000, guid: 7585ebe9b8134a64f957ccaeb9337ea6, type: 3}

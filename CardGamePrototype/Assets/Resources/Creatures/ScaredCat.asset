@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: LittleCatGirl
+  m_Name: ScaredCat
   m_EditorClassIdentifier: 
   name: Scared Cat
   Rarity: 0
@@ -25,4 +25,6 @@ MonoBehaviour:
   Enabling: 0300000006000000
   Payoff: 
   Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
+  SoundSetType: 8
   Performance: -447.51416
+  TopFocused: 0
