@@ -1,4 +1,4 @@
-﻿using GameLogic;
+using GameLogic;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,23 +18,12 @@ namespace MapLogic
         public List<Race> AdditionalRaces = new List<Race>();
         public int MinCr = 10;
         public int MaxCr = 100;
-        private int cRValue;
-        public int CRValue
-        {
-            get
-            {
-                if (cRValue <= 0)
-                    cRValue = Random.Range(MinCr, MaxCr);
-
-                return cRValue;
-            }
-            set => cRValue = value;
-        }
+        public int CRValue;
         public bool UniquesAllowed;
 
         public CombatOption(Race race, int combatRating, bool allowUniques)
         {
-            cRValue = combatRating;
+            CRValue = combatRating;
             MainRace = race;
 
             var friendChance = 0.3f;
@@ -55,7 +44,7 @@ namespace MapLogic
 
         public override float Difficulty()
         {
-            return cRValue;
+            return CRValue;
         }
 
         public override void ExecuteOption(MapNode owner)
