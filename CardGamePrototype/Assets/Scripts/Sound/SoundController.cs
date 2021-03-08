@@ -66,7 +66,8 @@ namespace Sound
 
         private void PlayCardSound(CreatureBark soundType, GameLogic.SoundSetType soundSetType)
         {
-            SfxAudioSource.PlayOneShot(SoundLibrary.GetSound(soundType, soundSetType));
+            
+            SfxAudioSource.PlayOneShot(SoundLibrary.GetSound(soundType, GameLogic.SoundSetType.Standard));
         }
 
         public void PlayButtonClick()
