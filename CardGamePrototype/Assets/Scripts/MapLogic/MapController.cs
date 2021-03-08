@@ -152,14 +152,14 @@ namespace MapLogic
                         if (parentIdx == lastStep.Length) parentIdx--;
                     }
                     //TODO: we can still get too many roads from the last one
-                    else if(parentIdx < lastStep.Length-1 && lastStep[parentIdx].LeadsTo.Count >= maxRoads )
+                    else if(parentIdx < lastStep.Length-1 && lastStep[parentIdx].LeadsTo.Count >= maxRoadsFrom )
                     {
-                        nodeIdx++;
+                        parentIdx++;
                     }
                     else
                     {
-                        var parentChance = Random.value * (lastStep.Length - parentIdx - 1);
-                        var nodeChance = Random.value * (step.Length - nodeIdx - 1);
+                        var parentChance = Random.value * (lastStep.Length - parentIdx - 1)+ (lastStep.Length - parentIdx - 1);
+                        var nodeChance = Random.value * (step.Length - nodeIdx - 1) + (step.Length - nodeIdx - 1);
 
                         if (parentChance >= nodeChance) parentIdx++;
                         else nodeIdx++;

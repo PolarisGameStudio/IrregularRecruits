@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1e98dbdbeb42bd844ac1219036d0fad7, type: 2}
   MapLength: 20
   MinNodesAtStep: 2
-  MaxNodesAtStep: 8
+  MaxNodesAtStep: 6
   VisibleSteps: 4
   VillageFrequency: 5
   GoldFrequency: 3

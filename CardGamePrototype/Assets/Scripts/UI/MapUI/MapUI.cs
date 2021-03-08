@@ -101,8 +101,10 @@ namespace MapUI
 
             Nodes.Clear();
             
+
+
             //create from node
-            yield return CreateNode(startNode, MapStartPosition.position);
+            yield return CreateNode(startNode, new Vector3(MapStartPosition.position.x,0));
             
             LeanTween.moveX(MapHolder.gameObject, MapHolder.transform.position.x-Nodes.First().transform.position.x - PositionToCenterDifferience.x, 3f).setEaseInExpo();
 
@@ -116,7 +118,7 @@ namespace MapUI
 
         private  IEnumerator DestroyNode(MapNodeIcon n)
         {
-            n.CanvasGroup.LeanAlpha(0.4f, NodeFadeTime);
+            n.CanvasGroup.LeanAlpha(0f, NodeFadeTime);
 
             yield return new WaitForSeconds(NodeFadeTime);
 
@@ -126,8 +128,6 @@ namespace MapUI
         private IEnumerator DrawStepRecursive(List<MapNode> nodes, int degree, int shownSteps,MapNodeIcon startNode)
         {
             var r = degree * MapSizeX;
-
-            var direction = PositionToCenterDifferience.normalized;
 
             //position should be all current node position + mapsize * direction
             
@@ -139,13 +139,16 @@ namespace MapUI
             if (nodes.Count == 1)
                 yPos += yDiff / 2;
 
+            //always centered on the y position
+            var anchorPos = new Vector3(startNode.transform.position.x, 0);
+
             foreach (var node in nodes)
             {
                 var x = r + Random.Range(-rnd, rnd);
                 var y = yPos + Random.Range(-rnd, rnd);
                 var pos = new Vector3(x, y);
 
-                yield return CreateNode(node, startNode.transform.position + pos,degree == 1);
+                yield return CreateNode(node, anchorPos + pos,degree == 1);
 
                 yPos += yDiff;
             }
