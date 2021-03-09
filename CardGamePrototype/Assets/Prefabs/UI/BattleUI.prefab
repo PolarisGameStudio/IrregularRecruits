@@ -1394,7 +1394,6 @@ MonoBehaviour:
   InstantiatedObjects: []
   AlwaysFaceUp: 0
   Interactable: 1
-  HealthValueDisplayed: 0
   CurrentZoneLayout: {fileID: 0}
   CanTransitionTo: {fileID: 0}
   LayoutIndex: 0
@@ -1858,7 +1857,6 @@ MonoBehaviour:
   InstantiatedObjects: []
   AlwaysFaceUp: 0
   Interactable: 1
-  HealthValueDisplayed: 0
   CurrentZoneLayout: {fileID: 0}
   CanTransitionTo: {fileID: 0}
   LayoutIndex: 0
@@ -13171,7 +13169,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 500, y: -200}
-  m_SizeDelta: {x: 1000, y: 200}
+  m_SizeDelta: {x: 1000, y: 240}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &5814319597416379553
 MonoBehaviour:
@@ -13248,8 +13246,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   FirstCardRotation: 12
   LastCardRotation: -12
-  MinimumPositions: 8
-  MaximumPositions: 12
+  MinimumPositions: 7
+  MaximumPositions: 10
   TransitionsTo: {fileID: 9019354100244692800}
 --- !u!1 &3660017128358087259
 GameObject:
@@ -13523,7 +13521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3660017128546219738
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13538,10 +13536,10 @@ RectTransform:
   m_Father: {fileID: 3660017127374411626}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -12.806671}
+  m_SizeDelta: {x: 100, y: 12.806657}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3660017128546219719
 CanvasRenderer:
@@ -26128,7 +26126,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -50, y: 0}
-  m_SizeDelta: {x: 140, y: 80}
+  m_SizeDelta: {x: 150, y: 120}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &925511948632167941
 CanvasRenderer:
@@ -26157,8 +26155,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4a7bb24e8bee1ba4f898ce39e8b222ec, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 741bfa6ed2e988a4f82c8bda76d7291f, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -27207,10 +27205,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start Combat
+  m_text: End turn
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 98f9108a4306c8542989800e9d595d2a, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 9cdc02962f94fca488687100cbbd37b1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f5077a1c077273c4382992a5d3cb3828, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 14c5e31bb701e57469471cb34b820591, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -27235,17 +27233,17 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 32.55
+  m_fontSize: 50.95
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -25
+  m_lineSpacing: -15
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -27276,7 +27274,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1597070166727517233}
-    characterCount: 12
+    characterCount: 8
     spriteCount: 0
     spaceCount: 1
     wordCount: 2

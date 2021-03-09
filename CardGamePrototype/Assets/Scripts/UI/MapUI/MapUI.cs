@@ -26,6 +26,7 @@ namespace MapUI
         [Range(0.5f, 20)]
         public float MapSizeY;
 
+        public float MapEdgeLength = 0.8f;
         public Sprite[] Linetypes;
         public Color MapDrawColor;
         public RectTransform MapStartPosition;
@@ -212,7 +213,7 @@ namespace MapUI
 
             var targetDir = finish.transform.position - start.transform.position;
 
-            line.transform.localScale = new Vector3(targetDir.magnitude*0.8f, 1);
+            line.transform.localScale = new Vector3(targetDir.magnitude* MapEdgeLength, 1);
 
             targetDir = targetDir.normalized;
 
