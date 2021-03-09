@@ -24,6 +24,9 @@ MonoBehaviour:
   MinNodesAtStep: 2
   MaxNodesAtStep: 6
   VisibleSteps: 4
+  HardCombatFrequency: 3
+  StandardCombatFrequency: 7
+  EventFrequency: 0
   VillageFrequency: 5
   GoldFrequency: 3
   XpFrequency: 2

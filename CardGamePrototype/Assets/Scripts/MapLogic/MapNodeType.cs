@@ -6,6 +6,7 @@
         HardCombat,
         Treasure,
         Xp,
+        Village,
         Event,
     }
 }

@@ -12,6 +12,7 @@ using Random = UnityEngine.Random;
 
 namespace MapLogic
 {
+
     public class MapController 
     {
         private static MapController instance;
@@ -71,32 +72,38 @@ namespace MapLogic
 
             var noOfNodes = nodesAtStep.Sum();
 
-            var locations = settings.Locations.OrderBy(c => Random.value).ToList();
+            //TODO: should only be Event locations
+            var uniqueLocations = settings.EventLocations.OrderBy(c => Random.value).ToList();
 
             //only one startnode
-            while (locations.Count(l => l.IsStartNode()) > 1)
-                locations.Remove(locations.First(l => l.IsStartNode()));
+            while (uniqueLocations.Count(l => l.IsStartNode()) > 1)
+                uniqueLocations.Remove(uniqueLocations.First(l => l.IsStartNode()));
 
             //only one winnode
-            while (locations.Count(l => l.IsWinNode()) > 1)
-                locations.Remove(locations.First(l => l.IsWinNode()));
+            while (uniqueLocations.Count(l => l.IsWinNode()) > 1)
+                uniqueLocations.Remove(uniqueLocations.First(l => l.IsWinNode()));
 
-            var nonUniques = locations.Where(l => !l.IsUniqueNode()).ToArray();
+            var nonUniques = uniqueLocations.Where(l => !l.IsUniqueNode()).ToArray();
 
-            //correct number of locations
-            while (locations.Count < noOfNodes)
-            {
-                locations.Add(nonUniques[Random.Range(0, nonUniques.Length)]);
-            }
+            var nodeTypes = new Dictionary<MapNodeType, int>();
 
-            while (locations.Count > noOfNodes)
-            {
-                locations.Remove(locations.First(l => !l.IsStartNode() && !l.IsWinNode()));
-            }
+            float totalFrequency = MapSettings.Instance.HardCombatFrequency
+                + MapSettings.Instance.StandardCombatFrequency
+                + MapSettings.Instance.EventFrequency
+                + MapSettings.Instance.VillageFrequency + MapSettings.Instance.GoldFrequency + MapSettings.Instance.XpFrequency;
 
-            locations = locations.OrderBy(d => d.Difficulty() + settings.RandomnessToDifficulty * Random.value).ToList();
+            nodeTypes[MapNodeType.Treasure] =Mathf.RoundToInt(  noOfNodes * (MapSettings.Instance.GoldFrequency / totalFrequency));
+            nodeTypes[MapNodeType.Event] =Mathf.RoundToInt(  noOfNodes * (MapSettings.Instance.EventFrequency/ totalFrequency));
+            nodeTypes[MapNodeType.HardCombat] =Mathf.RoundToInt(  noOfNodes * (MapSettings.Instance.HardCombatFrequency/ totalFrequency));
 
-            MapNode[] lastStep = { GenerateNode(locations.Single(l => l.IsStartNode()), locations) };
+            //only standard combats at first step, so they don't count
+            nodeTypes[MapNodeType.StandardCombat] =Mathf.RoundToInt(  noOfNodes * (MapSettings.Instance.StandardCombatFrequency/ totalFrequency)) - nodesAtStep[1];
+            nodeTypes[MapNodeType.Xp] =Mathf.RoundToInt(  noOfNodes * (MapSettings.Instance.XpFrequency/ totalFrequency));
+            nodeTypes[MapNodeType.Village] =Mathf.RoundToInt(  noOfNodes * (MapSettings.Instance.VillageFrequency/ totalFrequency));
+
+            uniqueLocations = uniqueLocations.OrderBy(d => d.Difficulty + settings.RandomnessToDifficulty * Random.value).ToList();
+
+            MapNode[] lastStep = { GenerateNode(uniqueLocations.Single(l => l.IsStartNode()), uniqueLocations) };
 
             for (int i = 1; i < settings.MapLength; i++)
             {
@@ -111,14 +118,16 @@ namespace MapLogic
                 {
 
                     if (i == settings.MapLength - 1)
-                        step[j] = GenerateNode(locations.Single(l => l.IsWinNode()), locations);
+                        step[j] = GenerateNode(uniqueLocations.Single(l => l.IsWinNode()), uniqueLocations);
+                    else if (i == 1)
+                        step[j] = GenerateNode(MapNodeType.StandardCombat,CurrentDifficulty,uniqueLocations);
                     else {
-                        var hardNodeChance = (i - 2f) / settings.MapLength;
+                        MapNodeType nodeType = GetNextNode(nodeTypes);
 
-                        var goodNodeChance = i >= 2 ? settings.NonCombatNodeChance : 0f;
-                        step[j] = GenerateNode(goodNodeChance > Random.value, CurrentDifficulty,hardNodeChance);
+                        step[j] = GenerateNode(nodeType , CurrentDifficulty,uniqueLocations);
                     } 
                 }
+
 
                 var extraStepsAtEachPathMin = 1;
                 var extraStepsAtEachPathMax = 4;
@@ -172,7 +181,30 @@ namespace MapLogic
                 lastStep = step;
             }
 
+            Debug.Log("unused nodes left: " + nodeTypes.Count);
+
             CurrentNode = Nodes.Single(n => n.IsStartNode());
+        }
+
+        private MapNodeType GetNextNode(Dictionary<MapNodeType, int> nodeTypes)
+        {
+            var acc = 0;
+            var total = nodeTypes.Values.Sum();
+
+            var rnd = Random.Range(1, total+1);
+
+            foreach(var n in nodeTypes)
+            {
+                if (rnd <= n.Value + acc)
+                {
+                    nodeTypes[n.Key]--;
+                    return n.Key;
+                }
+                acc += n.Value;
+            }
+
+            throw new Exception("Paw math error, acc: "+ acc + ", rnd val: "+ rnd + ", total: "+ total);
+
         }
 
         public void MoveToNode(MapNode node)
@@ -192,7 +224,7 @@ namespace MapLogic
         }
 
 
-        private MapNode GenerateNode(bool goodNode,int CR,float hardCombatChance = 0f)
+        private MapNode GenerateNode(MapNodeType type,int CR, List<MapLocation> uniqueLocations)
         {
             MapNode node;
 
@@ -207,54 +239,33 @@ namespace MapLogic
 
             var enemyRaces = MapSettings.Instance.EnemyRaces;
 
-            //if (BattleManager.Instance.PlayerDeck?.Hero != null && enemyRaces.Contains(BattleManager.Instance.PlayerDeck.Hero.GetRace()))
-            //{
-            //    enemyRaces = MapSettings.Instance.CivilizedRaces;
-            //    civilizedRaces = new Race[] { BattleManager.Instance.PlayerDeck.Hero.GetRace() };
-            //}
+            var race = enemyRaces[Random.Range(0, enemyRaces.Length)];
 
-
-
-            if (goodNode)
+            switch (type)
             {
-                var v = Random.value;
-
-                float totalFrequency = MapSettings.Instance.VillageFrequency + MapSettings.Instance.GoldFrequency + MapSettings.Instance.XpFrequency;
-
-                //TODO: allow for other types
-                if (v < MapSettings.Instance.VillageFrequency / totalFrequency )
-                {
-                    node = new MapNode(new VillageShop(CR, civilizedRaces[Random.Range(0, civilizedRaces.Length)]));
-                }
-                else
-                if (v < (MapSettings.Instance.VillageFrequency+ MapSettings.Instance.GoldFrequency)/ totalFrequency)
-                {
+                case MapNodeType.HardCombat:
+                    node = new MapNode(new CombatOption(race, CR * 2, true));
+                    break;
+                case MapNodeType.Treasure:
                     //gold
                     node = new MapNode(new GainGoldOption(CR));
-                }
-                else
-                {
+                    break;
+                case MapNodeType.Xp:
                     //xp
                     node = new MapNode(new GainXpOption(CR));
-                }
-                    
+                    break;
+                case MapNodeType.Event:
+                    node = new MapNode(uniqueLocations[Random.Range(0, uniqueLocations.Count)]);
+                    break;
+                case MapNodeType.Village:
+                    node = new MapNode(new VillageShop(CR, civilizedRaces[Random.Range(0, civilizedRaces.Length)]));
+                    break;
+                case MapNodeType.StandardCombat:
+                default:
+                    node = new MapNode(new CombatOption(race, CR, false));
+                    break;
             }
-            else
-            {
-                var race = enemyRaces[Random.Range(0, enemyRaces.Length)];
 
-
-                if (hardCombatChance > Random.value)
-                {
-                    node = new MapNode( new CombatOption(race,CR * 2,true));
-
-                }
-                else
-                {
-                    node = new MapNode(new CombatOption(race, CR,false));
-                }
-
-            }
 
             Nodes.Add(node);
 
@@ -263,7 +274,7 @@ namespace MapLogic
             return node;
         }
 
-        private MapNode GenerateNode(IMapLocation locationObject, List<IMapLocation> locations)
+        private MapNode GenerateNode(MapLocation locationObject, List<MapLocation> locations)
         {
             locations.Remove(locationObject);
 

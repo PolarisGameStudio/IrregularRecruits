@@ -11,29 +11,10 @@ namespace MapLogic
     public class MapSettings : SingletonScriptableObject<MapSettings>
     {
         [SerializeField]
-        private List<MapLocation> EventLocations;
+        public List<MapLocation> EventLocations;
         [SerializeField]
         private List<MapOption> BasicLocations;
 
-        private List<IMapLocation> locations;
-
-        public List<IMapLocation> Locations
-        {
-            get
-            {
-                if(locations == null)
-                {
-                    locations = new List<IMapLocation>();
-                    locations.AddRange(EventLocations);
-                    locations.AddRange(BasicLocations);
-                }
-
-                return locations;
-            }
-
-            set =>
-               locations = value;
-        }
 
 
         [Header("Generation")]
@@ -46,6 +27,14 @@ namespace MapLogic
 
         [Range(-1,6)]
         public int VisibleSteps;//-1 = all visible
+
+        //TODO: turn all of these into a list of MapNodeType to int tuples
+        [Range(1, 100)]
+        public int HardCombatFrequency;
+        [Range(1, 100)]
+        public int StandardCombatFrequency;
+        [Range(0, 100)]
+        public int EventFrequency;
         [Range(1, 100)]
         public int VillageFrequency;
         [Range(1, 100)]
