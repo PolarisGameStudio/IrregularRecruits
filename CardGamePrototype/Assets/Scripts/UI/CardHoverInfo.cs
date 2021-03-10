@@ -136,6 +136,13 @@ namespace UI
 
                 if (Creature.SpecialAbility is PassiveAbility ability)
                     AbilityIcon.Image.sprite = IconLibrary.GetAbilityIconSprite(ability.ResultingAction.ActionType);
+                
+                if (Creature.SpecialAbility is EffectDoublerAbility ability1)
+                    AbilityIcon.Image.sprite = IconLibrary.GetAbilityIconSprite(ability1.Effect);
+                
+                if (Creature.SpecialAbility is TriggerDoublerAbility ability2)
+                    AbilityIcon.Image.sprite = IconLibrary.GetAbilityIconSprite(ability2.EffectTrigger);
+
             }
 
             //public ImageTextEntry TraitPrefab;

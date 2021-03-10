@@ -134,7 +134,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 250, y: 320}
+  m_CellSize: {x: 250, y: 350}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
   m_ConstraintCount: 4
@@ -2133,12 +2133,12 @@ PrefabInstance:
     - target: {fileID: 3647378737500881846, guid: 8ba74a1c13a7ed44fae40a93abce7f51,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 145
+      value: 551.5
       objectReference: {fileID: 0}
     - target: {fileID: 3647378737500881846, guid: 8ba74a1c13a7ed44fae40a93abce7f51,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -180
+      value: -195
       objectReference: {fileID: 0}
     - target: {fileID: 3647378737500881846, guid: 8ba74a1c13a7ed44fae40a93abce7f51,
         type: 3}
@@ -2148,7 +2148,7 @@ PrefabInstance:
     - target: {fileID: 3647378737500881846, guid: 8ba74a1c13a7ed44fae40a93abce7f51,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 320
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 3647378737500881846, guid: 8ba74a1c13a7ed44fae40a93abce7f51,
         type: 3}

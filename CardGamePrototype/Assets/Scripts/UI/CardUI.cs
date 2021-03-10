@@ -153,6 +153,32 @@ namespace UI
 
                     SpecialAbilityIcon.Add(instance);
                 }
+                if(creature.SpecialAbility is EffectDoublerAbility doubler)
+                {
+                    if (DescriptionText)
+                        DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
+
+                    var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
+                    instance.gameObject.SetActive(true);
+                    instance.sprite = IconLibrary.GetAbilityIconSprite(doubler.Effect);
+
+                    InstantiatedObjects.Add(instance.gameObject);
+
+                    SpecialAbilityIcon.Add(instance);
+                }
+                if(creature.SpecialAbility is TriggerDoublerAbility doubleTrigger)
+                {
+                    if (DescriptionText)
+                        DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
+
+                    var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
+                    instance.gameObject.SetActive(true);
+                    instance.sprite = IconLibrary.GetAbilityIconSprite(doubleTrigger.EffectTrigger);
+
+                    InstantiatedObjects.Add(instance.gameObject);
+
+                    SpecialAbilityIcon.Add(instance);
+                }
             }
         }
 

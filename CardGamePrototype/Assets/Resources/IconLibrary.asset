@@ -43,3 +43,24 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: d08808bbbecdafd4da3ea706c51f5de7, type: 3}
   - ActionType: 14
     Sprite: {fileID: 21300000, guid: 72450c8078d595948a2f9824282f69d0, type: 3}
+  AbilityTriggerIcons:
+  - Trigger: 0
+    Sprite: {fileID: 21300000, guid: a92b6004430696542b08ea0f961d815c, type: 3}
+  - Trigger: 1
+    Sprite: {fileID: 21300000, guid: b8c0d5f83546e48488c903dfee789aac, type: 3}
+  - Trigger: 2
+    Sprite: {fileID: 21300000, guid: 4dc8bc6f4c79937419892d0d7c410c15, type: 3}
+  - Trigger: 3
+    Sprite: {fileID: 21300000, guid: b3457595b6e9d2c42bb6f241dc79f879, type: 3}
+  - Trigger: 4
+    Sprite: {fileID: 21300000, guid: 4de4c64363009dd4d8d3e7666215c17c, type: 3}
+  - Trigger: 5
+    Sprite: {fileID: 21300000, guid: 1067d2ad0e7d33d4ab117eed29de9f82, type: 3}
+  - Trigger: 6
+    Sprite: {fileID: 21300000, guid: 96375543f00401b4ebebc14a6e278fe0, type: 3}
+  - Trigger: 7
+    Sprite: {fileID: 21300000, guid: e3b88bc90f450aa4baaf2a377c5a541c, type: 3}
+  - Trigger: 8
+    Sprite: {fileID: 21300000, guid: f4815ac42831a5549a21d47fd0478306, type: 3}
+  - Trigger: 9
+    Sprite: {fileID: 21300000, guid: 8df002a01a1e1664a92cac2e735b1e51, type: 3}

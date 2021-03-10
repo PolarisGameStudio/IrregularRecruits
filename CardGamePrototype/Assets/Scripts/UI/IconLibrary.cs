@@ -9,9 +9,14 @@ namespace UI
     public class IconLibrary : SingletonScriptableObject<IconLibrary>
     {
         [System.Serializable]
-        public struct AbilityActionIcon { public EffectType ActionType; public Sprite Sprite; }
+        public struct AbilityEffectIcon { public EffectType ActionType; public Sprite Sprite; }
 
-        public AbilityActionIcon[] AbilityActionIcons;
+        public AbilityEffectIcon[] AbilityActionIcons;
+
+        [System.Serializable]
+        public struct AbilityTriggerIcon { public TriggerType Trigger; public Sprite Sprite; }
+
+        public AbilityTriggerIcon[] AbilityTriggerIcons;
 
         public static Sprite GetAbilityIconSprite(EffectType actionType)
         {
@@ -20,5 +25,11 @@ namespace UI
             return Instance.AbilityActionIcons.First(ai => ai.ActionType == actionType).Sprite;
         }
 
+        internal static Sprite GetAbilityIconSprite(TriggerType effectTrigger)
+        {
+            if (!Instance.AbilityTriggerIcons.Any(ai => ai.Trigger == effectTrigger)) return null;
+
+            return Instance.AbilityTriggerIcons.First(ai => ai.Trigger == effectTrigger).Sprite;
+        }
     }
 }
