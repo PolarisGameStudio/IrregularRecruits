@@ -9,18 +9,22 @@ namespace MapUI
 {
     public class HeroMapIcon :MonoBehaviour {
         public Button Portrait;
+        public Image LevelupIcon;
 
         private void Awake()
         {
             Portrait.onClick.AddListener(HeroView.Open);
 
-            Event.OnHeroSelect.AddListener(ChangeIcon);
+            Event.OnHeroSelect.AddListener(UpdateIcon);
+            Event.OnLevelUp.AddListener(UpdateIcon);
+            Event.OnLevelUpSelection.AddListener(UpdateIcon);
 
         }
 
-        private void ChangeIcon(Hero hero)
+        private void UpdateIcon(Hero hero)
         {
             Portrait.image.sprite = hero.HeroObject.Portrait;
+            LevelupIcon.enabled = hero.LevelUpPoints > 0;
         }
     }
 

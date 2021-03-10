@@ -83,7 +83,7 @@ namespace MapUI
 
         public void MoveHero(MapNodeIcon node)
         {
-            LeanTween.move(HeroIcon.gameObject, node.transform.position, 1.5f);
+            LeanTween.moveLocal(HeroIcon.gameObject, node.transform.localPosition, 1.5f);
         }
 
         private IEnumerator DrawMap(MapNode startNode, int shownSteps = 1000)
