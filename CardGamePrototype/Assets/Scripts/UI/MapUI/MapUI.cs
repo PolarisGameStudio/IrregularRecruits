@@ -10,6 +10,7 @@ using UI;
 
 namespace MapUI
 {
+
     public class MapUI : Singleton<MapUI>, IUIWindow
     {
         public MapNodeIcon NodeIconPrefab;
@@ -33,7 +34,8 @@ namespace MapUI
         public Vector3 PositionToCenterDifferience;
         public float NodeFadeTime = 2f;
         public static UnityEvent OnMapOpen = new UnityEvent();
-        private void Awake()
+
+        private void Start()
         {
             Event.OnGameBegin.AddListener(CreateMap);
 

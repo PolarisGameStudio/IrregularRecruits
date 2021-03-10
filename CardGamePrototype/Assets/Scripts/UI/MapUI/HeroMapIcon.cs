@@ -24,7 +24,18 @@ namespace MapUI
         private void UpdateIcon(Hero hero)
         {
             Portrait.image.sprite = hero.HeroObject.Portrait;
-            LevelupIcon.enabled = hero.LevelUpPoints > 0;
+
+
+            var before = LevelupIcon.enabled;
+            bool lvlUp = hero.LevelUpPoints > 0;
+            LevelupIcon.enabled = lvlUp;
+
+            if (lvlUp & !before)
+            {
+                AnimationSystem.PlayLevelupFX(transform.position);
+                BattleUI.OnLevelUp.Invoke();
+            }
+
         }
     }
 

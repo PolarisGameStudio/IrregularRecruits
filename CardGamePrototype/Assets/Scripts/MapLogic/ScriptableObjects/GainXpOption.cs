@@ -12,12 +12,14 @@ namespace MapLogic
         public GainXpOption()
         {
             Name = $"Campsite";
+            PopUpDescription = $"{Amount} XP";
         }
 
         public GainXpOption(int amount)
         {
             Amount = amount / 10;
             Name = $"Campsite";
+            PopUpDescription = $"{Amount} XP";
         }
 
         public override float Difficulty()

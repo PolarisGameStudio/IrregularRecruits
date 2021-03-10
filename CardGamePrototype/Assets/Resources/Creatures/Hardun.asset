@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hardun
   m_EditorClassIdentifier: 
   name: Hardun Enraged
-  Rarity: 1
+  Rarity: 2
   Locked: 0
   Image: {fileID: 21300000, guid: 24a16ceab87024a43b99f1f24078ab7e, type: 3}
   IconImage: {fileID: 0}
@@ -26,4 +26,6 @@ MonoBehaviour:
   Enabling: 070000000500000008000000
   Payoff: 
   Race: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
+  SoundSetType: 0
   Performance: -22.900387
+  TopFocused: 0

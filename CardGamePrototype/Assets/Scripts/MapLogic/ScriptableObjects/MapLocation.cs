@@ -10,6 +10,8 @@ namespace MapLogic
     public class MapLocation : ScriptableObject,IMapLocation
     {
         public string Name { get; }
+        public string PopUpDescription { get ; set; }
+
         public int Difficulty;
         public bool ExecuteRandomCombatOptionAutomatically;
         public bool WinNode;

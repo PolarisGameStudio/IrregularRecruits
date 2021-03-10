@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -35,6 +36,9 @@ namespace MapUI
             yield return new WaitForSeconds(1.8f);
 
             MapController.Instance.MoveToNode(Node);
+
+            if (!string.IsNullOrEmpty(Node.Location.PopUpDescription))
+                PopupTextController.Instance.DisplayText(Node.Location.PopUpDescription, transform.position);
 
             //TODO: this is just a hack untill the other options are implemented
             if (!(Node.Location is CombatOption))

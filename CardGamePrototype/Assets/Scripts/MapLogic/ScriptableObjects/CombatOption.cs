@@ -36,6 +36,8 @@ namespace MapLogic
             var hard = UniquesAllowed ? "Hard " : "";
 
             Name = $"{hard}{race.name} battle! ";//({combatRating})";
+
+            //PopUpDescription = "Battle";
         }
 
         public CombatOption()

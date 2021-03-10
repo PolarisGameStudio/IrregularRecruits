@@ -12,12 +12,14 @@ namespace MapLogic
         public GainGoldOption()
         {
             Name = $"Treasure";
+            PopUpDescription = $"{Amount} gold";
         }
 
         public GainGoldOption(int amount)
         {
             Amount = amount;
             Name = $"Treasure";
+            PopUpDescription = $"{Amount} gold";
         }
 
         public override float Difficulty()

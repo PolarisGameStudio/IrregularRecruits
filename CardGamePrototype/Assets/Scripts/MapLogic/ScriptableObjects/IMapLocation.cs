@@ -5,6 +5,8 @@
         MapOption[] GetLocationOptions();
 
         string Name { get;  }
+        string PopUpDescription { get; set; }
+
         void Open(MapNode node);
         bool IsStartNode();
         bool IsWinNode();

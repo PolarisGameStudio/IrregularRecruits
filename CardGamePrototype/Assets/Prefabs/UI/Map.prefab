@@ -401,6 +401,7 @@ MonoBehaviour:
   MapHolder: {fileID: 8082983244512182284}
   MapSizeX: 2.5
   MapSizeY: 7.5
+  MapEdgeLength: 0.8
   Linetypes:
   - {fileID: 21300000, guid: 8cef6f9079abc1e4d8906c2edcadc11e, type: 3}
   - {fileID: 21300000, guid: 4ff621daec31901459fd360a42c46410, type: 3}

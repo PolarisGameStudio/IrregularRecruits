@@ -27,6 +27,7 @@ namespace UI
 
         public static CardUIEvent OnCreatureExclamation = new CardUIEvent();
 
+
         public static UnityEvent OnDraw = new UnityEvent();
         public static UnityEvent OnWithdraw = new UnityEvent();
         public static UnityEvent OnEtb = new UnityEvent();

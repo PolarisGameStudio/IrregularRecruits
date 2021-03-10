@@ -29,7 +29,7 @@ MonoBehaviour:
   EventFrequency: 0
   VillageFrequency: 5
   GoldFrequency: 3
-  XpFrequency: 2
+  XpFrequency: 100
   RandomnessToDifficulty: 5
   NonCombatNodeChance: 0.5
   StepDifficultyIncrease: 20
@@ -50,6 +50,6 @@ MonoBehaviour:
   ExtraRoadChance: 0.9
   MoneyIcon: {fileID: 21300000, guid: 72450c8078d595948a2f9824282f69d0, type: 3}
   XpIcon: {fileID: 21300000, guid: f12f1cc0e056079429578a981f0073e7, type: 3}
-  UnknownNodeIcon: {fileID: 21300000, guid: 07807b509859236489ea2fe030b08fcb, type: 3}
+  UnknownNodeIcon: {fileID: 21300000, guid: 56f4a2a9d578026458667321be48743c, type: 3}
   VillageIcon: {fileID: 21300000, guid: f721032d8c523764c90634c64d12632d, type: 3}
-  GraveYardIcon: {fileID: 21300000, guid: 2ba10e7d1594699448c1924d776a486e, type: 3}
+  GraveYardIcon: {fileID: 21300000, guid: f721032d8c523764c90634c64d12632d, type: 3}

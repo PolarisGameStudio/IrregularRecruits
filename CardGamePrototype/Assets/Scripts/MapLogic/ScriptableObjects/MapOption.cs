@@ -23,6 +23,7 @@ namespace MapLogic
         private readonly string ThirdUnitEscapeString = "U2";
 
         public abstract string Name { get; }
+        public string PopUpDescription { get; set; }
 
         public enum UnitCandidate { NoUnit, Strong,Weak,Random, FriendlyRace,NonFriendlyRace}
 
