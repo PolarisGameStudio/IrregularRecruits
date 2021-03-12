@@ -9795,12 +9795,12 @@ MonoBehaviour:
   size: 1
   letterSpacing: 0.44
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
-  color1: {r: 0.95013654, g: 1, b: 0.47843137, a: 1}
-  color2: {r: 0.78431374, g: 1, b: 0.39215687, a: 1}
+  color1: {r: 1, g: 1, b: 1, a: 1}
+  color2: {r: 1, g: 1, b: 1, a: 1}
   delay: 0.05
   cumulativeDelay: 1
   compensateLifetime: 1
-  lifetimeMultiplier: 1
+  lifetimeMultiplier: 2
   rotation: 0
   sortingFudgeOffset: 0.1
   font: {fileID: 11400000, guid: 6107d49d5744fb24eb855f7abb997756, type: 2}

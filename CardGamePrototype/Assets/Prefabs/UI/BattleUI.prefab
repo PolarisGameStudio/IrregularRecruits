@@ -12880,10 +12880,10 @@ RectTransform:
   m_Father: {fileID: 3660017128914536195}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.125, y: 0.35}
-  m_AnchorMax: {x: 0.875, y: 0.6}
+  m_AnchorMin: {x: 0.5, y: 0.35}
+  m_AnchorMax: {x: 0.5, y: 0.6}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1152, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9019354100244692800
 MonoBehaviour:
@@ -12951,8 +12951,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   FirstCardRotation: 0
   LastCardRotation: 0
-  MinimumPositions: 4
-  MaximumPositions: 5
+  MinimumPositions: 6
+  MaximumPositions: 8
   TransitionsTo: {fileID: 3716480691181722876}
 --- !u!1 &3660017128170685124
 GameObject:
@@ -14167,10 +14167,10 @@ RectTransform:
   m_Father: {fileID: 3660017128914536195}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.125, y: 0.6}
-  m_AnchorMax: {x: 0.875, y: 0.85}
+  m_AnchorMin: {x: 0.5, y: 0.6}
+  m_AnchorMax: {x: 0.5, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1152, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2325820138656792337
 MonoBehaviour:
@@ -14238,8 +14238,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   FirstCardRotation: 0
   LastCardRotation: 0
-  MinimumPositions: 4
-  MaximumPositions: 5
+  MinimumPositions: 6
+  MaximumPositions: 8
   TransitionsTo: {fileID: 0}
 --- !u!1 &3660017129027377919
 GameObject:

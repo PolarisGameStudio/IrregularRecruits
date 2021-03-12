@@ -27,9 +27,9 @@ MonoBehaviour:
   HardCombatFrequency: 3
   StandardCombatFrequency: 7
   EventFrequency: 0
-  VillageFrequency: 5
+  VillageFrequency: 6
   GoldFrequency: 3
-  XpFrequency: 100
+  XpFrequency: 2
   RandomnessToDifficulty: 5
   NonCombatNodeChance: 0.5
   StepDifficultyIncrease: 20
