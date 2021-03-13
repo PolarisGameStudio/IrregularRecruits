@@ -53,6 +53,7 @@ namespace UI
         private List<Card> InitialEnemyDeck;
         private List<Card> InitialPlayerDeck;
 
+
         public static UnityEvent OnBattleFinished = new UnityEvent();
         public static UnityEvent OnBattleBegin = new UnityEvent();
 
@@ -188,6 +189,14 @@ namespace UI
             Destroy(CardUIs[summon].gameObject);
         }
 
+        internal static IEnumerator WardedAttack(Guid guid)
+        {
+            CardUI ui = GetCardUI(guid);
+
+            if (!ui) yield break;
+
+            yield return AnimationSystem.Instance.WardParticles(ui);
+        }
 
 
         private void EndBattle(Deck winner)

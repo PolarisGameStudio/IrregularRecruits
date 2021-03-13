@@ -15,9 +15,11 @@ namespace UI
 
         public ZoneMoveAnimation[] ZoneMoveAnimations;
 
+        //TODO: make an enum of fx type 
         public ParticleSystem[] WithdrawParticlesPrefab;
         public ParticleSystem[] ETBParticlesPrefab;
         public ParticleSystem[] DamageParticlesPrefab;
+        public ParticleSystem[] WardParticlesPrefab;
         public ParticleSystem[] DeathParticlesPrefab;
         public ParticleSystem AbilitySelectParticles;
         public ParticleSystem LevelUpParticles;
@@ -98,6 +100,11 @@ namespace UI
         public void DamageParticles(CardUI c)
         {
             StartCoroutine(PlayCardFX(c, DamageParticlesPrefab));
+
+        }
+        public IEnumerator WardParticles(CardUI c)
+        {
+            yield return PlayCardFX(c, WardParticlesPrefab,0.3f);
 
         }
 

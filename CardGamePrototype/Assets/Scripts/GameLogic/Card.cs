@@ -365,9 +365,10 @@ namespace GameLogic
         {
             if (change == 0 || !Alive()) return;
 
-            if(change < 0  && Warded)
+            if(change < 0  && Warded && Location == Deck.Zone.Battlefield)
             {
                 Warded = false;
+                Event.OnWardTriggered.Invoke(this);
                 return;
             }
 

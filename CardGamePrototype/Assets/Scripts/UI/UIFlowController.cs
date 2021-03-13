@@ -34,6 +34,8 @@ namespace UI
 
             Event.OnUnSummon.AddListener(card => AddCardEvent(BattleUI.UnSummon(card.Guid)));
 
+            Event.OnWardTriggered.AddListener(card => AddCardEvent(BattleUI.WardedAttack(card.Guid)));
+
             //OnAttack-> (Card) Attack animation
             Event.OnAttack.AddListener(card => AddCardEvent(BattleUI.SetAttacker(card.Guid)));
             //On Being Attacked->

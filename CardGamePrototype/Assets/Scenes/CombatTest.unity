@@ -187,6 +187,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &186866807
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497856, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3308840082544497919, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_Name
+      value: CFXR Hit B (Blue)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316621577996742132, guid: af0ef20d9a41ee7479f76ea5c49918cf,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af0ef20d9a41ee7479f76ea5c49918cf, type: 3}
 --- !u!1001 &342527705
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1863,7 +1937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextCombatButton: {fileID: 867765511}
   ShopBetweenBattles: 0
-  TestCreature: {fileID: 11400000, guid: d7196563ce6a9594cabb1ead488bd9a4, type: 2}
+  TestCreature: {fileID: 11400000, guid: cab99495d65d7c1489ef384613191c13, type: 2}
   TestHero: {fileID: 0}
 --- !u!1001 &1613703174279177226
 PrefabInstance:

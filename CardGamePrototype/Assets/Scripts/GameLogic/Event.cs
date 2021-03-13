@@ -19,6 +19,7 @@ namespace GameLogic
         public static CardEvent OnWithdraw = new CardEvent();
         public static CardEvent OnSummon = new CardEvent();
         public static CardEvent OnUnSummon = new CardEvent();
+        public static CardEvent OnWardTriggered = new CardEvent();
 
         public static CardEvent OnDamaged = new CardEvent();
 
@@ -100,6 +101,7 @@ namespace GameLogic
             OnSummon.RemoveAllListeners();
             //public static CardEvent OnUnSummon = new CardEvent();
             OnUnSummon.RemoveAllListeners();
+            OnWardTriggered.RemoveAllListeners();
 
             //public static CardEvent OnDamaged = new CardEvent();
             OnDamaged.RemoveAllListeners();
