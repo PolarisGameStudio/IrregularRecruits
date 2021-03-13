@@ -144,18 +144,19 @@ namespace UI
                 HeroUI.Instance?.Disable();
         }
 
-        private void CreateCardUI(Card card, bool playerDeck)
+        private void CreateCardUI(Card card, bool playerDeck, bool summon = false)
         {
             var ui = Instantiate(Instance.CardPrefab);
 
-            ui.SetCard(card);
+            ui.SetCard(card,summon);
 
             CardUIs[card.Guid] = ui;
 
             StartCoroutine(ui.Flip(CardUI.CardState.FaceDown, 0f));
 
             //Should we just move it to library nomatter what?
-            StartCoroutine(MoveCard(ui, card.Location, playerDeck));
+            Deck.Zone destination = summon ? Deck.Zone.Battlefield :  card.Location;
+            StartCoroutine(MoveCard(ui, destination, playerDeck));
         }
 
         public static IEnumerator CleanUpUI(Deck winner)
@@ -166,7 +167,8 @@ namespace UI
 
         public static IEnumerator Summon(Card summon,bool playerdekc)
         {
-            Instance.CreateCardUI(summon, playerdekc);
+            Instance.CreateCardUI(summon, playerdekc,true);
+            
             yield return null;
         }
         public static IEnumerator UnSummon(Guid summon)
@@ -387,6 +389,8 @@ namespace UI
         private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player)
         {
             if (!card) yield break;
+
+            Debug.Log($"Moving {card} to {zone}");
 
             if(zone == Deck.Zone.Graveyard)
                 yield return card.Flip(CardUI.CardState.Battle);

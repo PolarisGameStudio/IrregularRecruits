@@ -76,10 +76,15 @@ namespace UI
             OnUIDestroyed.Invoke(this);
         }
 
-        public void SetCard(Card c)
+        public void SetCard(Card c, bool ignoreCurrentState = false)
         {
             UpdateCreature(c.Creature);
-            UpdateStats(c.Attack, c.CurrentHealth, c.MaxHealth);
+
+            if (ignoreCurrentState)
+                UpdateStats(c.Creature.Attack, c.Creature.Health, c.Creature.Health);
+            else
+                UpdateStats(c.Attack, c.CurrentHealth, c.MaxHealth);
+            
             OnClick.AddListener(c.Click);
             OnPositionChanged.AddListener(c.PositionChanged);
         }
