@@ -11,7 +11,7 @@ namespace UI
 
         public ParticleSystem HighlightParticles;
 
-        public EffectAnimation DamageAnimation, StatPlusAnimation, StatMinusAnimation;
+        public EffectAnimation DamageAnimation, StatPlusAnimation, StatMinusAnimation,HealAnimation;
 
         private Material TargetMaterial, InstigatorMaterial;
 

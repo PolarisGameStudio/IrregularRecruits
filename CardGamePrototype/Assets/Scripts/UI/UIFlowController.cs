@@ -42,6 +42,7 @@ namespace UI
             //On Damage-> (Card, amount) & new health?
             //On healed
             Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
+            Event.OnHealed.AddListener((card, val) => AddCardEvent(BattleUI.CardHeal(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
 
             Event.PlayerActionPointsChanged.AddListener(i => AddCardEvent(ActionsChanged(i)));
 
@@ -52,6 +53,7 @@ namespace UI
 
             //On Ability trigger->All the current Ability animation param
             Event.OnAbilityExecution.AddListener((a, c, ts) => AddCardEvent(BattleUI.AbilityTriggered(a, c.Guid, ts.Select(t => t.Guid))));
+            
 
             //TODO: is this actually used in a timely order
             Event.OnCombatSetup.AddListener((e, c) => PlayerTurnStart());

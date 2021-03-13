@@ -347,16 +347,42 @@ namespace UI
             }
             else if (val > 0)
             {
-                AnimationSystem.OnHeal.Invoke();
-
+                //AnimationSystem.OnHeal.Invoke();
+                //handled by CardHeal Routine
             }
             else
-                Debug.LogError("health change of 0");
+                Debug.LogWarning("health change of 0");
 
             ui.UpdateHealth(currentHealth,  maxHealth);
 
             yield return null;
         }
+
+
+        internal static IEnumerator CardHeal(Guid guid, int val, int currentHealth, int maxHealth)
+        {
+            CardUI ui = GetCardUI(guid);
+
+            if (!ui) yield break;
+
+            if (val <= 0)
+            {
+
+                Debug.LogError("Card heal with value "+ val);
+            }
+            else if (val > 0)
+            {
+                AnimationSystem.OnHeal.Invoke();
+                ui.CardAnimation.HealAnimation.Show(val);
+                //handled by CardHeal Routine
+            }
+            else
+
+            ui.UpdateHealth(currentHealth, maxHealth);
+
+            yield return null;
+        }
+
 
         internal static IEnumerator CardStatsModified(Guid card, int val, int currentHealth, int currentAttack, int maxHealth)
         {
