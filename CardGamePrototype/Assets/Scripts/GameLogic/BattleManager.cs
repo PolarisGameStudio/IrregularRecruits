@@ -49,6 +49,12 @@ namespace GameLogic
 
         }
 
+        internal void CheckBattleOver()
+        {
+            if (CombatAutoResolver.BattleOver())
+                CombatAutoResolver.HandleBattleOver();
+        }
+
         public static void Init()
         {
             instance = new BattleManager();

@@ -130,15 +130,25 @@ namespace GameLogic
         {
             Event.OnCombatResolveFinished.Invoke();
 
-            if (EnemyDeck.Alive() == 0 || Turn >= MaxTurns)
-                Event.OnBattleFinished.Invoke(PlayerDeck);
-            else if (PlayerDeck.Alive() == 0)
-                Event.OnBattleFinished.Invoke(EnemyDeck);
+            if (BattleOver())
+            {
+                HandleBattleOver();
+            }
             else
                 Event.OnTurnBegin.Invoke();
         }
 
+        public bool BattleOver()
+        {
+            return EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0 || Turn >= MaxTurns;
+        }
 
-
+        public void HandleBattleOver()
+        {
+            if (PlayerDeck.Alive() > 0)
+                Event.OnBattleFinished.Invoke(PlayerDeck);
+            else
+                Event.OnBattleFinished.Invoke(EnemyDeck);
+        }
     }
 }

@@ -30,7 +30,11 @@ namespace GameLogic
             List<Card> targets = GetTargets(ResultingAction.Target, owner, triggerExecuter);
 
             AbilityProcessor.GetAction(ResultingAction.ActionType).ExecuteEffect(this, owner, targets);
-            
+
+            AbilityStackCount--;
+
+            if (AbilityStackCount == 0)
+                BattleManager.Instance.CheckBattleOver();
         }
 
         public List<Card> GetTargets(Noun targetType, AbilityHolder _owner, Card triggerExecuter,bool includeAllPossible = false)
