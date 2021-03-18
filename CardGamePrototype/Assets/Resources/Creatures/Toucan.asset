@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: GoatRabbit
+  m_Name: Toucan
   m_EditorClassIdentifier: 
-  name: Goat Rabbit
-  Rarity: 1
+  name: Toucan
+  Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: e3b1f4264028ed3438cc77e9aecb9c5f, type: 3}
-  IconImage: {fileID: 0}
+  Image: {fileID: 21300000, guid: 9a3eb7ca996410147a2962ceadab3ce8, type: 3}
+  IconImage: {fileID: 21300000, guid: 994f9dfb58f05be43a3f9b46d81a7666, type: 3}
   Attack: 1
-  Health: 12
-  Traits:
-  - {fileID: 11400000, guid: b724f83978f6e2c4abe9eb6d79825d64, type: 2}
-  SpecialAbility: {fileID: 0}
-  CR: 13
+  Health: 4
+  Traits: []
+  SpecialAbility: {fileID: 11400000, guid: f1aecd622b48b284dba0ab9cdf95faf9, type: 2}
+  CR: 7
   Enabling: 
   Payoff: 
   Race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
-  Performance: -86.50245
+  SoundSetType: 0
+  Performance: -110.10082
   TopFocused: 1

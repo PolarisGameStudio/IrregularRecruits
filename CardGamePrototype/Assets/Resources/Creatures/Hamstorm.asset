@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: FlyingPig
+  m_Name: Hamstorm
   m_EditorClassIdentifier: 
-  name: Flying Pig
+  name: Hamstorm
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: 5cdd08582aced114a994450dbc90d48b, type: 3}
@@ -25,5 +25,6 @@ MonoBehaviour:
   Enabling: 06000000
   Payoff: 
   Race: {fileID: 11400000, guid: f72ff2b1e9159a34799a574ae68502eb, type: 2}
+  SoundSetType: 0
   Performance: -197.55016
   TopFocused: 1

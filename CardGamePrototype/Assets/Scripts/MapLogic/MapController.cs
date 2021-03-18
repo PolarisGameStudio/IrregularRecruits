@@ -170,6 +170,11 @@ namespace MapLogic
                         var parentChance = Random.value * (lastStep.Length - parentIdx - 1)+ (lastStep.Length - parentIdx - 1);
                         var nodeChance = Random.value * (step.Length - nodeIdx - 1) + (step.Length - nodeIdx - 1);
 
+                        //more roads to villages
+                        if (step[nodeIdx].Location is VillageShop)
+                            parentChance *= 2;
+
+
                         if (parentChance >= nodeChance) parentIdx++;
                         else nodeIdx++;
                     }

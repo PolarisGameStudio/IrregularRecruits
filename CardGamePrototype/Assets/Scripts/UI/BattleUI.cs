@@ -157,7 +157,7 @@ namespace UI
 
             //Should we just move it to library nomatter what?
             Deck.Zone destination = summon ? Deck.Zone.Battlefield :  card.Location;
-            StartCoroutine(MoveCard(ui, destination, playerDeck));
+            StartCoroutine(MoveCard(ui, destination, playerDeck,true));
         }
 
         public static IEnumerator CleanUpUI(Deck winner)
@@ -258,8 +258,7 @@ namespace UI
             //TODO: should the effect be bfore or after
             yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
 
-
-                yield return MoveCard(ui, to, playerDeck);
+            yield return MoveCard(ui, to, playerDeck);
 
             ui.CardAnimation.TurnOffHighlight();
         }
@@ -421,7 +420,7 @@ namespace UI
 
         //otherwise make an onclick event in CardUI
 
-        private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player)
+        private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player, bool instantly = false)
         {
             if (!card) yield break;
 
@@ -455,7 +454,8 @@ namespace UI
 
                 adjustDirection = new Vector2(adjustDirection.y, -adjustDirection.x).normalized;
 
-                while (Time.time < startTime + MoveDuration)
+
+                while (!instantly && Time.time < startTime + MoveDuration)
                 {
                     yield return null;
 
