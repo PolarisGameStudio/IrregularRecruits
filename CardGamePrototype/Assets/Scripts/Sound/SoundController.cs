@@ -60,6 +60,8 @@ namespace Sound
             AnimationSystem.OnHeal.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Heal));
             AnimationSystem.OnWardTrigger.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Ward));
 
+            ActionsLeftUI.OnActionGained.AddListener(() => PlayUISound(SoundLibrary.UiSound.ActionsRefreshed));
+
             AnimationSystem.OnCreatureExclamation.AddListener((c,bark) => PlayCardSound(bark,c.Creature.SoundSetType));
 
             AnimationSystem.OnAbilityTrigger.AddListener(PlayAbilityTrigger);

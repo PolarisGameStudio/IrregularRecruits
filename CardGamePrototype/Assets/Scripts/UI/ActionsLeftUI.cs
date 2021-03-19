@@ -14,9 +14,10 @@ namespace UI
         private List<ActionIcon> ActionIcons = new List<ActionIcon>();
         private bool Initialized;
 
-        public static Event.IntEvent ActionGained = new Event.IntEvent();
+        public static Event.IntEvent OnActionChanged = new Event.IntEvent();
+        public static UnityEvent OnActionGained = new UnityEvent();
 
-        private void Start()
+        private void Awake()
         {
             Initialize();
         }
@@ -27,8 +28,8 @@ namespace UI
 
             Initialized = true;
 
-            ActionGained.RemoveAllListeners();
-            ActionGained.AddListener(ActionsChanged);
+            OnActionChanged.RemoveAllListeners();
+            OnActionChanged.AddListener(ActionsChanged);
             //ActionsRefreshed.AddListener(RefreshActions);
 
             //TODO: does not take into account if amount of actions are changed. Move to on next turn and check there
@@ -70,6 +71,8 @@ namespace UI
         }
         private void GainAction()
         {
+            OnActionGained.Invoke();
+
             if (!ActionIcons.Any(a => !a.Active))
                 CreateActionIcon();
             

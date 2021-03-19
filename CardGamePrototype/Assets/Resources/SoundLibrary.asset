@@ -51,7 +51,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: e085327d0cce4fe4fa46280ebaeda318, type: 3}
   - Type: 11
     Audio:
-    - {fileID: 8300000, guid: e085327d0cce4fe4fa46280ebaeda318, type: 3}
+    - {fileID: 8300000, guid: 8bb39bdaf262d8a45af05ae34029e716, type: 3}
   UiSounds:
   - Type: 1
     Audio:
@@ -98,6 +98,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 74eafa743cce60c47a1636b49067bf78, type: 3}
     - {fileID: 8300000, guid: 06f5f01f12266434fa55691da3021115, type: 3}
     - {fileID: 8300000, guid: 1c01df95412a341479af5c93625e0f78, type: 3}
+  - Type: 15
+    Audio:
+    - {fileID: 8300000, guid: 47409eb97e8fd644a979d810cec14ee8, type: 3}
   Stingers:
   - Type: 0
     Audio:

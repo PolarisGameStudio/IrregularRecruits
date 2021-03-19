@@ -73,7 +73,7 @@ namespace UI
 
         private IEnumerator ActionsChanged(int amount)
         {
-            ActionsLeftUI.ActionGained.Invoke(amount);
+            ActionsLeftUI.OnActionChanged.Invoke(amount);
 
 
             yield return new WaitForSeconds(0.1f);

@@ -24,7 +24,8 @@ namespace Sound
             CardLetGo,
             HeroWalking,
             ShopReroll,
-            PurchaseUnit
+            PurchaseUnit,
+            ActionsRefreshed
         }
 
         public enum Stinger
