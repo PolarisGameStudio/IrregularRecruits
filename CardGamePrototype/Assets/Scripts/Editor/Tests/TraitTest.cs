@@ -522,7 +522,7 @@ namespace Tests
 
         //test ward
         [Test]
-        public void WardProtectsAnyDamage()
+        public void WardNotProtectsNonCombatDamage()
         {
             var warded = GenerateTestCreatureWithTrait("Ward");
 
@@ -531,9 +531,9 @@ namespace Tests
 
             warded.HealthChange(-2);
 
-            Assert.AreEqual(warded.MaxHealth , warded.CurrentHealth);
+            Assert.AreEqual(warded.MaxHealth -2, warded.CurrentHealth);
 
-            Assert.IsFalse(warded.Warded);
+            Assert.IsTrue(warded.Warded);
 
         }
         
@@ -541,21 +541,36 @@ namespace Tests
         [Test]
         public void WardProtectsOnlyFirstDamage()
         {
-            var warded = GenerateTestCreatureWithTrait("Ward");
+            const int Attack = 2;
+            var warded = GenerateTestCreatureWithTrait("Ward", Attack, 10);
+
+            const int enmattack = 3;
+            var enm = GenerateTestCreatureWithTrait("", enmattack, 10);
+
+            var pDeck = GenerateTestDeck(0);
+            var enmDeck = GenerateTestDeck(0);
+
+            pDeck.AddCard(warded);
+            enmDeck.AddCard(enm);
+
+            warded.ChangeLocation(Deck.Zone.Battlefield);
+            enm.ChangeLocation(Deck.Zone.Battlefield);
+
 
             Assert.IsTrue(warded.Ward());
             Assert.IsTrue(warded.Warded);
 
-            warded.HealthChange(-2);
+            warded.AttackCard(enm);
 
-            Assert.AreEqual(warded.MaxHealth , warded.CurrentHealth);
+            Assert.AreEqual(enm.MaxHealth - Attack, enm.CurrentHealth);
+            Assert.AreEqual(warded.MaxHealth, warded.CurrentHealth);
 
             Assert.IsFalse(warded.Warded);
 
-            warded.HealthChange(-2);
+            warded.AttackCard(enm);
 
-            Assert.AreEqual(warded.MaxHealth-2, warded.CurrentHealth);
-                      
+
+            Assert.AreEqual(warded.MaxHealth - enmattack, warded.CurrentHealth);
 
         }
 

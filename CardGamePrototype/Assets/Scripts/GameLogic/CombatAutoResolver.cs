@@ -140,7 +140,7 @@ namespace GameLogic
 
         public bool BattleOver()
         {
-            return EnemyDeck.Alive() == 0 || PlayerDeck.Alive() == 0 || Turn >= MaxTurns;
+            return EnemyDeck?.Alive() == 0 || PlayerDeck?.Alive() == 0 || Turn >= MaxTurns;
         }
 
         public void HandleBattleOver()

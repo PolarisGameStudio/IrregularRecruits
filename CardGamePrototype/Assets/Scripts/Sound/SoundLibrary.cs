@@ -60,6 +60,7 @@ namespace Sound
             Heal = 8,
             AbilitySelection = 9,
             LevelUp = 10,
+            Ward = 11,
         }
 
 

@@ -35,6 +35,7 @@ namespace UI
         public static UnityEvent OnEtb = new UnityEvent();
         public static UnityEvent OnDamaged = new UnityEvent();
         public static UnityEvent OnHeal = new UnityEvent();
+        public static UnityEvent OnWardTrigger = new UnityEvent();
         public class AbilityEvent : UnityEvent<EffectType> { }
         public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
         public static AbilityEvent OnAbilityTargetHit = new AbilityEvent();

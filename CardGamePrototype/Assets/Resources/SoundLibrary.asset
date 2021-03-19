@@ -49,6 +49,9 @@ MonoBehaviour:
   - Type: 10
     Audio:
     - {fileID: 8300000, guid: e085327d0cce4fe4fa46280ebaeda318, type: 3}
+  - Type: 11
+    Audio:
+    - {fileID: 8300000, guid: e085327d0cce4fe4fa46280ebaeda318, type: 3}
   UiSounds:
   - Type: 1
     Audio:

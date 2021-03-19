@@ -376,8 +376,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KeyMappings:
-  - Key: 32
-    Action: 0
   - Key: 119
     Action: 1
   - Key: 114

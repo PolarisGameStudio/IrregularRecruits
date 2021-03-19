@@ -129,6 +129,8 @@ namespace GameLogic
             //public static UnityEvent OnCombatResolveFinished = new UnityEvent();
             OnCombatResolveFinished.RemoveAllListeners();
 
+
+            OnTurnBegin.RemoveAllListeners();
             //public static UnityEvent OnGameOver = new UnityEvent();
             OnGameOver.RemoveAllListeners();
             OnGameWin.RemoveAllListeners();

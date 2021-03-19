@@ -424,7 +424,7 @@ namespace UI
         {
             if (!card) yield break;
 
-            Debug.Log($"Moving {card} to {zone}");
+            //Debug.Log($"Moving {card} to {zone}");
 
             if(zone == Deck.Zone.Graveyard)
                 yield return card.Flip(CardUI.CardState.Battle);

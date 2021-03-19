@@ -69,7 +69,7 @@ namespace UI
 
         public void AddChild(CardUI cardUI, int pos)
         {
-            Debug.Log($"{cardUI.name} added to groupe {name}");
+            //Debug.Log($"{cardUI.name} added to groupe {name}");
 
             var parent = cardUI.GetComponentInParent<CardLayoutGroup>();
 

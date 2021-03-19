@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3609424269681954820}
   - component: {fileID: 3609424269681954821}
   - component: {fileID: 4197703754467786954}
+  - component: {fileID: 7671157923287399409}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -126,6 +127,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OpenUIWindowsInSceneStart:
   - {fileID: 3609424269561162395}
+--- !u!114 &7671157923287399409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3609424269681954826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefe73ccc4562624ca53e6a020185e31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &62414947554102042
 PrefabInstance:
   m_ObjectHideFlags: 0
