@@ -100,7 +100,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 1c01df95412a341479af5c93625e0f78, type: 3}
   - Type: 15
     Audio:
-    - {fileID: 8300000, guid: 47409eb97e8fd644a979d810cec14ee8, type: 3}
+    - {fileID: 8300000, guid: 3f72dddd685bbbc459d76a20ae68030e, type: 3}
   Stingers:
   - Type: 0
     Audio:

@@ -57,6 +57,7 @@ namespace MapLogic
 
             var deck = DeckGeneration.GenerateDeck(CRValue, possibleRaces, SpawnCreatures,UniquesAllowed);
 
+           
             MapController.Instance.StartCombat(deck);
 
         }

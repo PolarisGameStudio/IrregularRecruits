@@ -45,11 +45,11 @@ public class InputManager : Singleton<InputManager>
                 break;
             case MappableAction.WinBattle:
                 if(BattleManager.Instance.EnemyDeck != null)
-                    Event.OnBattleFinished.Invoke(BattleManager.Instance.PlayerDeck);
+                    Event.OnBattleFinished.Invoke(BattleManager.Instance.PlayerDeck, BattleManager.Instance.EnemyDeck);
                 break;
             case MappableAction.LoseBattle:
                 if (BattleManager.Instance.EnemyDeck != null)
-                    Event.OnBattleFinished.Invoke(BattleManager.Instance.EnemyDeck);
+                    Event.OnBattleFinished.Invoke(BattleManager.Instance.EnemyDeck, BattleManager.Instance.PlayerDeck);
                 break;
             case MappableAction.GainXp:
                 BattleManager.Instance.PlayerDeck?.Hero?.AwardXp(10);

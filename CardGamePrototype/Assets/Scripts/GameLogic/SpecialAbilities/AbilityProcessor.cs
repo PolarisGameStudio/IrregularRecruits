@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace GameLogic
 {
-    public class AbilityProcessor
+    public static class AbilityProcessor
     {
         private static Dictionary<EffectType, AbilityEffect> abilityEffects = new Dictionary<EffectType, AbilityEffect>();
         private static Dictionary<TriggerType, AbilityTrigger> triggers = new Dictionary<TriggerType, AbilityTrigger>();

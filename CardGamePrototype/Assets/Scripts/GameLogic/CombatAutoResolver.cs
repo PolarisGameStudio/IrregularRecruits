@@ -146,9 +146,9 @@ namespace GameLogic
         public void HandleBattleOver()
         {
             if (PlayerDeck.Alive() > 0)
-                Event.OnBattleFinished.Invoke(PlayerDeck);
+                Event.OnBattleFinished.Invoke(PlayerDeck,EnemyDeck);
             else
-                Event.OnBattleFinished.Invoke(EnemyDeck);
+                Event.OnBattleFinished.Invoke(EnemyDeck,EnemyDeck);
         }
     }
 }

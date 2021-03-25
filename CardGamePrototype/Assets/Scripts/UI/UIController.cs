@@ -51,7 +51,7 @@ namespace UI
             else
                 UIWindows.Add(window);
 
-            Debug.Log("opening " + window);
+            //Debug.Log("opening " + window);
 
             UIWindows = UIWindows.OrderBy(ui => ui.GetPriority()).ToList();
 
@@ -61,7 +61,7 @@ namespace UI
                 ui.GetCanvasGroup().interactable = ui == UIWindows.Last();
             }
 
-            Debug.Log("opening " + UIWindows.Last());
+            //Debug.Log("opening " + UIWindows.Last());
 
             OpenTopWindow();
         }

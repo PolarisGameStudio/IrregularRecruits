@@ -19,7 +19,7 @@ namespace UI
 
         private void Start()
         {
-            AllHeroes = DeckLibrary.GetHeroes();
+            AllHeroes = DeckLibrary.GetHeroes(false);
 
             PreviousButton.onClick.AddListener(Previous);
             NextButton.onClick.AddListener(Next);

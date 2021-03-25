@@ -42,7 +42,7 @@ namespace GameLogic
 
         public void FinishTurn()
         {
-            OnFinish.Invoke();
+            OnFinish?.Invoke();
         }
     }
 }

@@ -15,8 +15,6 @@ namespace Tests
         [SetUp]
         public void CardSetup()
         {
-            //Event.ResetListeners();
-
             TestCreature = CreateCreature();
 
             TestAbility = new PassiveAbility()

@@ -166,7 +166,7 @@ namespace Simulation
 
             var winner = gc.PlayerDeck;
 
-            Event.OnBattleFinished.AddListener(d => winner = d);
+            Event.OnBattleFinished.AddListener((d,l) => winner = d);
 
             while (wins <= MaxRun && winner == gc.PlayerDeck && gc.PlayerDeck.Alive() > 0)
             {
@@ -201,7 +201,7 @@ namespace Simulation
 
             var winner = gc.PlayerDeck;
 
-            Event.OnBattleFinished.AddListener(d => winner = d);
+            Event.OnBattleFinished.AddListener((d,l) => winner = d);
 
             while (wins <= MaxRun && winner == gc.PlayerDeck && gc.PlayerDeck.Alive() > 0)
             {
@@ -226,7 +226,7 @@ namespace Simulation
         {
             var result = new MatchUpResult(first.name, second.name);
 
-            UnityAction<Deck> winnerhandler = (d) => result.AddWin(d);
+            UnityAction<Deck,Deck> winnerhandler = (d,l) => result.AddWin(d);
 
             Event.OnBattleFinished.AddListener(winnerhandler);
 

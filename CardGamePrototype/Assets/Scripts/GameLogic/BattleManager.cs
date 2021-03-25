@@ -79,9 +79,9 @@ namespace GameLogic
             Event.OnDeckSizeChange.Invoke(Instance.PlayerDeck);
         }
 
-        public void PackUp(Deck d)
+        public void PackUp(Deck winner,Deck loser)
         {
-            bool playerWon = d == PlayerDeck;
+            bool playerWon = winner == PlayerDeck;
 
 
 #if UNITY_EDITOR

@@ -24,7 +24,6 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-
             BattleManager.Init();
 
             AiControlledPlayerValue = GameSettings.Instance.AiControlledPlayer;

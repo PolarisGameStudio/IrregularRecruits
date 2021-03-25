@@ -51,7 +51,7 @@ namespace UI
             //On Stat Change-> (Card, amount)
             Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack, card.MaxHealth)));
 
-            Event.OnBattleFinished.AddListener(d => AddCardEvent(BattleUI.CleanUpUI(d)));
+            Event.OnBattleFinished.AddListener((d,l) => AddCardEvent(BattleUI.CleanUpUI(d)));
 
             //On Ability trigger->All the current Ability animation param
             Event.OnAbilityExecution.AddListener((a, c, ts) => AddCardEvent(BattleUI.AbilityTriggered(a, c.Guid, ts.Select(t => t.Guid))));
