@@ -16,6 +16,7 @@ namespace UI
         public Button ViewDeckButton;
         public GameObject Holder;
         public Button SettingsButton;
+        public Button AchievementsButton;
 
         private List<Icon> InstantiatedIcons = new List<Icon>();
         private DeckObject SelectedDeck;
@@ -45,6 +46,7 @@ namespace UI
             InstantiatedIcons[0].Button.onClick.Invoke();
 
             SettingsButton.onClick.AddListener(() => UIController.Instance.Open(GameSettingsUI.Instance));
+            AchievementsButton.onClick.AddListener(() => LegacyUI.Instance.Open());
         }
 
         private void Start()

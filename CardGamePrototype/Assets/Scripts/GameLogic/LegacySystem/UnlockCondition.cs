@@ -21,6 +21,7 @@ namespace GameLogic
             return $"{Condition} (against {Against}) to unlock {UnlocksHero.name} {Count}/{UnlocksAt} ";
         }
 
+
         public void CountUp()
         {
             Count++;
