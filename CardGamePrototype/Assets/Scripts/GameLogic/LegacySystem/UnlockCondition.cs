@@ -18,7 +18,7 @@ namespace GameLogic
 
         public string Description()
         {
-            return $"{Condition} (against {Against}) to unlock {UnlocksHero.name} {Count}/{UnlocksAt} ";
+            return $"{Condition} (against {Against}) to unlock {UnlocksHero.name} {Count}/{UnlocksAt} ";        
         }
 
 

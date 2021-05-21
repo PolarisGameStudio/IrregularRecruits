@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Tests
 {
-
     public  class AbilityEffectTest : TestFixture
     {
         [Test]

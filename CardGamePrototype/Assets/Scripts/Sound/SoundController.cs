@@ -31,6 +31,8 @@ namespace Sound
             Event.OnGameOpen.AddListener(() => ChangeMusic(SoundLibrary.Music.Menu));
             Event.OnGameOpen.AddListener(() => PlayStinger(SoundLibrary.Stinger.MenuOpen));
 
+            Event.OnAchievement.AddListener(u => PlayStinger(SoundLibrary.Stinger.AchievementUnlocked));
+
             Event.OnGameOver.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
             Event.OnGameOver.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameLoss));
             Event.OnGameWin.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameWin));
@@ -70,8 +72,10 @@ namespace Sound
 
         private void PlayCardSound(CreatureBark soundType, GameLogic.SoundSetType soundSetType)
         {
-            
-            SfxAudioSource.PlayOneShot(SoundLibrary.GetSound(soundType, GameLogic.SoundSetType.Standard));
+            AudioClip clip = SoundLibrary.GetSound(soundType, GameLogic.SoundSetType.Standard);
+
+            if(clip)
+                SfxAudioSource.PlayOneShot(clip);
         }
 
         public void PlayButtonClick()

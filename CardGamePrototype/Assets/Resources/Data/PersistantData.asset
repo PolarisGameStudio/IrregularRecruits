@@ -19,8 +19,8 @@ MonoBehaviour:
   cloudServer: 
   cloudStatus: 
   cloudProgress: 0
-  savePath: C:/Users/hovsg/AppData/LocalLow/Paw Oktober/Auto Armies\Data
-  fileName: Data
+  savePath: C:/Users/hovsg/AppData/LocalLow/Paw Oktober/Auto Armies\Data.okto
+  fileName: Data.okto
   selectedApplicationPath: 0
   debugMode: 0
   showFieldTypes: 0
@@ -29,6 +29,7 @@ MonoBehaviour:
   encryption: 0
   encryptionKey: 123456
   compressJson: 0
+  dataFormat: 0
   collapsedView: 0
   showInspector: 1
   entriesPerPage: 99

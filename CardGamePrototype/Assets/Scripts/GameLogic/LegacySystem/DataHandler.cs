@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using Databox;
 using System.Collections.Generic;
+using System;
+using System.Collections;
 
 namespace Data
 {
@@ -10,7 +12,7 @@ namespace Data
         public DataboxObject PersistantDataObject;
         public DataboxObject PlayerPrefsObject;
 
-        private const string LegacyTableName = "Unlocks";
+        public const string LegacyTableName = "Unlocks";
         private Dictionary<string, IntType> LegacyData = new Dictionary<string, IntType>();
 
         private void CreateLegacyData(string key, int value)
@@ -18,12 +20,14 @@ namespace Data
             if (!LegacyData.ContainsKey(key))
             {
                 if (!PersistantDataObject.databaseLoaded)
-                    //TODO: consider async if this takes too long
-                    PersistantDataObject.LoadDatabase();
+                {
+                    Debug.LogError("Database not loaded");
+                    return;
+                }
 
                 IntType data;
 
-                if (!PersistantDataObject.TryGetData<IntType>(LegacyTableName, key, "Count", true, out data))
+                if (!PersistantDataObject.TryGetData<IntType>(LegacyTableName, key, "Count", false, out data))
                 {
                     data = new IntType(value);
                     PersistantDataObject.AddData(LegacyTableName, key, "Count", data);
@@ -32,7 +36,16 @@ namespace Data
                 data.Value = value;
 
                 LegacyData[key] = data;
+
+                PersistantDataObject.SaveDatabase();
             }
+        }
+
+        internal void InitializeDatabases()
+        {
+            PersistantDataObject.LoadDatabase();
+
+            PlayerPrefsObject.LoadDatabase();
         }
 
         public IntType GetLegacy(string key)
@@ -42,5 +55,6 @@ namespace Data
 
             return LegacyData[key];
         }
+
     }
 }

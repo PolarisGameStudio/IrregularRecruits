@@ -27,16 +27,21 @@ namespace GameLogic
 
             var opponent = BattleManager.Instance.GetEnemyDeck(ControlledDeck);
 
-            var myBattlefield = ControlledDeck.CreaturesInZone(Deck.Zone.Battlefield);
-            var opposingBattlefield = opponent.CreaturesInZone(Deck.Zone.Battlefield);
-
-            if (opposingBattlefield.Count < myBattlefield.Count && myBattlefield.Count > 2 && opposingBattlefield.Any())
+            if (opponent != null)
             {
-                //TODO: should account for ranged.  Maybe by a potential damage method?
-                var scaredCat = myBattlefield.FirstOrDefault(c => c.Damaged() && !c.IsSummon() && opposingBattlefield.Any(opp => opp.Attack * 2 > c.CurrentHealth));
-                if (scaredCat != null)
+                var myBattlefield = ControlledDeck.CreaturesInZone(Deck.Zone.Battlefield);
+
+
+                var opposingBattlefield = opponent.CreaturesInZone(Deck.Zone.Battlefield);
+
+                if (opposingBattlefield.Count < myBattlefield.Count && myBattlefield.Count > 2 && opposingBattlefield.Any())
                 {
-                    scaredCat.Withdraw();
+                    //TODO: should account for ranged.  Maybe by a potential damage method?
+                    var scaredCat = myBattlefield.FirstOrDefault(c => c.Damaged() && !c.IsSummon() && opposingBattlefield.Any(opp => opp.Attack * 2 > c.CurrentHealth));
+                    if (scaredCat != null)
+                    {
+                        scaredCat.Withdraw();
+                    }
                 }
             }
 

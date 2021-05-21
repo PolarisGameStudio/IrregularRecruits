@@ -1,5 +1,6 @@
 ﻿using Data;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,34 +9,55 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    [InitializeOnLoad]
+    //[InitializeOnLoad]
     public class LegacySystem : SingletonScriptableObject<LegacySystem>
     {
         public List<UnlockCondition> UnlockProgresses;
 
-        private void OnEnable()
+        void OnEnable()
         {
+
+            DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded += ImportData;
+
+            DataHandler.Instance.InitializeDatabases();
+
+
             if (UnlockProgresses.Select(u => u.UnlocksHero.name).Distinct().Count() != UnlockProgresses.Count())
                 Debug.LogError("Several unlock conditions for the same hero!");
 
-            foreach(var unlock in UnlockProgresses)
+            Event.OnBattleFinished.AddListener(HandleBattleFinished);
+
+        }
+
+        private void ImportData()
+        {
+            foreach (var unlock in UnlockProgresses)
             {
                 var value = DataHandler.Instance.GetLegacy(unlock.UnlocksHero.name);
 
                 unlock.Count = value.Value;
 
-                unlock.OnCountUp.AddListener(i => value.Value = i);
+                unlock.OnCountUp.AddListener(i => ChangeIntTypeValue(i, value, unlock.UnlocksHero.name));
 
                 Debug.Log("synced: " + unlock.Description());
 
             }
-
-            Event.OnBattleFinished.AddListener(HandleBattleFinished);
         }
 
         internal bool IsUnlocked(HeroObject arg)
         {
             return !UnlockProgresses.Any(con => con.UnlocksHero== arg && !con.Unlocked());
+        }
+
+        private void ChangeIntTypeValue(int i, IntType data,string name = "")
+        {
+            Debug.Log($"data {name}, changed from {data.Value} to {i}");
+
+            data.Value = i;
+
+            //TODO: Create a test that changes the value and gets and
+
+            Debug.Log("actual value in Databox:" + DataHandler.Instance.GetLegacy(name).Value);
         }
 
         private void HandleBattleFinished(Deck winner, Deck loser)

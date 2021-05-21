@@ -19,8 +19,8 @@ MonoBehaviour:
   cloudServer: 
   cloudStatus: 
   cloudProgress: 0
-  savePath: 
-  fileName: 
+  savePath: 'Key: Prefs.okto'
+  fileName: Prefs.okto
   selectedApplicationPath: 3
   debugMode: 0
   showFieldTypes: 0

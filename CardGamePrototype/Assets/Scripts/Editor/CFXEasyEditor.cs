@@ -1,4 +1,6 @@
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
 using System.Collections.Generic;
 
@@ -1796,3 +1798,4 @@ public class CFXEasyEditor : EditorWindow
 		}
 	}
 }
+#endif

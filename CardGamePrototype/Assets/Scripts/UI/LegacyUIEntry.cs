@@ -2,21 +2,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LegacyUIEntry : UIEntry<UnlockCondition>
+namespace UI
 {
-    public Sprite UnlockedFrame, LockedFrame;
-    
-
-    public Image FrameImage;
-    public Image PortraitImage;
-    public Button Button;
-    public Image LockIcon;
-
-    public override void Open(UnlockCondition data)
+    public class LegacyUIEntry : UIEntry<UnlockCondition>
     {
-        FrameImage.sprite = data.Unlocked() ? UnlockedFrame : LockedFrame;
-        LockIcon.gameObject.SetActive(!data.Unlocked());
+        public Sprite UnlockedFrame, LockedFrame;
 
-        PortraitImage.sprite = data.UnlocksHero.Portrait;
+
+        public Image FrameImage;
+        public Image PortraitImage;
+        public Button Button;
+        public Image LockIcon;
+
+        public override void Open(UnlockCondition data)
+        {
+            FrameImage.sprite = data.Unlocked() ? UnlockedFrame : LockedFrame;
+            LockIcon.gameObject.SetActive(!data.Unlocked());
+
+            PortraitImage.sprite = data.UnlocksHero.Portrait;
+
+            Button?.onClick.AddListener(() => LegacyUI.Instance.AchievementUI.Open(data));
+        }
     }
 }

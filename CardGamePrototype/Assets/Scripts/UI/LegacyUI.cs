@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace UI
     {
         public CanvasGroup FocusGroup;
         public static LegacyUI Instance;
+
+        public LegacyAchievementUI AchievementUI;
 
         private void Awake()
         {
@@ -30,6 +33,7 @@ namespace UI
         public void Open()
         {
             Open(LegacySystem.Instance.UnlockProgresses);
+            AchievementUI.Close();
         }
     }
 }
