@@ -2513,7 +2513,7 @@ ParticleSystem:
     inWorldSpace: 0
     multiplyDragByParticleSize: 0
     multiplyDragByParticleVelocity: 0
-    dampen: 1
+    dampen: 0.99
     drag:
       serializedVersion: 2
       minMaxState: 0
@@ -11780,7 +11780,7 @@ ParticleSystem:
     inWorldSpace: 0
     multiplyDragByParticleSize: 1
     multiplyDragByParticleVelocity: 1
-    dampen: 1
+    dampen: 0.99
     drag:
       serializedVersion: 2
       minMaxState: 0

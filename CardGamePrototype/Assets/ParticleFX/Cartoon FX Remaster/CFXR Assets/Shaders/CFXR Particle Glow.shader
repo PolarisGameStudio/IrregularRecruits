@@ -169,6 +169,11 @@ Shader "Cartoon FX/Remaster/Particle Procedural Glow"
 			{
 		#if !PASS_SHADOW_CASTER
 				v2f o;
+				#if CFXR_URP
+					o = (v2f)0;
+				#else
+					UNITY_INITIALIZE_OUTPUT(v2f, o);
+				#endif
 		#endif
 
 				UNITY_SETUP_INSTANCE_ID(v);
@@ -270,7 +275,7 @@ Shader "Cartoon FX/Remaster/Particle Procedural Glow"
 				
 				#pragma target 2.0
 				
-				#pragma multi_compile_particles
+				#pragma multi_compile_instancing
 				#pragma multi_compile_fog
 
 				#pragma multi_compile CFXR_URP
@@ -299,7 +304,7 @@ Shader "Cartoon FX/Remaster/Particle Procedural Glow"
 				
 				#pragma target 2.0
 				
-				#pragma multi_compile_particles
+				#pragma multi_compile_instancing
 				#pragma multi_compile_fog
 
 				#pragma multi_compile CFXR_URP
@@ -370,6 +375,7 @@ Shader "Cartoon FX/Remaster/Particle Procedural Glow"
 				#pragma target 2.0
 				
 				#pragma multi_compile_particles
+				#pragma multi_compile_instancing
 				#pragma multi_compile_fog
 				
 				#pragma shader_feature_local _ _CFXR_GLOW_POW_P2 _CFXR_GLOW_POW_P4 _CFXR_GLOW_POW_P8

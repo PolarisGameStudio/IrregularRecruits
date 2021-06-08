@@ -1,9 +1,6 @@
 using UnityEngine;
-using System.Collections;
-
-#if UNITY_EDITOR
 using UnityEditor;
-
+using System.Collections;
 
 // Cartoon FX  - (c) 2012-2016 Jean Moreno
 
@@ -194,4 +191,3 @@ public class CFX_SpawnSystemEditor : Editor
 		}
 	}
 }
-#endif

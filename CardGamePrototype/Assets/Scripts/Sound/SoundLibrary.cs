@@ -25,7 +25,8 @@ namespace Sound
             HeroWalking,
             ShopReroll,
             PurchaseUnit,
-            ActionsRefreshed
+            ActionsRefreshed,
+            BloodCut
         }
 
         public enum Stinger

@@ -1,5 +1,5 @@
 ﻿Cartoon FX Remaster, version R 1.1
-2021/02/10
+2021/04/21
 © 2012-2021 - Jean Moreno
 ==================================
 
@@ -94,6 +94,10 @@ I'd be happy to see any effects used in your project, so feel free to drop me a 
 
 RELEASE NOTES
 -------------
+
+R 1.1.1
+- Fixed AABB errors spamming in the console in Unity 2020.2+ with some effects (e.g. "CFXR Fire Trail")
+- Fixed shader compilation warnings when building
 
 R 1.1.0
 - Added text prefabs variants with a new font
