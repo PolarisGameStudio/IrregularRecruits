@@ -9,6 +9,7 @@ namespace UI
     {
         public Sprite UnlockedFrame, LockedFrame;
 
+        public UnlockCondition Data;
 
         public Image FrameImage;
         public Image PortraitImage;
@@ -26,13 +27,18 @@ namespace UI
 
             Button?.onClick.AddListener(() => LegacyAchievementUI.Instance.Open(data));
 
+            Data = data;
 
+            if(ProgressFill)
+                ProgressFill.fillAmount = data.StartedAt / (float)data.UnlocksAt;
 
         }
 
-        public IEnumerator AnimateProgress(UnlockCondition data)
+        public IEnumerator AnimateProgress()
         {
-            if (!ProgressFill || data.UnlockedAtStart)
+            var data = Data;
+
+            if (Data == null||!ProgressFill || data.UnlockedAtStart)
             {
                 yield break;
             }
@@ -51,6 +57,7 @@ namespace UI
             {
                 ProgressFill.color = Color.white;
 
+                Open(data);
                 //todo: play unlock animation
             }
         }

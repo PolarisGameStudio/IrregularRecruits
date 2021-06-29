@@ -20,7 +20,8 @@ namespace UI
         public LegacyUIEntry UnlockEntry;
         public TextMeshProUGUI LossDescriptionText;
         public Button RestartButton;
-
+        public int BattlesWon;
+        public int GoldGained;
 
         //Stats
         public Deck LostTo;
@@ -28,9 +29,12 @@ namespace UI
 
         private void OnEnable()
         {
+            GoldGained = BattlesWon = 0;
+
             Event.OnStatScreen.AddListener(Open);
             Event.OnBattleFinished.AddListener(HandleBattleStats);
             RestartButton.onClick.AddListener(Restart);
+            Event.OnPlayerGoldAdd.AddListener(i => GoldGained += i);
         }
 
         private void Restart()
@@ -42,7 +46,7 @@ namespace UI
         {
             if (winner == BattleManager.Instance.PlayerDeck)
             {
-
+                BattlesWon++;
             }
             else
                 LostTo = winner;
@@ -51,16 +55,34 @@ namespace UI
         public override void Open()
         {
             base.Open();
-            HeroObject heroObject = BattleManager.Instance.PlayerDeck.Hero.HeroObject;
-            HeroImage.sprite = heroObject.Portrait;
+            var hero = BattleManager.Instance.PlayerDeck.Hero;
+            HeroImage.sprite = hero.HeroObject.Portrait;
 
             UnlockEntry.gameObject.SetActive(false);
 
-            LossDescriptionText.text = heroObject.name + "\n was killed by a group of " + LostTo.Races.First().name;
+            LossDescriptionText.text = hero.GetName() + "\n was killed by a group of " + LostTo.Races.First().name;
 
             var killed = BattleSummary.TotalKilled;
+            var xp = hero.Xp;
 
-            StartCoroutine( ShowUnlocksRoutine());
+            var text = "Battles won";
+            var score = BattlesWon;
+
+            SetupStatEntry(text, score);
+            SetupStatEntry("Units killed", killed);
+            SetupStatEntry("Gold gained", GoldGained);
+            SetupStatEntry("Xp gained", xp);
+
+            StatTextEntry.gameObject.SetActive(false);
+
+            StartCoroutine(ShowUnlocksRoutine());
+        }
+
+        private void SetupStatEntry(string text, int score)
+        {
+            var inst = Instantiate(StatTextEntry, StatTextEntry.transform.parent);
+
+            inst.text = text + ": " + score;
         }
 
         private IEnumerator ShowUnlocksRoutine()
@@ -68,6 +90,8 @@ namespace UI
             var unlocksImproved = LegacySystem.Instance.UnlockProgresses.Where(uc => !uc.UnlockedAtStart && uc.StartedAt < uc.Count);
 
             //TODO: filter so we only show the easiest unlockable of each unlocktype
+
+            var instances = new List<LegacyUIEntry>();
 
             foreach (var uc in unlocksImproved)
             {
@@ -77,8 +101,12 @@ namespace UI
 
                 inst.Open(uc);
 
-                yield return inst.AnimateProgress(uc);
+                instances.Add(inst);
+
             }
+
+            foreach(var inst in instances)
+                yield return inst.AnimateProgress();
 
         }
     }
