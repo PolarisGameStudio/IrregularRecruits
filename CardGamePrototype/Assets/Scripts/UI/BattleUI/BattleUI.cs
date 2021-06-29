@@ -334,6 +334,11 @@ namespace UI
             AttackTarget.CardAnimation.Highlight();
             Attacker.CardAnimation.Highlight();
 
+            if(AttackTarget.GetCardState() == CardUI.CardState.FaceDown)
+            {
+                AttackTarget.transform.SetAsLastSibling();
+            }
+
             yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
 
             AttackTarget.CardAnimation.TurnOffHighlight();

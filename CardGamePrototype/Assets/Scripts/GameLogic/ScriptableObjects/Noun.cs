@@ -134,7 +134,7 @@ namespace GameLogic
             switch (Character)
             {
                 case CharacterTyp.This:
-                    return _owner.GetName();
+                    return "I"; //_owner.GetName();
                 case CharacterTyp.It:
                     return "it";
                 case CharacterTyp.Any:
