@@ -20,4 +20,5 @@ MonoBehaviour:
   LocationDescription: It is over. Or is it?
   LocationIcon: {fileID: 0}
   LocationImage: {fileID: 21300000, guid: 6f52a9c2d8d0ba64ca255e0c46e6a969, type: 3}
-  LocationOptions: []
+  LocationOptions:
+  - {fileID: 11400000, guid: 4dff14b2b8c3c9f48aa7a78463f100c0, type: 2}

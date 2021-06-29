@@ -14,6 +14,6 @@ namespace GameLogic
         public EffectType[] FavoriteActions;
         public TriggerType[] FavoriteTriggers;
 
-        public Race[] FriendRaces;
+        public Race[] FriendRaces; 
     }
 }

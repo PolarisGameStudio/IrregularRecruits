@@ -7,9 +7,10 @@ using UnityEngine.UI;
 namespace UI
 {
 
-    public class LegacyAchievementUI : MonoBehaviour, IPointerClickHandler
+    public class LegacyAchievementUI : Singleton<LegacyAchievementUI>,IPointerClickHandler
     {
         public GameObject Holder;
+        public CanvasGroup FocusGroup;
         public TextMeshProUGUI UnlocksText;
         public TextMeshProUGUI ConditionText;
         public TextMeshProUGUI ProgressText;
@@ -46,5 +47,6 @@ namespace UI
             Holder.SetActive(false);
         
         }
+
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace MapLogic
 {
+
     public abstract class MapOption : ScriptableObject, IMapLocation
     {
         public abstract void ExecuteOption(MapNode owner);

@@ -29,6 +29,12 @@ namespace GameLogic
 
         }
 
+        private void SetStartValues()
+        {
+            foreach (var u in UnlockProgresses)
+                u.StartRun();
+        }
+
         private void ImportData()
         {
             foreach (var unlock in UnlockProgresses)
@@ -42,6 +48,7 @@ namespace GameLogic
                 Debug.Log("synced: " + unlock.Description());
 
             }
+            SetStartValues();
         }
 
         internal bool IsUnlocked(HeroObject arg)

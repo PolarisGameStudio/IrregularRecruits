@@ -10,6 +10,7 @@ namespace UI
     public class HeroSelectionUI : Singleton<HeroSelectionUI>
     {
         public TextMeshProUGUI HeroName;
+        public TextMeshProUGUI RaceText, ClassText;
         public Button PreviousButton, NextButton;
         public Button HeroImage;
         private Hero SelectedHero;
@@ -68,6 +69,12 @@ namespace UI
 
                 HeroImage.image.sprite = chosen.Portrait;
                 HeroName.text = chosen.name;
+
+                RaceText.text = chosen.RaceOption.name;
+                RaceText.color = chosen.RaceOption.Color;
+                ClassText.text = chosen.Class.name;
+                ClassText.color = chosen.Class.Color;
+
                 if (chosen.Deck)
                     DeckSelectionUI.Instance.SelectDeck(chosen.Deck);
 

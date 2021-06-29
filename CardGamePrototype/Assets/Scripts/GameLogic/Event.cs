@@ -40,6 +40,7 @@ namespace GameLogic
         public class CombatEvent : UnityEvent<Deck, Deck> { }
         //Inputs player deck and enemy deck, in that order
         public static CombatEvent OnCombatSetup = new CombatEvent();
+        //Inputs winner deck and loser deck, in that order
         public static CombatEvent OnBattleFinished = new CombatEvent();
 
         public class AddUnitEvent : UnityEvent<Creature[]> { }
@@ -66,6 +67,7 @@ namespace GameLogic
         public static UnityEvent OnGameOpen = new UnityEvent();
         public static UnityEvent OnGameWin = new UnityEvent();
         public static UnityEvent OnGameBegin = new UnityEvent();
+        public static UnityEvent OnStatScreen = new UnityEvent();
 
         //moved Card. From. To
         //should only be used by ui to determine card locations
@@ -145,6 +147,8 @@ namespace GameLogic
             OnGameOpen.RemoveAllListeners();
             //public static UnityEvent OnGameBegin = new UnityEvent();
             OnGameBegin.RemoveAllListeners();
+
+            OnStatScreen.RemoveAllListeners();
 
             //public static LocationChangeEvent OnChangeLocation = new LocationChangeEvent();
             OnChangeLocation.RemoveAllListeners();

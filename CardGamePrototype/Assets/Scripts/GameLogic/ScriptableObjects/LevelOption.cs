@@ -9,5 +9,7 @@ namespace GameLogic
         public class LevelOption : ScriptableObject
         {
             public List<AbilityWithEffect> Options = new List<AbilityWithEffect>();
-        }
+
+        public Color Color;
+    }
 }

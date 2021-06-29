@@ -10,11 +10,19 @@ namespace GameLogic
         public Race Against;
         public int Count;
         public int UnlocksAt;
-
+        public int StartedAt;
+        public bool UnlockedAtStart;
 
         public Event.IntEvent OnCountUp = new Event.IntEvent();
 
         public bool Unlocked() => Count >= UnlocksAt;
+
+        //sets the startedAt value to the current count. To track how much have improved during a run.
+        public void StartRun()
+        {
+            UnlockedAtStart = Unlocked();
+            StartedAt = Count;
+        }
 
         public string Description()
         {

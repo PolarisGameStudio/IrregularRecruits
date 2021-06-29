@@ -32,10 +32,13 @@ namespace UI
 
         public CanvasGroup FocusGroup;
 
+        public static int TotalKilled;
+
         private void Awake()
         {
             BattleSummaryHolder.SetActive(false);
 
+            TotalKilled = 0;
 
             HeroPortrait.onClick.AddListener(HeroClick);
 
@@ -77,6 +80,7 @@ namespace UI
             SetupIcons(lost, BattleSummaryLostIcon);
             SetupIcons(gained, BattleSummaryGainedIcon);
 
+            TotalKilled += killed.Count();
 
             UIController.Instance.Open(this);
 

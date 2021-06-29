@@ -33,7 +33,6 @@ namespace UI
         public void Open()
         {
             Open(LegacySystem.Instance.UnlockProgresses);
-            AchievementUI.Close();
         }
     }
 }
