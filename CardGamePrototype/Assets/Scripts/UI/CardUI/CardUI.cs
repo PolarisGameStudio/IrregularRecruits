@@ -12,7 +12,7 @@ namespace UI
 {
 
     [RequireComponent(typeof(RectTransform))]
-    public class CardUI : AbilityHolderUI, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IDragHandler,IEndDragHandler,IBeginDragHandler
+    public class CardUI : AbilityHolderUI, IPointerClickHandler, IDragHandler,IEndDragHandler,IBeginDragHandler
     {
         public Creature Creature;
 
@@ -251,11 +251,11 @@ namespace UI
 #if true
         public void OnPointerClick(PointerEventData eventData)
         {
-#if UNITY_ANDROID
-            if (CardHoverInfo.IsActive()) return;
-#endif
-            if (!BeingDragged && IsClickable() && Interactable && UIFlowController.Instance.EmptyQueue())
-                OnClick.Invoke(0);
+            if (AlwaysFaceUp || (IsClickable()))
+            {
+                CardHoverInfo.Show(this);
+                CardAnimation?.Highlight();
+            }
         }
 
         private bool IsClickable()
@@ -263,22 +263,6 @@ namespace UI
             return GetCardState() == CardState.FaceUp || GetCardState() == CardState.Battle;
         }
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            CardAnimation?.TurnOffHighlight();
-            CardHoverInfo.Hide();
-
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            if (AlwaysFaceUp || (IsClickable()))
-            {
-                CardHoverInfo.Show(this);
-                CardAnimation?.Highlight();
-            }
-
-        }
 
         public void OnDrag(PointerEventData eventData)
         {

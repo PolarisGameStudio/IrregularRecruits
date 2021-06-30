@@ -19,11 +19,13 @@ MonoBehaviour:
   IconImage: {fileID: 21300000, guid: 56c44a6f8f3840349b4f44c188265d7b, type: 3}
   Attack: 8
   Health: 12
-  Traits: []
+  Traits:
+  - {fileID: 11400000, guid: 29981a7f06d8de94d9408f8bee84825d, type: 2}
   SpecialAbility: {fileID: 11400000, guid: 9fbc43e1296927c4aa5705f6ad0a12c4, type: 2}
   CR: 25
   Enabling: 
   Payoff: 
+  Allies: []
   Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
   SoundSetType: 0
   Performance: 0

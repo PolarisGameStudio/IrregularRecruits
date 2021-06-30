@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,6 +37,14 @@ namespace UI
             CardUI.OnUIDestroyed.AddListener(CardDestroyed);
         }
 
+        private void Update()
+        {
+            if (!Holder.activeInHierarchy) return;
+
+            if (Input.GetMouseButtonDown(0) || (Input.touches.Any(t => t.phase == TouchPhase.Began)))
+                Hide();
+        }
+
         private void CardDestroyed(CardUI arg0)
         {
             if (arg0.Creature == Creature)
@@ -68,7 +77,7 @@ namespace UI
 
         private IEnumerator ShowAfterDelay(CardUI card)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.0f);
 
             ShowCard(card);
         }

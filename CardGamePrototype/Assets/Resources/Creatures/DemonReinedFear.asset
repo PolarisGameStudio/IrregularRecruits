@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: DemonRepressedCowardice
+  m_Name: DemonReinedFear
   m_EditorClassIdentifier: 
   name: Demon of Reined Fear
   Rarity: 1
@@ -24,6 +24,11 @@ MonoBehaviour:
   CR: 27
   Enabling: 
   Payoff: 08000000
+  Allies:
+  - {fileID: 11400000, guid: af62b919b53c1ee4f8d053b075e635f2, type: 2}
+  - {fileID: 11400000, guid: 896636e326c93474fbbe268a481f3377, type: 2}
+  - {fileID: 11400000, guid: 3d22132945200974697f8c2fac041437, type: 2}
+  - {fileID: 11400000, guid: 6239fdedfad930944b315ce8c3489afa, type: 2}
   Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
   SoundSetType: 5
   Performance: 0

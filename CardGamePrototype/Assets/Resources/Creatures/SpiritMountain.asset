@@ -25,6 +25,10 @@ MonoBehaviour:
   CR: 25
   Enabling: 00000000
   Payoff: 0a000000
+  Allies:
+  - {fileID: 11400000, guid: 631a6942edf1c4c4f82fa972bba6c2e1, type: 2}
+  - {fileID: 11400000, guid: a8438ea294c51e845ae861e2acfb1aaa, type: 2}
+  - {fileID: 11400000, guid: 0dc8dfb5ab444994caeee1926293b166, type: 2}
   Race: {fileID: 11400000, guid: aa96f320044c3a248b7ab3ea6872f26f, type: 2}
   SoundSetType: 0
   Performance: 0
