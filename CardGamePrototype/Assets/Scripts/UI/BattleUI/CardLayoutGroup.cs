@@ -131,7 +131,7 @@ namespace UI
                 if (card.BeingDragged) continue;
 
                 //if (!PointOnly)
-                card.transform.LeanMove(desiredPos.Position, UnityEngine.Random.Range(0.2f, 0.5f)).setEaseOutExpo();
+                card.transform.LeanMove(desiredPos.Position, 0.3f).setEaseOutExpo();
             }
         }
 
@@ -192,6 +192,8 @@ namespace UI
             //closer to the transistions to layout
             if(transitionTo != null && ((Vector2)transform.position - cardPos).sqrMagnitude > ((Vector2)transitionTo.transform.position- cardPos).sqrMagnitude)
             {
+                Debug.Log($"{draggedCard.name} transitions from {this} to {transitionTo}");
+
                 draggedCard.CurrentZoneLayout = transitionTo;
                 draggedCard.CanTransitionTo = this;
                 transitionTo.AddChild(draggedCard,0);
@@ -209,12 +211,15 @@ namespace UI
             //closer to the before position
             else if (index > 0 && (currentDesiredPos.Position - cardPos).sqrMagnitude > (ChildDesiredPositions[index - 1].Position - cardPos).sqrMagnitude)
             {
+
                 OnSwitchingPlace.Invoke();
 
                 //switch positions
                 var ca = ChildCards[index - 1];
                 ChildCards[index - 1] = draggedCard;
                 ChildCards[index] = ca;
+
+                Debug.Log($"{draggedCard.name} swithches places DOWN in {this} to {index-1}");
 
                 MoveCardsToDesiredPositions();
             }
@@ -228,6 +233,7 @@ namespace UI
                 ChildCards[index + 1] = draggedCard;
                 ChildCards[index] = ca;
 
+                Debug.Log($"{draggedCard.name} swithches places UP in {this} to {index + 1}");
 
                 MoveCardsToDesiredPositions();
             }
