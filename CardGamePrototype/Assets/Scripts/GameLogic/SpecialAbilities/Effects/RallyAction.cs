@@ -7,7 +7,7 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.Rally;
 
-        public override string Description(string v, int amount, Creature summon)
+        public override string Description(string v, int amount, bool firstPerson, Creature summon)
         {
 
             return $"rally {v}";

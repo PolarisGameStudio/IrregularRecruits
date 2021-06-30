@@ -6,9 +6,9 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.ATTACKS;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
-            return $"When {instigatorString} attacks";
+            return $"When {instigatorString} attack" + (firstPerson?"": "s");
         }
 
 

@@ -6,9 +6,11 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.IsATTACKED;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
-            return $"When {instigatorString } is attacked";
+            return "When " + instigatorString
+                + (firstPerson ? " am " : " is ") +
+                "attacked";
         }
 
         internal override float GetValue()

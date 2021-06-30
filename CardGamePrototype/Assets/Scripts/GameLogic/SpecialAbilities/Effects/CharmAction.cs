@@ -7,7 +7,7 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.Charm;
 
-        public override string Description(string target, int amount, Creature summon)
+        public override string Description(string target, int amount, bool firstPerson, Creature summon)
         {
             return "take control of " + target;
         }

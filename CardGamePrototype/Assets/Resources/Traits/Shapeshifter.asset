@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Shapeshifter
   Icon: {fileID: 21300000, guid: f4815ac42831a5549a21d47fd0478306, type: 3}
   Description: counts as all races
-  CR: 0
+  CR: 1

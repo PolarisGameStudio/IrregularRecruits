@@ -6,9 +6,10 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.ETB;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
-            return $"When {instigatorString} enters the battlefield";
+            return $"When {instigatorString} enter" + (firstPerson ? "" : "s") 
+                +" the battlefield";
         }
 
         internal override float GetValue()

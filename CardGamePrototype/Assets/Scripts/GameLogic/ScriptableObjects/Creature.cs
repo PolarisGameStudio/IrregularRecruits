@@ -22,6 +22,7 @@ namespace GameLogic
         public List<DeckStrategy> Enabling;
         public List<DeckStrategy> Payoff;
 
+        public List<Creature> Allies;
 
         public Race Race;
 

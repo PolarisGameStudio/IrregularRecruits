@@ -102,6 +102,9 @@ public class AssetManager
         var races = new List<Race>();
         races = GetAssetsOfType<Race>();
 
+        var abilities = new List<PassiveAbility>();
+        abilities = GetAssetsOfType<PassiveAbility>();
+
         //Debug.Log("Checking abilities: " + creatures.Count);
         //var switchFrom = races.First(r => r.name == "Bird");
         //var switchto = races.First(r => r.name == "Animal");
@@ -115,7 +118,15 @@ public class AssetManager
         //    }
         //}
 
+        foreach(var ability in abilities)
+        {
+            if (ability.TriggerCondition.Subjekt.Character == Noun.CharacterTyp.This && ability.ResultingAction.Target.Character == Noun.CharacterTyp.It)
+            {
+                Debug.Log("changed ability from it to this: " + ability.Name);
+                ability.ResultingAction.Target.Character = Noun.CharacterTyp.This;
 
+            }
+        }
 
         //foreach (var creature in CreatureLibrary.Instance.AllCreatures)
         //{
@@ -134,7 +145,7 @@ public class AssetManager
         //}
 
         AssetDatabase.Refresh();
-        //creatures.ForEach(a => EditorUtility.SetDirty(a));
+        abilities.ForEach(a => EditorUtility.SetDirty(a));
         AssetDatabase.SaveAssets();
 
     }

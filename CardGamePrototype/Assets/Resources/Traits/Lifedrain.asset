@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Lifedrain
   Icon: {fileID: 21300000, guid: eebfcc65d93e9e943bd05684e02eab35, type: 3}
   Description: heals equal to combat damage dealt
-  CR: 0
+  CR: 8

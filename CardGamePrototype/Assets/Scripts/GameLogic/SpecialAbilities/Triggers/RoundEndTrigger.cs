@@ -6,7 +6,7 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.RoundEnd;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
             return "at the end of each combat round";
         }

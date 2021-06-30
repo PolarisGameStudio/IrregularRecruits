@@ -6,9 +6,11 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.IsDAMAGED;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
-            return $"When {instigatorString } is damaged";
+            return "When "+instigatorString
+                + (firstPerson ? " am " : " is ") +
+                "dealt damage";
         }
 
         internal override float GetValue()

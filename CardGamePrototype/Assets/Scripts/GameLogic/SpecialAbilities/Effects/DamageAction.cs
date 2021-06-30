@@ -7,7 +7,7 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.DealDamage;
 
-        public override string Description(string target, int amount, Creature summon)
+        public override string Description(string target, int amount, bool firstPerson, Creature summon)
         {
             return $"Deal {amount} damage to {target}";
         }

@@ -6,7 +6,7 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.GainEnergy;
 
-        public override string Description(string v, int amount, Creature summon)
+        public override string Description(string v, int amount, bool firstPerson, Creature summon)
         {
             return $"gain {amount} energy";
         }

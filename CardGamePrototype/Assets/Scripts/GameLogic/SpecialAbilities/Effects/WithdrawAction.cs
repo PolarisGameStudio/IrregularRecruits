@@ -7,7 +7,7 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.Withdraw;
 
-        public override string Description(string target, int amount, Creature summon)
+        public override string Description(string target, int amount, bool firstPerson, Creature summon)
         {
             return "withdraw " + target;
         }

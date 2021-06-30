@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Carnage
   Icon: {fileID: 21300000, guid: 61545772388d412498c706d9d1d3c262, type: 3}
-  Description: also damages the units next the attacked
-  CR: 0
+  Description: damages the units next to the attacked
+  CR: 10

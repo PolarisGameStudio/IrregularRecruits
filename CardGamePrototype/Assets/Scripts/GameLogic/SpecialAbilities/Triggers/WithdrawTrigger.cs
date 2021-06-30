@@ -6,9 +6,11 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.Withdraw;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
-            return $"When {instigatorString } is withdrawn";
+            return "When " + instigatorString
+                + (firstPerson ? " am " : " is ") +
+                "withdrawn";
         }
 
         internal override float GetValue()

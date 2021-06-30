@@ -23,6 +23,7 @@ MonoBehaviour:
       Relationship: 2
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     Amount: 0
     Summons: {fileID: 0}
   Value: 0
@@ -33,4 +34,5 @@ MonoBehaviour:
       Relationship: 1
       DamageState: 0
       Race: 1
+      Trait: {fileID: 0}
     TriggerAction: 8

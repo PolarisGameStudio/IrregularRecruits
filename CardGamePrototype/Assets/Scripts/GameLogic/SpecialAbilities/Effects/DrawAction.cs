@@ -8,9 +8,9 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.Draw;
 
-        public override string Description(string target, int amount, Creature summon)
+        public override string Description(string target, int amount, bool firstPerson, Creature summon)
         {
-            return $"draw {amount} cards";
+            return $"draw {amount} card" + (amount == 1 ? "": "s");
         }
 
         public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)

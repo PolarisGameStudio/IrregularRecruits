@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: ENEMYRoundEnd-HealIT1104
   m_EditorClassIdentifier: 
+  Name: 
+  Icon: {fileID: 0}
   ResultingAction:
     ActionType: 5
     TargetCount: 0
@@ -21,6 +23,7 @@ MonoBehaviour:
       Relationship: 1
       DamageState: 1
       Race: 0
+      Trait: {fileID: 0}
     Amount: 1
     Summons: {fileID: 0}
   Value: 0.525
@@ -31,4 +34,5 @@ MonoBehaviour:
       Relationship: 2
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     TriggerAction: 9

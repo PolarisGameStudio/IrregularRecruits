@@ -26,5 +26,5 @@ MonoBehaviour:
   Payoff: 
   Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
   SoundSetType: 9
-  Performance: 39.98075
+  Performance: 0
   TopFocused: 1

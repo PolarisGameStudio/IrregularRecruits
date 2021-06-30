@@ -7,9 +7,16 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.StatPlus;
 
-        public override string Description(string target, int amount, Creature summon)
+        public override string Description(string target, int amount, bool firstPerson, Creature summon)
         {
-            return $"{target} gain {amount}/{amount}";
+            if (firstPerson)
+            {
+                target = target.Replace("me", "I");
+
+                return $"{target} gain {amount}/{amount}";
+            }
+
+            return $"{target} gains {amount}/{amount}";
         }
 
         public override bool CanExecute(AbilityWithEffect ability, AbilityHolder owner, List<Card> potentialTargets)

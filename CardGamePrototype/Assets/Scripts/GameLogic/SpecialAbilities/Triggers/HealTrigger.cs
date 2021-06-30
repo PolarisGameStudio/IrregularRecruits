@@ -6,9 +6,11 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.IsHealed;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
-            return $"When {instigatorString } is healed";
+            return "When " + instigatorString
+                + (firstPerson ? " am " : " is ") +
+                "healed";
         }
 
         internal override float GetValue()

@@ -40,7 +40,7 @@ namespace GameLogic
 
         public string Description(ICharacter owner)
         {
-            return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, TargetCount), Amount, Summons);
+            return AbilityProcessor.GetAction(ActionType).Description(Target.NounAsString(owner, false, TargetCount), Amount, Target.Character == Noun.CharacterTyp.This || TargetCount != Count.One, Summons);
         }
 
 

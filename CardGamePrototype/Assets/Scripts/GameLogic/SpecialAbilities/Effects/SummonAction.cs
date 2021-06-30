@@ -6,7 +6,7 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.Summon;
 
-        public override string Description(string target, int amount, Creature summon)
+        public override string Description(string target, int amount, bool firstPerson, Creature summon)
         {
             return $"summon a {summon.Attack}/{summon.Health} {summon.name}" ;
         }

@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Ward
   Icon: {fileID: 21300000, guid: 526a815d1d8fde148a02eab90c34219e, type: 3}
   Description: first damage received is prevented
-  CR: 0
+  CR: 3

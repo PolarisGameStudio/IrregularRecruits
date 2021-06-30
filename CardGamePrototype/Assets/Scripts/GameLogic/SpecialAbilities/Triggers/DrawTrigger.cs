@@ -6,9 +6,10 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.Draw;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
-            return $"When {instigatorString}'s controller draws a card";
+            return $"When " + (firstPerson ? "my " : instigatorString+"'s ")
+                + "commander draws a card";
         }
 
         internal override float GetValue()

@@ -8,9 +8,9 @@ namespace GameLogic
     {
         public override EffectType ActionType => EffectType.Resurrect;
 
-        public override string Description(string target, int amount, Creature summon)
+        public override string Description(string target, int amount, bool firstPerson, Creature summon)
         {
-            target = target.Replace(", that is dead", "");
+            //target = target.Replace(", that is dead", "");
 
             return $"resurrect {target} with {amount} health";
         }

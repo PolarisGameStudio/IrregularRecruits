@@ -127,20 +127,25 @@ namespace GameLogic
             }
         }
 
-        public string NounAsString(ICharacter _owner, Count count = Count.One, TriggerType triggerAction = TriggerType.COUNT)
+        public string NounAsString(ICharacter _owner, bool subject, Count count = Count.One, TriggerType triggerAction = TriggerType.COUNT)
         {
             var str = "";
 
             switch (Character)
             {
                 case CharacterTyp.This:
-                    return "I"; //_owner.GetName();
+                    return subject?"I": "me"; //_owner.GetName();
                 case CharacterTyp.It:
                     return "it";
                 case CharacterTyp.Any:
                     if (count == Count.One)
-                        str += "a ";
-                    else 
+                    {
+                        if (Relationship == Allegiance.Enemy)
+                            str += "an ";
+                        else
+                            str += "a ";
+                    }
+                    else
                         str += count.ToString() + " ";
                     break;
                 case CharacterTyp.Other:

@@ -22,10 +22,10 @@ MonoBehaviour:
   Traits:
   - {fileID: 11400000, guid: 2e79b84878312aa47bc4ccbb282c0d44, type: 2}
   SpecialAbility: {fileID: 11400000, guid: b65d5392ea133294aa45bc35c31b84b2, type: 2}
-  CR: 46
+  CR: 47
   Enabling: 03000000050000000200000006000000
   Payoff: 
   Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
   SoundSetType: 4
-  Performance: -195.48424
+  Performance: 0
   TopFocused: 0

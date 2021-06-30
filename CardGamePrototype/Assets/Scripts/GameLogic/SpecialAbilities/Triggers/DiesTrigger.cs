@@ -6,9 +6,9 @@ namespace GameLogic
     {
         public override TriggerType TriggerType => TriggerType.DIES;
 
-        internal override string Description(string instigatorString)
+        internal override string Description(string instigatorString, bool firstPerson)
         {
-            return $"When {instigatorString } dies";
+            return $"When {instigatorString } die" + (firstPerson ? "" : "s");
         }
 
         internal override float GetValue()
