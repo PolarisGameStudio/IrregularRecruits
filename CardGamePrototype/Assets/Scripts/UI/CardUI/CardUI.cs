@@ -28,6 +28,7 @@ namespace UI
         public TextMeshProUGUI NameText;
         public TextMeshProUGUI DescriptionText;
         public TextMeshProUGUI PriceText;
+        public Button BuyButton;
 
         public List<GameObject> InstantiatedObjects = new List<GameObject>();
 

@@ -98,7 +98,7 @@ namespace UI
                 if(inst.PriceText)
                     inst.PriceText.text = card.Item2.ToString();
 
-                inst.OnClick.AddListener(i => BuyCard(inst));
+                inst.BuyButton.onClick.AddListener(() => BuyCard(inst));
 
                 OnReload.AddListener(() => Destroy(inst.gameObject));
 

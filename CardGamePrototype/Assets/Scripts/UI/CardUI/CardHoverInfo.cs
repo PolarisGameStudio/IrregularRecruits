@@ -187,6 +187,13 @@ namespace UI
             Holder.SetActive(true);
 
             Canvas.ForceUpdateCanvases();
+
+            //this is ugly and hacky. but apparently the only way to make sure that the layoutgroups sizes are updated correctly.
+            //remove, when/if unity fixes this
+            AbilityIcon.LayoutGroup.enabled = false;
+            AbilityIcon.LayoutGroup.enabled = true;
+            InstantiatedObjects.ForEach(o => o.LayoutGroup.enabled = false);
+            InstantiatedObjects.ForEach(o => o.LayoutGroup.enabled = true);
         }
 
         public static void Hide()

@@ -9,5 +9,6 @@ namespace UI
     {
         public Image Image;
         public TextMeshProUGUI Text;
+        public LayoutGroup LayoutGroup;
     }
 }
