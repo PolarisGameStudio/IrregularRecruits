@@ -10,8 +10,6 @@ namespace UI
         public CanvasGroup FocusGroup;
         public static LegacyUI Instance;
 
-        public LegacyAchievementUI AchievementUI;
-
         private void Awake()
         {
             Instance = this;

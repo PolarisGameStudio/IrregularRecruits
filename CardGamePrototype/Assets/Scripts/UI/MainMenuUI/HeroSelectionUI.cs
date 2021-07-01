@@ -12,7 +12,8 @@ namespace UI
         public TextMeshProUGUI HeroName;
         public TextMeshProUGUI RaceText, ClassText;
         public Button PreviousButton, NextButton;
-        public Button HeroImage;
+        public Image HeroImage;
+        public Button HeroButton;
         private Hero SelectedHero;
         private List<HeroObject> AllHeroes;
         private int Chosen;
@@ -27,7 +28,7 @@ namespace UI
 
             Chosen = AllHeroes.Count;
 
-            HeroImage.onClick.AddListener(()=> HeroView.Open(SelectedHero));
+            HeroButton.onClick.AddListener(()=> HeroView.Open(SelectedHero));
 
             Next();
         }
@@ -67,7 +68,7 @@ namespace UI
 
                 HeroImage.gameObject.SetActive(true);
 
-                HeroImage.image.sprite = chosen.Portrait;
+                HeroImage.sprite = chosen.Portrait;
                 HeroName.text = chosen.name;
 
                 RaceText.text = chosen.RaceOption.name;
