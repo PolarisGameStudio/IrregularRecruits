@@ -15,7 +15,7 @@ namespace MapUI
     {
         public MapNodeIcon NodeIconPrefab;
         public MapEdge LinePrefab;
-        public HeroMapIcon HeroIcon; 
+        public HeroIcon HeroIcon; 
         public List<MapNodeIcon> Nodes = new List<MapNodeIcon>();
         private List<MapNodeIcon> OldNodes = new List<MapNodeIcon>();
         public GameObject Holder;

@@ -393,7 +393,7 @@ MonoBehaviour:
     type: 3}
   LinePrefab: {fileID: -644115061392954524, guid: a16c41c3ab25ed34b9801c7fa8a62b52,
     type: 3}
-  HeroIcon: {fileID: 4257702827291930991}
+  HeroIcon: {fileID: 1369854045820159511}
   Nodes: []
   Holder: {fileID: 144759970862014761}
   FocusGroup: {fileID: 6617330883203426100}
@@ -643,7 +643,8 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5959167436390965816, guid: 6557626408950414d9ed5e8b723559dc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6557626408950414d9ed5e8b723559dc, type: 3}
 --- !u!224 &3704186576688416216 stripped
 RectTransform:
@@ -651,15 +652,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7612579926255981399}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4257702827291930991 stripped
+--- !u!114 &1369854045820159511 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5959167436390965816, guid: 6557626408950414d9ed5e8b723559dc,
+  m_CorrespondingSourceObject: {fileID: 8838283358573155648, guid: 6557626408950414d9ed5e8b723559dc,
     type: 3}
   m_PrefabInstance: {fileID: 7612579926255981399}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f1c062a678f7794982ce1b2d200ab42, type: 3}
+  m_Script: {fileID: 11500000, guid: b229dfea1976fb745a317d5ded8ff0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

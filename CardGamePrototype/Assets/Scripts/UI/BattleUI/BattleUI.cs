@@ -60,6 +60,7 @@ namespace UI
         //TODO: move these to animation system
         public static UnityEvent OnAbilitySelect = new UnityEvent();
         public static UnityEvent OnLevelUp = new UnityEvent();
+        public static UnityEvent OnLevelAnimation = new UnityEvent();
 
         public Button EndTurnButton;
 
@@ -334,12 +335,14 @@ namespace UI
             AttackTarget.CardAnimation.Highlight();
             Attacker.CardAnimation.Highlight();
 
-            if(AttackTarget.GetCardState() == CardUI.CardState.FaceDown)
+            yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
+
+            if (AttackTarget.GetCardState() == CardUI.CardState.FaceDown)
             {
                 AttackTarget.transform.SetAsLastSibling();
             }
 
-            yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
+
 
             AttackTarget.CardAnimation.TurnOffHighlight();
             Attacker.CardAnimation.TurnOffHighlight();

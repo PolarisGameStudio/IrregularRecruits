@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
+  m_Name: CatsSmall
+  m_EditorClassIdentifier: 
+  name: Cat Nation
+  Description: A cat army full of cat people. They are tricky and deadly. They make
+    their enemies withdraw, and then strike them before they get a chance to act.
+  Creatures:
+  - {fileID: 11400000, guid: 89383700738110c46aaf0c9e1a65c973, type: 2}
+  - {fileID: 11400000, guid: 06b422bbbc7800b4b9146f8eaaceea71, type: 2}
+  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
+  - {fileID: 11400000, guid: 3ac44313b8209ff43a827b2a7b2cbfe0, type: 2}
+  - {fileID: 11400000, guid: 548686969d256fd45b48b95539b59ca0, type: 2}
+  - {fileID: 11400000, guid: 548686969d256fd45b48b95539b59ca0, type: 2}
+  DeckIcon: {fileID: 21300000, guid: 829193eec1da30748b2ac27ef8cfe0ad, type: 3}
+  DeckImage: {fileID: 21300000, guid: 0f3a61879da8b23469c0b394b46e80f0, type: 3}
+  FriendRaces:
+  - {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}
+  - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+  EnemyRaces:
+  - {fileID: 11400000, guid: 4728fa16fe828ca41a23864bdfa561af, type: 2}
+  - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}

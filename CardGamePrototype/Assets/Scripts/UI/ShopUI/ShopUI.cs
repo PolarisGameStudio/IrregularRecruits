@@ -122,7 +122,7 @@ namespace UI
                 var card = item.Item1;
                 var able = item.Item2 <= gold;
 
-                card.Interactable = able;
+                card.BuyButton.interactable = able;
                 card.PriceText.color = able ? Color.white : Color.red;
             }
 

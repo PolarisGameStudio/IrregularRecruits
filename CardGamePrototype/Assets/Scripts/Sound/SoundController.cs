@@ -45,7 +45,7 @@ namespace Sound
             BattleUI.OnBattleFinished.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
             BattleUI.OnBattleFinished.AddListener(() => PlayStinger(SoundLibrary.Stinger.BattleWon));
             BattleUI.OnAbilitySelect.AddListener(() => PlayCardSound(SoundLibrary.CardSound.AbilitySelection));
-            BattleUI.OnLevelUp.AddListener(() => PlayCardSound(SoundLibrary.CardSound.LevelUp));
+            BattleUI.OnLevelAnimation.AddListener(() => PlayCardSound(SoundLibrary.CardSound.LevelUp));
             BattleSummary.Instance.OnClose.AddListener(() => ChangeMusic(SoundLibrary.Music.Explore));
 
             PlayerGoldUpdater.Instance.OnGoldGained.AddListener(() => PlayUISound(SoundLibrary.UiSound.GoldCoin));

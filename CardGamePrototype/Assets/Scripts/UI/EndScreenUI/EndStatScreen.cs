@@ -1,4 +1,5 @@
-﻿using GameLogic;
+﻿using Data;
+using GameLogic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,6 +81,8 @@ namespace UI
 
         private void SetupStatEntry(string text, int score)
         {
+            var savedScore = DataHandler.Instance.GetLegacy($"highscore.{text}");
+
             var inst = Instantiate(StatTextEntry, StatTextEntry.transform.parent);
 
             inst.text = text + ": " + score;

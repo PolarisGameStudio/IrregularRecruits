@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6539995272423495311}
   - component: {fileID: 3083901616842854467}
   - component: {fileID: 7028531189670946394}
-  - component: {fileID: 5959167436390965816}
+  - component: {fileID: 8838283358573155648}
   m_Layer: 5
   m_Name: PCMapIcon
   m_TagString: Untagged
@@ -60,7 +60,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &5959167436390965816
+--- !u!114 &8838283358573155648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 742175626818271870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f1c062a678f7794982ce1b2d200ab42, type: 3}
+  m_Script: {fileID: 11500000, guid: b229dfea1976fb745a317d5ded8ff0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Portrait: {fileID: 5129377626180668836}
