@@ -1,7 +1,9 @@
 ﻿using GameLogic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+using Event = GameLogic.Event;
 
 namespace UI
 {
@@ -18,20 +20,33 @@ namespace UI
 
         public Image ProgressFill;
 
+        public float ProgressFillDelta = 0.05f;
+
+        public static UnityEvent OnBarTick = new UnityEvent();
+
         public override void Open(UnlockCondition data)
         {
-            FrameImage.sprite = data.Unlocked() ? UnlockedFrame : LockedFrame;
-            LockIcon.gameObject.SetActive(!data.Unlocked());
-
-            PortraitImage.sprite = data.UnlocksHero.Portrait;
-
-            Button?.onClick.AddListener(() => LegacyAchievementUI.Instance.Open(data));
-
             Data = data;
 
-            if(ProgressFill)
-                ProgressFill.fillAmount = data.StartedAt / (float)data.UnlocksAt;
+            bool unlocked = Data.Unlocked();
+            SetUnlockStatus(unlocked);
 
+            PortraitImage.sprite = Data.UnlocksHero.Portrait;
+
+            Button?.onClick.AddListener(() => LegacyAchievementUI.Instance.Open(Data));
+
+
+        }
+
+        public void SetUnlockStatus(bool unlocked)
+        {
+            FrameImage.sprite = unlocked ? UnlockedFrame : LockedFrame;
+            LockIcon.gameObject.SetActive(!unlocked);
+
+            if (ProgressFill)
+                ProgressFill.fillAmount =
+                    unlocked ?
+                    1f : Data.StartedAt / (float)Data.UnlocksAt;
         }
 
         public IEnumerator AnimateProgress()
@@ -43,12 +58,16 @@ namespace UI
                 yield break;
             }
 
+            float x = data.StartedAt;
 
-            var x = data.StartedAt;
-
-            while (x <= data.Count && x <= data.UnlocksAt)
+            while (x < data.Count && x < data.UnlocksAt)
             {
-                ProgressFill.fillAmount = x++ / (float) data.UnlocksAt;
+                ProgressFill.fillAmount += ProgressFillDelta;
+
+                if (ProgressFill.fillAmount >= (x + 1) / data.UnlocksAt)
+                    x++;
+
+                OnBarTick.Invoke();
 
                 yield return new WaitForSeconds(Random.Range(0.2f, 0.6f));
             }
@@ -57,8 +76,14 @@ namespace UI
             {
                 ProgressFill.color = Color.white;
 
-                Open(data);
-                //todo: play unlock animation
+                SetUnlockStatus(true);
+
+                //unlock animation
+
+                AnimationSystem.PlayLevelupFX(PortraitImage.transform.position);
+                Event.OnAchievement.Invoke(data);
+
+                yield return new WaitForSeconds(1f);
             }
         }
     }

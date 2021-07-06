@@ -14,8 +14,10 @@ namespace GameLogic
     {
         public List<UnlockCondition> UnlockProgresses;
 
-        void OnEnable()
+        public void Load()
         {
+
+            DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded -= ImportData;
 
             DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded += ImportData;
 

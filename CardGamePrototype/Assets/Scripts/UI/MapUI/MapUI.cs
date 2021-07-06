@@ -30,6 +30,7 @@ namespace MapUI
         public float MapEdgeLength = 0.8f;
         public Sprite[] Linetypes;
         public Color MapDrawColor;
+        public Color LineDrawColor;
         public RectTransform MapStartPosition;
         public Vector3 PositionToCenterDifferience;
         public float NodeFadeTime = 2f;

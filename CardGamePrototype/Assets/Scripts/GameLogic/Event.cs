@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 namespace GameLogic
 {
+
     public class Event
     {
 

@@ -32,6 +32,8 @@ namespace Sound
             Event.OnGameOpen.AddListener(() => PlayStinger(SoundLibrary.Stinger.MenuOpen));
 
             Event.OnAchievement.AddListener(u => PlayStinger(SoundLibrary.Stinger.AchievementUnlocked));
+            //LegacyUIEntry.OnUnlock.AddListener(() => PlayStinger(SoundLibrary.Stinger.AchievementUnlocked));
+
 
             Event.OnGameOver.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
             Event.OnGameOver.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameLoss));
@@ -68,6 +70,8 @@ namespace Sound
 
             AnimationSystem.OnAbilityTrigger.AddListener(PlayAbilityTrigger);
             AnimationSystem.OnAbilityTargetHit.AddListener(PlayAbilityHit);
+
+            LegacyUIEntry.OnBarTick.AddListener(() => PlayUISound(SoundLibrary.UiSound.ProgressBarTick));
         }
 
         private void PlayCardSound(CreatureBark soundType, GameLogic.SoundSetType soundSetType)

@@ -43,6 +43,8 @@ namespace Data
 
         internal void InitializeDatabases()
         {
+            Debug.Log("loading databases");
+
             PersistantDataObject.LoadDatabase();
 
             PlayerPrefsObject.LoadDatabase();

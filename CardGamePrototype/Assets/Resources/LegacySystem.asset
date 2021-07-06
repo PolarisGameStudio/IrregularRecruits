@@ -16,28 +16,28 @@ MonoBehaviour:
   - UnlocksHero: {fileID: 11400000, guid: 6f440e99009158a4baa31e5ebb3cbe92, type: 2}
     Condition: 0
     Against: {fileID: 0}
-    Count: 3
-    UnlocksAt: 10
+    Count: 13
+    UnlocksAt: 8
     StartedAt: 0
     UnlockedAtStart: 0
   - UnlocksHero: {fileID: 11400000, guid: a64721902877f0a44b8327d8390bfa7f, type: 2}
     Condition: 0
     Against: {fileID: 0}
-    Count: 3
+    Count: 13
     UnlocksAt: 50
     StartedAt: 0
     UnlockedAtStart: 0
   - UnlocksHero: {fileID: 11400000, guid: 716c73d99fd062c40ac951e327587ca5, type: 2}
     Condition: 0
     Against: {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
-    Count: 1
+    Count: 0
     UnlocksAt: 30
     StartedAt: 0
     UnlockedAtStart: 0
   - UnlocksHero: {fileID: 11400000, guid: 7f190f1584d90ea4f8dd1490bc170f40, type: 2}
     Condition: 0
     Against: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
-    Count: 0
+    Count: 4
     UnlocksAt: 25
     StartedAt: 0
     UnlockedAtStart: 0

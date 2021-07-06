@@ -101,7 +101,7 @@ namespace MapUI
 
             instance.onClick.AddListener(() => CurrentNode.SelectOption(option));
 
-            instance.GetComponent<TextMeshProUGUI>().text = option.GetOptionDescription(owner);
+            instance.GetComponent<TextMeshProUGUI>().text = "- " + option.GetOptionDescription(owner);
 
             instance.gameObject.SetActive(true);
 

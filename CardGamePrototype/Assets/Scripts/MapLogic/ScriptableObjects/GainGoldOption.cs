@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using GameLogic;
+using Event = GameLogic.Event;
 
 namespace MapLogic
 {
@@ -29,7 +31,7 @@ namespace MapLogic
 
         public override void ExecuteOption(MapNode owner)
         {
-            MapController.Instance.PlayerGold += Amount;
+            Event.OnPlayerGoldAdd.Invoke(Amount);
         }
 
     }

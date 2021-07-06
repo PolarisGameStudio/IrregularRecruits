@@ -35,7 +35,7 @@ namespace UI
             Event.OnStatScreen.AddListener(Open);
             Event.OnBattleFinished.AddListener(HandleBattleStats);
             RestartButton.onClick.AddListener(Restart);
-            Event.OnPlayerGoldAdd.AddListener(i => GoldGained += i);
+            Event.OnPlayerGoldAdd.AddListener(i => GoldGained += Mathf.Max(0, i));
         }
 
         private void Restart()
@@ -83,13 +83,25 @@ namespace UI
         {
             var savedScore = DataHandler.Instance.GetLegacy($"highscore.{text}");
 
+            var newHighscore = savedScore.Value < score;
+
+            if (newHighscore) savedScore.Value = score;
+
             var inst = Instantiate(StatTextEntry, StatTextEntry.transform.parent);
 
-            inst.text = text + ": " + score;
+            inst.text = text + ": " + score + " "+ 
+                (
+                newHighscore ? "*NEW HIGH SCORE*"
+                : $"(High score: {savedScore.Value})"
+                ) ;
+
+
+
         }
 
         private IEnumerator ShowUnlocksRoutine()
         {
+
             var unlocksImproved = LegacySystem.Instance.UnlockProgresses.Where(uc => !uc.UnlockedAtStart && uc.StartedAt < uc.Count);
 
             //TODO: filter so we only show the easiest unlockable of each unlocktype
@@ -103,12 +115,15 @@ namespace UI
                 inst.gameObject.SetActive(true);
 
                 inst.Open(uc);
+                inst.SetUnlockStatus(uc.UnlockedAtStart);
 
                 instances.Add(inst);
 
             }
 
-            foreach(var inst in instances)
+            yield return new WaitForSeconds(1.2f);
+
+            foreach (var inst in instances)
                 yield return inst.AnimateProgress();
 
         }

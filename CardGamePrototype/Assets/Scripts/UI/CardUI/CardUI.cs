@@ -252,7 +252,7 @@ namespace UI
 #if true
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (AlwaysFaceUp || (IsClickable()))
+            if (!BeingDragged && (AlwaysFaceUp || IsClickable()))
             {
                 CardHoverInfo.Show(this);
                 CardAnimation?.Highlight();

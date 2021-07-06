@@ -55,7 +55,7 @@ public class InputManager : Singleton<InputManager>
                 BattleManager.Instance.PlayerDeck?.Hero?.AwardXp(10);
                 break;
             case MappableAction.GainGold:
-                MapController.Instance.PlayerGold += 20;
+                Event.OnPlayerGoldAdd.Invoke(20);
                 break;
             default:
                 break;

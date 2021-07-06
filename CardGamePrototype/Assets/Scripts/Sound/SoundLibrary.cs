@@ -26,7 +26,8 @@ namespace Sound
             ShopReroll,
             PurchaseUnit,
             ActionsRefreshed,
-            BloodCut
+            BloodCut,
+            ProgressBarTick
         }
 
         public enum Stinger

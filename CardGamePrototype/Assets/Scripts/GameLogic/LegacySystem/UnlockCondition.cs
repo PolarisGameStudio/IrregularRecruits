@@ -36,8 +36,6 @@ namespace GameLogic
 
             OnCountUp.Invoke(Count);
 
-            if (Count == UnlocksAt)
-                Event.OnAchievement.Invoke(this);
 
         }
     }
