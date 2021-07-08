@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GameLogic
 {
@@ -14,6 +16,13 @@ namespace GameLogic
         public EffectType[] FavoriteActions;
         public TriggerType[] FavoriteTriggers;
 
-        public Race[] FriendRaces; 
+        public Race[] FriendRaces;
+
+        public Sprite[] Backgrounds;
+
+        public Sprite GetBackground()
+        {
+            return Backgrounds[Random.Range(0, Backgrounds.Length)];
+        }
     }
 }

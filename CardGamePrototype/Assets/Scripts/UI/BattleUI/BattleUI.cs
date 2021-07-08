@@ -63,6 +63,7 @@ namespace UI
         public static UnityEvent OnLevelAnimation = new UnityEvent();
 
         public Button EndTurnButton;
+        public Image BackgroundImage;
 
         //todo: move ´this into seperate class
         private int XpAtStartOfBattle;
@@ -126,6 +127,8 @@ namespace UI
                 XpAtStartOfBattle = playerDeck.Hero.Xp;
                 GoldAtStartOfBattle = MapController.Instance.PlayerGold;
             }
+
+            BackgroundImage.sprite = opponentDeck.Races.First().GetBackground();
 
             BattleRunning = true;
             OnBattleBegin.Invoke();

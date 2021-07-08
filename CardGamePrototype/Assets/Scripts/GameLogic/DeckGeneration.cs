@@ -7,12 +7,18 @@ namespace GameLogic
 
     public abstract class DeckGeneration
     {
+        //test if this list persists through plays
+        public static HashSet<Creature> UniquesGenerated = new HashSet<Creature>();
+
         public static Deck GenerateDeck(int CR, List<Race> races = null, List<Creature> creatures = null, bool uniquesAllowed = false)
         {
             var possibleRaces = races ?? CreatureLibrary.Instance.AllRaces.OrderBy(c=>Random.value).ToList();
             var race = possibleRaces.First();
 
             if (creatures == null) creatures = new List<Creature>();
+
+            foreach (var c in creatures.Where(c => c.Rarity == Creature.RarityType.Unique))
+                UniquesGenerated.Add(c);
 
             var origCreatures = creatures;
 
@@ -25,6 +31,7 @@ namespace GameLogic
 
             if (!uniquesAllowed)
                 creatures = creatures.Where(c => c.Rarity != Creature.RarityType.Unique || origCreatures.Contains(c)).ToList();
+
 
             var difficultyLeft = CR;
 
@@ -46,7 +53,14 @@ namespace GameLogic
                 difficultyLeft -= selected.CR;
 
                 library.Add(card);
+
+                if (selected.Rarity == Creature.RarityType.Unique) 
+                { 
+                    UniquesGenerated.Add(selected);
+                    creatures.Remove(selected);
+                }
             }
+
 
             var deck = new Deck(library);
 
