@@ -19,3 +19,5 @@ MonoBehaviour:
   FavoriteActions: 0600000003000000
   FavoriteTriggers: 0300000002000000
   FriendRaces: []
+  Backgrounds:
+  - {fileID: 21300000, guid: 5b3766505d367fe4787bf2f21be7cc62, type: 3}

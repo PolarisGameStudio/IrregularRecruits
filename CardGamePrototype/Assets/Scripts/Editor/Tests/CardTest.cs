@@ -47,28 +47,6 @@ namespace Tests
             return TestCard;
         }
 
-        private static Creature CreateCreature()
-        {
-
-            Trait trait = new Trait()
-            {
-                Description = "Testing a trait",
-                name = "TestTrait"
-            };
-
-
-            return new Creature()
-            {
-                name = "Testeron",
-                Attack = 2,
-                Health = 3,
-                Traits = new List<Trait>()
-                {
-                    trait
-                }
-            };
-        }
-
         [Test]
         public void CardHasCorrectCreatureStats()
         {

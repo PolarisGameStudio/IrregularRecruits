@@ -7,8 +7,12 @@ namespace GameLogic
     {
         private void Awake()
         {
+            DeckGeneration.UniquesGenerated.Clear();
             Event.ResetEvents();
             LegacySystem.Instance.Load();
+
+            //TODO: should we reset all the singletons? yes
+
         }
     }
 }

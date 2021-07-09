@@ -45,8 +45,8 @@ namespace GameLogic
         {
             //unique control 
             Creature creature = card.Creature;
-            if (creature.Rarity == Creature.RarityType.Unique && !CreatureLibrary.Instance.SpawnedUniques.Contains(creature))
-                CreatureLibrary.Instance.SpawnedUniques.Add(creature);
+            if (creature.Rarity == Creature.RarityType.Unique && !DeckGeneration.UniquesGenerated.Contains(creature))
+                DeckGeneration.UniquesGenerated.Add(creature);
 
             card.InDeck = this;
             card.ChangeLocation(Deck.Zone.Library);

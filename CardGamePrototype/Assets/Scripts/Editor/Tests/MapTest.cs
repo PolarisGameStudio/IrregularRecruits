@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Tests
 {
+
     public class MapTest : TestFixture
     {
         [SetUp]
