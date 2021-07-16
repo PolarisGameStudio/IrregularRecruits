@@ -45,7 +45,7 @@ namespace UI
 
         private void HandleBattleStats(Deck winner, Deck loser)
         {
-            if (winner == BattleManager.Instance.PlayerDeck)
+            if (winner == Battle.PlayerDeck)
             {
                 BattlesWon++;
             }
@@ -56,7 +56,7 @@ namespace UI
         public override void Open()
         {
             base.Open();
-            var hero = BattleManager.Instance.PlayerDeck.Hero;
+            var hero = Battle.PlayerDeck.Hero;
             HeroImage.sprite = hero.HeroObject.Portrait;
 
             UnlockEntry.gameObject.SetActive(false);

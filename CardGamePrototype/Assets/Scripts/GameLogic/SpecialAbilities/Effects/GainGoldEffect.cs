@@ -21,7 +21,7 @@ namespace GameLogic
         {
             Event.OnAbilityExecution.Invoke(ability, _owner, new List<Card>());
             
-            if( BattleManager.Instance.PlayerDeck == _owner.InDeck)
+            if( Battle.PlayerDeck == _owner.InDeck)
                 Event.OnPlayerGoldAdd.Invoke(ability.ResultingAction.Amount);
         }
 

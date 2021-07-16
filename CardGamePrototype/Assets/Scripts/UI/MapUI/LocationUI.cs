@@ -57,7 +57,7 @@ namespace MapUI
         {
             Debug.Log("opening start event");
 
-            Hero hero = BattleManager.Instance.PlayerDeck.Hero;
+            Hero hero = Battle.PlayerDeck.Hero;
 
             StartEvent.LocationDescription = hero.HeroObject.BackgroundText;
 

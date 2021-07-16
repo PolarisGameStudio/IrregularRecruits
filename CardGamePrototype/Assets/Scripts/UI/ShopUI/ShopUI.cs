@@ -127,9 +127,9 @@ namespace UI
             }
 
 
-            var strategies = ShopRecommendation.GetTopStrategies(BattleManager.Instance.PlayerDeck);
+            var strategies = ShopRecommendation.GetTopStrategies(Battle.PlayerDeck);
 
-            var recommendation = ShopRecommendation.GetRecommendation(ShowingShop, BattleManager.Instance.PlayerDeck, MapController.Instance.PlayerGold);
+            var recommendation = ShopRecommendation.GetRecommendation(ShowingShop, Battle.PlayerDeck, MapController.Instance.PlayerGold);
 
             var str = "Current LEading strategies: ";
 

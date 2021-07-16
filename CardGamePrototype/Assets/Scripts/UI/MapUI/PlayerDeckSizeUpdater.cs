@@ -15,7 +15,7 @@ namespace UI
         {
             Text = GetComponent<TextMeshProUGUI>();
 
-            UpdateText(BattleManager.Instance.PlayerDeck);
+            UpdateText(Battle.PlayerDeck);
 
             Event.OnDeckSizeChange.AddListener(UpdateText);
 
@@ -23,10 +23,10 @@ namespace UI
 
         private void UpdateText(Deck deck)
         {
-            if (deck != BattleManager.Instance.PlayerDeck)
+            if (deck != Battle.PlayerDeck)
                 return;
 
-            string count = BattleManager.Instance.PlayerDeck?.AllCreatures().Count.ToString();
+            string count = Battle.PlayerDeck?.AllCreatures().Count.ToString();
 
             Text.text = count;
         }

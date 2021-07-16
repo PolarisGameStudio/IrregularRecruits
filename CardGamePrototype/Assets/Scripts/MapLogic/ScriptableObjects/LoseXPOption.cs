@@ -17,12 +17,12 @@ namespace MapLogic
 
         public override void ExecuteOption(MapNode owner)
         {
-            BattleManager.Instance.PlayerDeck.Hero?.RemoveXp(Amount);
+            Battle.PlayerDeck.Hero?.RemoveXp(Amount);
         }
 
         public override bool IsApplicable()
         {
-            return base.IsApplicable() && BattleManager.Instance.PlayerDeck.Hero.Xp >= Amount;
+            return base.IsApplicable() && Battle.PlayerDeck.Hero.Xp >= Amount;
         }
     }
 }

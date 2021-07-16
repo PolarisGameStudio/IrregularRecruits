@@ -34,7 +34,7 @@ namespace Tests
             Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
             Event.OnCombatResolveFinished.AddListener(() => DoIfTrue(() => attackedInFirstRound.AddRange(attacked), attackedInFirstRound.Count == 0));
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(attackedInFirstRound.Contains(defPlayer));
             Assert.IsTrue(attackedInFirstRound.Contains(defEnm));
@@ -67,7 +67,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => finished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(rangedCharacter.CurrentHealth == rangedCharacter.MaxHealth);
             Assert.IsTrue(finished);
@@ -88,7 +88,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => finished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(pDeck.AllCreatures().Contains(defPlayer));
             Assert.IsFalse(enmDeck.AllCreatures().Contains(defEnm));
@@ -121,7 +121,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => finished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(ethereal.CurrentHealth == nonEthereal.MaxHealth);
             Assert.IsFalse(attacked.Contains(ethereal));
@@ -157,7 +157,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => finished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(finished);
 
@@ -291,7 +291,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => finished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(finished);
 
@@ -339,7 +339,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => finished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(finished);
 
@@ -389,7 +389,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => finished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(finished);
 
@@ -625,7 +625,7 @@ namespace Tests
             Assert.IsTrue(warded.Ward());
             Assert.IsTrue(warded.Warded);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsFalse(enm.Alive());
         }
@@ -657,7 +657,7 @@ namespace Tests
 
             Event.OnAttack.AddListener(c => attackers.Add(c));
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.AreEqual(2, attackers.Count(a => a == ferious));
             Assert.AreEqual(1, attackers.Count(a => a == frind));

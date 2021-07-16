@@ -84,7 +84,6 @@ namespace Simulation
             if (Instance.DecksToSimulate.Count < 2)
                 Debug.LogError("no decks to simulate");
 
-            var x = BattleManager.Instance;
 
             GameSettings.Instance.AiControlledPlayer = true;
 
@@ -108,7 +107,6 @@ namespace Simulation
             if (Instance.DecksToSimulate.Count < 1)
                 Debug.LogError("no decks to simulate. Are you using the correct scene?");
 
-            var x = BattleManager.Instance;
 
             GameSettings.Instance.AiControlledPlayer = true;
 
@@ -135,8 +133,6 @@ namespace Simulation
             //var x = BattleManager.Instance;
             Event.ResetEvents();
             Shop.ResetEvents();
-
-            BattleManager.Init();
 
             GameSettings.Instance.AiControlledPlayer = true;
 
@@ -235,7 +231,7 @@ namespace Simulation
                 var pDeck = new Deck(first);
                 var enmDeck = new Deck(second);
 
-                Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+                new Battle(pDeck, enmDeck);
             }
 
             Debug.Log($"match up result: {result.FirstDeck} wins {result.FirstDeckWins}!  {result.SecondDeck} wins {result.SecondDeckWins}!");

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using UnityEngine.Events;
 
 namespace GameLogic
 {
@@ -8,20 +8,19 @@ namespace GameLogic
     public class CombatAutoResolver
     {
         private Deck PlayerDeck, EnemyDeck;
-        private List<Card> attackOrder;
-        public int Turn = 0;
+        private List<Card> AttackOrder;
 
-        private const int MaxTurns = 100;
+        private UnityAction NextTurnAction;
 
-        public CombatAutoResolver()
+        public CombatAutoResolver(UnityAction nextTurn)
         {
             Event.OnCombatResolveStart.AddListener(ResolveCombat);
+            NextTurnAction = nextTurn;
         }
 
         //TODO: should be removed and other
         public void StartCombat(Deck playerDeck, Deck enemyDeck)
         {
-            Turn = 0;
             PlayerDeck = playerDeck;
             EnemyDeck = enemyDeck;
         }
@@ -32,12 +31,11 @@ namespace GameLogic
             if (PlayerDeck == null || EnemyDeck == null)
                 return;
 
-            Turn++;
 
-            attackOrder = new List<Card>();
+            AttackOrder = new List<Card>();
 
-            attackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
-            attackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
+            AttackOrder.AddRange(EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
+            AttackOrder.AddRange(PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.CanAttack()));
 
             foreach (var c in EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Where(c => c.Ward()))
                 c.Warded = true;
@@ -52,58 +50,58 @@ namespace GameLogic
 
                     bool enm = EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Count >= PlayerDeck.CreaturesInZone(Deck.Zone.Battlefield).Count;
 
-                    while (attackOrder.Any())
+                    while (AttackOrder.Any())
                     {
                         Card select;
 
-                        if (attackOrder.Any(o => (o.InDeck == EnemyDeck) == enm))
-                            select = attackOrder.First(o => (o.InDeck == EnemyDeck) == enm);
+                        if (AttackOrder.Any(o => (o.InDeck == EnemyDeck) == enm))
+                            select = AttackOrder.First(o => (o.InDeck == EnemyDeck) == enm);
                         else
-                            select = attackOrder.First();
+                            select = AttackOrder.First();
 
                         order.Add(select);
 
-                        attackOrder.Remove(select);
+                        AttackOrder.Remove(select);
 
                         enm = !enm;
                     }
 
-                    attackOrder = order;                    
+                    AttackOrder = order;                    
                     break;
 
                 case GameSettings.AttackParadigm.Random:
-                    attackOrder = attackOrder.OrderBy(x => UnityEngine.Random.value).ToList();
+                    AttackOrder = AttackOrder.OrderBy(x => UnityEngine.Random.value).ToList();
                     break;
                 case GameSettings.AttackParadigm.HighestHealthFirst:
-                    attackOrder = attackOrder.OrderByDescending(x => x.Creature.Health).ToList();
+                    AttackOrder = AttackOrder.OrderByDescending(x => x.Creature.Health).ToList();
                     break;
                 case GameSettings.AttackParadigm.LowestHealthFirst:
-                    attackOrder = attackOrder.OrderBy(x => x.Creature.Health).ToList();
+                    AttackOrder = AttackOrder.OrderBy(x => x.Creature.Health).ToList();
                     break;
                 case GameSettings.AttackParadigm.HighestAttackFirst:
-                    attackOrder = attackOrder.OrderByDescending(x => x.Creature.Attack).ToList();
+                    AttackOrder = AttackOrder.OrderByDescending(x => x.Creature.Attack).ToList();
                     break;
                 case GameSettings.AttackParadigm.LowestAttackFirst:
-                    attackOrder = attackOrder.OrderBy(x => x.Creature.Attack).ToList();
+                    AttackOrder = AttackOrder.OrderBy(x => x.Creature.Attack).ToList();
                     break;
                 default:
                     break;
             };
 
 
-            foreach (var ferocioues in attackOrder.Where(c => c.Ferocity()).ToArray())
+            foreach (var ferocioues in AttackOrder.Where(c => c.Ferocity()).ToArray())
             {
-                var idx = attackOrder.IndexOf(ferocioues);
+                var idx = AttackOrder.IndexOf(ferocioues);
 
                 //inserts a copy in the order
-                attackOrder.Insert(idx, ferocioues);
+                AttackOrder.Insert(idx, ferocioues);
             }
 
-            while (attackOrder.Any(c => c.Alive()))
+            while (AttackOrder.Any(c => c.Alive()))
             {
                 AbilityWithEffect.AbilityStackCount = 0;
 
-                var attacker = attackOrder.First(c => c.Alive());
+                var attacker = AttackOrder.First(c => c.Alive());
 
                 var otherDeck = attacker.InDeck == PlayerDeck ? EnemyDeck : PlayerDeck;
 
@@ -111,13 +109,13 @@ namespace GameLogic
 
                 if (target == null || attacker.Location != Deck.Zone.Battlefield)
                 {
-                    attackOrder.Remove(attacker);
+                    AttackOrder.Remove(attacker);
                     continue;
                 }
 
                 attacker.AttackCard(target);
 
-                attackOrder.Remove(attacker);
+                AttackOrder.Remove(attacker);
             }
 
             AbilityWithEffect.AbilityStackCount = 0;
@@ -130,25 +128,14 @@ namespace GameLogic
         {
             Event.OnCombatResolveFinished.Invoke();
 
-            if (BattleOver())
+            if (Battle. BattleOver())
             {
-                HandleBattleOver();
+                Battle.HandleBattleOver();
             }
             else
-                Event.OnTurnBegin.Invoke();
+                NextTurnAction.Invoke();
         }
 
-        public bool BattleOver()
-        {
-            return EnemyDeck?.Alive() == 0 || PlayerDeck?.Alive() == 0 || Turn >= MaxTurns;
-        }
 
-        public void HandleBattleOver()
-        {
-            if (PlayerDeck.Alive() > 0)
-                Event.OnBattleFinished.Invoke(PlayerDeck,EnemyDeck);
-            else
-                Event.OnBattleFinished.Invoke(EnemyDeck,EnemyDeck);
-        }
     }
 }

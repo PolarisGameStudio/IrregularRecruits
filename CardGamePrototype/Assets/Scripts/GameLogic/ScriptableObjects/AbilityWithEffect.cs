@@ -34,12 +34,12 @@ namespace GameLogic
             AbilityStackCount--;
 
             if (AbilityStackCount == 0)
-                BattleManager.Instance.CheckBattleOver();
+                Battle.CheckBattleOver();
         }
 
         public List<Card> GetTargets(Noun targetType, AbilityHolder _owner, Card triggerExecuter,bool includeAllPossible = false)
         {
-            List<Card> cardsInZone = BattleManager.Instance.GetCardsInZone(targetType.Location);
+            List<Card> cardsInZone = Battle.GetCardsInZone(targetType.Location);
 
             List<Card> cs = cardsInZone.Where(c =>
                 targetType.CorrectCharacter(c, _owner, triggerExecuter) &&

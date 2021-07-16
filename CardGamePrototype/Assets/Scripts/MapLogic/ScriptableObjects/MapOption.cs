@@ -31,9 +31,9 @@ namespace MapLogic
         public virtual bool IsApplicable()
         {
             return
-                (OnlyForHeroRaces.Count == 0 || OnlyForHeroRaces.Contains(BattleManager.Instance.PlayerDeck?.Hero?.GetRace()))
+                (OnlyForHeroRaces.Count == 0 || OnlyForHeroRaces.Contains(Battle.PlayerDeck?.Hero?.GetRace()))
                 &&
-                (OnlyForAbility.Count == 0 ||BattleManager.Instance.PlayerDeck?.Hero != null && BattleManager.Instance.PlayerDeck.Hero.Abilities.Any(a=> OnlyForAbility.Contains(a)));
+                (OnlyForAbility.Count == 0 ||Battle.PlayerDeck?.Hero != null && Battle.PlayerDeck.Hero.Abilities.Any(a=> OnlyForAbility.Contains(a)));
         }
 
         public virtual string GetOptionDescription(MapNode owner, string overrideDescription = "")
@@ -79,10 +79,10 @@ namespace MapLogic
                         }
                 }
 
-                var unit = BattleManager.Instance.PlayerDeck.AllCreatures().FirstOrDefault(predicate);
+                var unit = Battle.PlayerDeck.AllCreatures().FirstOrDefault(predicate);
 
                 if (unit == null)
-                    unit = BattleManager.Instance.PlayerDeck.AllCreatures().FirstOrDefault();
+                    unit = Battle.PlayerDeck.AllCreatures().FirstOrDefault();
 
                 if (unit != null) mapNode.AddAssociation(this, unit);
         }

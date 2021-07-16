@@ -29,7 +29,7 @@ namespace UI
 
         public static void ViewPlayerDeck()
         {
-            View(BattleManager.Instance.PlayerDeck);
+            View(Battle.PlayerDeck);
         }
 
         public void ViewDeck(Deck deck)

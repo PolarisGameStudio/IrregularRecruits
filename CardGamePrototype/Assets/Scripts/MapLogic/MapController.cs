@@ -225,7 +225,7 @@ namespace MapLogic
 
         public void StartCombat(Deck enemyDeck)
         {
-            Event.OnCombatSetup.Invoke(BattleManager.Instance. PlayerDeck, enemyDeck);
+            new Battle(Battle.PlayerDeck, enemyDeck);
         }
 
 

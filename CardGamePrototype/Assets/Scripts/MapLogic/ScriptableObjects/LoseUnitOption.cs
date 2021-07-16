@@ -15,7 +15,7 @@ namespace MapLogic
         public override void ExecuteOption(MapNode owner)
         {
             if (owner.SelectedCards.ContainsKey(this))
-                BattleManager.Instance.PlayerDeck.Remove(owner.SelectedCards[this][0]);
+                Battle.PlayerDeck.Remove(owner.SelectedCards[this][0]);
         }
     }
 }

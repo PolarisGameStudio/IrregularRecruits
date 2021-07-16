@@ -78,9 +78,9 @@ namespace UI
 
         void Awake()
         {
-            ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(BattleManager.Instance.PlayerDeck));
+            ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(Battle.PlayerDeck));
 
-            Event.OnCombatSetup.AddListener(SetupDecks);
+            Event.OnCombatStart.AddListener(SetupDecks);
 
             EndTurnButton.onClick.AddListener(EndPlayerTurn);
 
@@ -104,8 +104,11 @@ namespace UI
                 controller.FinishTurn();
         }
 
-        private void SetupDecks(Deck playerDeck, Deck opponentDeck)
+        private void SetupDecks()
         {
+            var playerDeck = Battle.PlayerDeck;
+            var opponentDeck = Battle.EnemyDeck;
+
             MoveDuration = GameSettings.Instance.CombatSpeed / 2;
 
             SetupUI(playerDeck,true);
@@ -425,8 +428,8 @@ namespace UI
 
         public static void UpdateLibrary()
         {
-            //Instance.PlayerDeckDescription.text = "Deck size: " + BattleManager.Instance.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
-            //Instance.EnemyDeckDescription.text = "Deck size: " + BattleManager.Instance.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
+            //Instance.PlayerDeckDescription.text = "Deck size: " + BattleManager.PlayerDeck.CreaturesInZone(Deck.Zone.Library).Count;
+            //Instance.EnemyDeckDescription.text = "Deck size: " + BattleManager.EnemyDeck.CreaturesInZone(Deck.Zone.Library).Count;
         }
 
         //otherwise make an onclick event in CardUI

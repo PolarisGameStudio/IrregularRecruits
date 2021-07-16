@@ -29,7 +29,7 @@ namespace MapLogic
 
         public override void ExecuteOption(MapNode owner)
         {
-            BattleManager.Instance.PlayerDeck.Hero?.AwardXp(Amount);
+            Battle.PlayerDeck.Hero?.AwardXp(Amount);
         }
 
     }

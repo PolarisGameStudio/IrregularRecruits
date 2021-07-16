@@ -22,7 +22,7 @@ namespace MapLogic
         {
             foreach (var item in Units)
             {
-                BattleManager.Instance.PlayerDeck.AddCard(new Card(item));
+                Battle.PlayerDeck.AddCard(new Card(item));
 
             }
         }

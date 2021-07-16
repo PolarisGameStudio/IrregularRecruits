@@ -11,7 +11,7 @@ public class CombatHasComputedCheck : MonoBehaviour
     {
         Toggle = GetComponent<Toggle>();
 
-        GameLogic.Event.OnCombatSetup.AddListener((d, k) => Toggle.isOn = false);
+        GameLogic.Event.OnCombatStart.AddListener(() => Toggle.isOn = false);
         GameLogic.Event.OnBattleFinished.AddListener((d,l) => Toggle.isOn = true);
     }
 }

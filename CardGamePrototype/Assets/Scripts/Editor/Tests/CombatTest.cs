@@ -20,7 +20,7 @@ namespace Tests
             var resolveStarted = false;
 
             Event.OnCombatResolveStart.AddListener(() => resolveStarted = true);
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(resolveStarted);
         }
@@ -34,7 +34,7 @@ namespace Tests
             List<Card> deads = new List<Card>();
 
             Event.OnDeath.AddListener(c => deads.Add(c));
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.AreEqual(pDeck.AllCreatures().Count, 0);
             Assert.AreEqual(enmDeck.AllCreatures().Count, 0);
@@ -51,7 +51,7 @@ namespace Tests
 
             Event.OnCombatResolveFinished.AddListener(() => resolveFinish = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(resolveFinish);
         }
@@ -65,7 +65,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => battleFinished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(battleFinished);
         }
@@ -96,7 +96,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => battleFinished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(battleFinished);
             Assert.AreEqual(xp + xpValue, hero.Xp);
@@ -111,7 +111,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => battleFinished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
 
             Assert.IsTrue(battleFinished);
@@ -128,7 +128,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => battleFinished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(battleFinished);
             Assert.IsTrue(pDeck.AllCreatures().Count < creatures);
@@ -145,7 +145,7 @@ namespace Tests
 
             Event.OnBattleFinished.AddListener((d,l) => battleFinished = true);
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
 
             Assert.IsTrue(battleFinished);
@@ -166,7 +166,7 @@ namespace Tests
 
             Event.OnAttack.AddListener(c => attackers.Add(c));
 
-            Event.OnCombatSetup.Invoke(pDeck, enmDeck);
+            new Battle(pDeck, enmDeck);
 
             Assert.IsTrue(attackers.Count == creatures.Count);
 

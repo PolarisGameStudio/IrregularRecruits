@@ -29,12 +29,12 @@ namespace GameLogic
             //if (EnemyDeck == null || EnemyDeck.Alive() == 0)
             EnemyDeck = DeckGeneration.GenerateDeck(CurrentCombatDifficulty);
 
-            if (PlayerDeck == null) PlayerDeck = BattleManager.Instance.PlayerDeck;
+            if (PlayerDeck == null) PlayerDeck = Battle.PlayerDeck;
 
             if(GameSettings.Instance.EnemyDeckSize < MaxEnemyDeckSize)
                 GameSettings.Instance.EnemyDeckSize ++;
 
-            Event.OnCombatSetup.Invoke(PlayerDeck, EnemyDeck);
+            new Battle(PlayerDeck, EnemyDeck);
         }
     }
 }

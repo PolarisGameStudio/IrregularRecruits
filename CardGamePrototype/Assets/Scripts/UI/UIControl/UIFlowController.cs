@@ -58,7 +58,7 @@ namespace UI
             
 
             //TODO: is this actually used in a timely order
-            Event.OnCombatSetup.AddListener((e, c) => PlayerTurnStart());
+            Event.OnCombatStart.AddListener(() => PlayerTurnStart());
 
             Event.OnTurnBegin.AddListener(() => AddCardEvent(PlayerTurnStart()));
             Event.OnCombatResolveStart.AddListener(PlayerTurnDone);
@@ -84,7 +84,7 @@ namespace UI
         {
             yield return null;
 
-            if (BattleManager.Instance.PlayerDeck.DeckController is PlayerController)
+            if (Battle.PlayerDeck.DeckController is PlayerController)
             {
                 BattleUI.Instance.UILocked = false;
 

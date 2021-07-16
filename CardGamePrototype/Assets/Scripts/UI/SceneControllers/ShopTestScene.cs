@@ -13,8 +13,8 @@ namespace UI
 
         private void Start()
         {
-            BattleManager.SetPlayerDeck(PlayerDeck);
-            BattleManager.SetPlayerHero(PlayerHero);
+            Battle.SetPlayerDeck(PlayerDeck);
+            Battle.SetPlayerHero(new Hero(PlayerHero));
 
             MapController.Instance.PlayerGold = StartingGold;
 

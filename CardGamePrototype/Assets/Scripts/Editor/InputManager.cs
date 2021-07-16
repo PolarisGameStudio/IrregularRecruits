@@ -44,15 +44,15 @@ public class InputManager : Singleton<InputManager>
                 Time.timeScale = Time.timeScale > 0 ? 0 : 1f;
                 break;
             case MappableAction.WinBattle:
-                if(BattleManager.Instance.EnemyDeck != null)
-                    Event.OnBattleFinished.Invoke(BattleManager.Instance.PlayerDeck, BattleManager.Instance.EnemyDeck);
+                if(Battle.EnemyDeck != null)
+                    Event.OnBattleFinished.Invoke(Battle.PlayerDeck, Battle.EnemyDeck);
                 break;
             case MappableAction.LoseBattle:
-                if (BattleManager.Instance.EnemyDeck != null)
-                    Event.OnBattleFinished.Invoke(BattleManager.Instance.EnemyDeck, BattleManager.Instance.PlayerDeck);
+                if (Battle.EnemyDeck != null)
+                    Event.OnBattleFinished.Invoke(Battle.EnemyDeck, Battle.PlayerDeck);
                 break;
             case MappableAction.GainXp:
-                BattleManager.Instance.PlayerDeck?.Hero?.AwardXp(10);
+                Battle.PlayerDeck?.Hero?.AwardXp(10);
                 break;
             case MappableAction.GainGold:
                 Event.OnPlayerGoldAdd.Invoke(20);

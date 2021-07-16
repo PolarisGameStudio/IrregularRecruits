@@ -39,8 +39,7 @@ namespace GameLogic
 
         //COMBAT EVENTS
         public class CombatEvent : UnityEvent<Deck, Deck> { }
-        //Inputs player deck and enemy deck, in that order
-        public static CombatEvent OnCombatSetup = new CombatEvent();
+
         //Inputs winner deck and loser deck, in that order
         public static CombatEvent OnBattleFinished = new CombatEvent();
 
@@ -56,6 +55,9 @@ namespace GameLogic
 
         public class UnlockEvent : UnityEvent<UnlockCondition> { }
         public static UnlockEvent OnAchievement = new UnlockEvent();
+
+        //Inputs player deck and enemy deck, in that order
+        public static UnityEvent OnCombatStart = new UnityEvent();
 
         //TODO: should be handled by combat Resolver ;
         public static UnityEvent OnCombatResolveStart = new UnityEvent();
@@ -123,7 +125,7 @@ namespace GameLogic
             OnAbilityExecution.RemoveAllListeners();
 
             //public static CombatEvent OnCombatSetup = new CombatEvent();
-            OnCombatSetup.RemoveAllListeners();
+            OnCombatStart.RemoveAllListeners();
             //public static DeckEvent OnBattleFinished = new DeckEvent();
             OnBattleFinished.RemoveAllListeners();
 

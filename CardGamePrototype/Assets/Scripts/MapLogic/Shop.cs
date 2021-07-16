@@ -108,7 +108,7 @@ namespace MapLogic
 
                 OnOffer.Remove(sale);
 
-                BattleManager.Instance.PlayerDeck.AddCard(new Card(sale.Item1));
+                Battle.PlayerDeck.AddCard(new Card(sale.Item1));
 
                 MapController.Instance.PlayerGold -= sale.Item2;
 

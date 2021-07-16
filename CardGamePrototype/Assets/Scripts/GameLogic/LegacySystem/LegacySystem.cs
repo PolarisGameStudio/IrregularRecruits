@@ -71,7 +71,7 @@ namespace GameLogic
 
         private void HandleBattleFinished(Deck winner, Deck loser)
         {
-            if (winner != BattleManager.Instance.PlayerDeck)
+            if (winner != Battle.PlayerDeck)
                 return;
 
             foreach(var condition in UnlockProgresses)

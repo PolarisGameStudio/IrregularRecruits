@@ -24,8 +24,6 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            BattleManager.Init();
-
             AiControlledPlayerValue = GameSettings.Instance.AiControlledPlayer;
             GameSettings.Instance.AiControlledPlayer = true;
         }
@@ -78,32 +76,32 @@ namespace Tests
 
             if (playerdeck)
             {
-                if (BattleManager.Instance.PlayerDeck == null)
+                if (Battle.PlayerDeck == null)
                 {
                     var TestDeckObject = new DeckObject()
                     {
                         Creatures = new List<Creature>(),
                     };
 
-                    BattleManager.SetPlayerDeck(TestDeckObject);
+                    Battle.SetPlayerDeck(TestDeckObject);
                 }
 
-                testDeck = BattleManager.Instance.PlayerDeck;
+                testDeck = Battle.PlayerDeck;
                 testDeck.DeckController = new AI(testDeck);
             }
             else
             {
-                if (BattleManager.Instance.EnemyDeck == null)
+                if (Battle.EnemyDeck == null)
                 {
                     var TestDeckObject = new DeckObject()
                     {
                         Creatures = new List<Creature>(),
                     };
 
-                    BattleManager.Instance.EnemyDeck = new Deck(TestDeckObject);
+                    Battle.EnemyDeck = new Deck(TestDeckObject);
                 }
 
-                testDeck = BattleManager.Instance.EnemyDeck;
+                testDeck = Battle.EnemyDeck;
                 testDeck.DeckController = new AI(testDeck);
             }
 
@@ -181,21 +179,21 @@ namespace Tests
 
             Deck testDeck = null;
 
-            if (BattleManager.Instance.PlayerDeck == null)
+            if (Battle.PlayerDeck == null)
             {
                 var TestDeckObject = new DeckObject()
                 {
                     Creatures = new List<Creature>(),
                 };
 
-                BattleManager.SetPlayerDeck(TestDeckObject);
+                Battle.SetPlayerDeck(TestDeckObject);
 
-                var ai = new AI(BattleManager.Instance.PlayerDeck);
+                var ai = new AI(Battle.PlayerDeck);
 
-                BattleManager.Instance.PlayerDeck.DeckController = ai;
+                Battle.PlayerDeck.DeckController = ai;
             }
 
-            testDeck = BattleManager.Instance.PlayerDeck;
+            testDeck = Battle.PlayerDeck;
 
             testDeck.Hero = hero;
 

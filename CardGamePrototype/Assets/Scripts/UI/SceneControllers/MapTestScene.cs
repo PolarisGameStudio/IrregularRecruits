@@ -10,8 +10,8 @@ public class MapTestScene : MonoBehaviour
         var deckObject = DeckLibrary.GetDecks().First();
 
         var heroObject = DeckLibrary.GetHeroes().First();
-        BattleManager.SetPlayerDeck(deckObject);
-        BattleManager.SetPlayerHero(heroObject);
+        Battle.SetPlayerDeck(deckObject);
+        Battle.SetPlayerHero(new Hero(heroObject));
 
     }
 

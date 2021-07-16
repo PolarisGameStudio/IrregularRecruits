@@ -42,7 +42,7 @@ namespace MapUI
 
             Event.OnGameBegin.AddListener(Open);
             BattleSummary.Instance.OnClose.AddListener(Open);
-            Event.OnCombatSetup.AddListener((e, v) => Close());
+            Event.OnCombatStart.AddListener(() => Close());
 
         }
 
@@ -61,7 +61,7 @@ namespace MapUI
 
         public void Open()
         {
-            HeroIcon.Portrait.image.sprite = BattleManager.Instance.PlayerDeck.Hero.HeroObject.Portrait;
+            HeroIcon.Portrait.image.sprite = Battle.PlayerDeck.Hero.HeroObject.Portrait;
 
             OnMapOpen.Invoke();
 

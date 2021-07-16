@@ -12,8 +12,6 @@ namespace Tests
         [SetUp]
         public void PlayerDeckSetup()
         {
-            BattleManager.Init();
-
             var hero = new Hero(new HeroObject()
             {
                 name = "Testeron",
@@ -32,13 +30,13 @@ namespace Tests
                 Creatures = new List<Creature>(),
             };
 
-            BattleManager.SetPlayerDeck(TestDeckObject);
+            Battle.SetPlayerDeck(TestDeckObject);
 
-            var ai = new AI(BattleManager.Instance.PlayerDeck);
+            var ai = new AI(Battle.PlayerDeck);
 
-            BattleManager.Instance.PlayerDeck.DeckController = ai;
+            Battle.PlayerDeck.DeckController = ai;
 
-            var deck = BattleManager.Instance.PlayerDeck;
+            var deck = Battle.PlayerDeck;
 
             deck.Hero = hero;
 
@@ -63,7 +61,7 @@ namespace Tests
 
             var combatStarted = false;
 
-            Event.OnCombatSetup.AddListener((p, e) => combatStarted = true);
+            Event.OnCombatStart.AddListener(() => combatStarted = true);
 
             node.Open();
             node.SelectOption(0);
@@ -100,7 +98,7 @@ namespace Tests
 
             Deck eDeck = null;
 
-            Event.OnCombatSetup.AddListener((p, e) => eDeck = e);
+            Event.OnCombatStart.AddListener(() => eDeck = Battle.EnemyDeck);
 
             node.Open();
             node.SelectOption(0);
@@ -134,7 +132,7 @@ namespace Tests
 
             Deck eDeck = null;
 
-            Event.OnCombatSetup.AddListener((p, e) => eDeck = e);
+            Event.OnCombatStart.AddListener(() => eDeck = Battle.EnemyDeck);
 
             node.Open();
             node.SelectOption(0);
@@ -191,13 +189,13 @@ namespace Tests
 
             var node = new MapNode(location);
 
-            int xp = BattleManager.Instance.PlayerDeck.Hero.Xp;
+            int xp = Battle.PlayerDeck.Hero.Xp;
                        
             node.Open();
             node.SelectOption(0);
 
             Assert.
-                AreEqual(amount + xp, BattleManager.Instance.PlayerDeck.Hero.Xp);
+                AreEqual(amount + xp, Battle.PlayerDeck.Hero.Xp);
 
         }
 
@@ -248,13 +246,13 @@ namespace Tests
 
             int xp = 1000;
 
-            BattleManager.Instance.PlayerDeck.Hero.AwardXp(xp);
+            Battle.PlayerDeck.Hero.AwardXp(xp);
             
             node.Open();
             node.SelectOption(0);
 
             Assert.
-                AreEqual(xp - amount, BattleManager.Instance.PlayerDeck.Hero.Xp);
+                AreEqual(xp - amount, Battle.PlayerDeck.Hero.Xp);
         }
 
 
@@ -309,7 +307,7 @@ namespace Tests
 
             int xp = 68;
 
-            BattleManager.Instance.PlayerDeck.Hero.AwardXp(xp);
+            Battle.PlayerDeck.Hero.AwardXp(xp);
 
             Assert.IsFalse(node.GetOptions().Contains(option));
 
@@ -317,7 +315,7 @@ namespace Tests
             node.SelectOption(option);
 
             Assert.
-                AreEqual(xp , BattleManager.Instance.PlayerDeck.Hero.Xp);
+                AreEqual(xp , Battle.PlayerDeck.Hero.Xp);
 
         }
 
@@ -354,7 +352,7 @@ namespace Tests
 
             var node = new MapNode(location);
 
-            var units = BattleManager.Instance.PlayerDeck.AllCreatures();
+            var units = Battle.PlayerDeck.AllCreatures();
 
             var count = units.Count;
 
@@ -365,7 +363,7 @@ namespace Tests
             node.Open();
             node.SelectOption(0);
 
-            var addedUnits = BattleManager.Instance.PlayerDeck.AllCreatures();
+            var addedUnits = Battle.PlayerDeck.AllCreatures();
 
 
             Assert.AreEqual(count + 3, addedUnits.Count);
@@ -404,9 +402,9 @@ namespace Tests
 
             var node = new MapNode(location);
 
-            BattleManager.Instance.PlayerDeck.AddCard(new Card(giftCreature));
+            Battle.PlayerDeck.AddCard(new Card(giftCreature));
 
-            var units = BattleManager.Instance.PlayerDeck.AllCreatures();
+            var units = Battle.PlayerDeck.AllCreatures();
             
             var count = units.Count;
 
@@ -418,7 +416,7 @@ namespace Tests
             node.Open();
             node.SelectOption(0);
 
-            var removedUnits = BattleManager.Instance.PlayerDeck.AllCreatures();
+            var removedUnits = Battle.PlayerDeck.AllCreatures();
 
             Assert.AreEqual(count -1, removedUnits.Count);
             Assert.IsFalse(removedUnits.Any(c => c.Creature == giftCreature));
@@ -461,7 +459,7 @@ namespace Tests
             var option2 = new LoseGoldOption()
             {
                 Amount = 17,
-                OnlyForHeroRaces = new List<Race>() { BattleManager.Instance.PlayerDeck.Hero.GetRace() }
+                OnlyForHeroRaces = new List<Race>() { Battle.PlayerDeck.Hero.GetRace() }
 
             };
             var option3 = new LoseGoldOption()
@@ -521,7 +519,7 @@ namespace Tests
             var option1 = new GainGoldOption()
             {
                 Amount = 1000,
-                OnlyForAbility = new List<AbilityWithEffect>() { BattleManager.Instance.PlayerDeck.Hero.Abilities.FirstOrDefault() }
+                OnlyForAbility = new List<AbilityWithEffect>() { Battle.PlayerDeck.Hero.Abilities.FirstOrDefault() }
             };
             var option3 = new LoseGoldOption()
             {

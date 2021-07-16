@@ -25,7 +25,7 @@ namespace GameLogic
                 ControlledDeck.CreaturesInZone(Deck.Zone.Hand)[0].PlayCard();
             }
 
-            var opponent = BattleManager.Instance.GetEnemyDeck(ControlledDeck);
+            var opponent = Battle.GetEnemyDeck(ControlledDeck);
 
             if (opponent != null)
             {

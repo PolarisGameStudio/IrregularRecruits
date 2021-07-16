@@ -25,6 +25,7 @@ namespace GameLogic
         {
             ControlledDeck = controlledDeck;
 
+
             Event.OnPlayerAction.AddListener(UsedAction);
         }
 

@@ -60,8 +60,8 @@ namespace UI
         {
             Debug.Log("opening heroview");
 
-            if(BattleManager.Instance.PlayerDeck.Hero !=null)  
-                Instance.ShowHero(BattleManager.Instance.PlayerDeck.Hero);
+            if(Battle.PlayerDeck.Hero !=null)  
+                Instance.ShowHero(Battle.PlayerDeck.Hero);
         }
 
         private void ShowHero(Hero hero)

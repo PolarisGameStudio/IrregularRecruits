@@ -86,7 +86,7 @@ namespace UI
         public void SubmitHero()
         {
             if (SelectedHero!= null)
-                BattleManager.SetPlayerHero(SelectedHero);
+                Battle.SetPlayerHero(SelectedHero);
         }
     }
 }
