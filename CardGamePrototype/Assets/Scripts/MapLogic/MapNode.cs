@@ -18,13 +18,13 @@ namespace MapLogic
         public string name;
         public Dictionary<MapOption, List<Card>> SelectedCards = new Dictionary<MapOption, List<Card>>();
 
-        public MapController Map;
+        public Map Map;
 
         public class LocationEvent : UnityEvent<MapNode> { }
         public static LocationEvent OpenEvent = new LocationEvent();
         public static LocationEvent CloseLocation = new LocationEvent();
 
-        public MapNode(IMapLocation mapLocation,MapController map)
+        public MapNode(IMapLocation mapLocation,Map map)
         {
             Map = map;
             this.Location = mapLocation;

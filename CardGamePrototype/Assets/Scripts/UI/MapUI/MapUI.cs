@@ -35,7 +35,7 @@ namespace MapUI
         public Vector3 PositionToCenterDifferience;
         public float NodeFadeTime = 2f;
         public static UnityEvent OnMapOpen = new UnityEvent();
-        public MapController Map;
+        public Map Map;
 
         private void Start()
         {
@@ -49,7 +49,7 @@ namespace MapUI
 
         private void CreateMap()
         {
-            Map = new MapController();
+            Map = new Map();
 
             PositionToCenterDifferience = transform.position - MapStartPosition.position;
         }

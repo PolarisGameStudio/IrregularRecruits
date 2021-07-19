@@ -16,7 +16,7 @@ namespace UI
             Battle.SetPlayerDeck(PlayerDeck);
             Battle.SetPlayerHero(new Hero(PlayerHero));
 
-            MapController.PlayerGold = StartingGold;
+            Map.PlayerGold = StartingGold;
 
             ShopUI.OpenStandardShop();
         }

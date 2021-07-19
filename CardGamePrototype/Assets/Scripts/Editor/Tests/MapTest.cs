@@ -57,7 +57,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             var combatStarted = false;
 
@@ -94,7 +94,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             Deck eDeck = null;
 
@@ -128,7 +128,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             Deck eDeck = null;
 
@@ -158,9 +158,9 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
-            int playerGold = MapController.PlayerGold;
+            int playerGold = Map.PlayerGold;
 
 
 
@@ -168,7 +168,7 @@ namespace Tests
             node.SelectOption(0);
 
             Assert.
-                AreEqual(amount + playerGold, MapController.PlayerGold);
+                AreEqual(amount + playerGold, Map.PlayerGold);
 
         }
         
@@ -187,7 +187,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             int xp = Battle.PlayerDeck.Hero.Xp;
                        
@@ -214,17 +214,17 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             int playerGold = 1000;
 
-            MapController.PlayerGold = playerGold;
+            Map.PlayerGold = playerGold;
 
             node.Open();
             node.SelectOption(0);
 
             Assert.
-                AreEqual(playerGold - amount, MapController.PlayerGold);
+                AreEqual(playerGold - amount, Map.PlayerGold);
         }
 
         [Test]
@@ -242,7 +242,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             int xp = 1000;
 
@@ -272,11 +272,11 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             int playerGold = 1000;
 
-            MapController.PlayerGold = playerGold;
+            Map.PlayerGold = playerGold;
 
             Assert.IsFalse(node.GetOptions().Contains(option));
 
@@ -284,7 +284,7 @@ namespace Tests
             node.SelectOption(option);
 
             Assert.
-                AreEqual(playerGold , MapController.PlayerGold);
+                AreEqual(playerGold , Map.PlayerGold);
 
 
         }
@@ -303,7 +303,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             int xp = 68;
 
@@ -350,7 +350,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             var units = Battle.PlayerDeck.AllCreatures();
 
@@ -400,7 +400,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             Battle.PlayerDeck.AddCard(new Card(giftCreature));
 
@@ -445,7 +445,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option1,  option3 }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             node.Open();
 
@@ -473,7 +473,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option2,option3 }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             node.Open();
 
@@ -504,7 +504,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option1, option3 }
             };
 
-            var node = new MapNode(location,new MapController());
+            var node = new MapNode(location,new Map());
 
             node.Open();
 
@@ -532,7 +532,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option1, option3 }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
             node.Open();
 
@@ -566,15 +566,15 @@ namespace Tests
                 LocationOptions = new MapOption[] { composite, option1 }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
 
-            int playerGold = MapController.PlayerGold;
+            int playerGold = Map.PlayerGold;
 
             node.Open();
             node.SelectOption(0);
 
             Assert.
-                AreEqual(option1.Amount - 3 * option2.Amount + playerGold, MapController.PlayerGold);
+                AreEqual(option1.Amount - 3 * option2.Amount + playerGold, Map.PlayerGold);
 
 
 
@@ -623,7 +623,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
             MapNode closed = null;
 
 
@@ -654,7 +654,7 @@ namespace Tests
                 LocationOptions = new MapOption[] { option }
             };
 
-            var node = new MapNode(location, new MapController());
+            var node = new MapNode(location, new Map());
             MapNode closed = null;
 
             MapNode.CloseLocation.AddListener(m => closed = m);
@@ -680,7 +680,7 @@ namespace Tests
             MapSettings settings = MapSettings.Instance;
             settings.MapLength = 5;
 
-            var controller = new MapController();
+            var controller = new Map();
 
             Assert.AreEqual(1, controller.Nodes.Count(n => n.IsStartNode()));
             Assert.AreEqual(1, controller.Nodes.Count(n => n.IsFinalNode()));
@@ -697,7 +697,7 @@ namespace Tests
             MapSettings settings = MapSettings.Instance;
             settings.MapLength = 30;
 
-            var controller = new MapController();
+            var controller = new Map();
 
             Assert.AreEqual(1, controller.Nodes.Count(n => n.IsStartNode()));
             Assert.AreEqual(1, controller.Nodes.Count(n => n.IsFinalNode()));

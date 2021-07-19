@@ -36,7 +36,7 @@ namespace UI
         {
             Shop.OnShopOpen.AddListener(SetupShop);
             Shop.OnShopReroll.AddListener(ShowNewCards);
-            MapController.OnPlayerGoldUpdate.AddListener(i => UpdatePurchasability());
+            Map.OnPlayerGoldUpdate.AddListener(i => UpdatePurchasability());
 
 
             RerollButton.onClick.AddListener(RerollPush);
@@ -115,7 +115,7 @@ namespace UI
         {
             if (CurrentOffers == null) return;
 
-            var gold = MapController.PlayerGold;
+            var gold = Map.PlayerGold;
 
             foreach (var item in CurrentOffers)
             {
@@ -129,7 +129,7 @@ namespace UI
 
             var strategies = ShopRecommendation.GetTopStrategies(Battle.PlayerDeck);
 
-            var recommendation = ShopRecommendation.GetRecommendation(ShowingShop, Battle.PlayerDeck, MapController.PlayerGold);
+            var recommendation = ShopRecommendation.GetRecommendation(ShowingShop, Battle.PlayerDeck, Map.PlayerGold);
 
             var str = "Current LEading strategies: ";
 

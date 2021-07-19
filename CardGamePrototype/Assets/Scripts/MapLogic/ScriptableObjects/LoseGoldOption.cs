@@ -16,12 +16,12 @@ namespace MapLogic
 
         public override void ExecuteOption(MapNode owner)
         {
-            MapController.PlayerGold -= Amount;
+            Map.PlayerGold -= Amount;
         }
 
         public override bool IsApplicable()
         {
-            return base.IsApplicable() && MapController.PlayerGold >= Amount;
+            return base.IsApplicable() && Map.PlayerGold >= Amount;
         }
     }
 }

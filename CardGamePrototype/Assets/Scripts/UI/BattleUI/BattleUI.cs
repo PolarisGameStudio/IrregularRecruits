@@ -120,7 +120,7 @@ namespace UI
                 HeroUI.Instance.SetHero(PlayerDeck.Hero);
 
                 XpAtStartOfBattle = PlayerDeck.Hero.Xp;
-                GoldAtStartOfBattle = MapController.PlayerGold;
+                GoldAtStartOfBattle = Map.PlayerGold;
             }
 
 
@@ -227,7 +227,7 @@ namespace UI
                 return;
             }
             else
-                BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp,PlayerDeck.Hero,GoldAtStartOfBattle,MapController.PlayerGold);
+                BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp,PlayerDeck.Hero,GoldAtStartOfBattle,Map.PlayerGold);
             
         }
 
