@@ -11,8 +11,6 @@ namespace GameLogic
             Event.ResetEvents();
             LegacySystem.Instance.Load();
 
-            //TODO: should we reset all the singletons? yes
-
         }
     }
 }

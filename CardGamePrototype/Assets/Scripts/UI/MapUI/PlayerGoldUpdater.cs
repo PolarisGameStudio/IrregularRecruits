@@ -28,11 +28,11 @@ namespace UI
         {
             Text = GetComponent<TextMeshProUGUI>();
 
-            MoneyValue = MapController.Instance.PlayerGold;
+            MoneyValue = MapController.PlayerGold;
 
             Text.text = MoneyValue. ToString();
 
-            MapController.Instance.OnPlayerGoldUpdate.AddListener(UpdateValue);
+            MapController.OnPlayerGoldUpdate.AddListener(UpdateValue);
         }
 
         private void UpdateValue(int newamount)

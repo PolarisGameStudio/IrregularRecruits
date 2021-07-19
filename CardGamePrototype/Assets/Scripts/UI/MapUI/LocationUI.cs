@@ -42,14 +42,14 @@ namespace MapUI
         {
             Debug.Log("opening Win screen");
 
-            Open(new MapNode(WinEvent));
+            Open(new MapNode(WinEvent,CurrentNode.Map));
         }
 
         public void OpenGameOverEvent()
         {
             Debug.Log("opening Game Over screen");
 
-            Open(new MapNode(GameOverEvent));
+            Open(new MapNode(GameOverEvent, CurrentNode.Map));
 
         }
         
@@ -61,7 +61,7 @@ namespace MapUI
 
             StartEvent.LocationDescription = hero.HeroObject.BackgroundText;
 
-            Open(new MapNode(StartEvent));
+            Open(new MapNode(StartEvent, CurrentNode?.Map));
         }
 
         public void Open(MapNode node)

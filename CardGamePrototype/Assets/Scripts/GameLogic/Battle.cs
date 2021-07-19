@@ -42,12 +42,16 @@ namespace GameLogic
 
             PlayerDeck = playerDeck;
             EnemyDeck = enemyDeck;
+            
+            Turn = 0;
+
+            Event.OnCombatStart.Invoke();
 
             EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayerDeck.DeckController.YourTurn);
             PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, Event.OnCombatResolveStart.Invoke);
 
             //Debug.Log("starting battle. Enemies: " + enemyDeck.AllCreatures().Count + ", CR: " + enemyDeck.CR);
-            Turn = 0;
+            
 
             NextTurn();
         }
@@ -74,8 +78,11 @@ namespace GameLogic
 
         public static void SetPlayerHero(Hero hero)
         {
-            if(PlayerDeck!=null)
+            if (PlayerDeck != null)
+            { 
                 hero.InDeck = PlayerDeck;
+                PlayerDeck.Hero = hero;
+            }
 
             Event.OnHeroSelect.Invoke(hero);
         }

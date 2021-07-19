@@ -2688,6 +2688,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   EndTurnButton: {fileID: 2132162799118742221}
+  BackgroundImage: {fileID: 7467280203778397419}
   FocusCanvas: {fileID: 8451570703991737027}
   UILocked: 0
 --- !u!225 &8451570703991737027
@@ -15336,7 +15337,7 @@ GameObject:
   - component: {fileID: 7177861102857124819}
   - component: {fileID: 7467280203778397419}
   m_Layer: 5
-  m_Name: BackGround (1)
+  m_Name: BackGroundLandscape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

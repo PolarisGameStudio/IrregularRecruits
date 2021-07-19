@@ -35,7 +35,7 @@ namespace MapUI
 
             yield return new WaitForSeconds(1.8f);
 
-            MapController.Instance.MoveToNode(Node);
+            Node.Map.MoveToNode(Node);
 
             if (!string.IsNullOrEmpty(Node.Location.PopUpDescription))
                 PopupTextController.Instance.DisplayText(Node.Location.PopUpDescription, transform.position);
@@ -47,7 +47,7 @@ namespace MapUI
 
         internal bool Reachable()
         {
-            return MapController.Instance.CurrentNode == Node || MapController.Instance.CurrentNode.CanReach(Node);
+            return Node.Map.CurrentNode == Node || Node.Map.CurrentNode.CanReach(Node);
         }
 
         internal void SetInteractable(bool interactable)

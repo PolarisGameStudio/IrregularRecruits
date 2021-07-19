@@ -106,32 +106,29 @@ namespace UI
 
         private void SetupDecks()
         {
-            var playerDeck = Battle.PlayerDeck;
-            var opponentDeck = Battle.EnemyDeck;
+
+            PlayerDeck = Battle.PlayerDeck;
+            EnemyDeck = Battle.EnemyDeck;
 
             MoveDuration = GameSettings.Instance.CombatSpeed / 2;
 
-            SetupUI(playerDeck,true);
-            SetupUI(opponentDeck,false);
+            SetupUI(PlayerDeck,true);
+            SetupUI(EnemyDeck,false);
 
-            if(playerDeck.Hero!= null)
+            if(PlayerDeck.Hero != null)
             {
-                HeroUI.Instance.SetHero(playerDeck.Hero);
+                HeroUI.Instance.SetHero(PlayerDeck.Hero);
+
+                XpAtStartOfBattle = PlayerDeck.Hero.Xp;
+                GoldAtStartOfBattle = MapController.PlayerGold;
             }
 
-            PlayerDeck = playerDeck;
-            EnemyDeck = opponentDeck;
 
-            InitialPlayerDeck = playerDeck.AllCreatures();
-            InitialEnemyDeck = opponentDeck.AllCreatures();
+            InitialPlayerDeck = PlayerDeck.AllCreatures();
+            InitialEnemyDeck = EnemyDeck.AllCreatures();
 
-            if (playerDeck.Hero != null)
-            {
-                XpAtStartOfBattle = playerDeck.Hero.Xp;
-                GoldAtStartOfBattle = MapController.Instance.PlayerGold;
-            }
 
-            BackgroundImage.sprite = opponentDeck.Races.First().GetBackground();
+            BackgroundImage.sprite = EnemyDeck.Races.First().GetBackground();
 
             BattleRunning = true;
             OnBattleBegin.Invoke();
@@ -148,7 +145,7 @@ namespace UI
             {
                 CardUIs[deck.Hero.Guid] = HeroUI.Instance;
             }
-            else
+            else if (playerDeck)
                 HeroUI.Instance?.Disable();
         }
 
@@ -230,7 +227,7 @@ namespace UI
                 return;
             }
             else
-                BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp,PlayerDeck.Hero,GoldAtStartOfBattle,MapController.Instance.PlayerGold);
+                BattleSummary.ShowSummary(InitialPlayerDeck, InitialEnemyDeck, PlayerDeck.AllCreatures(), EnemyDeck.AllCreatures(),XpAtStartOfBattle,endXp,PlayerDeck.Hero,GoldAtStartOfBattle,MapController.PlayerGold);
             
         }
 

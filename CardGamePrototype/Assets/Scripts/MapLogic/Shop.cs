@@ -48,10 +48,10 @@ namespace MapLogic
 
         public void Reroll()
         {
-            if (RerollsLeft-- == 0 || RerollPrice > MapController.Instance.PlayerGold)
+            if (RerollsLeft-- == 0 || RerollPrice > MapController.PlayerGold)
                 throw new System.ArgumentException("No rerolls left");
 
-            MapController.Instance.PlayerGold -= RerollPrice;
+            MapController.PlayerGold -= RerollPrice;
 
             RerollPrice += ShopOptions.Instance.RerollCostIncrease;
 
@@ -102,7 +102,7 @@ namespace MapLogic
         {
             var sale = OnOffer.Single(o => o.Item1 == card);
 
-            if(MapController.Instance.PlayerGold >= sale.Item2)
+            if(MapController.PlayerGold >= sale.Item2)
             {
                 OnShopPurchase.Invoke(this);
 
@@ -110,7 +110,7 @@ namespace MapLogic
 
                 Battle.PlayerDeck.AddCard(new Card(sale.Item1));
 
-                MapController.Instance.PlayerGold -= sale.Item2;
+                MapController.PlayerGold -= sale.Item2;
 
                 return true;
             }

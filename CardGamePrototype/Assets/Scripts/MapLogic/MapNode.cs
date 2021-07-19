@@ -18,27 +18,25 @@ namespace MapLogic
         public string name;
         public Dictionary<MapOption, List<Card>> SelectedCards = new Dictionary<MapOption, List<Card>>();
 
+        public MapController Map;
+
+        public class LocationEvent : UnityEvent<MapNode> { }
+        public static LocationEvent OpenEvent = new LocationEvent();
+        public static LocationEvent CloseLocation = new LocationEvent();
+
+        public MapNode(IMapLocation mapLocation,MapController map)
+        {
+            Map = map;
+            this.Location = mapLocation;
+            name = mapLocation.Name;
+        }
+
         //REcursive check
         public bool CanReach(MapNode node)
         {
             if (LeadsTo.Contains(node)) return true;
 
             return LeadsTo.Any(n => n.CanReach(node));
-        }
-
-        public class LocationEvent : UnityEvent<MapNode> { }
-        public static LocationEvent OpenEvent = new LocationEvent();
-        public static LocationEvent CloseLocation = new LocationEvent();
-
-        public MapNode(IMapLocation mapLocation)
-        {
-            this.Location = mapLocation;
-            name = mapLocation.Name;
-        }
-
-        public void Visit()
-        {
-            Visited = true;
         }
 
         public MapOption[] GetOptions()

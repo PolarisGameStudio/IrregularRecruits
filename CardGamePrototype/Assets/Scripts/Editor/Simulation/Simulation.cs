@@ -242,7 +242,7 @@ namespace Simulation
         private static void GoShopping(Shop shop,Deck deck)
         {
 
-            System.Tuple<ShopChoice, Creature> recommendation = ShopRecommendation.GetRecommendation(shop, deck, MapController.Instance.PlayerGold);
+            System.Tuple<ShopChoice, Creature> recommendation = ShopRecommendation.GetRecommendation(shop, deck, MapController.PlayerGold);
 
             while ( recommendation.Item1 != ShopChoice.NoAction)
             {
@@ -251,7 +251,7 @@ namespace Simulation
                 else 
                     shop.Buy(recommendation.Item2);
 
-                recommendation = ShopRecommendation.GetRecommendation(shop, deck, MapController.Instance.PlayerGold);
+                recommendation = ShopRecommendation.GetRecommendation(shop, deck, MapController.PlayerGold);
             }
         }
 

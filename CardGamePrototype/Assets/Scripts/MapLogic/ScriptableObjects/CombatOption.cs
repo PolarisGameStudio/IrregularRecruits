@@ -51,14 +51,18 @@ namespace MapLogic
 
         public override void ExecuteOption(MapNode owner)
         {
-            var possibleRaces = new List<Race>() { MainRace };
+            List<Race> possibleRaces = null;
 
-            possibleRaces.AddRange(AdditionalRaces);
+            if (MainRace)
+            {
+                possibleRaces = new List<Race>() { MainRace};
+
+                possibleRaces.AddRange(AdditionalRaces);
+            }
 
             var deck = DeckGeneration.GenerateDeck(CRValue, possibleRaces, SpawnCreatures,UniquesAllowed);
 
-           
-            MapController.Instance.StartCombat(deck);
+            new Battle(Battle.PlayerDeck, deck);
 
         }
     }

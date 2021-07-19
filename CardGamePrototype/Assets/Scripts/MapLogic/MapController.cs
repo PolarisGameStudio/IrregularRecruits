@@ -20,26 +20,11 @@ namespace MapLogic
         public List<MapNode> Nodes = new List<MapNode>();
         public MapNode CurrentNode;
 
-        //TODO: only use event.OnPlayerGoldAdd
-        public class AmountEvent : UnityEvent<int> { }
-        public AmountEvent OnPlayerGoldUpdate = new AmountEvent();
+        public static Event.IntEvent OnPlayerGoldUpdate = new Event.IntEvent();
 
-        public static MapController Instance { get {
-                if (instance == null)
-                    instance = new MapController();
-                return instance;
-            }
-        }
+        private static int playerGold;
 
-        private int playerGold;
-
-        public MapController()
-        {
-            Event.OnPlayerGoldAdd.AddListener(i => PlayerGold += i);
-
-        }
-
-        public int PlayerGold
+        public static int PlayerGold
         {
             get => playerGold; 
             set
@@ -48,12 +33,21 @@ namespace MapLogic
                     return;
 
                 playerGold = value;
-
                 OnPlayerGoldUpdate.Invoke(value);
+
             }
         }
 
-        public void CreateMap()
+        public MapController()
+        {
+            //TODO: remove the listener on destroy. it is added too often.
+            Event.OnPlayerGoldAdd.AddListener(i => PlayerGold += i);
+
+            CreateMap();
+        }
+
+
+        private void CreateMap()
         {
             var settings = MapSettings.Instance;
 
@@ -223,12 +217,6 @@ namespace MapLogic
             node.Open();
         }
 
-        public void StartCombat(Deck enemyDeck)
-        {
-            new Battle(Battle.PlayerDeck, enemyDeck);
-        }
-
-
         private MapNode GenerateNode(MapNodeType type,int CR, List<MapLocation> uniqueLocations)
         {
             MapNode node;
@@ -249,25 +237,25 @@ namespace MapLogic
             switch (type)
             {
                 case MapNodeType.HardCombat:
-                    node = new MapNode(new CombatOption(race, CR * 2, true));
+                    node = new MapNode(new CombatOption(race, CR * 2, true),this);
                     break;
                 case MapNodeType.Treasure:
                     //gold
-                    node = new MapNode(new GainGoldOption(CR));
+                    node = new MapNode(new GainGoldOption(CR),this);
                     break;
                 case MapNodeType.Xp:
                     //xp
-                    node = new MapNode(new GainXpOption(CR));
+                    node = new MapNode(new GainXpOption(CR),this);
                     break;
                 case MapNodeType.Event:
-                    node = new MapNode(uniqueLocations[Random.Range(0, uniqueLocations.Count)]);
+                    node = new MapNode(uniqueLocations[Random.Range(0, uniqueLocations.Count)],this);
                     break;
                 case MapNodeType.Village:
-                    node = new MapNode(new VillageShop(CR, civilizedRaces[Random.Range(0, civilizedRaces.Length)]));
+                    node = new MapNode(new VillageShop(CR, civilizedRaces[Random.Range(0, civilizedRaces.Length)]),this);
                     break;
                 case MapNodeType.StandardCombat:
                 default:
-                    node = new MapNode(new CombatOption(race, CR, false));
+                    node = new MapNode(new CombatOption(race, CR, false),this);
                     break;
             }
 
@@ -283,7 +271,7 @@ namespace MapLogic
         {
             locations.Remove(locationObject);
 
-            var node = new MapNode(locationObject);
+            var node = new MapNode(locationObject,this);
             Nodes.Add(node);
 
             node.Id = Nodes.Count;

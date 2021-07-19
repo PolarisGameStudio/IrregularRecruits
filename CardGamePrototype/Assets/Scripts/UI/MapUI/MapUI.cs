@@ -35,6 +35,7 @@ namespace MapUI
         public Vector3 PositionToCenterDifferience;
         public float NodeFadeTime = 2f;
         public static UnityEvent OnMapOpen = new UnityEvent();
+        public MapController Map;
 
         private void Start()
         {
@@ -48,15 +49,14 @@ namespace MapUI
 
         private void CreateMap()
         {
-            if (MapController.Instance.Nodes.Count == 0)
-                MapController.Instance.CreateMap();
+            Map = new MapController();
 
             PositionToCenterDifferience = transform.position - MapStartPosition.position;
         }
 
         private void UpdateNodes()
         {
-            StartCoroutine(DrawMap(MapController.Instance.CurrentNode, MapSettings.Instance.VisibleSteps));
+            StartCoroutine(DrawMap(Map.CurrentNode, MapSettings.Instance.VisibleSteps));
         }
 
         public void Open()

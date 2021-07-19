@@ -36,7 +36,7 @@ namespace GameLogic
             var difficultyLeft = CR;
 
             if (!creatures.Any(c => c.CR <= difficultyLeft) )
-                throw new System.Exception("Creatures of type " + creatures.First().Race + " has no creature with CR below " + difficultyLeft);
+                throw new System.Exception("Creatures of type " + creatures.FirstOrDefault()?.Race + " has no creature with CR below " + difficultyLeft);
 
             int v = (GameSettings.DeckSize());
             for (int i = 0; i < v; i++)
