@@ -36,10 +36,10 @@ namespace UI
 
         struct PosAndRotation
         {
-            public Vector2 Position;
+            public Vector3 Position;
             public float ZRotation;
 
-            public PosAndRotation(Vector2 pos,float rot = 0f) 
+            public PosAndRotation(Vector3 pos,float rot = 0f) 
             {
                 Position = pos;
                 ZRotation = rot;
@@ -81,6 +81,8 @@ namespace UI
             cardUI.transform.SetParent(this.RectTransform,true);
 
             cardUI.transform.localScale = Vector3.one;
+
+            cardUI.CurrentZoneLayout = this;
 
             UpdateChildrenPositions();
         }
@@ -131,7 +133,7 @@ namespace UI
                 if (card.BeingDragged) continue;
 
                 //if (!PointOnly)
-                card.transform.LeanMove(desiredPos.Position, 0.3f).setEaseOutExpo();
+                card.transform.LeanMove( desiredPos.Position, 0.3f).setEaseOutExpo();
             }
         }
 
@@ -162,9 +164,11 @@ namespace UI
 
             var relativePos = (index + 0.5f) / count;
 
-            Vector2 vector2 = new Vector2(
+            Vector3 vector2 = new Vector3(
                 Mathf.LerpUnclamped(StartPos.x, EndPos.x, XPosition.Evaluate(relativePos)),
-                Mathf.LerpUnclamped(StartPos.y, EndPos.y, YPosition.Evaluate(relativePos)));
+                Mathf.LerpUnclamped(StartPos.y, EndPos.y, YPosition.Evaluate(relativePos)),
+                //-1 to allow for room between the cards and the highlight                 
+                -1);
 
             var rot = Mathf.LerpUnclamped(FirstCardRotation, LastCardRotation, relativePos);
 
@@ -209,7 +213,7 @@ namespace UI
                 }
             }
             //closer to the before position
-            else if (index > 0 && (currentDesiredPos.Position - cardPos).sqrMagnitude > (ChildDesiredPositions[index - 1].Position - cardPos).sqrMagnitude)
+            else if (index > 0 && ((Vector2)currentDesiredPos.Position - cardPos).sqrMagnitude > ((Vector2)ChildDesiredPositions[index - 1].Position - cardPos).sqrMagnitude)
             {
 
                 OnSwitchingPlace.Invoke();
@@ -224,7 +228,7 @@ namespace UI
                 MoveCardsToDesiredPositions();
             }
             //closer to the after position
-            else if (index < ChildCards.Count - 1 && (currentDesiredPos.Position - cardPos).sqrMagnitude > (ChildDesiredPositions[index + 1].Position - cardPos).sqrMagnitude)
+            else if (index < ChildCards.Count - 1 && ((Vector2)currentDesiredPos.Position - cardPos).sqrMagnitude > ((Vector2)ChildDesiredPositions[index + 1].Position - cardPos).sqrMagnitude)
             {
                 OnSwitchingPlace.Invoke();
 

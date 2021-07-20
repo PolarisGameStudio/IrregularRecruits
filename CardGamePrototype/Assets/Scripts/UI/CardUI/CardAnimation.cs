@@ -54,11 +54,11 @@ namespace UI
 
         public void Highlight()
         {
-            //HighlightParticles.Play();
+            HighlightParticles.Play();
         }
         public void TurnOffHighlight()
         {
-            //HighlightParticles.Stop();
+            HighlightParticles.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
         }
 
         public IEnumerator UnDissolve()

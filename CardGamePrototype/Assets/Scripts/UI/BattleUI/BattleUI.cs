@@ -151,7 +151,9 @@ namespace UI
 
         private void CreateCardUI(Card card, bool playerDeck, bool summon = false)
         {
-            var ui = Instantiate(Instance.CardPrefab);
+            var ui = Instantiate(Instance.CardPrefab,transform);
+
+            GetZoneHolder(card.Location, !playerDeck).AddChild(ui,0);
 
             ui.SetCard(card,summon);
 
@@ -182,13 +184,8 @@ namespace UI
 
             if (!ui) yield break;
 
-            ui.CardAnimation.Highlight();
-
             //TODO: should the effect be bfore or after
             yield return AnimationSystem.UnsummonFx(ui);
-
-
-            ui.CardAnimation.TurnOffHighlight();
 
             Destroy(CardUIs[summon].gameObject);
         }
@@ -257,14 +254,10 @@ namespace UI
 
             if (!ui) yield break;
 
-            ui.CardAnimation.Highlight();
-
             //TODO: should the effect be bfore or after
             yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
 
             yield return MoveCard(ui, to, playerDeck);
-
-            ui.CardAnimation.TurnOffHighlight();
         }
 
         internal static IEnumerator SetAttacker(Guid card)
@@ -335,9 +328,6 @@ namespace UI
             if (AttackTarget == null) Debug.LogError("no attacktarget");
             if (Attacker == null) Debug.LogError("no attacker");
 
-            AttackTarget.CardAnimation.Highlight();
-            Attacker.CardAnimation.Highlight();
-
             yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
 
             if (AttackTarget.GetCardState() == CardUI.CardState.FaceDown)
@@ -345,10 +335,6 @@ namespace UI
                 AttackTarget.transform.SetAsLastSibling();
             }
 
-
-
-            AttackTarget.CardAnimation.TurnOffHighlight();
-            Attacker.CardAnimation.TurnOffHighlight();
             AttackTarget = Attacker = null;
         }
 

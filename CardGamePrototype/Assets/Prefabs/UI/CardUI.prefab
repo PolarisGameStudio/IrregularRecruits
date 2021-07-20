@@ -736,6 +736,7 @@ GameObject:
   - component: {fileID: 8662044929345982549}
   - component: {fileID: 3276911169743078089}
   - component: {fileID: 1114623401180528400}
+  - component: {fileID: 7817936958261804273}
   m_Layer: 5
   m_Name: Frame (1)
   m_TagString: Untagged
@@ -801,6 +802,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7817936958261804273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913668716040699026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52ec34831a2aea4f8e8ea5cbcd3507d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  source: 0
+  alphaMode: 0
+  willRectResizeInRuntime: 1
+  maskTexture: {fileID: 0}
+  cullingMaskVal: 255
+  ditheringSteps: 255
+  alphaTestTreshold: 0.5
+  translucencyFactor: 1
+  depthRenderShader: {fileID: 4800000, guid: 7cf7e97856b7e774d9b22c8915b155c3, type: 3}
+  cullRenderShader: {fileID: 4800000, guid: 138a49593c2637e4a9ad77c8c4655a37, type: 3}
 --- !u!1 &2496915204608994410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,6 +1641,7 @@ GameObject:
   - component: {fileID: 3647378738829383158}
   - component: {fileID: 3647378738829383160}
   - component: {fileID: 3647378738829383159}
+  - component: {fileID: 8656496877532855792}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1680,6 +1705,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8656496877532855792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647378738829383157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52ec34831a2aea4f8e8ea5cbcd3507d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  source: 0
+  alphaMode: 0
+  willRectResizeInRuntime: 1
+  maskTexture: {fileID: 0}
+  cullingMaskVal: 255
+  ditheringSteps: 255
+  alphaTestTreshold: 0.05
+  translucencyFactor: 1
+  depthRenderShader: {fileID: 4800000, guid: 7cf7e97856b7e774d9b22c8915b155c3, type: 3}
+  cullRenderShader: {fileID: 4800000, guid: 138a49593c2637e4a9ad77c8c4655a37, type: 3}
 --- !u!1 &3647378739100117997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,6 +1887,7 @@ GameObject:
   - component: {fileID: 1342704311976644203}
   - component: {fileID: 7818710751542017044}
   - component: {fileID: 5792369718784859744}
+  - component: {fileID: 5397147162857675207}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -1903,6 +1952,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5397147162857675207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3917401750919979871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52ec34831a2aea4f8e8ea5cbcd3507d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  source: 0
+  alphaMode: 0
+  willRectResizeInRuntime: 1
+  maskTexture: {fileID: 0}
+  cullingMaskVal: 255
+  ditheringSteps: 255
+  alphaTestTreshold: 0.5
+  translucencyFactor: 1
+  depthRenderShader: {fileID: 4800000, guid: 7cf7e97856b7e774d9b22c8915b155c3, type: 3}
+  cullRenderShader: {fileID: 4800000, guid: 138a49593c2637e4a9ad77c8c4655a37, type: 3}
 --- !u!1 &3983243860329674903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2235,6 +2307,7 @@ GameObject:
   - component: {fileID: 3463430634117401069}
   - component: {fileID: 1491640176180842947}
   - component: {fileID: 7300263362879576828}
+  - component: {fileID: 5689104141781744692}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -2299,6 +2372,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5689104141781744692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936883102836848285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52ec34831a2aea4f8e8ea5cbcd3507d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  source: 0
+  alphaMode: 0
+  willRectResizeInRuntime: 1
+  maskTexture: {fileID: 0}
+  cullingMaskVal: 255
+  ditheringSteps: 255
+  alphaTestTreshold: 0.05
+  translucencyFactor: 1
+  depthRenderShader: {fileID: 4800000, guid: 7cf7e97856b7e774d9b22c8915b155c3, type: 3}
+  cullRenderShader: {fileID: 4800000, guid: 138a49593c2637e4a9ad77c8c4655a37, type: 3}
 --- !u!1 &5106528040805089779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,6 +2615,7 @@ GameObject:
   - component: {fileID: 6266383814788846416}
   - component: {fileID: 6989319423947272862}
   - component: {fileID: 5611340100294722415}
+  - component: {fileID: 4066665316340803784}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -2595,6 +2692,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &4066665316340803784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6436186019763095208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52ec34831a2aea4f8e8ea5cbcd3507d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  source: 0
+  alphaMode: 0
+  willRectResizeInRuntime: 1
+  maskTexture: {fileID: 0}
+  cullingMaskVal: 255
+  ditheringSteps: 255
+  alphaTestTreshold: 0.5
+  translucencyFactor: 1
+  depthRenderShader: {fileID: 4800000, guid: 7cf7e97856b7e774d9b22c8915b155c3, type: 3}
+  cullRenderShader: {fileID: 4800000, guid: 138a49593c2637e4a9ad77c8c4655a37, type: 3}
 --- !u!1 &7050089049703927803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,6 +3122,7 @@ GameObject:
   - component: {fileID: 6601871651748003387}
   - component: {fileID: 856257652062979694}
   - component: {fileID: 7829417301979537092}
+  - component: {fileID: 321493736290622291}
   m_Layer: 5
   m_Name: RaceIcon
   m_TagString: Untagged
@@ -3065,6 +3186,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &321493736290622291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7585116779652245510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52ec34831a2aea4f8e8ea5cbcd3507d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  source: 0
+  alphaMode: 0
+  willRectResizeInRuntime: 1
+  maskTexture: {fileID: 0}
+  cullingMaskVal: 255
+  ditheringSteps: 255
+  alphaTestTreshold: 0.05
+  translucencyFactor: 1
+  depthRenderShader: {fileID: 4800000, guid: 7cf7e97856b7e774d9b22c8915b155c3, type: 3}
+  cullRenderShader: {fileID: 4800000, guid: 138a49593c2637e4a9ad77c8c4655a37, type: 3}
 --- !u!1 &7670824317852101002
 GameObject:
   m_ObjectHideFlags: 0
@@ -3388,6 +3532,7 @@ GameObject:
   - component: {fileID: 428464503775218345}
   - component: {fileID: 4335141596764076605}
   - component: {fileID: 6553747281925912600}
+  - component: {fileID: 143019748678809434}
   m_Layer: 5
   m_Name: Attack
   m_TagString: Untagged
@@ -3452,6 +3597,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &143019748678809434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830718758053799678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52ec34831a2aea4f8e8ea5cbcd3507d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  source: 0
+  alphaMode: 0
+  willRectResizeInRuntime: 0
+  maskTexture: {fileID: 0}
+  cullingMaskVal: 255
+  ditheringSteps: 255
+  alphaTestTreshold: 0.05
+  translucencyFactor: 1
+  depthRenderShader: {fileID: 4800000, guid: 7cf7e97856b7e774d9b22c8915b155c3, type: 3}
+  cullRenderShader: {fileID: 4800000, guid: 138a49593c2637e4a9ad77c8c4655a37, type: 3}
 --- !u!1 &8078415882702594715
 GameObject:
   m_ObjectHideFlags: 0
@@ -3478,7 +3646,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8078415882702594715}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3647378737500881846}
@@ -3486,8 +3654,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 5}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!198 &2562568646690939912
 ParticleSystem:
@@ -3562,7 +3730,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
   randomSeed: 0
@@ -3572,7 +3740,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.8
+      scalar: 3
       minScalar: 0.3
       maxCurve:
         serializedVersion: 2
@@ -3625,7 +3793,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -3678,8 +3846,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0.18670559, b: 0.13883947, a: 0.46666667}
-      maxColor: {r: 0.8584906, g: 0.19032574, b: 0.75722045, a: 0.4392157}
+      minColor: {r: 0.8745098, g: 0.7921569, b: 0.6431373, a: 1}
+      maxColor: {r: 0.8745098, g: 0.7921569, b: 0.6431373, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -3741,8 +3909,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 80
-      minScalar: 15
+      scalar: 100
+      minScalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4088,7 +4256,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 159.03102, y: 250.11455, z: 0}
+    m_Scale: {x: 90, y: 180, z: 0}
     placementMode: 1
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -4286,7 +4454,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5000
+      scalar: 1000
       minScalar: 1000
       maxCurve:
         serializedVersion: 2
@@ -4392,11 +4560,11 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 1
+    enabled: 0
     curve:
       serializedVersion: 2
-      minMaxState: 1
-      scalar: 1
+      minMaxState: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4457,7 +4625,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -4519,7 +4687,7 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -4570,7 +4738,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    separateAxes: 1
+    separateAxes: 0
   RotationModule:
     enabled: 1
     x:

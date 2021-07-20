@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Event = GameLogic.Event;
 
 namespace UI
 {
@@ -69,11 +70,22 @@ namespace UI
 
         public static UnityEvent OnDragStarted = new UnityEvent();
         public static UnityEvent OnDragEnd = new UnityEvent();
-        
 
+        private void Awake()
+        {
+            ActionsLeftUI.OnActionChanged.AddListener(ActionsChanged);
+
+            OnDragStarted.AddListener(CardAnimation.TurnOffHighlight);
+            OnDragEnd.AddListener(()=> ActionsChanged(Battle.PlayerDeck.DeckController.ActionsLeft));
+        }
 
         public void OnDestroy()
         {
+            ActionsLeftUI.OnActionChanged.RemoveListener(ActionsChanged);
+
+            OnDragStarted.RemoveListener(CardAnimation.TurnOffHighlight);
+            OnDragEnd.RemoveListener(() => ActionsChanged(Battle.PlayerDeck.DeckController.ActionsLeft));
+
             OnUIDestroyed.Invoke(this);
         }
 
@@ -246,6 +258,19 @@ namespace UI
             return CardState.FaceDown;
         }
 
+        //Checks whether the card should highlight or not
+        private void ActionsChanged(int actionsLeft)
+        {
+            if (IsDraggable() && actionsLeft > 0)
+                CardAnimation.Highlight();
+            else
+                CardAnimation.TurnOffHighlight();
+        }
+
+        private bool IsDraggable()
+        {
+            return CurrentZoneLayout && CurrentZoneLayout.CardsAreDraggable && !BattleUI.Instance.UILocked;
+        }
 
 
         #region Input Handling
@@ -282,12 +307,12 @@ namespace UI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            CurrentZoneLayout =  GetComponentInParent<CardLayoutGroup>();
+            CurrentZoneLayout = GetComponentInParent<CardLayoutGroup>();
             CameFromGroup = CurrentZoneLayout;
 
             CanTransitionTo = CurrentZoneLayout?.TransitionsTo;
 
-            if (CurrentZoneLayout && CurrentZoneLayout.CardsAreDraggable && !BattleUI.Instance.UILocked)
+            if (IsDraggable())
             {
                 OnDragStarted.Invoke();
                 BeingDragged = true;

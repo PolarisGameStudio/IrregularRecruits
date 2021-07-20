@@ -8,8 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: cfxr stretch inv spike fade ab
-  m_Shader: {fileID: 4800000, guid: e198026df304af84a85675be636192ea, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _CFXR_SINGLE_CHANNEL _FADING_ON
+  m_Shader: {fileID: 4800000, guid: e4ae9a1447f888e4b8754eda64dff814, type: 3}
+  m_ShaderKeywords: CLIPPINGMODE_INSIDE _ALPHAPREMULTIPLY_ON _CFXR_SINGLE_CHANNEL
+    _FADING_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -52,15 +53,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - ClippingMode: 0
     - _BacklightTransmittance: 1
+    - _Blend: 1
+    - _Blend2: 1
     - _BlendingType: 1
     - _BumpScale: 1
     - _CFXR_DITHERED_SHADOWS: 0
     - _CFXR_OVERLAYBLEND: 0
     - _CFXR_OVERLAYTEX: 0
+    - _ClippingMaskVal: 1
+    - _Colorize: 0
     - _Cutoff: 0.1
     - _DirLightScreenAtten: 1
     - _DirectLightingMix: 0.5
+    - _DirectLightingRamp: 1
+    - _DisableCulling: 0
     - _DissolveSmooth: 0.1
     - _Distort: 0.1
     - _DstBlend: 10
@@ -69,25 +77,34 @@ Material:
     - _HdrBoost: 0
     - _HdrMultiply: 2
     - _IndirectLightingMix: 0.5
+    - _Intensity: 1
     - _InvertDissolveTex: 0
+    - _LightingWorldPosStrength: 0.2
     - _OVERLAYBLEND: 0
     - _OVERLAYTEX: 0
     - _ReceivedShadowsStrength: 0.5
     - _SecondColorSmooth: 0.2
     - _ShadowStrength: 1
     - _SingleChannel: 1
+    - _SoftCollisionMode: 0
     - _SoftParticlesFadeDistanceFar: 1
     - _SoftParticlesFadeDistanceNear: 0
     - _SrcBlend: 1
+    - _TranslucencyMode: 0
+    - _UISoftModeFadeSmooth: 1
     - _UVDistortionAdd: 0
     - _UseAlphaClip: 0
     - _UseBackLighting: 0
+    - _UseClippingMask: 0
     - _UseDissolve: 0
     - _UseEF: 0
+    - _UseEmission: 0
     - _UseFB: 0
     - _UseFontColor: 0
     - _UseGradientMap: 0
+    - _UseHDRMode: 0
     - _UseLighting: 0
+    - _UseLightingWorldPosOffset: 0
     - _UseNormalMap: 0
     - _UseSP: 1
     - _UseSecondColor: 0
@@ -99,4 +116,5 @@ Material:
     - _DistortScrolling: {r: 0, g: 0, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _OverlayTex_Scroll: {r: 0.1, g: 0.1, b: 1, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticlesFadeDistance: {r: 0, g: 1, b: 0, a: 0}

@@ -8,8 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: cfxr proc glow soft add
-  m_Shader: {fileID: 4800000, guid: 714e760b98304b44292e04841e05f258, type: 3}
-  m_ShaderKeywords: _CFXR_GLOW_POW_P0 _FADING_ON _SUBGLOW_ON __CFXRGLOW_POW_P4 __CFXRGLOW_POW_P6
+  m_Shader: {fileID: 4800000, guid: e4ae9a1447f888e4b8754eda64dff814, type: 3}
+  m_ShaderKeywords: CLIPPINGMODE_INSIDE HDR_MODE SOFT_COLLISION_MODE _CFXR_GLOW_POW_P0
+    _FADING_ON _SUBGLOW_ON __CFXRGLOW_POW_P4 __CFXRGLOW_POW_P6
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -27,9 +28,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: da8f1c2ca73fa7849812d48c57b95295, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - ClippingMode: 0
+    - _Blend: 1
+    - _Blend2: 1
     - _CFXR_DITHERED_SHADOWS: 0
     - _CFXR_GLOW_POW: 0
+    - _ClippingMaskVal: 1
+    - _Colorize: 0
+    - _DisableCulling: 0
     - _DissolveSmooth: 0.1
     - _DstBlend: 1
     - _GlowMax: 1.5
@@ -38,16 +49,22 @@ Material:
     - _Glow_Pow: 2
     - _HdrBoost: 0
     - _HdrMultiply: 2
+    - _Intensity: 0.5
     - _InvertDissolveTex: 0
     - _MaxValue: 2
     - _RingTopOffset: 0.05
     - _ShadowStrength: 1
+    - _SoftCollisionMode: 1
     - _SoftParticlesFadeDistanceFar: 1
     - _SoftParticlesFadeDistanceNear: 0
     - _SrcBlend: 5
     - _SubGlowMax: 6.7
     - _SubGlowMin: -2.47
+    - _TranslucencyMode: 0
+    - _UISoftModeFadeSmooth: 1
+    - _UseClippingMask: 0
     - _UseDissolve: 0
+    - _UseHDRMode: 1
     - _UseSG: 1
     - _UseSP: 1
     m_Colors:
