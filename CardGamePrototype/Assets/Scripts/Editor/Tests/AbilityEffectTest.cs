@@ -25,7 +25,7 @@ namespace Tests
             doublerCreature.ChangeLocation(Deck.Zone.Battlefield);
             abilityCreature.ChangeLocation(Deck.Zone.Battlefield);
 
-            var executedEffects = new List<AbilityWithEffect>();
+            var executedEffects = new List<SpecialAbility>();
 
             var currentStrength = doublerCreature.Attack;
 
@@ -57,7 +57,7 @@ namespace Tests
             doublerCreature.ChangeLocation(Deck.Zone.Battlefield);
             abilityCreature.ChangeLocation(Deck.Zone.Battlefield);
 
-            var executedEffects = new List<AbilityWithEffect>();
+            var executedEffects = new List<SpecialAbility>();
 
             var currentStrength = doublerCreature.Attack;
 

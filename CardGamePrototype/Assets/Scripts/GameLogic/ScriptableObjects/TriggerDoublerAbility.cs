@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -37,8 +38,10 @@ namespace GameLogic
         {
             //TODO: could let allegiance be a paramter, so some doublers could count both enemy and friendly effects
             if (t == EffectTrigger && owner.IsActive() && owner.InDeck == card.InDeck)
+            {
+                Event.OnAbilityExecution.Invoke(this, owner, new List<Card>());
                 a.Invoke();
-
+            }
         }
 
         public override float GetValue()

@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: A cat army full of cat people. They are tricky and deadly. They make
     their enemies withdraw, and then strike them before they get a chance to act.
   Creatures:
-  - {fileID: 11400000, guid: 9fe4fb27fb3e130469db46ce4f503bb9, type: 2}
+  - {fileID: 11400000, guid: 0fcdd57af5ebe234ebea17f63b9eb65e, type: 2}
   - {fileID: 11400000, guid: 019189cc08f72a443afefec5ec92af3f, type: 2}
   - {fileID: 11400000, guid: 9fe4fb27fb3e130469db46ce4f503bb9, type: 2}
   - {fileID: 11400000, guid: 019189cc08f72a443afefec5ec92af3f, type: 2}

@@ -32,7 +32,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -89,7 +89,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -151,7 +151,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -185,7 +185,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -210,7 +210,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -237,7 +237,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -261,7 +261,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             TestHero.InDeck.DeckController.ResetActions();
 

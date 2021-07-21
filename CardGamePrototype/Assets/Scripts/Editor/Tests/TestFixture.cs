@@ -141,7 +141,7 @@ namespace Tests
             return testCard;
         }
 
-        protected static void SetObjectIfCorrectAbility<T>(AbilityWithEffect thisAbility, AbilityWithEffect otherAb, ref T toBeSet, T value)
+        protected static void SetObjectIfCorrectAbility<T>(SpecialAbility thisAbility, SpecialAbility otherAb, ref T toBeSet, T value)
         {
             if (thisAbility == otherAb)
                 toBeSet = value;

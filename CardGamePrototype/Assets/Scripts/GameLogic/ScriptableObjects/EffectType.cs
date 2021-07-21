@@ -19,6 +19,9 @@
         Rally,
         GainGold,
 
+        //only for the UI and Sound FX
+        Doubler,
+        
         COUNT,
     }
 

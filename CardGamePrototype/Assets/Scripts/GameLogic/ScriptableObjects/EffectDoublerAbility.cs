@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace GameLogic
@@ -8,7 +9,7 @@ namespace GameLogic
     {
         [Header("While active, this will double any effect triggered by this type")]
         public EffectType Effect;
-        public string AbilityDescription ;
+        public string AbilityDescription;
 
         public override string Description(ICharacter owner)
         {
@@ -25,18 +26,22 @@ namespace GameLogic
 
             _owner.ListenersInitialized = true;
 
-            UnityAction<TriggerType,EffectType, AbilityHolder, UnityAction> checkTriggerAction = (t,e,c, a) => TriggerCheck(e,c, a, _owner);
+            UnityAction<TriggerType, EffectType, AbilityHolder, UnityAction> checkTriggerAction = (t, e, c, a) => TriggerCheck(e, c, a, _owner);
             AbilityProcessor.OnAbilityTriggered.AddListener(checkTriggerAction);
 
             _owner.RemoveListenerAction = () => AbilityProcessor.OnAbilityTriggered.RemoveListener(checkTriggerAction);
         }
 
         //should only detect the team
-        private  void TriggerCheck(EffectType effect,AbilityHolder card, UnityAction a, AbilityHolder owner)
+        private void TriggerCheck(EffectType effect, AbilityHolder card, UnityAction a, AbilityHolder owner)
         {
             //TODO: could let allegiance be a paramter, so some doublers could count both enemy and friendly effects
             if (effect == Effect && owner.IsActive() && owner.InDeck == card.InDeck)
+            {
+                Event.OnAbilityExecution.Invoke(this, owner, new List<Card>());
                 a.Invoke();
+                
+            }
         }
 
         public override float GetValue()

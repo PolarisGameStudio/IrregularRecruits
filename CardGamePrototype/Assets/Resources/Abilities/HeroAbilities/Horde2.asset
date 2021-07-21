@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Horde2
   m_EditorClassIdentifier: 
   Name: For the Horde!
-  Icon: {fileID: 21300000, guid: 17bc6fdbd3c0c7e4f94c95152a12fcb2, type: 3}
+  Icon: {fileID: 21300000, guid: fae56bd241e5df34bae43d3abf74510d, type: 3}
   ResultingAction:
     ActionType: 2
     TargetCount: 1

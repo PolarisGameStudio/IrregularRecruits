@@ -281,6 +281,22 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 56802a5bf5bd6ec47b46fa5d8ac090a9, type: 3}
     - {fileID: 8300000, guid: ff61f907387c1344993eb65a00f31f0a, type: 3}
     - {fileID: 8300000, guid: e3ff862324fd1934c8f66400349d78e5, type: 3}
+  - Type: 15
+    TriggerAudio:
+    - {fileID: 8300000, guid: f29a11151806e3c4d97e83ba837a387f, type: 3}
+    TargetAudio: []
+  - Type: 14
+    TriggerAudio:
+    - {fileID: 8300000, guid: 1cf3da27215812b40a0f3fb445a37270, type: 3}
+    TargetAudio: []
+  - Type: 13
+    TriggerAudio:
+    - {fileID: 8300000, guid: fd1760d10b177754995a66b863de16f3, type: 3}
+    TargetAudio: []
+  - Type: 12
+    TriggerAudio:
+    - {fileID: 8300000, guid: 9f494cb6325f3a349a1a26960eb0001d, type: 3}
+    TargetAudio: []
   VillageSounds: []
   CreatureSoundSets:
   - Type: 0

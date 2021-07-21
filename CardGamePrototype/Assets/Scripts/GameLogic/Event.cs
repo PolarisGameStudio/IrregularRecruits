@@ -33,8 +33,8 @@ namespace GameLogic
         public static CardValueEvent OnHealed = new CardValueEvent();
         public static CardValueEvent OnStatMod = new CardValueEvent();
 
-        //Ability,Owner,Targets . TODO: use holder class
-        public class AbilityEvent : UnityEvent<AbilityWithEffect, AbilityHolder, List<Card>> { }
+        //Ability,Owner,Targets 
+        public class AbilityEvent : UnityEvent<SpecialAbility, AbilityHolder, List<Card>> { }
         public static AbilityEvent OnAbilityExecution = new AbilityEvent();
 
         //COMBAT EVENTS

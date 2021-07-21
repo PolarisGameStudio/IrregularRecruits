@@ -171,7 +171,7 @@ namespace UI
             }
         }
 
-        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs, AbilityWithEffect ability, float delay = 0)
+        private IEnumerator PlayAbilityIconFx(AbilityHolderUI abilityOwner, ParticleSystem[] fxs, SpecialAbility ability, float delay = 0)
         {
             if (!abilityOwner) yield break;
 
@@ -218,6 +218,16 @@ namespace UI
                 OnAbilityTargetHit.Invoke(ability.ResultingAction.ActionType);
                 yield return PlayCardFX(t, abilityFx.TargetFX, delay / targets.Count());
             }
+        }
+
+        internal IEnumerator PlayDoublerFx(SpecialAbility ability, AbilityHolderUI owner, float delay = 0)
+        {
+            var abilityFx = AbilityFx.First(a => a.ActionType == EffectType.Doubler);
+
+            OnAbilityTrigger.Invoke(EffectType.Doubler);
+
+            yield return PlayCardFX(owner, abilityFx.OwnerFX, delay);
+            yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, ability, delay);
         }
     }
 }

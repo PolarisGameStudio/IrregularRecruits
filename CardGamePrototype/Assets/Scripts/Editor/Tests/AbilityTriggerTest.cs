@@ -80,7 +80,7 @@ namespace Tests
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
             OtherCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            AbilityWithEffect ability = null;
+            SpecialAbility ability = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => ability = a);
 
@@ -374,7 +374,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Hand);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -398,7 +398,7 @@ namespace Tests
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
             other.ChangeLocation(Deck.Zone.Hand);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggeredAblity = a);
 
@@ -507,7 +507,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Library);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref triggeredAblity, a));
 
@@ -532,7 +532,7 @@ namespace Tests
 
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            AbilityWithEffect triggeredAblity = null;
+            SpecialAbility triggeredAblity = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref triggeredAblity, a));
 

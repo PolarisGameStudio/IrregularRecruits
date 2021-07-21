@@ -276,13 +276,17 @@ namespace UI
             //do ready attack animation
         }
 
-        internal static IEnumerator AbilityTriggered(AbilityWithEffect a, Guid guid, IEnumerable<Guid> ts)
+        internal static IEnumerator AbilityTriggered(SpecialAbility a, Guid guid, IEnumerable<Guid> ts)
         {
             var ui = GetAbilityHolderUI(guid);
 
             if (!ui) yield break;
 
-            yield return AnimationSystem.Instance.PlayAbilityFx(a, ui, ts.Select(GetCardUI).ToList(), 0.25f);
+            if(a is AbilityWithEffect ae)
+                yield return AnimationSystem.Instance.PlayAbilityFx(ae, ui, ts.Select(GetCardUI).ToList(), 0.25f);
+            else
+                yield return AnimationSystem.Instance.PlayDoublerFx(a, ui, 0.25f);
+
 
         }
 
