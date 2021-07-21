@@ -46,12 +46,13 @@ public class UIParticleDepthObject : MonoBehaviour
         RectTrans = GetComponent<RectTransform>();
         particleCanvas = GetComponentInParent<UIParticleCanvas>();
         RefreshRenderer(true);
-        particleCanvas.RegisterUIParticleDepthObject(this);
+
+        particleCanvas?.RegisterUIParticleDepthObject(this);
     }
 
     protected void OnDisable()
     {
-        particleCanvas.UnregisterUIParticleDepthObject(this);
+        particleCanvas?.UnregisterUIParticleDepthObject(this);
         if(maskRendererObj != null)
             DestroyImmediate(maskRendererObj);
     }
