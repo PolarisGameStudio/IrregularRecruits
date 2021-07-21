@@ -102,8 +102,8 @@ public class AssetManager
         var races = new List<Race>();
         races = GetAssetsOfType<Race>();
 
-        var abilities = new List<PassiveAbility>();
-        abilities = GetAssetsOfType<PassiveAbility>();
+        var abilities = new List<AbilityWithEffect>();
+        abilities = GetAssetsOfType<AbilityWithEffect>();
 
         //Debug.Log("Checking abilities: " + creatures.Count);
         //var switchFrom = races.First(r => r.name == "Bird");
@@ -120,12 +120,9 @@ public class AssetManager
 
         foreach(var ability in abilities)
         {
-            if (ability.TriggerCondition.Subjekt.Character == Noun.CharacterTyp.This && ability.ResultingAction.Target.Character == Noun.CharacterTyp.It)
-            {
-                Debug.Log("changed ability from it to this: " + ability.Name);
-                ability.ResultingAction.Target.Character = Noun.CharacterTyp.This;
+            if (abilities.Any(a => a.Icon == ability.Icon && a != ability))
+                Debug.Log($"{ability} has same icon as {abilities.First(a => a.Icon == ability.Icon && a != ability)}, {abilities.Count(a => a.Icon == ability.Icon && a != ability)}");
 
-            }
         }
 
         //foreach (var creature in CreatureLibrary.Instance.AllCreatures)

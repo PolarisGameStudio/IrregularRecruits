@@ -61,8 +61,10 @@ namespace UI
             HighlightParticles.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
         }
 
-        public IEnumerator UnDissolve()
+        public IEnumerator UnDissolve(bool shout = true)
         {
+            DissolveAmount = 1f;
+            DissolveMaterial.SetFloat("DissolveAmount", DissolveAmount);
 
             while (DissolveAmount > 0)
             {
@@ -74,7 +76,8 @@ namespace UI
                 yield return null;
             }
 
-            AnimationSystem.OnCreatureExclamation.Invoke(GetComponentInParent<CardUI>(),CreatureBark.Resurrection);
+            if(shout)
+                AnimationSystem.OnCreatureExclamation.Invoke(GetComponentInParent<CardUI>(),CreatureBark.Resurrection);
         }        
     }
 }

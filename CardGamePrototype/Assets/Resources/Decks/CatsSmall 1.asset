@@ -16,12 +16,10 @@ MonoBehaviour:
   Description: A cat army full of cat people. They are tricky and deadly. They make
     their enemies withdraw, and then strike them before they get a chance to act.
   Creatures:
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
-  - {fileID: 11400000, guid: 9f874942b62b2b84ea6adf93f66f38b5, type: 2}
+  - {fileID: 11400000, guid: 9fe4fb27fb3e130469db46ce4f503bb9, type: 2}
+  - {fileID: 11400000, guid: 019189cc08f72a443afefec5ec92af3f, type: 2}
+  - {fileID: 11400000, guid: 9fe4fb27fb3e130469db46ce4f503bb9, type: 2}
+  - {fileID: 11400000, guid: 019189cc08f72a443afefec5ec92af3f, type: 2}
   DeckIcon: {fileID: 21300000, guid: 829193eec1da30748b2ac27ef8cfe0ad, type: 3}
   DeckImage: {fileID: 21300000, guid: 0f3a61879da8b23469c0b394b46e80f0, type: 3}
   FriendRaces:

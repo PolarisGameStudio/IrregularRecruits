@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dwarf3
   m_EditorClassIdentifier: 
   Name: Spiked Medicine
-  Icon: {fileID: 21300000, guid: 531646748e9c2f545a34c92179a1241a, type: 3}
+  Icon: {fileID: 21300000, guid: 15f6c9bf35adace44bd55829c6616f6a, type: 3}
   ResultingAction:
     ActionType: 2
     TargetCount: 0

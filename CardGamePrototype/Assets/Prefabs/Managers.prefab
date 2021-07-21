@@ -117,6 +117,8 @@ MonoBehaviour:
   AbilitySelectParticles: {fileID: 198858562690846188, guid: 968c924d2be019d4b9e67647551eec3e,
     type: 3}
   LevelUpParticles: {fileID: 19800004, guid: 757df604761b8ef42831192c70ee1099, type: 3}
+  SummoningParticles:
+  - {fileID: 19800002, guid: 3d4907e6bd39f474b8fd8220920e65c4, type: 3}
   AbilityFx:
   - ActionType: 0
     AbilityIconFX:

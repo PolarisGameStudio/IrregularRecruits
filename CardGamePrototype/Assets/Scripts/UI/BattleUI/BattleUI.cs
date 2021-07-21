@@ -161,6 +161,9 @@ namespace UI
 
             StartCoroutine(ui.Flip(CardUI.CardState.FaceDown, 0f));
 
+            if(summon)
+                AnimationSystem.Instance.SummonParticles(ui);
+
             //Should we just move it to library nomatter what?
             Deck.Zone destination = summon ? Deck.Zone.Battlefield :  card.Location;
             StartCoroutine(MoveCard(ui, destination, playerDeck,true));
@@ -176,7 +179,7 @@ namespace UI
         {
             Instance.CreateCardUI(summon, playerdekc,true);
             
-            yield return null;
+            yield return new WaitForSeconds(1f);
         }
         public static IEnumerator UnSummon(Guid summon)
         {

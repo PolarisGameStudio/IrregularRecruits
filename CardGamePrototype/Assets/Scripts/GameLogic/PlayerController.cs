@@ -42,6 +42,8 @@ namespace GameLogic
 
         public void FinishTurn()
         {
+            ActionsLeft = 0;
+
             OnFinish?.Invoke();
         }
     }

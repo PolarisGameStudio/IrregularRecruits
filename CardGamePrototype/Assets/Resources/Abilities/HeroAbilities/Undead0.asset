@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Undead0
   m_EditorClassIdentifier: 
   Name: Corpse Feast
-  Icon: {fileID: 21300000, guid: 95ad2d6ddf2b8d64dba5909a21f5d763, type: 3}
+  Icon: {fileID: 21300000, guid: ef23b8bc7bfb4ed45b405b808a27324d, type: 3}
   ResultingAction:
     ActionType: 2
     TargetCount: 0

@@ -23,6 +23,7 @@ MonoBehaviour:
       Relationship: 0
       DamageState: 0
       Race: 0
+      Trait: {fileID: 0}
     Amount: 10
     Summons: {fileID: 0}
   OncePrCombat: 1

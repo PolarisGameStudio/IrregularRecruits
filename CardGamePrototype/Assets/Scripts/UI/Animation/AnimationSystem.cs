@@ -23,6 +23,7 @@ namespace UI
         public ParticleSystem[] DeathParticlesPrefab;
         public ParticleSystem AbilitySelectParticles;
         public ParticleSystem LevelUpParticles;
+        public ParticleSystem[] SummoningParticles;
         public AbilityAnimationFX[] AbilityFx;
 
         public class CardUIEvent : UnityEvent<CardUI,CreatureBark> { }
@@ -86,7 +87,7 @@ namespace UI
         }
         //Event.OnWithdraw.AddListener(c => StartCoroutine(PlayCardFX(c, WithdrawParticlesPrefab, 0, true)));
         //Event.OnPlay.AddListener(c => StartCoroutine(PlayCardFX(c, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f)));
-        public void PlayParticles(CardUI cardUI)
+        public void ETBParticles(CardUI cardUI)
         {
             StartCoroutine(PlayCardFX(cardUI, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f));
             OnEtb.Invoke();
@@ -106,6 +107,14 @@ namespace UI
         public IEnumerator WardParticles(CardUI c)
         {
             yield return PlayCardFX(c, WardParticlesPrefab,0.3f);
+        }
+
+        public void SummonParticles(CardUI c)
+        {
+            StartCoroutine(c.CardAnimation.UnDissolve(false));
+
+            StartCoroutine(PlayCardFX(c, SummoningParticles));
+
 
         }
 
@@ -126,8 +135,11 @@ namespace UI
         private IEnumerator PlayCardFX(AbilityHolderUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
         {
             if (!card) yield break;
+
+            yield return null;
+
             //vector2 to ignore z position to prevent oddities
-            Vector2 position = card.transform.position;
+            Vector3 position =  card.transform.position + new Vector3(0,0,-1);
             PlayFx(fxs, position, instantiateInWorldSpace ? null : card.transform);
 
             yield return new WaitForSeconds(delay);
@@ -143,7 +155,7 @@ namespace UI
                 case Deck.Zone.Battlefield:
                     if (from == Deck.Zone.Graveyard)
                         yield return card.CardAnimation.UnDissolve();
-                    Instance.PlayParticles(card);
+                    Instance.ETBParticles(card);
                     break;
                 case Deck.Zone.Graveyard:
                     Instance.DeathParticles(card);
@@ -180,7 +192,7 @@ namespace UI
             yield return new WaitForSeconds(0.5f);
         }
 
-        private static void PlayFx(ParticleSystem[] fxs, Vector2 position, Transform parent)
+        private static void PlayFx(ParticleSystem[] fxs, Vector3 position, Transform parent)
         {
             foreach (var fx in fxs)
             {

@@ -30,6 +30,7 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
     //DamageToDeckSystem
     public DeckDamage DeckDamageParadigm = DeckDamage.DamageToTopCard;
     
+    //Slower means faster
     public float CombatSpeed = 1f;
 
     public bool AiControlledPlayer = false;
