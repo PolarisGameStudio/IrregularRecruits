@@ -124,8 +124,12 @@ namespace UI
 
                 card.BuyButton.interactable = able;
                 card.PriceText.color = able ? Color.white : Color.red;
-            }
 
+                if (able)
+                    card.CardAnimation.Highlight();
+                else
+                    card.CardAnimation.TurnOffHighlight();
+            }
 
             var strategies = ShopRecommendation.GetTopStrategies(Battle.PlayerDeck);
 
