@@ -8,8 +8,9 @@ namespace GameLogic
     {
 
         //CARD EVENTS
-        //Any move event happens after the event is called
-        public class CardEvent : UnityEvent<Card> { }
+        //Any move event happens after the event is called.
+        //Takes the location zone, so that triggers can still happen, even if location has changed after
+        public class CardEvent : UnityEvent<Card,Deck.Zone> { }
         public static CardEvent OnDraw = new CardEvent();
         public static CardEvent OnEtb = new CardEvent();
         public static CardEvent OnDeath = new CardEvent();
@@ -28,7 +29,7 @@ namespace GameLogic
         public static IntEvent OnPlayerGoldAdd = new IntEvent();
         public static IntEvent PlayerActionPointsChanged = new IntEvent();
 
-        public class CardValueEvent : UnityEvent<Card,int> { }
+        public class CardValueEvent : UnityEvent<Card,int,Deck.Zone> { }
         public static CardValueEvent OnHealthChange = new CardValueEvent();
         public static CardValueEvent OnHealed = new CardValueEvent();
         public static CardValueEvent OnStatMod = new CardValueEvent();

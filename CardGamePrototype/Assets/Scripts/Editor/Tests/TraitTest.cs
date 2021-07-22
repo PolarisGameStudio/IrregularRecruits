@@ -31,7 +31,7 @@ namespace Tests
             var attacked = new List<Card>();
             var attackedInFirstRound = new List<Card>();
 
-            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+            Event.OnBeingAttacked.AddListener((c,l) => attacked.Add(c));
             Event.OnCombatResolveFinished.AddListener(() => DoIfTrue(() => attackedInFirstRound.AddRange(attacked), attackedInFirstRound.Count == 0));
 
             new Battle(pDeck, enmDeck);
@@ -114,8 +114,8 @@ namespace Tests
             List<Card> attacked = new List<Card>();
             List<Card> attackers = new List<Card>();
 
-            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
-            Event.OnAttack.AddListener(c => attackers.Add(c));
+            Event.OnBeingAttacked.AddListener((c,l) => attacked.Add(c));
+            Event.OnAttack.AddListener((c,l) => attackers.Add(c));
 
             var finished = false;
 
@@ -150,8 +150,8 @@ namespace Tests
             List<Card> attacked = new List<Card>();
             List<Card> attackers = new List<Card>();
 
-            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
-            Event.OnAttack.AddListener(c => attackers.Add(c));
+            Event.OnBeingAttacked.AddListener((c,l) => attacked.Add(c));
+            Event.OnAttack.AddListener((c,l) => attackers.Add(c));
 
             var finished = false;
 
@@ -285,7 +285,7 @@ namespace Tests
 
             List<Card> attacked = new List<Card>();
 
-            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+            Event.OnBeingAttacked.AddListener((c,l) => attacked.Add(c));
 
             var finished = false;
 
@@ -333,7 +333,7 @@ namespace Tests
 
             List<Card> attacked = new List<Card>();
 
-            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+            Event.OnBeingAttacked.AddListener((c,l) => attacked.Add(c));
 
             var finished = false;
 
@@ -383,7 +383,7 @@ namespace Tests
 
             List<Card> attacked = new List<Card>();
 
-            Event.OnBeingAttacked.AddListener(c => attacked.Add(c));
+            Event.OnBeingAttacked.AddListener((c,l) => attacked.Add(c));
 
             var finished = false;
 
@@ -655,7 +655,7 @@ namespace Tests
 
             var attackers = new List<Card>();
 
-            Event.OnAttack.AddListener(c => attackers.Add(c));
+            Event.OnAttack.AddListener((c,l) => attackers.Add(c));
 
             new Battle(pDeck, enmDeck);
 

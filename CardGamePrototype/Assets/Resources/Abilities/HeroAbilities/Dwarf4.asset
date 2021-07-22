@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28024833f4f9be04b8b8af375ed25a0b, type: 3}
   m_Name: Dwarf4
   m_EditorClassIdentifier: 
-  Name: Unbroken by Battle
+  Name: Inspirational Vigor
   Icon: {fileID: 21300000, guid: ba2ecd0014f668149853a7e65bbe2ad2, type: 3}
   ResultingAction:
-    ActionType: 5
+    ActionType: 2
     TargetCount: 0
     Target:
-      Character: 3
+      Character: 2
       Location: 1
       Relationship: 0
       DamageState: 0
-      Race: 0
+      Race: 1
       Trait: {fileID: 0}
     Amount: 1
     Summons: {fileID: 0}

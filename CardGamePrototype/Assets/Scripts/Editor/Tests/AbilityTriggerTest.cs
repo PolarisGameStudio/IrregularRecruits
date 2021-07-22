@@ -429,7 +429,7 @@ namespace Tests
             Card killer = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
-            Event.OnKill.AddListener((c) => killer = c);
+            Event.OnKill.AddListener((c,l) => killer = c);
 
             TestCard.AttackCard(OtherCard);
 
@@ -458,7 +458,7 @@ namespace Tests
             Card killer = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
-            Event.OnKill.AddListener((c) => killer = c);
+            Event.OnKill.AddListener((c,l) => killer = c);
 
             OtherCard.AttackCard(TestCard);
 
@@ -486,7 +486,7 @@ namespace Tests
             Card death = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
-            Event.OnDeath.AddListener((c) => death = c);
+            Event.OnDeath.AddListener((c,l) => death = c);
 
             OtherCard.Die();
 
@@ -513,9 +513,40 @@ namespace Tests
 
             TestCard.PlayCard();
 
-
-
             Assert.IsFalse(triggeredAblity == testAbility);
+        }
+        
+        [Test]
+        public void TriggersIfLocationIsChangedAfter()
+        {
+            var testAbility = new PassiveAbility()
+            {
+                ResultingAction = new AbilityEffectObject(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other), TriggerType.ETB),
+            };
+
+            var testAbility2 = new PassiveAbility()
+            {
+                ResultingAction = new AbilityEffectObject(EffectType.Withdraw, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.ETB),
+            };
+
+            var scaredCat = GenerateTestCreatureWithAbility(testAbility2);
+            TestCard = GenerateTestCreatureWithAbility(testAbility);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            scaredCat.ChangeLocation(Deck.Zone.Hand);
+
+            SpecialAbility triggeredAblity = null;
+            SpecialAbility triggeredAblity2 = null;
+
+            Event.OnAbilityExecution.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility, a, ref triggeredAblity, a));
+            Event.OnAbilityExecution.AddListener((a, c, ts) => SetObjectIfCorrectAbility(testAbility2, a, ref triggeredAblity2, a));
+
+            scaredCat.PlayCard();
+
+            Assert.AreEqual(testAbility2, triggeredAblity2);
+            Assert.AreEqual(testAbility,triggeredAblity);
         }
 
 

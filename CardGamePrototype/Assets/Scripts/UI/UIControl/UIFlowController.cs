@@ -30,26 +30,26 @@ namespace UI
             // if an action moves a card a zone from different locations, the cards current location is used
             Event.OnChangeLocation.AddListener(AddMoveEvent);
 
-            Event.OnSummon.AddListener(card => AddCardEvent(BattleUI.Summon(card, card.InDeck == BattleUI.Instance.PlayerDeck)));
+            Event.OnSummon.AddListener((card,loc) => AddCardEvent(BattleUI.Summon(card, card.InDeck == BattleUI.Instance.PlayerDeck)));
 
-            Event.OnUnSummon.AddListener(card => AddCardEvent(BattleUI.UnSummon(card.Guid)));
+            Event.OnUnSummon.AddListener((card,loc) => AddCardEvent(BattleUI.UnSummon(card.Guid)));
 
-            Event.OnWardTriggered.AddListener(card => AddCardEvent(BattleUI.WardedAttack(card.Guid)));
+            Event.OnWardTriggered.AddListener((card,loc) => AddCardEvent(BattleUI.WardedAttack(card.Guid)));
 
             //OnAttack-> (Card) Attack animation
-            Event.OnAttack.AddListener(card => AddCardEvent(BattleUI.SetAttacker(card.Guid)));
+            Event.OnAttack.AddListener((card,loc) => AddCardEvent(BattleUI.SetAttacker(card.Guid)));
             //On Being Attacked->
-            Event.OnBeingAttacked.AddListener(card => AddCardEvent(BattleUI.SetAttackTarget(card.Guid)));
+            Event.OnBeingAttacked.AddListener((card,loc) => AddCardEvent(BattleUI.SetAttackTarget(card.Guid)));
 
             //On Damage-> (Card, amount) & new health?
             //On healed
-            Event.OnHealthChange.AddListener((card, val) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
-            Event.OnHealed.AddListener((card, val) => AddCardEvent(BattleUI.CardHeal(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
+            Event.OnHealthChange.AddListener((card, val,loc) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
+            Event.OnHealed.AddListener((card, val,loc) => AddCardEvent(BattleUI.CardHeal(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
 
             Event.PlayerActionPointsChanged.AddListener(i => AddCardEvent(ActionsChanged(i)));
 
             //On Stat Change-> (Card, amount)
-            Event.OnStatMod.AddListener((card, val) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack, card.MaxHealth)));
+            Event.OnStatMod.AddListener((card, val,loc) => AddCardEvent(BattleUI.CardStatsModified(card.Guid, val, card.CurrentHealth, card.Attack, card.MaxHealth)));
 
             Event.OnBattleFinished.AddListener((d,l) => AddCardEvent(BattleUI.CleanUpUI(d)));
 

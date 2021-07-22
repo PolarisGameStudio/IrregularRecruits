@@ -58,7 +58,8 @@ namespace UI
         public static UnityEvent OnBattleBegin = new UnityEvent();
 
         //TODO: move these to animation system
-        public static UnityEvent OnAbilitySelect = new UnityEvent();
+        public class AbEvent : UnityEvent<AbilityWithEffect> { }
+        public static AbEvent OnAbilitySelect = new AbEvent();
         public static UnityEvent OnLevelUp = new UnityEvent();
         public static UnityEvent OnLevelAnimation = new UnityEvent();
 

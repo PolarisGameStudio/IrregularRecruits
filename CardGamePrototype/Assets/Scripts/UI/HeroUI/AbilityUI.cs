@@ -152,7 +152,7 @@ namespace UI
 
             AnimationSystem.PlayAbilitySelection(transform.position);
 
-            BattleUI.OnAbilitySelect.Invoke();
+            BattleUI.OnAbilitySelect.Invoke(Ability);
         }
 
     }

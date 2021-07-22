@@ -137,17 +137,17 @@ namespace GameLogic
             {
                 case Deck.Zone.Library:
                     //if(from == Deck.Zone.Battlefield)
-                    Event.OnWithdraw.Invoke(this);
+                    Event.OnWithdraw.Invoke(this,Location);
                     break;
                 case Deck.Zone.Battlefield:
-                    Event.OnEtb.Invoke(this);
+                    Event.OnEtb.Invoke(this,Location);
                     break;
                 case Deck.Zone.Graveyard:
                     if(from == Deck.Zone.Battlefield)
-                        Event.OnDeath.Invoke(this);
+                        Event.OnDeath.Invoke(this,Location);
                     break;
                 case Deck.Zone.Hand:
-                    Event.OnDraw.Invoke(this);
+                    Event.OnDraw.Invoke(this,Location);
                     break;
             }
 
@@ -167,9 +167,9 @@ namespace GameLogic
 
             var returnDamage = !this.Ranged() && (target.Location == Deck.Zone.Battlefield);
 
-            Event.OnAttack.Invoke(this);
+            Event.OnAttack.Invoke(this,Location);
 
-            Event.OnBeingAttacked.Invoke(target);
+            Event.OnBeingAttacked.Invoke(target,target.Location);
 
             if (Location != Deck.Zone.Battlefield || !target.Alive())
                 return;
@@ -201,8 +201,8 @@ namespace GameLogic
             }
 
 
-            if (!Alive() && target.Alive()) Event.OnKill.Invoke(target);
-            else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this);
+            if (!Alive() && target.Alive()) Event.OnKill.Invoke(target,Location);
+            else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this,Location);
 
         }
 
@@ -234,7 +234,7 @@ namespace GameLogic
 
             InDeck.Remove(this);
 
-            Event.OnUnSummon.Invoke(this);
+            Event.OnUnSummon.Invoke(this,Location);
         }
 
         public void SetCreature(Creature newCreature)
@@ -291,7 +291,7 @@ namespace GameLogic
             CurrentHealth += amount;
             Attack += amount;
 
-            Event.OnStatMod.Invoke(this, amount);
+            Event.OnStatMod.Invoke(this, amount,Location);
 
             if (CurrentHealth <= 0)
                 Die();
@@ -333,13 +333,13 @@ namespace GameLogic
         internal void Resurrect(int amount)
         {
             ChangeLocation(Deck.Zone.Battlefield);
-            Event.OnRessurrect.Invoke(this);
+            Event.OnRessurrect.Invoke(this,Location);
 
             var healthChange = amount - CurrentHealth;
 
             CurrentHealth = amount;
 
-            Event.OnHealthChange.Invoke(this, healthChange);
+            Event.OnHealthChange.Invoke(this, healthChange,Location);
             //TODO: change race to UNDEAD?
         }
 
@@ -368,20 +368,20 @@ namespace GameLogic
             if(change < 0  && Warded && Location == Deck.Zone.Battlefield)
             {
                 Warded = false;
-                Event.OnWardTriggered.Invoke(this);
+                Event.OnWardTriggered.Invoke(this,Location);
                 return;
             }
 
             CurrentHealth += change;
 
-            Event.OnHealthChange.Invoke(this, change);
+            Event.OnHealthChange.Invoke(this, change,Location);
 
             if (CurrentHealth <= 0) Die();
 
             if (change < 0)
-                Event.OnDamaged.Invoke(this);
+                Event.OnDamaged.Invoke(this,Location);
             if (change > 0)
-                Event.OnHealed.Invoke(this, change);
+                Event.OnHealed.Invoke(this, change,Location);
         }
 
 

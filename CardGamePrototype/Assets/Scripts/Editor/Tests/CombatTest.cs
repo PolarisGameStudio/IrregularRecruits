@@ -33,7 +33,7 @@ namespace Tests
 
             List<Card> deads = new List<Card>();
 
-            Event.OnDeath.AddListener(c => deads.Add(c));
+            Event.OnDeath.AddListener((c,l) => deads.Add(c));
             new Battle(pDeck, enmDeck);
 
             Assert.AreEqual(pDeck.AllCreatures().Count, 0);
@@ -164,7 +164,7 @@ namespace Tests
 
             HashSet<Card> attackers = new HashSet<Card>();
 
-            Event.OnAttack.AddListener(c => attackers.Add(c));
+            Event.OnAttack.AddListener((c,l) => attackers.Add(c));
 
             new Battle(pDeck, enmDeck);
 

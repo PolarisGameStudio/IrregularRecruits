@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Katrina Black
   Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
-  Deck: {fileID: 11400000, guid: 1cb7369a44f367f48b0b26017ff5f92f, type: 2}
+  Deck: {fileID: 11400000, guid: 1be4a3a4206b3ea4dbcf51280e02e315, type: 2}
   Portrait: {fileID: 21300000, guid: 7334a5d3f79d0ba4a814ecfc2dcb0453, type: 3}
   StartingAbility: {fileID: 11400000, guid: dba7728b02843b243aa0c135d9546f9f, type: 2}
   Class: {fileID: 11400000, guid: 3e70c4b5694fc094a83fe17be7a0f441, type: 2}

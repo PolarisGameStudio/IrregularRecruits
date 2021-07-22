@@ -16,9 +16,9 @@ namespace GameLogic
             return 1f;
         }
 
-        internal override UnityAction SetupListener(AbilityHolder owner, Noun subjekt, UnityAction<Card, AbilityHolder, Noun> executeIfTrue)
+        internal override UnityAction SetupListener(AbilityHolder owner, Noun subjekt, UnityAction<Card, AbilityHolder, Deck.Zone, Noun> executeIfTrue)
         {
-            UnityAction handler = () => executeIfTrue.Invoke(null, owner, subjekt);
+            UnityAction handler = () => executeIfTrue.Invoke(null, owner,Deck.Zone.Battlefield, subjekt);
 
             var trigger = Event.OnCombatResolveFinished ;
 

@@ -27,7 +27,7 @@ namespace GameLogic
             Trait = trait;
         }
 
-        public bool CorrectNoun(Card instigator, AbilityHolder abilityOwner)
+        public bool CorrectNoun(Card instigator, AbilityHolder abilityOwner, Deck.Zone location)
         {
             //TODO: THIs should be a more complex check depending on the ability. Now this + etb won't trigger for instance
             // maybe all abilities should have a locations allowed for onwer
@@ -43,7 +43,7 @@ namespace GameLogic
                 CorrectAllegiance(instigator, abilityOwner) &&
                 CorrectDamageState(instigator) && 
                 CorrectTrait(instigator)
-                && instigator.Location == this.Location
+                && location == this.Location
                 ;
         }
 
@@ -58,7 +58,6 @@ namespace GameLogic
 
             if (abilityOwner == instigator)
                 return Location == card.Location;
-
 
                 //TODO: create a triggers from location field.
             return card.Location == Deck.Zone.Battlefield;

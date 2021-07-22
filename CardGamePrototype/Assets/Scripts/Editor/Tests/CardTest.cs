@@ -123,7 +123,7 @@ namespace Tests
 
             var triggered = false;
 
-            Event.OnEtb.AddListener(c => triggered = true);
+            Event.OnEtb.AddListener((c,l) => triggered = true);
 
             TestCard.Click();
 
@@ -181,7 +181,7 @@ namespace Tests
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
             var triggered = false;
 
-            Event.OnWithdraw.AddListener(c => triggered = true);
+            Event.OnWithdraw.AddListener((c,l) => triggered = true);
 
             TestCard.Withdraw();
 
@@ -233,7 +233,7 @@ namespace Tests
 
             var heal = 1;
 
-            Event.OnHealed.AddListener((i, val) => check = i);
+            Event.OnHealed.AddListener((i, val,l) => check = i);
 
             TestCard.HealthChange(heal);
 
@@ -258,8 +258,8 @@ namespace Tests
             var damage = 3;
             Card card = null;
 
-            Event.OnHealthChange.AddListener((c,i) => check = i);
-            Event.OnDamaged.AddListener((c) => card = c);
+            Event.OnHealthChange.AddListener((c,i,l) => check = i);
+            Event.OnDamaged.AddListener((c,l) => card = c);
 
             TestCard.HealthChange(-damage);
 
@@ -274,7 +274,7 @@ namespace Tests
 
             var damage = 1;
 
-            Event.OnDamaged.AddListener((i) => check = i);
+            Event.OnDamaged.AddListener((i,l) => check = i);
 
             TestCard.HealthChange(-damage);
 
@@ -292,8 +292,8 @@ namespace Tests
 
             var damage = 1000;
 
-            Event.OnHealthChange.AddListener((i,v) => damaged = i);
-            Event.OnDeath.AddListener((i) => hasBeenDamagedFirst = i == damaged);
+            Event.OnHealthChange.AddListener((i,v,l) => damaged = i);
+            Event.OnDeath.AddListener((i,l) => hasBeenDamagedFirst = i == damaged);
 
             TestCard.HealthChange(-damage);
 
@@ -323,8 +323,8 @@ namespace Tests
             var boost = 3;
             Card card = null;
 
-            Event.OnStatMod.AddListener((c, i) => check = i);
-            Event.OnStatMod.AddListener((c, i) => card = c);
+            Event.OnStatMod.AddListener((c, i,l) => check = i);
+            Event.OnStatMod.AddListener((c, i,l) => card = c);
 
             TestCard.StatModifier(boost);
 
@@ -340,7 +340,7 @@ namespace Tests
             Card check = null;
             var boost = 3;
 
-            Event.OnHealed.AddListener((i,val) => check = i);
+            Event.OnHealed.AddListener((i,val,l) => check = i);
 
             TestCard.StatModifier(boost);
 
@@ -369,7 +369,7 @@ namespace Tests
 
             var damage = 1;
 
-            Event.OnDamaged.AddListener((i) => check = i);
+            Event.OnDamaged.AddListener((i,l) => check = i);
 
             TestCard.StatModifier(-damage);
 
@@ -420,7 +420,7 @@ namespace Tests
 
             var triggered = false;
 
-            Event.OnDeath.AddListener(c => triggered = true);
+            Event.OnDeath.AddListener((c,l) => triggered = true);
 
             TestCard.Die();
 

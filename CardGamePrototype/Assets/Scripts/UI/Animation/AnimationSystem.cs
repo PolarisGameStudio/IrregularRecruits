@@ -194,6 +194,8 @@ namespace UI
 
         private static void PlayFx(ParticleSystem[] fxs, Vector3 position, Transform parent)
         {
+            position += new Vector3(0, 0, -1);
+
             foreach (var fx in fxs)
             {
                 if (parent)

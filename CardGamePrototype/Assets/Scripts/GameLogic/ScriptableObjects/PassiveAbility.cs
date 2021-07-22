@@ -53,9 +53,9 @@ namespace GameLogic
             return Value;
         }
 
-        private void ExecuteIfTrue(Card instigator, AbilityHolder abilityOwner, Noun subject)
+        private void ExecuteIfTrue(Card instigator, AbilityHolder abilityOwner, Deck.Zone location, Noun subject)
         {
-            if (subject.CorrectNoun(instigator, abilityOwner))
+            if (subject.CorrectNoun(instigator, abilityOwner,location))
             {
                 UnityAction action = ()=> ExecuteAction(abilityOwner, instigator);
 

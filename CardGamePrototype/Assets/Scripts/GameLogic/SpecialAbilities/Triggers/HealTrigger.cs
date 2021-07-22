@@ -18,9 +18,9 @@ namespace GameLogic
             return 0.5f;
         }
 
-        internal override UnityAction SetupListener(AbilityHolder owner, Noun subjekt, UnityAction<Card, AbilityHolder, Noun> executeIfTrue)
+        internal override UnityAction SetupListener(AbilityHolder owner, Noun subjekt, UnityAction<Card, AbilityHolder, Deck.Zone, Noun> executeIfTrue)
         {
-            UnityAction<Card,int> handler = (a,i) => executeIfTrue.Invoke(a, owner, subjekt);
+            UnityAction<Card,int,Deck.Zone> handler = (a,i,loc) => executeIfTrue.Invoke(a, owner,loc, subjekt);
 
             Event.CardValueEvent trigger = Event.OnHealed;
 

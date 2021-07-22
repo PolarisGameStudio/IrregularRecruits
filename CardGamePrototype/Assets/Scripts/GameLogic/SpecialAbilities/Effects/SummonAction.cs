@@ -33,7 +33,7 @@ namespace GameLogic
 
             owner.InDeck.AddCard(card);
 
-            Event.OnSummon.Invoke(card);
+            Event.OnSummon.Invoke(card,card.Location);
 
             card.ChangeLocation(Deck.Zone.Battlefield);
 

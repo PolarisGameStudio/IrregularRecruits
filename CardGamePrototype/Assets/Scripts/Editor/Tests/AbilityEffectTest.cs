@@ -89,7 +89,7 @@ namespace Tests
             bool triggered = false;
             Card withdrawn = null;
 
-            Event.OnWithdraw.AddListener(c => withdrawn = c);
+            Event.OnWithdraw.AddListener((c,l) => withdrawn = c);
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
 
             OtherCard.HealthChange(-1);
@@ -172,8 +172,8 @@ namespace Tests
             bool triggered = false;
             Card damaged = null;
 
-            Event.OnDamaged.AddListener((c) => damaged = c);
-            Event.OnWithdraw.AddListener((c) => triggered = true);
+            Event.OnDamaged.AddListener((c,l) => damaged = c);
+            Event.OnWithdraw.AddListener((c,l) => triggered = true);
 
             OtherCard.Withdraw();
 
@@ -201,7 +201,7 @@ namespace Tests
             bool triggered = false;
             Card drawn = null;
 
-            Event.OnDraw.AddListener(c => drawn = c);
+            Event.OnDraw.AddListener((c,l) => drawn = c);
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
 
             TestCard.HealthChange(-1);
@@ -229,7 +229,7 @@ namespace Tests
             bool triggered = false;
             Card healed = null;
 
-            Event.OnHealed.AddListener((c, i) => healed = c);
+            Event.OnHealed.AddListener((c, i,l) => healed = c);
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
 
             OtherCard.HealthChange(-amount);
@@ -256,7 +256,7 @@ namespace Tests
             bool triggered = false;
             Card killed = null;
 
-            Event.OnDeath.AddListener(c => killed = c);
+            Event.OnDeath.AddListener((c,l) => killed = c);
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
 
             OtherCard.HealthChange(-1);
@@ -284,7 +284,7 @@ namespace Tests
             Card death = null;
 
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
-            Event.OnDeath.AddListener((c) => death = c);
+            Event.OnDeath.AddListener((c,l) => death = c);
 
             OtherCard.Die();
 
@@ -346,7 +346,7 @@ namespace Tests
             bool triggered = false;
             Card summoned = null;
 
-            Event.OnSummon.AddListener(c => summoned = c);
+            Event.OnSummon.AddListener((c,l) => summoned = c);
             Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
 
             OtherCard.HealthChange(-1);
