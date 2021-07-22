@@ -258,10 +258,15 @@ namespace UI
 
             if (!ui) yield break;
 
-            //TODO: should the effect be bfore or after
-            yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
+            //Battlefield effects after move
+            if(to != Deck.Zone.Battlefield)
+                yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
 
             yield return MoveCard(ui, to, playerDeck);
+
+            if (to == Deck.Zone.Battlefield)
+                yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
+
         }
 
         internal static IEnumerator SetAttacker(Guid card)
@@ -436,6 +441,27 @@ namespace UI
 
             var zoneHolder = GetZoneHolder(zone, !player);
 
+            switch (zone)
+            {
+                case Deck.Zone.Library:
+                    StartCoroutine(card.Flip(CardUI.CardState.FaceDown));
+                    break;
+                case Deck.Zone.Battlefield:
+                    StartCoroutine(card.Flip(CardUI.CardState.Battle));
+                    break;
+                case Deck.Zone.Hand:
+                    if (!player)
+                        StartCoroutine(card.Flip(CardUI.CardState.FaceDown));
+                    else
+                        StartCoroutine(card.Flip(CardUI.CardState.FaceUp));
+                    break;
+                default:
+                    StartCoroutine(card.Flip(CardUI.CardState.FaceUp));
+                    break;
+            }
+
+
+
             //if not already dragged there
             if (!zoneHolder.HasChild(card))
             {
@@ -473,25 +499,6 @@ namespace UI
                 }
 
                 zoneHolder.AddChild(card,0);
-            }
-
-            switch (zone)
-            {
-                case Deck.Zone.Library:
-                    yield return card.Flip(CardUI.CardState.FaceDown);
-                    break;
-                case Deck.Zone.Battlefield:
-                    yield return card.Flip(CardUI.CardState.Battle);
-                    break;
-                case Deck.Zone.Hand:
-                    if(!player)
-                        yield return card.Flip(CardUI.CardState.FaceDown);
-                    else
-                        yield return card.Flip(CardUI.CardState.FaceUp);
-                    break;
-                default:
-                    yield return card.Flip(CardUI.CardState.FaceUp);
-                    break;
             }
 
             card.Interactable = true;

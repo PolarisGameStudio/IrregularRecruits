@@ -25,8 +25,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7b2c9e5f81088b74bbe1f005932eec22, type: 3}
   - Type: 2
     Audio:
-    - {fileID: 8300000, guid: a603fbca99afc344c946bde37eb0b19b, type: 3}
-    - {fileID: 8300000, guid: c4da5b6a756276d46ae398ccd1762340, type: 3}
+    - {fileID: 8300000, guid: 03ee366fcc768674088850a5c7232c11, type: 3}
+    - {fileID: 8300000, guid: 12b49f09b5a155d458f5cca90e815746, type: 3}
+    - {fileID: 8300000, guid: 0535173364e004d4fba91b9f2a2ca3cb, type: 3}
+    - {fileID: 8300000, guid: f3e6657e4a61ee64bba886cb4529a947, type: 3}
+    - {fileID: 8300000, guid: ad4ef5c6b9343ce45a52772f81535948, type: 3}
   - Type: 4
     Audio:
     - {fileID: 8300000, guid: 60582bc2a662f3647a87b1e949a05cbb, type: 3}

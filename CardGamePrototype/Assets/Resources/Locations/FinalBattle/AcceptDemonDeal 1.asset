@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClosesLocationOnSelection: 1
   OnlyForHeroRaces:
-  - {fileID: 11400000, guid: d44904e2056d5a74894a0eff770aa972, type: 2}
+  - {fileID: 0}
   OnlyForAbility: []
-  OptionDescription: '- ''You can take the soul of my kitten, if you make me Queen
+  OptionDescription: '''You can take the soul of my kitten, if you make me Queen
     of the Cats!'''
   AssociatedUnit: 0
   Amount: 0

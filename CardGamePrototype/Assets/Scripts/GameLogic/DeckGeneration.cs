@@ -10,43 +10,46 @@ namespace GameLogic
         //test if this list persists through plays
         public static HashSet<Creature> UniquesGenerated = new HashSet<Creature>();
 
-        public static Deck GenerateDeck(int CR, List<Race> races = null, List<Creature> creatures = null, bool uniquesAllowed = false)
+        public static Deck GenerateDeck(int CR, List<Race> races = null, List<Creature> alwaysInclude = null, bool uniquesAllowed = false)
         {
-            var possibleRaces = races ?? CreatureLibrary.Instance.AllRaces.OrderBy(c=>Random.value).ToList();
+            var possibleRaces = races ?? (
+                alwaysInclude!= null ? alwaysInclude.Select(c=>c.Race).Distinct().ToList() : 
+                CreatureLibrary.Instance.AllRaces.OrderBy(c=>Random.value).ToList());
+
             var race = possibleRaces.First();
 
-            if (creatures == null) creatures = new List<Creature>();
-
-            foreach (var c in creatures.Where(c => c.Rarity == Creature.RarityType.Unique))
+            foreach (var c in alwaysInclude.Where(c => c.Rarity == Creature.RarityType.Unique))
                 UniquesGenerated.Add(c);
 
-            var origCreatures = creatures;
+            var selectables = new List<Creature>();
 
             //TODO: possible for more races together
 
-            if(creatures == null || creatures.Count == 0)
-                creatures = CreatureLibrary.Instance.AllCreatures.Where(c => c.Race == race && !c.IsSummon()).ToList();
+            if(selectables == null || selectables.Count == 0)
+                selectables = CreatureLibrary.Instance.AllCreatures.Where(c => c.Race == race && !c.IsSummon()).ToList();
 
             var library = new List<Card>();
 
             if (!uniquesAllowed)
-                creatures = creatures.Where(c => c.Rarity != Creature.RarityType.Unique || origCreatures.Contains(c)).ToList();
+                selectables = selectables.Where(c => c.Rarity != Creature.RarityType.Unique).ToList();
 
+
+            library.AddRange(alwaysInclude.Select(c=> new Card(c)));
 
             var difficultyLeft = CR;
 
-            if (!creatures.Any(c => c.CR <= difficultyLeft) )
-                throw new System.Exception("Creatures of type " + creatures.FirstOrDefault()?.Race + " has no creature with CR below " + difficultyLeft);
+            //if (!creatures.Any(c => c.CR <= difficultyLeft) )
+            //    throw new System.Exception("Creatures of type " + creatures.FirstOrDefault()?.Race + " has no creature with CR below " + difficultyLeft);
 
             int v = (GameSettings.DeckSize());
             for (int i = 0; i < v; i++)
             {
                 Creature selected;
 
-                if (!creatures.Any(c => c.CR <= difficultyLeft))
+                if (!selectables.Any(c => c.CR <= difficultyLeft))
                     break;
 
-                selected = CreatureLibrary.Instance.TakeRandom(creatures,CR);
+                selected = CreatureLibrary.Instance.TakeRandom(selectables,CR);
 
                 var card = new Card(selected);
 
@@ -57,7 +60,7 @@ namespace GameLogic
                 if (selected.Rarity == Creature.RarityType.Unique) 
                 { 
                     UniquesGenerated.Add(selected);
-                    creatures.Remove(selected);
+                    selectables.Remove(selected);
                 }
             }
 

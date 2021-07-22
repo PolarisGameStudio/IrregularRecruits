@@ -15,7 +15,7 @@ MonoBehaviour:
   ClosesLocationOnSelection: 1
   OnlyForHeroRaces: []
   OnlyForAbility: []
-  OptionDescription: '- ''You can have my sword in your ugly face!'''
+  OptionDescription: '''You can have my sword in your ugly face!'''
   AssociatedUnit: 0
   SpawnCreatures:
   - {fileID: 11400000, guid: 02a3b05ab288a0446ab3b3959fba49f3, type: 2}
@@ -23,4 +23,5 @@ MonoBehaviour:
   AdditionalRaces: []
   MinCr: 100
   MaxCr: 100
+  CRValue: 0
   UniquesAllowed: 1

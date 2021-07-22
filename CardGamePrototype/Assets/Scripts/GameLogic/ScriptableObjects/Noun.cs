@@ -150,8 +150,10 @@ namespace GameLogic
                 case CharacterTyp.Other:
                     if (count == Count.One)
                         str += "another ";
-                    else if (count != Count.All)
-                        str += count.ToString() + "all other ";
+                    else if (count == Count.All)
+                        str += "all other ";
+                    else
+                        str += count.ToString() + " other ";
                     break;
             }
 
@@ -163,7 +165,7 @@ namespace GameLogic
                     str += "damaged ";
                     break;
                 case DamageType.Undamaged:
-                    str += "damaged ";
+                    str += "undamaged ";
                     break;
             }
             switch (Relationship)
@@ -217,11 +219,10 @@ namespace GameLogic
                 case Deck.Zone.Graveyard:
                     if (triggerAction == TriggerType.DIES )
                         return str;
-                    return str + ", that is dead"; //TODO: remove. just for debugging now
+                    return str;// + ", that is dead"; //TODO: remove. just for debugging now
                 case Deck.Zone.Hand:
                     if (triggerAction == TriggerType.Draw)
                         return str;
-
                     switch (Relationship)
                     {
                         case Allegiance.Friend:

@@ -16,6 +16,6 @@ MonoBehaviour:
   OnlyForHeroRaces:
   - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
   OnlyForAbility: []
-  OptionDescription: '- ''You can have my soul, if you grant me my immortality again'''
+  OptionDescription: '''You can have my soul, if you grant me my immortality again'''
   AssociatedUnit: 0
   Amount: 0

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClosesLocationOnSelection: 1
   OnlyForHeroRaces:
-  - {fileID: 11400000, guid: 4728fa16fe828ca41a23864bdfa561af, type: 2}
+  - {fileID: 0}
   OnlyForAbility: []
-  OptionDescription: '- ''You can have my son, if you make me king!'''
+  OptionDescription: '''You can have my son, if you make me king!'''
   AssociatedUnit: 0
   Amount: 0

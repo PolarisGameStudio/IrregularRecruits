@@ -34,7 +34,7 @@ Material:
     - _InvFade: 1
     - _SoftCollisionMode: 1
     - _TranslucencyMode: 0
-    - _UISoftModeFadeSmooth: 1
+    - _UISoftModeFadeSmooth: 2
     - _UseClippingMask: 0
     - _UseHDRMode: 1
     m_Colors:

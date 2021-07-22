@@ -91,6 +91,9 @@ namespace UI
         {
             StartCoroutine(PlayCardFX(cardUI, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f));
             OnEtb.Invoke();
+
+            //TODO: scale animation and sound with strength of the characters
+
         }
         //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
         public void DeathParticles(CardUI cardUI)
@@ -139,7 +142,7 @@ namespace UI
             yield return null;
 
             //vector2 to ignore z position to prevent oddities
-            Vector3 position =  card.transform.position + new Vector3(0,0,-1);
+            Vector3 position =  card.transform.position + new Vector3(0,0,-0.5f);
             PlayFx(fxs, position, instantiateInWorldSpace ? null : card.transform);
 
             yield return new WaitForSeconds(delay);
