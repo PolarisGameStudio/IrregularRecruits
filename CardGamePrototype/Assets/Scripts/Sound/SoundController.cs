@@ -72,6 +72,9 @@ namespace Sound
             AnimationSystem.OnAbilityTargetHit.AddListener(PlayAbilityHit);
 
             LegacyUIEntry.OnBarTick.AddListener(() => PlayUISound(SoundLibrary.UiSound.ProgressBarTick));
+
+            AbilityButton.OnHolding.AddListener(() => PlayUISound(SoundLibrary.UiSound.ChargingAbility));
+            AbilityButton.OnFizzle.AddListener(() => PlayUISound(SoundLibrary.UiSound.FizzleAbility));
         }
 
         private void PlayCardSound(CreatureBark soundType, GameLogic.SoundSetType soundSetType)

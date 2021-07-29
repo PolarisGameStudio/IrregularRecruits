@@ -300,7 +300,7 @@ namespace UI
         {
             if (!CardUIs.ContainsKey(cardGuid))
             {
-                Debug.LogError("ui for guid not instantiated");
+                //Debug.LogError("ui for guid not instantiated");
                 return null;
             }
 
@@ -316,7 +316,7 @@ namespace UI
         {
             if (!CardUIs.ContainsKey(guid))
             {
-                Debug.LogError("ui for guid not instantiated");
+                //Debug.LogError("ui for guid not instantiated");
                 return null;
             }
 
@@ -338,8 +338,8 @@ namespace UI
         private IEnumerator AttackAnimation()
         {
             //null check
-            if (AttackTarget == null) Debug.LogError("no attacktarget");
-            if (Attacker == null) Debug.LogError("no attacker");
+            //if (AttackTarget == null) Debug.LogError("no attacktarget");
+            //if (Attacker == null) Debug.LogError("no attacker");
 
             yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
 
@@ -369,8 +369,9 @@ namespace UI
                 //handled by CardHeal Routine
             }
             else
-                Debug.LogWarning("health change of 0");
-
+            {
+                //Debug.LogWarning("health change of 0");
+            }
             ui.UpdateHealth(currentHealth,  maxHealth);
 
             yield return null;
@@ -386,7 +387,7 @@ namespace UI
             if (val <= 0)
             {
 
-                Debug.LogError("Card heal with value "+ val);
+                //Debug.LogError("Card heal with value "+ val);
             }
             else if (val > 0)
             {

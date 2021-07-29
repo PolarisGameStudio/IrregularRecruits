@@ -110,6 +110,12 @@ MonoBehaviour:
   - Type: 17
     Audio:
     - {fileID: 8300000, guid: 5f448c4dd5217414b95ff73157346c25, type: 3}
+  - Type: 18
+    Audio:
+    - {fileID: 8300000, guid: 630fea36e3703fb47b68a086600f9049, type: 3}
+  - Type: 19
+    Audio:
+    - {fileID: 8300000, guid: 8bb39bdaf262d8a45af05ae34029e716, type: 3}
   Stingers:
   - Type: 0
     Audio:

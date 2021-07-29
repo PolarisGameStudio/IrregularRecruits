@@ -1,32 +1,38 @@
 ﻿using GameLogic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
 namespace UI
 {
-    public class AbilityUI : MonoBehaviour,  IPointerExitHandler, IPointerEnterHandler
+
+    public class AbilityUI : MonoBehaviour
     {
         //false == passive
+        //TODO: divide into different classes to clean up
+        public AbilityButton AbilityButton;
         public bool HeroViewAbility;
         public bool ActiveAbility;
         public Image AbilityImage;
         public Image BorderImage;
+        public Image ActivationFillImage;
         public ParticleSystem OutlineParticles;
 
         public AbilityWithEffect Ability;
         public Hero Owner;
-        public Button Button;
 
-        private void Start()
+
+        private void Start() 
         {
-            Button.onClick.AddListener(Click);
+            if(!HeroViewAbility)
+                UIFlowController.Instance.OnEmptyQueue.AddListener(SetExecutability);
 
-
-            UIFlowController.Instance.OnEmptyQueue.AddListener(SetExecutability);
+            AbilityButton.AbilityUI = this;
         }
+
+
 
         public void SetExecutability()
         {
@@ -36,17 +42,6 @@ namespace UI
                 SetAbilityAsActivable();
             else
                 LockAbility();
-        }
-
-        private void Click()
-        {
-            AbilityHoverInfo.Hide();
-
-
-            if (HeroViewAbility)
-                SelectLevelUp();
-            else
-                Activate();
         }
 
         private void SetAbilityAsActivable()
@@ -69,28 +64,16 @@ namespace UI
             AbilityImage.material = HeroView.Instance.GrayScaleMaterial;
         }
 
-
-        private void Activate()
+        public void Activate()
         {
+            AbilityHoverInfo.Instance.Hide();
+
             if (!Ability || !(Ability is ActiveAbility)) return;
 
             LockAbility();
 
-            (Ability as ActiveAbility).ActivateAbility(Owner);
+            (Ability as ActiveAbility).ActivateAbility(Owner);            
         }        
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            //Highlight
-            AbilityHoverInfo.Show(this);
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            //dehighlight
-            AbilityHoverInfo.Hide();
-        }
-
         public void SetAbility(AbilityWithEffect ability,Hero owner)
         {
             Ability = ability;
@@ -143,10 +126,8 @@ namespace UI
                 SetExecutability();
         }
 
-        private void SelectLevelUp()
+        public void SelectLevelUp()
         {
-            if (!HeroViewAbility || !OutlineParticles.isPlaying)
-                return;
 
             Owner.SelectLevelUpAbility(Ability);            
 

@@ -17,15 +17,15 @@ namespace GameLogic
         public void Load()
         {
 
-            DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded -= ImportData;
+            //DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded -= ImportData;
 
             DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded += ImportData;
 
             DataHandler.Instance.InitializeDatabases();
 
 
-            if (UnlockProgresses.Select(u => u.UnlocksHero.name).Distinct().Count() != UnlockProgresses.Count())
-                Debug.LogError("Several unlock conditions for the same hero!");
+            //if (UnlockProgresses.Select(u => u.UnlocksHero.name).Distinct().Count() != UnlockProgresses.Count())
+            //    Debug.LogError("Several unlock conditions for the same hero!");
 
             Event.OnBattleFinished.AddListener(HandleBattleFinished);
 
@@ -47,7 +47,7 @@ namespace GameLogic
 
                 unlock.OnCountUp.AddListener(i => ChangeIntTypeValue(i, value, unlock.UnlocksHero.name));
 
-                Debug.Log("synced: " + unlock.Description());
+                //Debug.Log("synced: " + unlock.Description());
 
             }
             SetStartValues();
@@ -60,13 +60,13 @@ namespace GameLogic
 
         private void ChangeIntTypeValue(int i, IntType data,string name = "")
         {
-            Debug.Log($"data {name}, changed from {data.Value} to {i}");
+            //Debug.Log($"data {name}, changed from {data.Value} to {i}");
 
             data.Value = i;
 
             //TODO: Create a test that changes the value and gets and
 
-            Debug.Log("actual value in Databox:" + DataHandler.Instance.GetLegacy(name).Value);
+            //Debug.Log("actual value in Databox:" + DataHandler.Instance.GetLegacy(name).Value);
         }
 
         private void HandleBattleFinished(Deck winner, Deck loser)
@@ -84,7 +84,7 @@ namespace GameLogic
 
                 condition.CountUp();
 
-                Debug.Log("Increasing: " + condition.Description());
+                //Debug.Log("Increasing: " + condition.Description());
             }
         }
 

@@ -2,31 +2,48 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI
 {
     
-    public class AbilityHoverInfo: Singleton<AbilityHoverInfo>
+    public class AbilityHoverInfo: Singleton<AbilityHoverInfo>, IPointerClickHandler
     {
         public TextMeshProUGUI Title;
         public TextMeshProUGUI Description;
+        public Button LevelUpButton;
         public GameObject Holder;
+        public AbilityUI ShowingAbility;
+        public LayoutGroup LayoutGroup;
 
-        public static Coroutine ShowAfterDelayRoutine;
-
-        //DISABLE mask if creature has small image
-        //remember color the same as health and attack of card
-        public static void Show(AbilityUI card)
+        private void Start()
         {
-            if (ShowAfterDelayRoutine == null)
-                ShowAfterDelayRoutine = Instance.StartCoroutine(Instance.ShowAfterDelay(card));
+            LevelUpButton.onClick.AddListener(LevelUpSelect);
         }
 
-        private IEnumerator ShowAfterDelay(AbilityUI ability)
+        public void OnPointerClick(PointerEventData eventData)
         {
-            yield return new WaitForSeconds(0.3f);
+            Hide();
+        }
 
-            ShowAbility(ability);
+
+        private void LevelUpSelect()
+        {
+            if (!ShowingAbility || !ShowingAbility.HeroViewAbility || !ShowingAbility.OutlineParticles.isPlaying)
+                return;
+
+            ShowingAbility.SelectLevelUp();
+
+            Hide();
+        }
+
+        public static void Show(AbilityUI card)
+        {
+            if (Instance.ShowingAbility == card)
+                Instance.Hide();
+            else
+                Instance.ShowAbility(card);
         }
 
         internal static bool IsActive()
@@ -36,11 +53,12 @@ namespace UI
 
         private void ShowAbility(AbilityUI abilityUI)
         {
-            ShowAfterDelayRoutine = null;
+            ShowingAbility = abilityUI;
 
             Title.text = abilityUI.Ability.Name;
             Description.text = abilityUI.Ability.Description(abilityUI.Owner);
-            
+
+            LevelUpButton.gameObject.SetActive(abilityUI.HeroViewAbility && abilityUI.OutlineParticles.isPlaying);
 
             var rect = GetComponent<RectTransform>();
             rect.position = abilityUI.GetComponent<RectTransform>().position;
@@ -50,19 +68,21 @@ namespace UI
             LeanTween.scale(Instance.Holder, Vector3.one, 0.15f);
 
             Holder.SetActive(true);
+
+            Canvas.ForceUpdateCanvases();
+
+            //this is ugly and hacky. but apparently the only way to make sure that the layoutgroups sizes are updated correctly.
+            //remove, when/if unity fixes this
+            LayoutGroup.enabled = false;
+            LayoutGroup.enabled = true;
         }
 
-        public static void Hide()
+        public  void Hide()
         {
-            Instance.Holder.SetActive(false);
+            ShowingAbility = null;
 
-            if (ShowAfterDelayRoutine != null)
-            {
-                Instance.StopCoroutine(ShowAfterDelayRoutine);
-                ShowAfterDelayRoutine = null;
-            }
+            Holder.SetActive(false);
+
         }
-
-
     }
 }
