@@ -20,9 +20,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
   - {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
   - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
-  EnemyRaces:
-  - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
-  - {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
   AllCreatures:
   - {fileID: 11400000, guid: 47f5b3e33714b4d499f1682d8a1d0c0f, type: 2}
   - {fileID: 11400000, guid: 75db06fe635810f44ab7e0e4e2902161, type: 2}
@@ -194,7 +191,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ff0d3f41b826d9c438f4689637c9122b, type: 2}
   - {fileID: 11400000, guid: 33a715d309f0b224997a4931936a1ab3, type: 2}
   - {fileID: 11400000, guid: 5eae458e1e71eeb4db8fbee78566b48c, type: 2}
-  - {fileID: 11400000, guid: 02a3b05ab288a0446ab3b3959fba49f3, type: 2}
   ShopCreatures:
   - {fileID: 11400000, guid: 77b3450bbc04bf048a4fbd32f67b7384, type: 2}
   - {fileID: 11400000, guid: c5b0f8dea4e2b3f4c89a3744e855f1c3, type: 2}

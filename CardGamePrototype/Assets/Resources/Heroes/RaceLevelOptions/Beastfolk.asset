@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Beastfolk
   m_EditorClassIdentifier: 
   Options:
-  - {fileID: 11400000, guid: a0504372974bfda4ea32a35d760c2e0d, type: 2}
+  - {fileID: 11400000, guid: dba7728b02843b243aa0c135d9546f9f, type: 2}
   - {fileID: 11400000, guid: be5501e0616f4144fa18fde3e84e8361, type: 2}
   - {fileID: 11400000, guid: 1cafa8f603ea11f4d8be5edbe6f24730, type: 2}
   - {fileID: 11400000, guid: a20979b41fb71e547bb5cce3cb9cccb6, type: 2}
