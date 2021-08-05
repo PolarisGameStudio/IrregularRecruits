@@ -91,6 +91,7 @@ namespace MapUI
 
         private IEnumerator DrawMap(MapNode startNode, int shownSteps = 1000)
         {
+
             if (shownSteps < 0) shownSteps = 1000;
 
             OldNodes = Nodes.ToList();

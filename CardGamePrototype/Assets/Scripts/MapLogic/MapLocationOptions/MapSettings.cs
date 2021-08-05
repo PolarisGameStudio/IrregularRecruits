@@ -13,7 +13,7 @@ namespace MapLogic
         [SerializeField]
         public List<MapLocation> EventLocations;
         [SerializeField]
-        private List<MapOption> BasicLocations;
+        private List<MapOptionObject> BasicLocations;
 
 
 
@@ -91,7 +91,7 @@ namespace MapLogic
                 return combat.MainRace.Icon;
 
             }
-            else if(location is HireUnitOption || location is VillageShop)
+            else if( location is VillageShop)
             {
                 //TODO: different icons for different villages?
 

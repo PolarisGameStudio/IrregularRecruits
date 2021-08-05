@@ -4,7 +4,7 @@
     {
         MapOption[] GetLocationOptions();
 
-        string Name { get;  }
+        string Name { get; set; }
         string PopUpDescription { get; set; }
 
         void Open(MapNode node);

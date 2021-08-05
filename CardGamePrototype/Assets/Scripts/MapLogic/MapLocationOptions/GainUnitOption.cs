@@ -1,17 +1,23 @@
 ﻿using GameLogic;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace MapLogic
 {
-
-
-    [CreateAssetMenu(menuName = "Create Map Objects/Gain Unit Option")]
     public class GainUnitOption : MapOption
     {
-        public override string Name { get; } = "gain units";
-        public List<Creature> Units;
+        public readonly List<Creature> Units;
+
+        public GainUnitOption(GainUnitOptionObject optionObject) : base(optionObject)
+        {
+            Name = "gain units";
+            Units = optionObject.Units;
+        }
+
+        public GainUnitOption(List<Creature> creatures)
+        {
+            Units = creatures;
+        }
 
         public override float Difficulty()
         {

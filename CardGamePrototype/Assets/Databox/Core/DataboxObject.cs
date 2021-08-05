@@ -103,34 +103,25 @@ namespace Databox
 		public DataboxCloud databoxCloudService;
 		
 		// Cloud
-		[SerializeField]
 		public string cloudVersion;
-		[SerializeField]
 		public string oldCloudVersion;
-		[SerializeField]
 		public string cloudId;
-		[SerializeField]
 		public string cloudServer;
 		public string cloudStatus;
 		public float cloudProgress;
 		
 		// CONFIG
 		///////////////////
-		[SerializeField]
 		public string savePath;
 		public string fileName;
 		public int selectedApplicationPath;
 		
-		[SerializeField]
 		public bool debugMode;
 		
-		[SerializeField]
 		public bool showFieldTypes;
 		
-		[SerializeField]
 		public bool showInitValues;
 	
-		[SerializeField]
 		public bool automaticSave = false;
 	
 	
@@ -165,10 +156,8 @@ namespace Databox
 		[System.NonSerialized]
 		public bool databaseLoaded = false;
 		
-		[SerializeField]
 		public bool collapsedView;
 		
-		[SerializeField]
 		public bool showInspector = true;
 		
 		[SerializeField]

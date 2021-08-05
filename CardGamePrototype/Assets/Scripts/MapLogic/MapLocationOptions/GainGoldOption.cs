@@ -1,25 +1,21 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using GameLogic;
-using Event = GameLogic.Event;
+﻿using Event = GameLogic.Event;
 
 namespace MapLogic
 {
-    [CreateAssetMenu(menuName = "Create Map Objects/Gain Gold Option")]
     public class GainGoldOption : MapOption
     {
-        public override string Name { get; }
-        public int Amount;
-
-        public GainGoldOption()
-        {
-            Name = $"Treasure";
-            PopUpDescription = $"{Amount} gold";
-        }
+        public readonly int Amount;
 
         public GainGoldOption(int amount)
         {
             Amount = amount;
+            Name = $"Treasure";
+            PopUpDescription = $"{Amount} gold";
+        }
+
+        public GainGoldOption(GainGoldOptionObject optionObject) : base(optionObject)
+        {
+            Amount = optionObject.Amount;
             Name = $"Treasure";
             PopUpDescription = $"{Amount} gold";
         }
@@ -33,6 +29,5 @@ namespace MapLogic
         {
             Event.OnPlayerGoldAdd.Invoke(Amount);
         }
-
     }
 }

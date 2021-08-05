@@ -4,7 +4,6 @@ namespace MapLogic
 {
     public class VillageShop : MapOption
     {
-        public override string Name { get; }
         public int CR;
         public Race Race;
 

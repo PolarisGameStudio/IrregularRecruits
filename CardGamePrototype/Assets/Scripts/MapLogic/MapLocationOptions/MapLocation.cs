@@ -9,7 +9,7 @@ namespace MapLogic
     [CreateAssetMenu(menuName = "Create Map Objects/Location", order = 0)]
     public class MapLocation : ScriptableObject,IMapLocation
     {
-        public string Name { get; }
+        public string Name { get; set; }
         public string PopUpDescription { get ; set; }
 
         public int Difficulty;
@@ -23,13 +23,23 @@ namespace MapLogic
         public string LocationDescription;
         public Sprite LocationIcon;
         public Sprite LocationImage;
-        [SerializeField]
-        public MapOption[] LocationOptions;
+        public MapOptionObject[] LocationOptions;
+        internal MapOption[] LocationOptionsInstantiated;
 
+        private void OnEnable()
+        {
+            LocationOptionsInstantiated = null;
+        }
 
         public MapOption[] GetLocationOptions()
         {
-            return LocationOptions;
+            if(LocationOptionsInstantiated == null)
+            {
+                LocationOptionsInstantiated = LocationOptions.Select(loc => loc.InstantiateMapOption()).ToArray();
+            }
+
+            return LocationOptionsInstantiated;
+
         }
 
         public bool IsStartNode()

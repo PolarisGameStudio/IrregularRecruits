@@ -6,16 +6,12 @@ using UnityEngine;
 
 namespace MapLogic
 {
-
-    public abstract class MapOption : ScriptableObject, IMapLocation
+    public abstract class MapOption : IMapLocation
     {
-        public abstract void ExecuteOption(MapNode owner);
-
         public bool ClosesLocationOnSelection = true;
         public List<Race> OnlyForHeroRaces = new List<Race>();
         //E.g. I use my fire magic to kill the ...
         public List<AbilityWithEffect> OnlyForAbility = new List<AbilityWithEffect>();
-        [SerializeField]
         internal string OptionDescription;
         public UnitCandidate AssociatedUnit;
 
@@ -23,17 +19,32 @@ namespace MapLogic
         private readonly string SecondUnitEscapeString = "U1";
         private readonly string ThirdUnitEscapeString = "U2";
 
-        public abstract string Name { get; }
+        public string Name { set; get; }
         public string PopUpDescription { get; set; }
 
-        public enum UnitCandidate { NoUnit, Strong,Weak,Random, FriendlyRace,NonFriendlyRace}
+        public enum UnitCandidate { NoUnit, Strong, Weak, Random, FriendlyRace, NonFriendlyRace }
+
+        public MapOption(MapOptionObject optionObject)
+        {
+            Name = optionObject.Name;
+            PopUpDescription = optionObject.PopUpDescription;
+            OnlyForAbility = optionObject.OnlyForAbility;
+            OnlyForHeroRaces = optionObject.OnlyForHeroRaces;
+            ClosesLocationOnSelection = optionObject.ClosesLocationOnSelection;
+            OptionDescription = optionObject.OptionDescription;
+        }
+
+        public MapOption() { }
+
+        public abstract void ExecuteOption(MapNode owner);
+
 
         public virtual bool IsApplicable()
         {
             return
                 (OnlyForHeroRaces.Count == 0 || OnlyForHeroRaces.Contains(Battle.PlayerDeck?.Hero?.GetRace()))
                 &&
-                (OnlyForAbility.Count == 0 ||Battle.PlayerDeck?.Hero != null && Battle.PlayerDeck.Hero.Abilities.Any(a=> OnlyForAbility.Contains(a)));
+                (OnlyForAbility.Count == 0 || Battle.PlayerDeck?.Hero != null && Battle.PlayerDeck.Hero.Abilities.Any(a => OnlyForAbility.Contains(a)));
         }
 
         public virtual string GetOptionDescription(MapNode owner, string overrideDescription = "")
@@ -58,38 +69,38 @@ namespace MapLogic
 
         internal virtual void FindCandidate(MapNode mapNode)
         {
-                Func<Card, bool> predicate;
+            Func<Card, bool> predicate;
 
 
 
-                switch (AssociatedUnit)
-                {
-                    case MapOption.UnitCandidate.NoUnit:
-                        return;
-                    case MapOption.UnitCandidate.Strong:
-                    case MapOption.UnitCandidate.Weak:
-                    case MapOption.UnitCandidate.Random:
-                    case MapOption.UnitCandidate.FriendlyRace:
-                    case MapOption.UnitCandidate.NonFriendlyRace:
-                    default:
-                        {
-                            predicate = d => !mapNode. SelectedCards.Values.Any(v => v.Contains(d));
+            switch (AssociatedUnit)
+            {
+                case UnitCandidate.NoUnit:
+                    return;
+                case UnitCandidate.Strong:
+                case UnitCandidate.Weak:
+                case UnitCandidate.Random:
+                case UnitCandidate.FriendlyRace:
+                case UnitCandidate.NonFriendlyRace:
+                default:
+                    {
+                        predicate = d => !mapNode.SelectedCards.Values.Any(v => v.Contains(d));
 
-                            break;
-                        }
-                }
+                        break;
+                    }
+            }
 
-                var unit = Battle.PlayerDeck.AllCreatures().FirstOrDefault(predicate);
+            var unit = Battle.PlayerDeck.AllCreatures().FirstOrDefault(predicate);
 
-                if (unit == null)
-                    unit = Battle.PlayerDeck.AllCreatures().FirstOrDefault();
+            if (unit == null)
+                unit = Battle.PlayerDeck.AllCreatures().FirstOrDefault();
 
-                if (unit != null) mapNode.AddAssociation(this, unit);
+            if (unit != null) mapNode.AddAssociation(this, unit);
         }
 
         public MapOption[] GetLocationOptions()
         {
-            return new MapOption[]{ this};
+            return new MapOption[] { this };
         }
 
         public void Open(MapNode node)

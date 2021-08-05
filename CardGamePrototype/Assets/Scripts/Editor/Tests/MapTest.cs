@@ -47,14 +47,14 @@ namespace Tests
         [Test]
         public void CombatOptionStartCombat()
         {
-            var option = new CombatOption()
+            var option = new CombatOptionObject()
             {
                 CRValue = 100
             };
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option }
+                LocationOptions = new MapOptionObject[] { option }
             };
 
             var node = new MapNode(location, new Map());
@@ -83,7 +83,7 @@ namespace Tests
 
             //add creatures to assetmanager
 
-            var option = new CombatOption()
+            var option = new CombatOptionObject()
             {
                 MainRace =race ,
                 CRValue = 100
@@ -91,7 +91,7 @@ namespace Tests
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option }
+                LocationOptions = new MapOptionObject[] { option }
             };
 
             var node = new MapNode(location, new Map());
@@ -118,14 +118,14 @@ namespace Tests
                 Health = 7
             };
 
-            var option = new CombatOption()
+            var option = new CombatOptionObject()
             {
                 SpawnCreatures = new List<Creature>() { TestCreature }
             };
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option }
+                LocationOptions = new MapOptionObject[] { option }
             };
 
             var node = new MapNode(location, new Map());
@@ -148,14 +148,14 @@ namespace Tests
         {
             var amount = 69;
 
-            var option = new GainGoldOption()
+            var option = new GainGoldOptionObject()
             {
                 Amount = amount
             };
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option }
+                LocationOptions = new MapOptionObject[] { option }
             };
 
             var node = new MapNode(location, new Map());
@@ -177,17 +177,9 @@ namespace Tests
         {
             var amount = 69;
 
-            var option = new GainXpOption()
-            {
-                Amount = amount
-            };
+            var option = new GainXpOption(amount);
 
-            var location = new MapLocation()
-            {
-                LocationOptions = new MapOption[] { option }
-            };
-
-            var node = new MapNode(location, new Map());
+            var node = new MapNode(option, new Map());
 
             int xp = Battle.PlayerDeck.Hero.Xp;
                        
@@ -204,17 +196,9 @@ namespace Tests
         {
             var amount = 69;
 
-            var option = new LoseGoldOption()
-            {
-                Amount = amount
-            };
+            var option = new LoseGoldOption(amount);
 
-            var location = new MapLocation()
-            {
-                LocationOptions = new MapOption[] { option }
-            };
-
-            var node = new MapNode(location, new Map());
+            var node = new MapNode(option, new Map());
 
             int playerGold = 1000;
 
@@ -232,17 +216,9 @@ namespace Tests
         {
             var amount = 69;
 
-            var option = new LoseXPOption()
-            {
-                Amount = amount
-            };
+            var option = new LoseXPOption(amount);
 
-            var location = new MapLocation()
-            {
-                LocationOptions = new MapOption[] { option }
-            };
-
-            var node = new MapNode(location, new Map());
+            var node = new MapNode(option, new Map());
 
             int xp = 1000;
 
@@ -262,17 +238,9 @@ namespace Tests
 
             var amount = 1001;
 
-            var option = new LoseGoldOption()
-            {
-                Amount = amount
-            };
+            var option = new LoseGoldOption(amount);
 
-            var location = new MapLocation()
-            {
-                LocationOptions = new MapOption[] { option }
-            };
-
-            var node = new MapNode(location, new Map());
+            var node = new MapNode(option, new Map());
 
             int playerGold = 1000;
 
@@ -293,17 +261,9 @@ namespace Tests
         {
             var amount = 69;
 
-            var option = new LoseXPOption()
-            {
-                Amount = amount
-            };
+            var option = new LoseXPOption(amount);
 
-            var location = new MapLocation()
-            {
-                LocationOptions = new MapOption[] { option }
-            };
-
-            var node = new MapNode(location, new Map());
+            var node = new MapNode(option, new Map());
 
             int xp = 68;
 
@@ -328,29 +288,23 @@ namespace Tests
                 Attack = 1000,
                 Health = 700000
             };
+#pragma warning disable UNT0011 // ScriptableObject instance creation
             var giftCreature2 = new Creature()
             {
                 name = "GiftPny",
                 Attack = 10,
                 Health = 500
             };
+#pragma warning restore UNT0011 // ScriptableObject instance creation
 
-            var option = new GainUnitOption()
-            {
-                Units = new List<Creature>()
+            var option = new GainUnitOption(new List<Creature>()
                 {
                     giftCreature,
                     giftCreature2,
                     giftCreature2
-                }
-            };
+                });
 
-            var location = new MapLocation()
-            {
-                LocationOptions = new MapOption[] { option }
-            };
-
-            var node = new MapNode(location, new Map());
+            var node = new MapNode(option, new Map());
 
             var units = Battle.PlayerDeck.AllCreatures();
 
@@ -395,12 +349,7 @@ namespace Tests
                 AssociatedUnit = MapOption.UnitCandidate.Random
             };
 
-            var location = new MapLocation()
-            {
-                LocationOptions = new MapOption[] { option }
-            };
-
-            var node = new MapNode(location, new Map());
+            var node = new MapNode(option, new Map());
 
             Battle.PlayerDeck.AddCard(new Card(giftCreature));
 
@@ -426,7 +375,7 @@ namespace Tests
         [Test]
         public void OptionsDoesNotContainIncorrectHeroRaceOptions()
         {
-            var option1 = new GainGoldOption()
+            var option1 = new GainGoldOptionObject()
             {
                 Amount = 1000,
                 OnlyForHeroRaces = new List<Race>() { new Race()
@@ -434,7 +383,7 @@ namespace Tests
                     name = "richRace"
                 } }
             };
-            var option3 = new LoseGoldOption()
+            var option3 = new LoseGoldOptionObject()
             {
                 Amount = 50
             };
@@ -442,27 +391,27 @@ namespace Tests
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option1,  option3 }
+                LocationOptions = new MapOptionObject[] { option1,  option3 }
             };
 
             var node = new MapNode(location, new Map());
 
             node.Open();
 
-            Assert.Contains(option3, node.GetOptions());
-            Assert.IsFalse(node.GetOptions().Contains(option1));
+            Assert.IsTrue(node.GetOptions().Any(o=>o is LoseGoldOption));
+            Assert.IsFalse(node.GetOptions().Any(o=> o is GainGoldOption));
 
         }
         [Test]
         public void OptionsContainsCorrectHeroRaceOptions()
         {
-            var option2 = new LoseGoldOption()
+            var option2 = new GainGoldOptionObject()
             {
                 Amount = 17,
                 OnlyForHeroRaces = new List<Race>() { Battle.PlayerDeck.Hero.GetRace() }
 
             };
-            var option3 = new LoseGoldOption()
+            var option3 = new LoseGoldOptionObject()
             {
                 Amount = 50
             };
@@ -470,22 +419,22 @@ namespace Tests
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option2,option3 }
+                LocationOptions = new MapOptionObject[] { option2,option3 }
             };
 
             var node = new MapNode(location, new Map());
 
             node.Open();
 
-            Assert.Contains(option3, node.GetOptions());
-            Assert.Contains(option2, node.GetOptions());
+            Assert.IsTrue(node.GetOptions().Any(o => o is LoseGoldOption));
+            Assert.IsTrue(node.GetOptions().Any(o => o is GainGoldOption));
 
         }
 
         [Test]
         public void OptionsDoesNotContainIncorrectAbilityOptions()
         {
-            var option1 = new GainGoldOption()
+            var option1 = new GainGoldOptionObject()
             {
                 Amount = 1000,
                 OnlyForAbility = new List<AbilityWithEffect>() { new PassiveAbility()
@@ -493,7 +442,7 @@ namespace Tests
                     name = "ability"
                 } }
             };
-            var option3 = new LoseGoldOption()
+            var option3 = new LoseGoldOptionObject()
             {
                 Amount = 50
             };
@@ -501,27 +450,27 @@ namespace Tests
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option1, option3 }
+                LocationOptions = new MapOptionObject[] { option1, option3 }
             };
 
             var node = new MapNode(location,new Map());
 
             node.Open();
 
-            Assert.Contains(option3, node.GetOptions());
-            Assert.IsFalse(node.GetOptions().Contains(option1));
+            Assert.IsTrue(node.GetOptions().Any(o => o is LoseGoldOption));
+            Assert.IsFalse(node.GetOptions().Any(o => o is GainGoldOption));
 
         }
 
         [Test]
         public void OptionsContainsCorrectAbilityOptions()
         {
-            var option1 = new GainGoldOption()
+            var option1 = new GainGoldOptionObject()
             {
                 Amount = 1000,
                 OnlyForAbility = new List<AbilityWithEffect>() { Battle.PlayerDeck.Hero.Abilities.FirstOrDefault() }
             };
-            var option3 = new LoseGoldOption()
+            var option3 = new LoseGoldOptionObject()
             {
                 Amount = 50
             };
@@ -529,33 +478,32 @@ namespace Tests
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option1, option3 }
+                LocationOptions = new MapOptionObject[] { option1, option3 }
             };
 
             var node = new MapNode(location, new Map());
 
             node.Open();
 
-            Assert.Contains(option3, node.GetOptions());
-            Assert.Contains(option1, node.GetOptions());
-
+            Assert.IsTrue(node.GetOptions().Any(o => o is LoseGoldOption));
+            Assert.IsTrue(node.GetOptions().Any(o => o is GainGoldOption));
         }
 
         [Test]
         public void CompositeOptionAllExecutes()
         {
-            var option1 = new GainGoldOption()
+            var option1 = new GainGoldOptionObject()
             {
                 Amount = 1000
             };
-            var option2 = new LoseGoldOption()
+            var option2 = new LoseGoldOptionObject()
             {
                 Amount = 17
             };
 
-            var composite = new MapOptionComposite()
+            var composite = new MapOptionCompositeObject()
             {
-                Options = new List<MapOption>()
+                Options = new List<MapOptionObject>()
                 {
                     option1,option2,option2,option2
                 }
@@ -563,7 +511,7 @@ namespace Tests
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { composite, option1 }
+                LocationOptions = new MapOptionObject[] { composite, option1 }
             };
 
             var node = new MapNode(location, new Map());
@@ -576,14 +524,12 @@ namespace Tests
             Assert.
                 AreEqual(option1.Amount - 3 * option2.Amount + playerGold, Map.PlayerGold);
 
-
-
         }
 
         [Test]
         public void CompositeOptionNotPossibleIfOneIsNotPossible()
         {
-            var option1 = new GainGoldOption()
+            var option1 = new GainGoldOptionObject()
             {
                 Amount = 1000,
                 OnlyForHeroRaces = new List<Race>() { new Race()
@@ -591,15 +537,15 @@ namespace Tests
                     name = "testrace"
                 } }
             };
-            var option2 = new LoseGoldOption()
+            var option2 = new LoseGoldOptionObject()
             {
                 Amount = 17
 
             };
 
-            var composite = new MapOptionComposite()
+            var composite = new MapOptionCompositeObject()
             {
-                Options = new List<MapOption>()
+                Options = new List<MapOptionObject>()
                 {
                     option2,option1,option2,option2
                 }
@@ -612,7 +558,7 @@ namespace Tests
         [Test]
         public void CloseBoolClosesMapLocation()
         {
-            var option = new LoseGoldOption()
+            var option = new LoseGoldOptionObject()
             {
                 Amount = 1,
                 ClosesLocationOnSelection = true
@@ -620,7 +566,7 @@ namespace Tests
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option }
+                LocationOptions = new MapOptionObject[] { option }
             };
 
             var node = new MapNode(location, new Map());
@@ -643,7 +589,7 @@ namespace Tests
         {
 
 
-            var option = new LoseGoldOption()
+            var option = new LoseGoldOptionObject()
             {
                 Amount = 1,
                 ClosesLocationOnSelection = false
@@ -651,7 +597,7 @@ namespace Tests
 
             var location = new MapLocation()
             {
-                LocationOptions = new MapOption[] { option }
+                LocationOptions = new MapOptionObject[] { option }
             };
 
             var node = new MapNode(location, new Map());

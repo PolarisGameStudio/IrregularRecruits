@@ -1,13 +1,13 @@
-﻿using UnityEngine;
-
-namespace MapLogic
+﻿namespace MapLogic
 {
-    [CreateAssetMenu(menuName = "Create Map Objects/End Game Option")]
     public class EndGameOption : MapOption
     {
         public bool Win;
 
-        public override string Name => "end";
+        public EndGameOption(EndGameOptionObject optionObject) : base(optionObject)
+        {
+            Win = optionObject.Win;
+        }
 
         public override float Difficulty()
         {

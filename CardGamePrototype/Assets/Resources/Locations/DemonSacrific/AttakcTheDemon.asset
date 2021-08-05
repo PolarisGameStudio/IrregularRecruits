@@ -9,18 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bffe17a3b83075a49a5398bb498ccfd0, type: 3}
+  m_Script: {fileID: 11500000, guid: f138d95b6a5bd1749847f59cb46f48fc, type: 3}
   m_Name: AttakcTheDemon
   m_EditorClassIdentifier: 
   ClosesLocationOnSelection: 1
   OnlyForHeroRaces: []
   OnlyForAbility: []
-  OptionDescription: Attack the Demon
-  AssociatedUnit: 0
-  SpawnCreatures:
-  - {fileID: 11400000, guid: 8513aaa969b8a6748a41d4ace3647652, type: 2}
-  - {fileID: 11400000, guid: 8cad4b4d2a335ff4c824daad1944e52d, type: 2}
-  - {fileID: 11400000, guid: 02a3b05ab288a0446ab3b3959fba49f3, type: 2}
-  PossibleRaces:
-  - {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
-  CRValue: 200
+  OptionDescription: 
+  SpawnCreatures: []
+  MainRace: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+  AdditionalRaces: []
+  MinCr: 10
+  MaxCr: 100
+  CRValue: 0
+  UniquesAllowed: 0

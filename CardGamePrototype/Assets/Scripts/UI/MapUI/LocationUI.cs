@@ -25,8 +25,6 @@ namespace MapUI
         public MapLocation WinEvent;
         public MapLocation GameOverEvent;
 
-
-
         private void Awake()
         {
             MapNode.OpenEvent.AddListener(Open);

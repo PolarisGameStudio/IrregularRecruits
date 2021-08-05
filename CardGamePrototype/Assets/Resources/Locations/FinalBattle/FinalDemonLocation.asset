@@ -30,6 +30,3 @@ MonoBehaviour:
   LocationImage: {fileID: 21300000, guid: 06b9cc33ed5437f448810d2680a53613, type: 3}
   LocationOptions:
   - {fileID: 11400000, guid: b4faa84efbfcd2d4e936d230fe3dc487, type: 2}
-  - {fileID: 11400000, guid: 5fc787b9ce2b66a44bcb147ec7c9dcd6, type: 2}
-  - {fileID: 11400000, guid: 091a2d7d337b5d946a645c482fbab12a, type: 2}
-  - {fileID: 11400000, guid: 533dd7f178a4cd941856faf260dd2b7c, type: 2}

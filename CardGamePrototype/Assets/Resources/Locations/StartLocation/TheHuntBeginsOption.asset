@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f6d655fbe44a0489bb24101b20c6e6, type: 3}
+  m_Script: {fileID: 11500000, guid: a7b1b1ffe64c5264da7700d79c250f2d, type: 3}
   m_Name: TheHuntBeginsOption
   m_EditorClassIdentifier: 
   ClosesLocationOnSelection: 1
   OnlyForHeroRaces: []
   OnlyForAbility: []
-  OptionDescription: '''The hunt begins...'''
-  AssociatedUnit: 0
+  OptionDescription: Let the hunt begin
   Amount: 0

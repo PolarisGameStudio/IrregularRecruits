@@ -1,14 +1,20 @@
 ﻿using GameLogic;
-using UnityEngine;
 
 namespace MapLogic
 {
-    [CreateAssetMenu(menuName = "Create Map Objects/Lose XP Option")]
     public class LoseXPOption : MapOption
     {
+        public readonly int Amount;
 
-        public override string Name { get; } = "xp loss";
-        public int Amount;
+        public LoseXPOption(LoseXPOptionObject optionObject) : base(optionObject)
+        {
+            Amount = optionObject.Amount;
+        }
+
+        public LoseXPOption(int amount)
+        {
+            Amount = amount;
+        }
 
         public override float Difficulty()
         {

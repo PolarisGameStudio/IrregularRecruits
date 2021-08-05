@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f6d655fbe44a0489bb24101b20c6e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e6d22485f32917448e1e0dfca637fdf, type: 3}
   m_Name: AcceptDemonDeal
   m_EditorClassIdentifier: 
   ClosesLocationOnSelection: 1
-  OnlyForHeroRaces:
-  - {fileID: 0}
+  OnlyForHeroRaces: []
   OnlyForAbility: []
-  OptionDescription: '''You can have my son, if you make me king!'''
-  AssociatedUnit: 0
-  Amount: 0
+  OptionDescription: 
+  Win: 0

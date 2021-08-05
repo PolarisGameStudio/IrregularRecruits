@@ -1,12 +1,17 @@
 ﻿using GameLogic;
-using UnityEngine;
 
 namespace MapLogic
 {
-    [CreateAssetMenu(menuName = "Create Map Objects/Lose Unity Option")]
     public class LoseUnitOption : MapOption
     {
-        public override string Name { get; } = "unit loss";
+        public LoseUnitOption()
+        {
+        }
+
+        public LoseUnitOption(LoseUnitOptionObject optionObject) : base(optionObject)
+        {
+        }
+
         public override float Difficulty()
         {
             return 0;

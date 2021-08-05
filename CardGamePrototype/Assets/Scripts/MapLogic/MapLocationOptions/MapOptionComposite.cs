@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace MapLogic
 {
-    [CreateAssetMenu(menuName = "Create Map Objects/Option Composite")]
     public class MapOptionComposite : MapOption
     {
-        public override string Name { get {
-                return Options.Select(s => s.Name).Aggregate((s, n) => s + ", " + n);
-            } }
         public List<MapOption> Options;
+
+        public MapOptionComposite(MapOptionCompositeObject optionObject) : base(optionObject)
+        {
+            Options = optionObject.Options.Select(o => o.InstantiateMapOption()).ToList();
+        }
 
         public override void ExecuteOption(MapNode owner)
         {

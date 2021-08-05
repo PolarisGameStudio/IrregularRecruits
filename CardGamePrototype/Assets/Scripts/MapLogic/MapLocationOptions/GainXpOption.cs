@@ -1,23 +1,21 @@
 ﻿using GameLogic;
-using UnityEngine;
 
 namespace MapLogic
 {
-    [CreateAssetMenu(menuName = "Create Map Objects/Gain XP Option")]
     public class GainXpOption : MapOption
     {
-        public override string Name { get; }
-        public int Amount;
-
-        public GainXpOption()
-        {
-            Name = $"Campsite";
-            PopUpDescription = $"{Amount} XP";
-        }
+        public readonly int Amount;
 
         public GainXpOption(int amount)
         {
             Amount = amount / 10;
+            Name = $"Campsite";
+            PopUpDescription = $"{Amount} XP";
+        }
+
+        public GainXpOption(GainXpOptionObject optionObject) : base(optionObject)
+        {
+            Amount = optionObject.Amount;
             Name = $"Campsite";
             PopUpDescription = $"{Amount} XP";
         }

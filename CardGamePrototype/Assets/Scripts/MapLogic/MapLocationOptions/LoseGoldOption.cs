@@ -1,13 +1,20 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace MapLogic
 {
-    [CreateAssetMenu(menuName = "Create Map Objects/Lose Gold Option")]
     public class LoseGoldOption : MapOption
     {
-        public override string Name { get; } = "gold loss";
-        public int Amount;
+        public readonly int Amount;
+
+        public LoseGoldOption(LoseGoldOptionObject optionObject) : base(optionObject)
+        {
+            Amount = optionObject.Amount;
+        }
+
+        public LoseGoldOption(int amount)
+        {
+            Amount = amount;
+        }
 
         public override float Difficulty()
         {

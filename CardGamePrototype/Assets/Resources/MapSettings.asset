@@ -15,11 +15,7 @@ MonoBehaviour:
   EventLocations:
   - {fileID: 11400000, guid: 424e245fa5fbaf24fa3d45ce51592609, type: 2}
   - {fileID: 11400000, guid: 25687110417007740a0808a9b344c3ae, type: 2}
-  BasicLocations:
-  - {fileID: 11400000, guid: d93cc11fe96e6814092c0f87331908ad, type: 2}
-  - {fileID: 11400000, guid: 604fac54e3d24d4499135b06857a66f6, type: 2}
-  - {fileID: 11400000, guid: 877d62f9ded80a942bb20bac874c64d1, type: 2}
-  - {fileID: 11400000, guid: 1e98dbdbeb42bd844ac1219036d0fad7, type: 2}
+  BasicLocations: []
   MapLength: 20
   MinNodesAtStep: 2
   MaxNodesAtStep: 6
