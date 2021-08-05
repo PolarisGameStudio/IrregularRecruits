@@ -13,9 +13,9 @@ namespace MapLogic
             PopUpDescription = $"{Amount} XP";
         }
 
-        public GainXpOption(GainXpOptionObject optionObject) : base(optionObject)
+        public GainXpOption(MapOptionObject optionObject) : base(optionObject)
         {
-            Amount = optionObject.Amount;
+            Amount = optionObject.XpAmount;
             Name = $"Campsite";
             PopUpDescription = $"{Amount} XP";
         }

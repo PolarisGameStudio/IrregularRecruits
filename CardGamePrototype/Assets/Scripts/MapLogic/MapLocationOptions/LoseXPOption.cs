@@ -6,9 +6,13 @@ namespace MapLogic
     {
         public readonly int Amount;
 
-        public LoseXPOption(LoseXPOptionObject optionObject) : base(optionObject)
+        public LoseXPOption(MapOptionObject optionObject) : base(optionObject)
         {
-            Amount = optionObject.Amount;
+            Amount = -optionObject.XpAmount;
+
+            //should be positive
+            if (Amount < 0)
+                Amount = -Amount;
         }
 
         public LoseXPOption(int amount)

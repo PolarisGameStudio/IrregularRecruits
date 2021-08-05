@@ -237,7 +237,7 @@ namespace UI
                 ChildCards[index + 1] = draggedCard;
                 ChildCards[index] = ca;
 
-                Debug.Log($"{draggedCard.name} swithches places UP in {this} to {index + 1}");
+                //Debug.Log($"{draggedCard.name} swithches places UP in {this} to {index + 1}");
 
                 MoveCardsToDesiredPositions();
             }

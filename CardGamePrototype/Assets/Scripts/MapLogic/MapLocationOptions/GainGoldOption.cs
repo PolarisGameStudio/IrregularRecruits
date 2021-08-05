@@ -13,9 +13,9 @@ namespace MapLogic
             PopUpDescription = $"{Amount} gold";
         }
 
-        public GainGoldOption(GainGoldOptionObject optionObject) : base(optionObject)
+        public GainGoldOption(MapOptionObject optionObject) : base(optionObject)
         {
-            Amount = optionObject.Amount;
+            Amount = optionObject.GoldAmount;
             Name = $"Treasure";
             PopUpDescription = $"{Amount} gold";
         }

@@ -6,9 +6,13 @@ namespace MapLogic
     {
         public readonly int Amount;
 
-        public LoseGoldOption(LoseGoldOptionObject optionObject) : base(optionObject)
+        public LoseGoldOption(MapOptionObject optionObject) : base(optionObject)
         {
-            Amount = optionObject.Amount;
+            Amount = -optionObject.GoldAmount;
+
+            //should be positive
+            if (Amount < 0)
+                Amount = -Amount;
         }
 
         public LoseGoldOption(int amount)

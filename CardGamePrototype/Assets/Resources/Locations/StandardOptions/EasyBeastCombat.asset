@@ -9,15 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bffe17a3b83075a49a5398bb498ccfd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 53b3ea62efefcef49a9d1db75151961f, type: 3}
   m_Name: EasyBeastCombat
   m_EditorClassIdentifier: 
   ClosesLocationOnSelection: 1
   OnlyForHeroRaces: []
   OnlyForAbility: []
-  OptionDescription: Attack the subhumans
-  AssociatedUnit: 0
+  OptionDescription: 
+  EndsGame: 0
+  Win: 0
+  StartsCombat: 0
   SpawnCreatures: []
-  PossibleRaces:
-  - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
-  CRValue: 100
+  MainRace: {fileID: 0}
+  AdditionalRaces: []
+  CRValue: 0
+  UniquesAllowed: 0
+  XpAmount: 0
+  GoldAmount: 0
+  LoseUnit: 0
+  GainUnits: []

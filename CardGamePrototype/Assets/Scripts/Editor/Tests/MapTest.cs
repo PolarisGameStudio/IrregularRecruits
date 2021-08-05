@@ -47,9 +47,10 @@ namespace Tests
         [Test]
         public void CombatOptionStartCombat()
         {
-            var option = new CombatOptionObject()
+            var option = new MapOptionObject()
             {
-                CRValue = 100
+                CRValue = 100,
+                StartsCombat = true
             };
 
             var location = new MapLocation()
@@ -83,10 +84,11 @@ namespace Tests
 
             //add creatures to assetmanager
 
-            var option = new CombatOptionObject()
+            var option = new MapOptionObject()
             {
                 MainRace =race ,
-                CRValue = 100
+                CRValue = 100,
+                StartsCombat = true
             };
 
             var location = new MapLocation()
@@ -118,9 +120,10 @@ namespace Tests
                 Health = 7
             };
 
-            var option = new CombatOptionObject()
+            var option = new MapOptionObject()
             {
-                SpawnCreatures = new List<Creature>() { TestCreature }
+                SpawnCreatures = new List<Creature>() { TestCreature },
+                StartsCombat = true
             };
 
             var location = new MapLocation()
@@ -148,9 +151,9 @@ namespace Tests
         {
             var amount = 69;
 
-            var option = new GainGoldOptionObject()
+            var option = new MapOptionObject()
             {
-                Amount = amount
+                GoldAmount = amount
             };
 
             var location = new MapLocation()
@@ -375,17 +378,17 @@ namespace Tests
         [Test]
         public void OptionsDoesNotContainIncorrectHeroRaceOptions()
         {
-            var option1 = new GainGoldOptionObject()
+            var option1 = new MapOptionObject()
             {
-                Amount = 1000,
+                GoldAmount = 1000,
                 OnlyForHeroRaces = new List<Race>() { new Race()
                 {
                     name = "richRace"
                 } }
             };
-            var option3 = new LoseGoldOptionObject()
+            var option3 = new MapOptionObject()
             {
-                Amount = 50
+                GoldAmount = -50
             };
 
 
@@ -405,15 +408,15 @@ namespace Tests
         [Test]
         public void OptionsContainsCorrectHeroRaceOptions()
         {
-            var option2 = new GainGoldOptionObject()
+            var option2 = new MapOptionObject()
             {
-                Amount = 17,
+                GoldAmount = 17,
                 OnlyForHeroRaces = new List<Race>() { Battle.PlayerDeck.Hero.GetRace() }
 
             };
-            var option3 = new LoseGoldOptionObject()
+            var option3 = new MapOptionObject()
             {
-                Amount = 50
+                GoldAmount = -50
             };
 
 
@@ -434,17 +437,17 @@ namespace Tests
         [Test]
         public void OptionsDoesNotContainIncorrectAbilityOptions()
         {
-            var option1 = new GainGoldOptionObject()
+            var option1 = new MapOptionObject()
             {
-                Amount = 1000,
+                GoldAmount = 1000,
                 OnlyForAbility = new List<AbilityWithEffect>() { new PassiveAbility()
                 {
                     name = "ability"
                 } }
             };
-            var option3 = new LoseGoldOptionObject()
+            var option3 = new MapOptionObject()
             {
-                Amount = 50
+                GoldAmount= -50
             };
 
 
@@ -465,14 +468,14 @@ namespace Tests
         [Test]
         public void OptionsContainsCorrectAbilityOptions()
         {
-            var option1 = new GainGoldOptionObject()
+            var option1 = new MapOptionObject()
             {
-                Amount = 1000,
+                GoldAmount= 1000,
                 OnlyForAbility = new List<AbilityWithEffect>() { Battle.PlayerDeck.Hero.Abilities.FirstOrDefault() }
             };
-            var option3 = new LoseGoldOptionObject()
+            var option3 = new MapOptionObject()
             {
-                Amount = 50
+                GoldAmount = -50
             };
 
 
@@ -492,29 +495,17 @@ namespace Tests
         [Test]
         public void CompositeOptionAllExecutes()
         {
-            var option1 = new GainGoldOptionObject()
-            {
-                Amount = 1000
-            };
-            var option2 = new LoseGoldOptionObject()
-            {
-                Amount = 17
-            };
+            var option1 = new GainGoldOption(1000);
 
-            var composite = new MapOptionCompositeObject()
-            {
-                Options = new List<MapOptionObject>()
+            var option2 = new LoseGoldOption(17);
+
+            var composite = new MapOptionComposite (
+                new List<MapOption>()
                 {
                     option1,option2,option2,option2
-                }
-            };
+                });
 
-            var location = new MapLocation()
-            {
-                LocationOptions = new MapOptionObject[] { composite, option1 }
-            };
-
-            var node = new MapNode(location, new Map());
+            var node = new MapNode(composite, new Map());
 
             int playerGold = Map.PlayerGold;
 
@@ -522,34 +513,26 @@ namespace Tests
             node.SelectOption(0);
 
             Assert.
-                AreEqual(option1.Amount - 3 * option2.Amount + playerGold, Map.PlayerGold);
+                AreEqual(option1.Amount + 3 * option2.Amount + playerGold, Map.PlayerGold);
 
         }
 
         [Test]
         public void CompositeOptionNotPossibleIfOneIsNotPossible()
         {
-            var option1 = new GainGoldOptionObject()
+            var option1 = new GainGoldOption(1000)
             {
-                Amount = 1000,
                 OnlyForHeroRaces = new List<Race>() { new Race()
                 {
                     name = "testrace"
                 } }
             };
-            var option2 = new LoseGoldOptionObject()
-            {
-                Amount = 17
+            var option2 = new LoseGoldOption(17);
 
-            };
-
-            var composite = new MapOptionCompositeObject()
-            {
-                Options = new List<MapOptionObject>()
+            var composite = new MapOptionComposite (new List<MapOption>()
                 {
                     option2,option1,option2,option2
-                }
-            };
+                });
 
             Assert.IsFalse(composite.IsApplicable());
 
@@ -558,9 +541,9 @@ namespace Tests
         [Test]
         public void CloseBoolClosesMapLocation()
         {
-            var option = new LoseGoldOptionObject()
+            var option = new MapOptionObject()
             {
-                Amount = 1,
+                GoldAmount = 1,
                 ClosesLocationOnSelection = true
             };
 
@@ -589,9 +572,9 @@ namespace Tests
         {
 
 
-            var option = new LoseGoldOptionObject()
+            var option = new MapOptionObject()
             {
-                Amount = 1,
+                GoldAmount = 1,
                 ClosesLocationOnSelection = false
             };
 

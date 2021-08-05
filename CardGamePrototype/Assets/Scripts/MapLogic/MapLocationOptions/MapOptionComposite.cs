@@ -3,13 +3,19 @@ using System.Linq;
 
 namespace MapLogic
 {
+    //this class allows map options to have composite effects, like lose a unit AND gain 110 gold.
     public class MapOptionComposite : MapOption
     {
         public List<MapOption> Options;
 
-        public MapOptionComposite(MapOptionCompositeObject optionObject) : base(optionObject)
+        public MapOptionComposite(MapOptionObject optionObject,List<MapOption> options) : base(optionObject)
         {
-            Options = optionObject.Options.Select(o => o.InstantiateMapOption()).ToList();
+            Options = options;
+        }
+
+        public MapOptionComposite(List<MapOption> options)
+        {
+            Options = options;
         }
 
         public override void ExecuteOption(MapNode owner)

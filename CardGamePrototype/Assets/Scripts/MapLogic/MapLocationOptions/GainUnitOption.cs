@@ -8,10 +8,10 @@ namespace MapLogic
     {
         public readonly List<Creature> Units;
 
-        public GainUnitOption(GainUnitOptionObject optionObject) : base(optionObject)
+        public GainUnitOption(MapOptionObject optionObject) : base(optionObject)
         {
             Name = "gain units";
-            Units = optionObject.Units;
+            Units = optionObject.GainUnits;
         }
 
         public GainUnitOption(List<Creature> creatures)

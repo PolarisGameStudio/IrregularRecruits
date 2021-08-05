@@ -8,7 +8,7 @@ namespace MapLogic
         {
         }
 
-        public LoseUnitOption(LoseUnitOptionObject optionObject) : base(optionObject)
+        public LoseUnitOption(MapOptionObject optionObject) : base(optionObject)
         {
         }
 

@@ -4,9 +4,14 @@
     {
         public bool Win;
 
-        public EndGameOption(EndGameOptionObject optionObject) : base(optionObject)
+        public EndGameOption(MapOptionObject optionObject) : base(optionObject)
         {
             Win = optionObject.Win;
+        }
+
+        public EndGameOption(bool v)
+        {
+            Win = v;
         }
 
         public override float Difficulty()

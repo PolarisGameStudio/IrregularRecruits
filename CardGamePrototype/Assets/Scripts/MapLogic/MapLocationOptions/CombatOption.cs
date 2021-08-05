@@ -33,7 +33,7 @@ namespace MapLogic
             //PopUpDescription = "Battle";
         }
 
-        public CombatOption( CombatOptionObject optionObject)
+        public CombatOption( MapOptionObject optionObject)
             : base(optionObject)
         {
 
