@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Knight
+  m_Name: OrmskirkScout
   m_EditorClassIdentifier: 
-  name: Knight
-  Rarity: 1
+  name: Ormskirk Scout
+  Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 25d1ff1ab4928bd44b9290e4cbe36162, type: 3}
-  IconImage: {fileID: 0}
-  Attack: 3
+  Image: {fileID: 21300000, guid: 72ac31b97da1ce141b8dd2e73b96e476, type: 3}
+  IconImage: {fileID: 21300000, guid: 855e7693592bbaf409d8f227be4c11d2, type: 3}
+  Attack: 1
   Health: 16
   Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: f1aecd622b48b284dba0ab9cdf95faf9, type: 2}
-  CR: 23
-  Enabling: 0200000000000000
+  - {fileID: 11400000, guid: 7a817369293f625469ed09b70b07e03c, type: 2}
+  SpecialAbility: {fileID: 0}
+  CR: 22
+  Enabling: 020000000a000000
   Payoff: 
+  Allies: []
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
   SoundSetType: 0
   Performance: 0
-  TopFocused: 0
+  TopFocused: 1

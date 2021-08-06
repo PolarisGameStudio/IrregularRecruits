@@ -369,14 +369,20 @@ public class AssetManager
     {
         int cr = 0;
 
-        cr += creature.Attack + creature.Health;
+        //(A+H)/2 + A*H/4 
+        cr += (creature.Attack + creature.Health)/2 + creature.Attack*creature.Health / 4 ;
 
         if (creature.SpecialAbility)
-            cr += (int)(creature.SpecialAbility.GetValue()*2);
+        {
+            cr += (int)(creature.SpecialAbility.GetValue() );
+
+            EditorUtility.SetDirty(creature.SpecialAbility);
+
+        }
 
         foreach (var item in creature.Traits)
         {
-            cr += item.CR;
+            cr += item.CR * (item.CRScalesWithPower ? creature.Attack : 1);
         }
         return cr;
     }

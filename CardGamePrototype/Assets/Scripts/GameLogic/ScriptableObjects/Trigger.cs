@@ -58,6 +58,8 @@ namespace GameLogic
                 value -= 0.1f;
             if (Subjekt.Character != Noun.CharacterTyp.Any)
                 value -= 0.1f;
+            if (Subjekt.Trait != null)
+                value -= 0.3f;
 
             return value;
         }

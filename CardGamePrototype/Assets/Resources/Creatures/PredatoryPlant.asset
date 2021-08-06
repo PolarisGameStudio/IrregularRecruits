@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: PredatoryPlant
   m_EditorClassIdentifier: 
-  name: PredatoryPlant
+  name: Predatory Plant
   Rarity: 0
   Locked: 0
   Image: {fileID: 21300000, guid: f47bf4a1c189c014e8b66777bc48e93b, type: 3}
@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2c3f1899a4bbdf499638d01ff53e368, type: 2}
   - {fileID: 11400000, guid: 1ab98939c40df894491caa5d89b806c2, type: 2}
   SpecialAbility: {fileID: 0}
-  CR: 31
+  CR: 35
   Enabling: 
   Payoff: 
   Allies:

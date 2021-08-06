@@ -14,7 +14,7 @@ namespace GameLogic
 
         internal override float GetValue()
         {
-            return 3f;
+            return 2f;
         }
 
         internal override UnityAction SetupListener(AbilityHolder owner, Noun subjekt, UnityAction<Card, AbilityHolder, Deck.Zone, Noun> executeIfTrue)

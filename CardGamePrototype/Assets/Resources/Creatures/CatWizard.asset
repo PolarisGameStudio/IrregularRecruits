@@ -22,7 +22,7 @@ MonoBehaviour:
   Traits:
   - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
   SpecialAbility: {fileID: 11400000, guid: 07d88e177f624e448944e385b22f7a90, type: 2}
-  CR: 28
+  CR: 35
   Enabling: 0300000001000000
   Payoff: 
   Allies:

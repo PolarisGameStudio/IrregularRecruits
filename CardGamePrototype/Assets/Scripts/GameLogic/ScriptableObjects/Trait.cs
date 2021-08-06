@@ -7,6 +7,7 @@ public class Trait : ScriptableObject
     public Sprite Icon;
     public string Description;
     public int CR;
+    public bool CRScalesWithPower;
 
 
 }

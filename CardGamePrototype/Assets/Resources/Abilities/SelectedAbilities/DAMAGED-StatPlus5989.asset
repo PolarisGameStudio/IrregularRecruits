@@ -26,7 +26,7 @@ MonoBehaviour:
       Trait: {fileID: 0}
     Amount: 1
     Summons: {fileID: 0}
-  Value: 4.5
+  Value: 39
   TriggerCondition:
     Subjekt:
       Character: 1

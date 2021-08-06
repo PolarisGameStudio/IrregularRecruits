@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Succubus
+  m_Name: KnightDefeatist
   m_EditorClassIdentifier: 
-  name: Selanhi the Succubus
-  Rarity: 2
+  name: Knight Defeatist
+  Rarity: 1
   Locked: 0
-  Image: {fileID: 21300000, guid: 895084eb1070a274086e953d953eb2f8, type: 3}
+  Image: {fileID: 21300000, guid: 25d1ff1ab4928bd44b9290e4cbe36162, type: 3}
   IconImage: {fileID: 0}
-  Attack: 3
-  Health: 14
+  Attack: 4
+  Health: 20
   Traits:
-  - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: adf4f46b9e8784a44baa883d21f5c3f4, type: 2}
+  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 01e754e65c3cace4e9b756731ebdb063, type: 2}
   CR: 40
-  Enabling: 01000000
+  Enabling: 0200000000000000
   Payoff: 
-  Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+  Allies: []
+  Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
   SoundSetType: 0
   Performance: 0
   TopFocused: 0

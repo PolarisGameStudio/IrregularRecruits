@@ -10,26 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: HumanCultist
+  m_Name: ArmoredMidget
   m_EditorClassIdentifier: 
-  name: Human Cultist
+  name: Armored Midget
   Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 6d59a3dcb59856249b159bb9793612c4, type: 3}
-  IconImage: {fileID: 21300000, guid: 1ce98dd8059cbf440a492f64fceb2127, type: 3}
+  Image: {fileID: 21300000, guid: e8f307a27147e2a43b81b03e5e7b9e7d, type: 3}
+  IconImage: {fileID: 0}
   Attack: 2
-  Health: 10
-  Traits: []
+  Health: 14
+  Traits:
+  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
+  - {fileID: 11400000, guid: b724f83978f6e2c4abe9eb6d79825d64, type: 2}
   SpecialAbility: {fileID: 0}
-  CR: 12
-  Enabling: 02000000
+  CR: 21
+  Enabling: 0200000000000000
   Payoff: 
-  Allies:
-  - {fileID: 11400000, guid: a8438ea294c51e845ae861e2acfb1aaa, type: 2}
-  - {fileID: 11400000}
-  - {fileID: 11400000, guid: 9fe4fb27fb3e130469db46ce4f503bb9, type: 2}
-  - {fileID: 11400000, guid: e1490f8b66db9f545b1b91c21ef78e03, type: 2}
+  Allies: []
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
   SoundSetType: 0
   Performance: 0
-  TopFocused: 1
+  TopFocused: 0

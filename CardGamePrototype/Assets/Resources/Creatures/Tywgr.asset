@@ -21,9 +21,10 @@ MonoBehaviour:
   Health: 19
   Traits: []
   SpecialAbility: {fileID: 11400000, guid: 46d6e9d40e756aa42b8d2c98f89377a2, type: 2}
-  CR: 39
+  CR: 66
   Enabling: 0a000000
   Payoff: 
+  Allies: []
   Race: {fileID: 11400000, guid: aa96f320044c3a248b7ab3ea6872f26f, type: 2}
   SoundSetType: 5
   Performance: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: PrideDemon
   m_EditorClassIdentifier: 
-  name: PrideDemon
+  name: Pride Demon
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: 95721396a4069b941887a57f21f977e3, type: 3}
@@ -21,9 +21,10 @@ MonoBehaviour:
   Health: 16
   Traits: []
   SpecialAbility: {fileID: 11400000, guid: 9958447aafcaa8e47a5ee8c2bd370059, type: 2}
-  CR: 46
+  CR: 65
   Enabling: 
   Payoff: 
+  Allies: []
   Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
   SoundSetType: 5
   Performance: 0

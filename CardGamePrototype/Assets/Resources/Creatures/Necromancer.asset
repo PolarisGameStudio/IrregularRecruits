@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
   m_Name: Necromancer
   m_EditorClassIdentifier: 
-  name: Necromancer
+  name: Aspiring Necromancer
   Rarity: 1
   Locked: 0
   Image: {fileID: 21300000, guid: 362ba867a76fff649afe0c4560e7d5b4, type: 3}
@@ -21,7 +21,7 @@ MonoBehaviour:
   Health: 10
   Traits: []
   SpecialAbility: {fileID: 11400000, guid: 5cbbd7efa5fc8784cbf3b3ea60468b0e, type: 2}
-  CR: 20
+  CR: 21
   Enabling: 02000000
   Payoff: 
   Allies:

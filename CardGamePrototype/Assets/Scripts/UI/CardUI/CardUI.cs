@@ -26,6 +26,7 @@ namespace UI
         public CardAnimation CardAnimation;
         public TextMeshProUGUI[] AttackText;
         public TextMeshProUGUI[] HealthText;
+        public TextMeshProUGUI CRText;
         public TextMeshProUGUI NameText;
         public TextMeshProUGUI DescriptionText;
         public TextMeshProUGUI PriceText;
@@ -122,6 +123,11 @@ namespace UI
                 NameText.text = creature.name;
 
             name = creature?.name;
+
+#if UNITY_EDITOR
+            if (CRText)
+                CRText.text = creature.CR.ToString("N0");
+#endif
 
             InstantiatedObjects.ForEach(DestroyImmediate);
             InstantiatedObjects.Clear();

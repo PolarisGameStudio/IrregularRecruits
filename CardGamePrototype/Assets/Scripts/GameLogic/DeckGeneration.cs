@@ -26,7 +26,7 @@ namespace GameLogic
             //TODO: possible for more races together
 
             if(selectables == null || selectables.Count == 0)
-                selectables = CreatureLibrary.Instance.AllCreatures.Where(c => c.Race == race && !c.IsSummon()).ToList();
+                selectables = CreatureLibrary.Instance.SpawnableEnemies.Where(c => c.Race == race && !c.IsSummon()).ToList();
 
             var library = new List<Card>();
 

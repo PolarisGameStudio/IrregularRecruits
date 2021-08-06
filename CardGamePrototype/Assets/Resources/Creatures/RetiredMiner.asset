@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: HumanVanguard
+  m_Name: RetiredMiner
   m_EditorClassIdentifier: 
-  name: Human Vanguard
+  name: Retired Miner
   Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 707db6077bbf65d4aaec891b241df992, type: 3}
-  IconImage: {fileID: 21300000, guid: 3932fd9e2b77f3c4bab4cb79c726032b, type: 3}
-  Attack: 3
+  Image: {fileID: 21300000, guid: cc616cb91b6b3824097afa1ebfda89f6, type: 3}
+  IconImage: {fileID: 21300000, guid: b8dd06efa6e6e2a4ea97d5eeaa940542, type: 3}
+  Attack: 2
   Health: 12
-  Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  - {fileID: 11400000, guid: 7a817369293f625469ed09b70b07e03c, type: 2}
+  Traits: []
   SpecialAbility: {fileID: 0}
-  CR: 27
-  Enabling: 02000000000000000a000000
+  CR: 13
+  Enabling: 02000000
   Payoff: 
+  Allies: []
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
-  SoundSetType: 8
+  SoundSetType: 0
   Performance: 0
   TopFocused: 1

@@ -46,7 +46,7 @@ namespace GameLogic
 
         public override float GetValue()
         {
-            Value = TriggerCondition.GetValue() * ResultingAction.GetValue();
+            Value = TriggerCondition.GetValue() * ResultingAction.GetValue() * 3f;
 
             if (Value < 0) Value *= -0.5f;
 

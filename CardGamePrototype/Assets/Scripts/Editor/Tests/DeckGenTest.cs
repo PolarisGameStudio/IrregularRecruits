@@ -53,7 +53,7 @@ namespace Tests
 
             Assert.IsEmpty(DeckGeneration.UniquesGenerated);
 
-            var creatures = CreatureLibrary.Instance.AllCreatures.Count();
+            var creatures = CreatureLibrary.Instance.SpawnableEnemies.Count();
 
             for (int i = 0; i < 1000; i++)
             {
@@ -61,7 +61,7 @@ namespace Tests
 
             }
 
-            Assert.AreEqual(creatures, CreatureLibrary.Instance.AllCreatures.Count());
+            Assert.AreEqual(creatures, CreatureLibrary.Instance.SpawnableEnemies.Count());
 
             Assert.IsNotEmpty(DeckGeneration.UniquesGenerated);
 

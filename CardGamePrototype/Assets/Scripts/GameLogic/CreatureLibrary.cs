@@ -10,12 +10,12 @@ namespace GameLogic
     public class CreatureLibrary : SingletonScriptableObject<CreatureLibrary>
     {
         public Race[] AllRaces;
-        public Creature[] AllCreatures;
+        public Creature[] SpawnableEnemies;
         public List<Creature> ShopCreatures;
 
         public Creature GetCreature(Race race, bool includeUniques = true)
         {
-            var selectables = AllCreatures.Where(c => c.Race == race && !c.IsSummon()).ToList();
+            var selectables = SpawnableEnemies.Where(c => c.Race == race && !c.IsSummon()).ToList();
 
             if (!includeUniques)
                 selectables = selectables.Where(c => c.Rarity != Creature.RarityType.Unique).ToList();

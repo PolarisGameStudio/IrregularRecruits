@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: HumanBarbarian
+  m_Name: LoneMercenary
   m_EditorClassIdentifier: 
-  name: Human Barbarian
-  Rarity: 1
+  name: Lone Mercenary
+  Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 9c1a455ce10591c498dd04f1c84662dc, type: 3}
-  IconImage: {fileID: 21300000, guid: 51f368f8d0aacbf4ba369c1eaa46617e, type: 3}
-  Attack: 4
-  Health: 12
+  Image: {fileID: 21300000, guid: 54c25016914b49648ab1a6de39bc8dbf, type: 3}
+  IconImage: {fileID: 0}
+  Attack: 2
+  Health: 14
   Traits:
   - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 53ecab1fcbf1282499e2cebe0fa3c88a, type: 2}
-  CR: 20
+  SpecialAbility: {fileID: 11400000, guid: cc515d9d6e33f954abb941344e0adb05, type: 2}
+  CR: 42
   Enabling: 0200000000000000
   Payoff: 
+  Allies: []
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
   SoundSetType: 0
   Performance: 0

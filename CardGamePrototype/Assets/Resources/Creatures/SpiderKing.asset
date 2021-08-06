@@ -21,7 +21,7 @@ MonoBehaviour:
   Health: 18
   Traits: []
   SpecialAbility: {fileID: 11400000, guid: 68fdebab3dbfd9543873d9818636fd1b, type: 2}
-  CR: 34
+  CR: 28
   Enabling: 070000000a000000
   Payoff: 
   Allies:

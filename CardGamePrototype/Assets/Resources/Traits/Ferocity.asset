@@ -15,4 +15,5 @@ MonoBehaviour:
   name: Ferocity
   Icon: {fileID: 21300000, guid: 11ba786838127a6488eff9c578ffd002, type: 3}
   Description: attacks twice
-  CR: 5
+  CR: 2
+  CRScalesWithPower: 1

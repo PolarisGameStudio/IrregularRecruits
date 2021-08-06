@@ -30,7 +30,7 @@ namespace GameLogic
 
         public override float GetValue(float targetvalue, int amount)
         {
-            return targetvalue * 1f;
+            return targetvalue * 2f;
         }
     }
 }

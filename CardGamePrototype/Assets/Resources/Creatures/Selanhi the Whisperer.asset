@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: Sorceress
+  m_Name: Selanhi the Whisperer
   m_EditorClassIdentifier: 
-  name: Sorceress
-  Rarity: 0
+  name: Selanhi the Whisperer
+  Rarity: 2
   Locked: 0
-  Image: {fileID: 21300000, guid: f5331951e4fddc246b6cb88f8155274b, type: 3}
-  IconImage: {fileID: 21300000, guid: 753c86d5fa86bce4396d80db22407a65, type: 3}
+  Image: {fileID: 21300000, guid: 895084eb1070a274086e953d953eb2f8, type: 3}
+  IconImage: {fileID: 0}
   Attack: 3
-  Health: 8
+  Health: 14
   Traits:
   - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
-  SpecialAbility: {fileID: 0}
-  CR: 21
-  Enabling: 0200000001000000
+  SpecialAbility: {fileID: 11400000, guid: adf4f46b9e8784a44baa883d21f5c3f4, type: 2}
+  CR: 46
+  Enabling: 01000000
   Payoff: 
-  Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
-  SoundSetType: 8
+  Allies: []
+  Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+  SoundSetType: 0
   Performance: 0
-  TopFocused: 1
+  TopFocused: 0
