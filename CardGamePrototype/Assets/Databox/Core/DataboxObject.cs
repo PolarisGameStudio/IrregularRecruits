@@ -1136,14 +1136,7 @@ namespace Databox
 			switch(serializer)
 			{
 				case Serializer.FullSerializer:
-					try
-					{
-						LoadWithFullSerializer(_savePath, _callEvent);
-					}
-					catch(Exception e)
-					{
-						Debug.LogException(e, this);
-					}
+					LoadWithFullSerializer(_savePath, _callEvent);
 					break;
 				case Serializer.OdinSerializer:
 #if NET_4_6

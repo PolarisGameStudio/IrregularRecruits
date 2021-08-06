@@ -3,6 +3,7 @@ using Databox;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using System.IO;
 
 namespace Data
 {
@@ -10,12 +11,12 @@ namespace Data
     public class DataHandler : SingletonScriptableObject<DataHandler>
     {
         public DataboxObject PersistantDataObject;
-        public DataboxObject PlayerPrefsObject;
+        //public DataboxObject PlayerPrefsObject;
 
         public const string LegacyTableName = "Unlocks";
         private Dictionary<string, IntType> LegacyData = new Dictionary<string, IntType>();
 
-        private void CreateLegacyData(string key, int value)
+        private void GetPersistantData(string key)
         {
             if (!LegacyData.ContainsKey(key))
             {
@@ -29,11 +30,11 @@ namespace Data
 
                 if (!PersistantDataObject.TryGetData<IntType>(LegacyTableName, key, "Count", false, out data))
                 {
-                    data = new IntType(value);
+                    data = new IntType(0);
                     PersistantDataObject.AddData(LegacyTableName, key, "Count", data);
-                }
 
-                data.Value = value;
+                    Debug.Log("No data named " + key + ", Creating entry");
+                }
 
                 LegacyData[key] = data;
 
@@ -45,18 +46,29 @@ namespace Data
         {
             Debug.Log("loading databases");
 
+            var path = System.IO.Path.Combine(Application.persistentDataPath, "Data.json");
+
+            if (!File.Exists(path))
+            {
+                var jsonString = Resources.Load<TextAsset>("Data");
+                File.WriteAllText(path, jsonString.text);
+            }
             PersistantDataObject.LoadDatabase();
 
-            PlayerPrefsObject.LoadDatabase();
+            //PlayerPrefsObject.LoadDatabase();
         }
 
-        public IntType GetLegacy(string key)
+        public IntType GetData(string key)
         {
             if (!LegacyData.ContainsKey(key))
-                CreateLegacyData(key, 0);
+                GetPersistantData(key);
 
             return LegacyData[key];
         }
 
+        internal void Save()
+        {
+            PersistantDataObject.SaveDatabase();
+        }
     }
 }

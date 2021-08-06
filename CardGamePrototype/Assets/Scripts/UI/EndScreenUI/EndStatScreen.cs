@@ -81,7 +81,7 @@ namespace UI
 
         private void SetupStatEntry(string text, int score)
         {
-            var savedScore = DataHandler.Instance.GetLegacy($"highscore.{text}");
+            var savedScore = DataHandler.Instance.GetData($"highscore.{text}");
 
             var newHighscore = savedScore.Value < score;
 

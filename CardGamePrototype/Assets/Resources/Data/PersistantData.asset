@@ -19,13 +19,13 @@ MonoBehaviour:
   cloudServer: 
   cloudStatus: 
   cloudProgress: 0
-  savePath: C:/Users/hovsg/AppData/LocalLow/Paw Oktober/Irregular Recruits\Data.okto
-  fileName: Data.okto
+  savePath: C:/Users/hovsg/AppData/LocalLow/Paw Oktober/Irregular Recruits\Data.json
+  fileName: Data.json
   selectedApplicationPath: 0
   debugMode: 0
   showFieldTypes: 0
   showInitValues: 0
-  automaticSave: 1
+  automaticSave: 0
   encryption: 0
   encryptionKey: 123456
   compressJson: 0

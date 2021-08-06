@@ -19,16 +19,16 @@ namespace Tests
 
         }
         
-        [UnityTest]
-        public IEnumerator PlayerPrefsAreLoaded()
-        {
-            DataHandler.Instance.PlayerPrefsObject.LoadDatabase();
+        //[UnityTest]
+        //public IEnumerator PlayerPrefsAreLoaded()
+        //{
+        //    DataHandler.Instance.PlayerPrefsObject.LoadDatabase();
 
-            yield return null;
+        //    yield return null;
 
-            Assert.IsTrue(DataHandler.Instance.PlayerPrefsObject.databaseLoaded);
+        //    Assert.IsTrue(DataHandler.Instance.PlayerPrefsObject.databaseLoaded);
 
-        }
+        //}
 
         [UnityTest]
         public IEnumerator PersistantDataContainsData()
@@ -58,7 +58,7 @@ namespace Tests
         {
 
             const string Key = "TestHero";
-            var referenceValue = DataHandler.Instance.GetLegacy(Key);
+            var referenceValue = DataHandler.Instance.GetData(Key);
 
             Assert.NotNull(referenceValue);
 
@@ -67,7 +67,7 @@ namespace Tests
 
             referenceValue.Value += change;
 
-            var reference2 = DataHandler.Instance.GetLegacy(Key);
+            var reference2 = DataHandler.Instance.GetData(Key);
 
             Assert.AreEqual(originalValue + change, reference2.Value);
 

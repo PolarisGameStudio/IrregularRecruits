@@ -14,40 +14,29 @@ namespace GameLogic
     {
         public List<UnlockCondition> UnlockProgresses;
 
-        public void Load()
-        {
-
-            //DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded -= ImportData;
-
-            DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded += ImportData;
-
-            DataHandler.Instance.InitializeDatabases();
-
-
-            //if (UnlockProgresses.Select(u => u.UnlocksHero.name).Distinct().Count() != UnlockProgresses.Count())
-            //    Debug.LogError("Several unlock conditions for the same hero!");
-
-            Event.OnBattleFinished.AddListener(HandleBattleFinished);
-
-        }
-
         private void SetStartValues()
         {
             foreach (var u in UnlockProgresses)
                 u.StartRun();
         }
 
-        private void ImportData()
+        public IEnumerator ImportRoutine()
         {
+            Event.OnBattleFinished.AddListener(HandleBattleFinished);
+
+            Debug.Log("Started importing data");
+
+            yield return new WaitUntil(()=> DataHandler.Instance.PersistantDataObject.databaseLoaded);
+
             foreach (var unlock in UnlockProgresses)
             {
-                var value = DataHandler.Instance.GetLegacy(unlock.UnlocksHero.name);
+                var value = DataHandler.Instance.GetData(unlock.UnlocksHero.name);
 
                 unlock.Count = value.Value;
 
                 unlock.OnCountUp.AddListener(i => ChangeIntTypeValue(i, value, unlock.UnlocksHero.name));
 
-                //Debug.Log("synced: " + unlock.Description());
+                Debug.Log("synced: " + unlock.Description());
 
             }
             SetStartValues();
@@ -60,13 +49,15 @@ namespace GameLogic
 
         private void ChangeIntTypeValue(int i, IntType data,string name = "")
         {
-            //Debug.Log($"data {name}, changed from {data.Value} to {i}");
+            Debug.Log($"data {name}, changed from {data.Value} to {i}");
 
             data.Value = i;
 
+            DataHandler.Instance.Save();
+
             //TODO: Create a test that changes the value and gets and
 
-            //Debug.Log("actual value in Databox:" + DataHandler.Instance.GetLegacy(name).Value);
+            Debug.Log("actual value in Databox:" + DataHandler.Instance.GetData(name).Value);
         }
 
         private void HandleBattleFinished(Deck winner, Deck loser)
