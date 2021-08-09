@@ -435,33 +435,33 @@ namespace UI
         {
             if (!card) yield break;
 
-            //Debug.Log($"Moving {card} to {zone}");
+            Debug.Log($"Moving {card} to {zone}");
 
             if(zone == Deck.Zone.Graveyard)
                 yield return card.Flip(CardUI.CardState.Battle);
 
             var zoneHolder = GetZoneHolder(zone, !player);
 
+            var fliptime = instantly ? 0f : 0.2f;
+
             switch (zone)
             {
                 case Deck.Zone.Library:
-                    StartCoroutine(card.Flip(CardUI.CardState.FaceDown));
+                    StartCoroutine(card.Flip(CardUI.CardState.FaceDown,fliptime));
                     break;
                 case Deck.Zone.Battlefield:
-                    StartCoroutine(card.Flip(CardUI.CardState.Battle));
+                    StartCoroutine(card.Flip(CardUI.CardState.Battle,fliptime));
                     break;
                 case Deck.Zone.Hand:
                     if (!player)
-                        StartCoroutine(card.Flip(CardUI.CardState.FaceDown));
+                        StartCoroutine(card.Flip(CardUI.CardState.FaceDown, fliptime));
                     else
-                        StartCoroutine(card.Flip(CardUI.CardState.FaceUp));
+                        StartCoroutine(card.Flip(CardUI.CardState.FaceUp,fliptime));
                     break;
                 default:
-                    StartCoroutine(card.Flip(CardUI.CardState.FaceUp));
+                    StartCoroutine(card.Flip(CardUI.CardState.FaceUp,fliptime));
                     break;
             }
-
-
 
             //if not already dragged there
             if (!zoneHolder.HasChild(card))

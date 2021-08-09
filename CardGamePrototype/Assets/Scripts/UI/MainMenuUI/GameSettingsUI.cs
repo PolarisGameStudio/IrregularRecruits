@@ -14,6 +14,7 @@ namespace UI
         public Slider ActionsPrTurnSlider;
         public Slider RareEnemySlider;
         public Toggle AiToggle;
+        public Toggle AutoEndTurn;
         public GameObject Holder;
         public CanvasGroup FocusGroup;
 
@@ -23,6 +24,8 @@ namespace UI
 
             AiToggle.isOn = GS.AiControlledPlayer;
             AiToggle.onValueChanged.AddListener(GS.AiControlsPlayer);
+            AutoEndTurn.isOn = GS.AutoEndTurn;
+            AutoEndTurn.onValueChanged.AddListener(i => GS.AutoEndTurn = i);
             CombatSpeedSlider.value = GS.CombatSpeed; 
             CombatSpeedSlider.onValueChanged.AddListener(i => GS.CombatSpeed = i);
             StartingHandSlider.value = GS.StartingHandSize;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace GameLogic
@@ -22,12 +23,15 @@ namespace GameLogic
             CurrentCombatDifficulty = startingDiffulty;
         }
 
-        public void NextCombat()
+        public void NextCombat(List<Creature> addCreatures = null)
         {
             CurrentCombatDifficulty += CombatDifficultyIncrease;
 
             //if (EnemyDeck == null || EnemyDeck.Alive() == 0)
-            EnemyDeck = DeckGeneration.GenerateDeck(CurrentCombatDifficulty);
+
+            if (addCreatures.Count == 0) addCreatures = null;
+
+            EnemyDeck = DeckGeneration.GenerateDeck(CurrentCombatDifficulty,null,addCreatures);
 
             if (PlayerDeck == null) PlayerDeck = Battle.PlayerDeck;
 

@@ -35,6 +35,8 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
 
     public bool AiControlledPlayer = false;
 
+    public bool AutoEndTurn;
+
     public enum DeckDamage
     {
         DamageToTopCard,

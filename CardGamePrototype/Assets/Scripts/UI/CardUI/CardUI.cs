@@ -354,7 +354,8 @@ namespace UI
         {
             
             //already correct face up
-            if (state == GetCardState()) yield break;
+            if (state == GetCardState()) 
+                yield break;
 
             if (AlwaysFaceUp) yield break;
 
@@ -392,6 +393,10 @@ namespace UI
                 from.SetActive(false);
 
             }
+
+            CardBackHolder.SetActive(state == CardState.FaceDown);
+            CardBattleUI.SetActive(state == CardState.Battle);
+            FrontHolder.SetActive(state == CardState.FaceUp);
         }
 
         private IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn, float duration)

@@ -1,5 +1,6 @@
 ﻿using GameLogic;
 using MapLogic;
+using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,11 +16,14 @@ public class CombatPrototype : Singleton<CombatPrototype>
     public Creature TestCreature;
     public HeroObject TestHero;
 
+    public List<Creature> EnemyDeck;
+
+
     void Start()
     {
         GC = new PrototypeGameControl(TestCreature, TestHero);
 
-        NextCombatButton.onClick.AddListener(GC.NextCombat);
+        NextCombatButton.onClick.AddListener(()=> GC.NextCombat(EnemyDeck));
         NextCombatButton.onClick.AddListener(() => NextCombatButton.gameObject.SetActive(false));
 
         NextCombatButton.gameObject.SetActive(true);
