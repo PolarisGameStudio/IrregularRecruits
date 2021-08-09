@@ -148,8 +148,6 @@ namespace MapLogic
                 lastStep = step;
             }
 
-            Debug.Log("unused nodes left: " + nodeTypes.Count);
-
             map.CurrentNode = map.Nodes.Single(n => n.IsStartNode());
         }
 
