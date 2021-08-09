@@ -268,9 +268,11 @@ namespace Tests
         [Test]
         public void ActionResurrectExecutes()
         {
+            var amount = 1;
+
             var testAbility = new PassiveAbility()
             {
-                ResultingAction = new AbilityEffectObject(EffectType.Resurrect, Count.One, 1, new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard)),
+                ResultingAction = new AbilityEffectObject(EffectType.Resurrect, Count.One, amount, new Noun(Noun.CharacterTyp.Any,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard)),
                 TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.Other,Noun.Allegiance.Any,Noun.DamageType.Any,Noun.RaceType.Any,Deck.Zone.Graveyard), TriggerType.DIES),
             };
 
@@ -291,7 +293,97 @@ namespace Tests
             Assert.NotNull(death);
             Assert.IsTrue(triggered);
             Assert.IsTrue(OtherCard.Alive());
+
+            Assert.AreEqual(amount, OtherCard.CurrentHealth);
         }
+
+        [Test]
+        public void ActionResurrectRemovesStatChanges()
+        {
+
+            const int amount = 1;
+
+            var testAbility = new PassiveAbility()
+            {
+                ResultingAction = new AbilityEffectObject(EffectType.Resurrect, Count.One, amount, new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Any, Deck.Zone.Graveyard)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreatureWithAbility(testAbility);
+            OtherCard = GenerateTestCreatureWithAbility(null);
+
+            var startingAttack = OtherCard.Attack;
+            var startingHealth = OtherCard.CurrentHealth;
+
+            var statChange = 20;
+
+            OtherCard.StatModifier(statChange);
+
+            Assert.AreEqual(statChange + startingAttack, OtherCard.Attack);
+            Assert.AreEqual(statChange + startingHealth, OtherCard.MaxHealth);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Graveyard);
+
+            bool triggered = false;
+
+            Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
+
+            Assert.IsFalse(OtherCard.Alive());
+
+            TestCard.HealthChange(-2);
+
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(OtherCard.Alive());
+
+            Assert.AreEqual( startingAttack, OtherCard.Attack);
+            Assert.AreEqual( startingHealth, OtherCard.MaxHealth);
+
+            Assert.AreEqual(amount, OtherCard.CurrentHealth);
+
+        }
+        [Test]
+        public void ActionResurrectRemovesNegativeStatChanges()
+        {
+            const int amount = 1;
+
+            var testAbility = new PassiveAbility()
+            {
+                ResultingAction = new AbilityEffectObject(EffectType.Resurrect, Count.One, amount, new Noun(Noun.CharacterTyp.Any, Noun.Allegiance.Any, Noun.DamageType.Any, Noun.RaceType.Any, Deck.Zone.Graveyard)),
+                TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.IsDAMAGED),
+            };
+
+            TestCard = GenerateTestCreatureWithAbility(testAbility);
+            OtherCard = GenerateTestCreatureWithAbility(null);
+
+            var startingAttack = OtherCard.Attack;
+            var startingHealth = OtherCard.CurrentHealth;
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            OtherCard.ChangeLocation(Deck.Zone.Battlefield);
+            
+            var statChange = - startingHealth - 2 ;
+
+            OtherCard.StatModifier(statChange);
+
+            bool triggered = false;
+
+            Event.OnAbilityExecution.AddListener((a, c, ts) => triggered = true);
+
+            Assert.IsFalse(OtherCard.Alive());
+
+            TestCard.HealthChange(-2);
+
+            Assert.IsTrue(triggered);
+            Assert.IsTrue(OtherCard.Alive());
+
+            Assert.AreEqual( startingAttack, OtherCard.Attack);
+            Assert.AreEqual( startingHealth, OtherCard.MaxHealth);
+
+            Assert.AreEqual(amount, OtherCard.CurrentHealth);
+        }
+
+
         [Test]
         public void ActionStatminusExecutes()
         {

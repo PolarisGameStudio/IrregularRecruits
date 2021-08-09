@@ -28,7 +28,7 @@ MonoBehaviour:
   XpFrequency: 2
   RandomnessToDifficulty: 5
   NonCombatNodeChance: 0.5
-  StepDifficultyIncrease: 20
+  StepDifficultyIncrease: 30
   StartDifficulty: 30
   CivilizedRaces:
   - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}

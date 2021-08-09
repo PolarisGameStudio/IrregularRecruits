@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameLogic
 {
@@ -13,6 +14,7 @@ namespace GameLogic
     public class LegacySystem : SingletonScriptableObject<LegacySystem>
     {
         public List<UnlockCondition> UnlockProgresses;
+        public UnityEvent OnLegaciesLoaded = new UnityEvent();
 
         private void SetStartValues()
         {
@@ -40,6 +42,8 @@ namespace GameLogic
 
             }
             SetStartValues();
+
+            OnLegaciesLoaded.Invoke();
         }
 
         internal bool IsUnlocked(HeroObject arg)

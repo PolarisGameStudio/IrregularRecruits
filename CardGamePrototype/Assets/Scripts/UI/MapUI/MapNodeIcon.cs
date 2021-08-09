@@ -25,6 +25,7 @@ namespace MapUI
         private void Start()
         {
             Icon.onClick.AddListener(() =>StartCoroutine( MoveToRoutine()));
+            OnMapButtonClick.AddListener(() => SetInteractable(false));
         }
 
         private IEnumerator MoveToRoutine()

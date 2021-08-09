@@ -25,21 +25,14 @@ namespace UI
 
         public CanvasGroup FocusGroup;
 
+        private void Start()
+        {
+            Event.OnGameOpen.Invoke();
+        }
+
         private void Awake()
         {
-            foreach (var deck in DeckLibrary.GetDecks())
-            {
-                var icon = Instantiate(DeckIconInstance, DeckIconInstance.transform.parent);
-
-                icon.Image.sprite = deck.DeckIcon;
-
-                icon.Button.onClick.AddListener(() => SelectDeck( deck));
-
-                InstantiatedIcons.Add(icon);
-
-                Decks.Add(deck, new Deck(deck,true));
-                DeckIcons[deck] = icon;
-            }
+            LoadDecks();
 
             Destroy(DeckIconInstance.gameObject);
 
@@ -49,9 +42,24 @@ namespace UI
             AchievementsButton.onClick.AddListener(() => LegacyUI.Instance.Open());
         }
 
-        private void Start()
+        private void LoadDecks()
         {
-            Event.OnGameOpen.Invoke();
+            foreach (var deck in DeckLibrary.GetDecks())
+            {
+                if (Decks.ContainsKey(deck))
+                    continue;
+
+                var icon = Instantiate(DeckIconInstance, DeckIconInstance.transform.parent);
+
+                icon.Image.sprite = deck.DeckIcon;
+
+                icon.Button.onClick.AddListener(() => SelectDeck(deck));
+
+                InstantiatedIcons.Add(icon);
+
+                Decks.Add(deck, new Deck(deck, true));
+                DeckIcons[deck] = icon;
+            }
         }
 
         public void SelectDeck( DeckObject d)

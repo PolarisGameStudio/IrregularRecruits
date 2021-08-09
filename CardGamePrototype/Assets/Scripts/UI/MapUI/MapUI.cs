@@ -106,10 +106,8 @@ namespace MapUI
 
             Nodes.Clear();
             
-
-
             //create from node
-            yield return CreateNode(startNode, new Vector3(MapStartPosition.position.x,0));
+            yield return CreateNode(startNode, MapStartPosition.position);
             
             LeanTween.moveX(MapHolder.gameObject, MapHolder.transform.position.x-Nodes.First().transform.position.x - PositionToCenterDifferience.x, 3f).setEaseInExpo();
 
@@ -135,22 +133,33 @@ namespace MapUI
             var r = degree * MapSizeX;
 
             //position should be all current node position + mapsize * direction
-            
-            var yDiff =  MapSizeY/ nodes.Count;
 
-            var yPos = -0.5f * MapSizeY ;
-            var rnd = 0.2f;
+            var yPos = -0.5f * MapSizeY;
 
+            var yDiff =  MapSizeY/ Mathf.Max(1, (nodes.Count-1));
+
+            var yRnd = yDiff / 10f;
+
+            var xRnd = 0.3f;
+
+            //check: maybe if nodes is uneven + the diff/2
             if (nodes.Count == 1)
-                yPos += yDiff / 2;
+                yPos += MapSizeY / 2;
+            else if(nodes.Count < 5) // bring the map closer together
+            {
+                var cut = yDiff / (nodes.Count * 2);
+                yPos += cut/2f;
+                yDiff -= cut;
+
+            }
 
             //always centered on the y position
-            var anchorPos = new Vector3(startNode.transform.position.x, 0);
+            var anchorPos = new Vector3(startNode.transform.position.x, MapStartPosition.position.y);
 
             foreach (var node in nodes)
             {
-                var x = r + Random.Range(-rnd, rnd);
-                var y = yPos + Random.Range(-rnd, rnd);
+                var x = r + Random.Range(-xRnd, xRnd);
+                var y = yPos + Random.Range(-yRnd, yRnd);
                 var pos = new Vector3(x, y);
 
                 yield return CreateNode(node, anchorPos + pos,degree == 1);

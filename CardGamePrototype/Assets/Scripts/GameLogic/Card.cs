@@ -143,6 +143,7 @@ namespace GameLogic
                     Event.OnEtb.Invoke(this,Location);
                     break;
                 case Deck.Zone.Graveyard:
+                    this.ResetStats();
                     if(from == Deck.Zone.Battlefield)
                         Event.OnDeath.Invoke(this,Location);
                     break;
@@ -301,7 +302,8 @@ namespace GameLogic
         public void PlayCard(int position = 0)
         {
             ChangeLocation(Deck.Zone.Hand, Deck.Zone.Battlefield,false,position);
-            
+
+            Event.OnPlayerAction.Invoke(this.InDeck);
 
         }
 
@@ -323,10 +325,9 @@ namespace GameLogic
 
         public void Withdraw()
         {
-            //TODO: replace with Waiting ON player Input
-
             ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library);
 
+            Event.OnPlayerAction.Invoke(this.InDeck);
         }
 
         //should this method be called from OnRessurrect or the other way around?
@@ -391,7 +392,13 @@ namespace GameLogic
             if (Location != Deck.Zone.Library)
                 ChangeLocation(Location, Deck.Zone.Library, true);
 
-            //todo: find a way to safe permanent buffs or drain
+            ResetStats();
+        }
+
+        private void ResetStats()
+        {
+
+            //todo: find a way to save permanent buffs or drain
             if (Attack != Creature.Attack) Attack = Creature.Attack;
             if (MaxHealth != Creature.Health) MaxHealth = Creature.Health;
 
@@ -419,7 +426,6 @@ namespace GameLogic
                 Withdraw();
             }
 
-            Event.OnPlayerAction.Invoke(this.InDeck);
         }
 
         public override Race GetRace()

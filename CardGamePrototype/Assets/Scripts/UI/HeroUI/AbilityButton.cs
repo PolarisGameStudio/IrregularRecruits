@@ -14,8 +14,8 @@ namespace UI
         public float HeldStartTime { get; private set; }
 
         //how long must the user hold for the click not to count and how long before it then activates the ability
-        public static float TimeForNonClick = 0.5f;
-        public static float TimeToActivate = 1.5f;
+        public static float TimeForNonClick = 0.25f;
+        public static float TimeToActivate = 1f;
         public static UnityEvent OnHolding = new UnityEvent();
         public static UnityEvent OnFizzle = new UnityEvent();
 
@@ -26,7 +26,7 @@ namespace UI
             Held = true;
             HeldStartTime = Time.unscaledTime;
 
-            if (!AbilityUI. HeroViewAbility && AbilityUI. OutlineParticles.isPlaying)
+            if (AbilityUI. Activatable)
                 StartCoroutine(HoldRoutine());
 
         }
@@ -41,9 +41,9 @@ namespace UI
 
                 AbilityHoverInfo.Show(AbilityUI);
             }
-            else if (heldDown > TimeToActivate && !AbilityUI. HeroViewAbility && AbilityUI. OutlineParticles.isPlaying)
+            else if (heldDown > TimeToActivate +TimeForNonClick && AbilityUI.Activatable)
                 AbilityUI. Activate();
-            else if (!AbilityUI.HeroViewAbility && AbilityUI.OutlineParticles.isPlaying)
+            else if (AbilityUI.Activatable)
             {
                 //fizzle sound
                 OnFizzle.Invoke();
@@ -69,9 +69,10 @@ namespace UI
 
             while (Held && Time.unscaledTime < nonClickTime + TimeToActivate)
             {
-                yield return null;
 
                AbilityUI. ActivationFillImage.fillAmount = (Time.unscaledTime - nonClickTime) / TimeToActivate;
+
+                yield return null;
             }
 
         }

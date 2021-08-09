@@ -15,29 +15,36 @@ namespace UI
         public Image HeroImage;
         public Button HeroButton;
         private Hero SelectedHero;
-        private List<HeroObject> AllHeroes;
+        private List<HeroObject> SelectableHeroes;
         private int Chosen;
         private Dictionary<HeroObject, Hero> InstantiatedHeroes = new Dictionary<HeroObject, Hero>(); 
 
         private void Start()
         {
-            AllHeroes = DeckLibrary.GetHeroes(false);
+            LoadHeroes();
+
+            LegacySystem.Instance.OnLegaciesLoaded.AddListener(LoadHeroes);
 
             PreviousButton.onClick.AddListener(Previous);
             NextButton.onClick.AddListener(Next);
 
-            Chosen = AllHeroes.Count;
+            Chosen = SelectableHeroes.Count;
 
-            HeroButton.onClick.AddListener(()=> HeroView.Open(SelectedHero));
+            HeroButton.onClick.AddListener(() => HeroView.Open(SelectedHero));
 
             Next();
+        }
+
+        private void LoadHeroes()
+        {
+            SelectableHeroes = DeckLibrary.GetHeroes(false);
         }
 
         private void Next()
         {
             Chosen++;
 
-            if (Chosen >= AllHeroes.Count) Chosen = 0;
+            if (Chosen >= SelectableHeroes.Count) Chosen = 0;
 
             ChooseHero(Chosen);
         }
@@ -45,21 +52,21 @@ namespace UI
         {
             Chosen--;
 
-            if (Chosen < 0) Chosen = AllHeroes.Count-1;
+            if (Chosen < 0) Chosen = SelectableHeroes.Count-1;
 
             ChooseHero(Chosen);
         }
 
         private void ChooseHero(int i)
         {
-            if(i >= AllHeroes.Count)
+            if(i >= SelectableHeroes.Count)
             {
                 HeroImage.gameObject.SetActive(false);
                 HeroName.text = "No Hero";
             }
             else
             {
-                var chosen = AllHeroes[i];
+                var chosen = SelectableHeroes[i];
 
                 if (!InstantiatedHeroes.ContainsKey(chosen))
                     InstantiatedHeroes[chosen] = new Hero(chosen);

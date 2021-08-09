@@ -10,6 +10,7 @@ namespace GameLogic
         {
             DeckGeneration.UniquesGenerated.Clear();
             //Event.ResetEvents();
+
             Load();
 
         }
@@ -22,7 +23,6 @@ namespace GameLogic
             DataHandler.Instance.PersistantDataObject.OnDatabaseLoaded += ImportData;
 
             DataHandler.Instance.InitializeDatabases();
-
 
             //if (UnlockProgresses.Select(u => u.UnlocksHero.name).Distinct().Count() != UnlockProgresses.Count())
             //    Debug.LogError("Several unlock conditions for the same hero!");

@@ -128,7 +128,7 @@ namespace UI
 
                 var desiredPos = ChildDesiredPositions[i];
 
-                card.FrontHolder.transform.LeanRotateZ(desiredPos.ZRotation, UnityEngine.Random.Range(0.1f, 0.3f));
+                card.FrontHolder.transform.LeanRotateZ(desiredPos.ZRotation, Random.Range(0.1f, 0.3f));
 
                 if (card.BeingDragged) continue;
 

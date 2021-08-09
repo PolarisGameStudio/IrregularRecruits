@@ -20,9 +20,12 @@ namespace UI
         public Image ActivationFillImage;
         public ParticleSystem OutlineParticles;
 
+        public bool Activatable;
+
         public AbilityWithEffect Ability;
         public Hero Owner;
-
+        [HideInInspector]
+        public bool IsLevelUpOption;
 
         private void Start() 
         {
@@ -48,6 +51,8 @@ namespace UI
         {
             if (!ActiveAbility) return;
 
+            Activatable = true;
+
             OutlineParticles.Play();
             
             AbilityImage.color = HeroView.Instance.NormalAbilityColor;
@@ -57,6 +62,8 @@ namespace UI
         public void LockAbility()
         {
             if (!ActiveAbility) return;
+
+            Activatable = false;
 
             OutlineParticles.Stop();
 
@@ -74,6 +81,7 @@ namespace UI
 
             (Ability as ActiveAbility).ActivateAbility(Owner);            
         }        
+
         public void SetAbility(AbilityWithEffect ability,Hero owner)
         {
             Ability = ability;
@@ -83,6 +91,8 @@ namespace UI
             Owner = owner;
 
             AbilityImage.sprite = ability.Icon;
+
+            IsLevelUpOption = false;
 
             OutlineParticles.Stop();
 
@@ -100,6 +110,8 @@ namespace UI
                     // Level up ability possible
                     if(owner.LevelUpPoints >0)
                     {
+                        IsLevelUpOption = true;
+
                         OutlineParticles.Play();
 
                         AbilityImage.color = HeroView.Instance.NormalAbilityColor;

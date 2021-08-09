@@ -20,7 +20,7 @@ MonoBehaviour:
     Target:
       Character: 0
       Location: 0
-      Relationship: 0
+      Relationship: 1
       DamageState: 0
       Race: 0
       Trait: {fileID: 0}

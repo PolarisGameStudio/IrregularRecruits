@@ -30,7 +30,7 @@ namespace UI
 
         private void LevelUpSelect()
         {
-            if (!ShowingAbility || !ShowingAbility.HeroViewAbility || !ShowingAbility.OutlineParticles.isPlaying)
+            if (!ShowingAbility || !ShowingAbility.IsLevelUpOption)
                 return;
 
             ShowingAbility.SelectLevelUp();
@@ -58,7 +58,7 @@ namespace UI
             Title.text = abilityUI.Ability.Name;
             Description.text = abilityUI.Ability.Description(abilityUI.Owner);
 
-            LevelUpButton.gameObject.SetActive(abilityUI.HeroViewAbility && abilityUI.OutlineParticles.isPlaying);
+            LevelUpButton.gameObject.SetActive(abilityUI.IsLevelUpOption);
 
             var rect = GetComponent<RectTransform>();
             rect.position = abilityUI.GetComponent<RectTransform>().position;

@@ -23,11 +23,12 @@ namespace MapLogic
             int[] nodesAtStep = new int[settings.MapLength];
 
             nodesAtStep[0] = nodesAtStep[settings.MapLength - 1] = 1;
-            nodesAtStep[settings.MapLength - 2] = settings.MinNodesAtStep;
+            nodesAtStep[1] = nodesAtStep[settings.MapLength - 2] = 2;
 
-            for (int i = 1; i < settings.MapLength - 2; i++)
+            for (int i = 2; i < settings.MapLength - 2; i++)
             {
-                nodesAtStep[i] = Mathf.Min(nodesAtStep[i - 1] * settings.MinNodesAtStep, Random.Range(settings.MinNodesAtStep, settings.MaxNodesAtStep));
+
+                nodesAtStep[i] = Mathf.Clamp(nodesAtStep[i - 1] + Random.Range(-2, 3), settings.MinNodesAtStep, settings.MaxNodesAtStep);
             }
 
             var noOfNodes = nodesAtStep.Sum();
