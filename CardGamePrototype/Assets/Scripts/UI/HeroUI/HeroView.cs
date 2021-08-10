@@ -58,7 +58,7 @@ namespace UI
         
         public static void Open()
         {
-            Debug.Log("opening heroview");
+            //Debug.Log("opening heroview");
 
             if(Battle.PlayerDeck.Hero !=null)  
                 Instance.ShowHero(Battle.PlayerDeck.Hero);

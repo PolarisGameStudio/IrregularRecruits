@@ -22,4 +22,4 @@ MonoBehaviour:
   DeckDamageParadigm: 0
   CombatSpeed: 1
   AiControlledPlayer: 0
-  AutoEndTurn: 0
+  AutoEndTurn: 1

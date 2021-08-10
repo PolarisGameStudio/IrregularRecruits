@@ -38,7 +38,7 @@ namespace GameLogic
 
                 unlock.OnCountUp.AddListener(i => ChangeIntTypeValue(i, value, unlock.UnlocksHero.name));
 
-                Debug.Log("synced: " + unlock.Description());
+                //Debug.Log("synced: " + unlock.Description());
 
             }
             SetStartValues();

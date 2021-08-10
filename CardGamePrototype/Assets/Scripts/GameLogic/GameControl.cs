@@ -9,7 +9,7 @@ namespace GameLogic
         private void Awake()
         {
             DeckGeneration.UniquesGenerated.Clear();
-            //Event.ResetEvents();
+            Event.ResetEvents();
 
             Load();
 

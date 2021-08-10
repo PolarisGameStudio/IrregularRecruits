@@ -53,7 +53,7 @@ namespace MapUI
         
         public void OpenStartEvent()
         {
-            Debug.Log("opening start event");
+            //Debug.Log("opening start event");
 
             Hero hero = Battle.PlayerDeck.Hero;
 
