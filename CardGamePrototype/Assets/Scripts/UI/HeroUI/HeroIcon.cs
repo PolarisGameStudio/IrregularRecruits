@@ -23,6 +23,7 @@ namespace UI
 
         }
 
+
         private void UpdateIcon(Hero hero = null)
         {
             if (hero == null)
@@ -35,10 +36,12 @@ namespace UI
 
             var before = LevelupIcon.enabled;
             bool lvlUp = hero.LevelUpPoints > 0;
-            LevelupIcon.enabled = lvlUp;
+            
+            LevelupIcon.enabled = lvlUp ;
 
             if (lvlUp //& !before 
-                && GetComponentInParent<IUIWindow>().GetCanvasGroup().interactable)
+                //&& GetComponentInParent<IUIWindow>().GetCanvasGroup().interactable 
+                && gameObject.activeInHierarchy)
             {
                 AnimationSystem.PlayLevelupFX(transform.position);
                 BattleUI.OnLevelAnimation.Invoke();
