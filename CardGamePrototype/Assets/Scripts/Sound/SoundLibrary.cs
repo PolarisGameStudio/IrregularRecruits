@@ -109,6 +109,7 @@ namespace Sound
         public struct MusicRef
         {
             public Music Type;
+            public Race RaceSpecific;
             public AudioClip[] Audio;
         }
 
@@ -153,15 +154,21 @@ namespace Sound
             return Rnd(Instance.UiSounds.First(s => s.Type == sound).Audio);
         }
 
-        public static AudioClip GetSound(Music sound)
+        public static AudioClip GetSound(Music sound,Race race =null)
         {
-            if (!Instance.Musics.Any(s => s.Type == sound))
+            System.Func<MusicRef, bool> predicate = s => s.Type == sound;
+            if (!Instance.Musics.Any(predicate))
             {
                 Debug.LogWarning("No sound for " + sound);
                 return null;
             }
 
-            return Rnd(Instance.Musics.First(s => s.Type == sound).Audio);
+            System.Func<MusicRef, bool> racePredicate = s => s.Type == sound && s.RaceSpecific == race;
+
+            if (race && Instance.Musics.Any(racePredicate))
+                return Rnd(Instance.Musics.First(racePredicate).Audio);
+
+            return Rnd(Instance.Musics.First(predicate).Audio);
         }
 
 

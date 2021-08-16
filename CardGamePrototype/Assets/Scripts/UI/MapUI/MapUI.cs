@@ -34,7 +34,6 @@ namespace MapUI
         public RectTransform MapStartPosition;
         public Vector3 PositionToCenterDifferience;
         public float NodeFadeTime = 2f;
-        public static UnityEvent OnMapOpen = new UnityEvent();
         public Map Map;
 
         private void Start()
@@ -63,7 +62,6 @@ namespace MapUI
         {
             HeroIcon.Portrait.image.sprite = Battle.PlayerDeck.Hero.HeroObject.Portrait;
 
-            OnMapOpen.Invoke();
 
             UIController.Instance.Open(this);
 

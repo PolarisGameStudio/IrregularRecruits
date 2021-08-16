@@ -27,7 +27,7 @@ namespace GameLogic
 
         public int CurrentLevel = GetLevel(0);
 
-        public static int[] LevelCaps = {  10, 20, 30, 50, 80, 130, 210, 340, 550, 890, 20000 };
+        public static int[] LevelCaps = {  10, 30, 60, 100, 160, 240, 340, 460, 600, 760, 940,1140,1360,1600,1900,2300,2800,3400,4100,4900,5900,7000,8500,10000 };
         public static int GetLevel(int xp)
         {
             int level = 0;

@@ -1,4 +1,5 @@
-﻿using MapLogic;
+﻿using GameLogic;
+using MapLogic;
 using MapUI;
 using UI;
 using UnityEngine;
@@ -34,21 +35,21 @@ namespace Sound
             Event.OnAchievement.AddListener(u => PlayStinger(SoundLibrary.Stinger.AchievementUnlocked));
             //LegacyUIEntry.OnUnlock.AddListener(() => PlayStinger(SoundLibrary.Stinger.AchievementUnlocked));
 
-
             Event.OnGameOver.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
             Event.OnGameOver.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameLoss));
             Event.OnGameWin.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameWin));
-            Shop.OnShopOpen.AddListener(s => ChangeMusic(SoundLibrary.Music.Shop));
+            Shop.OnShopOpen.AddListener(s => ChangeMusic(SoundLibrary.Music.Shop, s.VillageType));
             Shop.OnShopReroll.AddListener(i => PlayUISound(SoundLibrary.UiSound.ShopReroll));
             Shop.OnShopPurchase.AddListener(i => PlayUISound(SoundLibrary.UiSound.PurchaseUnit));
 
-            BattleUI.OnBattleBegin.AddListener(() => ChangeMusic(SoundLibrary.Music.Battle));
+            BattleUI.OnBattleBegin.AddListener(r => ChangeMusic(SoundLibrary.Music.Battle,r));
 
             BattleUI.OnBattleFinished.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
             BattleUI.OnBattleFinished.AddListener(() => PlayStinger(SoundLibrary.Stinger.BattleWon));
             BattleUI.OnAbilitySelect.AddListener(a => PlayAbilityHit(a.ResultingAction.ActionType));
             BattleUI.OnLevelAnimation.AddListener(() => PlayCardSound(SoundLibrary.CardSound.LevelUp));
             BattleSummary.Instance.OnClose.AddListener(() => ChangeMusic(SoundLibrary.Music.Explore));
+            Event.OnShopClose.AddListener(() => ChangeMusic(SoundLibrary.Music.Explore));
 
             PlayerGoldUpdater.Instance.OnGoldGained.AddListener(() => PlayUISound(SoundLibrary.UiSound.GoldCoin));
 
@@ -121,15 +122,16 @@ namespace Sound
 
 
         //TODO: create fade
-        public static void ChangeMusic(SoundLibrary.Music type)
+        public static void ChangeMusic(SoundLibrary.Music type,Race race = null)
         {
             if (type == SoundLibrary.Music.NoMusic)
             {
                 Instance.MusicAudioSource.clip = null;
                 Instance.MusicAudioSource.Stop();
+                return;
             }
 
-            var f = SoundLibrary.GetSound(type);
+            var f = SoundLibrary.GetSound(type,race);
 
             if (Instance.MusicAudioSource.clip != f)
             {

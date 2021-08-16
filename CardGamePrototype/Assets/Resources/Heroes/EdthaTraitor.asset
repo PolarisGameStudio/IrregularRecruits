@@ -20,7 +20,6 @@ MonoBehaviour:
   Class: {fileID: 11400000, guid: 8e9d03a3a17f7da4fa30823f9ac28a5d, type: 2}
   RaceOption: {fileID: 11400000, guid: 5433a1b2312221749a66ceecbf01a9c6, type: 2}
   BackgroundText: "Cast out by your father, King Lodos of Narthon, for plotting against
-    him, you were taken in and raised by wolf people. They tell you that the demon
-    Konallath holds the key to your vindication. \n\nIn the Cinder Lands, you must
-    assemble an army of misfits to seize out the demon Konallath's power, so you
-    can reclaim your birthright"
+    him, you were taken in by wolf people. \n\nNow, you have learned that the demon
+    Konallath holds the key to your vindication. You must assemble an army of misfits
+    to seize out the demon Konallath's power, and reclaim your birthright"

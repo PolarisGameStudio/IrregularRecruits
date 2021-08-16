@@ -55,7 +55,7 @@ namespace UI
 
 
         public static UnityEvent OnBattleFinished = new UnityEvent();
-        public static UnityEvent OnBattleBegin = new UnityEvent();
+        public static Event.FactionEvent OnBattleBegin = new Event.FactionEvent();
 
         //TODO: move these to animation system
         public class AbEvent : UnityEvent<AbilityWithEffect> { }
@@ -130,10 +130,12 @@ namespace UI
             InitialEnemyDeck = EnemyDeck.AllCreatures();
 
 
-            BackgroundImage.sprite = EnemyDeck.Races.First().GetBackground();
+            Race enmRace = EnemyDeck.Races.First();
+
+            BackgroundImage.sprite = enmRace.GetBackground();
 
             BattleRunning = true;
-            OnBattleBegin.Invoke();
+            OnBattleBegin.Invoke(enmRace);
         }
 
         private void SetupUI(Deck deck,bool playerDeck)
