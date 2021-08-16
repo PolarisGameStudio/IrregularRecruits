@@ -72,6 +72,7 @@ namespace UI
 
         public CanvasGroup FocusCanvas;
 
+
         [HideInInspector]
         public bool UILocked;
 

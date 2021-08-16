@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: General Bharrun
   Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
-  Deck: {fileID: 11400000, guid: fba9fffeff43e994187e725c52de51e3, type: 2}
+  Deck: {fileID: 11400000, guid: 8b1756275e2b5b441abf5729e5af5d2f, type: 2}
   Portrait: {fileID: 21300000, guid: e0343f44bd3c49348b9f17de3a4705ec, type: 3}
   StartingAbility: {fileID: 11400000, guid: dcc6922316029d845be74e7c8c4847e9, type: 2}
   Class: {fileID: 11400000, guid: a478ea569415d70439ac25b16d7755d4, type: 2}

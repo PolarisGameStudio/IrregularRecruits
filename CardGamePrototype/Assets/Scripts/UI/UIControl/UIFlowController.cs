@@ -44,6 +44,7 @@ namespace UI
             //On Damage-> (Card, amount) & new health?
             //On healed
             Event.OnHealthChange.AddListener((card, val,loc) => AddCardEvent(BattleUI.CardHealthChange(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
+            
             Event.OnHealed.AddListener((card, val,loc) => AddCardEvent(BattleUI.CardHeal(card.Guid, val, card.CurrentHealth, card.MaxHealth)));
 
             Event.PlayerActionPointsChanged.AddListener(i => AddCardEvent(ActionsChanged(i)));

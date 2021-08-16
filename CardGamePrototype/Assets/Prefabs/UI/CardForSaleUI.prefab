@@ -395,6 +395,7 @@ MonoBehaviour:
   - {fileID: 5049484097247480745}
   HealthText:
   - {fileID: 2381724531818119844}
+  CRText: {fileID: 0}
   NameText: {fileID: 8556805553056012979}
   DescriptionText: {fileID: 0}
   PriceText: {fileID: 4054414864592861555}
@@ -1343,7 +1344,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 0}
+  m_SizeDelta: {x: 105, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8600936660165211403
 CanvasRenderer:
@@ -1372,9 +1373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '30
-
-'
+  m_text: 252
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98f9108a4306c8542989800e9d595d2a, type: 2}
   m_sharedMaterial: {fileID: 8906265073594048316, guid: 98f9108a4306c8542989800e9d595d2a,
@@ -1417,7 +1416,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_firstOverflowCharacterIndex: -1
@@ -1446,7 +1445,7 @@ MonoBehaviour:
     textComponent: {fileID: 4054414864592861555}
     characterCount: 3
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 1
     linkCount: 0
     lineCount: 1

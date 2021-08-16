@@ -16,9 +16,9 @@ namespace UI
         [Header("Battle summary")]
         //TODO: move to battlesummary class
         public GameObject BattleSummaryHolder;
-        public UnitIcon BattleSummaryLostIcon;
-        public UnitIcon BattleSummaryKilledIcon;
-        public UnitIcon BattleSummaryGainedIcon;
+        public UnitIcon BattleSummaryIcon;
+        public GameObject KilledHolder;
+        public GameObject LostHolder;
         public Button HeroPortrait;
         public Hero Hero;
         public Button CloseButton;
@@ -76,9 +76,10 @@ namespace UI
             var killed = initialEnemyDeck.Where(c => !finalEnemyDeck.Contains(c) & !finalPlayerDeck.Contains(c));
             var lost = initialPlayerDeck.Where(c => !finalPlayerDeck.Contains(c));
             var gained = finalPlayerDeck.Where(c => !initialPlayerDeck.Contains(c));
-            SetupIcons(killed, BattleSummaryKilledIcon);
-            SetupIcons(lost, BattleSummaryLostIcon);
-            SetupIcons(gained, BattleSummaryGainedIcon);
+
+            SetupIcons(gained, BattleSummaryIcon, KilledHolder.transform, true);
+            SetupIcons(killed, BattleSummaryIcon,KilledHolder.transform);
+            SetupIcons(lost, BattleSummaryIcon,LostHolder.transform);
 
             TotalKilled += killed.Count();
 
@@ -86,13 +87,13 @@ namespace UI
 
         }
 
-        private void SetupIcons(IEnumerable<Card> killed, UnitIcon iconPrefab)
+        private void SetupIcons(IEnumerable<Card> killed, UnitIcon iconPrefab,Transform parent, bool charmed = false)
         {
             foreach (var c in killed)
             {
-                var icon = Instantiate(iconPrefab, iconPrefab.transform.parent);
+                var icon = Instantiate(iconPrefab, parent);
 
-                icon.Setup(c);
+                icon.Setup(c,charmed);
                 icon.gameObject.SetActive(true);
 
                 InstantiatedObjects.Add(icon);

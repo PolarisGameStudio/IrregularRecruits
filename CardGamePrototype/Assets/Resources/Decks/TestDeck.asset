@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d345b676d45020841bd2074337617abf, type: 3}
-  m_Name: TraitTestDeck
+  m_Name: TestDeck
   m_EditorClassIdentifier: 
   name: Beastfolk Party
   Description: Beastmen and women
   Creatures:
-  - {fileID: 11400000, guid: ce7df19d452e3de42bf7bdce0c3a1f61, type: 2}
-  - {fileID: 11400000, guid: 9661defb99ce43248b955e92a961007b, type: 2}
-  - {fileID: 11400000, guid: 77b3450bbc04bf048a4fbd32f67b7384, type: 2}
-  - {fileID: 11400000, guid: 933f738cf9c0c6a41848fb20684d7475, type: 2}
-  - {fileID: 11400000, guid: 17f9a173e4ea2c048aa1e1b0ebd0b908, type: 2}
-  - {fileID: 11400000, guid: be1e0f28cbff72843a238383be74a6e3, type: 2}
+  - {fileID: 11400000, guid: 896636e326c93474fbbe268a481f3377, type: 2}
+  - {fileID: 11400000, guid: 7d1a90b45e6f13043856a3029af096c0, type: 2}
+  - {fileID: 11400000, guid: 8513aaa969b8a6748a41d4ace3647652, type: 2}
+  - {fileID: 11400000, guid: 04ab0a004cf51144082e9a7e144dd923, type: 2}
+  - {fileID: 11400000, guid: 507b8d5c78db4cf4aa7f2e10b9387a0f, type: 2}
   DeckIcon: {fileID: 21300000, guid: ae96d41254699b741abfd83e383e2adb, type: 3}
   DeckImage: {fileID: 21300000, guid: c97d2c4598be91a49b3e2ef154dbf26d, type: 3}
   FriendRaces:

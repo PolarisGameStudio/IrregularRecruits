@@ -34,6 +34,8 @@ namespace GameLogic
         public static CardValueEvent OnHealed = new CardValueEvent();
         public static CardValueEvent OnStatMod = new CardValueEvent();
 
+
+
         //Ability,Owner,Targets 
         public class AbilityEvent : UnityEvent<SpecialAbility, AbilityHolder, List<Card>> { }
         public static AbilityEvent OnAbilityExecution = new AbilityEvent();
@@ -122,6 +124,7 @@ namespace GameLogic
 
             //public static CardValueEvent OnHealthChange = new CardValueEvent();
             OnHealthChange.RemoveAllListeners();
+
             //public static CardValueEvent OnHealed = new CardValueEvent();
             OnHealed.RemoveAllListeners();
             //public static CardValueEvent OnStatMod = new CardValueEvent();
