@@ -437,9 +437,11 @@ namespace UI
 
             //Debug.Log($"Moving {card} to {zone}");
 
-            if(zone == Deck.Zone.Graveyard)
+            if (zone == Deck.Zone.Graveyard)
+            {
                 yield return card.Flip(CardUI.CardState.Battle);
-
+                yield return new WaitForSeconds(0.4f);
+            }
             var zoneHolder = GetZoneHolder(zone, !player);
 
             var fliptime = instantly ? 0f : 0.2f;
