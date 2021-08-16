@@ -98,7 +98,7 @@ namespace Tests
             TestDeckController.ActionsLeft = 1;
 
 
-            TestCard.Click();
+            TestCard.Activate();
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Battlefield);
         }
@@ -111,7 +111,7 @@ namespace Tests
             TestDeckController.ActionsLeft = 1;
 
 
-            TestCard.Click();
+            TestCard.Activate();
             Assert.AreEqual(0,TestDeckController.ActionsLeft);
         }
 
@@ -125,7 +125,7 @@ namespace Tests
 
             Event.OnEtb.AddListener((c,l) => triggered = true);
 
-            TestCard.Click();
+            TestCard.Activate();
 
             Assert.IsTrue(triggered);
         }
@@ -136,7 +136,7 @@ namespace Tests
             TestDeckController.ActionsLeft = 1;
 
 
-            TestCard.Click();
+            TestCard.Activate();
 
 
 
@@ -148,7 +148,7 @@ namespace Tests
             TestCard.ChangeLocation(Deck.Zone.Hand);
             TestDeckController.ActionsLeft = 0;
 
-            TestCard.Click();
+            TestCard.Activate();
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Hand);
         }
@@ -159,7 +159,7 @@ namespace Tests
 
             TestDeckController.ActionsLeft = 1;
 
-            TestCard.Click();
+            TestCard.Activate();
 
             Assert.AreEqual(TestDeckController.ActionsLeft, 0);
         }
@@ -170,7 +170,7 @@ namespace Tests
 
             TestDeckController.ActionsLeft = 1;
 
-            TestCard.Click();
+            TestCard.Activate();
 
             Assert.IsTrue(TestCard.Location == Deck.Zone.Library);
         }
@@ -197,7 +197,7 @@ namespace Tests
 
             TestDeckController.ActionsLeft = 0;
 
-            TestCard.Click();
+            TestCard.Activate();
 
             Assert.IsFalse(TestCard.Location == Deck.Zone.Library);
         }
@@ -208,7 +208,7 @@ namespace Tests
 
             TestDeckController.ActionsLeft = 1;
 
-            TestCard.Click();
+            TestCard.Activate();
 
 
 

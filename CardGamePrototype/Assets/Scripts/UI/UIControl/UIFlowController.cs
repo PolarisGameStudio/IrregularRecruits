@@ -97,7 +97,7 @@ namespace UI
 
         private void PlayerTurnDone()
         {
-            Debug.Log("Combat started. Locking ui");
+            //Debug.Log("Combat started. Locking ui");
 
             BattleUI.Instance.UILocked = true;
             HeroUI.Instance?.LockAbilities();

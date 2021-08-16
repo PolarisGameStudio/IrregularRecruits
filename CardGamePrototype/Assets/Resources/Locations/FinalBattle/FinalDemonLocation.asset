@@ -25,7 +25,7 @@ MonoBehaviour:
 
 
     ''I will now devour your soul, as promised to me.
-    Unless of course, you will give the soul of your child.'''
+    Unless of course, you will give the soul of your firstborn.'''
   LocationIcon: {fileID: 21300000, guid: d08808bbbecdafd4da3ea706c51f5de7, type: 3}
   LocationImage: {fileID: 21300000, guid: 06b9cc33ed5437f448810d2680a53613, type: 3}
   LocationOptions:

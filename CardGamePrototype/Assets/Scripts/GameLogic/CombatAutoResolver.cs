@@ -14,7 +14,6 @@ namespace GameLogic
 
         public CombatAutoResolver(UnityAction nextTurn)
         {
-            Event.OnCombatResolveStart.AddListener(ResolveCombat);
             NextTurnAction = nextTurn;
         }
 
@@ -26,11 +25,12 @@ namespace GameLogic
         }
 
         //TODO: make static and parse the decks
-        private void ResolveCombat()
+        public void ResolveCombat()
         {
             if (PlayerDeck == null || EnemyDeck == null)
                 return;
 
+            Event.OnCombatResolveStart.Invoke();
 
             AttackOrder = new List<Card>();
 

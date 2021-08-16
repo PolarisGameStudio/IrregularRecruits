@@ -46,6 +46,7 @@ namespace MapLogic
                 AdditionalRaces.Add(MainRace.FriendRaces[Random.Range(0, MainRace.FriendRaces.Length)]);
 
             UniquesAllowed = optionObject.UniquesAllowed;
+            SpawnCreatures = optionObject.SpawnCreatures;
 
             var hard = UniquesAllowed ? "Hard " : "";
 

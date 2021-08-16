@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace GameLogic
 {
@@ -13,6 +14,8 @@ namespace GameLogic
         //this could be a more complex evaluation and move mechanics
         public override void YourTurn()
         {
+            Debug.Log("my turn");
+
             ResetActions();
 
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);

@@ -27,9 +27,9 @@ namespace GameLogic
             _owner.ListenersInitialized = true;
 
             UnityAction<TriggerType, EffectType, AbilityHolder, UnityAction> checkTriggerAction = (t, e, c, a) => TriggerCheck(e, c, a, _owner);
-            AbilityProcessor.OnAbilityTriggered.AddListener(checkTriggerAction);
+            Event.OnAbilityTriggered.AddListener(checkTriggerAction);
 
-            _owner.RemoveListenerAction = () => AbilityProcessor.OnAbilityTriggered.RemoveListener(checkTriggerAction);
+            _owner.RemoveListenerAction = () => Event.OnAbilityTriggered.RemoveListener(checkTriggerAction);
         }
 
         //should only detect the team

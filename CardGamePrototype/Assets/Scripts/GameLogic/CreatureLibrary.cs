@@ -13,20 +13,24 @@ namespace GameLogic
         public Creature[] SpawnableEnemies;
         public List<Creature> ShopCreatures;
 
-        public Creature GetCreature(Race race, bool includeUniques = true)
+        public Creature GetShopCreature(Race race)
         {
-            var selectables = SpawnableEnemies.Where(c => c.Race == race && !c.IsSummon()).ToList();
+            var selectables = ShopCreatures.Where(c => c.Race == race && !c.IsSummon()).ToList();
 
-            if (!includeUniques)
-                selectables = selectables.Where(c => c.Rarity != Creature.RarityType.Unique).ToList();
-            
             return TakeRandom(selectables);
 
         }
 
+        //should never return already spawned unique
         public Creature TakeRandom(List<Creature> selectables,int belowCr = int.MaxValue)
         {
-            if (selectables.Any(c => c.CR <= belowCr)) selectables = selectables.Where(c => c.CR <= belowCr).ToList();
+            if (selectables.Except(DeckGeneration.UniquesGenerated).Any())
+                selectables = selectables.Except(DeckGeneration.UniquesGenerated).ToList();
+
+            if (selectables.Any(c => c.CR <= belowCr))
+                selectables = selectables.Where(c => c.CR <= belowCr).ToList();
+            else
+                return selectables.First(min => min.CR == selectables.Min(c => c.CR));
 
             Creature selected = selectables[Random.Range(0, selectables.Count())];
 

@@ -405,7 +405,7 @@ namespace GameLogic
             CurrentHealth = MaxHealth;
         }
 
-        public void Click(int position = 0)
+        public void Activate(int position = 0)
         {
             if (InDeck == null || InDeck.DeckController == null)
             {

@@ -287,17 +287,18 @@ namespace Tests
             TestCard.ChangeLocation(Deck.Zone.Battlefield);
             OtherCard.ChangeLocation(Deck.Zone.Battlefield);
 
-            List<Card> targettedCards = null;
+            List<Card> targettedCards = new List<Card>();
 
-            Event.OnAbilityExecution.AddListener((a, c, ts) => targettedCards = ts);
+            Event.OnAbilityExecution.AddListener((a, c, ts) => targettedCards.AddRange(ts));
 
             TestCard.HealthChange(-1);
 
             Assert.IsTrue(TestCard.Alive());
 
             Assert.IsNotNull(targettedCards);
-            Assert.IsTrue(targettedCards.Count == 1);
             Assert.IsTrue(targettedCards.Contains(OtherCard));
+            Assert.IsFalse(targettedCards.Contains(TestCard));
+            Assert.IsTrue(targettedCards.Count == 1);
         }
 
     }

@@ -59,7 +59,7 @@ namespace GameLogic
             {
                 UnityAction action = ()=> ExecuteAction(abilityOwner, instigator);
 
-                AbilityProcessor.OnAbilityTriggered.Invoke(TriggerCondition.TriggerAction,ResultingAction.ActionType, abilityOwner, action);
+                Event.OnAbilityTriggered.Invoke(TriggerCondition.TriggerAction,ResultingAction.ActionType, abilityOwner, action);
 
                 action.Invoke();
 

@@ -80,9 +80,9 @@ namespace MapLogic
             while ( (forSale == null || OnOffer.Any(a=> a.Item1 ==  forSale)) && stop-- > 0)
             {
                 if (choice == ShopOptionType.OwnerRace && VillageType)
-                    forSale = CreatureLibrary.Instance.GetCreature(VillageType);
+                    forSale = CreatureLibrary.Instance.GetShopCreature(VillageType);
                 else if (choice == ShopOptionType.FriendRace && VillageType && VillageType.FriendRaces.Length > 0)
-                    forSale = CreatureLibrary.Instance.GetCreature(VillageType.FriendRaces[Random.Range(0, VillageType.FriendRaces.Length)]);
+                    forSale = CreatureLibrary.Instance.GetShopCreature(VillageType.FriendRaces[Random.Range(0, VillageType.FriendRaces.Length)]);
                 else
                     forSale = CreatureLibrary.Instance.GetShopCreature();
 

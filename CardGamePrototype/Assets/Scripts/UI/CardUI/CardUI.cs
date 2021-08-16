@@ -39,7 +39,7 @@ namespace UI
         public bool AlwaysFaceUp;
         public bool Interactable = true;
         public class IntEvent : UnityEvent<int> { }
-        public readonly IntEvent OnClick = new IntEvent();
+        public readonly IntEvent OnMoveToNextZone = new IntEvent();
 
         private IntEvent OnPositionChanged = new IntEvent();
 
@@ -99,7 +99,7 @@ namespace UI
             else
                 UpdateStats(c.Attack, c.CurrentHealth, c.MaxHealth);
             
-            OnClick.AddListener(c.Click);
+            OnMoveToNextZone.AddListener(c.Activate);
             OnPositionChanged.AddListener(c.PositionChanged);
         }
         public void SetCreature(Creature c)
@@ -163,46 +163,51 @@ namespace UI
 
             foreach (var AttributeInstance in AttributeInstances)
             {
-                if (creature.SpecialAbility is PassiveAbility ability)
-                {
+                UpdateSpecialAbility(creature.SpecialAbility, AttributeInstance);
+            }
+        }
 
-                    if (DescriptionText)
-                        DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
+        private void UpdateSpecialAbility(SpecialAbility specialAbility, Image AttributeInstance)
+        {
+            if (specialAbility is PassiveAbility ability)
+            {
 
-                    var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
-                    instance.gameObject.SetActive(true);
-                    instance.sprite = IconLibrary.GetAbilityIconSprite(ability.ResultingAction.ActionType);
+                if (DescriptionText)
+                    DescriptionText.text += $"{specialAbility.Description(Creature)}\n";
 
-                    InstantiatedObjects.Add(instance.gameObject);
+                var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
+                instance.gameObject.SetActive(true);
+                instance.sprite = IconLibrary.GetAbilityIconSprite(ability.ResultingAction.ActionType);
 
-                    SpecialAbilityIcon.Add(instance);
-                }
-                if(creature.SpecialAbility is EffectDoublerAbility doubler)
-                {
-                    if (DescriptionText)
-                        DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
+                InstantiatedObjects.Add(instance.gameObject);
 
-                    var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
-                    instance.gameObject.SetActive(true);
-                    instance.sprite = IconLibrary.GetAbilityIconSprite(doubler.Effect);
+                SpecialAbilityIcon.Add(instance);
+            }
+            if (specialAbility is EffectDoublerAbility doubler)
+            {
+                if (DescriptionText)
+                    DescriptionText.text += $"{specialAbility.Description(Creature)}\n";
 
-                    InstantiatedObjects.Add(instance.gameObject);
+                var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
+                instance.gameObject.SetActive(true);
+                instance.sprite = IconLibrary.GetAbilityIconSprite(doubler.Effect);
 
-                    SpecialAbilityIcon.Add(instance);
-                }
-                if(creature.SpecialAbility is TriggerDoublerAbility doubleTrigger)
-                {
-                    if (DescriptionText)
-                        DescriptionText.text += $"{creature.SpecialAbility.Description(Creature)}\n";
+                InstantiatedObjects.Add(instance.gameObject);
 
-                    var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
-                    instance.gameObject.SetActive(true);
-                    instance.sprite = IconLibrary.GetAbilityIconSprite(doubleTrigger.EffectTrigger);
+                SpecialAbilityIcon.Add(instance);
+            }
+            if (specialAbility is TriggerDoublerAbility doubleTrigger)
+            {
+                if (DescriptionText)
+                    DescriptionText.text += $"{specialAbility.Description(Creature)}\n";
 
-                    InstantiatedObjects.Add(instance.gameObject);
+                var instance = Instantiate(AttributeInstance, AttributeInstance.transform.parent);
+                instance.gameObject.SetActive(true);
+                instance.sprite = IconLibrary.GetAbilityIconSprite(doubleTrigger.EffectTrigger);
 
-                    SpecialAbilityIcon.Add(instance);
-                }
+                InstantiatedObjects.Add(instance.gameObject);
+
+                SpecialAbilityIcon.Add(instance);
             }
         }
 
@@ -339,7 +344,7 @@ namespace UI
             if (CameFromGroup != CurrentZoneLayout)
             {
                 //Debug.Log($"{name} dragged to {CurrentZoneLayout.CardZone} at pos {LayoutIndex}");
-                OnClick.Invoke(LayoutIndex);
+                OnMoveToNextZone.Invoke(LayoutIndex);
             }
             else
                 OnPositionChanged.Invoke(LayoutIndex);

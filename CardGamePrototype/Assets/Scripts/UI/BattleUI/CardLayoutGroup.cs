@@ -137,13 +137,16 @@ namespace UI
             }
         }
 
-        private PosAndRotation EvaluatePosition(int index)
+        private PosAndRotation EvaluatePosition(int index, bool fakeHigherCount = false)
         {
             if (PointOnly) return new PosAndRotation( (Vector2)RectTransform.position + Random.insideUnitCircle *0.1f);
 
             if (index < 0) index = 0;
 
-            int count = ChildCards.Count > 0 ? ChildCards.Count : 1;
+            int count =  ChildCards.Count ;
+
+            if (fakeHigherCount)
+                count++;
 
             if(count < MinimumPositions)
             {
@@ -244,9 +247,9 @@ namespace UI
 
         }
 
-        internal Vector2 GetFirstPosition()
+        internal Vector2 GetFirstNewPosition()
         {
-            return EvaluatePosition(0).Position;
+            return EvaluatePosition(0,true).Position;
         }
 
         internal bool HasChild(CardUI card)

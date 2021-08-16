@@ -33,8 +33,9 @@ namespace Tests
 
             doublerCreature.HealthChange(-1);
 
-            Assert.AreEqual(2, executedEffects.Count);
+            Assert.AreEqual(3, executedEffects.Count);
             Assert.Contains(statboostAbility, executedEffects);
+            Assert.Contains(doublerAbility, executedEffects);
 
             Assert.AreEqual(currentStrength + 2, doublerCreature.Attack);
         }        
@@ -65,8 +66,9 @@ namespace Tests
 
             doublerCreature.HealthChange(-1);
 
-            Assert.AreEqual(2, executedEffects.Count);
+            Assert.AreEqual(3, executedEffects.Count);
             Assert.Contains(statboostAbility, executedEffects);
+            Assert.Contains(doublerAbility, executedEffects);
 
             Assert.AreEqual(currentStrength + 2, doublerCreature.Attack);
         }

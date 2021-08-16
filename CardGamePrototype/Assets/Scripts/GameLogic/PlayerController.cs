@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace GameLogic
 {
@@ -22,6 +23,9 @@ namespace GameLogic
 
         public override void YourTurn()
         {
+            Debug.Log("player turn");
+
+
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
             ResetActions();
@@ -42,6 +46,8 @@ namespace GameLogic
 
         public void FinishTurn()
         {
+            Debug.Log("finish player turn");
+
             ActionsLeft = 0;
 
             OnFinish?.Invoke();

@@ -38,6 +38,11 @@ namespace GameLogic
         public class AbilityEvent : UnityEvent<SpecialAbility, AbilityHolder, List<Card>> { }
         public static AbilityEvent OnAbilityExecution = new AbilityEvent();
 
+        //takes the trigger type, the ability owner and the result action to allow doublers to double the effect
+        public class AbilityTriggerEvent : UnityEvent<TriggerType, EffectType, AbilityHolder, UnityAction> { }
+        public static AbilityTriggerEvent OnAbilityTriggered = new AbilityTriggerEvent();
+
+
         //COMBAT EVENTS
         public class CombatEvent : UnityEvent<Deck, Deck> { }
 
@@ -123,7 +128,9 @@ namespace GameLogic
             OnStatMod.RemoveAllListeners();
 
             //public static AbilityEvent OnAbilityExecution = new AbilityEvent();
-            OnAbilityExecution.RemoveAllListeners();
+            OnAbilityExecution = new AbilityEvent();
+
+            OnAbilityTriggered = new AbilityTriggerEvent();
 
             //public static CombatEvent OnCombatSetup = new CombatEvent();
             OnCombatStart.RemoveAllListeners();

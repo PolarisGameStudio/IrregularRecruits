@@ -48,7 +48,7 @@ namespace GameLogic
             Event.OnCombatStart.Invoke();
 
             EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayerDeck.DeckController.YourTurn);
-            PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, Event.OnCombatResolveStart.Invoke);
+            PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, CombatAutoResolver.ResolveCombat);
 
             //Debug.Log("starting battle. Enemies: " + enemyDeck.AllCreatures().Count + ", CR: " + enemyDeck.CR);
             

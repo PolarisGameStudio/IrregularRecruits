@@ -466,17 +466,15 @@ namespace UI
             //if not already dragged there
             if (!zoneHolder.HasChild(card))
             {
-
                 var rect = card.GetComponent<RectTransform>();
                 Vector2 startPos = rect.position;
 
                 if (!zoneHolder) yield break;
 
-
                 var startTime = Time.time;
                 float posAdjust = GetZoneAdjust(zone, !player);
                 var rot = GetZoneRotation(zone, !player);
-                Vector2 endPosition = zoneHolder.GetFirstPosition();
+                Vector2 endPosition = zoneHolder.GetFirstNewPosition();
 
                 endPosition += new Vector2(Random.Range(-posAdjust, posAdjust), Random.Range(-posAdjust, posAdjust));
 

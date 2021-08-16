@@ -13,10 +13,6 @@ namespace GameLogic
         private static Dictionary<TriggerType, AbilityTrigger> triggers = new Dictionary<TriggerType, AbilityTrigger>();
         private static bool initialized;
 
-        //takes the trigger type, the ability owner and the result action to allow doublers to double the effect
-        public class AbilityTriggerEvent : UnityEvent<TriggerType,EffectType, AbilityHolder,UnityAction> { }
-        public static AbilityTriggerEvent OnAbilityTriggered = new AbilityTriggerEvent();
-
         private static void Initialize()
         {
             /// ACTIONS

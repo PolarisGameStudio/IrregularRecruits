@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 424e245fa5fbaf24fa3d45ce51592609, type: 2}
   - {fileID: 11400000, guid: 25687110417007740a0808a9b344c3ae, type: 2}
   BasicLocations: []
-  MapLength: 20
+  MapLength: 3
   MinNodesAtStep: 3
   MaxNodesAtStep: 6
   VisibleSteps: 3
@@ -28,7 +28,7 @@ MonoBehaviour:
   XpFrequency: 2
   RandomnessToDifficulty: 5
   NonCombatNodeChance: 0.5
-  StepDifficultyIncrease: 30
+  StepDifficultyIncrease: 35
   StartDifficulty: 30
   CivilizedRaces:
   - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
