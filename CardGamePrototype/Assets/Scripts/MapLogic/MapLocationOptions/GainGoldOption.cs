@@ -29,5 +29,10 @@ namespace MapLogic
         {
             Event.OnPlayerGoldAdd.Invoke(Amount);
         }
+
+        public override MapNodeType GetLocationType()
+        {
+            return MapNodeType.Treasure;
+        }
     }
 }

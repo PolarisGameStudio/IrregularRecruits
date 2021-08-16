@@ -127,5 +127,9 @@ namespace MapLogic
         }
 
         public abstract float Difficulty();
+        public virtual MapNodeType GetLocationType()
+        {
+            return MapNodeType.Event;
+        }
     }
 }

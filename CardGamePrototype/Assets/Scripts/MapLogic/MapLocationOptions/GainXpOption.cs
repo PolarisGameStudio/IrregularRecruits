@@ -30,5 +30,10 @@ namespace MapLogic
             Battle.PlayerDeck.Hero?.AwardXp(Amount);
         }
 
+        public override MapNodeType GetLocationType()
+        {
+            return MapNodeType.Xp;
+        }
+
     }
 }

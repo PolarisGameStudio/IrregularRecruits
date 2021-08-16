@@ -145,12 +145,82 @@ namespace MapLogic
                 }
                 while (nodeIdx < step.Length - 1 || parentIdx < lastStep.Length - 1);
 
+                foreach(var n in lastStep.Where(node => node.GetNodeType() != MapNodeType.StandardCombat && node.LeadsTo.All(child => child.GetNodeType() == node.GetNodeType())  ))
+                {
+                    var idx = Array.IndexOf(lastStep,n);
+
+                    if (idx > 0 && CanMakeConnectionToAChild(n, lastStep[idx - 1], step, true) is MapNode item && item != null && item.GetNodeType() != n.GetNodeType())
+                    {
+                        n.LeadsTo.Add(item);
+
+                        Debug.Log($"added child {item} to {n}. pos ({i},idx)");
+
+                        //could also delete connections to old
+                    }
+                    else if (idx < lastStep.Count() - 1 && CanMakeConnectionToAChild(n, lastStep[idx + 1], step, false) is MapNode item2 && item2 != null && item2.GetNodeType() != n.GetNodeType())
+                    {
+                        n.LeadsTo.Add(item2);
+
+                        Debug.Log($"added child {item2} to {n}. pos ({i},idx)");
+                    }
+                    else
+                    {
+                        if (idx > 0 && lastStep[idx - 1].LeadsTo.Count()>1)
+                        {
+                            MapNode childe =  TakeChildFrom(n, lastStep[idx - 1], step, true);
+
+                            Debug.Log($"stole child {childe} for {n}. pos ({i},idx)");
+                            n.LeadsTo.Add(childe);
+
+                            if (idx < lastStep.Count() - 1) //also delete connections to old
+                            {
+                                MapNode ike = TakeChildFrom(lastStep[idx + 1], n, step, true);
+                                lastStep[idx + 1].LeadsTo.Add(ike);
+                            }
+                        }
+                        else if (idx < lastStep.Count() - 1 && lastStep[idx + 1].LeadsTo.Count() > 1)
+                        {
+                            MapNode childe = TakeChildFrom(n, lastStep[idx + 1], step, false);
+
+                            Debug.Log($"stole child {childe} for {n}. pos ({i},idx)");
+                            n.LeadsTo.Add(childe);
+
+                            if (idx > 0) //also delete connections to old
+                            {
+                                MapNode ike = TakeChildFrom(lastStep[idx - 1], n, step, false);
+                                lastStep[idx - 1].LeadsTo.Add(ike);
+                            }
+                        }
+                    }
+                }
+
                 lastStep = step;
             }
 
             map.CurrentNode = map.Nodes.Single(n => n.IsStartNode());
         }
 
+        private static MapNode TakeChildFrom(MapNode thief, MapNode victimParent, MapNode[] childStep, bool highestChild)
+        {
+            //first remove all conflicts
+            victimParent.LeadsTo.RemoveAll(thief.LeadsTo.Contains);
+
+            if (highestChild)
+                return childStep[victimParent.LeadsTo.Max(child => Array.IndexOf(childStep, child))];
+            else
+                return childStep[victimParent.LeadsTo.Min(child => Array.IndexOf(childStep, child))];
+        }
+
+        private static MapNode CanMakeConnectionToAChild(MapNode parent, MapNode otherParent, MapNode[] childStep,bool highestIdxChild)
+        {
+            if (parent.LeadsTo.Any(otherParent.LeadsTo.Contains)) // connection would create an overlap
+                return null;
+
+            if (highestIdxChild)
+                return childStep[otherParent.LeadsTo.Max(child => Array.IndexOf(childStep, child))];
+            else
+                return childStep[otherParent.LeadsTo.Min(child => Array.IndexOf(childStep, child))];
+        }
 
         private static MapNode GenerateNode(MapNodeType type, int CR, List<MapLocation> uniqueLocations, Map map)
         {

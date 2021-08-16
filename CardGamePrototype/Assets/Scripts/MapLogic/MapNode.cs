@@ -101,5 +101,9 @@ namespace MapLogic
             return name;
         }
 
+        internal MapNodeType GetNodeType()
+        {
+            return Location.GetLocationType();
+        }
     }
 }

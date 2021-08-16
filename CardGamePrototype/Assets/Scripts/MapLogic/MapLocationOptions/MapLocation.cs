@@ -66,5 +66,10 @@ namespace MapLogic
         {
             return Difficulty;
         }
+
+        public MapNodeType GetLocationType()
+        {
+            return MapNodeType.Event;
+        }
     }
 }

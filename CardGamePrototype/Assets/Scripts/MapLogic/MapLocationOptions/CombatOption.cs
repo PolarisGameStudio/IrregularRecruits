@@ -76,5 +76,10 @@ namespace MapLogic
             new Battle(Battle.PlayerDeck, deck);
 
         }
+
+        public override MapNodeType GetLocationType()
+        {
+            return UniquesAllowed ? MapNodeType.HardCombat : MapNodeType.StandardCombat;
+        }
     }
 }

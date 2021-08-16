@@ -26,5 +26,10 @@ namespace MapLogic
         {
             new Shop(Race);
         }
+
+        public override MapNodeType GetLocationType()
+        {
+            return MapNodeType.Village;
+        }
     }
 }
