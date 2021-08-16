@@ -140,19 +140,43 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 297d669d21de80f43ad98cdcfbebd5db, type: 3}
   Musics:
   - Type: 1
+    RaceSpecific: {fileID: 0}
     Audio:
     - {fileID: 8300000, guid: 890243a1170edfb4fb97a968add53a6e, type: 3}
     - {fileID: 8300000, guid: bb40b00ff9989454d82780a2cce81f7e, type: 3}
   - Type: 2
+    RaceSpecific: {fileID: 0}
     Audio:
     - {fileID: 8300000, guid: 2cabb03d9c2e2f647b43783c528de77a, type: 3}
     - {fileID: 8300000, guid: ae4877942f2cbf74c93c474c38508b71, type: 3}
   - Type: 3
+    RaceSpecific: {fileID: 0}
     Audio:
     - {fileID: 8300000, guid: 79c7ef39285c99f4fadc220bc67d12ec, type: 3}
   - Type: 4
+    RaceSpecific: {fileID: 0}
     Audio:
     - {fileID: 8300000, guid: 4b2bade7633d4864aab239a8553f7cfe, type: 3}
+  - Type: 4
+    RaceSpecific: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
+    Audio:
+    - {fileID: 8300000, guid: 412d90ed3af746a41a87692f3621345f, type: 3}
+  - Type: 4
+    RaceSpecific: {fileID: 11400000, guid: aa96f320044c3a248b7ab3ea6872f26f, type: 2}
+    Audio:
+    - {fileID: 8300000, guid: 2ab162a5b9452ad49885258c59b9573b, type: 3}
+  - Type: 4
+    RaceSpecific: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+    Audio:
+    - {fileID: 8300000, guid: acc8cfc648175ef43b9dc1292f013dfb, type: 3}
+  - Type: 2
+    RaceSpecific: {fileID: 11400000, guid: a0c3b2bf97b8a324cb15c700e93ca0a6, type: 2}
+    Audio:
+    - {fileID: 8300000, guid: 3454de71220560145a56dbc3509b33b3, type: 3}
+  - Type: 2
+    RaceSpecific: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
+    Audio:
+    - {fileID: 8300000, guid: 019bdee515ab9354b98ad33ac01609b2, type: 3}
   AbilitySounds:
   - Type: 0
     TriggerAudio:
