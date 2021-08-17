@@ -152,8 +152,6 @@ namespace GameLogic
                     break;
             }
 
-            //TODO: this should be controlled by ui level
-            //BattleUI.Move(this, to, InDeck.PlayerDeck, delay);
         }
 
         public void PositionChanged(int position)
@@ -167,6 +165,8 @@ namespace GameLogic
                 return;
 
             var returnDamage = !this.Ranged() && (target.Location == Deck.Zone.Battlefield);
+
+            Event.OnReadyToAttack.Invoke(this, Location);
 
             Event.OnAttack.Invoke(this,Location);
 

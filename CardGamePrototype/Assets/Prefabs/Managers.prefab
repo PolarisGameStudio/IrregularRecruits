@@ -110,7 +110,7 @@ MonoBehaviour:
   - {fileID: 19800000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
   DamageParticlesPrefab: []
   WardParticlesPrefab:
-  - {fileID: 3308840082544497918, guid: af0ef20d9a41ee7479f76ea5c49918cf, type: 3}
+  - {fileID: 8163684771574148737, guid: 6dc4191059d6c3a4a820270672bbf567, type: 3}
   DeathParticlesPrefab:
   - {fileID: 198247871303120836, guid: e473029e4c70ad543a6879b82a732f4f, type: 3}
   - {fileID: 198330214428362902, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}

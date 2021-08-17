@@ -199,8 +199,6 @@ namespace UI
             //closer to the transistions to layout
             if(transitionTo != null && ((Vector2)transform.position - cardPos).sqrMagnitude > ((Vector2)transitionTo.transform.position- cardPos).sqrMagnitude)
             {
-                Debug.Log($"{draggedCard.name} transitions from {this} to {transitionTo}");
-
                 draggedCard.CurrentZoneLayout = transitionTo;
                 draggedCard.CanTransitionTo = this;
                 transitionTo.AddChild(draggedCard,0);

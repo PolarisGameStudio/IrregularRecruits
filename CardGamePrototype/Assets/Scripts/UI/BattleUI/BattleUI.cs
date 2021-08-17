@@ -14,8 +14,6 @@ using Random = UnityEngine.Random;
 
 namespace UI
 {
-
-
     /// <summary>
     /// Responsible for handling all ui during combat
     /// </summary>
@@ -51,6 +49,7 @@ namespace UI
         public Deck PlayerDeck;
         public Deck EnemyDeck;
         private List<Card> InitialEnemyDeck;
+        internal HashSet<CardAnimation> WardOnBattlefield;
         private List<Card> InitialPlayerDeck;
 
 
@@ -134,8 +133,16 @@ namespace UI
 
             BackgroundImage.sprite = enmRace.GetBackground();
 
+            WardOnBattlefield = new HashSet<CardAnimation>();
+
             BattleRunning = true;
             OnBattleBegin.Invoke(enmRace);
+        }
+
+        internal void ResetWards()
+        {
+            foreach (var w in WardOnBattlefield)
+                w.SetWarded(true,false);
         }
 
         private void SetupUI(Deck deck,bool playerDeck)
@@ -156,6 +163,11 @@ namespace UI
         private void CreateCardUI(Card card, bool playerDeck, bool summon = false)
         {
             var ui = Instantiate(Instance.CardPrefab,transform);
+
+            ui.HasWard = card.Ward();
+
+            if (!ui.HasWard)
+                ui.CardAnimation.DestroyWardAni();
 
             GetZoneHolder(card.Location, !playerDeck).AddChild(ui,0);
 
@@ -203,7 +215,8 @@ namespace UI
 
             if (!ui) yield break;
 
-            yield return AnimationSystem.Instance.WardParticles(ui);
+            
+            yield return AnimationSystem.Instance.WardPopParticles(ui);
         }
 
 
@@ -266,6 +279,8 @@ namespace UI
                 yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
 
             yield return MoveCard(ui, to, playerDeck);
+
+            ui.CardAnimation.SetWarded(ui.HasWard && to == Deck.Zone.Battlefield,true);
 
             if (to == Deck.Zone.Battlefield)
                 yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
@@ -340,16 +355,12 @@ namespace UI
 
         private IEnumerator AttackAnimation()
         {
-            //null check
-            //if (AttackTarget == null) Debug.LogError("no attacktarget");
-            //if (Attacker == null) Debug.LogError("no attacker");
-
-            yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
-
             if (AttackTarget.GetCardState() == CardUI.CardState.FaceDown)
             {
                 AttackTarget.transform.SetAsLastSibling();
             }
+
+            yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
 
             AttackTarget = Attacker = null;
         }
@@ -364,7 +375,7 @@ namespace UI
             if (val < 0)
             {
                 ui.CardAnimation.DamageAnimation.Show(val);
-                AnimationSystem.OnDamaged.Invoke();
+                AnimationSystem.Instance.OnDamaged.Invoke();
             }
             else if (val > 0)
             {
@@ -394,7 +405,7 @@ namespace UI
             }
             else if (val > 0)
             {
-                AnimationSystem.OnHeal.Invoke();
+                AnimationSystem.Instance.OnHeal.Invoke();
                 ui.CardAnimation.HealAnimation.Show(val);
                 //handled by CardHeal Routine
             }
@@ -434,7 +445,7 @@ namespace UI
 
         //otherwise make an onclick event in CardUI
 
-        private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player, bool instantly = false)
+        private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player, bool instantly = false, bool wardOn = false)
         {
             if (!card) yield break;
 

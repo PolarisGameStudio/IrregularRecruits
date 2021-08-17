@@ -15,11 +15,11 @@ MonoBehaviour:
   name: Beastfolk Party
   Description: Beastmen and women
   Creatures:
-  - {fileID: 11400000, guid: 896636e326c93474fbbe268a481f3377, type: 2}
-  - {fileID: 11400000, guid: 7d1a90b45e6f13043856a3029af096c0, type: 2}
-  - {fileID: 11400000, guid: 8513aaa969b8a6748a41d4ace3647652, type: 2}
-  - {fileID: 11400000, guid: 04ab0a004cf51144082e9a7e144dd923, type: 2}
-  - {fileID: 11400000, guid: 507b8d5c78db4cf4aa7f2e10b9387a0f, type: 2}
+  - {fileID: 11400000, guid: cab99495d65d7c1489ef384613191c13, type: 2}
+  - {fileID: 11400000, guid: cab99495d65d7c1489ef384613191c13, type: 2}
+  - {fileID: 11400000, guid: cab99495d65d7c1489ef384613191c13, type: 2}
+  - {fileID: 11400000, guid: cab99495d65d7c1489ef384613191c13, type: 2}
+  - {fileID: 11400000, guid: cab99495d65d7c1489ef384613191c13, type: 2}
   DeckIcon: {fileID: 21300000, guid: ae96d41254699b741abfd83e383e2adb, type: 3}
   DeckImage: {fileID: 21300000, guid: c97d2c4598be91a49b3e2ef154dbf26d, type: 3}
   FriendRaces:

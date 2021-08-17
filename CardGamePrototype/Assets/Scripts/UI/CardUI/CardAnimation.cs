@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ namespace UI
         public Material DissolveMaterial;
 
         public ParticleSystem HighlightParticles;
+
+        public ParticleSystem WardActiveParticles;
 
         public EffectAnimation DamageAnimation, StatPlusAnimation, StatMinusAnimation,HealAnimation;
 
@@ -78,6 +81,32 @@ namespace UI
 
             if(shout)
                 AnimationSystem.OnCreatureExclamation.Invoke(GetComponentInParent<CardUI>(),CreatureBark.Resurrection);
-        }        
+        }
+
+        internal void SetWarded(bool warded,bool addRemoveFromWatchlist)
+        {
+            if (!WardActiveParticles)
+                return;
+
+            if (warded)
+            {
+                WardActiveParticles.Play();
+
+                if(addRemoveFromWatchlist)
+                    BattleUI.Instance.WardOnBattlefield.Add(this);
+            }
+            else
+            {
+                WardActiveParticles.Stop();
+
+                if (addRemoveFromWatchlist)
+                    BattleUI.Instance.WardOnBattlefield.Remove(this);
+            }
+        }
+
+        internal void DestroyWardAni()
+        {
+            Destroy(WardActiveParticles);
+        }
     }
 }

@@ -23,9 +23,6 @@ namespace GameLogic
 
         public override void YourTurn()
         {
-            Debug.Log("player turn");
-
-
             ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
             ResetActions();

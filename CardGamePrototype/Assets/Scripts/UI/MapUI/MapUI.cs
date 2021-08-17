@@ -73,8 +73,6 @@ namespace MapUI
         }
         public void Close()
         {
-            Debug.Log("closing map");
-
             UIController.Instance.Close(this);
 
             //foreach (var item in Nodes)

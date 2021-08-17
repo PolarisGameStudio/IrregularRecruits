@@ -7,11 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8487402871801164198, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: m_Name
-      value: CFXR2 Cartoon Fight Ground (Loop)
-      objectReference: {fileID: 0}
     - target: {fileID: 4036418579442813153, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 4036418579442813153, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4036418579442813153, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
@@ -45,7 +40,7 @@ PrefabInstance:
     - target: {fileID: 4036418579442813153, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4036418579442813153, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
@@ -55,7 +50,7 @@ PrefabInstance:
     - target: {fileID: 4036418579442813153, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4036418579442813153, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
@@ -65,6 +60,66 @@ PrefabInstance:
     - target: {fileID: 4036418579442813153, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.minScalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6300717128283190289, guid: 90375796f996bff4cabed66da5e558cb,
@@ -127,65 +182,10 @@ PrefabInstance:
       propertyPath: ShapeModule.radiusThickness
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
+    - target: {fileID: 8487402871801164198, guid: 90375796f996bff4cabed66da5e558cb,
         type: 3}
-      propertyPath: ShapeModule.type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: ShapeModule.m_Rotation.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: ShapeModule.m_Position.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4292828191062302239, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: ShapeModule.radiusThickness
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: ShapeModule.type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: ShapeModule.m_Rotation.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: ShapeModule.m_Position.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: EmissionModule.rateOverTime.minScalar
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4223188315814551729, guid: 90375796f996bff4cabed66da5e558cb,
-        type: 3}
-      propertyPath: ShapeModule.radiusThickness
-      value: 0
+      propertyPath: m_Name
+      value: CFXR2 Cartoon Fight Ground (Loop)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90375796f996bff4cabed66da5e558cb, type: 3}

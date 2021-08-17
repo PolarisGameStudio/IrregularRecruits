@@ -153,15 +153,11 @@ namespace MapLogic
                     {
                         n.LeadsTo.Add(item);
 
-                        Debug.Log($"added child {item} to {n}. pos ({i},idx)");
-
                         //could also delete connections to old
                     }
                     else if (idx < lastStep.Count() - 1 && CanMakeConnectionToAChild(n, lastStep[idx + 1], step, false) is MapNode item2 && item2 != null && item2.GetNodeType() != n.GetNodeType())
                     {
                         n.LeadsTo.Add(item2);
-
-                        Debug.Log($"added child {item2} to {n}. pos ({i},idx)");
                     }
                     else
                     {
@@ -169,7 +165,6 @@ namespace MapLogic
                         {
                             MapNode childe =  TakeChildFrom(n, lastStep[idx - 1], step, true);
 
-                            Debug.Log($"stole child {childe} for {n}. pos ({i},idx)");
                             n.LeadsTo.Add(childe);
 
                             if (idx < lastStep.Count() - 1) //also delete connections to old
@@ -182,7 +177,6 @@ namespace MapLogic
                         {
                             MapNode childe = TakeChildFrom(n, lastStep[idx + 1], step, false);
 
-                            Debug.Log($"stole child {childe} for {n}. pos ({i},idx)");
                             n.LeadsTo.Add(childe);
 
                             if (idx > 0) //also delete connections to old

@@ -71,6 +71,7 @@ namespace UI
 
         public static UnityEvent OnDragStarted = new UnityEvent();
         public static UnityEvent OnDragEnd = new UnityEvent();
+        internal bool HasWard;
 
         private void Awake()
         {

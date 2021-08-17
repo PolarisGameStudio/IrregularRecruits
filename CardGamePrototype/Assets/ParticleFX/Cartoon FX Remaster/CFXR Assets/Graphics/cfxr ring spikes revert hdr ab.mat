@@ -9,9 +9,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: cfxr ring spikes revert hdr ab
   m_Shader: {fileID: 4800000, guid: e198026df304af84a85675be636192ea, type: 3}
-  m_ShaderKeywords: _ALPHABLEND_ON _FADING_ON _CFXR_HDR_BOOST _CFXR_OVERLAYBLEND_RGBA
-    _OVERLAYTEX_OFF _CFXR_SINGLE_CHANNEL _CFXR_DITHERED_SHADOWS_OFF _CFXR_EDGE_FADING
-    _CFXR_UV2_DISTORTION _CFXR_UV_DISTORTION _CFXR_UV_DISTORTION_ADD
+  m_ShaderKeywords: _ALPHABLEND_ON _CFXR_DITHERED_SHADOWS_OFF _CFXR_HDR_BOOST _CFXR_OVERLAYBLEND_RGBA
+    _CFXR_OVERLAYTEX_OFF _CFXR_SINGLE_CHANNEL _CFXR_UV2_DISTORTION _CFXR_UV_DISTORTION
+    _CFXR_UV_DISTORTION_ADD _OVERLAYTEX_OFF
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -86,7 +86,7 @@ Material:
     - _UseAlphaClip: 0
     - _UseBackLighting: 0
     - _UseDissolve: 0
-    - _UseEF: 1
+    - _UseEF: 0
     - _UseEmission: 0
     - _UseFB: 0
     - _UseFontColor: 0
@@ -94,7 +94,7 @@ Material:
     - _UseLighting: 0
     - _UseLightingWorldPosOffset: 0
     - _UseNormalMap: 0
-    - _UseSP: 1
+    - _UseSP: 0
     - _UseSecondColor: 0
     - _UseUV2Distortion: 1
     - _UseUVDistortion: 1

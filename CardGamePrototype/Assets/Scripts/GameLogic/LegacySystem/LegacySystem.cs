@@ -26,8 +26,6 @@ namespace GameLogic
         {
             Event.OnBattleFinished.AddListener(HandleBattleFinished);
 
-            Debug.Log("Started importing data");
-
             yield return new WaitUntil(()=> DataHandler.Instance.PersistantDataObject.databaseLoaded);
 
             foreach (var unlock in UnlockProgresses)
@@ -53,15 +51,11 @@ namespace GameLogic
 
         private void ChangeIntTypeValue(int i, IntType data,string name = "")
         {
-            Debug.Log($"data {name}, changed from {data.Value} to {i}");
-
             data.Value = i;
 
             DataHandler.Instance.Save();
 
             //TODO: Create a test that changes the value and gets and
-
-            Debug.Log("actual value in Databox:" + DataHandler.Instance.GetData(name).Value);
         }
 
         private void HandleBattleFinished(Deck winner, Deck loser)

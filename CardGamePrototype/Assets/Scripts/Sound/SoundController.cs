@@ -58,19 +58,19 @@ namespace Sound
             CardLayoutGroup.OnSwitchingPlace.AddListener(() => PlayUISound(SoundLibrary.UiSound.CardSwitchPlace));
             CardHoverInfo.Instance.OnCardHighlight.AddListener(() => PlayUISound(SoundLibrary.UiSound.CardHighlight));
 
-            AnimationSystem.OnDraw.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Draw));
-            AnimationSystem.OnWithdraw.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Withdraw));
-            AnimationSystem.OnEtb.AddListener(() => PlayCardSound(SoundLibrary.CardSound.ETB));
-            AnimationSystem.OnDamaged.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Hit));
-            AnimationSystem.OnHeal.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Heal));
-            AnimationSystem.OnWardTrigger.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Ward));
+            AnimationSystem.Instance.OnDraw.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Draw));
+            AnimationSystem.Instance.OnWithdraw.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Withdraw));
+            AnimationSystem.Instance.OnEtb.AddListener(() => PlayCardSound(SoundLibrary.CardSound.ETB));
+            AnimationSystem.Instance.OnDamaged.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Hit));
+            AnimationSystem.Instance.OnHeal.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Heal));
+            AnimationSystem.Instance.OnWardTrigger.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Ward));
 
             ActionsLeftUI.OnActionGained.AddListener(() => PlayUISound(SoundLibrary.UiSound.ActionsRefreshed));
 
             AnimationSystem.OnCreatureExclamation.AddListener((c,bark) => PlayCardSound(bark,c.Creature.SoundSetType));
 
-            AnimationSystem.OnAbilityTrigger.AddListener(PlayAbilityTrigger);
-            AnimationSystem.OnAbilityTargetHit.AddListener(PlayAbilityHit);
+            AnimationSystem.Instance.OnAbilityTrigger.AddListener(PlayAbilityTrigger);
+            AnimationSystem.Instance.OnAbilityTargetHit.AddListener(PlayAbilityHit);
 
             LegacyUIEntry.OnBarTick.AddListener(() => PlayUISound(SoundLibrary.UiSound.ProgressBarTick));
 

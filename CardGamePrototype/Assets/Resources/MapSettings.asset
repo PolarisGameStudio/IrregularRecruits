@@ -18,7 +18,7 @@ MonoBehaviour:
   BasicLocations: []
   MapLength: 20
   MinNodesAtStep: 3
-  MaxNodesAtStep: 6
+  MaxNodesAtStep: 5
   VisibleSteps: 3
   HardCombatFrequency: 3
   StandardCombatFrequency: 7

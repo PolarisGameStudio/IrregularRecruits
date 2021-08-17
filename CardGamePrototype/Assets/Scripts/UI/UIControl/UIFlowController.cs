@@ -21,10 +21,6 @@ namespace UI
 
         public void Start()
         {
-            //todo: do we need this
-            //var bm = BattleManager.Instance;
-
-
             //SETUP listeners
             //    Move->deckmanager(Card, Zone) Handles death/ etb / withdraw / resurrection / draw animation
             // if an action moves a card a zone from different locations, the cards current location is used
@@ -37,7 +33,7 @@ namespace UI
             Event.OnWardTriggered.AddListener((card,loc) => AddCardEvent(BattleUI.WardedAttack(card.Guid)));
 
             //OnAttack-> (Card) Attack animation
-            Event.OnAttack.AddListener((card,loc) => AddCardEvent(BattleUI.SetAttacker(card.Guid)));
+            Event.OnReadyToAttack.AddListener((card,loc) => AddCardEvent(BattleUI.SetAttacker(card.Guid)));
             //On Being Attacked->
             Event.OnBeingAttacked.AddListener((card,loc) => AddCardEvent(BattleUI.SetAttackTarget(card.Guid)));
 
@@ -84,6 +80,8 @@ namespace UI
         private IEnumerator PlayerTurnStart()
         {
             yield return null;
+
+            BattleUI.Instance.ResetWards();
 
             if (Battle.PlayerDeck.DeckController is PlayerController)
             {

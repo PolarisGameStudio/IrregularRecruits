@@ -20,6 +20,7 @@ namespace UI
         public ParticleSystem[] ETBParticlesPrefab;
         public ParticleSystem[] DamageParticlesPrefab;
         public ParticleSystem[] WardParticlesPrefab;
+
         public ParticleSystem[] DeathParticlesPrefab;
         public ParticleSystem AbilitySelectParticles;
         public ParticleSystem LevelUpParticles;
@@ -31,15 +32,15 @@ namespace UI
         public static CardUIEvent OnCreatureExclamation = new CardUIEvent();
 
 
-        public static UnityEvent OnDraw = new UnityEvent();
-        public static UnityEvent OnWithdraw = new UnityEvent();
-        public static UnityEvent OnEtb = new UnityEvent();
-        public static UnityEvent OnDamaged = new UnityEvent();
-        public static UnityEvent OnHeal = new UnityEvent();
-        public static UnityEvent OnWardTrigger = new UnityEvent();
+        public  UnityEvent OnDraw = new UnityEvent();
+        public  UnityEvent OnWithdraw = new UnityEvent();
+        public  UnityEvent OnEtb = new UnityEvent();
+        public  UnityEvent OnDamaged = new UnityEvent();
+        public  UnityEvent OnHeal = new UnityEvent();
+        public  UnityEvent OnWardTrigger = new UnityEvent();
         public class AbilityEvent : UnityEvent<EffectType> { }
-        public static AbilityEvent OnAbilityTrigger = new AbilityEvent();
-        public static AbilityEvent OnAbilityTargetHit = new AbilityEvent();
+        public  AbilityEvent OnAbilityTrigger = new AbilityEvent();
+        public  AbilityEvent OnAbilityTargetHit = new AbilityEvent();
 
         [Serializable]
         public struct ZoneMoveAnimation
@@ -107,9 +108,14 @@ namespace UI
             StartCoroutine(PlayCardFX(c, DamageParticlesPrefab));
 
         }
-        public IEnumerator WardParticles(CardUI c)
+
+        public IEnumerator WardPopParticles(CardUI c)
         {
-            yield return PlayCardFX(c, WardParticlesPrefab,0.3f);
+            c.CardAnimation.SetWarded(false,false);
+
+            OnWardTrigger.Invoke();
+
+            yield return PlayCardFX(c, WardParticlesPrefab,0.3f,true);
         }
 
         public void SummonParticles(CardUI c)
@@ -137,9 +143,9 @@ namespace UI
 
         private IEnumerator PlayCardFX(AbilityHolderUI card, ParticleSystem[] fxs, float delay = 0, bool instantiateInWorldSpace = false)
         {
-            if (!card) yield break;
-
             yield return null;
+
+            if (!card) yield break;
 
             //vector2 to ignore z position to prevent oddities
             Vector3 position =  card.transform.position + new Vector3(0,0,-0.5f);
@@ -169,7 +175,7 @@ namespace UI
                     yield return card.CardAnimation.Dissolve();
                     break;
                 case Deck.Zone.Hand:
-                    OnDraw.Invoke();
+                    Instance.OnDraw.Invoke();
                     break;
             }
         }
@@ -192,7 +198,11 @@ namespace UI
 
         internal static IEnumerator StartAttack(CardUI ui)
         {
-            yield return new WaitForSeconds(0.5f);
+            float time = 1f * GameSettings.Instance.CombatSpeed;
+
+            ui.transform.LeanScale(Vector3.one * 1.2f, time).setOnComplete(()=> ui.transform.LeanScale(Vector3.one , time *2));
+
+            yield return new WaitForSeconds(time);
         }
 
         private static void PlayFx(ParticleSystem[] fxs, Vector3 position, Transform parent)

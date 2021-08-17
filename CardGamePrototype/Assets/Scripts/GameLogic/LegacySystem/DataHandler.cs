@@ -44,8 +44,6 @@ namespace Data
 
         internal void InitializeDatabases()
         {
-            Debug.Log("loading databases");
-
             var path = System.IO.Path.Combine(Application.persistentDataPath, "Data.json");
 
             if (!File.Exists(path))
