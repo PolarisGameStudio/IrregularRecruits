@@ -93,6 +93,8 @@ namespace MapUI
 
             OldNodes = Nodes.ToList();
 
+            yield return new WaitUntil(() => FocusGroup.interactable);
+
             foreach (var n in Nodes)
             {
                 n.SetInteractable(false);

@@ -135,13 +135,13 @@ namespace UI
 
             var recommendation = ShopRecommendation.GetRecommendation(ShowingShop, Battle.PlayerDeck, Map.PlayerGold);
 
-            var str = "Current LEading strategies: ";
+            //var str = "Current LEading strategies: ";
 
-            foreach (var strat in strategies)
-                str += strat.Key +"(" + strat.Value + ")";
+            //foreach (var strat in strategies)
+            //    str += strat.Key +"(" + strat.Value + ")";
 
-            Debug.Log(str); 
-            Debug.Log("AI recommending: " +recommendation.Item1 + ": "+recommendation.Item2);
+            //Debug.Log(str); 
+            //Debug.Log("AI recommending: " +recommendation.Item1 + ": "+recommendation.Item2);
         }
 
         public void BuyCard(CardUI card)
