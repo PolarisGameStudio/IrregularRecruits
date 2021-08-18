@@ -19,13 +19,13 @@ namespace Tests
 
             Event.ResetEvents();
 
-            GameSettings.Instance.AiControlledPlayer = AiControlledPlayerValue;
+            GameSettings.Instance.AiControlledPlayer.Value = AiControlledPlayerValue;
         }
         [SetUp]
         public void Setup()
         {
-            AiControlledPlayerValue = GameSettings.Instance.AiControlledPlayer;
-            GameSettings.Instance.AiControlledPlayer = true;
+            AiControlledPlayerValue = GameSettings.Instance.AiControlledPlayer.Value;
+            GameSettings.Instance.AiControlledPlayer.Value = true;
         }
 
         protected Creature GenerateSummon()

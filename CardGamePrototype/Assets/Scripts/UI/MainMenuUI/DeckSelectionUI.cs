@@ -38,7 +38,7 @@ namespace UI
 
             InstantiatedIcons[0].Button.onClick.Invoke();
 
-            SettingsButton.onClick.AddListener(() => UIController.Instance.Open(GameSettingsUI.Instance));
+
             AchievementsButton.onClick.AddListener(() => LegacyUI.Instance.Open());
         }
 

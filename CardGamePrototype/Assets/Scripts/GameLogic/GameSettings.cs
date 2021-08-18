@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data;
+using System;
+using System.Collections;
 using UnityEngine;
 using Event = GameLogic.Event;
 
@@ -6,7 +8,7 @@ using Event = GameLogic.Event;
 public class GameSettings : SingletonScriptableObject<GameSettings>
 {
 
-    public int EnemyDeckSize = 3;
+    public IntType EnemyDeckSize = new IntType();
     //Player deck size
     public int PlayerDeckSize = 5;
     //Player starting hand size
@@ -31,11 +33,11 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
     public DeckDamage DeckDamageParadigm = DeckDamage.DamageToTopCard;
     
     //Slower means faster
-    public float CombatSpeed = 1f;
+    public FloatType CombatSpeed ;
 
-    public bool AiControlledPlayer = false;
+    public BoolType AiControlledPlayer ;
 
-    public bool AutoEndTurn;
+    public BoolType AutoEndTurn;
 
     public enum DeckDamage
     {
@@ -44,11 +46,27 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
         AnyDamageKillsTopCard
     }
 
-    public static int DeckSize() =>  Instance.EnemyDeckSize;
+    public static int DeckSize() =>  Instance.EnemyDeckSize.Value;
 
     public void AiControlsPlayer(bool ai)
     {
-        AiControlledPlayer = ai;
+        AiControlledPlayer.Value = ai;
     }
 
+    public IEnumerator ImportRoutine()
+    {
+        yield return new WaitUntil(() => DataHandler.Instance.PersistantDataObject.databaseLoaded);
+
+        const string table = "PlayerPrefs";
+
+        CombatSpeed = DataHandler.Instance.GetData<FloatType>("Speed", table, 1f.ToString());
+        AiControlledPlayer = DataHandler.Instance.GetData<BoolType>("AutoPlayer", table, "false");
+        AutoEndTurn = DataHandler.Instance.GetData<BoolType>("AutoEndTurn", table, "true");
+
+    }
+
+    public static float Speed()
+    {
+        return Instance.CombatSpeed.Value;
+    }
 }

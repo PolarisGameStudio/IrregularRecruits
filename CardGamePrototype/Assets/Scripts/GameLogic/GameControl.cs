@@ -33,6 +33,7 @@ namespace GameLogic
         private void ImportData()
         {
             StartCoroutine(LegacySystem.Instance.ImportRoutine());
+            StartCoroutine(GameSettings.Instance.ImportRoutine());
         }
     }
 }

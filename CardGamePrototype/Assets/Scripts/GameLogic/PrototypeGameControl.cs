@@ -35,8 +35,8 @@ namespace GameLogic
 
             if (PlayerDeck == null) PlayerDeck = Battle.PlayerDeck;
 
-            if(GameSettings.Instance.EnemyDeckSize < MaxEnemyDeckSize)
-                GameSettings.Instance.EnemyDeckSize ++;
+            if(GameSettings.Instance.EnemyDeckSize.Value < MaxEnemyDeckSize)
+                GameSettings.Instance.EnemyDeckSize.Value = MaxEnemyDeckSize;
 
             new Battle(PlayerDeck, EnemyDeck);
         }

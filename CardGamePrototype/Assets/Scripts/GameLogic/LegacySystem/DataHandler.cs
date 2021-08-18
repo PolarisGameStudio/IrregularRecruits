@@ -11,35 +11,15 @@ namespace Data
     public class DataHandler : SingletonScriptableObject<DataHandler>
     {
         public DataboxObject PersistantDataObject;
-        //public DataboxObject PlayerPrefsObject;
 
-        public const string LegacyTableName = "Unlocks";
-        private Dictionary<string, IntType> LegacyData = new Dictionary<string, IntType>();
+        private Dictionary<string, DataboxType> LoadedData = new Dictionary<string, DataboxType>();
 
-        private void GetPersistantData(string key)
+        public T GetData<T>(string key, string table, string standardValue) where T : DataboxType
         {
-            if (!LegacyData.ContainsKey(key))
-            {
-                if (!PersistantDataObject.databaseLoaded)
-                {
-                    Debug.LogError("Database not loaded");
-                    return;
-                }
+            if (!LoadedData.ContainsKey(table + key))
+                GetPersistantData<T>(key, table, standardValue);
 
-                IntType data;
-
-                if (!PersistantDataObject.TryGetData<IntType>(LegacyTableName, key, "Count", false, out data))
-                {
-                    data = new IntType(0);
-                    PersistantDataObject.AddData(LegacyTableName, key, "Count", data);
-
-                    Debug.Log("No data named " + key + ", Creating entry");
-                }
-
-                LegacyData[key] = data;
-
-                PersistantDataObject.SaveDatabase();
-            }
+            return (T)LoadedData[table + key];
         }
 
         internal void InitializeDatabases()
@@ -56,17 +36,39 @@ namespace Data
             //PlayerPrefsObject.LoadDatabase();
         }
 
-        public IntType GetData(string key)
-        {
-            if (!LegacyData.ContainsKey(key))
-                GetPersistantData(key);
-
-            return LegacyData[key];
-        }
-
-        internal void Save()
+        public void Save()
         {
             PersistantDataObject.SaveDatabase();
         }
+
+        private void GetPersistantData<T>(string key, string table, string stdValue) where T: DataboxType
+        {
+            if (!LoadedData.ContainsKey(table + key))
+            {
+                if (!PersistantDataObject.databaseLoaded)
+                {
+                    Debug.LogError("Database not loaded");
+                    return;
+                }
+
+                T data;
+
+                if (!PersistantDataObject.TryGetData<T>(table, key, "Count", false, out data))
+                {
+                    data = (Activator.CreateInstance(typeof(T)) as T);
+
+                    data.Convert(stdValue);
+
+                    PersistantDataObject.AddData(table, key, "Count", data);
+
+                    //Debug.Log("No data named " + key +" in table "+ table+", Creating entry");
+                }
+
+                LoadedData[table + key] = data;
+
+                PersistantDataObject.SaveDatabase();
+            }
+        }
+
     }
 }

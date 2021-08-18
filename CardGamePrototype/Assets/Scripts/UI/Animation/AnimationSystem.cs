@@ -67,7 +67,7 @@ namespace UI
             var startPos = rect.position;
             var endPos = target.GetComponent<RectTransform>();
 
-            duration *= GameSettings.Instance.CombatSpeed;
+            duration *= GameSettings.Speed();
 
             var startTime = Time.time;
 
@@ -198,7 +198,7 @@ namespace UI
 
         internal static IEnumerator StartAttack(CardUI ui)
         {
-            float time = 1f * GameSettings.Instance.CombatSpeed;
+            float time = 1f * GameSettings.Speed();
 
             ui.transform.LeanScale(Vector3.one * 1.2f, time).setOnComplete(()=> ui.transform.LeanScale(Vector3.one , time *2));
 

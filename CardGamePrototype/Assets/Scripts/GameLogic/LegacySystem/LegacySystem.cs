@@ -30,7 +30,7 @@ namespace GameLogic
 
             foreach (var unlock in UnlockProgresses)
             {
-                var value = DataHandler.Instance.GetData(unlock.UnlocksHero.name);
+                var value = DataHandler.Instance.GetData<IntType>(unlock.UnlocksHero.name,"Unlocks","0");
 
                 unlock.Count = value.Value;
 

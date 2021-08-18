@@ -8,6 +8,7 @@ namespace UI
     {
         private GameSettings GS;
 
+        
         public Slider CombatSpeedSlider;
         public Slider StartingHandSlider;
         public Slider DrawSlider;
@@ -22,21 +23,30 @@ namespace UI
         {
             GS = GameSettings.Instance;
 
-            AiToggle.isOn = GS.AiControlledPlayer;
             AiToggle.onValueChanged.AddListener(GS.AiControlsPlayer);
-            AutoEndTurn.isOn = GS.AutoEndTurn;
-            AutoEndTurn.onValueChanged.AddListener(i => GS.AutoEndTurn = i);
-            CombatSpeedSlider.value = GS.CombatSpeed; 
-            CombatSpeedSlider.onValueChanged.AddListener(i => GS.CombatSpeed = i);
-            StartingHandSlider.value = GS.StartingHandSize;
+            AutoEndTurn.onValueChanged.AddListener(i => GS.AutoEndTurn.Value = i);
+            CombatSpeedSlider.onValueChanged.AddListener(i => GS.CombatSpeed.Value = i);
             StartingHandSlider.onValueChanged.AddListener(i => GS.StartingHandSize = (int)i);
-            DrawSlider.value = GS.DrawPrTurn;
             DrawSlider.onValueChanged.AddListener(i => GS.DrawPrTurn = (int)i);
-            ActionsPrTurnSlider.value = GS.PlaysPrTurn;
             ActionsPrTurnSlider.onValueChanged.AddListener(i => GS.PlaysPrTurn = (int)i);
-            
+
         }
 
+        public void UpdateValues()
+        {
+            AiToggle.isOn = GS.AiControlledPlayer.Value;
+            AutoEndTurn.isOn = GS.AutoEndTurn.Value;
+            CombatSpeedSlider.value = GS.CombatSpeed.Value;
+            StartingHandSlider.value = GS.StartingHandSize;
+            DrawSlider.value = GS.DrawPrTurn;
+            ActionsPrTurnSlider.value = GS.PlaysPrTurn;
+
+        }
+
+        public void Save()
+        {
+            Data.DataHandler.Instance.Save();
+        }
 
         public CanvasGroup GetCanvasGroup()
         {

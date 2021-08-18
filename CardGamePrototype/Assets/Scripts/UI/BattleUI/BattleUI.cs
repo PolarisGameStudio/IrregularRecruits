@@ -14,6 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace UI
 {
+
     /// <summary>
     /// Responsible for handling all ui during combat
     /// </summary>
@@ -111,7 +112,7 @@ namespace UI
             PlayerDeck = Battle.PlayerDeck;
             EnemyDeck = Battle.EnemyDeck;
 
-            MoveDuration = GameSettings.Instance.CombatSpeed / 2;
+            MoveDuration = GameSettings.Speed() / 2;
 
             SetupUI(PlayerDeck,true);
             SetupUI(EnemyDeck,false);

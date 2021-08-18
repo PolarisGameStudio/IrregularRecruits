@@ -35,7 +35,7 @@ namespace GameLogic
 
             ActionsLeft--;
 
-            if (!ActionAvailable() && GameSettings.Instance.AutoEndTurn)
+            if (!ActionAvailable() && GameSettings.Instance.AutoEndTurn.Value)
             {
                 FinishTurn();
             }

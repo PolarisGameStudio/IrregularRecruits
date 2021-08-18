@@ -41,7 +41,7 @@ namespace Tests
 
             Assert.IsTrue(persistantDataObject.databaseLoaded);
 
-            const string tableName = DataHandler.LegacyTableName;
+            const string tableName = "Unlocks";
 
             const string Key = "TestHero";
 
@@ -58,7 +58,7 @@ namespace Tests
         {
 
             const string Key = "TestHero";
-            var referenceValue = DataHandler.Instance.GetData(Key);
+            var referenceValue = DataHandler.Instance.GetData<IntType>(Key, "Unlocks","0");
 
             Assert.NotNull(referenceValue);
 
@@ -67,7 +67,7 @@ namespace Tests
 
             referenceValue.Value += change;
 
-            var reference2 = DataHandler.Instance.GetData(Key);
+            var reference2 = DataHandler.Instance.GetData<IntType>(Key, "Unlocks","0");
 
             Assert.AreEqual(originalValue + change, reference2.Value);
 

@@ -85,7 +85,7 @@ namespace Simulation
                 Debug.LogError("no decks to simulate");
 
 
-            GameSettings.Instance.AiControlledPlayer = true;
+            GameSettings.Instance.AiControlledPlayer.Value = true;
 
             for (int i = 0; i < Instance.DecksToSimulate.Count; i++)
             {
@@ -108,7 +108,7 @@ namespace Simulation
                 Debug.LogError("no decks to simulate. Are you using the correct scene?");
 
 
-            GameSettings.Instance.AiControlledPlayer = true;
+            GameSettings.Instance.AiControlledPlayer.Value = true;
 
             for (int i = 0; i < Instance.DecksToSimulate.Count; i++)
             {
@@ -134,7 +134,7 @@ namespace Simulation
             Event.ResetEvents();
             Shop.ResetEvents();
 
-            GameSettings.Instance.AiControlledPlayer = true;
+            GameSettings.Instance.AiControlledPlayer.Value = true;
 
             for (int i = 0; i < Instance.DecksToSimulate.Count; i++)
             {
