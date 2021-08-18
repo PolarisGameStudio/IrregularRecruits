@@ -19,6 +19,7 @@ namespace GameLogic
         public static CardEvent OnReadyToAttack = new CardEvent();
         public static CardEvent OnAttack = new CardEvent();
         public static CardEvent OnBeingAttacked = new CardEvent();
+        public static CardEvent OnAttackFinished = new CardEvent();
         public static CardEvent OnWithdraw = new CardEvent();
         public static CardEvent OnSummon = new CardEvent();
         public static CardEvent OnUnSummon = new CardEvent();
@@ -116,6 +117,7 @@ namespace GameLogic
             OnAttack.RemoveAllListeners();
             //public static CardEvent OnBeingAttacked = new CardEvent();
             OnBeingAttacked.RemoveAllListeners();
+            OnAttackFinished.RemoveAllListeners();
             //public static CardEvent OnWithdraw = new CardEvent();
             OnWithdraw.RemoveAllListeners();
             //public static CardEvent OnSummon = new CardEvent();

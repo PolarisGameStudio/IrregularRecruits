@@ -60,6 +60,8 @@ namespace UI
         //TODO: move these to animation system
         public class AbEvent : UnityEvent<AbilityWithEffect> { }
         public static AbEvent OnAbilitySelect = new AbEvent();
+
+
         public static UnityEvent OnLevelUp = new UnityEvent();
         public static UnityEvent OnLevelAnimation = new UnityEvent();
 
@@ -288,19 +290,6 @@ namespace UI
 
         }
 
-        internal static IEnumerator SetAttacker(Guid card)
-        {
-            CardUI ui = GetCardUI(card);
-
-            if (!ui) yield break;
-
-            Instance.Attacker = ui;
-
-            yield return AnimationSystem.StartAttack(ui);
-
-            //do ready attack animation
-        }
-
         internal static IEnumerator AbilityTriggered(SpecialAbility a, Guid guid, IEnumerable<Guid> ts)
         {
             var ui = GetAbilityHolderUI(guid);
@@ -343,6 +332,22 @@ namespace UI
             return ui;
         }
 
+        internal static IEnumerator SetAttacker(Guid card)
+        {
+            CardUI ui = GetCardUI(card);
+
+            if (!ui) yield break;
+
+            //Hack to avoid it from being moved by the layout group
+            ui.BeingDragged = true;
+
+            Instance.Attacker = ui;
+
+            yield return AnimationSystem.StartAttack(ui);
+
+            //do ready attack animation
+        }
+
         internal static IEnumerator SetAttackTarget(Guid card)
         {
             CardUI ui = GetCardUI(card);
@@ -351,7 +356,30 @@ namespace UI
 
             Instance.AttackTarget = ui;
 
+            ui.transform.LeanScale(Vector3.one, 0.5f * GameSettings.Speed());
+
             yield return Instance.AttackAnimation();
+        }
+
+        internal static IEnumerator PullBackAttacker(Guid guid)
+        {
+            CardUI ui = GetCardUI(guid);
+
+            if (!ui ) yield break;
+
+            ui.BeingDragged = false;
+
+            ui.CurrentZoneLayout.MoveCardsToDesiredPositions();
+
+            float seconds = 0.5f * GameSettings.Speed();
+
+            ui.transform.LeanScale(Vector3.one, seconds);
+
+            Instance.AttackTarget.transform.LeanScale(Vector3.one, seconds);
+
+            yield return new WaitForSeconds(seconds);
+
+            Instance.AttackTarget = Instance.Attacker = null;
         }
 
         private IEnumerator AttackAnimation()
@@ -363,7 +391,6 @@ namespace UI
 
             yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
 
-            AttackTarget = Attacker = null;
         }
 
         //negative for damage, positive for heal

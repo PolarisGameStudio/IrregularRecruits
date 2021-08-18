@@ -71,13 +71,12 @@ namespace UI
 
             var startTime = Time.time;
 
-            OnCreatureExclamation.Invoke(owner, CreatureBark.Attack);
 
-            while (Time.time < startTime + duration)
+            while (Time.time < startTime + duration )
             {
                 yield return null;
 
-                rect.position = Vector3.LerpUnclamped(startPos, endPos.position, AnimationSystem.Instance.AttackAnimationCurve.Evaluate((Time.time - startTime) / duration));
+                rect.position = Vector3.LerpUnclamped(startPos, endPos.position, Instance.AttackAnimationCurve.Evaluate((Time.time - startTime) / duration));
             }
         }
 
@@ -200,7 +199,9 @@ namespace UI
         {
             float time = 1f * GameSettings.Speed();
 
-            ui.transform.LeanScale(Vector3.one * 1.2f, time).setOnComplete(()=> ui.transform.LeanScale(Vector3.one , time *2));
+            ui.transform.LeanScale(Vector3.one * 1.2f, time);
+
+            OnCreatureExclamation.Invoke(ui, CreatureBark.Attack);
 
             yield return new WaitForSeconds(time);
         }

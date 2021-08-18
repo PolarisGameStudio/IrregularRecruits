@@ -205,6 +205,7 @@ namespace GameLogic
             if (!Alive() && target.Alive()) Event.OnKill.Invoke(target,Location);
             else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this,Location);
 
+            Event.OnAttackFinished.Invoke(this, Location);
         }
 
         private List<Card> Neighbours()

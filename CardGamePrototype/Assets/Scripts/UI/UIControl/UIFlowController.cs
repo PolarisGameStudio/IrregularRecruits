@@ -36,6 +36,7 @@ namespace UI
             Event.OnReadyToAttack.AddListener((card,loc) => AddCardEvent(BattleUI.SetAttacker(card.Guid)));
             //On Being Attacked->
             Event.OnBeingAttacked.AddListener((card,loc) => AddCardEvent(BattleUI.SetAttackTarget(card.Guid)));
+            Event.OnAttackFinished.AddListener((card, loc) => AddCardEvent(BattleUI.PullBackAttacker(card.Guid))); 
 
             //On Damage-> (Card, amount) & new health?
             //On healed
