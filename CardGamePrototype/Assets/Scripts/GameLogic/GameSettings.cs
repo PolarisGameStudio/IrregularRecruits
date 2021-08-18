@@ -8,7 +8,7 @@ using Event = GameLogic.Event;
 public class GameSettings : SingletonScriptableObject<GameSettings>
 {
 
-    public IntType EnemyDeckSize = new IntType();
+    public int EnemyDeckSize = 50;
     //Player deck size
     public int PlayerDeckSize = 5;
     //Player starting hand size
@@ -46,7 +46,7 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
         AnyDamageKillsTopCard
     }
 
-    public static int DeckSize() =>  Instance.EnemyDeckSize.Value;
+    public static int DeckSize() =>  Instance.EnemyDeckSize;
 
     public void AiControlsPlayer(bool ai)
     {
