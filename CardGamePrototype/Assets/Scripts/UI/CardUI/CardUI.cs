@@ -286,13 +286,11 @@ namespace UI
 
 
         #region Input Handling
-#if true
         public void OnPointerClick(PointerEventData eventData)
         {
             if (!BeingDragged && (AlwaysFaceUp || IsClickable()))
             {
                 CardHoverInfo.Show(this);
-                CardAnimation?.Highlight();
             }
         }
 
@@ -355,6 +353,7 @@ namespace UI
             //move it into place
             CurrentZoneLayout.MoveCardsToDesiredPositions();
         }
+        #endregion
 
         internal IEnumerator Flip(CardState state, float flipTime = 0.2f)
         {
@@ -427,22 +426,5 @@ namespace UI
             }
         }
 
-#endif
-#if false
-    public void Update()
-    {
-        var touch = Input.GetTouch(0);
-
-        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-        {
-            // ui touched
-            CardHighlight.Show(this);
-        }
-        else if (touch.phase == TouchPhase.Ended)
-            CardHighlight.Hide();
-
-    }
-#endif
-        #endregion
     }
 }
