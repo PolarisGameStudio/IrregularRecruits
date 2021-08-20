@@ -199,11 +199,11 @@ namespace UI
         {
             float time = 1f * GameSettings.Speed();
 
-            ui.transform.LeanScale(Vector3.one * 1.2f, time);
+            ui.transform.LeanScale(Vector3.one * 1.15f, time);
 
             OnCreatureExclamation.Invoke(ui, CreatureBark.Attack);
 
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(time / 2);
         }
 
         private static void PlayFx(ParticleSystem[] fxs, Vector3 position, Transform parent)

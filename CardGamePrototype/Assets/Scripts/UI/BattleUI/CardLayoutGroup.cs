@@ -123,7 +123,10 @@ namespace UI
             for (int i = 0; i < ChildCards.Count; i++)
             {
                 var card = ChildCards[i];
-
+                
+                if (!card)
+                    continue;
+                
                 card.LayoutIndex = i;
 
                 var desiredPos = ChildDesiredPositions[i];
@@ -224,7 +227,6 @@ namespace UI
                 ChildCards[index - 1] = draggedCard;
                 ChildCards[index] = ca;
 
-                Debug.Log($"{draggedCard.name} swithches places DOWN in {this} to {index-1}");
 
                 MoveCardsToDesiredPositions();
             }

@@ -9,14 +9,11 @@ namespace GameLogic
         public bool OncePrCombat;
         private bool ActivatedThisTurn;
 
-        private void OnEnable()
+        public void SetupActionRefresh()
         {
-            Event.OnCombatResolveStart.AddListener(RefreshAction);
-        }
+            ActivatedThisTurn = false;
 
-        private void OnDestroy()
-        {
-            Event.OnCombatResolveStart.RemoveListener(RefreshAction);
+            Event.OnCombatResolveStart.AddListener(RefreshAction);
         }
 
         private void RefreshAction()

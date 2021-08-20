@@ -43,8 +43,6 @@ namespace GameLogic
 
         public void FinishTurn()
         {
-            Debug.Log("finish player turn");
-
             ActionsLeft = 0;
 
             OnFinish?.Invoke();

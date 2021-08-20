@@ -375,7 +375,8 @@ namespace UI
 
             ui.transform.LeanScale(Vector3.one, seconds);
 
-            Instance.AttackTarget.transform.LeanScale(Vector3.one, seconds);
+            if(Instance.AttackTarget != null)
+                Instance.AttackTarget.transform.LeanScale(Vector3.one, seconds);
 
             yield return new WaitForSeconds(seconds);
 

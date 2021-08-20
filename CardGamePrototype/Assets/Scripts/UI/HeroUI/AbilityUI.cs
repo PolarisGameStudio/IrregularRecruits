@@ -86,7 +86,10 @@ namespace UI
         {
             Ability = ability;
 
-            ActiveAbility = ability is ActiveAbility;
+            ActiveAbility = ability is ActiveAbility active;
+
+            if(ActiveAbility)
+                (ability as ActiveAbility).SetupActionRefresh();
 
             Owner = owner;
 

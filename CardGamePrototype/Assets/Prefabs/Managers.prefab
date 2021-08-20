@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cb8945538546e4985edb6e44ed056d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackWaitingPoint: 0.85
   AttackAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -94,12 +93,12 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0.77316284
-      inSlope: -3.2668335
-      outSlope: -3.2668335
+      value: 0.45
+      inSlope: -6.550269
+      outSlope: -6.550269
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.18280298
+      inWeight: 0.18600927
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
