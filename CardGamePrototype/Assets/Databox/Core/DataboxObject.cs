@@ -7,7 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Reflection;
 
-#if NET_4_6
+#if false
 using Databox.OdinSerializer;
 #endif
 using Databox.FullSerializer;
@@ -869,7 +869,7 @@ namespace Databox
 					SaveWithFullSerializer(_savePath, _callEvent);
 					break;
 				case Serializer.OdinSerializer:
-#if NET_4_6
+#if false
 					SaveWithOdinSerializer(_savePath, _callEvent);
 #endif
 					break;
@@ -877,7 +877,7 @@ namespace Databox
 			
 		}
 		
-#if NET_4_6
+#if false
 		void SaveWithOdinSerializer(string _savePath, bool _callEvent)
 		{
 			DataFormat _format = DataFormat.Binary;
@@ -1139,7 +1139,7 @@ namespace Databox
 					LoadWithFullSerializer(_savePath, _callEvent);
 					break;
 				case Serializer.OdinSerializer:
-#if NET_4_6
+#if false
 					try
 					{
 						LoadWithOdinSerializer(_savePath, _callEvent);
@@ -1154,7 +1154,7 @@ namespace Databox
 		
 		}
 		
-#if NET_4_6
+#if false
 		void LoadWithOdinSerializer(string _savePath, bool _callEvent)
 		{
 

@@ -106,7 +106,7 @@ namespace MapUI
             Nodes.Clear();
             
             //create from node
-            yield return CreateNode(startNode, MapStartPosition.position);
+            yield return CreateNode(startNode, MapStartPosition.position,false,true);
             
             LeanTween.moveX(MapHolder.gameObject, MapHolder.transform.position.x-Nodes.First().transform.position.x - PositionToCenterDifferience.x, 3f).setEaseInExpo();
 
@@ -174,7 +174,7 @@ namespace MapUI
             }
         }
 
-        private IEnumerator CreateNode(MapNode node, Vector3 position,bool interactable = false)
+        private IEnumerator CreateNode(MapNode node, Vector3 position,bool interactable = false,bool firstNode = false)
         {
             MapNodeIcon instance;
 
@@ -199,11 +199,14 @@ namespace MapUI
 
                 instance.Node = node;
 
-                instance.transform.localScale = Vector3.zero;
+                if (!firstNode)
+                {
+                    instance.transform.localScale = Vector3.zero;
 
-                instance.transform.LeanScale(Vector3.one, 1f).setEaseInCubic();
-
-            instance.SetInteractable(false);
+                    instance.transform.LeanScale(Vector3.one, 1f).setEaseInCubic();
+                }
+                
+                instance.SetInteractable(false);
 
                 foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
                     yield return DrawLine(parent, instance);

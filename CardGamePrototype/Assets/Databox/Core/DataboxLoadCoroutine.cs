@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 using Databox;
 using Databox.FullSerializer;
-#if NET_4_6
+#if false
 using Databox.OdinSerializer;
 #endif
 using Databox.Dictionary;
@@ -183,7 +183,7 @@ namespace Databox.Utils
 				}
 				else
 				{
-#if NET_4_6
+#if false
 					DeserializeWithOdin(_j, _databoxObject, _callEvent);
 #endif
 				}
@@ -229,7 +229,7 @@ namespace Databox.Utils
 			//Destroy(this.gameObject);
 		}
 	
-#if NET_4_6
+#if false
 		void DeserializeWithOdin(string _text, DataboxObject _databoxObject, bool _callEvent)
 		{
 			
