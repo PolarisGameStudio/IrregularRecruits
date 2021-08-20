@@ -20,7 +20,7 @@ namespace UpdateManagement
         public TextMeshProUGUI UpdateStatusText;
         public TextMeshProUGUI DescriptionText;
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID
         private void Awake()
         {
             UpdateManager = new AppUpdateManager();
@@ -93,6 +93,9 @@ namespace UpdateManagement
             // If the update completes successfully, then the app restarts and this line
             // is never reached. If this line is reached, then handle the failure (for
             // example, by logging result.Error or by displaying a message to the user).
+
+            UpdateStatusText.text = "Update failed";
+            Background.SetActive(false);
 
         }
         
