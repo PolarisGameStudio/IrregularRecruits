@@ -95,6 +95,12 @@ namespace UI
             //TODO: scale animation and sound with strength of the characters
 
         }
+        
+        public void MapNodeSpawn(MapUI.MapNodeIcon node)
+        {
+            PlayFx(ETBParticlesPrefab,node.transform.position,node.transform);
+
+        }
         //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
         public void DeathParticles(CardUI cardUI)
         {

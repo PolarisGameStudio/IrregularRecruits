@@ -51,10 +51,13 @@ namespace UI
 
         public static UnityEvent OnSwitchingPlace = new UnityEvent();
 
+        private bool BeenSetup = false;
 
 
-        private void OnEnable()
+        private void Setup()
         {
+            BeenSetup = true;
+
             ChildCards = GetComponentsInChildren<CardUI>().ToList();
             RectTransform = GetComponent<RectTransform>();
 
@@ -69,6 +72,9 @@ namespace UI
 
         public void AddChild(CardUI cardUI, int pos)
         {
+            if (!BeenSetup)
+                Setup();
+
             //Debug.Log($"{cardUI.name} added to groupe {name}");
 
             var parent = cardUI.GetComponentInParent<CardLayoutGroup>();
@@ -142,6 +148,9 @@ namespace UI
 
         private PosAndRotation EvaluatePosition(int index, bool fakeHigherCount = false)
         {
+            if (!BeenSetup)
+                Setup();
+
             if (PointOnly) return new PosAndRotation( (Vector2)RectTransform.position + Random.insideUnitCircle *0.1f);
 
             if (index < 0) index = 0;

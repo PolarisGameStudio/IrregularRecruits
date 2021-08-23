@@ -29,7 +29,9 @@ namespace Sound
             BloodCut,
             ProgressBarTick,
             ChargingAbility,
-            FizzleAbility
+            FizzleAbility,
+            MapLineDraw,
+            MapNodeDraw
         }
 
         public enum Stinger

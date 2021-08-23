@@ -36,6 +36,12 @@ namespace MapUI
         public float NodeFadeTime = 2f;
         public Map Map;
 
+        [HideInInspector]
+        public UnityEvent OnLineDraw = new UnityEvent();
+        [HideInInspector]
+        public UnityEvent OnNodeDraw = new UnityEvent();
+
+
         private void Start()
         {
             Event.OnGameBegin.AddListener(CreateMap);
@@ -201,15 +207,30 @@ namespace MapUI
 
                 if (!firstNode)
                 {
+                    instance.SetInteractable(interactable);
+
                     instance.transform.localScale = Vector3.zero;
 
-                    instance.transform.LeanScale(Vector3.one, 1f).setEaseInCubic();
+                    foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
+                        yield return DrawLine(parent, instance);
+
+                    yield return new WaitForSeconds(0.2f);
+
+                    OnNodeDraw.Invoke();
+
+                    instance.transform.localScale = Vector3.one;
+
+                    //Shake
+                    instance.transform.LeanRotateZ(Random.Range(-10f, 10f), 0.1f).setEaseInOutBounce().setOnComplete(()=>
+                        instance.transform.LeanRotateZ(0, 0.1f).setEaseInOutBounce()) ;
+
+                    //instance.transform.LeanScale(Vector3.one, 1f).setEaseInCubic();
+                    AnimationSystem.Instance.MapNodeSpawn(instance);
+
+                    yield return new WaitForSeconds(0.5f);
                 }
                 
-                instance.SetInteractable(false);
 
-                foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
-                    yield return DrawLine(parent, instance);
             }
 
             instance.Icon.interactable = interactable;
@@ -223,6 +244,8 @@ namespace MapUI
         private IEnumerator DrawLine(MapNodeIcon start, MapNodeIcon finish)
         {
             //Debug.DrawLine(start.transform.position, finish.transform.position, Color.black, 100000);
+
+            OnLineDraw.Invoke();
 
             var line = Instantiate(LinePrefab, start.transform);
 
@@ -242,6 +265,7 @@ namespace MapUI
 
             yield return line.DrawLine();
 
+            //yield return new WaitForSeconds(Random.Range(0.25f, 0.6f));
         }
 
         public static Sprite GetRandomLineSprite()

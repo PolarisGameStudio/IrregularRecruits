@@ -116,6 +116,19 @@ MonoBehaviour:
   - Type: 19
     Audio:
     - {fileID: 8300000, guid: 8bb39bdaf262d8a45af05ae34029e716, type: 3}
+  - Type: 20
+    Audio:
+    - {fileID: 8300000, guid: a888d2159ed16924595cf0fe728b3654, type: 3}
+    - {fileID: 8300000, guid: a3f98ad2560433448ab7d8b0c88e5a30, type: 3}
+    - {fileID: 8300000, guid: 227ba2426b962f443ac18627b5b7faf6, type: 3}
+    - {fileID: 8300000, guid: dcae0689ce8c764408d244bb9dbaeaa4, type: 3}
+  - Type: 21
+    Audio:
+    - {fileID: 8300000, guid: 03ee366fcc768674088850a5c7232c11, type: 3}
+    - {fileID: 8300000, guid: 12b49f09b5a155d458f5cca90e815746, type: 3}
+    - {fileID: 8300000, guid: 0535173364e004d4fba91b9f2a2ca3cb, type: 3}
+    - {fileID: 8300000, guid: f3e6657e4a61ee64bba886cb4529a947, type: 3}
+    - {fileID: 8300000, guid: ad4ef5c6b9343ce45a52772f81535948, type: 3}
   Stingers:
   - Type: 0
     Audio:

@@ -61,6 +61,8 @@ namespace MapUI
             }
             else HighlightParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
+            NameText.gameObject.SetActive(interactable);
+
         }
 
            

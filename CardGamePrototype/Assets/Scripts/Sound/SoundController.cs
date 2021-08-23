@@ -26,6 +26,9 @@ namespace Sound
 
             MapNodeIcon.OnMapButtonClick.AddListener(() => PlayUISound(SoundLibrary.UiSound.HeroWalking));
 
+            MapUI.MapUI.Instance.OnLineDraw.AddListener(() => PlayUISound(SoundLibrary.UiSound.MapLineDraw,0.2f));
+            MapUI.MapUI.Instance.OnNodeDraw.AddListener(() => PlayUISound(SoundLibrary.UiSound.MapNodeDraw,0.4f));
+
             Event.OnGameBegin.AddListener(() => ChangeMusic(SoundLibrary.Music.Explore));
             Event.OnGameBegin.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameStart));
 
@@ -114,9 +117,9 @@ namespace Sound
             Instance.SfxAudioSource.PlayOneShot(SoundLibrary.GetSound(type));
 
         }
-        public static void PlayUISound(SoundLibrary.UiSound type)
+        public static void PlayUISound(SoundLibrary.UiSound type,float volume = 1f)
         {
-            Instance.UiAudioSource.PlayOneShot(SoundLibrary.GetSound(type));
+            Instance.UiAudioSource.PlayOneShot(SoundLibrary.GetSound(type),volume);
 
         }
 

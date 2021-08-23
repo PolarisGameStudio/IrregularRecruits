@@ -7,7 +7,7 @@ namespace MapUI
     public class MapEdge : MonoBehaviour
     {
         public Image Line;
-        public float DrawTime = 0.5f;
+        private float DrawTime = 0.25f;
 
         private void Start()
         {
