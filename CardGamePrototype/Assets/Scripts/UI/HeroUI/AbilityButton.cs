@@ -33,6 +33,8 @@ namespace UI
 
         public override void OnPointerUp(PointerEventData eventData)
         {
+            transform.LeanScale(Vector3.one, 0.15f);
+
             var heldDown = Time.unscaledTime - HeldStartTime;
 
             if (heldDown < TimeForNonClick)
@@ -59,6 +61,8 @@ namespace UI
         {
             var nonClickTime = HeldStartTime + TimeForNonClick;
 
+            transform.LeanScale(Vector3.one * 2.5f, 0.15f);
+
             yield return new WaitUntil(() => !Held || Time.unscaledTime > nonClickTime);
 
             if (Held)
@@ -69,6 +73,7 @@ namespace UI
 
             while (Held && Time.unscaledTime < nonClickTime + TimeToActivate)
             {
+                //TODO: shake a little
 
                AbilityUI. ActivationFillImage.fillAmount = (Time.unscaledTime - nonClickTime) / TimeToActivate;
 
