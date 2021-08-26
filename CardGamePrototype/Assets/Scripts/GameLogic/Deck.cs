@@ -18,8 +18,8 @@ namespace GameLogic
 
         public Hero Hero;
 
-        public Deck(DeckObject deckObject,bool temporary = false)
-            : this(deckObject.Creatures.Select(c => new Card(c,temporary)).ToList())
+        public Deck(DeckObject deckObject)
+            : this(deckObject.Creatures.Select(c => new Card(c)).ToList())
         {
             DeckObject = deckObject;
         }

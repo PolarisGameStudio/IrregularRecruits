@@ -49,10 +49,14 @@ namespace UI
         private CardUI AttackTarget;
         public Deck PlayerDeck;
         public Deck EnemyDeck;
-        private List<Card> InitialEnemyDeck;
         internal HashSet<CardAnimation> WardOnBattlefield;
-        private List<Card> InitialPlayerDeck;
 
+        public List<Card> InitialEnemyDeck;
+        public List<Card> InitialPlayerDeck;
+
+        //todo: move ´this into seperate class
+        public int XpAtStartOfBattle;
+        public int GoldAtStartOfBattle;
 
         public static UnityEvent OnBattleFinished = new UnityEvent();
         public static Event.FactionEvent OnBattleBegin = new Event.FactionEvent();
@@ -68,9 +72,6 @@ namespace UI
         public Button EndTurnButton;
         public Image BackgroundImage;
 
-        //todo: move ´this into seperate class
-        private int XpAtStartOfBattle;
-        private int GoldAtStartOfBattle;
 
         public CanvasGroup FocusCanvas;
 

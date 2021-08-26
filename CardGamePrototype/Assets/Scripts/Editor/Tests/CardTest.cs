@@ -19,7 +19,7 @@ namespace Tests
 
             TestAbility = new PassiveAbility()
             {
-                ResultingAction = new AbilityEffectObject(EffectType.DealDamage, Count.One, 1, new Noun()),
+                ResultingAction = new AbilityEffectObject(EffectType.DealDamage, Count.One, 1, new Noun(Noun.CharacterTyp.This)),
                 TriggerCondition = new Trigger(new Noun(Noun.CharacterTyp.This), TriggerType.ETB),
             };
 
@@ -316,6 +316,41 @@ namespace Tests
             Assert.IsTrue(startHealth + boost == TestCard.CurrentHealth);
             Assert.IsTrue(startMaxHealth + boost == TestCard.MaxHealth);
         }
+
+        [Test]
+        public void StatboostBoostDealsCorrectDamageOnDeath()
+        {
+            var startAttack = TestCard.Attack;
+            var startHealth = TestCard.CurrentHealth;
+            
+            var boost = 2;
+
+            int modifiedAttack = startAttack + boost;
+
+            TestCard.StatModifier(boost);
+
+            var otherHealth = modifiedAttack + 5;
+
+            int otherAttack = startHealth + boost;
+            var otherCard = GenerateTestCreatureWithTrait("test", otherAttack, otherHealth,false);
+
+            TestCard.ChangeLocation(Deck.Zone.Battlefield);
+            otherCard.ChangeLocation(Deck.Zone.Battlefield);
+
+            Assert.AreEqual(modifiedAttack, TestCard.Attack);
+
+            Assert.IsTrue(TestCard.Alive());
+
+            otherCard.AttackCard(TestCard);
+
+            Assert.IsFalse(TestCard.Alive());
+
+            Assert.AreEqual(otherHealth - modifiedAttack, otherCard.CurrentHealth);
+
+
+        }
+
+
         [Test]
         public void StatboostTriggersOnStatMod()
         {

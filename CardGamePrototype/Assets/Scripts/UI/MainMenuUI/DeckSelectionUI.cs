@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace UI
         public GameObject Holder;
         public Button SettingsButton;
         public Button AchievementsButton;
+        public Button PlayStoreButton;
 
         private DeckObject SelectedDeck;
 
@@ -27,7 +29,9 @@ namespace UI
         private void Awake()
         {
             AchievementsButton.onClick.AddListener(() => LegacyUI.Instance.Open());
+            PlayStoreButton.onClick.AddListener(OpenPlayStore);
         }
+
 
         public void SelectDeck( DeckObject d)
         {
@@ -63,5 +67,12 @@ namespace UI
         }
 
         public int GetPriority() => 5;
+
+        private void OpenPlayStore()
+        {
+            Application.OpenURL("http://tiny.cc/exbiuz");
+
+
+        }
     }
 }

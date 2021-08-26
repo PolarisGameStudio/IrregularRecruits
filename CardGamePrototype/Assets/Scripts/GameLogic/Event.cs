@@ -36,11 +36,12 @@ namespace GameLogic
         public static CardValueEvent OnHealed = new CardValueEvent();
         public static CardValueEvent OnStatMod = new CardValueEvent();
 
-
+        public class AbilityEvent : UnityEvent<SpecialAbility> { }
+        public static AbilityEvent OnAbilitySelection = new AbilityEvent();
 
         //Ability,Owner,Targets 
-        public class AbilityEvent : UnityEvent<SpecialAbility, AbilityHolder, List<Card>> { }
-        public static AbilityEvent OnAbilityExecution = new AbilityEvent();
+        public class AbilityExecutionEvent : UnityEvent<SpecialAbility, AbilityHolder, List<Card>> { }
+        public static AbilityExecutionEvent OnAbilityExecution = new AbilityExecutionEvent();
 
         //takes the trigger type, the ability owner and the result action to allow doublers to double the effect
         public class AbilityTriggerEvent : UnityEvent<TriggerType, EffectType, AbilityHolder, UnityAction> { }
@@ -52,10 +53,6 @@ namespace GameLogic
 
         //Inputs winner deck and loser deck, in that order
         public static CombatEvent OnBattleFinished = new CombatEvent();
-
-        public class AddUnitEvent : UnityEvent<Creature[]> { }
-        public static AddUnitEvent OnHireUnits = new AddUnitEvent();
-
 
         //TODO: replace with deck/card action and parse the relevant Controller/deck/card
         public class DeckEvent : UnityEvent<Deck> { }
@@ -138,7 +135,7 @@ namespace GameLogic
             OnStatMod.RemoveAllListeners();
 
             //public static AbilityEvent OnAbilityExecution = new AbilityEvent();
-            OnAbilityExecution = new AbilityEvent();
+            OnAbilityExecution = new AbilityExecutionEvent();
 
             OnAbilityTriggered = new AbilityTriggerEvent();
 
@@ -172,6 +169,7 @@ namespace GameLogic
             OnStatScreen.RemoveAllListeners();
             OnShopClose.RemoveAllListeners();
 
+            OnAbilitySelection.RemoveAllListeners();
 
             //public static LocationChangeEvent OnChangeLocation = new LocationChangeEvent();
             OnChangeLocation.RemoveAllListeners();

@@ -51,13 +51,13 @@ namespace Sound
 
             Shop.OnShopOpen.AddListener(s => ChangeMusic(SoundLibrary.Music.Shop, s.VillageType));
             Shop.OnShopReroll.AddListener(i => PlayUISound(SoundLibrary.UiSound.ShopReroll));
-            Shop.OnShopPurchase.AddListener(i => PlayUISound(SoundLibrary.UiSound.PurchaseUnit));
+            Shop.OnShopPurchase.AddListener((i,c) => PlayUISound(SoundLibrary.UiSound.PurchaseUnit));
 
             BattleUI.OnBattleBegin.AddListener(r => ChangeMusic(SoundLibrary.Music.Battle,r));
 
             BattleUI.OnBattleFinished.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
             BattleUI.OnBattleFinished.AddListener(() => PlayStinger(SoundLibrary.Stinger.BattleWon));
-            BattleUI.OnAbilitySelect.AddListener(a => PlayAbilityHit(a.ResultingAction.ActionType));
+            BattleUI.OnAbilitySelect.AddListener(a => PlayAbilityTrigger(a.ResultingAction.ActionType));
             BattleUI.OnLevelAnimation.AddListener(() => PlayCardSound(SoundLibrary.CardSound.LevelUp));
             BattleSummary.Instance.OnClose.AddListener(() => ChangeMusic(SoundLibrary.Music.Explore));
             Event.OnShopClose.AddListener(() => ChangeMusic(SoundLibrary.Music.Explore));

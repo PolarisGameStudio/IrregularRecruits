@@ -61,7 +61,6 @@ namespace UI
 
         private void RerollPush()
         {
-            Debug.Log("clicked reroll");
             ShowingShop?.Reroll();
         }
 
@@ -213,6 +212,13 @@ namespace UI
             if (Shop.StandardShop == null) Shop.StandardShop = new Shop(null);
 
             Instance.SetupShop(Shop.StandardShop);
+        }
+
+        public void Close()
+        {
+            UIController.Instance.Close(this);
+            Shop.OnShopRemovingOptions.Invoke(ShowingShop);
+
         }
     }
 }

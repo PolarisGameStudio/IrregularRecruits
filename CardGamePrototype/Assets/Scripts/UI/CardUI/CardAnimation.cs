@@ -79,7 +79,7 @@ namespace UI
             while (DissolveAmount > 0)
             {
                 DissolveAmount = Mathf.Clamp01(DissolveAmount - Time.deltaTime);
-                DissolveMaterial?.SetFloat("DissolveAmount", DissolveAmount);
+                DissolveMaterial? .SetFloat("DissolveAmount", DissolveAmount);
 
                 foreach (var t in ControlledTexts)
                     t.alpha = 1 - DissolveAmount;

@@ -52,8 +52,8 @@ namespace Tests
 
         protected Card GenerateTestCreatureWithAbility(SpecialAbility ability, Race race = null,bool playerdeck = true, Trait trait = null)
         {
-            if(trait == null)
-                 trait = new Trait()
+            if (trait == null)
+                trait = new Trait()
                 {
                     Description = "Testing a trait",
                     name = "TestTrait"
@@ -72,6 +72,43 @@ namespace Tests
 
             };
 
+            if (ability)
+                TestCreature.SpecialAbility = ability;
+
+            var testCard = new Card(TestCreature);
+            AddCardToDeck(playerdeck, testCard);
+
+            return testCard;
+        }
+
+        protected Card GenerateTestCreatureWithTrait(string traitName, int attack = 2, int health = 10, bool playerDeck = true)
+        {
+            Trait trait = new Trait()
+            {
+                Description = "Testing a trait",
+                name = traitName
+            };
+
+            var TestCreature = new Creature()
+            {
+                name = "Tester" + UnityEngine.Random.Range(0, 1000),
+                Attack = attack,
+                Health = health,
+                Traits = string.IsNullOrEmpty(traitName) ? new List<Trait>() : new List<Trait>()
+                {
+                    trait
+                }
+            };
+
+            var testCard = new Card(TestCreature);
+
+            AddCardToDeck(playerDeck, testCard);
+
+            return testCard;
+        }
+
+        private static void AddCardToDeck(bool playerdeck, Card testCard)
+        {
             Deck testDeck = null;
 
             if (playerdeck)
@@ -105,40 +142,7 @@ namespace Tests
                 testDeck.DeckController = new AI(testDeck);
             }
 
-            if (ability)
-                TestCreature.SpecialAbility = ability;
-
-            var testCard = new Card(TestCreature);
-
             testDeck.AddCard(testCard);
-
-            return testCard;
-        }
-
-
-
-        protected Card GenerateTestCreatureWithTrait(string traitName, int attack = 2, int health = 10)
-        {
-            Trait trait = new Trait()
-            {
-                Description = "Testing a trait",
-                name = traitName
-            };
-
-            var TestCreature = new Creature()
-            {
-                name = "Tester" + UnityEngine.Random.Range(0, 1000),
-                Attack = attack,
-                Health = health,
-                Traits = string.IsNullOrEmpty(traitName) ? new List<Trait>() : new List<Trait>()
-                {
-                    trait
-                }
-            };
-
-            var testCard = new Card(TestCreature);
-
-            return testCard;
         }
 
         protected static void SetObjectIfCorrectAbility<T>(SpecialAbility thisAbility, SpecialAbility otherAb, ref T toBeSet, T value)

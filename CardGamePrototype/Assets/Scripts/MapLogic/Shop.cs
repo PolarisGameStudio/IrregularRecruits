@@ -19,13 +19,16 @@ namespace MapLogic
         public int RerollPrice;
         public static Shop StandardShop;
         public int MaxCreatureCR;
-
+        public int PlayerGoldOnReroll;
 
         //shop Events
         public class ShopEvent : UnityEvent<Shop> { }
         public static ShopEvent OnShopOpen = new ShopEvent();
         public static ShopEvent OnShopReroll = new ShopEvent();
-        public static ShopEvent OnShopPurchase = new ShopEvent();
+        public static ShopEvent OnShopRemovingOptions = new ShopEvent();
+
+        public class PurchaseEvent : UnityEvent<Creature,Shop> { }
+        public static PurchaseEvent OnShopPurchase = new PurchaseEvent();
 
         public Shop(Race villageType, int cR = int.MaxValue)
         {
@@ -48,13 +51,16 @@ namespace MapLogic
         {
             OnShopOpen.RemoveAllListeners();
             OnShopReroll.RemoveAllListeners();
+            OnShopRemovingOptions.RemoveAllListeners();
             OnShopPurchase.RemoveAllListeners();
         }
 
         public void Reroll()
         {
             if (RerollsLeft-- == 0 || RerollPrice > Map.PlayerGold)
-                throw new System.ArgumentException("No rerolls left");
+                return;
+
+            OnShopRemovingOptions.Invoke(this);
 
             Map.PlayerGold -= RerollPrice;
 
@@ -68,6 +74,8 @@ namespace MapLogic
         private void SetupOptions()
         {
             OnOffer.Clear();
+
+            PlayerGoldOnReroll = Map.PlayerGold;
 
             foreach (var choice in ShopOptions.Instance.Options)
             {
@@ -109,9 +117,9 @@ namespace MapLogic
 
             if(Map.PlayerGold >= sale.Item2)
             {
-                OnShopPurchase.Invoke(this);
-
                 OnOffer.Remove(sale);
+
+                OnShopPurchase.Invoke(card, this);
 
                 Battle.PlayerDeck.AddCard(new Card(sale.Item1));
 
@@ -122,6 +130,11 @@ namespace MapLogic
 
             return false;
 
+        }
+
+        public void Close()
+        {
+            OnShopRemovingOptions.Invoke(this);
         }
 
     }

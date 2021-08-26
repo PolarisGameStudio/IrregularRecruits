@@ -55,17 +55,14 @@ namespace GameLogic
 
         public bool Warded = false;
 
-        //no listeners created for only ui cards
-        private bool TempCard = false;
 
 
 
         #endregion
 
         //temporary if the card is only meant to display in deck selection or similar and not in deck to battle
-        public Card(Creature c,bool temporary = false)
+        public Card(Creature c)
         {
-            TempCard = temporary;
             Creature = c;
 
             //this means that they are warded outisde of combat as well? intentional
@@ -177,6 +174,8 @@ namespace GameLogic
 
             int damageGiven = Mathf.Max(0, Attack);
 
+            int damageTaken = Mathf.Max(0, target.Attack);
+
             var nextTo = target.Neighbours();
 
             target.HealthChange(-damageGiven);
@@ -189,11 +188,8 @@ namespace GameLogic
 
             if (returnDamage )
             {
-                int damageTaken = Mathf.Max(0, target.Attack);
                 this.HealthChange(-damageTaken);
 
-                if (target.Lifedrain())
-                    target.HealthChange(damageTaken);
             }
 
             if (Lifedrain())
@@ -201,6 +197,8 @@ namespace GameLogic
                 HealthChange(damageGiven);
             }
 
+            if (returnDamage && target.Lifedrain())
+                target.HealthChange(damageTaken);
 
             if (!Alive() && target.Alive()) Event.OnKill.Invoke(target,Location);
             else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this,Location);
@@ -252,7 +250,7 @@ namespace GameLogic
             if (creature && creature.SpecialAbility)
                 creature.SpecialAbility.RemoveListeners(this);
 
-            if (newCreature.SpecialAbility && !TempCard)
+            if (newCreature.SpecialAbility )
             {
                 newCreature.SpecialAbility.SetupListeners(this);
             }
@@ -315,7 +313,7 @@ namespace GameLogic
 
         public void CleanListeners()
         {
-            if (Creature && Creature.SpecialAbility && !TempCard)
+            if (Creature && Creature.SpecialAbility )
                 Creature.SpecialAbility.RemoveListeners(this);
         }
 
