@@ -27,6 +27,6 @@ MonoBehaviour:
   Payoff: 
   Allies: []
   Race: {fileID: 11400000, guid: c0b8f6b8885d02b488e0cad60f06d0af, type: 2}
-  SoundSetType: 0
+  SoundSetType: 14
   Performance: 0
   TopFocused: 0

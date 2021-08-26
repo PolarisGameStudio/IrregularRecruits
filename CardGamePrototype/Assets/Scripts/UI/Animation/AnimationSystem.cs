@@ -27,20 +27,22 @@ namespace UI
         public ParticleSystem[] SummoningParticles;
         public AbilityAnimationFX[] AbilityFx;
 
-        public class CardUIEvent : UnityEvent<CardUI,CreatureBark> { }
-
-        public static CardUIEvent OnCreatureExclamation = new CardUIEvent();
-
 
         public  UnityEvent OnDraw = new UnityEvent();
         public  UnityEvent OnWithdraw = new UnityEvent();
-        public  UnityEvent OnEtb = new UnityEvent();
+
+        public class CardUIEvent : UnityEvent<CardUI, CreatureBark> { }
+        public  CardUIEvent OnEtb = new CardUIEvent();
         public  UnityEvent OnDamaged = new UnityEvent();
         public  UnityEvent OnHeal = new UnityEvent();
         public  UnityEvent OnWardTrigger = new UnityEvent();
         public class AbilityEvent : UnityEvent<EffectType> { }
         public  AbilityEvent OnAbilityTrigger = new AbilityEvent();
         public  AbilityEvent OnAbilityTargetHit = new AbilityEvent();
+
+
+        public CardUIEvent OnCreatureExclamation = new CardUIEvent();
+
 
         [Serializable]
         public struct ZoneMoveAnimation
@@ -90,7 +92,7 @@ namespace UI
         public void ETBParticles(CardUI cardUI)
         {
             StartCoroutine(PlayCardFX(cardUI, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f));
-            OnEtb.Invoke();
+            OnEtb.Invoke(cardUI,CreatureBark.Grunt);
 
             //TODO: scale animation and sound with strength of the characters
 
@@ -98,7 +100,7 @@ namespace UI
         
         public void MapNodeSpawn(MapUI.MapNodeIcon node)
         {
-            PlayFx(ETBParticlesPrefab,node.transform.position,node.transform);
+            PlayFx(ETBParticlesPrefab,node.transform.position,null);
 
         }
         //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
@@ -207,7 +209,7 @@ namespace UI
 
             ui.transform.LeanScale(Vector3.one * 1.15f, time);
 
-            OnCreatureExclamation.Invoke(ui, CreatureBark.Attack);
+            Instance.OnCreatureExclamation.Invoke(ui, CreatureBark.Attack);
 
             yield return new WaitForSeconds(time / 2);
         }

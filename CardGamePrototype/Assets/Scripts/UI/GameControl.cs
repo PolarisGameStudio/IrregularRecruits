@@ -8,6 +8,8 @@ namespace GameLogic
     {
         private void Awake()
         {
+            LeanTween.init(3200);
+
             DeckGeneration.UniquesGenerated.Clear();
             Event.ResetEvents();
 

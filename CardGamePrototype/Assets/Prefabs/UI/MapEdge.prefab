@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38679248, g: 0.19416305, b: 0.10399608, a: 0.39215687}
+  m_Color: {r: 0.38679248, g: 0.19416305, b: 0.10399608, a: 0.5882353}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -88,4 +88,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 6325142181278093834}
-  DrawTime: 0.5

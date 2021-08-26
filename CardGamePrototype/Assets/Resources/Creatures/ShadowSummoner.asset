@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0395432d20999be4586d0532e8f1d995, type: 3}
-  m_Name: DogWarrior
+  m_Name: ShadowSummoner
   m_EditorClassIdentifier: 
-  name: Dog Man
+  name: Shadow Summoner
   Rarity: 0
   Locked: 0
-  Image: {fileID: 21300000, guid: 13b756e1eb6e22e43820816ca1873c8f, type: 3}
+  Image: {fileID: 21300000, guid: a0d9f32cfaef97b4c8046302b9d4d2a8, type: 3}
   IconImage: {fileID: 0}
   Attack: 1
-  Health: 12
+  Health: 6
   Traits:
-  - {fileID: 11400000, guid: 6b040849a02f2f14897ce2af0c220731, type: 2}
-  SpecialAbility: {fileID: 11400000, guid: 617173551f55dc64bbc081c9195aab66, type: 2}
-  CR: 26
-  Enabling: 0300000000000000
+  - {fileID: 11400000, guid: 8ca915ef29b61f8499e1b0bdc12f8f21, type: 2}
+  SpecialAbility: {fileID: 11400000, guid: 7beab9bb91105da4ebcb893dbbb48721, type: 2}
+  CR: 23
+  Enabling: 0200000001000000070000000a000000
   Payoff: 
   Allies: []
-  Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
-  SoundSetType: 0
+  Race: {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
+  SoundSetType: 12
   Performance: 0
-  TopFocused: 1
+  TopFocused: 0

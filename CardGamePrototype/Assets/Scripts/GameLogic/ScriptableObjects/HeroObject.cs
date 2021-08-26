@@ -13,6 +13,7 @@ namespace GameLogic
         public Race Race;
         public DeckObject Deck;
 
+        public bool HasWon;
         public Sprite Portrait;
         public AbilityWithEffect StartingAbility;
 

@@ -20,7 +20,7 @@ namespace UpdateManagement
         public TextMeshProUGUI UpdateStatusText;
         public TextMeshProUGUI DescriptionText;
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && ! UNITY_EDITOR
         private void Awake()
         {
             UpdateManager = new AppUpdateManager();

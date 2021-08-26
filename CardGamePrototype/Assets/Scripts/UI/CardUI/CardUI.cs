@@ -326,7 +326,7 @@ namespace UI
             {
                 OnDragStarted.Invoke();
                 BeingDragged = true;
-                AnimationSystem.OnCreatureExclamation.Invoke(this, CreatureBark.Grunt);
+                //AnimationSystem.OnCreatureExclamation.Invoke(this, CreatureBark.Grunt);
             }
         }
 

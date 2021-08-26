@@ -34,6 +34,7 @@ namespace UI
             UIWindows.Remove(window);
 
             window.GetHolder()?.SetActive(false);
+            window.GetCanvasGroup().interactable = false;
 
             if (UIWindows.Any())
             {

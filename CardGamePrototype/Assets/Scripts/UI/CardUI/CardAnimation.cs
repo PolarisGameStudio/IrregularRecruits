@@ -80,7 +80,7 @@ namespace UI
             }
 
             if(shout)
-                AnimationSystem.OnCreatureExclamation.Invoke(GetComponentInParent<CardUI>(),CreatureBark.Resurrection);
+                AnimationSystem.Instance.OnCreatureExclamation.Invoke(GetComponentInParent<CardUI>(),CreatureBark.Resurrection);
         }
 
         internal void SetWarded(bool warded,bool addRemoveFromWatchlist)

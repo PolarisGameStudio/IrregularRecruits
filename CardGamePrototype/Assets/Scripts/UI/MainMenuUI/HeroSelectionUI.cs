@@ -13,6 +13,7 @@ namespace UI
         public TextMeshProUGUI RaceText, ClassText;
         public Button PreviousButton, NextButton;
         public Image HeroImage;
+        public Image CrownImage;
         public Button HeroButton;
         private Hero SelectedHero;
         private List<HeroObject> SelectableHeroes;
@@ -77,6 +78,8 @@ namespace UI
 
                 HeroImage.sprite = chosen.Portrait;
                 HeroName.text = chosen.name;
+
+                CrownImage.gameObject.SetActive(chosen.HasWon);
 
                 RaceText.text = chosen.RaceOption.name;
                 RaceText.color = chosen.RaceOption.Color;

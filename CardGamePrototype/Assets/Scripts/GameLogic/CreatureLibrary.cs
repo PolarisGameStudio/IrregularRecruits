@@ -13,11 +13,11 @@ namespace GameLogic
         public Creature[] SpawnableEnemies;
         public List<Creature> ShopCreatures;
 
-        public Creature GetShopCreature(Race race)
+        public Creature GetShopCreature(Race race, int maxCreatureCR)
         {
             var selectables = ShopCreatures.Where(c => c.Race == race && !c.IsSummon()).ToList();
 
-            return TakeRandom(selectables);
+            return TakeRandom(selectables,maxCreatureCR);
 
         }
 
@@ -38,9 +38,9 @@ namespace GameLogic
         }
 
 
-        public Creature GetShopCreature()
+        public Creature GetShopCreature(int maxCr)
         {
-            return TakeRandom(ShopCreatures);
+            return TakeRandom(ShopCreatures,maxCr);
         }
 
     }

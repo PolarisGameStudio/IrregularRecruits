@@ -79,14 +79,6 @@ namespace Sound
             public AudioClip[] Audio;
         }
 
-
-        [System.Serializable]
-        public struct RaceSpecificSound
-        {
-            public CardSound Type;
-            public AudioClip[] Audio;
-        }
-
         [System.Serializable]
         public struct AbilitySound
         {
@@ -120,7 +112,6 @@ namespace Sound
         public StingerSoundReference[] Stingers;
         public MusicRef[] Musics;
         public AbilitySound[] AbilitySounds;
-        public RaceSpecificSound[] VillageSounds;
         public SoundSet[] CreatureSoundSets;
 
         internal static AudioClip GetSound(CardSound type)

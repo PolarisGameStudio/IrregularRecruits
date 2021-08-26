@@ -22,7 +22,7 @@ namespace Data
             return (T)LoadedData[table + key];
         }
 
-        internal void InitializeDatabases()
+        public void InitializeDatabases()
         {
             var path = System.IO.Path.Combine(Application.persistentDataPath, "Data.json");
 

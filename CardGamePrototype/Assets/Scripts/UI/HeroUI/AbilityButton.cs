@@ -16,7 +16,9 @@ namespace UI
         //how long must the user hold for the click not to count and how long before it then activates the ability
         public static float TimeForNonClick = 0.25f;
         public static float TimeToActivate = 1f;
-        public static UnityEvent OnHolding = new UnityEvent();
+
+        public class AbilityButtonEvent : UnityEvent<AbilityButton> { }
+        public static AbilityButtonEvent OnHolding = new AbilityButtonEvent();
         public static UnityEvent OnFizzle = new UnityEvent();
 
         public override void OnPointerDown(PointerEventData eventData)
@@ -66,7 +68,7 @@ namespace UI
             yield return new WaitUntil(() => !Held || Time.unscaledTime > nonClickTime);
 
             if (Held)
-                OnHolding.Invoke();
+                OnHolding.Invoke(this);
             else
                 yield break;
 

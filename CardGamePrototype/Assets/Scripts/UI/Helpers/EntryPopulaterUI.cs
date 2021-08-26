@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,6 +36,11 @@ public abstract class EntryPopulaterUI<E,T> : MonoBehaviour where E : UIEntry<T>
             inst.gameObject.SetActive(true);
 
             OnReload.AddListener(() => Destroy(inst.gameObject));
+        }
+
+        if(this is IUIWindow window)
+        {
+            UIController.Instance.Open(window);
         }
     }
 

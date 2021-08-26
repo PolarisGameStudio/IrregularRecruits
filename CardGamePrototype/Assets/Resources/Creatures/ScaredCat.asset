@@ -34,6 +34,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6fd6eb573d1c53349b6e80273e7335d5, type: 2}
   - {fileID: 11400000, guid: 9f4238adc108e8e479b23362fd7c596a, type: 2}
   Race: {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
-  SoundSetType: 8
+  SoundSetType: 10
   Performance: 0
   TopFocused: 0

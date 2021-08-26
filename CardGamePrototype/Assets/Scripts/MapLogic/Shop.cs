@@ -18,6 +18,7 @@ namespace MapLogic
         public int RerollsLeft;
         public int RerollPrice;
         public static Shop StandardShop;
+        public int MaxCreatureCR;
 
 
         //shop Events
@@ -26,9 +27,13 @@ namespace MapLogic
         public static ShopEvent OnShopReroll = new ShopEvent();
         public static ShopEvent OnShopPurchase = new ShopEvent();
 
-        public Shop(Race villageType)
+        public Shop(Race villageType, int cR = int.MaxValue)
         {
             VillageType = villageType;
+
+            MaxCreatureCR =  14 + cR / 6;
+
+            Debug.Log("max cr in shop: " + MaxCreatureCR);
 
             RerollsLeft = ShopOptions.Instance.Rerolls;
 
@@ -80,11 +85,11 @@ namespace MapLogic
             while ( (forSale == null || OnOffer.Any(a=> a.Item1 ==  forSale)) && stop-- > 0)
             {
                 if (choice == ShopOptionType.OwnerRace && VillageType)
-                    forSale = CreatureLibrary.Instance.GetShopCreature(VillageType);
+                    forSale = CreatureLibrary.Instance.GetShopCreature(VillageType,MaxCreatureCR);
                 else if (choice == ShopOptionType.FriendRace && VillageType && VillageType.FriendRaces.Length > 0)
-                    forSale = CreatureLibrary.Instance.GetShopCreature(VillageType.FriendRaces[Random.Range(0, VillageType.FriendRaces.Length)]);
+                    forSale = CreatureLibrary.Instance.GetShopCreature(VillageType.FriendRaces[Random.Range(0, VillageType.FriendRaces.Length)],MaxCreatureCR);
                 else
-                    forSale = CreatureLibrary.Instance.GetShopCreature();
+                    forSale = CreatureLibrary.Instance.GetShopCreature( MaxCreatureCR);
 
                 price = (int)( forSale.CR * Random.Range(0.5f, 1.2f));
 

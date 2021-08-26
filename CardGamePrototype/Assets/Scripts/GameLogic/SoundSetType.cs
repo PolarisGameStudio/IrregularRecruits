@@ -12,6 +12,14 @@
         MaleFunnyDwarf,
         FemaleQuirky,
         FemaleBrute,
+        Cat,
+        Zombie,
+        MaleCrazy,
+        Male2,
+        FemaleCrazy,
+        PlantMonster,
+        StoneMonster,
+        SwampMonster
 
     }
 

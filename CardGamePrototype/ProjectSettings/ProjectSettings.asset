@@ -41,7 +41,7 @@ PlayerSettings:
     height: 1
   m_SplashScreenLogos:
   - logo: {fileID: 21300000, guid: 732bdec506f32654db2ece84d9b3a773, type: 3}
-    duration: 4
+    duration: 8
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
@@ -126,7 +126,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.21d
+  bundleVersion: 0.22a
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -173,7 +173,7 @@ PlayerSettings:
     Android: com.PawOktober.IrregularRecruits
     Standalone: com.Company.ProductName
   buildNumber: {}
-  AndroidBundleVersionCode: 5
+  AndroidBundleVersionCode: 9
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -271,7 +271,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 66231da4e1efaea468a6fb94b1a8bca6, type: 3}
+      m_Icon: {fileID: 2800000, guid: 23dfbc0e58255014ca5ab5efe47913bb, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

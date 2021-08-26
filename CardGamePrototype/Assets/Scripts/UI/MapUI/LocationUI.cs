@@ -38,14 +38,14 @@ namespace MapUI
 
         public void OpenWinEvent()
         {
-            Debug.Log("opening Win screen");
+            //Debug.Log("open win node");
 
             Open(new MapNode(WinEvent,CurrentNode.Map));
         }
 
         public void OpenGameOverEvent()
         {
-            Debug.Log("opening Game Over screen");
+            //Debug.Log("open loss node");
 
             Open(new MapNode(GameOverEvent, CurrentNode.Map));
 

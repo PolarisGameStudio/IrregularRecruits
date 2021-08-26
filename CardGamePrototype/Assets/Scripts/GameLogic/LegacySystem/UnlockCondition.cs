@@ -15,6 +15,7 @@ namespace GameLogic
 
         public Event.IntEvent OnCountUp = new Event.IntEvent();
 
+
         public bool Unlocked() => Count >= UnlocksAt;
 
         //sets the startedAt value to the current count. To track how much have improved during a run.

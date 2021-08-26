@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Event = GameLogic.Event;
 
 namespace MapLogic
 {
@@ -54,6 +55,15 @@ namespace MapLogic
             }
 
             Location.Open(this);
+
+            if (IsFinalNode())
+                Event.OnBattleFinished.AddListener(CheckGameWin);
+        }
+
+        private void CheckGameWin(Deck winner, Deck loser)
+        {
+            if (winner == Battle.PlayerDeck)
+                Event.OnGameWin.Invoke();
         }
 
         public void AddAssociation(MapOption option, Card unit)

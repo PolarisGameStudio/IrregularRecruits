@@ -158,10 +158,9 @@ namespace UI
 
         private IEnumerator BuyAnimation(CardUI card)
         {
-
             if (!card) yield break;
 
-            AnimationSystem.OnCreatureExclamation.Invoke(card, CreatureBark.Grunt);
+            AnimationSystem.Instance.OnCreatureExclamation.Invoke(card, CreatureBark.Grunt);
 
             StartCoroutine(card.Flip(CardUI.CardState.FaceDown));
             card.Interactable = false;
@@ -192,7 +191,7 @@ namespace UI
 
             var startTime = Time.time;
 
-            while (Time.time < startTime + MoveDuration)
+            while (Time.time < startTime + MoveDuration )
             {
                 yield return null;
 

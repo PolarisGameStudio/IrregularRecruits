@@ -24,7 +24,7 @@ namespace MapLogic
 
         public override void ExecuteOption(MapNode owner)
         {
-            new Shop(Race);
+            new Shop(Race,CR);
         }
 
         public override MapNodeType GetLocationType()

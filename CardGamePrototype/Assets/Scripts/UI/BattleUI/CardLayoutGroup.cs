@@ -91,12 +91,14 @@ namespace UI
             cardUI.CurrentZoneLayout = this;
 
             UpdateChildrenPositions();
+
+            if (PointOnly) //move it yourself
+                MoveCardToPos(cardUI,EvaluatePosition(0));
         }
 
         private void RemoveChild(CardUI cardUI)
         {
             ChildCards.Remove(cardUI);
-
 
             UpdateChildrenPositions();
         }
@@ -119,7 +121,8 @@ namespace UI
                 ChildDesiredPositions[i] = EvaluatePosition(i);
             }
 
-            MoveCardsToDesiredPositions();
+            if(!PointOnly)
+                MoveCardsToDesiredPositions();
 
             // update child as movingToPosition, to only check those cards
         }
@@ -129,22 +132,35 @@ namespace UI
             for (int i = 0; i < ChildCards.Count; i++)
             {
                 var card = ChildCards[i];
-                
+
                 if (!card)
                     continue;
-                
+
                 card.LayoutIndex = i;
 
                 var desiredPos = ChildDesiredPositions[i];
 
-                card.FrontHolder.transform.LeanRotateZ(desiredPos.ZRotation, Random.Range(0.1f, 0.3f));
+                MoveCardToPos(card, desiredPos);
 
-                if (card.BeingDragged) continue;
-
-                //if (!PointOnly)
-                card.transform.LeanMove( desiredPos.Position, 0.3f).setEaseOutExpo();
             }
+
         }
+
+        private static void MoveCardToPos(CardUI card, PosAndRotation desiredPos)
+        {
+            card.FrontHolder.transform.LeanRotateZ(desiredPos.ZRotation, Random.Range(0.1f, 0.3f));
+
+            if (card.BeingDragged) return;
+                    
+            card.transform.LeanMove(desiredPos.Position, 0.3f).setEaseOutExpo();
+
+            //if( !(ChildCards.Count > 8 && PointOnly))
+            //if too many cards in deck. don't animate the movement. 
+            //if (!(ChildCards.Count > 8 && PointOnly && !card.CurrentZoneLayout))
+            //else
+            //    card.transform.position = desiredPos.Position;
+        }
+
 
         private PosAndRotation EvaluatePosition(int index, bool fakeHigherCount = false)
         {

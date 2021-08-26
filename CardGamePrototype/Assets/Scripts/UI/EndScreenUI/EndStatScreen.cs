@@ -27,6 +27,9 @@ namespace UI
         //Stats
         public Deck LostTo;
 
+        public GameObject BloodAnimation;
+        public GameObject Crown;
+
 
         private void OnEnable()
         {
@@ -61,7 +64,18 @@ namespace UI
 
             UnlockEntry.gameObject.SetActive(false);
 
-            LossDescriptionText.text = hero.GetName() + "\n was killed by a group of " + LostTo.Races.First().name;
+            if (LostTo != null)
+            {
+                LossDescriptionText.text = hero.GetName() + "\n was killed by a group of " + LostTo.Races.First().name;
+                BloodAnimation.SetActive(true);
+            }
+            else
+            {
+                LossDescriptionText.text = hero.GetName() + "\n vanquished the demon Konallath";
+                
+                Crown.SetActive(true);
+                //TODO crown animation and sound
+            }
 
             var killed = BattleSummary.TotalKilled;
             var xp = hero.Xp;
@@ -85,7 +99,11 @@ namespace UI
 
             var newHighscore = savedScore.Value < score;
 
-            if (newHighscore) savedScore.Value = score;
+            if (newHighscore)
+            {
+                savedScore.Value = score;
+                DataHandler.Instance.Save();
+            }
 
             var inst = Instantiate(StatTextEntry, StatTextEntry.transform.parent);
 

@@ -1,8 +1,11 @@
 ﻿using GameLogic;
 using MapLogic;
 using MapUI;
+using System;
+using System.Collections;
 using UI;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Event = GameLogic.Event;
 
@@ -14,6 +17,8 @@ namespace Sound
         public AudioSource StingerAudioSource;
         public AudioSource MusicAudioSource;
         public AudioSource SfxAudioSource;
+
+
 
         private void Awake()
         {
@@ -41,6 +46,9 @@ namespace Sound
             Event.OnGameOver.AddListener(() => ChangeMusic(SoundLibrary.Music.NoMusic));
             Event.OnGameOver.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameLoss));
             Event.OnGameWin.AddListener(() => PlayStinger(SoundLibrary.Stinger.GameWin));
+
+            AnimationSystem.Instance.OnEtb.AddListener(AnimationSystem.Instance. OnCreatureExclamation.Invoke);
+
             Shop.OnShopOpen.AddListener(s => ChangeMusic(SoundLibrary.Music.Shop, s.VillageType));
             Shop.OnShopReroll.AddListener(i => PlayUISound(SoundLibrary.UiSound.ShopReroll));
             Shop.OnShopPurchase.AddListener(i => PlayUISound(SoundLibrary.UiSound.PurchaseUnit));
@@ -63,27 +71,27 @@ namespace Sound
 
             AnimationSystem.Instance.OnDraw.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Draw));
             AnimationSystem.Instance.OnWithdraw.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Withdraw));
-            AnimationSystem.Instance.OnEtb.AddListener(() => PlayCardSound(SoundLibrary.CardSound.ETB));
+            AnimationSystem.Instance.OnEtb.AddListener((c,b) => PlayCardSound(SoundLibrary.CardSound.ETB));
             AnimationSystem.Instance.OnDamaged.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Hit));
             AnimationSystem.Instance.OnHeal.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Heal));
             AnimationSystem.Instance.OnWardTrigger.AddListener(() => PlayCardSound(SoundLibrary.CardSound.Ward));
 
             ActionsLeftUI.OnActionGained.AddListener(() => PlayUISound(SoundLibrary.UiSound.ActionsRefreshed));
 
-            AnimationSystem.OnCreatureExclamation.AddListener((c,bark) => PlayCardSound(bark,c.Creature.SoundSetType));
+            AnimationSystem.Instance.OnCreatureExclamation.AddListener((c,bark) => PlayCardSound(bark,c.Creature.SoundSetType));
 
             AnimationSystem.Instance.OnAbilityTrigger.AddListener(PlayAbilityTrigger);
             AnimationSystem.Instance.OnAbilityTargetHit.AddListener(PlayAbilityHit);
 
             LegacyUIEntry.OnBarTick.AddListener(() => PlayUISound(SoundLibrary.UiSound.ProgressBarTick));
 
-            AbilityButton.OnHolding.AddListener(() => PlayUISound(SoundLibrary.UiSound.ChargingAbility));
+            AbilityButton.OnHolding.AddListener(button => PlayUISound(SoundLibrary.UiSound.ChargingAbility,()=> !button.Held));
             AbilityButton.OnFizzle.AddListener(() => PlayUISound(SoundLibrary.UiSound.FizzleAbility));
         }
 
         private void PlayCardSound(CreatureBark soundType, GameLogic.SoundSetType soundSetType)
         {
-            AudioClip clip = SoundLibrary.GetSound(soundType, GameLogic.SoundSetType.Standard);
+            AudioClip clip = SoundLibrary.GetSound(soundType, soundSetType);
 
             if(clip)
                 SfxAudioSource.PlayOneShot(clip);
@@ -122,7 +130,11 @@ namespace Sound
             Instance.UiAudioSource.PlayOneShot(SoundLibrary.GetSound(type),volume);
 
         }
-
+        
+        public static void PlayUISound(SoundLibrary.UiSound type, Func<bool> stopCondition)
+        {
+            Instance.StartCoroutine(Instance.PlayUntillRoutine(Instance.UiAudioSource, SoundLibrary.GetSound(type), stopCondition));
+        }
 
         //TODO: create fade
         public static void ChangeMusic(SoundLibrary.Music type,Race race = null)
@@ -141,6 +153,18 @@ namespace Sound
                 Instance.MusicAudioSource.clip = f;
                 Instance.MusicAudioSource.Play();
             }
+        }
+
+        private IEnumerator PlayUntillRoutine(AudioSource audioSource, AudioClip clip, Func<bool> stopAction)
+        {
+            audioSource.clip = clip;
+
+            audioSource.Play();
+
+            yield return new WaitUntil(stopAction);
+
+            audioSource.clip = null;
+
         }
     }
 }

@@ -36,12 +36,28 @@ namespace GameLogic
 
                 unlock.OnCountUp.AddListener(i => ChangeIntTypeValue(i, value, unlock.UnlocksHero.name));
 
+                var crown = DataHandler.Instance.GetData<BoolType>(unlock.UnlocksHero.name, "Winners", "false");
+
+                unlock.UnlocksHero. HasWon = crown.Value;
+
+                Event.OnGameWin.AddListener(() => SetWonIfWinner(crown, unlock.UnlocksHero));
+
                 //Debug.Log("synced: " + unlock.Description());
 
             }
             SetStartValues();
 
             OnLegaciesLoaded.Invoke();
+        }
+
+        private void SetWonIfWinner(BoolType crown, HeroObject hero)
+        {
+            if (Battle.PlayerDeck.Hero.HeroObject != hero)
+                return;
+
+            crown.Value = true;
+
+            DataHandler.Instance.Save();
         }
 
         internal bool IsUnlocked(HeroObject arg)

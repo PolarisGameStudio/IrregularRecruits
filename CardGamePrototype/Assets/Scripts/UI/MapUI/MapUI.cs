@@ -41,6 +41,7 @@ namespace MapUI
         [HideInInspector]
         public UnityEvent OnNodeDraw = new UnityEvent();
 
+        private bool DrawingMap;
 
         private void Start()
         {
@@ -94,6 +95,9 @@ namespace MapUI
 
         private IEnumerator DrawMap(MapNode startNode, int shownSteps = 1000)
         {
+            yield return new WaitUntil(() => !DrawingMap);
+
+            DrawingMap = true;
 
             if (shownSteps < 0) shownSteps = 1000;
 
@@ -112,7 +116,7 @@ namespace MapUI
             Nodes.Clear();
             
             //create from node
-            yield return CreateNode(startNode, MapStartPosition.position,false,true);
+            yield return CreateNode(startNode, MapStartPosition.localPosition,false,true);
             
             LeanTween.moveX(MapHolder.gameObject, MapHolder.transform.position.x-Nodes.First().transform.position.x - PositionToCenterDifferience.x, 3f).setEaseInExpo();
 
@@ -122,6 +126,8 @@ namespace MapUI
             {
                 n.SetInteractable(true);
             }
+
+            DrawingMap = false;
         }
 
         private  IEnumerator DestroyNode(MapNodeIcon n)
@@ -135,17 +141,17 @@ namespace MapUI
 
         private IEnumerator DrawStepRecursive(List<MapNode> nodes, int degree, int shownSteps,MapNodeIcon startNode)
         {
-            var r = degree * MapSizeX;
+            var r = degree * MapSizeX /NodeHolder.transform.lossyScale.x;
 
             //position should be all current node position + mapsize * direction
 
-            var yPos = -0.5f * MapSizeY;
+            var yPos = -0.5f * MapSizeY / NodeHolder.transform.lossyScale.y;
 
-            var yDiff =  MapSizeY/ Mathf.Max(1, (nodes.Count-1));
+            var yDiff =  MapSizeY/ Mathf.Max(1, (nodes.Count-1)) / NodeHolder.transform.lossyScale.y;
 
             var yRnd = yDiff / 10f;
 
-            var xRnd = 0.3f;
+            var xRnd = 25;// 0.3f;
 
             //check: maybe if nodes is uneven + the diff/2
             if (nodes.Count == 1)
@@ -159,7 +165,7 @@ namespace MapUI
             }
 
             //always centered on the y position
-            var anchorPos = new Vector3(startNode.transform.position.x, MapStartPosition.position.y);
+            var anchorPos = new Vector3(startNode.transform.localPosition.x, MapStartPosition.localPosition.y);
 
             foreach (var node in nodes)
             {
@@ -199,7 +205,7 @@ namespace MapUI
 
                 instance.NameText.text = node.ToString();
 
-                instance.transform.position = position;
+                instance.transform.localPosition = position;
 
                 instance.Icon.image.sprite = MapSettings.GetLocationIcon(node.Location);
 
@@ -214,9 +220,10 @@ namespace MapUI
                     foreach (var parent in Nodes.Where(n => n.Node.LeadsTo.Contains(node)))
                         yield return DrawLine(parent, instance);
 
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.1f);
 
-                    OnNodeDraw.Invoke();
+                    if(FocusGroup.interactable)
+                        OnNodeDraw.Invoke();
 
                     instance.transform.localScale = Vector3.one;
 
@@ -225,10 +232,14 @@ namespace MapUI
                         instance.transform.LeanRotateZ(0, 0.1f).setEaseInOutBounce()) ;
 
                     //instance.transform.LeanScale(Vector3.one, 1f).setEaseInCubic();
-                    AnimationSystem.Instance.MapNodeSpawn(instance);
+                    if(FocusGroup.interactable)
+                        AnimationSystem.Instance.MapNodeSpawn(instance);
 
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.3f);
                 }
+                //else
+                //    instance.transform.localScale = Vector3.one;
+
                 
 
             }
@@ -245,7 +256,8 @@ namespace MapUI
         {
             //Debug.DrawLine(start.transform.position, finish.transform.position, Color.black, 100000);
 
-            OnLineDraw.Invoke();
+            if (FocusGroup.interactable)
+                OnLineDraw.Invoke();
 
             var line = Instantiate(LinePrefab, start.transform);
 
