@@ -32,10 +32,17 @@ namespace UI
         {
             ControlledImages = GetComponentsInChildren<Image>(true);
             ControlledTexts = GetComponentsInChildren<TextMeshProUGUI>(true);
-            DissolveMaterial = Instantiate(DissolveMaterial);
 
             prefWidth = LayoutElement.preferredWidth;
 
+            if (!GetComponent<CardUI>().PreviewCard)
+            {
+                DissolveMaterial = Instantiate(DissolveMaterial);
+            }
+            else
+            {
+                DissolveMaterial = null;
+            }
             foreach (var i in ControlledImages)
                 i.material = DissolveMaterial;
         }
@@ -47,7 +54,7 @@ namespace UI
             while (DissolveAmount < 1)
             {
                 DissolveAmount = Mathf.Clamp01(DissolveAmount + Time.deltaTime * DissolveSpeed);
-                DissolveMaterial.SetFloat("DissolveAmount", DissolveAmount);
+                DissolveMaterial?.SetFloat("DissolveAmount", DissolveAmount);
 
                 foreach (var t in ControlledTexts)
                     t.alpha = 1 - DissolveAmount;
@@ -67,12 +74,12 @@ namespace UI
         public IEnumerator UnDissolve(bool shout = true)
         {
             DissolveAmount = 1f;
-            DissolveMaterial.SetFloat("DissolveAmount", DissolveAmount);
+            DissolveMaterial?.SetFloat("DissolveAmount", DissolveAmount);
 
             while (DissolveAmount > 0)
             {
                 DissolveAmount = Mathf.Clamp01(DissolveAmount - Time.deltaTime);
-                DissolveMaterial.SetFloat("DissolveAmount", DissolveAmount);
+                DissolveMaterial?.SetFloat("DissolveAmount", DissolveAmount);
 
                 foreach (var t in ControlledTexts)
                     t.alpha = 1 - DissolveAmount;

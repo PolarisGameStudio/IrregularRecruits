@@ -47,7 +47,7 @@ namespace UI
 
             if (Chosen >= SelectableHeroes.Count) Chosen = 0;
 
-            ChooseHero(Chosen);
+            ShowHero(Chosen);
         }
         private void Previous()
         {
@@ -55,10 +55,10 @@ namespace UI
 
             if (Chosen < 0) Chosen = SelectableHeroes.Count-1;
 
-            ChooseHero(Chosen);
+            ShowHero(Chosen);
         }
 
-        private void ChooseHero(int i)
+        private void ShowHero(int i)
         {
             if(i >= SelectableHeroes.Count)
             {

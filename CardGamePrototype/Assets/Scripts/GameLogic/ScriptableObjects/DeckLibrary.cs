@@ -13,6 +13,12 @@ namespace GameLogic
         [SerializeField]
         private List<HeroObject> Heroes;
 
+#if UNITY_EDITOR
+        public HeroObject TestHero;
+#endif
+
+
+
         public static List<DeckObject> GetDecks()
         {
             return Instance.Heroes.Select(hero => hero.Deck).ToList();
@@ -25,7 +31,13 @@ namespace GameLogic
                 return Instance.Heroes;
 
 
-            return Instance.Heroes.Where(LegacySystem.Instance.IsUnlocked).ToList() ;
+            List<HeroObject> heroObjects = Instance.Heroes.Where(LegacySystem.Instance.IsUnlocked).ToList();
+
+#if UNITY_EDITOR
+            heroObjects.Add(Instance.TestHero);
+#endif
+
+            return heroObjects;
         
         }
     }

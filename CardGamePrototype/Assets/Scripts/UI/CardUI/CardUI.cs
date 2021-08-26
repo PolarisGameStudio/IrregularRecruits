@@ -36,7 +36,7 @@ namespace UI
 
 
         //For deck view and the like
-        public bool AlwaysFaceUp;
+        public bool PreviewCard;
         public bool Interactable = true;
         public class IntEvent : UnityEvent<int> { }
         public readonly IntEvent OnMoveToNextZone = new IntEvent();
@@ -103,6 +103,8 @@ namespace UI
             OnMoveToNextZone.AddListener(c.Activate);
             OnPositionChanged.AddListener(c.PositionChanged);
         }
+        
+        //also removes custom materials to allow for masking
         public void SetCreature(Creature c)
         {
             UpdateCreature(c);
@@ -288,7 +290,7 @@ namespace UI
         #region Input Handling
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!BeingDragged && (AlwaysFaceUp || IsClickable()))
+            if (!BeingDragged && (PreviewCard || IsClickable()))
             {
                 CardHoverInfo.Show(this);
             }
@@ -362,7 +364,7 @@ namespace UI
             if (state == GetCardState()) 
                 yield break;
 
-            if (AlwaysFaceUp) yield break;
+            if (PreviewCard) yield break;
 
             bool flipping = GetCardState() == CardState.FaceDown || state == CardState.FaceDown;
 

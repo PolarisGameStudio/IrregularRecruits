@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -26,13 +27,20 @@ namespace UI
 
             Instance.ViewDeck(deck);
         }
+        
+        public static void View(DeckObject deck)
+        {
+            if (deck == null) return;
+
+            Instance.ViewDeck(deck);
+        }
 
         public static void ViewPlayerDeck()
         {
             View(Battle.PlayerDeck);
         }
 
-        public void ViewDeck(Deck deck)
+        private void ViewDeck(Deck deck)
         {
             InstatiatedObjects.ForEach(Destroy);
             InstatiatedObjects.Clear();
@@ -46,7 +54,7 @@ namespace UI
                 inst.SetCard( c);
 
                 inst.gameObject.SetActive(true);
-                inst.AlwaysFaceUp = true;
+                inst.PreviewCard = true;
 
                 InstatiatedObjects.Add(inst.gameObject);
             }
@@ -54,6 +62,29 @@ namespace UI
             UIController.Instance.Open(this);
 
         }
+
+        private void ViewDeck(DeckObject deck)
+        {
+            InstatiatedObjects.ForEach(Destroy);
+            InstatiatedObjects.Clear();
+
+            WaterMark.sprite = deck.Creatures.First().Race?.Icon;
+
+            foreach (var c in deck.Creatures.OrderBy(c=> c.GetRace()? c.GetRace().name : "00"))
+            {
+                var inst = Instantiate(CardUIInstance, CardUIInstance.transform.parent);
+
+                inst.SetCreature( c);
+
+                inst.gameObject.SetActive(true);
+                inst.PreviewCard = true;
+
+                InstatiatedObjects.Add(inst.gameObject);
+            }
+
+            UIController.Instance.Open(this);
+        }
+
 
 
         public CanvasGroup GetCanvasGroup()
