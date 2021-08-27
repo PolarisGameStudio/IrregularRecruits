@@ -65,15 +65,23 @@ namespace MapLogic
 
 
         //get strategies that are higher than the threshold and at minimum half the value of the top strategy
-        public static Dictionary<DeckStrategy,int> GetTopStrategies(Deck deck, int threshold = 3)
+        public static Dictionary<DeckStrategy,int> GetTopStrategies(Deck deck, int threshold = 5)
+        {
+            return GetTopStrategies(deck.AllCreatures(), threshold);
+        }
+
+        public static Dictionary<DeckStrategy,int> GetTopStrategies(List<Card> deck, int threshold = 5)
         {
             var strategies = new Dictionary<DeckStrategy,int>();
+
+            var creatures = deck.Select(card => card.Creature).ToList();
+
 
             for (int i = 0; i < (int)DeckStrategy.COUNT; i++)
             {
                 var strat = (DeckStrategy)i;
 
-                int value = GetStrategyValue(deck, strat);
+                int value = GetStrategyValue(creatures, strat);
 
                 if (value > threshold)
                     strategies.Add(strat,value);
@@ -94,10 +102,8 @@ namespace MapLogic
             return strategies;
         }
 
-        private static int GetStrategyValue(Deck deck, DeckStrategy strat)
+        private static int GetStrategyValue(List<Creature> creatures, DeckStrategy strat)
         {
-            var creatures = deck.AllCreatures().Select(c=>c.Creature);
-
             //TODO: should this be count or CR sum? 
             var enablers = creatures.Count(c => c.Enabling.Contains(strat));
 

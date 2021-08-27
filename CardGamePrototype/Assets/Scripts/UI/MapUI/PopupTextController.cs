@@ -9,11 +9,11 @@ namespace UI
         private CFXR_ParticleText_Runtime TextParticlePrefab;
 
 
-        public void DisplayText(string text, Vector3 position)
+        public void DisplayText(string text, Vector3 position, Transform parent)
         {
             text = text.ToUpper();
 
-            var instance = Instantiate(TextParticlePrefab);
+            var instance = Instantiate(TextParticlePrefab,parent);
 
             instance.transform.position = position;
 

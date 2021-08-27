@@ -2,7 +2,7 @@
 {
     public enum MapNodeType
     {
-        StandardCombat,
+        StdCombat,
         HardCombat,
         Treasure,
         Xp,

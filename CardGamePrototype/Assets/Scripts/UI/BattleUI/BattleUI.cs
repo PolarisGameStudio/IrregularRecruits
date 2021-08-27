@@ -129,7 +129,7 @@ namespace UI
             }
 
 
-            InitialPlayerDeck = PlayerDeck.AllCreatures();
+            InitialPlayerDeck =  PlayerDeck.AllCreatures();
             InitialEnemyDeck = EnemyDeck.AllCreatures();
 
 

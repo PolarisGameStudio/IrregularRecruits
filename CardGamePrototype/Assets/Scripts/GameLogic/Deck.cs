@@ -6,7 +6,7 @@ namespace GameLogic
 {
 
 
-    public class Deck
+    public class Deck 
     {
         public enum Zone { Library, Battlefield, Graveyard, Hand, COUNT }
         public DeckObject DeckObject;

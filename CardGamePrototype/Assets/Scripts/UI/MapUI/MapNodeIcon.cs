@@ -39,7 +39,7 @@ namespace MapUI
             Node.Map.MoveToNode(Node);
 
             if (!string.IsNullOrEmpty(Node.Location.PopUpDescription))
-                PopupTextController.Instance.DisplayText(Node.Location.PopUpDescription, transform.position);
+                PopupTextController.Instance.DisplayText(Node.Location.PopUpDescription, transform.position,this.transform);
 
             //TODO: this is just a hack untill the other options are implemented
             if (!(Node.Location is CombatOption))
@@ -48,7 +48,7 @@ namespace MapUI
 
         internal bool Reachable()
         {
-            return Node.Map.CurrentNode == Node || Node.Map.CurrentNode.CanReach(Node);
+            return Map.CurrentNode == Node || Map.CurrentNode.CanReach(Node);
         }
 
         internal void SetInteractable(bool interactable)

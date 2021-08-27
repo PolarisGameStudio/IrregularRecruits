@@ -58,7 +58,7 @@ namespace MapLogic
             nodeTypes[MapNodeType.HardCombat] = Mathf.RoundToInt(noOfNodes * (MapSettings.Instance.HardCombatFrequency / totalFrequency));
 
             //only standard combats at first step, so they don't count
-            nodeTypes[MapNodeType.StandardCombat] = Mathf.RoundToInt(noOfNodes * (MapSettings.Instance.StandardCombatFrequency / totalFrequency)) - nodesAtStep[1];
+            nodeTypes[MapNodeType.StdCombat] = Mathf.RoundToInt(noOfNodes * (MapSettings.Instance.StandardCombatFrequency / totalFrequency)) - nodesAtStep[1];
             nodeTypes[MapNodeType.Xp] = Mathf.RoundToInt(noOfNodes * (MapSettings.Instance.XpFrequency / totalFrequency));
             nodeTypes[MapNodeType.Village] = Mathf.RoundToInt(noOfNodes * (MapSettings.Instance.VillageFrequency / totalFrequency));
 
@@ -81,7 +81,7 @@ namespace MapLogic
                     if (i == settings.MapLength - 1)
                         step[j] = GenerateNode(uniqueLocations.Single(l => l.IsWinNode()), uniqueLocations,map);
                     else if (i == 1)
-                        step[j] = GenerateNode(MapNodeType.StandardCombat, CurrentDifficulty, uniqueLocations,map);
+                        step[j] = GenerateNode(MapNodeType.StdCombat, CurrentDifficulty, uniqueLocations,map);
                     else
                     {
                         MapNodeType nodeType = GetNextNode(nodeTypes);
@@ -145,7 +145,7 @@ namespace MapLogic
                 }
                 while (nodeIdx < step.Length - 1 || parentIdx < lastStep.Length - 1);
 
-                foreach(var n in lastStep.Where(node => node.GetNodeType() != MapNodeType.StandardCombat && node.LeadsTo.All(child => child.GetNodeType() == node.GetNodeType())  ))
+                foreach(var n in lastStep.Where(node => node.GetNodeType() != MapNodeType.StdCombat && node.LeadsTo.All(child => child.GetNodeType() == node.GetNodeType())  ))
                 {
                     var idx = Array.IndexOf(lastStep,n);
 
@@ -191,7 +191,7 @@ namespace MapLogic
                 lastStep = step;
             }
 
-            map.CurrentNode = map.Nodes.Single(n => n.IsStartNode());
+            Map.CurrentNode = map.Nodes.Single(n => n.IsStartNode());
         }
 
         private static MapNode TakeChildFrom(MapNode thief, MapNode victimParent, MapNode[] childStep, bool highestChild)
@@ -235,7 +235,7 @@ namespace MapLogic
             MapNode node;
             switch (type)
             {
-                case MapNodeType.StandardCombat:
+                case MapNodeType.StdCombat:
                     node = new MapNode(new CombatOption(race, CR, false), map);
                     break;
                 case MapNodeType.HardCombat:

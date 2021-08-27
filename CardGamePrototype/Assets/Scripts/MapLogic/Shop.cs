@@ -36,7 +36,7 @@ namespace MapLogic
 
             MaxCreatureCR =  14 + cR / 6;
 
-            Debug.Log("max cr in shop: " + MaxCreatureCR);
+            //Debug.Log("max cr in shop: " + MaxCreatureCR);
 
             RerollsLeft = ShopOptions.Instance.Rerolls;
 
@@ -113,6 +113,9 @@ namespace MapLogic
         //returns whether or not the player bought it
         public bool Buy(Creature card)
         {
+            if (!OnOffer.Any(o => o.Item1 == card))
+                return false;
+
             var sale = OnOffer.Single(o => o.Item1 == card);
 
             if(Map.PlayerGold >= sale.Item2)

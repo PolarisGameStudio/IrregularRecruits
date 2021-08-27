@@ -32,6 +32,12 @@ namespace MapLogic
             name = mapLocation.Name;
         }
 
+        public static void ResetListiners()
+        {
+            OpenEvent.RemoveAllListeners();
+            CloseLocation.RemoveAllListeners();
+        }
+
         //REcursive check
         public bool CanReach(MapNode node)
         {
@@ -53,6 +59,8 @@ namespace MapLogic
             {
                 option.FindCandidate(this);
             }
+
+            Map.ChosenPath.Add(Location.GetLocationType());
 
             Location.Open(this);
 

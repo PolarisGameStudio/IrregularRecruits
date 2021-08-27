@@ -150,6 +150,7 @@ namespace UI
             if(result)
             {
                 //show result
+                CurrentOffers.RemoveAll (c => c.Item1 == card);
                 
                 StartCoroutine(BuyAnimation(card));
             }
@@ -205,6 +206,7 @@ namespace UI
 
             card.transform.SetParent(deckIcon.transform, true);
 
+            Destroy(card.gameObject);
         }
 
         internal static void OpenStandardShop()

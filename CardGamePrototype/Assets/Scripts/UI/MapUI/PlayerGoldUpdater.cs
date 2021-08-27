@@ -47,7 +47,7 @@ namespace UI
             }
             else
             {
-                IncreaseRoutine = StartCoroutine(IncreaseMoneyRoutine(MoneyValue, newamount));
+                IncreaseRoutine = StartCoroutine(IncreaseMoneyRoutine( newamount));
             }
 
         }
@@ -58,7 +58,7 @@ namespace UI
             Text.text = MoneyValue.ToString();
         }
 
-        private IEnumerator IncreaseMoneyRoutine(int moneyValue, int newamount)
+        private IEnumerator IncreaseMoneyRoutine(int newamount)
         {
             yield return new WaitUntil(() => !BattleUI.Instance.BattleRunning);
 
@@ -66,7 +66,9 @@ namespace UI
             {
                 yield return new WaitForSeconds(Random.Range(MinGoldCoinWait, MaxGoldCoinWait));
 
-                SetMoneyText(MoneyValue + 1);
+                var increaseSpeed = Mathf.Max(1, (newamount - MoneyValue) / 3);
+
+                SetMoneyText(Mathf.Min(MoneyValue + increaseSpeed));
 
                 if (MoneyValue % AnimationFactor == 0)
                 {

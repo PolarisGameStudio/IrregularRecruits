@@ -79,7 +79,7 @@ namespace MapLogic
 
         public override MapNodeType GetLocationType()
         {
-            return UniquesAllowed ? MapNodeType.HardCombat : MapNodeType.StandardCombat;
+            return UniquesAllowed ? MapNodeType.HardCombat : MapNodeType.StdCombat;
         }
     }
 }

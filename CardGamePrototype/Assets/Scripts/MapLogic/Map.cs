@@ -15,7 +15,8 @@ namespace MapLogic
     public class Map 
     {
         public List<MapNode> Nodes = new List<MapNode>();
-        public MapNode CurrentNode;
+        public List<MapNodeType> ChosenPath = new List<MapNodeType>(); 
+        public static MapNode CurrentNode;
 
         public static Event.IntEvent OnPlayerGoldUpdate = new Event.IntEvent();
 

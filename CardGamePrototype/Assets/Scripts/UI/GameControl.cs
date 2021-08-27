@@ -1,4 +1,5 @@
 ﻿using Data;
+using MapLogic;
 using UnityEngine;
 
 namespace GameLogic
@@ -12,6 +13,7 @@ namespace GameLogic
 
             DeckGeneration.UniquesGenerated.Clear();
             Event.ResetEvents();
+            MapNode.ResetListiners();
 
             Load();
 
