@@ -90,6 +90,9 @@ namespace UI
 
             foreach(var card in shop.OnOffer)
             {
+                if (!card.Item1)
+                    continue;
+
                 var inst = Instantiate(CardPrefab, CardHolders[holder++].transform);
 
                 inst.SetCreature(card.Item1);               
@@ -206,7 +209,7 @@ namespace UI
 
             card.transform.SetParent(deckIcon.transform, true);
 
-            Destroy(card.gameObject);
+            card.gameObject.SetActive(false);
         }
 
         internal static void OpenStandardShop()

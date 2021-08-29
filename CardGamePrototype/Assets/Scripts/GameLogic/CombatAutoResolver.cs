@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace GameLogic
@@ -29,6 +30,8 @@ namespace GameLogic
         {
             if (PlayerDeck == null || EnemyDeck == null)
                 return;
+
+            Debug.Log("Resolving combat");
 
             Event.OnCombatResolveStart.Invoke();
 

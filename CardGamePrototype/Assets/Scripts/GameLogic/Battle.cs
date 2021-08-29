@@ -116,7 +116,7 @@ namespace GameLogic
             PlayerDeck?.PackUp();
             EnemyDeck?.PackUp(true);
 
-            EnemyDeck = null;
+            //EnemyDeck = null;
 
         }
 

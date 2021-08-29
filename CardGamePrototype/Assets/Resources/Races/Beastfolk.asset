@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Beastfolk
   m_EditorClassIdentifier: 
   name: Beastfolk
-  Icon: {fileID: 21300000, guid: 731af4e3827420f47a2bf68f947ddbe0, type: 3}
+  Icon: {fileID: 21300000, guid: bd869a07d892ea745836976ef8d901be, type: 3}
   Shield: {fileID: 21300000, guid: fd009bc2708664948a7a90bda372dc0b, type: 3}
   Description: 
   FavoriteActions: 030000000200000005000000

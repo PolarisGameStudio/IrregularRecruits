@@ -7,7 +7,7 @@ namespace GameLogic
     [CreateAssetMenu(menuName = "Create Game Objects/Effect Doubler Ability")]
     public class EffectDoublerAbility : SpecialAbility
     {
-        [Header("While active, this will double any effect triggered by this type")]
+        [Header("While active, this will double any effect of this type")]
         public EffectType Effect;
         public string AbilityDescription;
 

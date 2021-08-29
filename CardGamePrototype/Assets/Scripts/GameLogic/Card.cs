@@ -322,11 +322,13 @@ namespace GameLogic
             return Attack > 0 & !Ethereal();
         }
 
-        public void Withdraw()
+        public void Withdraw(bool playerAction)
         {
             ChangeLocation(Deck.Zone.Battlefield, Deck.Zone.Library);
 
-            Event.OnPlayerAction.Invoke(this.InDeck);
+            //otherwise it was caused by an ability and should not cost an action
+            if(playerAction)
+                Event.OnPlayerAction.Invoke(this.InDeck);
         }
 
         //should this method be called from OnRessurrect or the other way around?
@@ -422,7 +424,7 @@ namespace GameLogic
             }
             else if (Location == Deck.Zone.Battlefield)
             {
-                Withdraw();
+                Withdraw(true);
             }
 
         }

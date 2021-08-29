@@ -42,7 +42,7 @@ namespace GameLogic
                     var scaredCat = myBattlefield.FirstOrDefault(c => c.Damaged() && !c.IsSummon() && opposingBattlefield.Any(opp => opp.Attack * 2 > c.CurrentHealth));
                     if (scaredCat != null)
                     {
-                        scaredCat.Withdraw();
+                        scaredCat.Withdraw(true);
                     }
                 }
             }

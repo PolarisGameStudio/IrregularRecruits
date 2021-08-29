@@ -15,4 +15,5 @@ MonoBehaviour:
   Name: 
   Icon: {fileID: 0}
   EffectTrigger: 4
-  AbilityDescription: 
+  AbilityDescription: Our abilities caused by units entering the battlefield, triggers
+    twice

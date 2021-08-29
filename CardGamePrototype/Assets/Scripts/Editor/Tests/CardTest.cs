@@ -183,7 +183,7 @@ namespace Tests
 
             Event.OnWithdraw.AddListener((c,l) => triggered = true);
 
-            TestCard.Withdraw();
+            TestCard.Withdraw(true);
 
 
 

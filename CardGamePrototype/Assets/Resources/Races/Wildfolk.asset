@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wildfolk
   m_EditorClassIdentifier: 
   name: Wildfolk
-  Icon: {fileID: 21300000, guid: 536602a24a14d40418ea1f58bf903a5b, type: 3}
+  Icon: {fileID: 21300000, guid: e1a5853ffe5dbf94b8d9de91f6eb1062, type: 3}
   Shield: {fileID: 21300000, guid: 1b7f9b24fa946f6478cd364ca2c9ae74, type: 3}
   Description: 
   FavoriteActions: 0d0000000000000001000000

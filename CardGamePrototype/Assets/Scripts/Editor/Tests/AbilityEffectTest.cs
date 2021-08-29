@@ -177,7 +177,7 @@ namespace Tests
             Event.OnDamaged.AddListener((c,l) => damaged = c);
             Event.OnWithdraw.AddListener((c,l) => triggered = true);
 
-            OtherCard.Withdraw();
+            OtherCard.Withdraw(true);
 
             Assert.IsTrue(triggered);
             Assert.IsNotNull(damaged);

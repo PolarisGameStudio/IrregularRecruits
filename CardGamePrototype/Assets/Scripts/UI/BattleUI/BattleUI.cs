@@ -105,7 +105,7 @@ namespace UI
 
         private void EndPlayerTurn()
         {
-            if (PlayerDeck.DeckController is PlayerController controller)
+            if (!UILocked && PlayerDeck.DeckController is PlayerController controller)
                 controller.FinishTurn();
         }
 
@@ -169,6 +169,7 @@ namespace UI
             var ui = Instantiate(Instance.CardPrefab,transform);
 
             ui.HasWard = card.Ward();
+            ui.IsEthereal = card.Ethereal();
 
             if (!ui.HasWard)
                 ui.CardAnimation.DestroyWardAni();
@@ -366,7 +367,13 @@ namespace UI
         {
             CardUI ui = GetCardUI(guid);
 
-            if (!ui ) yield break;
+            yield return PullBackAttacker(ui);
+
+        }
+        private static IEnumerator PullBackAttacker(CardUI ui)
+        {
+
+            if (!ui) yield break;
 
             ui.BeingDragged = false;
 
@@ -376,7 +383,7 @@ namespace UI
 
             ui.transform.LeanScale(Vector3.one, seconds);
 
-            if(Instance.AttackTarget != null)
+            if (Instance.AttackTarget != null)
                 Instance.AttackTarget.transform.LeanScale(Vector3.one, seconds);
 
             yield return new WaitForSeconds(seconds);
@@ -386,6 +393,12 @@ namespace UI
 
         private IEnumerator AttackAnimation()
         {
+            if (AttackTarget.IsDead() || Attacker.IsDead())
+            {
+                yield return PullBackAttacker(Attacker);
+                yield break;
+            }
+
             if (AttackTarget.GetCardState() == CardUI.CardState.FaceDown)
             {
                 AttackTarget.transform.SetAsLastSibling();
@@ -475,7 +488,7 @@ namespace UI
 
         //otherwise make an onclick event in CardUI
 
-        private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player, bool instantly = false, bool wardOn = false)
+        private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player, bool instantly = false)
         {
             if (!card) yield break;
 

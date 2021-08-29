@@ -87,6 +87,7 @@ namespace UI
             if (Battle.PlayerDeck.DeckController is PlayerController)
             {
                 BattleUI.Instance.UILocked = false;
+                BattleUI.Instance.EndTurnButton.interactable = true;
 
                 HeroUI.Instance?.UnlockAbilities();
             }
@@ -95,11 +96,13 @@ namespace UI
 
         }
 
+        //Todo: move to battle ui
         private void PlayerTurnDone()
         {
             //Debug.Log("Combat started. Locking ui");
 
             BattleUI.Instance.UILocked = true;
+            BattleUI.Instance.EndTurnButton.interactable = false;
             HeroUI.Instance?.LockAbilities();
 
         }

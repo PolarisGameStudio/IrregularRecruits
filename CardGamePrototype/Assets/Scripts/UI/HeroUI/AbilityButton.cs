@@ -45,9 +45,9 @@ namespace UI
 
                 AbilityHoverInfo.Show(AbilityUI);
             }
-            else if (heldDown > TimeToActivate +TimeForNonClick && AbilityUI.Activatable)
-                AbilityUI. Activate();
-            else if (AbilityUI.Activatable)
+            else if (!( heldDown > TimeToActivate +TimeForNonClick && AbilityUI.Activatable))
+            //    AbilityUI. Activate();
+            //else if (AbilityUI.Activatable)
             {
                 //fizzle sound
                 OnFizzle.Invoke();
@@ -81,6 +81,10 @@ namespace UI
 
                 yield return null;
             }
+
+
+            if (Held)
+                AbilityUI.Activate();
 
         }
 

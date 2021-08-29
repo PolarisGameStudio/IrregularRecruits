@@ -57,6 +57,7 @@ namespace UI
         public CardLayoutGroup CurrentZoneLayout;
         [HideInInspector]
         public CardLayoutGroup CameFromGroup { get; private set; }
+        public bool IsEthereal { get; internal set; }
 
         [HideInInspector]
         public CardLayoutGroup CanTransitionTo;
@@ -141,11 +142,10 @@ namespace UI
             if (RaceInstance)
                 if (creature.Race)
                 {
-                    var instance = Instantiate(RaceInstance, RaceInstance.transform.parent);
+                    var instance = RaceInstance;
                     instance.gameObject.SetActive(true);
-                    instance.sprite = creature.Race.Shield;
+                    instance.sprite = creature.Race.Icon;
 
-                    InstantiatedObjects.Add(instance.gameObject);
                 }
 
 
@@ -355,6 +355,11 @@ namespace UI
             //move it into place
             CurrentZoneLayout.MoveCardsToDesiredPositions();
         }
+
+        internal bool IsDead()
+        {
+            return CardAnimation.Dissolved();
+        }
         #endregion
 
         internal IEnumerator Flip(CardState state, float flipTime = 0.2f)
@@ -392,8 +397,8 @@ namespace UI
 
                 to.SetActive(true);
 
-                StartCoroutine(Fade(to.GetComponent<CanvasGroup>(), true, flipTime));
-                StartCoroutine(Fade(from.GetComponent<CanvasGroup>(), false, flipTime));
+                StartCoroutine(Fade(to.GetComponent<CanvasGroup>(), true, flipTime, state== CardState.Battle && IsEthereal));
+                StartCoroutine(Fade(from.GetComponent<CanvasGroup>(), false, flipTime,GetCardState()== CardState.Battle && IsEthereal));
 
                 yield return new WaitForSeconds(flipTime);
 
@@ -406,17 +411,20 @@ namespace UI
             FrontHolder.SetActive(state == CardState.FaceUp);
         }
 
-        private IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn, float duration)
+        private IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn, float duration,bool ethereal)
         {
             var endTime = Time.time + duration;
 
             if (fadeIn)
             {
+                float target = ethereal ? 0.6f : 1f;
+
                 while (Time.time < endTime)
                 {
-                    canvasGroup.alpha = 1f - (endTime - Time.time) / duration;
+                    canvasGroup.alpha = target - (endTime - Time.time) / duration;
                     yield return null;
                 }
+                canvasGroup.alpha = target;
             }
             else
             {
@@ -425,6 +433,8 @@ namespace UI
                     canvasGroup.alpha = (endTime - Time.time) / duration; 
                     yield return null;
                 }
+
+                canvasGroup.alpha = 0f;
             }
         }
 

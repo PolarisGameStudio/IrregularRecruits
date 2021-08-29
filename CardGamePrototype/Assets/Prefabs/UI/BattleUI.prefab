@@ -977,6 +977,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  XpAtStartOfBattle: 0
+  GoldAtStartOfBattle: 0
   EndTurnButton: {fileID: 2132162799118742221}
   BackgroundImage: {fileID: 7467280203778397419}
   FocusCanvas: {fileID: 8451570703991737027}
@@ -13453,7 +13455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25, y: -350}
+  m_AnchoredPosition: {x: -25, y: -450}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &925511948632167941
@@ -13531,8 +13533,8 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 5713744646931427682}
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 1597070166727517233}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

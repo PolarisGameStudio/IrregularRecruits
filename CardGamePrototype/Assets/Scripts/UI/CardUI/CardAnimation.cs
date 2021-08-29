@@ -64,7 +64,7 @@ namespace UI
 
         public void Highlight()
         {
-            HighlightParticles.Play();
+            HighlightParticles?.Play();
         }
         public void TurnOffHighlight()
         {
@@ -114,6 +114,11 @@ namespace UI
         internal void DestroyWardAni()
         {
             Destroy(WardActiveParticles);
+        }
+
+        internal bool Dissolved()
+        {
+            return DissolveAmount > 0;
         }
     }
 }

@@ -62,12 +62,10 @@ namespace GameLogic
                     return cards;
                 case Count.One:
                     return new List<Card>() { cards[Random.Range(0, cards.Count())] };
-                case Count.Two:
-                    cards.OrderBy(o => Random.value);
-                    return cards.Take(2).ToList();
+                case Count.Two:                    
+                    return cards.OrderBy(o => Random.value).Take(2).ToList();
                 case Count.Three:
-                    cards.OrderBy(o => Random.value);
-                    return cards.Take(2).ToList();
+                    return cards.OrderBy(o => Random.value).Take(2).ToList();
                 default:
                     return cards;
             }

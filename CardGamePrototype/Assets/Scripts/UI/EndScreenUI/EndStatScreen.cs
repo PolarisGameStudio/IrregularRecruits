@@ -7,7 +7,6 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Event = GameLogic.Event;
 
@@ -20,7 +19,6 @@ namespace UI
         public TextMeshProUGUI StatTextEntry;
         public LegacyUIEntry UnlockEntry;
         public TextMeshProUGUI LossDescriptionText;
-        public Button RestartButton;
         public int BattlesWon;
         public int GoldGained;
 
@@ -37,13 +35,7 @@ namespace UI
 
             Event.OnStatScreen.AddListener(Open);
             Event.OnBattleFinished.AddListener(HandleBattleStats);
-            RestartButton.onClick.AddListener(Restart);
             Event.OnPlayerGoldAdd.AddListener(i => GoldGained += Mathf.Max(0, i));
-        }
-
-        private void Restart()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         private void HandleBattleStats(Deck winner, Deck loser)
@@ -52,7 +44,7 @@ namespace UI
             {
                 BattlesWon++;
             }
-            else
+            else if(LostTo != null)
                 LostTo = winner;
         }
 

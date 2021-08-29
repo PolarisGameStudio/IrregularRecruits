@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Elemental
   m_EditorClassIdentifier: 
   name: Elemental
-  Icon: {fileID: 21300000, guid: f5d6152da3f47d64a8be65a734f8001c, type: 3}
+  Icon: {fileID: 21300000, guid: d96832f986401af4f8e0c4ba389a1923, type: 3}
   Shield: {fileID: 21300000, guid: bd9cb8954ec136844bd32bcfe7bf2ff7, type: 3}
   Description: 
   FavoriteActions: 0c0000000200000006000000

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameLogic;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -18,6 +19,7 @@ namespace UI
         public Toggle AutoEndTurn;
         public GameObject Holder;
         public CanvasGroup FocusGroup;
+        public GameObject RestartButton;
 
         private void Start()
         {
@@ -40,6 +42,8 @@ namespace UI
             StartingHandSlider.value = GS.StartingHandSize;
             DrawSlider.value = GS.DrawPrTurn;
             ActionsPrTurnSlider.value = GS.PlaysPrTurn;
+
+            RestartButton.SetActive(Battle.PlayerDeck?.Hero != null);
 
         }
 

@@ -66,7 +66,7 @@ namespace UI
             {
                 yield return new WaitForSeconds(Random.Range(MinGoldCoinWait, MaxGoldCoinWait));
 
-                var increaseSpeed = Mathf.Max(1, (newamount - MoneyValue) / 3);
+                var increaseSpeed = Mathf.Max(1, (newamount - MoneyValue) / 8);
 
                 SetMoneyText(Mathf.Min(MoneyValue + increaseSpeed));
 

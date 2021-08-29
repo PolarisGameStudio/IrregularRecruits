@@ -1004,13 +1004,14 @@ GameObject:
   - component: {fileID: 1093105727950373427}
   - component: {fileID: 8300641267166656641}
   - component: {fileID: 5871634752225547190}
+  - component: {fileID: 4645939521611914825}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1717022665994911626
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1111,6 +1112,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4645939521611914825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067802536770865856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec51c7fa7a4e9ff4c9cc224333429288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2172508077065415869
 GameObject:
   m_ObjectHideFlags: 0
@@ -2328,7 +2341,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -2706,7 +2719,6 @@ MonoBehaviour:
   StatTextEntry: {fileID: 5055897484597177466}
   UnlockEntry: {fileID: 2213684366821050436}
   LossDescriptionText: {fileID: 737483752138449112}
-  RestartButton: {fileID: 5871634752225547190}
   BattlesWon: 0
   GoldGained: 0
   BloodAnimation: {fileID: 2714795213941523764}
@@ -2797,7 +2809,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2809,9 +2821,9 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 17
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0

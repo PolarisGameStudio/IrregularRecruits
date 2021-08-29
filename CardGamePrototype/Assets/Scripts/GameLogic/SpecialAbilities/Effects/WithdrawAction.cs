@@ -21,7 +21,7 @@ namespace GameLogic
         public override void ExecuteEffect(AbilityWithEffect ability, AbilityHolder owner, List<Card> targets)
         {
             Event.OnAbilityExecution.Invoke(ability, owner, targets);
-            targets.ForEach(c => c.Withdraw());
+            targets.ForEach(c => c.Withdraw(false));
         }
 
         public override float GetValue(float targetValue, int amount)
