@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 1110452306688261353}
   - component: {fileID: 8392445396577739212}
   - component: {fileID: 8559110751907361440}
+  - component: {fileID: 408326274240756134}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -482,7 +483,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489086697710987878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7856078999665281570}
@@ -565,6 +566,29 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &408326274240756134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489086697710987878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52ec34831a2aea4f8e8ea5cbcd3507d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderMode: 0
+  source: 0
+  alphaMode: 0
+  willRectResizeInRuntime: 0
+  maskTexture: {fileID: 0}
+  cullingMaskVal: 255
+  ditheringSteps: 255
+  alphaTestTreshold: 0.05
+  translucencyFactor: 1
+  depthRenderShader: {fileID: 4800000, guid: 7cf7e97856b7e774d9b22c8915b155c3, type: 3}
+  cullRenderShader: {fileID: 4800000, guid: 138a49593c2637e4a9ad77c8c4655a37, type: 3}
 --- !u!1 &583433450595164087
 GameObject:
   m_ObjectHideFlags: 0

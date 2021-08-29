@@ -35,7 +35,7 @@ namespace UI
 
             prefWidth = LayoutElement.preferredWidth;
 
-            if (!GetComponent<CardUI>().PreviewCard)
+            if (!GetComponent<CardUI>().PreviewCard && DissolveMaterial)
             {
                 DissolveMaterial = Instantiate(DissolveMaterial);
             }
