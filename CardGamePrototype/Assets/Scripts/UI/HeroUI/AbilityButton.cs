@@ -35,8 +35,6 @@ namespace UI
 
         public override void OnPointerUp(PointerEventData eventData)
         {
-            transform.LeanScale(Vector3.one, 0.15f);
-
             var heldDown = Time.unscaledTime - HeldStartTime;
 
             if (heldDown < TimeForNonClick)
@@ -45,7 +43,7 @@ namespace UI
 
                 AbilityHoverInfo.Show(AbilityUI);
             }
-            else if (!( heldDown > TimeToActivate +TimeForNonClick && AbilityUI.Activatable))
+            else if (Held && !(heldDown > TimeToActivate + TimeForNonClick) && AbilityUI.Activatable)
             //    AbilityUI. Activate();
             //else if (AbilityUI.Activatable)
             {
@@ -53,11 +51,17 @@ namespace UI
                 OnFizzle.Invoke();
             }
 
-            AbilityUI. ActivationFillImage.fillAmount = 0f;
-            Held = false;
+            ResetButton();
 
         }
 
+        public void ResetButton()
+        {
+            transform.LeanScale(Vector3.one, 0.15f);
+
+            AbilityUI.ActivationFillImage.fillAmount = 0f;
+            Held = false;
+        }
 
         public IEnumerator HoldRoutine()
         {
@@ -72,6 +76,7 @@ namespace UI
             else
                 yield break;
 
+            AnimationSystem.Instance.Vibrate();
 
             while (Held && Time.unscaledTime < nonClickTime + TimeToActivate)
             {

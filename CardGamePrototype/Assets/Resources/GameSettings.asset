@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9df2439aac0ff24cb3bad7bd563a2c5, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: e95be4ed10c042c4fac750762dc1c86e, type: 2}
   EnemyDeckSize: 30
   PlayerDeckSize: 5
   StartingHandSize: 3
@@ -20,6 +21,18 @@ MonoBehaviour:
   MaxCreaturesOnBattlefield: 0
   AttackOrderParadigm: 5
   DeckDamageParadigm: 0
-  CombatSpeed: 1
-  AiControlledPlayer: 0
-  AutoEndTurn: 1
+  CombatSpeed:
+    _float: 1.005174
+    InitValue: 1
+  Volume:
+    _int: -35
+    InitValue: 0
+  AiControlledPlayer:
+    _bool: 0
+    InitValue: 0
+  AutoEndTurn:
+    _bool: 1
+    InitValue: 1
+  VibrateEnabled:
+    _bool: 0
+    InitValue: 1

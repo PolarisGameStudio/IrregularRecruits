@@ -2,12 +2,14 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 using Event = GameLogic.Event;
 
 [CreateAssetMenu]
 public class GameSettings : SingletonScriptableObject<GameSettings>
 {
 
+    public AudioMixer mixer;
     public int EnemyDeckSize = 50;
     //Player deck size
     public int PlayerDeckSize = 5;
@@ -34,10 +36,13 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
     
     //Slower means faster
     public FloatType CombatSpeed ;
+    public IntType Volume;
 
     public BoolType AiControlledPlayer ;
 
     public BoolType AutoEndTurn;
+
+    public BoolType VibrateEnabled;
 
     public enum DeckDamage
     {
@@ -53,6 +58,21 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
         AiControlledPlayer.Value = ai;
     }
 
+    //todo: move to soundcontroller
+    public void SetVolume(float arg0)
+    {
+        if (arg0 < -19f)
+            arg0 = -80f;
+
+        mixer.SetFloat("MasterVolume", arg0);
+        Volume.Value = (int)arg0;
+    }
+
+    public void Vibration(bool enabled)
+    {
+        VibrateEnabled.Value = enabled;
+    }
+
     public IEnumerator ImportRoutine()
     {
         yield return new WaitUntil(() => DataHandler.Instance.PersistantDataObject.databaseLoaded);
@@ -62,6 +82,10 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
         CombatSpeed = DataHandler.Instance.GetData<FloatType>("Speed", table, 1f.ToString());
         AiControlledPlayer = DataHandler.Instance.GetData<BoolType>("AutoPlayer", table, "false");
         AutoEndTurn = DataHandler.Instance.GetData<BoolType>("AutoEndTurn", table, "true");
+        VibrateEnabled = DataHandler.Instance.GetData<BoolType>("VibrationEnabled", table, "true");
+        Volume = DataHandler.Instance.GetData<IntType>("MasterVolume", table, "0");
+
+        SetVolume(Volume.Value);
 
     }
 

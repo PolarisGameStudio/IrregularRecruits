@@ -253,5 +253,11 @@ namespace UI
             yield return PlayCardFX(owner, abilityFx.OwnerFX, delay);
             yield return PlayAbilityIconFx(owner, abilityFx.AbilityIconFX, ability, delay);
         }
+
+        public void Vibrate()
+        {
+            if(GameSettings.Instance.VibrateEnabled.Value)
+                Handheld.Vibrate();
+        }
     }
 }

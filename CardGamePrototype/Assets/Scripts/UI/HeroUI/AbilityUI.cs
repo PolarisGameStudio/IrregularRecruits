@@ -77,6 +77,8 @@ namespace UI
 
             if (!Ability || !(Ability is ActiveAbility)) return;
 
+            AbilityButton.ResetButton();
+
             LockAbility();
 
             (Ability as ActiveAbility).ActivateAbility(Owner);            
