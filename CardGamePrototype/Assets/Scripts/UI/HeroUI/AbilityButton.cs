@@ -76,7 +76,7 @@ namespace UI
             else
                 yield break;
 
-            AnimationSystem.Instance.Vibrate();
+            //AnimationSystem.Instance.Vibrate();
 
             while (Held && Time.unscaledTime < nonClickTime + TimeToActivate)
             {

@@ -12,5 +12,8 @@ namespace GameLogic
 
         internal abstract string Description(string instigatorString, bool firstPerson);
         internal abstract float GetValue();
+
+        //returns how the ability makes the unit benifit from going first
+        internal abstract float AttackOrderModifier(Noun subjekt);
     }
 }

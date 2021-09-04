@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 namespace UI
 {
     
-    public class AbilityHoverInfo: Singleton<AbilityHoverInfo>, IPointerClickHandler
+    public class AbilityHoverInfo: Singleton<AbilityHoverInfo>
     {
         public TextMeshProUGUI Title;
         public TextMeshProUGUI Description;
@@ -16,15 +17,19 @@ namespace UI
         public GameObject Holder;
         public AbilityUI ShowingAbility;
         public LayoutGroup LayoutGroup;
+        private Coroutine HidingRoutine;
 
         private void Start()
         {
             LevelUpButton.onClick.AddListener(LevelUpSelect);
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        private void Update()
         {
-            Hide();
+            if (!Holder.activeInHierarchy) return;
+
+            if (Input.GetMouseButtonDown(0) || (Input.touches.Any(t => t.phase == TouchPhase.Began)))
+                Hide();
         }
 
 
@@ -53,6 +58,10 @@ namespace UI
 
         private void ShowAbility(AbilityUI abilityUI)
         {
+            //so we don't hide the window we are opnening.
+            if (HidingRoutine != null)
+                StopCoroutine(HidingRoutine);
+
             ShowingAbility = abilityUI;
 
             Title.text = abilityUI.Ability.Name;
@@ -77,11 +86,20 @@ namespace UI
             LayoutGroup.enabled = true;
         }
 
-        public  void Hide()
+        public void Hide()
         {
+            HidingRoutine = StartCoroutine(HideRoutine());
+        }
+
+        private IEnumerator HideRoutine()
+        {
+            yield return new WaitForSeconds(0.1f);
+
             ShowingAbility = null;
 
             Holder.SetActive(false);
+
+            HidingRoutine = null;
 
         }
     }

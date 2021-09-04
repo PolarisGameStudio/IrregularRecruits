@@ -13,6 +13,11 @@ namespace GameLogic
                 "healed";
         }
 
+        internal override float AttackOrderModifier(Noun subjekt)
+        {
+            return  0f;
+        }
+
         internal override float GetValue()
         {
             return 0.5f;

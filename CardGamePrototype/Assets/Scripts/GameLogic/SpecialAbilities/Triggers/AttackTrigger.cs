@@ -11,6 +11,10 @@ namespace GameLogic
             return $"When {instigatorString} attack" + (firstPerson?"": "s");
         }
 
+        internal override float AttackOrderModifier(Noun subjekt)
+        {
+            return subjekt.IsMeInBattle() ? 2f : 0f;
+        }
 
         internal override float GetValue()
         {

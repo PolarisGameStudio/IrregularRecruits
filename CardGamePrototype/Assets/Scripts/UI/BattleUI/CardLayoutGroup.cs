@@ -96,9 +96,12 @@ namespace UI
                 MoveCardToPos(cardUI,EvaluatePosition(0));
         }
 
-        private void RemoveChild(CardUI cardUI)
+        public void RemoveChild(CardUI cardUI)
         {
             ChildCards.Remove(cardUI);
+
+            if(cardUI.CurrentZoneLayout == this)
+                cardUI.CurrentZoneLayout = null;
 
             UpdateChildrenPositions();
         }
@@ -144,6 +147,16 @@ namespace UI
 
             }
 
+        }
+
+        internal void UpdateOrderFromGame(List<CardUI> cards)
+        {
+            if (ChildCards.Count != cards.Count && ChildCards.All(cards.Contains)) 
+                Debug.LogWarning("Child cards does not match ");
+
+            ChildCards = cards;
+
+            UpdateChildrenPositions();
         }
 
         private static void MoveCardToPos(CardUI card, PosAndRotation desiredPos)

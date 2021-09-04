@@ -40,8 +40,14 @@ namespace GameLogic
         //Higher the more often it happens
         internal float GetValue()
         {
-            return AbilityProcessor.GetTrigger(TriggerAction).GetValue() * GetSubjectValue();
+            return AbilityProcessor.GetTrigger(TriggerAction).GetValue() * GetSubjectValue() /2f;
 
+        }
+
+        //the higher, the more it benifits from going first in attack order
+        internal float AttackOrderModifier()
+        {
+            return AbilityProcessor.GetTrigger(TriggerAction).AttackOrderModifier(Subjekt);
         }
 
         private float GetSubjectValue()

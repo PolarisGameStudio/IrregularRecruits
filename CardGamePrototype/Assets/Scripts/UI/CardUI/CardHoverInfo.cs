@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI
@@ -29,6 +30,7 @@ namespace UI
         private readonly List<ImageTextEntry> InstantiatedObjects = new List<ImageTextEntry>();
 
         public GameObject Holder;
+        private CardUI ShowingCard;
 
         private void Start()
         {
@@ -44,6 +46,7 @@ namespace UI
             if (Input.GetMouseButtonDown(0) || (Input.touches.Any(t => t.phase == TouchPhase.Began)))
                 Hide();
         }
+
 
         private void CardDestroyed(CardUI arg0)
         {
@@ -71,24 +74,20 @@ namespace UI
         //remember color the same as health and attack of card
         public static void Show(CardUI card)
         {
-            if (ShowAfterDelayRoutine == null)
-                ShowAfterDelayRoutine = Instance.StartCoroutine(Instance.ShowAfterDelay(card));
+            Instance.ShowCard(card);
+
         }
 
-        private IEnumerator ShowAfterDelay(CardUI card)
-        {
-            yield return new WaitForSeconds(0.0f);
-
-            ShowCard(card);
-        }
 
         private void ShowCard(CardUI cardUI)
         {
-            if(cardUI.BeingDragged)
+            if(cardUI.BeingDragged ||cardUI == ShowingCard)
             {
                 Hide();
                 return;
             }
+
+            ShowingCard = cardUI;
 
             OnCardHighlight.Invoke();
 
@@ -198,6 +197,9 @@ namespace UI
 
         public static void Hide()
         {
+            //so that clicking the same card does not reopen
+            LeanTween.delayedCall(0.1f,()=>Instance.ShowingCard = null);
+
             Instance.Holder.SetActive(false);
 
             if (ShowAfterDelayRoutine != null)

@@ -32,7 +32,6 @@ namespace GameLogic
         }
 
         public virtual float GetValue() => 1f;
-
-
+        internal abstract float AttackOrderModifier();
     }
 }

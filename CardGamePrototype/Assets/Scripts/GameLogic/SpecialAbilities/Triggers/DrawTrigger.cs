@@ -12,6 +12,11 @@ namespace GameLogic
                 + "commander draws a card";
         }
 
+        internal override float AttackOrderModifier(Noun subjekt)
+        {
+            return  0f;
+        }
+
         internal override float GetValue()
         {
             return 1f;

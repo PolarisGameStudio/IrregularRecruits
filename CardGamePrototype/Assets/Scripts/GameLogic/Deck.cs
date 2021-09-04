@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace GameLogic
@@ -133,11 +134,23 @@ namespace GameLogic
             
             var creaturesInZone = CreaturesInZone(zone);
 
-            if(position >= creaturesInZone.Count)
-                throw new System.ArgumentException($"positionning: cannot put {card} in {zone} at pos {position}");
+            if (position >= creaturesInZone.Count)
+            {
+                Debug.LogWarning($"positionning: cannot put {card} in {zone} at pos {position}");
+                return;
+            }
 
             if (!creaturesInZone.Contains(card))
-                throw new System.ArgumentException($"positionning card: {card} not in {zone}");
+            {
+                Debug.LogWarning($"positionning card: {card} not in {zone}");
+                return;
+            }
+
+            if (position == creaturesInZone.IndexOf(card))
+            {
+                Debug.Log($"positionning: {card} already at position {position}");
+                return;
+             }
 
             //rearranging the cards in same order, with the selected Card at selected position
             //todo: just use list.insert

@@ -13,6 +13,11 @@ namespace GameLogic
                 "withdrawn";
         }
 
+        internal override float AttackOrderModifier(Noun subjekt)
+        {
+            return 0f;
+        }
+
         internal override float GetValue()
         {
             return 1;

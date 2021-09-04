@@ -70,7 +70,7 @@ namespace GameLogic
         public static UnityEvent OnCombatResolveStart = new UnityEvent();
         public static UnityEvent OnCombatResolveFinished = new UnityEvent();
 
-        public static UnityEvent OnTurnBegin = new UnityEvent();
+        public static UnityEvent OnPlayersTurnBegin = new UnityEvent();
 
         //GAME EVENTS
         public static UnityEvent OnGameOver = new UnityEvent();
@@ -157,7 +157,7 @@ namespace GameLogic
             OnCombatResolveFinished.RemoveAllListeners();
 
 
-            OnTurnBegin.RemoveAllListeners();
+            OnPlayersTurnBegin.RemoveAllListeners();
             //public static UnityEvent OnGameOver = new UnityEvent();
             OnGameOver.RemoveAllListeners();
             OnGameWin.RemoveAllListeners();

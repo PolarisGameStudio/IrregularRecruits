@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace MapLogic
 {
     public static class MapGen
     {
+        private static List<Race> VillageRaces = new List<Race>();
+        private static int NextVillageCounter = 0;
 
         public static void CreateMap(Map map)
         {
@@ -19,13 +22,15 @@ namespace MapLogic
 
             List<MapNode> Nodes = new List<MapNode>();
 
+            VillageRaces = new List<Race>(settings.CivilizedRaces.OrderBy(r => Random.value));
 
             int[] nodesAtStep = new int[settings.MapLength];
 
             nodesAtStep[0] = nodesAtStep[settings.MapLength - 1] = 1;
             nodesAtStep[1] = nodesAtStep[settings.MapLength - 2] = 2;
+            nodesAtStep[2] = nodesAtStep[settings.MapLength - 3] = 3;
 
-            for (int i = 2; i < settings.MapLength - 2; i++)
+            for (int i = 3; i < settings.MapLength - 3; i++)
             {
 
                 nodesAtStep[i] = Mathf.Clamp(nodesAtStep[i - 1] + Random.Range(-2, 3), settings.MinNodesAtStep, settings.MaxNodesAtStep);
@@ -224,9 +229,6 @@ namespace MapLogic
 
             if (CR < MapSettings.Instance.StepDifficultyIncrease) CR = MapSettings.Instance.StepDifficultyIncrease;
 
-            //village
-            var civilizedRaces = MapSettings.Instance.CivilizedRaces;
-
             var enemyRaces = MapSettings.Instance.EnemyRaces;
 
             var race = enemyRaces[Random.Range(0, enemyRaces.Length)];
@@ -248,7 +250,10 @@ namespace MapLogic
                     node = new MapNode(new GainXpOption(CR), map);
                     break;
                 case MapNodeType.Village:
-                    node = new MapNode(new VillageShop(CR, civilizedRaces[Random.Range(0, civilizedRaces.Length)]), map);
+                    if (NextVillageCounter >= VillageRaces.Count)
+                        NextVillageCounter = 0;
+
+                    node = new MapNode(new VillageShop(CR, VillageRaces[NextVillageCounter++]), map);
                     break;
                 case MapNodeType.Event:
                     node = new MapNode(uniqueLocations[Random.Range(0, uniqueLocations.Count)], map);

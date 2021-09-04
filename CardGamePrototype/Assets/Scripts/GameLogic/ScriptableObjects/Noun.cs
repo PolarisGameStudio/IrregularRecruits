@@ -14,6 +14,12 @@ namespace GameLogic
         public enum CharacterTyp { Any, This, Other, It }
         public enum Allegiance { Any, Friend, Enemy };
         public enum DamageType { Any, Damaged, Undamaged };
+
+        internal bool IsMeInBattle()
+        {
+            return Character == CharacterTyp.This && Location == Deck.Zone.Battlefield;
+        }
+
         public enum RaceType { Any, Same, Different };
 
 

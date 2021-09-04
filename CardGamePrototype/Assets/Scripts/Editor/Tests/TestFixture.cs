@@ -124,7 +124,7 @@ namespace Tests
                 }
 
                 testDeck = Battle.PlayerDeck;
-                testDeck.DeckController = new AI(testDeck);
+                testDeck.DeckController = new DeckAI(testDeck,false);
             }
             else
             {
@@ -139,7 +139,7 @@ namespace Tests
                 }
 
                 testDeck = Battle.EnemyDeck;
-                testDeck.DeckController = new AI(testDeck);
+                testDeck.DeckController = new DeckAI(testDeck,true);
             }
 
             testDeck.AddCard(testCard);
@@ -192,7 +192,7 @@ namespace Tests
 
                 Battle.SetPlayerDeck(TestDeckObject);
 
-                var ai = new AI(Battle.PlayerDeck);
+                var ai = new DeckAI(Battle.PlayerDeck,false);
 
                 Battle.PlayerDeck.DeckController = ai;
             }

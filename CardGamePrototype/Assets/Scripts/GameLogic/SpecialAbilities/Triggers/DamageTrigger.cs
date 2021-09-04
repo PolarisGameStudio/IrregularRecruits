@@ -13,6 +13,11 @@ namespace GameLogic
                 "dealt damage";
         }
 
+        internal override float AttackOrderModifier(Noun subjekt)
+        {
+            return subjekt.IsMeInBattle() ? 1f : 0f;
+        }
+
         internal override float GetValue()
         {
             return 2f;

@@ -11,6 +11,12 @@ namespace GameLogic
             return "at the end of each combat round";
         }
 
+        internal override float AttackOrderModifier(Noun subjekt)
+        {
+            return -1f;
+        }
+
+
         internal override float GetValue()
         {
             return 1f;

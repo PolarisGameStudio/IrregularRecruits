@@ -32,7 +32,7 @@ namespace Tests
 
             Battle.SetPlayerDeck(TestDeckObject);
 
-            var ai = new AI(Battle.PlayerDeck);
+            var ai = new DeckAI(Battle.PlayerDeck,false);
 
             Battle.PlayerDeck.DeckController = ai;
 

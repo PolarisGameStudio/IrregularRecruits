@@ -13,6 +13,12 @@ namespace GameLogic
                 "attacked";
         }
 
+        internal override float AttackOrderModifier(Noun subjekt)
+        {
+            return -1f;
+        }
+
+
         internal override float GetValue()
         {
             return 2f;

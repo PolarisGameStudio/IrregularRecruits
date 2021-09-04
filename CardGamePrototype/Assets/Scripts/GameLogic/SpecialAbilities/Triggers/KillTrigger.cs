@@ -11,6 +11,11 @@ namespace GameLogic
             return $"When {instigatorString } kill" + (firstPerson ? "" : "s");
         }
 
+        internal override float AttackOrderModifier(Noun subjekt)
+        {
+            return subjekt.IsMeInBattle() ? 1f : 0f;
+        }
+
         internal override float GetValue()
         {
             return 1f;

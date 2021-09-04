@@ -56,9 +56,9 @@ namespace UI
             
 
             //TODO: is this actually used in a timely order
-            Event.OnCombatStart.AddListener(() => PlayerTurnStart());
+            //Event.OnCombatStart.AddListener(() => PlayerTurnStart());
 
-            Event.OnTurnBegin.AddListener(() => AddCardEvent(PlayerTurnStart()));
+            Event.OnPlayersTurnBegin.AddListener(() => AddCardEvent(PlayerTurnStart()));
             Event.OnCombatResolveStart.AddListener(PlayerTurnDone);
         }
 
@@ -73,16 +73,28 @@ namespace UI
         {
             ActionsLeftUI.OnActionChanged.Invoke(amount);
 
-
             yield return new WaitForSeconds(0.1f);
 
         }
 
+        //TODO: move to battle ui
         private IEnumerator PlayerTurnStart()
         {
             yield return null;
 
+            Debug.Log("player turn starting");
+
             BattleUI.Instance.ResetWards();
+
+            BattleUI.UIZone battlefield = BattleUI.Instance.EnemyUIZones.First(z => z.Zone == Deck.Zone.Battlefield);
+
+            List<CardUI> enmBattlefield = BattleUI.Instance.EnemyDeck.CreaturesInZone(Deck.Zone.Battlefield).Select(c => BattleUI.GetCardUI(c.Guid)).ToList(); 
+
+            battlefield.CardLayout.UpdateOrderFromGame( enmBattlefield);
+
+            if (enmBattlefield.Count > 1)
+                yield return new WaitForSeconds(1f );
+
 
             if (Battle.PlayerDeck.DeckController is PlayerController)
             {

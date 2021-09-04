@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace GameLogic
 {
-    public class AI : DeckController
+    public class DeckAI : DeckController
     {
-        public AI(Deck controlledDeck) : base(controlledDeck)
+        public DeckAI(Deck controlledDeck, bool enm) : base(controlledDeck)
         {
+            Enemy = enm;
         }
 
         //this could be a more complex evaluation and move mechanics
         public override void YourTurn()
         {
+            ControlledDeck.Draw(
+                Enemy ? GameSettings.Instance.EnemyDrawsPrTurn : GameSettings.Instance.DrawPrTurn
+                );
 
             ResetActions();
-
-            ControlledDeck.Draw(GameSettings.Instance.DrawPrTurn);
 
             for (int i = 0; i < GameSettings.Instance.PlaysPrTurn; i++)
             {
@@ -27,6 +28,50 @@ namespace GameLogic
                 ControlledDeck.CreaturesInZone(Deck.Zone.Hand)[0].PlayCard();
             }
 
+            //WithdrawVulnerable();
+
+            ArrangeAttackOrder();
+
+            ActionsLeft = 0;
+
+            OnFinish.Invoke();
+        }
+
+        private void ArrangeAttackOrder()
+        {
+            var orderPreference = new Dictionary<Card, float>();
+
+            foreach (var recruit in ControlledDeck.CreaturesInZone(Deck.Zone.Battlefield))
+            {
+                //the higher, the more likely to be first. 
+                var firstFactor = recruit.CurrentHealth / 20f + Random.value * 0.2f;
+
+                if (recruit.Ranged()) firstFactor++;
+
+                if (recruit.Lifedrain()) firstFactor++;
+
+                if (recruit.Carnage()) firstFactor++;
+
+                if (recruit.Ferocity()) firstFactor++;
+
+                //can be negative
+                if (recruit.Ability())
+                {
+                    firstFactor += recruit.Ability().AttackOrderModifier();
+                }
+
+                orderPreference[recruit] = firstFactor;
+
+            }
+
+            var pos = 0;
+
+            foreach (var pair in orderPreference.OrderByDescending((c) => c.Value))
+                ControlledDeck.SetPosition(pair.Key, Deck.Zone.Battlefield, pos++);
+        }
+
+        private void WithdrawVulnerable()
+        {
             var opponent = Battle.GetEnemyDeck(ControlledDeck);
 
             if (opponent != null)
@@ -46,19 +91,14 @@ namespace GameLogic
                     }
                 }
             }
-
-            ActionsLeft = 0;
-
-            OnFinish.Invoke();
         }
 
-
-        public override void SetupDeckActions(Deck deck, Action onFinish)
+        public override void SetupDeckActions(Deck deck, System.Action onFinish)
         {
             ControlledDeck = deck;
             OnFinish = onFinish;
 
-            if(deck.Hero!= null)
+            if (deck.Hero != null)
             {
                 //TODO: test that it was the correct hero
                 //AI does not level up. Could be an option in the settings
@@ -73,7 +113,7 @@ namespace GameLogic
         {
             if (deck != ControlledDeck)
                 return;
-            
+
             ActionsLeft--;
         }
 
@@ -83,7 +123,7 @@ namespace GameLogic
 
             var possibleAbilities = hero.GetLevelUpOptions();
 
-            if(possibleAbilities.Count >0)
+            if (possibleAbilities.Count > 0)
                 hero.SelectLevelUpAbility(possibleAbilities[UnityEngine.Random.Range(0, possibleAbilities.Count)]);
         }
     }

@@ -17,7 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25687110417007740a0808a9b344c3ae, type: 2}
   BasicLocations: []
   MapLength: 20
-  MinNodesAtStep: 3
+  MinNodesAtStep: 4
   MaxNodesAtStep: 5
   VisibleSteps: 3
   HardCombatFrequency: 3
@@ -43,7 +43,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b016ddeb66ad924491d7b1c503f2032, type: 2}
   - {fileID: 11400000, guid: 420d96c584038d04884397c9e3520452, type: 2}
   - {fileID: 11400000, guid: caacc6959156e8f4ca26e242a0653370, type: 2}
-  ExtraRoadChance: 0.9
+  ExtraRoadChance: 1
   MoneyIcon: {fileID: 21300000, guid: 72450c8078d595948a2f9824282f69d0, type: 3}
   XpIcon: {fileID: 21300000, guid: f12f1cc0e056079429578a981f0073e7, type: 3}
   UnknownNodeIcon: {fileID: 21300000, guid: 56f4a2a9d578026458667321be48743c, type: 3}

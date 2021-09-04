@@ -48,5 +48,10 @@ namespace GameLogic
         {
             return 15f;
         }
+
+        internal override float AttackOrderModifier()
+        {
+            return -1f;
+        }
     }
 }

@@ -72,6 +72,11 @@ namespace GameLogic
 
         }
 
+        internal override float AttackOrderModifier()
+        {
+            return 0f;
+        }
+
         public virtual bool CanExecute(AbilityHolder owner, Card triggerExecuter)
         {
             List<Card> targets = GetTargets(ResultingAction.Target, owner, triggerExecuter,true);

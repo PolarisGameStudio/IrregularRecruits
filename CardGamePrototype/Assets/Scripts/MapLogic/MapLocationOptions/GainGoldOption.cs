@@ -8,7 +8,7 @@ namespace MapLogic
 
         public GainGoldOption(int amount)
         {
-            Amount = amount;
+            Amount = amount / 2;
             Name = $"Treasure";
             PopUpDescription = $"{Amount} gold";
         }

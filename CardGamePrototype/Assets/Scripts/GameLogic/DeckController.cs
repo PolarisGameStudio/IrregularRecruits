@@ -8,6 +8,7 @@ namespace GameLogic
         protected Action OnFinish;
 
         private int actionsLeft;
+        protected bool Enemy;
 
         public int ActionsLeft
         {

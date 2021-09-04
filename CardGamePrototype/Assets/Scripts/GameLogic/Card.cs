@@ -197,8 +197,9 @@ namespace GameLogic
                 HealthChange(damageGiven);
             }
 
-            if (returnDamage && target.Lifedrain())
-                target.HealthChange(damageTaken);
+            //only lifedrain on attacks
+            //if (returnDamage && target.Lifedrain())
+            //    target.HealthChange(damageTaken);
 
             if (!Alive() && target.Alive()) Event.OnKill.Invoke(target,Location);
             else if (Alive() & !target.Alive()) Event.OnKill.Invoke(this,Location);

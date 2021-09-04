@@ -18,6 +18,7 @@ public class GameSettings : SingletonScriptableObject<GameSettings>
     public int PlaysPrTurn = 2;
     //player draw amount
     public int DrawPrTurn = 1;
+    public int EnemyDrawsPrTurn = 2;
     //Battlefield size
     public int MaxCreaturesOnBattlefield;
     //AttackOrderParadigm

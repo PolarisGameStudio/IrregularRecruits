@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Ethereal
   Icon: {fileID: 21300000, guid: 731af4e3827420f47a2bf68f947ddbe0, type: 3}
-  Description: cannot attack and cannot be attacked while it has any non-ethereal
-    friends
+  Description: cannot attack and can only be attacked when alone
   CR: 0
+  CRScalesWithPower: 0

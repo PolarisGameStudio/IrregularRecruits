@@ -21,9 +21,9 @@ namespace GameLogic
         public Battle(Deck playerDeck, Deck enemyDeck)
         {
             if (playerDeck.DeckController == null)
-                playerDeck.DeckController = GameSettings.Instance.AiControlledPlayer.Value ? new AI(playerDeck) : (DeckController)new PlayerController(playerDeck);
+                playerDeck.DeckController = GameSettings.Instance.AiControlledPlayer.Value ? new DeckAI(playerDeck,false) : (DeckController)new PlayerController(playerDeck);
             if (enemyDeck.DeckController == null)
-                enemyDeck.DeckController = new AI(enemyDeck);
+                enemyDeck.DeckController = new DeckAI(enemyDeck,true);
 
             PlayerStartingDeck = playerDeck.AllCreatures();
             EnmStartDeck = enemyDeck.AllCreatures();
@@ -47,7 +47,7 @@ namespace GameLogic
 
             Event.OnCombatStart.Invoke();
 
-            EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayerDeck.DeckController.YourTurn);
+            EnemyDeck.DeckController.SetupDeckActions(EnemyDeck, PlayersTurn);
             PlayerDeck.DeckController.SetupDeckActions(PlayerDeck, CombatAutoResolver.ResolveCombat);
 
             //Debug.Log("starting battle. Enemies: " + enemyDeck.AllCreatures().Count + ", CR: " + enemyDeck.CR);
@@ -56,6 +56,14 @@ namespace GameLogic
             NextTurn();
         }
 
+        //TODO: should aslo handle the things we don't want ai to handle. Reset actions and Draws
+        private void PlayersTurn()
+        {
+            PlayerDeck.DeckController.YourTurn();
+
+            Event.OnPlayersTurnBegin.Invoke();
+
+        }
 
         internal static void CheckBattleOver()
         {
@@ -110,7 +118,7 @@ namespace GameLogic
             if (EnemyDeck != null && playerWon)
             {
                 PlayerDeck?.Hero?.AwardXp(EnemyDeck.GetXpValue());
-                Event.OnPlayerGoldAdd.Invoke((int)(EnemyDeck.GetXpValue() * Random.Range(2.5f, 4f)));
+                Event.OnPlayerGoldAdd.Invoke((int)(15 + EnemyDeck.GetXpValue() ));
             }
 
             PlayerDeck?.PackUp();
@@ -126,12 +134,9 @@ namespace GameLogic
             else return PlayerDeck;
         }
 
-        //TODO: this should be done by the player controller
         private void NextTurn()
         {
             Turn++;
-
-            Event.OnTurnBegin.Invoke();
 
             //Could control which player goes  first
             if (EnemyDeck != null)

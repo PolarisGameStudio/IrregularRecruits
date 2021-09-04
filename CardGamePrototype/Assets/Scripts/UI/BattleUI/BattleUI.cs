@@ -54,6 +54,8 @@ namespace UI
         public List<Card> InitialEnemyDeck;
         public List<Card> InitialPlayerDeck;
 
+        private List<CardUI> DeadCards = new List<CardUI>();
+
         //todo: move ´this into seperate class
         public int XpAtStartOfBattle;
         public int GoldAtStartOfBattle;
@@ -279,6 +281,12 @@ namespace UI
 
             if (!ui) yield break;
 
+            if(to == Deck.Zone.Graveyard)
+            {
+                DeadCards.Add(ui);
+                yield break;
+            }
+
             //Battlefield effects after move
             if(to != Deck.Zone.Battlefield)
                 yield return AnimationSystem.ZoneMoveEffects(ui, from, to);
@@ -303,10 +311,13 @@ namespace UI
             else
                 yield return AnimationSystem.Instance.PlayDoublerFx(a, ui, 0.25f);
 
+            yield return Instance.HandleDeaths();
+
 
         }
 
-        private static CardUI GetCardUI(Guid cardGuid)
+        //TODO make private
+        internal static CardUI GetCardUI(Guid cardGuid)
         {
             if (!CardUIs.ContainsKey(cardGuid))
             {
@@ -358,7 +369,7 @@ namespace UI
 
             Instance.AttackTarget = ui;
 
-            ui.transform.LeanScale(Vector3.one, 0.5f * GameSettings.Speed());
+            ui.transform.LeanScale(Vector3.one * 1.1f, 0.5f * GameSettings.Speed());
 
             yield return Instance.AttackAnimation();
         }
@@ -372,6 +383,17 @@ namespace UI
         }
         private static IEnumerator PullBackAttacker(CardUI ui)
         {
+            if (Instance.DeadCards.Contains(ui)) //don't pull back a dead attacker
+                ui = null;
+
+            yield return Instance.HandleDeaths();
+
+            float scaleTime = 0.5f * GameSettings.Speed();
+
+            if (Instance.AttackTarget != null)
+            {
+                Instance.AttackTarget.transform.LeanScale(Vector3.one, scaleTime);
+            }
 
             if (!ui) yield break;
 
@@ -379,14 +401,9 @@ namespace UI
 
             ui.CurrentZoneLayout.MoveCardsToDesiredPositions();
 
-            float seconds = 0.5f * GameSettings.Speed();
+            ui.transform.LeanScale(Vector3.one, scaleTime);
 
-            ui.transform.LeanScale(Vector3.one, seconds);
-
-            if (Instance.AttackTarget != null)
-                Instance.AttackTarget.transform.LeanScale(Vector3.one, seconds);
-
-            yield return new WaitForSeconds(seconds);
+            yield return new WaitForSeconds(scaleTime);
 
             Instance.AttackTarget = Instance.Attacker = null;
         }
@@ -399,12 +416,24 @@ namespace UI
                 yield break;
             }
 
+            var flipBack = false;
+
             if (AttackTarget.GetCardState() == CardUI.CardState.FaceDown)
             {
                 AttackTarget.transform.SetAsLastSibling();
+
+                yield return AttackTarget.Flip(CardUI.CardState.FaceUp);
+
+                flipBack = true;
+
             }
 
             yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
+
+            AttackTarget.transform.LeanScale(Vector3.one , 0.5f * GameSettings.Speed());
+
+            if(flipBack)
+                StartCoroutine( AttackTarget.Flip(CardUI.CardState.FaceDown));
 
         }
 
@@ -488,17 +517,48 @@ namespace UI
 
         //otherwise make an onclick event in CardUI
 
+        private  IEnumerator HandleDeaths()
+        {
+            if (DeadCards.Count == 0)
+                yield break;
+
+            foreach(var dead in DeadCards)
+            {
+                StartCoroutine(HandleDeathRoutine(dead));
+
+                yield return new WaitForSeconds(0.2f);
+
+            }
+
+            yield return new WaitForSeconds(1f);
+
+            DeadCards.Clear();
+        }
+
+        private IEnumerator HandleDeathRoutine(CardUI card)
+        {
+            //if (card.GetCardState() == CardUI.CardState.FaceDown)
+            //{
+            //    yield return card.Flip(CardUI.CardState.Battle);
+
+            //    //yield return new WaitForSeconds(0.4f);
+            //}
+
+            card.transform.LeanScale(Vector3.one, 0.5f);
+
+            yield return AnimationSystem.ZoneMoveEffects(card, Deck.Zone.Battlefield, Deck.Zone.Graveyard);
+
+            //if dying just remove from current group
+            card.CurrentZoneLayout.RemoveChild(card);
+
+        }
+
         private IEnumerator MoveCard(CardUI card, Deck.Zone zone, bool player, bool instantly = false)
         {
             if (!card) yield break;
 
             //Debug.Log($"Moving {card} to {zone}");
 
-            if (zone == Deck.Zone.Graveyard)
-            {
-                yield return card.Flip(CardUI.CardState.Battle);
-                yield return new WaitForSeconds(0.4f);
-            }
             var zoneHolder = GetZoneHolder(zone, !player);
 
             var fliptime = instantly ? 0f : 0.2f;
@@ -523,7 +583,7 @@ namespace UI
             }
 
             //if not already dragged there
-            if (!zoneHolder.HasChild(card))
+             if (!zoneHolder.HasChild(card))
             {
                 var rect = card.GetComponent<RectTransform>();
                 Vector2 startPos = rect.position;

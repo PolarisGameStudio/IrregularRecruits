@@ -174,10 +174,10 @@ namespace UI
                     Instance.ETBParticles(card);
                     break;
                 case Deck.Zone.Graveyard:
-                    Instance.DeathParticles(card);
-
                     if (card.GetCardState() == CardUI.CardState.FaceDown)
                         yield return card.Flip(CardUI.CardState.FaceUp, 0.3f);
+
+                    Instance.DeathParticles(card);
 
                     yield return card.CardAnimation.Dissolve();
                     break;
