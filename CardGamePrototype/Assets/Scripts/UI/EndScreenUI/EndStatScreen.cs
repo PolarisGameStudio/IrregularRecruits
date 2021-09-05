@@ -28,6 +28,7 @@ namespace UI
         public GameObject BloodAnimation;
         public GameObject Crown;
 
+        private bool PlayerLost;
 
         private void OnEnable()
         {
@@ -44,8 +45,12 @@ namespace UI
             {
                 BattlesWon++;
             }
-            else if(LostTo != null)
-                LostTo = winner;
+            else
+            {
+                PlayerLost = true;
+                if (LostTo != null)
+                    LostTo = winner;
+            }
         }
 
         public override void Open()
@@ -56,15 +61,22 @@ namespace UI
 
             UnlockEntry.gameObject.SetActive(false);
 
-            if (LostTo != null)
+            if (PlayerLost)
             {
-                LossDescriptionText.text = hero.GetName() + "\n was killed by a group of " + LostTo.Races.First().name;
+                if (LostTo != null)
+                {
+                    LossDescriptionText.text = hero.GetName() + "\n was killed by a group of " + LostTo.Races.First().name;
+                }
+                else
+                    LossDescriptionText.text = hero.GetName() + "\n was broken by the Cinder Lands" ;
+
                 BloodAnimation.SetActive(true);
+
             }
             else
             {
                 LossDescriptionText.text = hero.GetName() + "\n vanquished the demon Konallath";
-                
+
                 Crown.SetActive(true);
                 //TODO crown animation and sound
             }

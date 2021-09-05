@@ -390,7 +390,7 @@ namespace UI
 
             float scaleTime = 0.5f * GameSettings.Speed();
 
-            if (Instance.AttackTarget != null)
+            if (Instance.AttackTarget != null )
             {
                 Instance.AttackTarget.transform.LeanScale(Vector3.one, scaleTime);
             }
