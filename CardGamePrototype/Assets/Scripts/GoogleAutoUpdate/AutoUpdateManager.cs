@@ -1,5 +1,7 @@
-﻿using Google.Play.AppUpdate;
+﻿#if UNITY_ANDROID && ! UNITY_EDITOR
+using Google.Play.AppUpdate;
 using Google.Play.Common;
+#endif
 using System;
 using System.Collections;
 using TMPro;
@@ -11,6 +13,8 @@ namespace UpdateManagement
     // based on https://developer.android.com/guide/playcore/in-app-updates/unity?authuser=1
     public class AutoUpdateManager : Singleton<AutoUpdateManager>
     {
+#if UNITY_ANDROID && ! UNITY_EDITOR
+
         private AppUpdateManager UpdateManager;
         private PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> AppUpdateInfoOperation;
         private AppUpdateInfo AppUpdateInfoResult;
@@ -20,7 +24,6 @@ namespace UpdateManagement
         public TextMeshProUGUI UpdateStatusText;
         public TextMeshProUGUI DescriptionText;
 
-#if UNITY_ANDROID && ! UNITY_EDITOR
         private void Awake()
         {
             UpdateManager = new AppUpdateManager();

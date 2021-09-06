@@ -28,17 +28,17 @@ namespace UI
         public AbilityAnimationFX[] AbilityFx;
 
 
-        public  UnityEvent OnDraw = new UnityEvent();
-        public  UnityEvent OnWithdraw = new UnityEvent();
+        public UnityEvent OnDraw = new UnityEvent();
+        public UnityEvent OnWithdraw = new UnityEvent();
 
         public class CardUIEvent : UnityEvent<CardUI, CreatureBark> { }
-        public  CardUIEvent OnEtb = new CardUIEvent();
-        public  UnityEvent OnDamaged = new UnityEvent();
-        public  UnityEvent OnHeal = new UnityEvent();
-        public  UnityEvent OnWardTrigger = new UnityEvent();
+        public CardUIEvent OnEtb = new CardUIEvent();
+        public UnityEvent OnDamaged = new UnityEvent();
+        public UnityEvent OnHeal = new UnityEvent();
+        public UnityEvent OnWardTrigger = new UnityEvent();
         public class AbilityEvent : UnityEvent<EffectType> { }
-        public  AbilityEvent OnAbilityTrigger = new AbilityEvent();
-        public  AbilityEvent OnAbilityTargetHit = new AbilityEvent();
+        public AbilityEvent OnAbilityTrigger = new AbilityEvent();
+        public AbilityEvent OnAbilityTargetHit = new AbilityEvent();
 
 
         public CardUIEvent OnCreatureExclamation = new CardUIEvent();
@@ -74,7 +74,7 @@ namespace UI
             var startTime = Time.time;
 
 
-            while (Time.time < startTime + duration )
+            while (Time.time < startTime + duration)
             {
                 yield return null;
 
@@ -92,22 +92,22 @@ namespace UI
         public void ETBParticles(CardUI cardUI)
         {
             StartCoroutine(PlayCardFX(cardUI, ETBParticlesPrefab, BattleUI.Instance.MoveDuration + 0.1f));
-            OnEtb.Invoke(cardUI,CreatureBark.Grunt);
+            OnEtb.Invoke(cardUI, CreatureBark.Grunt);
 
             //TODO: scale animation and sound with strength of the characters
 
         }
-        
+
         public void MapNodeSpawn(MapUI.MapNodeIcon node)
         {
-            PlayFx(ETBParticlesPrefab,node.transform.position,null);
+            PlayFx(ETBParticlesPrefab, node.transform.position, null);
 
         }
         //Event.OnDeath.AddListener(c => StartCoroutine(PlayCardFX(c, DeathParticlesPrefab, 0.1f)));
         public void DeathParticles(CardUI cardUI)
         {
             StartCoroutine(PlayCardFX(cardUI, DeathParticlesPrefab, 0.1f));
-            OnCreatureExclamation.Invoke(cardUI,CreatureBark.Death);
+            OnCreatureExclamation.Invoke(cardUI, CreatureBark.Death);
         }
         //Event.OnDamaged.AddListener(c => StartCoroutine(PlayCardFX(c, DamageParticlesPrefab)));
         public void DamageParticles(CardUI c)
@@ -118,11 +118,11 @@ namespace UI
 
         public IEnumerator WardPopParticles(CardUI c)
         {
-            c.CardAnimation.SetWarded(false,false);
+            c.CardAnimation.SetWarded(false, false);
 
             OnWardTrigger.Invoke();
 
-            yield return PlayCardFX(c, WardParticlesPrefab,0.3f,true);
+            yield return PlayCardFX(c, WardParticlesPrefab, 0.3f, true);
         }
 
         public void SummonParticles(CardUI c)
@@ -155,7 +155,7 @@ namespace UI
             if (!card) yield break;
 
             //vector2 to ignore z position to prevent oddities
-            Vector3 position =  card.transform.position + new Vector3(0,0,-0.5f);
+            Vector3 position = card.transform.position + new Vector3(0, 0, -0.5f);
             PlayFx(fxs, position, instantiateInWorldSpace ? null : card.transform);
 
             yield return new WaitForSeconds(delay);
@@ -256,8 +256,10 @@ namespace UI
 
         public void Vibrate()
         {
+#if UNITY_ANDROID
             if(GameSettings.Instance.VibrateEnabled.Value)
                 Handheld.Vibrate();
+#endif
         }
     }
 }
