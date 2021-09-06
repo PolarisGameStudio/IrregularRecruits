@@ -338,11 +338,11 @@ namespace GameLogic
             ChangeLocation(Deck.Zone.Battlefield);
             Event.OnRessurrect.Invoke(this,Location);
 
-            var healthChange = amount - CurrentHealth;
-
             CurrentHealth = amount;
 
-            Event.OnHealthChange.Invoke(this, healthChange,Location);
+            Event.OnHealthChange.Invoke(this, amount, Location);
+
+
             //TODO: change race to UNDEAD?
         }
 

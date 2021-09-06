@@ -18,6 +18,7 @@ namespace UI
         public AbilityUI ShowingAbility;
         public LayoutGroup LayoutGroup;
         private Coroutine HidingRoutine;
+        public CanvasGroup CanvasGroup;
 
         private void Start()
         {
@@ -74,6 +75,8 @@ namespace UI
 
             Holder.transform.localScale = Vector3.zero;
 
+            CanvasGroup.alpha = 1f;
+
             LeanTween.scale(Instance.Holder, Vector3.one, 0.15f);
 
             Holder.SetActive(true);
@@ -93,7 +96,9 @@ namespace UI
 
         private IEnumerator HideRoutine()
         {
-            yield return new WaitForSeconds(0.1f);
+            CanvasGroup.alpha = 0f;
+
+            yield return new WaitForSeconds(0.2f);
 
             ShowingAbility = null;
 

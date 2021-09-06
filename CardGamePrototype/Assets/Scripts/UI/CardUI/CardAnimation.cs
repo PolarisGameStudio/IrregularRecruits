@@ -60,6 +60,8 @@ namespace UI
                     t.alpha = 1 - DissolveAmount;
                 yield return null;
             }
+
+            LeanTween.scale(gameObject, Vector3.zero, 1f);
         }
 
         public void Highlight()
@@ -75,6 +77,8 @@ namespace UI
         {
             DissolveAmount = 1f;
             DissolveMaterial?.SetFloat("DissolveAmount", DissolveAmount);
+
+            LeanTween.scale(gameObject, Vector3.one, 1.5f).setEaseInCubic();
 
             while (DissolveAmount > 0)
             {

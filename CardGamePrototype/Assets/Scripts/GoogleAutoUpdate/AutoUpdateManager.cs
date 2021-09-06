@@ -1,4 +1,4 @@
-﻿#if UNITY_ANDROID && ! UNITY_EDITOR
+﻿#if UNITY_ANDROID
 using Google.Play.AppUpdate;
 using Google.Play.Common;
 #endif
@@ -13,7 +13,7 @@ namespace UpdateManagement
     // based on https://developer.android.com/guide/playcore/in-app-updates/unity?authuser=1
     public class AutoUpdateManager : Singleton<AutoUpdateManager>
     {
-#if UNITY_ANDROID && ! UNITY_EDITOR
+#if UNITY_ANDROID 
 
         private AppUpdateManager UpdateManager;
         private PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> AppUpdateInfoOperation;

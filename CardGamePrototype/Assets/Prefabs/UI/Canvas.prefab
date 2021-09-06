@@ -49,6 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816c5be8148855642ad610daee635312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Background: {fileID: 6948084539070070638}
+  AskUserForUpdateGO: {fileID: 832659273904551636}
+  UpdateButton: {fileID: 1800666270814012848}
+  UpdateStatusText: {fileID: 2812792690270577675}
+  DescriptionText: {fileID: 4055986970807406952}
 --- !u!1 &221949164416654289
 GameObject:
   m_ObjectHideFlags: 0
@@ -12589,7 +12594,7 @@ PrefabInstance:
     - target: {fileID: 4813993072918643220, guid: a9beb042fe4360c43953653df95de2d0,
         type: 3}
       propertyPath: m_Name
-      value: HeroSelection
+      value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 4813993072918643223, guid: a9beb042fe4360c43953653df95de2d0,
         type: 3}
@@ -12769,6 +12774,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31d5fcb3ee0b9714bbca172d493279c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2812792690270577675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9002080033574482957, guid: a9beb042fe4360c43953653df95de2d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6621659334804983814}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6707719915950004180
@@ -12967,6 +12984,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AbilityHighlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983070703679332837, guid: c2fc97d9411c1b14981742abe9b0c607,
+        type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8683335497903681055, guid: c2fc97d9411c1b14981742abe9b0c607,
         type: 3}

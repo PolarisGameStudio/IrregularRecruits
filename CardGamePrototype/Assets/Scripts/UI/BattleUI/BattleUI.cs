@@ -27,6 +27,9 @@ namespace UI
         public UIZone[] PlayerUIZones;
         public UIZone[] EnemyUIZones;
 
+        //To always have the attacking card on top
+        public RectTransform AttackCardHolder;
+
         public Button ViewPlayerDeckButton;
 
         [Serializable]
@@ -86,6 +89,8 @@ namespace UI
         void Awake()
         {
             ViewPlayerDeckButton.onClick.AddListener(() => DeckViewerUI.View(Battle.PlayerDeck));
+
+            UIFlowController.Instance.OnEmptyQueue.AddListener(() => StartCoroutine(HandleDeaths()));
 
             Event.OnCombatStart.AddListener(SetupDecks);
 
@@ -302,6 +307,8 @@ namespace UI
 
         internal static IEnumerator AbilityTriggered(SpecialAbility a, Guid guid, IEnumerable<Guid> ts)
         {
+            Debug.Log("ability triggered: " + a.Name);
+
             var ui = GetAbilityHolderUI(guid);
 
             if (!ui) yield break;
@@ -376,6 +383,8 @@ namespace UI
 
         internal static IEnumerator PullBackAttacker(Guid guid)
         {
+            Debug.Log("Pulling back attacker");
+
             CardUI ui = GetCardUI(guid);
 
             yield return PullBackAttacker(ui);
@@ -397,7 +406,13 @@ namespace UI
 
             if (!ui) yield break;
 
+            if (ui != Instance.Attacker)
+                Debug.LogWarning("Attacker is not set to: " + ui.name + ". Missing assignment?");
+
             ui.BeingDragged = false;
+
+            ui.transform.SetParent(ui.CurrentZoneLayout.transform);
+
 
             ui.CurrentZoneLayout.MoveCardsToDesiredPositions();
 
@@ -427,6 +442,8 @@ namespace UI
                 flipBack = true;
 
             }
+
+            Attacker.transform.SetParent(AttackCardHolder);
 
             yield return (AnimationSystem.AttackAnimation(Attacker, AttackTarget, 1f));
 
